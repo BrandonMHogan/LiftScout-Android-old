@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="themedMenuCalendarDrawable" format="reference" />
+    <attr name="themedMenuExerciseDrawable" format="reference" />
+    <attr name="themedMenuRoutineDrawable" format="reference" />
+    <attr name="themedMenuGraphDrawable" format="reference" />
+</resources>
