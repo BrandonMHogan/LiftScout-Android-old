@@ -1,5 +1,19 @@
 <resources>
 
+    <style name="AppTheme.Dark" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/colorPrimaryInverse</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkInverse</item>
+        <item name="colorAccent">@color/colorAccentInverse</item>
+        <item name="android:textColorPrimary">@color/textColorPrimaryInverse</item>
+        <item name="android:textColorSecondary">@color/textColorSecondaryInverse</item>
+        <item name="android:textColorPrimaryInverse">@color/textColorPrimary</item>
+        <item name="android:textColorSecondaryInverse">@color/textColorSecondary</item>
+
+        <item name="android:windowBackground">@color/background</item>
+        <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_white</item>
+        <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
@@ -11,22 +25,10 @@
         <item name="android:textColorPrimaryInverse">@color/textColorPrimaryInverse</item>
         <item name="android:textColorSecondaryInverse">@color/textColorSecondaryInverse</item>
 
+        <item name="android:windowBackground">@color/background</item>
         <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_black</item>
         <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_black</item>
 
-    </style>
-
-    <style name="AppTheme.Dark" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/colorPrimaryInverse</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkInverse</item>
-        <item name="colorAccent">@color/colorAccentInverse</item>
-        <item name="android:textColorPrimary">@color/textColorPrimaryInverse</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryInverse</item>
-        <item name="android:textColorPrimaryInverse">@color/textColorPrimary</item>
-        <item name="android:textColorSecondaryInverse">@color/textColorSecondary</item>
-
-        <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_white</item>
-        <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
