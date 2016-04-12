@@ -1,19 +1,4 @@
 <resources>
-
-    <style name="AppTheme.Dark" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/colorPrimaryInverse</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkInverse</item>
-        <item name="colorAccent">@color/colorAccentInverse</item>
-        <item name="android:textColorPrimary">@color/textColorPrimaryInverse</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryInverse</item>
-        <item name="android:textColorPrimaryInverse">@color/textColorPrimary</item>
-        <item name="android:textColorSecondaryInverse">@color/textColorSecondary</item>
-
-        <item name="android:windowBackground">@color/background</item>
-        <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_white</item>
-        <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
-    </style>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
@@ -24,20 +9,43 @@
         <item name="android:textColorSecondary">@color/textColorSecondary</item>
         <item name="android:textColorPrimaryInverse">@color/textColorPrimaryInverse</item>
         <item name="android:textColorSecondaryInverse">@color/textColorSecondaryInverse</item>
+        <item name="android:windowBackground">@color/activity_background_light</item>
 
-        <item name="android:windowBackground">@color/background</item>
+        <item name="themedMenuHomeDrawable">@drawable/ic_menu_home_black</item>
         <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_black</item>
         <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_black</item>
+        <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_black</item>
+        <item name="themedMenuGraphsDrawable">@drawable/ic_menu_bar_chart_black</item>
+        <item name="themedMenuSettingsDrawable">@drawable/ic_menu_settings_black</item>
+        <item name="themedMenuAboutDrawable">@drawable/ic_menu_camera</item>
 
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.Dark" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/colorPrimaryInverse</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkInverse</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimaryInverse</item>
+        <item name="android:textColorSecondary">@color/textColorSecondaryInverse</item>
+        <item name="android:textColorPrimaryInverse">@color/textColorPrimary</item>
+        <item name="android:textColorSecondaryInverse">@color/textColorSecondary</item>
+        <item name="android:windowBackground">@color/activity_background_dark</item>
+
+        <item name="themedMenuHomeDrawable">@drawable/ic_menu_home_white</item>
+        <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_white</item>
+        <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
+        <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_white</item>
+        <item name="themedMenuGraphsDrawable">@drawable/ic_menu_bar_chart_white</item>
+        <item name="themedMenuSettingsDrawable">@drawable/ic_menu_settings_white</item>
+        <item name="themedMenuAboutDrawable">@drawable/ic_menu_info_white</item>
+
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="themeMenuBackgroundColorDrawable" format="reference" />
+    <attr name="themedMenuHomeDrawable" format="reference" />
     <attr name="themedMenuCalendarDrawable" format="reference" />
     <attr name="themedMenuExerciseDrawable" format="reference" />
     <attr name="themedMenuRoutineDrawable" format="reference" />
-    <attr name="themedMenuGraphDrawable" format="reference" />
+    <attr name="themedMenuGraphsDrawable" format="reference" />
+    <attr name="themedMenuSettingsDrawable" format="reference" />
+    <attr name="themedMenuAboutDrawable" format="reference" />
 </resources>

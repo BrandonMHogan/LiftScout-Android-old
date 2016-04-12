@@ -5,6 +5,11 @@
         android:id="@+id/drawer_menu_top"
         android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_home"
+            android:icon="?attr/themedMenuHomeDrawable"
+            android:title="@string/nav_home"
+            android:checked="true"/>
+        <item
             android:id="@+id/nav_calendar"
             android:icon="?attr/themedMenuCalendarDrawable"
             android:title="@string/nav_calendar" />
@@ -14,11 +19,11 @@
             android:title="@string/nav_exercises" />
         <item
             android:id="@+id/nav_routines"
-            android:icon="@drawable/ic_menu_routine_white"
+            android:icon="?attr/themedMenuRoutineDrawable"
             android:title="@string/nav_routines" />
         <item
             android:id="@+id/nav_graphs"
-            android:icon="@drawable/ic_menu_bar_chart_black"
+            android:icon="?attr/themedMenuGraphsDrawable"
             android:title="@string/nav_graphs" />
     </group>
 
@@ -27,11 +32,11 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="?attr/themedMenuSettingsDrawable"
             android:title="@string/nav_settings" />
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_menu_info_black"
+            android:icon="?attr/themedMenuAboutDrawable"
             android:title="@string/nav_about" />
     </group>
 

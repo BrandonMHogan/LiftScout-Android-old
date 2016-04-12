@@ -8,6 +8,7 @@
 
 
     <!-- Drawer Navigations -->
+    <string name="nav_home">Home</string>
     <string name="nav_calendar">Calendar</string>
     <string name="nav_routines">Routines</string>
     <string name="nav_exercises">Exercises</string>
