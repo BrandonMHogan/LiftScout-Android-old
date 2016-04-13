@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Normal Theme -->
     <color name="colorPrimary">#FF9800</color>
     <color name="colorPrimaryDark">#F57C00</color>
     <color name="colorPrimaryLight">#FFE0B2</color>
-
-    <color name="colorPrimaryInverse">#FF9800</color>
-    <color name="colorPrimaryDarkInverse">#F57C00</color>
-    <color name="colorAccentInverse">#FFE0B2</color>
-
-    <!-- accent color: red -->
     <color name="colorAccent">#FF5252</color>
-    <!-- text color: white -->
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="textColorSecondary">#9E9E9E</color>
-    <!-- inverse text color: 87% black -->
+    <color name="activity_background_dark">#ff433d43</color>
+
+    <!-- Dark Theme -->
+    <color name="colorPrimaryInverse">#FF9800</color>
+    <color name="colorPrimaryDarkInverse">#F57C00</color>
+    <color name="colorPrimaryLightInverse">#FFE0B2</color>
+    <color name="colorAccentInverse">#FF5252</color>
     <color name="textColorPrimaryInverse">#DE000000</color>
     <color name="textColorSecondaryInverse">#9E9E9E</color>
-    <color name="activity_background_dark">#ff433d43</color>
     <color name="activity_background_light">#FFFFFF</color>
+
+
+
+
+
 
     <!-- Font Opacity - Black -->
     <color name="material_text_opacity_black_body_1">#DE000000</color>
