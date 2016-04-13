@@ -1,11 +1,8 @@
 package com.brandonhogan.liftscout.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,15 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.classes.ExerciseType;
 import com.brandonhogan.liftscout.fragments.HomeFragment;
-import com.brandonhogan.liftscout.fragments.InitFragment;
 import com.brandonhogan.liftscout.fragments.base.BHFragment;
 import com.brandonhogan.liftscout.fragments.base.BHFragmentListener;
-import com.brandonhogan.liftscout.model.Exercise;
-import com.brandonhogan.liftscout.model.User;
-
-import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
