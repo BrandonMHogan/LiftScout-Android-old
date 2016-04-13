@@ -31,8 +31,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".activities.MainActivity"
-        tools:showIn="@layout/activity_main_app_bar">
+        tools:context=".activities.MainActivity">
 
 
         <TextView
@@ -40,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingTop="@dimen/generic_padding_top_medium"
+            android:layout_marginTop="@dimen/generic_padding_top_medium"
             android:textSize="@dimen/material_text_size_medium"
             android:text="@string/frag_init_welcome_title"/>
 
@@ -49,10 +48,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingTop="@dimen/generic_padding_top_medium"
             android:textSize="@dimen/material_text_size_medium"
             android:layout_below="@id/message_title"
             android:text="@string/frag_init_welcome_message"/>
+
 
 
         <EditText
@@ -60,44 +59,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:paddingTop="@dimen/textview_top_margin_default"
             android:hint="@string/frag_init_name_hint"
+            android:layout_marginTop="@dimen/control_top_margin_default"
             android:textSize="@dimen/material_text_size_large"
             android:layout_below="@id/message"
             android:ems="10"/>
 
-        <LinearLayout
-            android:id="@+id/age_layout"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
+        <EditText
+            android:id="@+id/age"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/frag_init_age_hint"
+            android:textSize="@dimen/material_text_size_large"
             android:layout_below="@id/username"
-            android:paddingTop="@dimen/textview_top_margin_default">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/material_text_size_large"
-                android:textColor="?attr/android:textColorPrimary"
-                android:text="@string/frag_init_age_hint"/>
+            android:ems="10"/>
 
 
-            <Spinner
-                android:id="@+id/age_spinner"
-                android:layout_width="@dimen/spinner_width_default"
-                android:dropDownWidth="@dimen/spinner_width_default"
-                android:layout_height="wrap_content">
-            </Spinner>
+        <EditText
+            android:id="@+id/weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="@string/frag_init_weight_hint"
+            android:textSize="@dimen/material_text_size_large"
+            android:layout_below="@id/age"
+            android:ems="10"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/weight"
+            android:layout_marginTop="@dimen/control_top_margin_default">
+
+            <Button
+                android:id="@+id/startButton"
+                style="@style/RobotoButton"
+                android:text="Lets Do This!"
+                android:visibility="invisible"
+                />
 
         </LinearLayout>
-
-
-        <Button
-            android:id="@+id/browseMultimedia"
-            style="@style/SupportButton"
-            android:layout_below="@id/age_layout"
-            android:text="Lets Do This!"
-            />
 
 
     </RelativeLayout>

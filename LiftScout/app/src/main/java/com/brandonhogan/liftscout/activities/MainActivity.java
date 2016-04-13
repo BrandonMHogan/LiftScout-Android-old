@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (findViewById(R.id.fragment_container) != null) {
+        if (findViewById(R.id.fragment_manager) != null) {
             //This is set when restoring from a previous state,
             //so we do not want to try and load a new fragment
             if (savedInstanceState != null) {
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity
             }
 
             transaction.setCustomAnimations(animIn, animOut, R.anim.slide_from_left, R.anim.slide_to_right);
-            transaction.replace(R.id.fragment_container, newFragment);
+            transaction.replace(R.id.fragment_manager, newFragment);
             transaction.addToBackStack(tag);
             transaction.commit();
         }
