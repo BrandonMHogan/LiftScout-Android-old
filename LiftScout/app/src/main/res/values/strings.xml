@@ -16,5 +16,8 @@
     <string name="nav_settings">Settings</string>
     <string name="nav_about">About</string>
 
+    <!-- Init user fragment -->
+    <string name="frag_init_welcome_message">"Welcome to Lift Scout! \n Before we get started, we need to set up a few details."</string>
+
 
 </resources>
