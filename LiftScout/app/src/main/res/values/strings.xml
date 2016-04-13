@@ -16,6 +16,10 @@
     <string name="nav_settings">Settings</string>
     <string name="nav_about">About</string>
 
+    <!-- Titles -->
+    <string name="title_activity_init">Lift Scout Setup</string>
+    <string name="title_frag_home">Home</string>
+
     <!-- Init user fragment -->
     <string name="frag_init_welcome_message">"Welcome to Lift Scout! \n Before we get started, we need to set up a few details."</string>
 
