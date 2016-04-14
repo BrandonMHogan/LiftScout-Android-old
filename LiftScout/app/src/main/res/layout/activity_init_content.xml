@@ -96,7 +96,7 @@
             <Button
                 android:id="@+id/start_button"
                 style="@style/RobotoButton"
-                android:text="Lets Do This!"
+                android:text="@string/frag_init_start_button"
                 android:visibility="invisible"
                 />
 

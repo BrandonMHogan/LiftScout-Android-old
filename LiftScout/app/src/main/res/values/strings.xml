@@ -27,5 +27,6 @@
     <string name="frag_init_name_hint">Your Name</string>
     <string name="frag_init_age_hint">Your Age</string>
     <string name="frag_init_weight_hint">Your Weight</string>
+    <string name="frag_init_start_button">"Let's Begin!"</string>
 
 </resources>
