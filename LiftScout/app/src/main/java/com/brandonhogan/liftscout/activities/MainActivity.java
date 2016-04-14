@@ -16,6 +16,11 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.HomeFragment;
 import com.brandonhogan.liftscout.fragments.base.BHFragment;
 import com.brandonhogan.liftscout.fragments.base.BHFragmentListener;
+import com.brandonhogan.liftscout.model.User;
+
+import java.util.Date;
+
+import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -51,6 +56,27 @@ public class MainActivity extends AppCompatActivity
 
             replaceFragment(new HomeFragment());
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUserData();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        updateUserData();
+    }
+
+    private void updateUserData() {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        User user = realm.where(User.class).findFirst();
+        user.setLastUsed(new Date());
+        realm.commitTransaction();
+        realm.close();
     }
 
     @Override

@@ -53,6 +53,16 @@ public class HomeFragment extends BHFragment {
         Realm realm = Realm.getDefaultInstance();
         user = realm.where(User.class).findFirst();
 
-        welcomeMessage.setText("Welcome " + user.getName() + "!");
+        if(user.isFirstLoad()) {
+            realm.beginTransaction();
+            user.setFirstLoad(false);
+            realm.commitTransaction();
+            welcomeMessage.setText(String.format(getContext().getString(R.string.frag_home_first_load_message), user.getName()));
+        }
+        else {
+            welcomeMessage.setText(String.format(getContext().getString(R.string.frag_home_welcome_back_message),user.getName()));
+        }
+
+        realm.close();
     }
 }
