@@ -55,7 +55,7 @@
 
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -72,7 +72,7 @@
             android:inputType="number"
             android:hint="@string/frag_init_age_hint"
             android:textSize="@dimen/material_text_size_large"
-            android:layout_below="@id/username"
+            android:layout_below="@id/name"
             android:ems="10"/>
 
 
@@ -94,7 +94,7 @@
             android:layout_marginTop="@dimen/control_top_margin_default">
 
             <Button
-                android:id="@+id/startButton"
+                android:id="@+id/start_button"
                 style="@style/RobotoButton"
                 android:text="Lets Do This!"
                 android:visibility="invisible"

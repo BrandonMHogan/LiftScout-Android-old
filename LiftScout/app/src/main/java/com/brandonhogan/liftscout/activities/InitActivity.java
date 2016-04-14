@@ -21,18 +21,25 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import io.realm.Realm;
 
 public class InitActivity extends AppCompatActivity {
 
     private static final String TAG = "InitActivity";
     private boolean nameSet, ageSet, weightSet;
-    private Button startButton;
+
+    @Bind(R.id.name) TextView name;
+    @Bind(R.id.age) TextView age;
+    @Bind(R.id.weight) TextView weight;
+    @Bind(R.id.start_button) Button startButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init);
+        ButterKnife.bind(this);
 
         Realm realm = Realm.getDefaultInstance();
         User user = realm.where(User.class).findFirst();
@@ -46,11 +53,10 @@ public class InitActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        startButton = (Button) findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goHome(v);
+                saveUserData();
             }
         });
 
@@ -60,10 +66,29 @@ public class InitActivity extends AppCompatActivity {
         setupWeight();
     }
 
-    /** Called when the user clicks the Send button */
-    public void goHome(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    private void saveUserData() {
+
+        String nameValue = name.getText().toString();
+        int ageValue = 0;
+        double weightValue = 0;
+
+        try {
+            ageValue = Integer.parseInt(age.getText().toString());
+            weightValue = Double.parseDouble(weight.getText().toString());
+        } catch(NumberFormatException nfe) {
+            return;
+        }
+
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+
+        User user = new User(nameValue, ageValue, weightValue);
+        realm.copyToRealmOrUpdate(user);
+
+        realm.commitTransaction();
+        realm.close();
+
+        loadHome();
     }
 
     private void loadHome() {
@@ -72,8 +97,6 @@ public class InitActivity extends AppCompatActivity {
     }
 
     private void setupName() {
-        TextView name = (TextView) findViewById(R.id.username);
-
         name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -95,7 +118,6 @@ public class InitActivity extends AppCompatActivity {
     }
 
     private void setupAge() {
-        TextView age = (TextView) findViewById(R.id.age);
 
         age.addTextChangedListener(new TextWatcher() {
             @Override
@@ -118,7 +140,6 @@ public class InitActivity extends AppCompatActivity {
     }
 
     private void setupWeight() {
-        TextView weight = (TextView) findViewById(R.id.weight);
 
         weight.addTextChangedListener(new TextWatcher() {
             @Override

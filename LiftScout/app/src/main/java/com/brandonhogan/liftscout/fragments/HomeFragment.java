@@ -6,12 +6,23 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.brandonhogan.liftscout.AppController;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.base.BHFragment;
+import com.brandonhogan.liftscout.model.User;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import io.realm.Realm;
 
 public class HomeFragment extends BHFragment {
+
+    private User user;
+
+    @Bind(R.id.welcome_message)
+    TextView welcomeMessage;
 
     public HomeFragment() {
         super(AppController.getInstance().getString(R.string.nav_home));
@@ -21,6 +32,7 @@ public class HomeFragment extends BHFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_home, container, false);
+        ButterKnife.bind(this, view);
 
         //FAB button
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -32,6 +44,15 @@ public class HomeFragment extends BHFragment {
             }
         });
 
+        loadUserData();
+
         return view;
+    }
+
+    private void loadUserData() {
+        Realm realm = Realm.getDefaultInstance();
+        user = realm.where(User.class).findFirst();
+
+        welcomeMessage.setText("Welcome " + user.getName() + "!");
     }
 }
