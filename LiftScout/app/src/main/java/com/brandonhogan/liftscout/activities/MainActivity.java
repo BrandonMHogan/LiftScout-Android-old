@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
 import com.brandonhogan.liftscout.fragments.HomeFragment;
 import com.brandonhogan.liftscout.fragments.base.BHFragment;
 import com.brandonhogan.liftscout.fragments.base.BHFragmentListener;
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             replaceFragment(new HomeFragment());
         } else if (id == R.id.nav_calendar) {
-
+            replaceFragment(new CalendarFragment());
         } else if (id == R.id.nav_exercises) {
 
         } else if (id == R.id.nav_routines) {
