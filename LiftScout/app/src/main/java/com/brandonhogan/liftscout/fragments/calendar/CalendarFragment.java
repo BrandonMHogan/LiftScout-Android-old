@@ -53,7 +53,7 @@ public class CalendarFragment extends BHFragment implements OnDateSelectedListen
 
         Calendar calendar = Calendar.getInstance();
         widget.setSelectedDate(calendar.getTime());
-        //setMinMax(calendar);
+        setMinMax(calendar);
 
 //        widget.addDecorators(
 //                new MySelectorDecorator(getActivity())
@@ -88,10 +88,11 @@ public class CalendarFragment extends BHFragment implements OnDateSelectedListen
 
     // Sets the calendars min and max ranges
     private void setMinMax(Calendar calendar) {
-        // calendar.set(calendar.get(Calendar.YEAR), Calendar.JANUARY, 1);
-        // widget.setMinimumDate(calendar.getTime());
-        // calendar.set(calendar.get(Calendar.YEAR), Calendar.DECEMBER, 31);
-        // widget.setMaximumDate(calendar.getTime());
+        calendar.set(calendar.get(Calendar.YEAR) + 2, Calendar.DECEMBER, 31);
+        widget.setMaximumDate(calendar.getTime());
+
+        calendar.set(2010, Calendar.JANUARY, 1);
+        widget.setMinimumDate(calendar.getTime());
     }
 
     private void setEvents() {
