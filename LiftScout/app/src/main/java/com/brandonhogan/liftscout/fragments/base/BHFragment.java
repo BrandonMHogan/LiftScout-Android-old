@@ -16,11 +16,11 @@ public abstract class BHFragment extends Fragment {
     private final String bhTAG = this.getClass().getSimpleName();
     private BHFragmentListener callback;
     private String title;
-
     // Constructors
     public BHFragment(String title) {
         this.title = title;
     }
+    public BHFragment() { }
 
     // Public Functions
     public String getBhTAG() {
