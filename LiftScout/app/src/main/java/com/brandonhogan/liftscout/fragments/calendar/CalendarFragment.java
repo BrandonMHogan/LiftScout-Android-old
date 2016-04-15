@@ -55,9 +55,9 @@ public class CalendarFragment extends BHFragment implements OnDateSelectedListen
         widget.setSelectedDate(calendar.getTime());
         setMinMax(calendar);
 
-//        widget.addDecorators(
-//                new MySelectorDecorator(getActivity())
-//        );
+        widget.addDecorators(
+                oneDayDecorator
+        );
 
         setEvents();
 
@@ -67,15 +67,15 @@ public class CalendarFragment extends BHFragment implements OnDateSelectedListen
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        widget.setSelectedDate(CalendarDay.from(2016,7,27));
-        widget.setCurrentDate(CalendarDay.from(2016,7,27),true);
+       // widget.setSelectedDate(CalendarDay.from(2016,7,27));
+       // widget.setCurrentDate(CalendarDay.from(2016,7,27),true);
     }
 
     @Override
     public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
         //If you change a decorate, you need to invalidate decorators
-       // oneDayDecorator.setDate(date.getDate());
-       // widget.invalidateDecorators();
+        oneDayDecorator.setDate(date.getDate());
+        widget.invalidateDecorators();
         Toast.makeText(getContext(), "Day: " + date.getDate().toString(), Toast.LENGTH_SHORT).show();
     }
 
