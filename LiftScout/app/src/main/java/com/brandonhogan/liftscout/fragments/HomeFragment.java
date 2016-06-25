@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.brandonhogan.liftscout.AppController;
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.fragments.base.BHDetailFragment;
 import com.brandonhogan.liftscout.fragments.base.BHFragment;
 import com.brandonhogan.liftscout.model.User;
 
@@ -17,7 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.realm.Realm;
 
-public class HomeFragment extends BHFragment {
+public class HomeFragment extends BHDetailFragment {
 
     private User user;
 
@@ -26,6 +27,16 @@ public class HomeFragment extends BHFragment {
 
     public HomeFragment() {
         super(AppController.getInstance().getString(R.string.nav_home));
+    }
+
+    @Override
+    public ApplicationArea applicationArea() {
+        return ApplicationArea.HOME;
+    }
+
+    @Override
+    public BHFragment parentFragment() {
+        return null;
     }
 
     @Override

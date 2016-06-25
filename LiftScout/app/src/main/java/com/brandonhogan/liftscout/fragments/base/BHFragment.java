@@ -10,17 +10,58 @@ import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.brandonhogan.liftscout.R;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class BHFragment extends Fragment {
+
+    // Public Properties
+    public enum FragmentType { List, Detail, Editable, Tab }
+    public enum ApplicationArea {
+        HOME(R.id.nav_home),
+        CALENDAR(R.id.nav_calendar),
+        EXERCISES(R.id.nav_exercises),
+        ROUTINE(R.id.nav_routines),
+        GRAPHS(R.id.nav_graphs),
+        SETTINGS(R.id.nav_settings),
+        ABOUT(R.id.nav_about);
+
+        private int value;
+        private static Map<Integer, ApplicationArea> map = new HashMap<Integer, ApplicationArea>();
+
+        static {
+            for (ApplicationArea wigoType : ApplicationArea.values()) {
+                map.put(wigoType.getValue(), wigoType);
+            }
+        }
+        public static ApplicationArea valueOf(int id) {
+            return map.get(id);
+        }
+        ApplicationArea(int value) {
+            this.value = value;
+        }
+        public int getValue() { return this.value; }
+        public int setValue(int value) { this.value = value; return getValue(); }
+
+    }
 
     // Private Properties
     private final String bhTAG = this.getClass().getSimpleName();
     private BHFragmentListener callback;
     private String title;
 
+    // Abstract Functions
+    public abstract FragmentType fragmentType();
+    public abstract ApplicationArea applicationArea();
+    public abstract BHFragment parentFragment();
+
     // Constructors
     public BHFragment(String title) {
         this.title = title;
     }
+    public BHFragment() { }
 
     // Public Functions
     public String getBhTAG() {
