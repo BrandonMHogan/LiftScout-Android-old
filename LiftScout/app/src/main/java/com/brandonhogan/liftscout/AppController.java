@@ -12,7 +12,7 @@ public class AppController extends Application {
     private static AppController mInstance;
   //  private Tracker mTracker;
 
-    private static synchronized AppController getInstance() {
+    public static synchronized AppController getInstance() {
         return mInstance;
     }
 

@@ -1,8 +1,35 @@
 <resources>
-    <string name="app_name">LiftScout</string>
+    <string name="app_name">Lift Scout</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+
+    <!-- Drawer Navigations -->
+    <string name="nav_home">Home</string>
+    <string name="nav_calendar">Calendar</string>
+    <string name="nav_routines">Routines</string>
+    <string name="nav_exercises">Exercises</string>
+    <string name="nav_graphs">Graphs</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_about">About</string>
+
+    <!-- Titles -->
+    <string name="title_activity_init">Lift Scout Setup</string>
+    <string name="title_frag_home">Home</string>
+
+    <!-- Init user activity -->
+    <string name="frag_init_welcome_title">"Welcome to Lift Scout!"</string>
+    <string name="frag_init_welcome_message">"Before we get started, we need to set up a few details."</string>
+    <string name="frag_init_name_hint">Your Name</string>
+    <string name="frag_init_age_hint">Your Age</string>
+    <string name="frag_init_weight_hint">Your Weight</string>
+    <string name="frag_init_start_button">"Let's Begin!"</string>
+
+    <!-- Home Fragment -->
+    <string name="frag_home_first_load_message">"Welcome to Lift Scout %s! This app will become your closest ally in your swole journey."</string>
+    <string name="frag_home_welcome_back_message">Welcome back %s!</string>
+
 </resources>

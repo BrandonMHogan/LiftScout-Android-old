@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF9900</color>
-    <color name="colorPrimaryDark">#C58940</color>
-    <color name="colorAccent">#FFC163</color>
+    <!-- Normal Theme -->
+    <color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryDark">#F57C00</color>
+    <color name="colorPrimaryLight">#FFE0B2</color>
+    <color name="colorAccent">#FF5252</color>
+    <color name="textColorPrimary">#9E9E9E</color>
+    <color name="textColorSecondary">#9E9E9E</color>
+    <color name="activity_background_dark">#ff433d43</color>
+
+    <!-- Dark Theme -->
+    <color name="colorPrimaryInverse">#FF9800</color>
+    <color name="colorPrimaryDarkInverse">#F57C00</color>
+    <color name="colorPrimaryLightInverse">#FFE0B2</color>
+    <color name="colorAccentInverse">#FF5252</color>
+    <color name="textColorPrimaryInverse">#9E9E9E</color>
+    <color name="textColorSecondaryInverse">#9E9E9E</color>
+    <color name="activity_background_light">#FFFFFF</color>
+
+    <!-- Generic -->
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+
+
+
+    <!-- Font Opacity - Black -->
+    <color name="material_text_opacity_black_body_1">#DE000000</color>
+    <color name="material_text_opacity_black_body_2">#DE000000</color>
+    <color name="material_text_opacity_black_button">#DE000000</color>
+    <color name="material_text_opacity_black_caption">#8A000000</color>
+    <color name="material_text_opacity_black_display_1">#8A000000</color>
+    <color name="material_text_opacity_black_display_2">#8A000000</color>
+    <color name="material_text_opacity_black_display_3">#8A000000</color>
+    <color name="material_text_opacity_black_display_4">#8A000000</color>
+    <color name="material_text_opacity_black_headline">#DE000000</color>
+    <color name="material_text_opacity_black_large">#DE000000</color>
+    <color name="material_text_opacity_black_medium">#DE000000</color>
+    <color name="material_text_opacity_black_menu">#DE000000</color>
+    <color name="material_text_opacity_black_small">#DE000000</color>
+    <color name="material_text_opacity_black_subhead">#DE000000</color>
+    <color name="material_text_opacity_black_subtitle_toolbar">#DE000000</color>
+    <color name="material_text_opacity_black_title">#DE000000</color>
+    <color name="material_text_opacity_black_title_toolbar">#DE000000</color>
+
+    <!-- Font Opacity - White -->
+    <color name="material_text_opacity_white_body_1">#DEFFFFFF</color>
+    <color name="material_text_opacity_white_body_2">#DEFFFFFF</color>
+    <color name="material_text_opacity_white_button">#DEFFFFFF</color>
+    <color name="material_text_opacity_white_caption">#8AFFFFFF</color>
+    <color name="material_text_opacity_white_display_1">#8AFFFFFF</color>
+    <color name="material_text_opacity_white_display_2">#8AFFFFFF</color>
+    <color name="material_text_opacity_white_display_3">#8AFFFFFF</color>
+    <color name="material_text_opacity_white_display_4">#8AFFFFFF</color>
+    <color name="material_text_opacity_white_headline">#DEFFFFFF</color>
+    <color name="material_text_opacity_white_large">#DEFFFFFF</color>
+    <color name="material_text_opacity_white_medium">#DEFFFFFF</color>
+    <color name="material_text_opacity_white_menu">#DEFFFFFF</color>
+    <color name="material_text_opacity_white_small">#DEFFFFFF</color>
+    <color name="material_text_opacity_white_subhead">#DEFFFFFF</color>
+    <color name="material_text_opacity_white_subtitle_toolbar">#DEFFFFFF</color>
+    <color name="material_text_opacity_white_title">#DEFFFFFF</color>
+    <color name="material_text_opacity_white_title_toolbar">#DEFFFFFF</color>
 </resources>
