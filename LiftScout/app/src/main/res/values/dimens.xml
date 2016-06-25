@@ -8,7 +8,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!-- Control defaults -->
-    <dimen name="control_top_margin_default">25dp</dimen>
+    <dimen name="control_top_margin_default">55dp</dimen>
     <dimen name="spinner_width_default">90dp</dimen>
 
     <!-- Generic -->

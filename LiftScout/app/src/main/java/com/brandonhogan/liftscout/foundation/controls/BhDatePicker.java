@@ -28,7 +28,6 @@ public class BhDatePicker extends FrameLayout {
 
     // Private Properties
 
-    private TextView label;
     private EditText editTextView;
     private Date date;
     private Date minDate;
@@ -40,11 +39,6 @@ public class BhDatePicker extends FrameLayout {
 
     // Public Properties
 
-    public void setLabel(String text) { label.setText(text); }
-    public void setLabelVisibility(boolean visible) {
-        label.setVisibility(visible ? VISIBLE : GONE);
-    }
-
     public Date getDate() {
         return date;
     }
@@ -52,7 +46,7 @@ public class BhDatePicker extends FrameLayout {
     public void setDate (Date date) {
         this.date = date;
         if (date != null) {
-            label.setText(BhDate.toStringDate(date));
+            editTextView.setText(BhDate.toStringDate(date));
         }
     }
     public Date getMinDate() { return minDate; }
@@ -100,9 +94,6 @@ public class BhDatePicker extends FrameLayout {
 
     private void initControl() {
         final View view = inflate(getContext(), R.layout.con_date_picker, this);
-
-        label = (TextView) findViewById(R.id.label);
-        label.setVisibility(GONE);
 
         editTextView = (EditText) findViewById(R.id.edit_text);
         editTextView.setOnTouchListener(new OnTouchListener() {

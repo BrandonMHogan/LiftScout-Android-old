@@ -1,26 +1,32 @@
 package com.brandonhogan.liftscout.foundation.model;
 
+import java.util.Calendar;
 import java.util.Date;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
 public class User extends RealmObject {
 
     @PrimaryKey
     private int id;
+    @Required
     private String name;
-    private int age;
+    @Required
+    private Date birthDate;
     private double weight;
+    @Required
     private Date startDate;
+    @Required
     private Date lastUsed;
     private boolean firstLoad = true;
 
     public User() {}
 
-    public User(String name, int age, double weight) {
+    public User(String name, Date birthDate, double weight) {
         this.id = name.hashCode();
         this.name = name;
-        this.age = age;
+        this.birthDate = birthDate;
         this.weight = weight;
         this.startDate = new Date();
         this.lastUsed = this.startDate;
@@ -39,12 +45,12 @@ public class User extends RealmObject {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public double getWeight() {
@@ -77,5 +83,21 @@ public class User extends RealmObject {
 
     public void setFirstLoad(boolean firstLoad) {
         this.firstLoad = firstLoad;
+    }
+
+
+    public Integer getAge() {
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.setTime(birthDate);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+            age--;
+        }
+
+        return age;
     }
 }
