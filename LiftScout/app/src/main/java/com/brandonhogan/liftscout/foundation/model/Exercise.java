@@ -1,6 +1,4 @@
-package com.brandonhogan.liftscout.model;
-
-import com.brandonhogan.liftscout.classes.ExerciseType;
+package com.brandonhogan.liftscout.foundation.model;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

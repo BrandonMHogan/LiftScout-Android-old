@@ -7,9 +7,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +17,7 @@ import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
 import com.brandonhogan.liftscout.fragments.HomeFragment;
 import com.brandonhogan.liftscout.fragments.base.BHFragment;
 import com.brandonhogan.liftscout.fragments.base.BHFragmentListener;
-import com.brandonhogan.liftscout.model.User;
+import com.brandonhogan.liftscout.foundation.model.User;
 
 import java.util.Date;
 

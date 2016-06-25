@@ -12,7 +12,7 @@ import com.brandonhogan.liftscout.AppController;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.base.BHDetailFragment;
 import com.brandonhogan.liftscout.fragments.base.BHFragment;
-import com.brandonhogan.liftscout.model.User;
+import com.brandonhogan.liftscout.foundation.model.User;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

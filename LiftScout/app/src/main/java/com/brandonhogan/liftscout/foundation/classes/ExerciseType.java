@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.classes;
+package com.brandonhogan.liftscout.foundation.classes;
 
 public class ExerciseType {
 

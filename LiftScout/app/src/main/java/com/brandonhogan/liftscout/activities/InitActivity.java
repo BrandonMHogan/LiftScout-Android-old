@@ -2,26 +2,15 @@ package com.brandonhogan.liftscout.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
-
+import com.brandonhogan.liftscout.foundation.model.User;
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.model.User;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

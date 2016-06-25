@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">Lift Scout</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
 
+    <!-- Generics -->
+    <string name="date">Date</string>
 
     <!-- Drawer Navigations -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_home">Home</string>
     <string name="nav_calendar">Calendar</string>
     <string name="nav_routines">Routines</string>

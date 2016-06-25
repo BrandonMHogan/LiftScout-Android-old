@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/ic_margin_bottom">
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/date"
+        android:paddingStart="@dimen/wc_date_picker_padding_left"
+        android:paddingEnd="@dimen/wc_date_picker_padding_end"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/date"
+            android:inputType="none"
+            android:paddingTop="@dimen/wc_date_picker_padding_top"
+            android:layout_marginTop="@dimen/wc_date_picker_margin_top"
+            android:layout_marginEnd="@dimen/wc_edit_text_margin_right"
+            android:textSize="@dimen/wc_date_picker_text_size"
+            android:focusableInTouchMode="false"/>
+
+        <ImageButton
+            android:id="@+id/clear_text_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close_white_24dp"
+            android:layout_alignParentEnd="true"
+            android:paddingTop="@dimen/wc_spinner_image_button_top_padding"
+            android:paddingEnd="@dimen/size_zero"
+            android:layout_margin="@dimen/size_zero"
+            android:tint="@color/black_transparent_30"
+            android:layout_marginEnd="@dimen/wc_spinner_image_button_margin_right"
+            android:background="@android:color/transparent"
+            android:contentDescription="@null"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

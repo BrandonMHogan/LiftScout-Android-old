@@ -12,6 +12,7 @@
     <dimen name="spinner_width_default">90dp</dimen>
 
     <!-- Generic -->
+    <dimen name="size_zero">0dp</dimen>
     <dimen name="generic_padding_top_small">5dp</dimen>
     <dimen name="generic_padding_top_medium">10dp</dimen>
     <dimen name="generic_padding_top_large">20dp</dimen>
@@ -20,6 +21,45 @@
     <dimen name="btn_height">36dp</dimen>
     <dimen name="btn_padding_left">16dp</dimen>
     <dimen name="btn_padding_right">16dp</dimen>
+
+    <!-- Input Controls -->
+    <dimen name="ic_padding_top_edit_text">20dp</dimen>
+    <dimen name="ic_padding_top">10dp</dimen>
+    <dimen name="ic_margin_bottom">6dp</dimen>
+
+    <!-- Wc Spinner -->
+    <dimen name="wc_spinner_layout_height">42dp</dimen>
+    <dimen name="wc_spinner_margin_right">55dp</dimen>
+    <dimen name="wc_spinner_image_button_top_padding">5dp</dimen>
+    <dimen name="wc_spinner_image_button_margin_right">10dp</dimen>
+    <dimen name="wc_spinner_text_padding_left">0dp</dimen>
+    <dimen name="wc_spinner_text_size">16sp</dimen>
+    <dimen name="wc_spinner_padding_left">4dp</dimen>
+    <dimen name="wc_spinner_padding_end">0dp</dimen>
+    <dimen name="wc_spinner_padding_top">0dp</dimen>
+    <dimen name="wc_spinner_padding_bottom">1dp</dimen>
+    <dimen name="wc_spinner_margin">0dp</dimen>
+
+    <!-- Wc DatePicker -->
+    <dimen name="wc_date_picker_margin_right">55dp</dimen>
+    <dimen name="wc_date_picker_image_button_margin_right">10dp</dimen>
+    <dimen name="wc_date_picker_layout_height">34dp</dimen>
+    <dimen name="wc_date_picker_text_size">16sp</dimen>
+    <dimen name="wc_date_picker_padding_left">4dp</dimen>
+    <dimen name="wc_date_picker_padding_end">0dp</dimen>
+    <dimen name="wc_date_picker_padding_top">0dp</dimen>
+    <dimen name="wc_date_picker_margin_top">4dp</dimen>
+
+    <!-- Wc Edit Text -->
+    <dimen name="wc_edit_text_margin_right">55dp</dimen>
+    <dimen name="wc_edit_text_image_button_margin_right">10dp</dimen>
+    <dimen name="wc_edit_text_text_size">16sp</dimen>
+    <dimen name="text_edit_padding_left">4dp</dimen>
+    <dimen name="text_edit_padding_end">0dp</dimen>
+    <dimen name="text_edit_padding_top">0dp</dimen>
+    <dimen name="text_edit_margin_top">0dp</dimen>
+    <dimen name="text_edit_clear_margin_top">10dp</dimen>
+    <dimen name="text_edit_margin_left">0dp</dimen>
 
     <!-- Material Font sizes -->
     <dimen name="material_text_size_body_1">14sp</dimen>

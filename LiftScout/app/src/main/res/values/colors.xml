@@ -61,4 +61,42 @@
     <color name="material_text_opacity_white_subtitle_toolbar">#DEFFFFFF</color>
     <color name="material_text_opacity_white_title">#DEFFFFFF</color>
     <color name="material_text_opacity_white_title_toolbar">#DEFFFFFF</color>
+
+
+    <!-- Black Transparencies -->
+    <color name="black_transparent_90">#E6000000</color>
+    <color name="black_transparent_80">#CC000000</color>
+    <color name="black_transparent_70">#B3000000</color>
+    <color name="black_transparent_60">#99000000</color>
+    <color name="black_transparent_50">#80000000</color>
+    <color name="black_transparent_40">#66000000</color>
+    <color name="black_transparent_30">#4D000000</color>
+    <color name="black_transparent_26">#42000000</color>
+    <color name="black_transparent_20">#33000000</color>
+    <color name="black_transparent_10">#1A000000</color>
+    <color name="black_transparent_05">#0D000000</color>
+
+    <!-- Gray Transparencies -->
+    <color name="gray_transparent_90">#E6676767</color>
+    <color name="gray_transparent_80">#CC676767</color>
+    <color name="gray_transparent_75">#75676767</color>
+    <color name="gray_transparent_70">#B3676767</color>
+    <color name="gray_transparent_50">#80676767</color>
+    <color name="gray_transparent_40">#66676767</color>
+    <color name="gray_transparent_30">#4D676767</color>
+    <color name="gray_transparent_20">#33676767</color>
+    <color name="gray_transparent_10">#1A676767</color>
+    <color name="gray_transparent_05">#0D676767</color>
+
+    <!-- White Transparencies -->
+    <color name="white_transparent_90">#E6ffffff</color>
+    <color name="white_transparent_80">#CCffffff</color>
+    <color name="white_transparent_75">#75ffffff</color>
+    <color name="white_transparent_70">#B3ffffff</color>
+    <color name="white_transparent_50">#80ffffff</color>
+    <color name="white_transparent_40">#66ffffff</color>
+    <color name="white_transparent_30">#4Dffffff</color>
+    <color name="white_transparent_20">#33ffffff</color>
+    <color name="white_transparent_10">#1Affffff</color>
+    <color name="white_transparent_05">#0Dffffff</color>
 </resources>
