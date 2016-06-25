@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.brandonhogan.liftscout.AppController;
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.fragments.HomeFragment;
+import com.brandonhogan.liftscout.fragments.base.BHDetailFragment;
 import com.brandonhogan.liftscout.fragments.base.BHFragment;
 import com.brandonhogan.liftscout.fragments.calendar.decorators.EventDecorator;
 import com.brandonhogan.liftscout.fragments.calendar.decorators.HighlightWeekendsDecorator;
@@ -29,7 +31,7 @@ import java.util.Calendar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class CalendarFragment extends BHFragment implements OnDateSelectedListener, OnMonthChangedListener {
+public class CalendarFragment extends BHDetailFragment implements OnDateSelectedListener, OnMonthChangedListener {
 
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
 
@@ -38,6 +40,16 @@ public class CalendarFragment extends BHFragment implements OnDateSelectedListen
 
     public CalendarFragment() {
         super();
+    }
+
+    @Override
+    public BHFragment parentFragment() {
+        return new HomeFragment();
+    }
+
+    @Override
+    public ApplicationArea applicationArea() {
+        return ApplicationArea.HOME;
     }
 
     @Override

@@ -9,8 +9,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
@@ -25,18 +27,23 @@ import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
+        FragmentManager.OnBackStackChangedListener,
         BHFragmentListener {
 
     private boolean isInTransition = false;
     private FragmentTransaction transaction;
     // Tracks the currently displayed fragment
     private BHFragment currentFragment;
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
+    private Toolbar toolbar;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (findViewById(R.id.fragment_manager) != null) {
@@ -46,8 +53,8 @@ public class MainActivity extends AppCompatActivity
                 return;
             }
 
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+            drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawer.addDrawerListener(toggle);
             toggle.syncState();
@@ -63,6 +70,7 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         updateUserData();
+
     }
 
     @Override
@@ -81,12 +89,41 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onBackStackChanged() {
+        if(currentFragment.parentFragment() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // show back button
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+        }
+        else {
+            //show hamburger
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            toggle.syncState();
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+            });
+        }
+    }
+
+    @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            // If the current fragment has no parent, then hitting the back button will close the app
+            if (currentFragment.parentFragment() == null) {
+                finish();
+            }
+            else{
+                fragmentTransitionTo(currentFragment.parentFragment());
+            }
         }
     }
 
@@ -139,6 +176,10 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    private void setNavHighlight() {
+
+    }
+
     private boolean replaceFragment(BHFragment fragment) {
         return replaceFragment(fragment, 0, 0);
     }
@@ -180,6 +221,15 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.fragment_manager, newFragment);
             transaction.addToBackStack(tag);
             transaction.commit();
+        }
+
+        // Will set the highlight on the drawer based on the current fragments application area
+        if (currentFragment.applicationArea() != null) {
+            BHFragment.ApplicationArea app = currentFragment.applicationArea();
+            int apple = app.getValue();
+            int orang = R.id.nav_home;
+
+        //    navigationView.setCheckedItem(currentFragment.applicationArea().getValue());
         }
 
         return true;

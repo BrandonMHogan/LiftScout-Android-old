@@ -6,12 +6,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.fragments.base.BHDetailFragment;
 import com.brandonhogan.liftscout.fragments.base.BHFragment;
 
-public class ExerciseTypeList extends BHFragment {
+public class ExerciseTypeList extends BHDetailFragment {
 
     public ExerciseTypeList() {
         super("Exercises");
+    }
+
+    @Override
+    public ApplicationArea applicationArea() {
+        return ApplicationArea.EXERCISES;
+    }
+
+    @Override
+    public BHFragment parentFragment() {
+        return new HomeFragment();
     }
 
     @Override
