@@ -32,6 +32,8 @@ public class InitActivity extends BaseActivity {
         setContentView(R.layout.activity_init);
         ButterKnife.bind(this);
 
+        setTitle(R.string.title_activity_init);
+
         User user = getRealm().where(User.class).findFirst();
 
         // User has used the app before and should be directed to the main activity
