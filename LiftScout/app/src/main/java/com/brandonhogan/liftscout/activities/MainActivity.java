@@ -25,7 +25,7 @@ import java.util.Date;
 
 import io.realm.Realm;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         FragmentManager.OnBackStackChangedListener,
         BHFragmentListener {

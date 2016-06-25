@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,11 +24,11 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.realm.Realm;
 
-public class InitActivity extends AppCompatActivity {
+public class InitActivity extends BaseActivity {
 
-    private static final String TAG = "InitActivity";
     private boolean nameSet, ageSet, weightSet;
 
     @Bind(R.id.name) TextView name;
@@ -41,24 +42,15 @@ public class InitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_init);
         ButterKnife.bind(this);
 
-        Realm realm = Realm.getDefaultInstance();
-        User user = realm.where(User.class).findFirst();
+        User user = getRealm().where(User.class).findFirst();
 
-        // User has never used the app before
+        // User has used the app before and should be directed to the main activity
         if (user != null){
             loadHome();
         }
-        realm.close();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveUserData();
-            }
-        });
 
 
         setupName();
@@ -66,7 +58,8 @@ public class InitActivity extends AppCompatActivity {
         setupWeight();
     }
 
-    private void saveUserData() {
+    @OnClick(R.id.start_button)
+    public void saveUserData() {
 
         String nameValue = name.getText().toString();
         int ageValue = 0;
@@ -105,9 +98,9 @@ public class InitActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                nameSet = count > 0;
+                nameSet = s.length() > 0;
                 showStartButton();
-                Log.d(TAG, "Name set : " + nameSet);
+                Log.d(getClassTag(), "Name set : " + nameSet + ". Length :" + s.length());
             }
 
             @Override
@@ -127,9 +120,9 @@ public class InitActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ageSet = count > 0;
+                ageSet = s.length() > 0;
                 showStartButton();
-                Log.d(TAG, "Age set : " + ageSet);
+                Log.d(getClassTag(), "Age set : " + ageSet + ". Length :" + s.length());
             }
 
             @Override
@@ -149,9 +142,9 @@ public class InitActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                weightSet = count > 0;
+                weightSet = s.length() > 0;
                 showStartButton();
-                Log.d(TAG, "Weight set : " + weightSet);
+                Log.d(getClassTag(), "Weight set : " + weightSet + ". Length :" + s.length());
             }
 
             @Override
