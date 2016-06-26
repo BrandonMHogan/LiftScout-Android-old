@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
-
 import io.realm.Realm;
 
 public class BaseActivity extends AppCompatActivity {

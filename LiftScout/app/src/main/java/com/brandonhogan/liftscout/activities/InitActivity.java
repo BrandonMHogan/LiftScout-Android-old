@@ -1,8 +1,6 @@
 package com.brandonhogan.liftscout.activities;
 
 import android.animation.ObjectAnimator;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -13,7 +11,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,7 +24,7 @@ import butterknife.OnClick;
 
 public class InitActivity extends BaseActivity {
 
-    private boolean nameSet, weightSet;
+    private boolean nameSet, weightSet, ageSet;
     private boolean showWeight, showAge;
 
     @Bind(R.id.name) TextView name;
@@ -56,9 +53,11 @@ public class InitActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        setupUI(findViewById(android.R.id.content));
         initControl();
         setupName();
         setupWeight();
+        setupAge();
     }
 
     @OnClick(R.id.start_button)
@@ -154,20 +153,34 @@ public class InitActivity extends BaseActivity {
         });
     }
 
+    private void setupAge() {
+        age.setCallback(new BhDatePicker.DatePickerCallback() {
+            @Override
+            public void onBhDatePickerDismiss() {
+                if (age.getDate() != null) {
+                    ageSet = true;
+                    showStartButton();
+                }
+            }
+        });
+    }
+
     private void showStartButton() {
-        if (nameSet && weightSet)
+        if (nameSet && weightSet && ageSet)
             startButton.setVisibility(View.VISIBLE);
         else
             startButton.setVisibility(View.INVISIBLE);
     }
 
+    // Fades in the views
     private void fadeIn(View view) {
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
-        objectAnimator.setDuration(500L);
+        objectAnimator.setDuration(450L);
         objectAnimator.start();
     }
 
-
+    // Will make add a touch listener to everything but EditText which
+    // will close the keyboard when touched
     public void setupUI(View view) {
 
         //Set up touch listener for non-text box views to hide keyboard.
