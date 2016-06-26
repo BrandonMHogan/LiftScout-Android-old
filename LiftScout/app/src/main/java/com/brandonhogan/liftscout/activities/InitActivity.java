@@ -1,13 +1,21 @@
 package com.brandonhogan.liftscout.activities;
 
+import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.brandonhogan.liftscout.foundation.controls.BhDatePicker;
 import com.brandonhogan.liftscout.foundation.model.User;
@@ -20,11 +28,15 @@ import butterknife.OnClick;
 public class InitActivity extends BaseActivity {
 
     private boolean nameSet, weightSet;
+    private boolean showWeight, showAge;
 
     @Bind(R.id.name) TextView name;
     @Bind(R.id.age) BhDatePicker age;
     @Bind(R.id.weight) TextView weight;
     @Bind(R.id.start_button) Button startButton;
+
+    @Bind(R.id.weight_inputlayout)
+    TextInputLayout weightInputLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +56,7 @@ public class InitActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        initControl();
         setupName();
         setupWeight();
     }
@@ -59,9 +72,9 @@ public class InitActivity extends BaseActivity {
             birthDate = age.getDate();
             weightValue = Double.parseDouble(weight.getText().toString());
         } catch(NumberFormatException nfe) {
+            Log.e(getClassTag(), "Failed to save user data. Likely conversion failure");
             return;
         }
-
 
         getRealm().beginTransaction();
 
@@ -81,6 +94,11 @@ public class InitActivity extends BaseActivity {
         finish();
     }
 
+    private void initControl() {
+        weightInputLayout.setAlpha(0);
+        age.setAlpha(0);
+    }
+
     private void setupName() {
         name.addTextChangedListener(new TextWatcher() {
             @Override
@@ -91,8 +109,14 @@ public class InitActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 nameSet = s.length() > 0;
+
+                if (!showWeight) {
+                    showWeight = true;
+                    fadeIn(weightInputLayout);
+                }
+
                 showStartButton();
-                Log.d(getClassTag(), "Name set : " + nameSet + ". Length :" + s.length());
+                Log.d(getClassTag(), "Name set: " + nameSet + ". Length :" + s.length());
             }
 
             @Override
@@ -113,8 +137,14 @@ public class InitActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 weightSet = s.length() > 0;
+
+                if (!showAge) {
+                    showAge = true;
+                    fadeIn(age);
+                }
+
                 showStartButton();
-                Log.d(getClassTag(), "Weight set : " + weightSet + ". Length :" + s.length());
+                Log.d(getClassTag(), "Weight set: " + weightSet + ". Length :" + s.length());
             }
 
             @Override
@@ -129,5 +159,39 @@ public class InitActivity extends BaseActivity {
             startButton.setVisibility(View.VISIBLE);
         else
             startButton.setVisibility(View.INVISIBLE);
+    }
+
+    private void fadeIn(View view) {
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
+        objectAnimator.setDuration(500L);
+        objectAnimator.start();
+    }
+
+
+    public void setupUI(View view) {
+
+        //Set up touch listener for non-text box views to hide keyboard.
+        if(!(view instanceof EditText)) {
+
+            view.setOnTouchListener(new View.OnTouchListener() {
+
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard();
+                    return false;
+                }
+
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+
+                View innerView = ((ViewGroup) view).getChildAt(i);
+
+                setupUI(innerView);
+            }
+        }
     }
 }
