@@ -16,6 +16,8 @@ public class User extends RealmObject {
     private Date birthDate;
     private double weight;
     @Required
+    private String unitType;
+    @Required
     private Date startDate;
     @Required
     private Date lastUsed;
@@ -23,11 +25,12 @@ public class User extends RealmObject {
 
     public User() {}
 
-    public User(String name, Date birthDate, double weight) {
+    public User(String name, Date birthDate, double weight, String unitType) {
         this.id = name.hashCode();
         this.name = name;
         this.birthDate = birthDate;
         this.weight = weight;
+        this.unitType = unitType;
         this.startDate = new Date();
         this.lastUsed = this.startDate;
     }
@@ -59,6 +62,14 @@ public class User extends RealmObject {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public String getUnitType() {
+        return unitType;
+    }
+
+    public void setUnitType(String unitType) {
+        this.unitType = unitType;
     }
 
     public Date getStartDate() {

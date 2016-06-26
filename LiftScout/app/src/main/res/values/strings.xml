@@ -4,6 +4,12 @@
 
     <!-- Generics -->
     <string name="date">Date</string>
+    <string name="lbs">lbs</string>
+    <string name="pound">Pound</string>
+    <string name="pounds">Pounds</string>
+    <string name="kgs">kgs</string>
+    <string name="kilogram">Kilogram</string>
+    <string name="kilograms">Kilograms</string>
 
     <!-- Drawer Navigations -->
     <string name="navigation_drawer_open">Open navigation drawer</string>

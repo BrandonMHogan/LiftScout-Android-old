@@ -1,9 +1,9 @@
 package com.brandonhogan.liftscout.activities;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,13 +11,16 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import com.brandonhogan.liftscout.foundation.controls.BhDatePicker;
 import com.brandonhogan.liftscout.foundation.model.User;
 import com.brandonhogan.liftscout.R;
+import java.util.ArrayList;
 import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,6 +34,7 @@ public class InitActivity extends BaseActivity {
     @Bind(R.id.name) TextView name;
     @Bind(R.id.age) BhDatePicker age;
     @Bind(R.id.weight) TextView weight;
+    @Bind(R.id.unit_spinner) Spinner unitSpinner;
     @Bind(R.id.start_button) Button startButton;
 
     @Bind(R.id.weight_layout)
@@ -80,7 +84,7 @@ public class InitActivity extends BaseActivity {
 
         getRealm().beginTransaction();
 
-        User user = new User(nameValue, birthDate, weightValue);
+        User user = new User(nameValue, birthDate, weightValue, unitSpinner.getSelectedItem().toString());
         getRealm().copyToRealmOrUpdate(user);
 
         getRealm().commitTransaction();
@@ -97,8 +101,23 @@ public class InitActivity extends BaseActivity {
     }
 
     private void initControl() {
+        weightLayout.setVisibility(View.GONE);
         weightLayout.setAlpha(0);
+        age.setVisibility(View.GONE);
         age.setAlpha(0);
+
+        // Setup the scale spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ArrayList<String> unitTypes = new ArrayList<>();
+        unitTypes.add(getResources().getString(R.string.lbs));
+        unitTypes.add(getResources().getString(R.string.kgs));
+
+        unitSpinner.setAdapter(adapter);
+        adapter.addAll(unitTypes);
+        adapter.notifyDataSetChanged();
+        unitSpinner.setSelection(0);
     }
 
     private void setupName() {
@@ -176,9 +195,31 @@ public class InitActivity extends BaseActivity {
     }
 
     // Fades in the views
-    private void fadeIn(View view) {
+    private void fadeIn(final View view) {
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
         objectAnimator.setDuration(450L);
+
+        objectAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+                view.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
         objectAnimator.start();
     }
 
