@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/wc_spinner_layout_height">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="false"
+        android:layout_marginEnd="@dimen/wc_spinner_margin_right"
+        android:paddingTop="@dimen/wc_spinner_padding_top"
+        android:paddingBottom="@dimen/wc_spinner_padding_bottom"
+        android:layout_marginTop="@dimen/wc_spinner_margin"
+        android:layout_marginBottom="@dimen/wc_spinner_margin"
+        android:textSize="@dimen/wc_spinner_text_size"
+        style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
+
+</RelativeLayout>

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.brandonhogan.liftscout.foundation.controls.BhDatePicker;
 import com.brandonhogan.liftscout.foundation.model.User;
@@ -32,8 +33,10 @@ public class InitActivity extends BaseActivity {
     @Bind(R.id.weight) TextView weight;
     @Bind(R.id.start_button) Button startButton;
 
-    @Bind(R.id.weight_inputlayout)
-    TextInputLayout weightInputLayout;
+    @Bind(R.id.weight_layout)
+    LinearLayout weightLayout;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +97,7 @@ public class InitActivity extends BaseActivity {
     }
 
     private void initControl() {
-        weightInputLayout.setAlpha(0);
+        weightLayout.setAlpha(0);
         age.setAlpha(0);
     }
 
@@ -111,7 +114,7 @@ public class InitActivity extends BaseActivity {
 
                 if (!showWeight) {
                     showWeight = true;
-                    fadeIn(weightInputLayout);
+                    fadeIn(weightLayout);
                 }
 
                 showStartButton();

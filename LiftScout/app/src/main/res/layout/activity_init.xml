@@ -73,28 +73,47 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/weight_inputlayout"
+        <LinearLayout
+            android:id="@+id/weight_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/name_inputlayout">
+            android:layout_below="@id/name_inputlayout"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-            <EditText
-                android:id="@+id/weight"
-                android:layout_width="match_parent"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/weight_inputlayout"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:hint="@string/frag_init_weight_hint"
-                android:textSize="@dimen/material_text_size_large"
-                android:ems="10"/>
+                android:layout_weight="0.5">
 
-        </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:id="@+id/weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/frag_init_weight_hint"
+                    android:textSize="@dimen/material_text_size_large"
+                    android:ems="10"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:focusableInTouchMode="false"
+                android:textSize="@dimen/wc_spinner_text_size"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
+
+        </LinearLayout>
 
         <com.brandonhogan.liftscout.foundation.controls.BhDatePicker
             android:id="@+id/age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/weight_inputlayout"/>
+            android:layout_below="@id/weight_layout"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,7 +134,6 @@
                 android:backgroundTint="@color/colorPrimary"
                 android:textColor="@color/white"
                 android:visibility="invisible" />
-
 
         </LinearLayout>
 
