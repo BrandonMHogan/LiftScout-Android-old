@@ -228,7 +228,7 @@ public class InitActivity extends BaseActivity {
     public void setupUI(View view) {
 
         //Set up touch listener for non-text box views to hide keyboard.
-        if(!(view instanceof EditText)) {
+        if(!(view instanceof EditText || view instanceof Button || view instanceof Spinner)) {
 
             view.setOnTouchListener(new View.OnTouchListener() {
 
