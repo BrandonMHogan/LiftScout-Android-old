@@ -96,22 +96,26 @@ public class BhDatePicker extends FrameLayout {
         editTextView = (EditText) findViewById(R.id.edit_text);
         editTextView.setKeyListener(null);
 
-//        editTextView.setOnTouchListener(new OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//                showDialog();
-//                InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//                return false;
-//            }
-//        });
+        editTextView.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (v.hasFocus() && dialog == null) {
+                    showDialog();
+                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+                return false;
+            }
+        });
 
         editTextView.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if(b)
+                if(b && dialog == null) {
                     showDialog();
+                    InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
             }
         });
 
@@ -183,6 +187,7 @@ public class BhDatePicker extends FrameLayout {
     }
 
     private void datePickerDismissListener () {
+        dialog = null;
         if (callback != null)
             callback.onBhDatePickerDismiss();
     }
