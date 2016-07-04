@@ -38,4 +38,12 @@
     <string name="frag_home_first_load_message">"Welcome to Lift Scout %s! This app will become your closest ally in your swole journey."</string>
     <string name="frag_home_welcome_back_message">Welcome back %s!</string>
 
+
+    <!-- Errors -->
+    <string name="error_title">Uh oh!</string>
+    <string name="error_name">Name is required</string>
+    <string name="error_weight">Weight is required</string>
+    <string name="error_age">Age is required</string>
+
+
 </resources>

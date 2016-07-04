@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.activities;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -25,6 +26,7 @@ import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class InitActivity extends BaseActivity {
 
@@ -70,21 +72,39 @@ public class InitActivity extends BaseActivity {
     @OnClick(R.id.start_button)
     public void saveUserData() {
 
+        String errorLog = "";
+
         String nameValue = name.getText().toString();
-        Date birthDate;
+        String unitValue = unitSpinner.getSelectedItem().toString();
+        Date birthDateValue = age.getDate();
         double weightValue = 0;
 
+        if (nameValue.trim().isEmpty())
+            errorLog += getResources().getString(R.string.error_name) + "\n";
+
+        if (age.getDate() == null)
+            errorLog += getResources().getString(R.string.error_age) + "\n";
+
         try {
-            birthDate = age.getDate();
             weightValue = Double.parseDouble(weight.getText().toString());
         } catch(NumberFormatException nfe) {
-            Log.e(getClassTag(), "Failed to save user data. Likely conversion failure");
+            errorLog += getResources().getString(R.string.error_weight);
+        }
+
+        if (!errorLog.isEmpty()) {
+
+            SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+            .setTitleText(getResources().getString(R.string.error_title))
+            .setContentText(errorLog);
+
+            pDialog.show();
+
             return;
         }
 
         getRealm().beginTransaction();
 
-        User user = new User(nameValue, birthDate, weightValue, unitSpinner.getSelectedItem().toString());
+        User user = new User(nameValue, birthDateValue, weightValue, unitValue);
         getRealm().copyToRealmOrUpdate(user);
 
         getRealm().commitTransaction();
@@ -190,8 +210,6 @@ public class InitActivity extends BaseActivity {
     private void showStartButton() {
         if (nameSet && weightSet && ageSet)
             startButton.setVisibility(View.VISIBLE);
-        else
-            startButton.setVisibility(View.INVISIBLE);
     }
 
     // Fades in the views
