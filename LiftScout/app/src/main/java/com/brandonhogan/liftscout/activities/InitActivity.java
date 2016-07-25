@@ -3,7 +3,6 @@ package com.brandonhogan.liftscout.activities;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -42,8 +41,6 @@ public class InitActivity extends BaseActivity {
     @Bind(R.id.weight_layout)
     LinearLayout weightLayout;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,22 +70,34 @@ public class InitActivity extends BaseActivity {
     public void saveUserData() {
 
         String errorLog = "";
+        boolean focusSet = false;
 
         String nameValue = name.getText().toString();
         String unitValue = unitSpinner.getSelectedItem().toString();
         Date birthDateValue = age.getDate();
         double weightValue = 0;
 
-        if (nameValue.trim().isEmpty())
+        if (nameValue.trim().isEmpty()) {
             errorLog += getResources().getString(R.string.error_name) + "\n";
-
-        if (age.getDate() == null)
-            errorLog += getResources().getString(R.string.error_age) + "\n";
+            name.setError(getResources().getString(R.string.error_name));
+            focusSet = true;
+            name.requestFocus();
+        }
 
         try {
             weightValue = Double.parseDouble(weight.getText().toString());
         } catch(NumberFormatException nfe) {
             errorLog += getResources().getString(R.string.error_weight);
+            weight.setError(getResources().getString(R.string.error_weight));
+
+            if (!focusSet) {
+                focusSet = true;
+                weight.requestFocus();
+            }
+        }
+
+        if (age.getDate() == null) {
+            errorLog += getResources().getString(R.string.error_age) + "\n";
         }
 
         if (!errorLog.isEmpty()) {
@@ -125,6 +134,7 @@ public class InitActivity extends BaseActivity {
         weightLayout.setAlpha(0);
         age.setVisibility(View.GONE);
         age.setAlpha(0);
+        age.setHint(getResources().getString(R.string.frag_init_age_hint));
 
         // Setup the scale spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item);

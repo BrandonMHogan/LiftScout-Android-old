@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.foundation.controls;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.design.widget.TextInputLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,6 +28,7 @@ public class BhDatePicker extends FrameLayout {
 
     // Private Properties
 
+    private TextInputLayout inputLayout;
     private EditText editTextView;
     private Date date;
     private Date minDate;
@@ -65,6 +67,10 @@ public class BhDatePicker extends FrameLayout {
             setDate(maxDate);
     }
 
+    public void setHint(String hint) {
+        inputLayout.setHint(hint);
+    }
+
     public void setCallback(DatePickerCallback callback) {
         this.callback = callback;
     }
@@ -92,6 +98,8 @@ public class BhDatePicker extends FrameLayout {
 
     private void initControl() {
         final View view = inflate(getContext(), R.layout.con_date_picker, this);
+
+        inputLayout = (TextInputLayout) findViewById(R.id.input_layout);
 
         editTextView = (EditText) findViewById(R.id.edit_text);
         editTextView.setKeyListener(null);
