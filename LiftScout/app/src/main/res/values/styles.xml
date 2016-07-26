@@ -80,4 +80,12 @@
         <item name="android:layout_margin">3dp</item>
     </style>
 
+    <!-- Logos -->
+    <style name="Logo_Scout">
+        <item name="android:alpha">1.0</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:src">@drawable/ic_scout_orange</item>
+    </style>
+
 </resources>

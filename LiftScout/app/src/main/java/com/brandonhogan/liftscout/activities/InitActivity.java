@@ -49,13 +49,6 @@ public class InitActivity extends BaseActivity {
 
         setTitle(R.string.title_activity_init);
 
-        User user = getRealm().where(User.class).findFirst();
-
-        // User has used the app before and should be directed to the main activity
-        if (user != null){
-            loadHome();
-        }
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

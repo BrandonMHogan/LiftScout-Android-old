@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_dark"
+    tools:context="com.brandonhogan.liftscout.activities.SplashActivity">
+
+    <ImageView
+        android:id="@+id/logo_icon"
+        android:layout_width="@dimen/logo_scout_width"
+        android:layout_height="@dimen/logo_scout_height"
+        style="@style/Logo_Scout"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@null"/>
+
+</LinearLayout>
