@@ -2,8 +2,6 @@ package com.brandonhogan.liftscout;
 
 import android.app.Application;
 
-import java.util.logging.Logger;
-
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 

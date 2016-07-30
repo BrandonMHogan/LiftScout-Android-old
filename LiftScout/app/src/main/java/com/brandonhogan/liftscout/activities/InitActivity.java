@@ -17,11 +17,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.controls.BhDatePicker;
 import com.brandonhogan.liftscout.foundation.model.User;
-import com.brandonhogan.liftscout.R;
+
 import java.util.ArrayList;
 import java.util.Date;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

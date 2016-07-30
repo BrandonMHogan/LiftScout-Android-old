@@ -11,8 +11,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.utils.BhDate;
+
 import java.util.Calendar;
 import java.util.Date;
 

@@ -10,13 +10,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.fragments.base.BaseFragment;
+import com.brandonhogan.liftscout.fragments.base.FragmentListener;
 import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
 import com.brandonhogan.liftscout.fragments.HomeFragment;
-import com.brandonhogan.liftscout.fragments.base.BHFragment;
-import com.brandonhogan.liftscout.fragments.base.BHFragmentListener;
 import com.brandonhogan.liftscout.foundation.model.User;
 
 import java.util.Date;
@@ -26,12 +25,12 @@ import io.realm.Realm;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         FragmentManager.OnBackStackChangedListener,
-        BHFragmentListener {
+        FragmentListener {
 
     private boolean isInTransition = false;
     private FragmentTransaction transaction;
     // Tracks the currently displayed fragment
-    private BHFragment currentFragment;
+    private BaseFragment currentFragment;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
@@ -91,25 +90,10 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onBackStackChanged() {
-        if(currentFragment.parentFragment() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // show back button
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            });
-        }
-        else {
-            //show hamburger
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } else {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            toggle.syncState();
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    drawer.openDrawer(GravityCompat.START);
-                }
-            });
         }
     }
 
@@ -117,14 +101,9 @@ public class MainActivity extends BaseActivity
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            // If the current fragment has no parent, then hitting the back button will close the app
-            if (currentFragment.parentFragment() == null) {
-                finish();
-            }
-            else{
-                fragmentTransitionTo(currentFragment.parentFragment());
-            }
+        }
+        else {
+            super.onBackPressed();
         }
     }
 
@@ -177,19 +156,20 @@ public class MainActivity extends BaseActivity
         return true;
     }
 
-    private void setNavHighlight() {
-
+    public void setTitle(String title) {
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setTitle(title);
     }
 
-    private boolean replaceFragment(BHFragment fragment) {
+    private boolean replaceFragment(BaseFragment fragment) {
         return replaceFragment(fragment, 0, 0);
     }
 
-    private boolean replaceFragment(BHFragment fragment, int animIn, int animOut) {
-        return fragmentReplaceTransaction(fragment, fragment.getBhTAG(), animIn, animOut);
+    private boolean replaceFragment(BaseFragment fragment, int animIn, int animOut) {
+        return fragmentReplaceTransaction(fragment, fragment.getClassTag(), animIn, animOut);
     }
 
-    private boolean fragmentReplaceTransaction(BHFragment newFragment, String tag, int animIn, int animOut) {
+    private boolean fragmentReplaceTransaction(BaseFragment newFragment, String tag, int animIn, int animOut) {
 
         if(newFragment == null)
             return false;
@@ -224,25 +204,16 @@ public class MainActivity extends BaseActivity
             transaction.commit();
         }
 
-        // Will set the highlight on the drawer based on the current fragments application area
-        if (currentFragment.applicationArea() != null) {
-            BHFragment.ApplicationArea app = currentFragment.applicationArea();
-            int apple = app.getValue();
-            int orang = R.id.nav_home;
-
-        //    navigationView.setCheckedItem(currentFragment.applicationArea().getValue());
-        }
-
         return true;
     }
 
     @Override
-    public void fragmentTransitionTo(BHFragment fragment) {
+    public void fragmentTransitionTo(BaseFragment fragment) {
         replaceFragment(fragment);
     }
 
     @Override
-    public void fragmentTransitionTo(BHFragment fragment, int animIn, int animOut) {
+    public void fragmentTransitionTo(BaseFragment fragment, int animIn, int animOut) {
         replaceFragment(fragment, animIn, animOut);
     }
 
