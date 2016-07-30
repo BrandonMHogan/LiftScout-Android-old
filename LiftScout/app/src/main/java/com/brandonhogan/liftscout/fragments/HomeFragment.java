@@ -17,12 +17,27 @@ import butterknife.Bind;
 
 public class HomeFragment extends BaseFragment {
 
+    // Instance
+    //
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
+    }
+
+
+    // Private Properties
+    //
     private User user;
     private View rootView;
 
+
+    // Binds
+    //
     @Bind(R.id.welcome_message)
     TextView welcomeMessage;
 
+
+    // Overrides
+    //
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +64,9 @@ public class HomeFragment extends BaseFragment {
         loadUserData();
     }
 
+
+    // Private Functions
+    //
     private void loadUserData() {
         user = getRealm().where(User.class).findFirst();
 

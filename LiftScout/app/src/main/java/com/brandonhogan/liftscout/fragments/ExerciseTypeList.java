@@ -11,6 +11,13 @@ import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 
 public class ExerciseTypeList extends BaseFragment {
 
+    // Instance
+    //
+    public static ExerciseTypeList newInstance() {
+        return new ExerciseTypeList();
+    }
+
+
     // Private Properties
     //
     private View rootView;

@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
-            replaceFragment(new HomeFragment());
+            replaceFragment(HomeFragment.newInstance());
         }
     }
 
@@ -98,9 +98,9 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            replaceFragment(new HomeFragment());
+            replaceFragment(HomeFragment.newInstance());
         } else if (id == R.id.nav_calendar) {
-            replaceFragment(new CalendarFragment());
+            replaceFragment(CalendarFragment.newInstance());
         } else if (id == R.id.nav_exercises) {
 
         } else if (id == R.id.nav_routines) {

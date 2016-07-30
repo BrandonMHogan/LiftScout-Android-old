@@ -26,6 +26,13 @@ import butterknife.Bind;
 
 public class CalendarFragment extends BaseFragment implements OnDateSelectedListener, OnMonthChangedListener {
 
+    // Instance
+    //
+    public static CalendarFragment newInstance() {
+        return new CalendarFragment();
+    }
+
+
     // Private Properties
     //
     private View rootView;
