@@ -1,7 +1,5 @@
 package com.brandonhogan.liftscout.fragments.base;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.brandonhogan.liftscout.activities.MainActivity;
+import com.brandonhogan.liftscout.foundation.navigation.NavigationManager;
 
 import butterknife.ButterKnife;
 import io.realm.Realm;
@@ -19,7 +18,6 @@ public class BaseFragment extends Fragment {
     // Private Properties
     //
     private final String classTag = this.getClass().getSimpleName();
-    private FragmentListener callback;
     private Realm realm;
     private final Object realmLock = new Object();
 
@@ -32,6 +30,10 @@ public class BaseFragment extends Fragment {
 
     public void setTitle(String title) {
         ((MainActivity)getActivity()).setTitle(title);
+    }
+
+    public NavigationManager getNavigationManager() {
+        return ((MainActivity)getActivity()).getNavigationManager();
     }
 
     public Realm getRealm() {
@@ -76,32 +78,7 @@ public class BaseFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        Activity activity;
-
-        // Makes sure the context is activity based
-        try {
-            activity = (Activity)context;
-        }
-        catch (ClassCastException e){
-            throw new ClassCastException("BaseFragment passed none activity based " +
-                    "context for " + getClassTag());
-        }
-
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-        try {
-            callback = ((FragmentListener) activity);
-        } catch (ClassCastException e) {
-            throw new ClassCastException(getClassTag()
-                    + " must implement FragmentListener");
-        }
-    }
-
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+    public Animation onCreateAnimation(final int transit, boolean enter, int nextAnim) {
 
         if (nextAnim == 0) {
             return null;
@@ -113,7 +90,7 @@ public class BaseFragment extends Fragment {
             @Override
             public void onAnimationStart(Animation animation) {
                 Log.v(getClassTag(), "Fragment Animation started.");
-                callback.fragmentTransitionStarted();
+                getNavigationManager().setInTransition(true);
             }
 
             @Override
@@ -125,7 +102,7 @@ public class BaseFragment extends Fragment {
             @Override
             public void onAnimationEnd(Animation animation) {
                 Log.v(getClassTag(), "Fragment Animation ended.");
-                callback.fragmentTransitionEnded();
+                getNavigationManager().setInTransition(false);
             }
         });
 

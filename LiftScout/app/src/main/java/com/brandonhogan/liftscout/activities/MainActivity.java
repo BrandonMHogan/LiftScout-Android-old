@@ -2,7 +2,6 @@ package com.brandonhogan.liftscout.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,23 +10,21 @@ import android.view.MenuItem;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.model.User;
-import com.brandonhogan.liftscout.fragments.HomeFragment;
+import com.brandonhogan.liftscout.foundation.navigation.NavigationManager;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
-import com.brandonhogan.liftscout.fragments.base.FragmentListener;
-import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
 
 import java.util.Date;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        FragmentManager.OnBackStackChangedListener,
-        FragmentListener {
+        NavigationManager.NavigationListener {
 
     // Private Properties
     //
     private boolean isInTransition = false;
     private BaseFragment currentFragment;
     private DrawerLayout drawer;
+    private NavigationManager navigationManager;
 
 
     // Overrides
@@ -56,7 +53,11 @@ public class MainActivity extends BaseActivity
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
-            replaceFragment(HomeFragment.newInstance());
+            navigationManager = new NavigationManager();
+            navigationManager.init(getSupportFragmentManager());
+            navigationManager.setNavigationListener(this);
+
+            navigationManager.startHome();
         }
     }
 
@@ -72,14 +73,14 @@ public class MainActivity extends BaseActivity
         updateUserData();
     }
 
-    @Override
-    public void onBackStackChanged() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        } else {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
-    }
+//    @Override
+//    public void onBackStackChanged() {
+//        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        } else {
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//        }
+//    }
 
     @Override
     public void onBackPressed() {
@@ -98,9 +99,9 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            replaceFragment(HomeFragment.newInstance());
+            navigationManager.startHome();
         } else if (id == R.id.nav_calendar) {
-            replaceFragment(CalendarFragment.newInstance());
+            navigationManager.startCalendar();
         } else if (id == R.id.nav_exercises) {
 
         } else if (id == R.id.nav_routines) {
@@ -125,6 +126,10 @@ public class MainActivity extends BaseActivity
             getSupportActionBar().setTitle(title);
     }
 
+    public NavigationManager getNavigationManager() {
+        return navigationManager;
+    }
+
 
     // Private Functions
     //
@@ -135,71 +140,10 @@ public class MainActivity extends BaseActivity
         getRealm().commitTransaction();
     }
 
-    private boolean replaceFragment(BaseFragment fragment) {
-        return replaceFragment(fragment, 0, 0);
-    }
 
-    private boolean replaceFragment(BaseFragment fragment, int animIn, int animOut) {
-        return fragmentReplaceTransaction(fragment, animIn, animOut);
-    }
-
-    private boolean fragmentReplaceTransaction(BaseFragment newFragment, int animIn, int animOut) {
-
-        if(newFragment == null)
-            return false;
-
-        // If a fragment is already in transition, prevent additional replacement
-        if (isInTransition)
-            return false;
-
-        // Do not reload the same fragment current in the fragment container
-        if (currentFragment != null && newFragment.getClass().getName().equals(currentFragment.getClass().getName()))
-            return false;
-
-        currentFragment = newFragment;
-        FragmentManager manager = getSupportFragmentManager();
-        boolean fragmentPopped = manager.popBackStackImmediate(currentFragment.getClassTag(), 0);
-
-        //fragment not in back stack, create it.
-        if (!fragmentPopped){
-
-            // If animation not set, use the defaults
-            if (animIn == 0) {
-                animIn = R.anim.slide_from_right;
-            }
-            if (animOut == 0) {
-                animOut = R.anim.slide_to_left;
-            }
-
-            getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(animIn, animOut, R.anim.slide_from_left, R.anim.slide_to_right)
-                    .replace(R.id.fragment_manager, newFragment)
-                    .addToBackStack(currentFragment.getClassTag())
-                    .commit();
-        }
-
-        return true;
-    }
-
-    // Fragment Callbacks
-    //
+    // Navigation Manager Callbacks
     @Override
-    public void fragmentTransitionTo(BaseFragment fragment) {
-        replaceFragment(fragment);
-    }
+    public void onBackstackChanged() {
 
-    @Override
-    public void fragmentTransitionTo(BaseFragment fragment, int animIn, int animOut) {
-        replaceFragment(fragment, animIn, animOut);
-    }
-
-    @Override
-    public void fragmentTransitionStarted() {
-        isInTransition = true;
-    }
-
-    @Override
-    public void fragmentTransitionEnded() {
-        isInTransition = false;
     }
 }
