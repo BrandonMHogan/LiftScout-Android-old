@@ -1,49 +1,43 @@
 package com.brandonhogan.liftscout.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.foundation.model.User;
+import com.brandonhogan.liftscout.fragments.HomeFragment;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.brandonhogan.liftscout.fragments.base.FragmentListener;
 import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
-import com.brandonhogan.liftscout.fragments.HomeFragment;
-import com.brandonhogan.liftscout.foundation.model.User;
 
 import java.util.Date;
-
-import io.realm.Realm;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         FragmentManager.OnBackStackChangedListener,
         FragmentListener {
 
+    // Private Properties
+    //
     private boolean isInTransition = false;
-    private FragmentTransaction transaction;
-    // Tracks the currently displayed fragment
     private BaseFragment currentFragment;
     private DrawerLayout drawer;
-    private ActionBarDrawerToggle toggle;
-    private Toolbar toolbar;
-    private NavigationView navigationView;
 
+
+    // Overrides
+    //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setTitle(R.string.title_frag_home);
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (findViewById(R.id.fragment_manager) != null) {
@@ -54,7 +48,7 @@ public class MainActivity extends BaseActivity
             }
 
             drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            toggle = new ActionBarDrawerToggle(
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawer.addDrawerListener(toggle);
             toggle.syncState();
@@ -70,22 +64,12 @@ public class MainActivity extends BaseActivity
     protected void onResume() {
         super.onResume();
         updateUserData();
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         updateUserData();
-    }
-
-    private void updateUserData() {
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        User user = realm.where(User.class).findFirst();
-        user.setLastUsed(new Date());
-        realm.commitTransaction();
-        realm.close();
     }
 
     @Override
@@ -105,28 +89,6 @@ public class MainActivity extends BaseActivity
         else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -151,14 +113,26 @@ public class MainActivity extends BaseActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+
+    // Public Functions
+    //
     public void setTitle(String title) {
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle(title);
+    }
+
+
+    // Private Functions
+    //
+    private void updateUserData() {
+        getRealm().beginTransaction();
+        User user = getRealm().where(User.class).findFirst();
+        user.setLastUsed(new Date());
+        getRealm().commitTransaction();
     }
 
     private boolean replaceFragment(BaseFragment fragment) {
@@ -166,10 +140,10 @@ public class MainActivity extends BaseActivity
     }
 
     private boolean replaceFragment(BaseFragment fragment, int animIn, int animOut) {
-        return fragmentReplaceTransaction(fragment, fragment.getClassTag(), animIn, animOut);
+        return fragmentReplaceTransaction(fragment, animIn, animOut);
     }
 
-    private boolean fragmentReplaceTransaction(BaseFragment newFragment, String tag, int animIn, int animOut) {
+    private boolean fragmentReplaceTransaction(BaseFragment newFragment, int animIn, int animOut) {
 
         if(newFragment == null)
             return false;
@@ -184,11 +158,10 @@ public class MainActivity extends BaseActivity
 
         currentFragment = newFragment;
         FragmentManager manager = getSupportFragmentManager();
-        boolean fragmentPopped = manager.popBackStackImmediate(tag, 0);
+        boolean fragmentPopped = manager.popBackStackImmediate(currentFragment.getClassTag(), 0);
 
         //fragment not in back stack, create it.
         if (!fragmentPopped){
-            transaction = getSupportFragmentManager().beginTransaction();
 
             // If animation not set, use the defaults
             if (animIn == 0) {
@@ -198,15 +171,18 @@ public class MainActivity extends BaseActivity
                 animOut = R.anim.slide_to_left;
             }
 
-            transaction.setCustomAnimations(animIn, animOut, R.anim.slide_from_left, R.anim.slide_to_right);
-            transaction.replace(R.id.fragment_manager, newFragment);
-            transaction.addToBackStack(tag);
-            transaction.commit();
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(animIn, animOut, R.anim.slide_from_left, R.anim.slide_to_right)
+                    .replace(R.id.fragment_manager, newFragment)
+                    .addToBackStack(currentFragment.getClassTag())
+                    .commit();
         }
 
         return true;
     }
 
+    // Fragment Callbacks
+    //
     @Override
     public void fragmentTransitionTo(BaseFragment fragment) {
         replaceFragment(fragment);

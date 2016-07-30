@@ -3,20 +3,13 @@ package com.brandonhogan.liftscout.fragments.base;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 
-import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.activities.MainActivity;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.ButterKnife;
 import io.realm.Realm;
@@ -105,5 +98,37 @@ public class BaseFragment extends Fragment {
             throw new ClassCastException(getClassTag()
                     + " must implement FragmentListener");
         }
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+
+        if (nextAnim == 0) {
+            return null;
+        }
+        Animation anim = AnimationUtils.loadAnimation(getActivity(), nextAnim);
+
+        anim.setAnimationListener(new Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(Animation animation) {
+                Log.v(getClassTag(), "Fragment Animation started.");
+                callback.fragmentTransitionStarted();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                Log.v(getClassTag(), "Fragment Animation repeating.");
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Log.v(getClassTag(), "Fragment Animation ended.");
+                callback.fragmentTransitionEnded();
+            }
+        });
+
+        return anim;
     }
 }

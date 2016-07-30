@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.foundation.model;
 
 import java.util.Calendar;
 import java.util.Date;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
