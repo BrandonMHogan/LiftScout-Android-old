@@ -10,6 +10,7 @@ import com.brandonhogan.liftscout.fragments.HomeFragment;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
+import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
 
 public class NavigationManager {
 
@@ -157,10 +158,19 @@ public class NavigationManager {
         openAsRoot(fragment);
     }
 
+
+    // Settings
+    //
     public void startSettings() {
         BaseFragment fragment = SettingsListFragment.newInstance();
         openAsRoot(fragment);
     }
+
+    public void startSettingsProfile() {
+        BaseFragment fragment = SettingsProfileFragment.newInstance();
+        open(fragment);
+    }
+
 
     public void startExerciseTypeList() {
         BaseFragment fragment = ExerciseTypeListFragment.newInstance();

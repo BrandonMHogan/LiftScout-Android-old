@@ -27,7 +27,10 @@
 
     <!-- Titles -->
     <string name="title_activity_init">Lift Scout Setup</string>
-    <string name="title_activity_settings">Settings</string>
+    <string name="title_frag_settings">Settings</string>
+    <string name="title_frag_settings_profile">Profile Settings</string>
+    <string name="title_frag_settings_display">Display Settings</string>
+    <string name="title_frag_settings_notification">Notification Settings</string>
     <string name="title_activity_exercise_type_list">Exercises</string>
     <string name="title_frag_home">Home</string>
 

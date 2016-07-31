@@ -9,15 +9,12 @@ import android.view.ViewGroup;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 
-import butterknife.Bind;
-import butterknife.OnClick;
-
-public class SettingsListFragment extends BaseFragment {
+public class SettingsProfileFragment extends BaseFragment {
 
     // Instance
     //
-    public static SettingsListFragment newInstance() {
-        return new SettingsListFragment();
+    public static SettingsProfileFragment newInstance() {
+        return new SettingsProfileFragment();
     }
 
 
@@ -32,7 +29,7 @@ public class SettingsListFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.frag_settings, null);
+            rootView = inflater.inflate(R.layout.frag_settings_profile, null);
         }
         return rootView;
     }
@@ -41,15 +38,7 @@ public class SettingsListFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setTitle(getResources().getString(R.string.title_frag_settings));
+        setTitle(getResources().getString(R.string.title_frag_settings_profile));
 
-    }
-
-
-    // Events
-    //
-    @OnClick(R.id.profileRow)
-    public void profileCLicked() {
-        getNavigationManager().startSettingsProfile();
     }
 }
