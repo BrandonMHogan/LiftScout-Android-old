@@ -1,8 +1,9 @@
 package com.brandonhogan.liftscout.foundation.navigation;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.app.Fragment;
+import android.app.FragmentManager;
+
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.ExerciseTypeListFragment;
@@ -19,6 +20,7 @@ public class NavigationManager {
     public interface NavigationListener {
         void onBackstackChanged();
     }
+
 
 
     // Private Properties
@@ -60,7 +62,7 @@ public class NavigationManager {
      *
      * @param fragment
      */
-    private boolean open(BaseFragment fragment) {
+    private boolean openWithTransitions(Fragment fragment, int in, int out) {
         if (mFragmentManager == null)
             return false;
 
@@ -78,10 +80,10 @@ public class NavigationManager {
             return false;
 
         mFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.slide_from_right,
-                        R.anim.slide_to_left,
-                        R.anim.slide_from_left,
-                        R.anim.slide_to_right)
+                .setCustomAnimations(in,
+                        out,
+                        R.animator.root_in,
+                        R.animator.root_out)
                 .replace(R.id.fragment_manager, fragment)
                 .addToBackStack(fragment.getClass().getName())
                 .commit();
@@ -94,14 +96,18 @@ public class NavigationManager {
      *
      * @param fragment
      */
-    private void openAsRoot(BaseFragment fragment) {
+    private void openAsRoot(Fragment fragment) {
         popToHomeFragment();
-        open(fragment);
+        openWithTransitions(fragment, R.animator.root_in, R.anim.root_out_old);
     }
 
-    private void openAsHome(BaseFragment fragment) {
+    private void openAsHome(Fragment fragment) {
         popEveryFragment();
-        open(fragment);
+        openWithTransitions(fragment, R.animator.root_in, R.anim.root_out_old);
+    }
+
+    private void open(Fragment fragment) {
+        openWithTransitions(fragment, R.animator.root_in, R.anim.root_out_old);
     }
 
 
@@ -149,12 +155,12 @@ public class NavigationManager {
     }
 
     public void startHome() {
-        BaseFragment fragment = HomeFragment.newInstance();
+        Fragment fragment = HomeFragment.newInstance();
         openAsHome(fragment);
     }
 
     public void startCalendar() {
-        BaseFragment fragment = CalendarFragment.newInstance();
+        Fragment fragment = CalendarFragment.newInstance();
         openAsRoot(fragment);
     }
 
@@ -162,18 +168,18 @@ public class NavigationManager {
     // Settings
     //
     public void startSettings() {
-        BaseFragment fragment = SettingsListFragment.newInstance();
+        Fragment fragment = SettingsListFragment.newInstance();
         openAsRoot(fragment);
     }
 
     public void startSettingsProfile() {
-        BaseFragment fragment = SettingsProfileFragment.newInstance();
+        Fragment fragment = SettingsProfileFragment.newInstance();
         open(fragment);
     }
 
 
     public void startExerciseTypeList() {
-        BaseFragment fragment = ExerciseTypeListFragment.newInstance();
+        Fragment fragment = ExerciseTypeListFragment.newInstance();
         openAsRoot(fragment);
     }
 

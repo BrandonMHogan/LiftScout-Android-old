@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity
             navigationView.setNavigationItemSelectedListener(this);
 
             navigationManager = new NavigationManager();
-            navigationManager.init(getSupportFragmentManager());
+            navigationManager.init(getFragmentManager());
             navigationManager.setNavigationListener(this);
 
 
