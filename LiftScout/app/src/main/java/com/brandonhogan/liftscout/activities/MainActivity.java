@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.model.User;
@@ -28,6 +29,7 @@ public class MainActivity extends BaseActivity
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private SweetAlertDialog dialog;
+    private Toolbar toolbar;
 
 
     // Overrides
@@ -37,7 +39,7 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (findViewById(R.id.fragment_manager) != null) {
@@ -100,13 +102,13 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_calendar) {
             navigationManager.startCalendar();
         } else if (id == R.id.nav_exercises) {
-
+            navigationManager.startExerciseTypeList();
         } else if (id == R.id.nav_routines) {
 
         } else if (id == R.id.nav_graphs) {
 
         } else if (id == R.id.nav_settings) {
-
+            navigationManager.startSettings();
         } else if (id == R.id.nav_about) {
 
         }
@@ -140,16 +142,16 @@ public class MainActivity extends BaseActivity
     private void showExitDialog() {
 
         dialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("Are you sure?")
-                .setContentText("Won't be able to recover this file!")
-                .setConfirmText("Yes,delete it!")
+                .setTitleText(getString(R.string.dialog_close_app_title))
+                .setContentText(getString(R.string.dialog_close_app_message))
+                .setConfirmText(getString(R.string.yes))
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         endActivity();
                     }
                 })
-                .setCancelText("Cancel")
+                .setCancelText(getString(R.string.cancel))
                 .showCancelButton(true);
 
         dialog.show();
@@ -176,14 +178,46 @@ public class MainActivity extends BaseActivity
             case "CalendarFragment":
                 navigationView.setCheckedItem(R.id.nav_calendar);
                 break;
+            case "SettingsListFragment":
+                navigationView.setCheckedItem(R.id.nav_settings);
+                break;
 
         }
 
         boolean rootFragment = navigationManager.isRootFragmentVisible();
+
         //getSupportActionBar().setDisplayShowHomeEnabled(rootFragment);
         //getSupportActionBar().setHomeButtonEnabled(true);
-     //   getSupportActionBar().setDisplayHomeAsUpEnabled(rootFragment);
+//
+//        if (!rootFragment) {
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//            toggle.setDrawerIndicatorEnabled(false);
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        } else {
+//            toggle.setDrawerIndicatorEnabled(true);
+//        }
+
+
         toggle.setDrawerIndicatorEnabled(rootFragment);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(!rootFragment);
+
+        if (rootFragment) {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+            });
+        }
+        else {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+        }
+
         toggle.syncState();
 
     }

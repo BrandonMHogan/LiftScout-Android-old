@@ -3,11 +3,14 @@ package com.brandonhogan.liftscout.foundation.navigation;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.fragments.ExerciseTypeListFragment;
 import com.brandonhogan.liftscout.fragments.HomeFragment;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
+import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
 
 public class NavigationManager {
 
@@ -119,7 +122,6 @@ public class NavigationManager {
      * @param baseActivity
      */
     public void navigateBack(Activity baseActivity) {
-
         if (mFragmentManager.getBackStackEntryCount() == 0) {
             // we can finish the base activity since we have no other fragments
             baseActivity.finish();
@@ -135,6 +137,16 @@ public class NavigationManager {
 
     public void startCalendar() {
         BaseFragment fragment = CalendarFragment.newInstance();
+        open(fragment);
+    }
+
+    public void startSettings() {
+        BaseFragment fragment = SettingsListFragment.newInstance();
+        open(fragment);
+    }
+
+    public void startExerciseTypeList() {
+        BaseFragment fragment = ExerciseTypeListFragment.newInstance();
         open(fragment);
     }
 
