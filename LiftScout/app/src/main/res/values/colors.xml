@@ -23,7 +23,8 @@
     <color name="white">#ffffff</color>
     <color name="gray_dark">#151515</color>
 
-
+    <!-- Border -->
+    <color name="listview_border_color">#1F000000</color>
 
     <!-- Font Opacity - Black -->
     <color name="material_text_opacity_black_body_1">#DE000000</color>

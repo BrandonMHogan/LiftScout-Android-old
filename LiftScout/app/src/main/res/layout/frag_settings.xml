@@ -1,13 +1,141 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="55dp"
-        android:text="Setting Page (Change This noob)"/>
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" >
 
-</LinearLayout>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/settings_table_layout_padding_top"
+            android:id="@+id/SettingsTableLayout" >
+
+            <!-- Profile Section -->
+            <TableRow
+                android:id="@+id/profileRow"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:minHeight="@dimen/settings_table_row_min_height"
+                android:showDividers="end"
+                android:divider="@color/listview_border_color"
+                android:background="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/setting_layout_top_padding"
+                    android:paddingLeft="@dimen/settings_table_row_horizontal_padding"
+                    android:paddingRight="@dimen/settings_table_row_horizontal_padding">
+
+                    <TextView
+                        android:text="@string/setting_profile"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:paddingTop="@dimen/settings_table_body_text_padding_top"
+                        android:textSize="@dimen/settings_table_body_text_size"/>
+
+                    <TextView
+                        style="@style/RobotoBody01"
+                        android:textColor="@color/textColorSecondaryInverse"
+                        android:text="@string/setting_profile_description"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:maxLines="4" />
+
+                </LinearLayout>
+            </TableRow>
+
+            <View android:layout_width="match_parent"
+                android:background="@color/listview_border_color"
+                android:layout_height="@dimen/settings_divider_view_hieght"/>
+
+            <!-- Display Section -->
+            <TableRow
+                android:id="@+id/displayRow"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:minHeight="@dimen/settings_table_row_min_height"
+                android:showDividers="end"
+                android:divider="@color/listview_border_color"
+                android:background="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/setting_layout_top_padding"
+                    android:paddingLeft="@dimen/settings_table_row_horizontal_padding"
+                    android:paddingRight="@dimen/settings_table_row_horizontal_padding">
+
+                    <TextView
+                        android:text="@string/setting_display"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:paddingTop="@dimen/settings_table_body_text_padding_top"
+                        android:textSize="@dimen/settings_table_body_text_size"/>
+
+                    <TextView
+                        style="@style/RobotoBody01"
+                        android:textColor="@color/textColorSecondaryInverse"
+                        android:text="@string/setting_display_description"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:maxLines="4" />
+
+                </LinearLayout>
+            </TableRow>
+
+            <View android:layout_width="match_parent"
+                android:background="@color/listview_border_color"
+                android:layout_height="@dimen/settings_divider_view_hieght"/>
+
+            <!-- Notification Section -->
+            <TableRow
+                android:id="@+id/notificationRow"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:minHeight="@dimen/settings_table_row_min_height"
+                android:showDividers="end"
+                android:divider="@color/listview_border_color"
+                android:background="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/setting_layout_top_padding"
+                    android:paddingLeft="@dimen/settings_table_row_horizontal_padding"
+                    android:paddingRight="@dimen/settings_table_row_horizontal_padding">
+
+                    <TextView
+                        android:text="@string/setting_notifications"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:paddingTop="@dimen/settings_table_body_text_padding_top"
+                        android:textSize="@dimen/settings_table_body_text_size"/>
+
+                    <TextView
+                        style="@style/RobotoBody01"
+                        android:textColor="@color/textColorSecondaryInverse"
+                        android:text="@string/setting_notifications_description"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:maxLines="4" />
+
+                </LinearLayout>
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
+</FrameLayout>

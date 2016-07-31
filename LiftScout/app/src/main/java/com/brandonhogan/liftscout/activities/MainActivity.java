@@ -189,18 +189,6 @@ public class MainActivity extends BaseActivity
 
         boolean rootFragment = navigationManager.isRootFragmentVisible();
 
-        //getSupportActionBar().setDisplayShowHomeEnabled(rootFragment);
-        //getSupportActionBar().setHomeButtonEnabled(true);
-//
-//        if (!rootFragment) {
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//            toggle.setDrawerIndicatorEnabled(false);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        } else {
-//            toggle.setDrawerIndicatorEnabled(true);
-//        }
-
-
         toggle.setDrawerIndicatorEnabled(rootFragment);
         getSupportActionBar().setDisplayHomeAsUpEnabled(!rootFragment);
 
@@ -222,6 +210,5 @@ public class MainActivity extends BaseActivity
         }
 
         toggle.syncState();
-
     }
 }

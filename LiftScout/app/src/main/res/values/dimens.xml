@@ -13,6 +13,7 @@
 
     <!-- Generic -->
     <dimen name="size_zero">0dp</dimen>
+    <dimen name="modal_text_size">16dp</dimen>
     <dimen name="generic_padding_top_small">5dp</dimen>
     <dimen name="generic_padding_top_medium">10dp</dimen>
     <dimen name="generic_padding_top_large">20dp</dimen>
@@ -83,4 +84,16 @@
     <dimen name="material_text_size_subtitle_toolbar">16dp</dimen>
     <dimen name="material_text_size_title">20sp</dimen>
     <dimen name="material_text_size_title_toolbar">20dp</dimen>
+
+    <!-- Settings Layout -->
+    <dimen name="settings_table_layout_padding_top">0dp</dimen>
+    <dimen name="settings_table_row_horizontal_padding">16dp</dimen>
+    <dimen name="settings_table_header_text_size">14sp</dimen>
+    <dimen name="settings_table_body_text_padding_top">0dp</dimen>
+    <dimen name="settings_table_body_text_size">16sp</dimen>
+    <dimen name="settings_table_body_description_text_size">14sp</dimen>
+    <dimen name="settings_header_table_row_padding_top">20dp</dimen>
+    <dimen name="settings_table_row_min_height">72dp</dimen>
+    <dimen name="setting_layout_top_padding">0dp</dimen>
+    <dimen name="settings_divider_view_hieght">1dp</dimen>
 </resources>
