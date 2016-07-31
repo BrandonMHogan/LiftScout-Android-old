@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 
-
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.ExerciseTypeListFragment;
 import com.brandonhogan.liftscout.fragments.HomeFragment;
-import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
@@ -22,12 +20,12 @@ public class NavigationManager {
     }
 
 
-
     // Private Properties
     //
     private FragmentManager mFragmentManager;
     private NavigationListener navigationListener;
     private boolean isInTransition = false;
+
 
     // Public Properties
     //
@@ -79,9 +77,6 @@ public class NavigationManager {
         if (currentFragment != null && fragment.getClass().getName().equals(currentFragment.getClass().getName()))
             return false;
 
-
-
-
         mFragmentManager.beginTransaction()
                 .setCustomAnimations(in,
                         out,
@@ -110,7 +105,7 @@ public class NavigationManager {
     }
 
     private void open(Fragment fragment) {
-        openWithTransitions(fragment, R.animator.slide_in_left, R.animator.slide_out_right);
+        openWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
     }
 
 
