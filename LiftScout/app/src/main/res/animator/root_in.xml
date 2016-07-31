@@ -5,7 +5,7 @@
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"
         android:propertyName="yFraction"
         android:valueType="floatType"
-        android:valueFrom="1.0"
+        android:valueFrom="0.8"
         android:valueTo="0"
         android:duration="@integer/animation_speed_root_in"/>
 
@@ -15,5 +15,5 @@
         android:valueTo="1.0"
         android:valueType="floatType"
         android:propertyName="alpha"
-        android:duration="@integer/animation_speed_root_in"/>
+        android:duration="@integer/animation_speed_root_in_alpha"/>
 </set>
