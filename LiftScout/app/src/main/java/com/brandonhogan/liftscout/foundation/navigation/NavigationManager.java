@@ -79,11 +79,14 @@ public class NavigationManager {
         if (currentFragment != null && fragment.getClass().getName().equals(currentFragment.getClass().getName()))
             return false;
 
+
+
+
         mFragmentManager.beginTransaction()
                 .setCustomAnimations(in,
                         out,
-                        R.animator.root_in,
-                        R.animator.root_out)
+                        android.R.animator.fade_in,
+                        android.R.animator.fade_out)
                 .replace(R.id.fragment_manager, fragment)
                 .addToBackStack(fragment.getClass().getName())
                 .commit();

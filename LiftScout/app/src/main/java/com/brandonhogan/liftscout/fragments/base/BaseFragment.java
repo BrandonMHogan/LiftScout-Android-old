@@ -5,8 +5,10 @@ import android.animation.AnimatorInflater;
 import android.animation.TimeInterpolator;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -23,7 +25,7 @@ public class BaseFragment extends Fragment {
     private final String classTag = this.getClass().getSimpleName();
     private Realm realm;
     private final Object realmLock = new Object();
-
+    private float oldTranslationZ;
 
     // Public Functions
     //
@@ -81,22 +83,36 @@ public class BaseFragment extends Fragment {
     }
 
     @Override
-    public Animator onCreateAnimator(int transit, boolean enter, int nextAnim) {
+    public Animator onCreateAnimator(int transit, final boolean enter, int nextAnim) {
 
         if (nextAnim != 0) {
 
             Animator animator = AnimatorInflater.loadAnimator(getActivity(), nextAnim);
             animator.addListener(new Animator.AnimatorListener() {
+
+
+
                 @Override
                 public void onAnimationStart(Animator animator) {
                     Log.v(getClassTag(), "Fragment Animation started.");
                     getNavigationManager().setInTransition(true);
+
+                    if (getView() != null && enter) {
+                        oldTranslationZ = ViewCompat.getTranslationZ(getView());
+                        ViewCompat.setTranslationZ(getView(), 300.f);
+                    }
+
+                    Log.d(classTag, "onAnimationStart: " + ViewCompat.getTranslationZ(getView()));
                 }
 
                 @Override
                 public void onAnimationEnd(Animator animator) {
                     Log.v(getClassTag(), "Fragment Animation ended.");
                     getNavigationManager().setInTransition(false);
+
+                    if (getView() != null && enter) {
+                        ViewCompat.setTranslationZ(getView(), oldTranslationZ);
+                    }
                 }
 
                 @Override

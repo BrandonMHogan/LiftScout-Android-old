@@ -28,9 +28,7 @@ public class ExerciseTypeListFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (rootView == null) {
-            rootView = inflater.inflate(R.layout.frag_exercise_type_list, null);
-        }
+        rootView = inflater.inflate(R.layout.frag_exercise_type_list, null);
         return rootView;
     }
 

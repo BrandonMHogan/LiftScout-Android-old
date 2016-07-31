@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="?android:windowBackground">
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,5 +18,5 @@
             app:mcv_showOtherDates="all"
             app:mcv_selectionColor="#00F" />
 
-    </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </com.brandonhogan.liftscout.foundation.controls.BaseFrameLayout>

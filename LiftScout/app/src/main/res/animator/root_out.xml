@@ -7,6 +7,6 @@
         android:valueTo="1.0"
         android:valueType="floatType"
         android:propertyName="translationY"
-        android:duration="3000" />
+        android:duration="2500" />
 
 </set>

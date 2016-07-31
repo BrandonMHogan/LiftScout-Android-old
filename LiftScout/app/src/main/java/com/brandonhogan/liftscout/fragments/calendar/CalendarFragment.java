@@ -50,9 +50,8 @@ public class CalendarFragment extends BaseFragment implements OnDateSelectedList
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (rootView == null) {
-            rootView = inflater.inflate(R.layout.frag_calendar, null);
-        }
+        rootView = inflater.inflate(R.layout.frag_calendar, container, false);
+
         return rootView;
     }
 
