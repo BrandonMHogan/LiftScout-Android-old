@@ -1,9 +1,8 @@
-package com.brandonhogan.liftscout.fragments;
+package com.brandonhogan.liftscout.fragments.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +33,9 @@ public class HomeFragment extends BaseFragment {
     @Bind(R.id.welcome_message)
     TextView welcomeMessage;
 
+    @Bind(R.id.viewpager)
+    ViewPager viewPager;
+
 
     // Overrides
     //
@@ -51,18 +53,8 @@ public class HomeFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle("Home Sweet Home");
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-                getNavigationManager().startCalendar();
-            }
-        });
-
         loadUserData();
+        setupPager();
     }
 
 
@@ -81,5 +73,9 @@ public class HomeFragment extends BaseFragment {
         else {
             welcomeMessage.setText(String.format(getContext().getString(R.string.frag_home_welcome_back_message),user.getName()));
         }
+    }
+
+    private void setupPager() {
+       // viewPager.setAdapter(new CustomPagerAdapter(this));
     }
 }
