@@ -61,21 +61,6 @@ public class NavigationManager {
      * @param fragment
      */
     private boolean openWithTransitions(Fragment fragment, int in, int out) {
-        if (mFragmentManager == null)
-            return false;
-
-        if(fragment == null)
-            return false;
-
-        // If a fragment is already in transition, prevent additional replacement
-        if (isInTransition)
-            return false;
-
-        Fragment currentFragment = mFragmentManager.findFragmentById(R.id.fragment_manager);
-
-        // Do not reload the same fragment current in the fragment container
-        if (currentFragment != null && fragment.getClass().getName().equals(currentFragment.getClass().getName()))
-            return false;
 
         mFragmentManager.beginTransaction()
                 .setCustomAnimations(in,
@@ -94,18 +79,47 @@ public class NavigationManager {
      *
      * @param fragment
      */
-    private void openAsRoot(Fragment fragment) {
+    private boolean openAsRoot(Fragment fragment) {
+        if (!verifyTransition(fragment))
+            return false;
+
         popToHomeFragment();
-        openWithTransitions(fragment, R.animator.root_in, R.animator.root_out);
+        return openWithTransitions(fragment, R.animator.root_in, R.animator.root_out);
     }
 
-    private void openAsHome(Fragment fragment) {
+    private boolean openAsHome(Fragment fragment) {
+        if (!verifyTransition(fragment))
+            return false;
+
         popEveryFragment();
-        openWithTransitions(fragment, R.animator.root_in, R.animator.root_out);
+        return openWithTransitions(fragment, R.animator.root_in, R.animator.root_out);
     }
 
-    private void open(Fragment fragment) {
-        openWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
+    private boolean open(Fragment fragment) {
+        if (!verifyTransition(fragment))
+            return false;
+
+        return openWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
+    }
+
+    private boolean verifyTransition(Fragment fragment) {
+        if (mFragmentManager == null)
+            return false;
+
+        if(fragment == null)
+            return false;
+
+        // If a fragment is already in transition, prevent additional replacement
+        if (isInTransition)
+            return false;
+
+        Fragment currentFragment = mFragmentManager.findFragmentById(R.id.fragment_manager);
+
+        // Do not reload the same fragment current in the fragment container
+        if (currentFragment != null && fragment.getClass().getName().equals(currentFragment.getClass().getName()))
+            return false;
+
+        return true;
     }
 
 
@@ -152,33 +166,33 @@ public class NavigationManager {
         }
     }
 
-    public void startHome() {
+    public boolean startHome() {
         Fragment fragment = HomeFragment.newInstance();
-        openAsHome(fragment);
+        return openAsHome(fragment);
     }
 
-    public void startCalendar() {
+    public boolean startCalendar() {
         Fragment fragment = CalendarFragment.newInstance();
-        openAsRoot(fragment);
+        return openAsRoot(fragment);
     }
 
 
     // Settings
     //
-    public void startSettings() {
+    public boolean startSettings() {
         Fragment fragment = SettingsListFragment.newInstance();
-        openAsRoot(fragment);
+        return openAsRoot(fragment);
     }
 
-    public void startSettingsProfile() {
+    public boolean startSettingsProfile() {
         Fragment fragment = SettingsProfileFragment.newInstance();
-        open(fragment);
+        return open(fragment);
     }
 
 
-    public void startExerciseTypeList() {
+    public boolean startExerciseTypeList() {
         Fragment fragment = ExerciseTypeListFragment.newInstance();
-        openAsRoot(fragment);
+        return openAsRoot(fragment);
     }
 
 
