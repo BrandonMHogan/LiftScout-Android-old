@@ -3,7 +3,6 @@ package com.brandonhogan.liftscout.foundation.navigation;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.ExerciseTypeListFragment;
@@ -83,7 +82,7 @@ public class NavigationManager {
                         R.anim.slide_from_left,
                         R.anim.slide_to_right)
                 .replace(R.id.fragment_manager, fragment)
-                .addToBackStack(fragment.toString())
+                .addToBackStack(fragment.getClass().getName())
                 .commit();
 
         return true;
@@ -95,6 +94,11 @@ public class NavigationManager {
      * @param fragment
      */
     private void openAsRoot(BaseFragment fragment) {
+        popToHomeFragment();
+        open(fragment);
+    }
+
+    private void openAsHome(BaseFragment fragment) {
         popEveryFragment();
         open(fragment);
     }
@@ -107,6 +111,19 @@ public class NavigationManager {
         // Clear all back stack.
         int backStackCount = mFragmentManager.getBackStackEntryCount();
         for (int i = 0; i < backStackCount; i++) {
+
+            // Get the back stack fragment id.
+            int backStackId = mFragmentManager.getBackStackEntryAt(i).getId();
+
+            mFragmentManager.popBackStack(backStackId, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        }
+    }
+
+    // Will pop all but the first fragment in the back stack which *should* be home
+    private void popToHomeFragment() {
+        int backStackCount = mFragmentManager.getBackStackEntryCount();
+        for (int i = 1; i < backStackCount; i++) {
 
             // Get the back stack fragment id.
             int backStackId = mFragmentManager.getBackStackEntryAt(i).getId();
@@ -132,22 +149,22 @@ public class NavigationManager {
 
     public void startHome() {
         BaseFragment fragment = HomeFragment.newInstance();
-        openAsRoot(fragment);
+        openAsHome(fragment);
     }
 
     public void startCalendar() {
         BaseFragment fragment = CalendarFragment.newInstance();
-        open(fragment);
+        openAsRoot(fragment);
     }
 
     public void startSettings() {
         BaseFragment fragment = SettingsListFragment.newInstance();
-        open(fragment);
+        openAsRoot(fragment);
     }
 
     public void startExerciseTypeList() {
         BaseFragment fragment = ExerciseTypeListFragment.newInstance();
-        open(fragment);
+        openAsRoot(fragment);
     }
 
 

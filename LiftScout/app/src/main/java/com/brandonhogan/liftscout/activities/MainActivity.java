@@ -62,6 +62,9 @@ public class MainActivity extends BaseActivity
             navigationManager.init(getSupportFragmentManager());
             navigationManager.setNavigationListener(this);
 
+
+            // This needs to be hit first regardless of where a notification will go. Home must
+            // be the first item in the back stack
             navigationManager.startHome();
         }
     }
