@@ -1,6 +1,8 @@
 package com.brandonhogan.liftscout.fragments.base;
 
 import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.TimeInterpolator;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,26 +84,29 @@ public class BaseFragment extends Fragment {
     public Animator onCreateAnimator(int transit, boolean enter, int nextAnim) {
 
         if (nextAnim != 0) {
-            Animation anim = AnimationUtils.loadAnimation(getActivity(), nextAnim);
 
-            anim.setAnimationListener(new Animation.AnimationListener() {
-
+            Animator animator = AnimatorInflater.loadAnimator(getActivity(), nextAnim);
+            animator.addListener(new Animator.AnimatorListener() {
                 @Override
-                public void onAnimationStart(Animation animation) {
+                public void onAnimationStart(Animator animator) {
                     Log.v(getClassTag(), "Fragment Animation started.");
                     getNavigationManager().setInTransition(true);
                 }
 
                 @Override
-                public void onAnimationRepeat(Animation animation) {
-                    Log.v(getClassTag(), "Fragment Animation repeating.");
+                public void onAnimationEnd(Animator animator) {
+                    Log.v(getClassTag(), "Fragment Animation ended.");
+                    getNavigationManager().setInTransition(false);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animator) {
 
                 }
 
                 @Override
-                public void onAnimationEnd(Animation animation) {
-                    Log.v(getClassTag(), "Fragment Animation ended.");
-                    getNavigationManager().setInTransition(false);
+                public void onAnimationRepeat(Animator animator) {
+
                 }
             });
         }

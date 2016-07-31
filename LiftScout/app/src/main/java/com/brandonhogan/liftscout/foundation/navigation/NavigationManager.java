@@ -98,16 +98,16 @@ public class NavigationManager {
      */
     private void openAsRoot(Fragment fragment) {
         popToHomeFragment();
-        openWithTransitions(fragment, R.animator.root_in, R.anim.root_out_old);
+        openWithTransitions(fragment, R.animator.root_in, R.animator.root_out);
     }
 
     private void openAsHome(Fragment fragment) {
         popEveryFragment();
-        openWithTransitions(fragment, R.animator.root_in, R.anim.root_out_old);
+        openWithTransitions(fragment, R.animator.root_in, R.animator.root_out);
     }
 
     private void open(Fragment fragment) {
-        openWithTransitions(fragment, R.animator.root_in, R.anim.root_out_old);
+        openWithTransitions(fragment, R.animator.slide_in_left, R.animator.slide_out_right);
     }
 
 

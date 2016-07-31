@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.brandonhogan.liftscout.foundation.controls.BaseFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:windowBackground">
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        android:id="@+id/calendarView"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:mcv_showOtherDates="all"
-        app:mcv_selectionColor="#00F"
-        />
+        android:layout_height="match_parent">
 
-</LinearLayout>
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:mcv_showOtherDates="all"
+            app:mcv_selectionColor="#00F" />
+
+    </LinearLayout>
+</com.brandonhogan.liftscout.foundation.controls.BaseFrameLayout>
