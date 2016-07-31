@@ -38,6 +38,7 @@ public class CalendarFragment extends BaseFragment implements OnDateSelectedList
     private View rootView;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
 
+
     // Binds
     //
     @Bind(R.id.calendarView)

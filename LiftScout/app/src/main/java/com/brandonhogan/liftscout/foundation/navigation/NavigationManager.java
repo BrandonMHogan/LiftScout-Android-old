@@ -23,13 +23,15 @@ public class NavigationManager {
     private FragmentManager mFragmentManager;
     private NavigationListener navigationListener;
     private boolean isInTransition = false;
-    private BaseFragment currentFragment;
-
 
     // Public Properties
     //
     public void setInTransition(boolean inTransition) {
         isInTransition = inTransition;
+    }
+
+    public Fragment getCurrentFragment() {
+        return mFragmentManager.findFragmentById(R.id.fragment_manager);
     }
 
     /**
@@ -55,31 +57,33 @@ public class NavigationManager {
      *
      * @param fragment
      */
-    private boolean open(Fragment fragment) {
-            if (mFragmentManager == null)
-                return false;
+    private boolean open(BaseFragment fragment) {
+        if (mFragmentManager == null)
+            return false;
 
-            if(fragment == null)
-                return false;
+        if(fragment == null)
+            return false;
 
-            // If a fragment is already in transition, prevent additional replacement
-            if (isInTransition)
-                return false;
+        // If a fragment is already in transition, prevent additional replacement
+        if (isInTransition)
+            return false;
 
-            // Do not reload the same fragment current in the fragment container
-            if (currentFragment != null && fragment.getClass().getName().equals(currentFragment.getClass().getName()))
-                return false;
+        Fragment currentFragment = mFragmentManager.findFragmentById(R.id.fragment_manager);
 
-            mFragmentManager.beginTransaction()
-                    .setCustomAnimations(R.anim.slide_from_right,
-                            R.anim.slide_to_left,
-                            R.anim.slide_from_left,
-                            R.anim.slide_to_right)
-                    .replace(R.id.fragment_manager, fragment)
-                    .addToBackStack(fragment.toString())
-                    .commit();
+        // Do not reload the same fragment current in the fragment container
+        if (currentFragment != null && fragment.getClass().getName().equals(currentFragment.getClass().getName()))
+            return false;
 
-            return true;
+        mFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_from_right,
+                        R.anim.slide_to_left,
+                        R.anim.slide_from_left,
+                        R.anim.slide_to_right)
+                .replace(R.id.fragment_manager, fragment)
+                .addToBackStack(fragment.toString())
+                .commit();
+
+        return true;
     }
 
     /**
@@ -87,8 +91,8 @@ public class NavigationManager {
      *
      * @param fragment
      */
-    private void openAsRoot(Fragment fragment) {
-      //  popEveryFragment();
+    private void openAsRoot(BaseFragment fragment) {
+        popEveryFragment();
         open(fragment);
     }
 
@@ -125,13 +129,13 @@ public class NavigationManager {
     }
 
     public void startHome() {
-        Fragment fragment = HomeFragment.newInstance();
+        BaseFragment fragment = HomeFragment.newInstance();
         openAsRoot(fragment);
     }
 
     public void startCalendar() {
-        Fragment fragment = CalendarFragment.newInstance();
-        openAsRoot(fragment);
+        BaseFragment fragment = CalendarFragment.newInstance();
+        open(fragment);
     }
 
 
@@ -147,6 +151,6 @@ public class NavigationManager {
     }
 
     public void setNavigationListener(NavigationListener navigationListener) {
-        navigationListener = navigationListener;
+        this.navigationListener = navigationListener;
     }
 }

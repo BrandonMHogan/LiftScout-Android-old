@@ -58,12 +58,15 @@ public class SplashActivity extends BaseActivity {
 
     private void toInit() {
         Intent intent = new Intent(this, InitActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION |
+                Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivityForResult(intent, 0);
+        finish();
     }
 
     private void toMain() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(intent);
         finish();
     }

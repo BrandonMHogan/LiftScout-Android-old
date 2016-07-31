@@ -11,20 +11,23 @@ import android.view.MenuItem;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.model.User;
 import com.brandonhogan.liftscout.foundation.navigation.NavigationManager;
-import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 
 import java.util.Date;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         NavigationManager.NavigationListener {
 
+
     // Private Properties
     //
-    private boolean isInTransition = false;
-    private BaseFragment currentFragment;
     private DrawerLayout drawer;
     private NavigationManager navigationManager;
+    private NavigationView navigationView;
+    private ActionBarDrawerToggle toggle;
+    private SweetAlertDialog dialog;
 
 
     // Overrides
@@ -45,12 +48,12 @@ public class MainActivity extends BaseActivity
             }
 
             drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+             toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawer.addDrawerListener(toggle);
             toggle.syncState();
 
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
             navigationManager = new NavigationManager();
@@ -73,22 +76,16 @@ public class MainActivity extends BaseActivity
         updateUserData();
     }
 
-//    @Override
-//    public void onBackStackChanged() {
-//        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        } else {
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//        }
-//    }
-
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
-        else {
-            super.onBackPressed();
+        else if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            // we have only one fragment left so we would close the application with this back
+            showExitDialog();
+        } else {
+            navigationManager.navigateBack(this);
         }
     }
 
@@ -140,10 +137,54 @@ public class MainActivity extends BaseActivity
         getRealm().commitTransaction();
     }
 
+    private void showExitDialog() {
+
+        dialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Are you sure?")
+                .setContentText("Won't be able to recover this file!")
+                .setConfirmText("Yes,delete it!")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        endActivity();
+                    }
+                })
+                .setCancelText("Cancel")
+                .showCancelButton(true);
+
+        dialog.show();
+    }
+
+    private void endActivity() {
+        if (dialog != null)
+            dialog.dismiss();
+
+        finish();
+    }
+
+
 
     // Navigation Manager Callbacks
     @Override
     public void onBackstackChanged() {
+        String fragment = navigationManager.getCurrentFragment().getClass().getSimpleName();
+
+        switch (fragment) {
+            case "HomeFragment":
+                navigationView.setCheckedItem(R.id.nav_home);
+                break;
+            case "CalendarFragment":
+                navigationView.setCheckedItem(R.id.nav_calendar);
+                break;
+
+        }
+
+        boolean rootFragment = navigationManager.isRootFragmentVisible();
+        //getSupportActionBar().setDisplayShowHomeEnabled(rootFragment);
+        //getSupportActionBar().setHomeButtonEnabled(true);
+     //   getSupportActionBar().setDisplayHomeAsUpEnabled(rootFragment);
+        toggle.setDrawerIndicatorEnabled(rootFragment);
+        toggle.syncState();
 
     }
 }

@@ -23,7 +23,6 @@ public class HomeFragment extends BaseFragment {
         return new HomeFragment();
     }
 
-
     // Private Properties
     //
     private User user;
