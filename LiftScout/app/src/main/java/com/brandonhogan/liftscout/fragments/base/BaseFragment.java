@@ -1,9 +1,14 @@
 package com.brandonhogan.liftscout.fragments.base;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.TimeInterpolator;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -20,7 +25,7 @@ public class BaseFragment extends Fragment {
     private final String classTag = this.getClass().getSimpleName();
     private Realm realm;
     private final Object realmLock = new Object();
-
+    private float oldTranslationZ;
 
     // Public Functions
     //
@@ -78,34 +83,50 @@ public class BaseFragment extends Fragment {
     }
 
     @Override
-    public Animation onCreateAnimation(final int transit, boolean enter, int nextAnim) {
+    public Animator onCreateAnimator(int transit, final boolean enter, int nextAnim) {
 
-        if (nextAnim == 0) {
-            return null;
+        if (nextAnim != 0) {
+
+            Animator animator = AnimatorInflater.loadAnimator(getActivity(), nextAnim);
+            animator.addListener(new Animator.AnimatorListener() {
+
+
+
+                @Override
+                public void onAnimationStart(Animator animator) {
+                    Log.v(getClassTag(), "Fragment Animation started.");
+                    getNavigationManager().setInTransition(true);
+
+                    if (getView() != null && enter) {
+                        oldTranslationZ = ViewCompat.getTranslationZ(getView());
+                        ViewCompat.setTranslationZ(getView(), 300.f);
+                    }
+
+                    Log.d(classTag, "onAnimationStart: " + ViewCompat.getTranslationZ(getView()));
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    Log.v(getClassTag(), "Fragment Animation ended.");
+                    getNavigationManager().setInTransition(false);
+
+                    if (getView() != null && enter) {
+                        ViewCompat.setTranslationZ(getView(), oldTranslationZ);
+                    }
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {
+
+                }
+            });
         }
-        Animation anim = AnimationUtils.loadAnimation(getActivity(), nextAnim);
 
-        anim.setAnimationListener(new Animation.AnimationListener() {
-
-            @Override
-            public void onAnimationStart(Animation animation) {
-                Log.v(getClassTag(), "Fragment Animation started.");
-                getNavigationManager().setInTransition(true);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-                Log.v(getClassTag(), "Fragment Animation repeating.");
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                Log.v(getClassTag(), "Fragment Animation ended.");
-                getNavigationManager().setInTransition(false);
-            }
-        });
-
-        return anim;
+        return super.onCreateAnimator(transit, enter, nextAnim);
     }
 }

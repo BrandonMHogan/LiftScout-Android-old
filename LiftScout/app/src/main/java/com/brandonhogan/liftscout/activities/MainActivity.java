@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity
             navigationView.setNavigationItemSelectedListener(this);
 
             navigationManager = new NavigationManager();
-            navigationManager.init(getSupportFragmentManager());
+            navigationManager.init(getFragmentManager());
             navigationManager.setNavigationListener(this);
 
 
@@ -99,25 +99,28 @@ public class MainActivity extends BaseActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        boolean success = false;
 
         if (id == R.id.nav_home) {
-            navigationManager.startHome();
+            success = navigationManager.startHome();
         } else if (id == R.id.nav_calendar) {
-            navigationManager.startCalendar();
+            success = navigationManager.startCalendar();
         } else if (id == R.id.nav_exercises) {
-            navigationManager.startExerciseTypeList();
+            success = navigationManager.startExerciseTypeList();
         } else if (id == R.id.nav_routines) {
 
         } else if (id == R.id.nav_graphs) {
 
         } else if (id == R.id.nav_settings) {
-            navigationManager.startSettings();
+            success = navigationManager.startSettings();
         } else if (id == R.id.nav_about) {
 
         }
 
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        if (success)
+            drawer.closeDrawer(GravityCompat.START);
+
+        return success;
     }
 
 

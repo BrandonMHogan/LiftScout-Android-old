@@ -28,9 +28,7 @@ public class SettingsProfileFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (rootView == null) {
-            rootView = inflater.inflate(R.layout.frag_settings_profile, null);
-        }
+        rootView = inflater.inflate(R.layout.frag_settings_profile, null);
         return rootView;
     }
 
