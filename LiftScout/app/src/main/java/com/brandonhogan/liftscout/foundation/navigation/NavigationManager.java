@@ -1,8 +1,8 @@
 package com.brandonhogan.liftscout.foundation.navigation;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.app.Fragment;
+import android.app.FragmentManager;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.ExerciseTypeListFragment;
@@ -26,6 +26,7 @@ public class NavigationManager {
     private FragmentManager mFragmentManager;
     private NavigationListener navigationListener;
     private boolean isInTransition = false;
+
 
     // Public Properties
     //
@@ -60,7 +61,49 @@ public class NavigationManager {
      *
      * @param fragment
      */
-    private boolean open(BaseFragment fragment) {
+    private boolean openWithTransitions(Fragment fragment, int in, int out) {
+
+        mFragmentManager.beginTransaction()
+                .setCustomAnimations(in,
+                        out,
+                        android.R.animator.fade_in,
+                        android.R.animator.fade_out)
+                .replace(R.id.fragment_manager, fragment)
+                .addToBackStack(fragment.getClass().getName())
+                .commit();
+
+        return true;
+    }
+
+    /**
+     * pops every fragment and starts the given fragment as a new one.
+     *
+     * @param fragment
+     */
+    private boolean openAsRoot(Fragment fragment) {
+        if (!verifyTransition(fragment))
+            return false;
+
+        popToHomeFragment();
+        return openWithTransitions(fragment, R.animator.root_in, R.animator.root_out);
+    }
+
+    private boolean openAsHome(Fragment fragment) {
+        if (!verifyTransition(fragment))
+            return false;
+
+        popEveryFragment();
+        return openWithTransitions(fragment, R.animator.root_in, R.animator.root_out);
+    }
+
+    private boolean open(Fragment fragment) {
+        if (!verifyTransition(fragment))
+            return false;
+
+        return openWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
+    }
+
+    private boolean verifyTransition(Fragment fragment) {
         if (mFragmentManager == null)
             return false;
 
@@ -77,31 +120,7 @@ public class NavigationManager {
         if (currentFragment != null && fragment.getClass().getName().equals(currentFragment.getClass().getName()))
             return false;
 
-        mFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.slide_from_right,
-                        R.anim.slide_to_left,
-                        R.anim.slide_from_left,
-                        R.anim.slide_to_right)
-                .replace(R.id.fragment_manager, fragment)
-                .addToBackStack(fragment.getClass().getName())
-                .commit();
-
         return true;
-    }
-
-    /**
-     * pops every fragment and starts the given fragment as a new one.
-     *
-     * @param fragment
-     */
-    private void openAsRoot(BaseFragment fragment) {
-        popToHomeFragment();
-        open(fragment);
-    }
-
-    private void openAsHome(BaseFragment fragment) {
-        popEveryFragment();
-        open(fragment);
     }
 
 
@@ -148,33 +167,33 @@ public class NavigationManager {
         }
     }
 
-    public void startHome() {
-        BaseFragment fragment = HomeFragment.newInstance();
-        openAsHome(fragment);
+    public boolean startHome() {
+        Fragment fragment = HomeFragment.newInstance();
+        return openAsHome(fragment);
     }
 
-    public void startCalendar() {
-        BaseFragment fragment = CalendarFragment.newInstance();
-        openAsRoot(fragment);
+    public boolean startCalendar() {
+        Fragment fragment = CalendarFragment.newInstance();
+        return openAsRoot(fragment);
     }
 
 
     // Settings
     //
-    public void startSettings() {
-        BaseFragment fragment = SettingsListFragment.newInstance();
-        openAsRoot(fragment);
+    public boolean startSettings() {
+        Fragment fragment = SettingsListFragment.newInstance();
+        return openAsRoot(fragment);
     }
 
-    public void startSettingsProfile() {
-        BaseFragment fragment = SettingsProfileFragment.newInstance();
-        open(fragment);
+    public boolean startSettingsProfile() {
+        Fragment fragment = SettingsProfileFragment.newInstance();
+        return open(fragment);
     }
 
 
-    public void startExerciseTypeList() {
-        BaseFragment fragment = ExerciseTypeListFragment.newInstance();
-        openAsRoot(fragment);
+    public boolean startExerciseTypeList() {
+        Fragment fragment = ExerciseTypeListFragment.newInstance();
+        return openAsRoot(fragment);
     }
 
 
