@@ -1,45 +1,40 @@
 package com.brandonhogan.liftscout.fragments.home;
 
-import android.database.Cursor;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.view.ViewGroup;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.support.v13.app.FragmentStatePagerAdapter;
 
+import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
-public class TodayPageAdapter   {
-  //  extends FragmentStatePagerAdapter
-//        private final Cursor cursor;
-//
-//        private final int count;
-//
-//        public TodayPageAdapter( FragmentManager fm ) {
-//            super( fm );
-//            cursor = initCursorSomehow();
-//            count = cursor.getCount();
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return count;
-//        }
-//
-//        @Override
-//        public CharSequence getPageTitle( int position ) {
-//            cursor.moveToPosition( position );
-//            return cursor.getString( cursor.getColumnIndex( "title" ) );
-//        }
-//
-//        @Override
-//        public Fragment getItem( int position ) {
-//            Bundle b = new Bundle();
-//            cursor.moveToPosition( position );
-//            b.putString( "someDate", cursor.getString( cursor.getColumnIndex( "someDate" ) ) );
-//            b.putString( "someInt", cursor.getInt( cursor.getColumnIndex( "someInt" ) ) );
-//            return Fragment.instantiate( getApp(), TodayFragment.class.getName(), b );
-//        }
+public class TodayPageAdapter extends FragmentStatePagerAdapter
+{
+    public static int LOOPS_COUNT = 1000;
+    private static int DAYS = 365;
+
+
+    public TodayPageAdapter(FragmentManager manager)
+    {
+        super(manager);
+    }
+
+
+    @Override
+    public Fragment getItem(int position)
+    {
+        position = position % DAYS; // use modulo for infinite cycling
+
+        Calendar calendar=Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, position);
+
+        return TodayFragment.newInstance(calendar.getTime());
+    }
+
+
+    @Override
+    public int getCount()
+    {
+
+            return DAYS*LOOPS_COUNT; // simulate infinite by big number of products
+    }
 }

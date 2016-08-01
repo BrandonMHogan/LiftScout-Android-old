@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.fragments.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,13 +27,11 @@ public class HomeFragment extends BaseFragment {
     //
     private User user;
     private View rootView;
-
+    private TodayPageAdapter adapter;
+    private ViewPager pager;
 
     // Binds
     //
-    @Bind(R.id.welcome_message)
-    TextView welcomeMessage;
-
     @Bind(R.id.viewpager)
     ViewPager viewPager;
 
@@ -67,14 +66,16 @@ public class HomeFragment extends BaseFragment {
             user.setFirstLoad(false);
             getRealm().commitTransaction();
 
-            welcomeMessage.setText(String.format(getContext().getString(R.string.frag_home_first_load_message), user.getName()));
+          //  welcomeMessage.setText(String.format(getContext().getString(R.string.frag_home_first_load_message), user.getName()));
         }
         else {
-            welcomeMessage.setText(String.format(getContext().getString(R.string.frag_home_welcome_back_message),user.getName()));
+        //    welcomeMessage.setText(String.format(getContext().getString(R.string.frag_home_welcome_back_message),user.getName()));
         }
     }
 
     private void setupPager() {
-       // viewPager.setAdapter(new CustomPagerAdapter(this));
+        adapter = new TodayPageAdapter(getFragmentManager());
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(viewPager.getChildCount() * TodayPageAdapter.LOOPS_COUNT / 2, false);
     }
 }
