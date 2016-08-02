@@ -12,6 +12,7 @@ import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import butterknife.Bind;
 
@@ -41,12 +42,18 @@ public class TodayFragment extends BaseFragment {
     //
     private View rootView;
     private long date;
+    private String year;
+    private String dateString;
 
 
     // Binds
     //
     @Bind(R.id.date)
     TextView dateView;
+
+    @Bind(R.id.date_year)
+    TextView dateYearView;
+
 
     //Overrides
     //
@@ -63,9 +70,11 @@ public class TodayFragment extends BaseFragment {
 
         date = getArguments().getLong(DATE_BUNDLE);
 
-        String dateString = new SimpleDateFormat("MM/dd/yyyy").format(new Date(date));
+        dateString = new SimpleDateFormat("EEE, MMMM d", Locale.getDefault()).format(new Date(date));
+        year = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date(date));
 
         dateView.setText(dateString);
+        dateYearView.setText(year);
 
     }
 }
