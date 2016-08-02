@@ -49,4 +49,10 @@ public class SettingsListFragment extends BaseFragment {
     public void profileCLicked() {
         getNavigationManager().startSettingsProfile();
     }
+
+    @OnClick(R.id.displayRow)
+    public void displayClicked() {
+        getNavigationManager().startSettingsDisplay();
+    }
+
 }
