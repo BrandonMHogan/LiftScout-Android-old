@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="animation_speed_slide">1100</integer>
-    <integer name="animation_speed_root_in">600</integer>
-    <integer name="animation_speed_root_in_alpha">500</integer>
-    <integer name="animation_speed_root_out">500</integer>
+    <integer name="animation_speed_root_in">500</integer>
+    <integer name="animation_speed_root_in_alpha">400</integer>
+    <integer name="animation_speed_root_out">400</integer>
 </resources>

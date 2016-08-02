@@ -3,12 +3,15 @@ package com.brandonhogan.liftscout.fragments.home;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
+import com.antonyt.infiniteviewpager.InfiniteViewPager;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.model.User;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
@@ -23,17 +26,17 @@ public class HomeFragment extends BaseFragment {
         return new HomeFragment();
     }
 
+
     // Private Properties
     //
     private User user;
     private View rootView;
-    private TodayPageAdapter adapter;
-    private ViewPager pager;
+
 
     // Binds
     //
     @Bind(R.id.viewpager)
-    ViewPager viewPager;
+    InfiniteViewPager viewPager;
 
 
     // Overrides
@@ -74,8 +77,10 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void setupPager() {
-        adapter = new TodayPageAdapter(getFragmentManager());
-        viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(viewPager.getChildCount() * TodayPageAdapter.LOOPS_COUNT / 2, false);
+        TodayPageAdapter adapter = new TodayPageAdapter(getFragmentManager());
+
+        PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
+        viewPager.setAdapter(wrappedAdapter);
+        //viewPager.setCurrentItem(TodayPageAdapter.TOTAL_DAYS, false);
     }
 }

@@ -5,15 +5,18 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import butterknife.Bind;
 
 public class TodayFragment extends BaseFragment {
 
-    private static final String DATE_BUNDLE = "dateBundle";
 
     // Instance
     //
@@ -29,21 +32,28 @@ public class TodayFragment extends BaseFragment {
     }
 
 
+    // Static Properties
+    //
+    private static final String DATE_BUNDLE = "dateBundle";
+
+
     // Private Properties
     //
     private View rootView;
     private long date;
 
 
+    // Binds
+    //
+    @Bind(R.id.date)
+    TextView dateView;
+
     //Overrides
     //
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_today, null);
-
-        date = getArguments().getLong(DATE_BUNDLE);
-
+        rootView = inflater.inflate(R.layout.frag_today, container, false);
         return rootView;
     }
 
@@ -52,6 +62,12 @@ public class TodayFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         setTitle(getResources().getString(R.string.title_frag_settings_profile));
+
+        date = getArguments().getLong(DATE_BUNDLE);
+
+        String dateString = new SimpleDateFormat("MM/dd/yyyy").format(new Date(date));
+
+        dateView.setText(dateString);
 
     }
 }

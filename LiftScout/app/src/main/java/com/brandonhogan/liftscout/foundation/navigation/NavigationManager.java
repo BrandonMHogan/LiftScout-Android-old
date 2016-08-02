@@ -3,6 +3,8 @@ package com.brandonhogan.liftscout.foundation.navigation;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.transition.Transition;
+import android.util.Log;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.ExerciseTypeListFragment;
@@ -13,6 +15,8 @@ import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
 
 public class NavigationManager {
+
+    private static final String TAG = "NavigationManager";
 
     // Listener
     //
@@ -85,7 +89,7 @@ public class NavigationManager {
             return false;
 
         popToHomeFragment();
-        return openWithTransitions(fragment, R.animator.root_in, R.animator.root_out);
+        return openWithTransitions(fragment, R.animator.root_in, android.R.animator.fade_out);
     }
 
     private boolean openAsHome(Fragment fragment) {
@@ -93,7 +97,7 @@ public class NavigationManager {
             return false;
 
         popEveryFragment();
-        return openWithTransitions(fragment, R.animator.root_in, R.animator.root_out);
+        return openWithTransitions(fragment, R.animator.root_in, android.R.animator.fade_out);
     }
 
     private boolean open(Fragment fragment) {
@@ -110,15 +114,17 @@ public class NavigationManager {
         if(fragment == null)
             return false;
 
-        // If a fragment is already in transition, prevent additional replacement
-        if (isInTransition)
-            return false;
-
         Fragment currentFragment = mFragmentManager.findFragmentById(R.id.fragment_manager);
 
         // Do not reload the same fragment current in the fragment container
         if (currentFragment != null && fragment.getClass().getName().equals(currentFragment.getClass().getName()))
             return false;
+
+        // If a fragment is already in transition, prevent additional replacement
+        if (isInTransition)
+            return false;
+
+
 
         return true;
     }
