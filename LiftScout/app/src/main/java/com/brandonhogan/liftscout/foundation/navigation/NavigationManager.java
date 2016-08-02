@@ -78,20 +78,6 @@ public class NavigationManager {
         return true;
     }
 
-    private boolean addWithTransitions(Fragment fragment, int in, int out) {
-
-        mFragmentManager.beginTransaction()
-                .setCustomAnimations(in,
-                        out,
-                        android.R.animator.fade_in,
-                        android.R.animator.fade_out)
-                .add(R.id.fragment_manager, fragment)
-                .addToBackStack(fragment.getClass().getName())
-                .commit();
-
-        return true;
-    }
-
     /**
      * pops every fragment and starts the given fragment as a new one.
      *

@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
-        else if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+        else if (getFragmentManager().getBackStackEntryCount() == 1) {
             // we have only one fragment left so we would close the application with this back
             showExitDialog();
         } else {
