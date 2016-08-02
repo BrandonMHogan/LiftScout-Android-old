@@ -2,15 +2,11 @@ package com.brandonhogan.liftscout.fragments.base;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
-import android.animation.TimeInterpolator;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.foundation.navigation.NavigationManager;

@@ -2,25 +2,12 @@ package com.brandonhogan.liftscout.fragments.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
-import com.ToxicBakery.viewpager.transforms.CubeInTransformer;
-import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
-import com.ToxicBakery.viewpager.transforms.DepthPageTransformer;
-import com.ToxicBakery.viewpager.transforms.ForegroundToBackgroundTransformer;
-import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
 import com.ToxicBakery.viewpager.transforms.ScaleInOutTransformer;
-import com.ToxicBakery.viewpager.transforms.StackTransformer;
-import com.ToxicBakery.viewpager.transforms.TabletTransformer;
-import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
-import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.antonyt.infiniteviewpager.InfiniteViewPager;
 import com.brandonhogan.liftscout.R;
@@ -42,6 +29,7 @@ public class HomeFragment extends BaseFragment {
     //
     private User user;
     private View rootView;
+    private TodayPageAdapter adapter;
 
 
     // Binds
@@ -55,10 +43,14 @@ public class HomeFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_home, container, false);
+
+        if (rootView == null)
+            rootView = inflater.inflate(R.layout.frag_home, container, false);
+
 
         return rootView;
     }
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -88,12 +80,15 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void setupPager() {
-        TodayPageAdapter adapter = new TodayPageAdapter(getFragmentManager());
+
+        if (adapter != null) {
+            return;
+        }
+
+        adapter = new TodayPageAdapter(getChildFragmentManager());
 
         PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
         viewPager.setAdapter(wrappedAdapter);
-        //viewPager.setCurrentItem(TodayPageAdapter.TOTAL_DAYS, false);
-
-        viewPager.setPageTransformer(true, new ZoomOutTranformer());
+        viewPager.setPageTransformer(true, new ScaleInOutTransformer());
     }
 }

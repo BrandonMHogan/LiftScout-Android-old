@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 
-import butterknife.Bind;
 import butterknife.OnClick;
 
 public class SettingsListFragment extends BaseFragment {

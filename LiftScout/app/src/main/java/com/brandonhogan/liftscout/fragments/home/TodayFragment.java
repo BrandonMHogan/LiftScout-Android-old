@@ -61,8 +61,6 @@ public class TodayFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setTitle(getResources().getString(R.string.title_frag_settings_profile));
-
         date = getArguments().getLong(DATE_BUNDLE);
 
         String dateString = new SimpleDateFormat("MM/dd/yyyy").format(new Date(date));
