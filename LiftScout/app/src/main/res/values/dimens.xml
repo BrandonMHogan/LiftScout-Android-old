@@ -18,6 +18,12 @@
     <dimen name="generic_padding_top_medium">10dp</dimen>
     <dimen name="generic_padding_top_large">20dp</dimen>
 
+    <!-- Card Views -->
+    <dimen name="card_view_padding">1dp</dimen>
+    <dimen name="card_view_corner_radius">10dp</dimen>
+    <dimen name="card_view_elevation">5dp</dimen>
+    <dimen name="card_view_inner_content_padding">12dp</dimen>
+
     <!-- Logos -->
     <dimen name="logo_scout_width">100dp</dimen>
     <dimen name="logo_scout_height">100dp</dimen>
@@ -96,4 +102,7 @@
     <dimen name="settings_table_row_min_height">72dp</dimen>
     <dimen name="setting_layout_top_padding">0dp</dimen>
     <dimen name="settings_divider_view_hieght">1dp</dimen>
+
+    <!-- Today Layout -->
+    <dimen name="today_divider_top_margin">5dp</dimen>
 </resources>

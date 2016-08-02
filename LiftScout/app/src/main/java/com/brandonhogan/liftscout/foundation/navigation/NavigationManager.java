@@ -6,12 +6,14 @@ import android.app.FragmentManager;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.ExerciseTypeListFragment;
-import com.brandonhogan.liftscout.fragments.HomeFragment;
 import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
+import com.brandonhogan.liftscout.fragments.home.HomeFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
 
 public class NavigationManager {
+
+    private static final String TAG = "NavigationManager";
 
     // Listener
     //
@@ -60,7 +62,7 @@ public class NavigationManager {
      *
      * @param fragment
      */
-    private boolean openWithTransitions(Fragment fragment, int in, int out) {
+    private boolean replaceWithTransitions(Fragment fragment, int in, int out) {
 
         mFragmentManager.beginTransaction()
                 .setCustomAnimations(in,
@@ -68,6 +70,20 @@ public class NavigationManager {
                         android.R.animator.fade_in,
                         android.R.animator.fade_out)
                 .replace(R.id.fragment_manager, fragment)
+                .addToBackStack(fragment.getClass().getName())
+                .commit();
+
+        return true;
+    }
+
+    private boolean addWithTransitions(Fragment fragment, int in, int out) {
+
+        mFragmentManager.beginTransaction()
+                .setCustomAnimations(in,
+                        out,
+                        android.R.animator.fade_in,
+                        android.R.animator.fade_out)
+                .add(R.id.fragment_manager, fragment)
                 .addToBackStack(fragment.getClass().getName())
                 .commit();
 
@@ -84,7 +100,7 @@ public class NavigationManager {
             return false;
 
         popToHomeFragment();
-        return openWithTransitions(fragment, R.animator.root_in, R.animator.root_out);
+        return replaceWithTransitions(fragment, R.animator.root_in, android.R.animator.fade_out);
     }
 
     private boolean openAsHome(Fragment fragment) {
@@ -92,14 +108,14 @@ public class NavigationManager {
             return false;
 
         popEveryFragment();
-        return openWithTransitions(fragment, R.animator.root_in, R.animator.root_out);
+        return replaceWithTransitions(fragment, R.animator.root_in, android.R.animator.fade_out);
     }
 
     private boolean open(Fragment fragment) {
         if (!verifyTransition(fragment))
             return false;
 
-        return openWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
+        return replaceWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
     }
 
     private boolean verifyTransition(Fragment fragment) {
@@ -109,15 +125,17 @@ public class NavigationManager {
         if(fragment == null)
             return false;
 
-        // If a fragment is already in transition, prevent additional replacement
-        if (isInTransition)
-            return false;
-
         Fragment currentFragment = mFragmentManager.findFragmentById(R.id.fragment_manager);
 
         // Do not reload the same fragment current in the fragment container
         if (currentFragment != null && fragment.getClass().getName().equals(currentFragment.getClass().getName()))
             return false;
+
+        // If a fragment is already in transition, prevent additional replacement
+        if (isInTransition)
+            return false;
+
+
 
         return true;
     }
