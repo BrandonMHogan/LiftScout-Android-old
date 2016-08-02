@@ -11,6 +11,7 @@ import com.brandonhogan.liftscout.fragments.home.HomeFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
+import com.brandonhogan.liftscout.fragments.settings.SettingsTodayFragment;
 
 public class NavigationManager {
 
@@ -210,6 +211,11 @@ public class NavigationManager {
 
     public boolean startSettingsDisplay() {
         Fragment fragment = SettingsDisplayFragment.newInstance();
+        return open(fragment);
+    }
+
+    public boolean startSettingsToday() {
+        Fragment fragment = SettingsTodayFragment.newInstance();
         return open(fragment);
     }
 

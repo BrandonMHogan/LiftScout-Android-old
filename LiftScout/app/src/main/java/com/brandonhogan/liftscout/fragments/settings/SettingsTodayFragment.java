@@ -9,14 +9,12 @@ import android.view.ViewGroup;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 
-import butterknife.OnClick;
-
-public class SettingsListFragment extends BaseFragment {
+public class SettingsTodayFragment extends BaseFragment {
 
     // Instance
     //
-    public static SettingsListFragment newInstance() {
-        return new SettingsListFragment();
+    public static SettingsTodayFragment newInstance() {
+        return new SettingsTodayFragment();
     }
 
 
@@ -30,7 +28,7 @@ public class SettingsListFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_settings, null);
+        rootView = inflater.inflate(R.layout.frag_settings_today, container, false);
         return rootView;
     }
 
@@ -38,26 +36,7 @@ public class SettingsListFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setTitle(getResources().getString(R.string.title_frag_settings));
+        setTitle(getResources().getString(R.string.title_frag_settings_today));
 
     }
-
-
-    // Events
-    //
-    @OnClick(R.id.profileRow)
-    public void profileCLicked() {
-        getNavigationManager().startSettingsProfile();
-    }
-
-    @OnClick(R.id.displayRow)
-    public void displayClicked() {
-        getNavigationManager().startSettingsDisplay();
-    }
-
-    @OnClick(R.id.todayRow)
-    public void todayClicked() {
-        getNavigationManager().startSettingsToday();
-    }
-
 }
