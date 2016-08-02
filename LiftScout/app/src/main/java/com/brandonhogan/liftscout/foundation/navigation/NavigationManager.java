@@ -7,11 +7,11 @@ import android.app.FragmentManager;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.ExerciseTypeListFragment;
 import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
-import com.brandonhogan.liftscout.fragments.home.HomeFragment;
+import com.brandonhogan.liftscout.fragments.home.HomeContainerFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
-import com.brandonhogan.liftscout.fragments.settings.SettingsTodayFragment;
+import com.brandonhogan.liftscout.fragments.settings.SettingsHomeFragment;
 
 public class NavigationManager {
 
@@ -173,7 +173,7 @@ public class NavigationManager {
     }
 
     public boolean startHome() {
-        Fragment fragment = HomeFragment.newInstance();
+        Fragment fragment = HomeContainerFragment.newInstance();
         return openAsHome(fragment);
     }
 
@@ -200,8 +200,8 @@ public class NavigationManager {
         return open(fragment);
     }
 
-    public boolean startSettingsToday() {
-        Fragment fragment = SettingsTodayFragment.newInstance();
+    public boolean startSettingsHome() {
+        Fragment fragment = SettingsHomeFragment.newInstance();
         return open(fragment);
     }
 

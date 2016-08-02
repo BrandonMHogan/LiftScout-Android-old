@@ -178,14 +178,26 @@ public class MainActivity extends BaseActivity
         String fragment = navigationManager.getCurrentFragment().getClass().getSimpleName();
 
         switch (fragment) {
-            case "HomeFragment":
+            case "HomeContainerFragment":
                 navigationView.setCheckedItem(R.id.nav_home);
                 break;
             case "CalendarFragment":
                 navigationView.setCheckedItem(R.id.nav_calendar);
                 break;
+            case "ExerciseTypeListFragment":
+                navigationView.setCheckedItem(R.id.nav_exercises);
+                break;
+            case "RoutineListFragment":
+                navigationView.setCheckedItem(R.id.nav_routines);
+                break;
+            case "GraphsFragment":
+                navigationView.setCheckedItem(R.id.nav_graphs);
+                break;
             case "SettingsListFragment":
                 navigationView.setCheckedItem(R.id.nav_settings);
+                break;
+            case "AboutFragment":
+                navigationView.setCheckedItem(R.id.nav_about);
                 break;
 
         }

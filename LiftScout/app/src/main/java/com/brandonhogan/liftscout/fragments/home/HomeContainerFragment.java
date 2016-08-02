@@ -16,12 +16,12 @@ import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 
 import butterknife.Bind;
 
-public class HomeFragment extends BaseFragment {
+public class HomeContainerFragment extends BaseFragment {
 
     // Instance
     //
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
+    public static HomeContainerFragment newInstance() {
+        return new HomeContainerFragment();
     }
 
 
