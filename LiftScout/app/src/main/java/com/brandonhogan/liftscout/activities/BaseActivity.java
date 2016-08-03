@@ -1,9 +1,14 @@
 package com.brandonhogan.liftscout.activities;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
+
+import com.brandonhogan.liftscout.R;
 
 import io.realm.Realm;
 
@@ -32,6 +37,14 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
         return realm;
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
+            setTheme(R.style.AppTheme_Dark);
+        }
+        super.onCreate(savedInstanceState);
     }
 
     public void hideSoftKeyboard() {
