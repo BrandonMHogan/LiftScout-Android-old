@@ -2,7 +2,9 @@ package com.brandonhogan.liftscout.fragments.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import com.antonyt.infiniteviewpager.InfiniteViewPager;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.model.User;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
+import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
 import butterknife.Bind;
 
@@ -37,6 +40,20 @@ public class HomeContainerFragment extends BaseFragment {
     @Bind(R.id.viewpager)
     InfiniteViewPager viewPager;
 
+//    @Bind(R.id.bottom_sheet)
+//    BottomSheetLayout bottomSheetLayout;
+//
+//    @Bind(R.id.fab)
+//    FloatingActionButton fab;
+//
+//    @Bind(R.id.list_menu)
+//    ListView listView;
+
+    @Bind(R.id.fabtoolbar)
+    FABToolbarLayout toolbarLayout;
+
+    @Bind(R.id.fabtoolbar_fab)
+    FloatingActionButton fab;
 
     // Overrides
     //
@@ -59,6 +76,7 @@ public class HomeContainerFragment extends BaseFragment {
 
         loadUserData();
         setupPager();
+        setupFab();
     }
 
 
@@ -95,5 +113,31 @@ public class HomeContainerFragment extends BaseFragment {
         viewPager.setAdapter(wrappedAdapter);
 
         viewPager.setPageTransformer(true, new ScaleInOutTransformer());
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                toolbarLayout.hide();
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    private void setupFab() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toolbarLayout.show();
+            }
+        });
     }
 }

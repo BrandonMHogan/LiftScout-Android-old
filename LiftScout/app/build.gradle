@@ -89,6 +89,7 @@ dependencies {
     compile 'com.github.antonyt:InfiniteViewPager:v1.0.0' // Infinite View Pager
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar' // Today ViewPager Transforms
     compile 'com.jaredrummler:material-spinner:1.1.0' // Spinner
+    compile 'com.github.fafaldo:fab-toolbar:1.2.0'
     //compile 'com.google.android.gms:play-services-analytics:8.4.0'
 }
 
