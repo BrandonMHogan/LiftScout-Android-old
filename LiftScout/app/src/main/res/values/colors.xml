@@ -7,7 +7,7 @@
     <color name="colorAccent">#FF5252</color>
     <color name="textColorPrimary">#9E9E9E</color>
     <color name="textColorSecondary">#9E9E9E</color>
-    <color name="activity_background_dark">#ff433d43</color>
+    <color name="activity_background_light">#FFFFFF</color>
 
     <!-- Dark Theme -->
     <color name="colorPrimaryInverse">#FF9800</color>
@@ -16,7 +16,7 @@
     <color name="colorAccentInverse">#FF5252</color>
     <color name="textColorPrimaryInverse">#9E9E9E</color>
     <color name="textColorSecondaryInverse">#9E9E9E</color>
-    <color name="activity_background_light">#FFFFFF</color>
+    <color name="activity_background_dark">#ff433d43</color>
 
     <!-- Generic -->
     <color name="black">#000000</color>

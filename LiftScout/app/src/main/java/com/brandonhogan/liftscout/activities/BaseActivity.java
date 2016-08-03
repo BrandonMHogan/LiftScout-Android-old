@@ -1,9 +1,16 @@
 package com.brandonhogan.liftscout.activities;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
+
+import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.foundation.model.UserSetting;
+import com.brandonhogan.liftscout.foundation.utils.constants.Themes;
 
 import io.realm.Realm;
 
@@ -34,6 +41,18 @@ public class BaseActivity extends AppCompatActivity {
         return realm;
     }
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
+//            setTheme(R.style.AppTheme_Dark);
+//        }
+
+        if (getDisplayTheme() != null && getDisplayTheme().getValue().equals(Themes.DARK))
+            setTheme(R.style.AppTheme_Dark);
+
+        super.onCreate(savedInstanceState);
+    }
+
     public void hideSoftKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager)  this.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
@@ -59,6 +78,10 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    private UserSetting getDisplayTheme() {
+        return getRealm().where(UserSetting.class)
+                .equalTo(UserSetting.NAME, UserSetting.THEME).findFirst();
+    }
 
     // Overrides
 

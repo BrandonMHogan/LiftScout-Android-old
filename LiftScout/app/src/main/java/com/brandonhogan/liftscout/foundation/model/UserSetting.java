@@ -7,7 +7,14 @@ import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
-public class UserSettings extends RealmObject {
+public class UserSetting extends RealmObject {
+
+    public static final String NAME = "name";
+    public static final String VALUE = "value";
+
+
+    // Types
+    public static final String THEME = "theme";
 
 //    @Ignore
 //    public static final ArrayList<String> TodayTransformType = new ArrayList<String>() {{
@@ -17,20 +24,10 @@ public class UserSettings extends RealmObject {
 //            }};
 
     @PrimaryKey
-    private int id;
     @Required
     private String name;
     @Required
     private String value;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

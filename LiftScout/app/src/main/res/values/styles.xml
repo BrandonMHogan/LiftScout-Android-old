@@ -49,7 +49,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!-- Light Theme -->
+    <!-- Dark Theme -->
     <style name="AppTheme.Dark" parent="AppTheme.Dark.Base">
     </style>
 

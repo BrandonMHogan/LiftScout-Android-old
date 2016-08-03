@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Lift Scout</string>
     <string name="action_settings">Settings</string>
+    <string name="action_save">Save</string>
 
     <!-- Generics -->
     <string name="date">Date</string>
@@ -13,6 +14,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="cancel">Cancel</string>
+    <string name="restart">Restart</string>
 
     <!-- Drawer Navigations -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -47,6 +49,9 @@
     <string name="dialog_close_app_title">Closing Lift Scout</string>
     <string name="dialog_close_app_message">Are you sure you wish to close Lift Scout?</string>
 
+    <string name="dialog_restarting_app_theme_title">Restarting Lift Scout</string>
+    <string name="dialog_restarting_app_theme_message">Changing themes requires the application to restart</string>
+
     <!-- Home Fragment -->
     <string name="frag_home_first_load_message">"Welcome to Lift Scout %s! This app will become your closest ally in your swole journey."</string>
     <string name="frag_home_welcome_back_message">Welcome back %s!</string>
@@ -63,6 +68,8 @@
     <string name="setting_today_transformer_spinner_title">Transition Type</string>
     <string name="setting_today_transformer_spinner_description">Change the transition type when swiping from day to day</string>
 
+    <string name="setting_display_theme_spinner_title">Theme</string>
+    <string name="setting_display_theme_spinner_description">Choose a theme that better fits your taste</string>
 
     <!-- Errors -->
     <string name="error_title">Uh oh!</string>
