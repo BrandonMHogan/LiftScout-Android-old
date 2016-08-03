@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.brandonhogan.liftscout.foundation.controls.BaseFrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.brandonhogan.liftscout.foundation.controls.BaseFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/fragment_default_padding"
     android:background="?android:windowBackground">
 
     <LinearLayout
@@ -13,9 +14,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="55dp"
-            android:text="Today SETTINGS"/>
+            android:text="@string/setting_today_transformer_spinner_title"
+            android:layout_marginBottom="@dimen/fragment_default_xsmall_margin"
+            style="@style/RobotoSubheadingBold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_today_transformer_spinner_description"
+            android:layout_marginBottom="@dimen/fragment_default_small_margin"
+            style="@style/RobotoCaption" />
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/todayTransformSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ms_background_color="@color/black_transparent_10"/>
 
     </LinearLayout>
 </com.brandonhogan.liftscout.foundation.controls.BaseFrameLayout>

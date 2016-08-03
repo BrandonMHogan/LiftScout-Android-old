@@ -124,6 +124,12 @@
         <item name="android:textSize">@dimen/material_text_size_subhead</item>
     </style>
 
+    <style name="RobotoSubheadingBold">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/material_text_size_subhead</item>
+    </style>
+
     <style name="RobotoBody01">
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">@dimen/material_text_size_body_1</item>

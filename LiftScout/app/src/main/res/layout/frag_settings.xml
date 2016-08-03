@@ -104,7 +104,7 @@
                     android:background="@color/listview_border_color"
                     android:layout_height="@dimen/settings_divider_view_hieght"/>
 
-                <!-- Notification Section -->
+                <!-- Today Section -->
                 <TableRow
                     android:id="@+id/todayRow"
                     android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                         android:paddingRight="@dimen/settings_table_row_horizontal_padding">
 
                         <TextView
-                            android:text="@string/setting_today"
+                            android:text="@string/setting_home"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
                             android:paddingTop="@dimen/settings_table_body_text_padding_top"
@@ -134,7 +134,7 @@
                         <TextView
                             style="@style/RobotoBody01"
                             android:textColor="@color/textColorSecondaryInverse"
-                            android:text="@string/setting_today_description"
+                            android:text="@string/setting_home_description"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
                             android:maxLines="4" />

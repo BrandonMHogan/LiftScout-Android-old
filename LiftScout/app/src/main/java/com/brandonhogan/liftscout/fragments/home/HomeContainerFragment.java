@@ -79,6 +79,10 @@ public class HomeContainerFragment extends BaseFragment {
         }
     }
 
+    private String getTransformType() {
+        return "blaw";
+    }
+
     private void setupPager() {
 
         if (adapter != null) {
@@ -89,6 +93,7 @@ public class HomeContainerFragment extends BaseFragment {
 
         PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
         viewPager.setAdapter(wrappedAdapter);
+
         viewPager.setPageTransformer(true, new ScaleInOutTransformer());
     }
 }

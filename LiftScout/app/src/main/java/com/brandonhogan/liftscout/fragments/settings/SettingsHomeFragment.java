@@ -2,14 +2,20 @@ package com.brandonhogan.liftscout.fragments.settings;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
+import com.jaredrummler.materialspinner.MaterialSpinner;
+
+import butterknife.Bind;
 
 public class SettingsHomeFragment extends BaseFragment {
+
+
 
     // Instance
     //
@@ -22,6 +28,11 @@ public class SettingsHomeFragment extends BaseFragment {
     //
     private View rootView;
 
+
+    // Bindings
+    //
+    @Bind(R.id.todayTransformSpinner)
+    MaterialSpinner transformSpinner;
 
     //Overrides
     //
@@ -37,6 +48,15 @@ public class SettingsHomeFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         setTitle(getResources().getString(R.string.title_frag_settings_home));
+
+
+        transformSpinner.setItems("Scale In Out", "Depth Page", "Accordion", "Flip Horizontal", "Flip Vertical");
+        transformSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+            }
+        });
 
     }
 }
