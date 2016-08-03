@@ -79,6 +79,11 @@ public class HomeContainerFragment extends BaseFragment {
         setupFab();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        toolbarLayout.hide(); // Hides because it bugs out if left open and returned sometimes
+    }
 
     // Private Functions
     //
