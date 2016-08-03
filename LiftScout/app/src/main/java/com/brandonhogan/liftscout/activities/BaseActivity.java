@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.foundation.model.UserSetting;
+import com.brandonhogan.liftscout.foundation.utils.constants.Themes;
 
 import io.realm.Realm;
 
@@ -41,9 +43,13 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
+//        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
+//            setTheme(R.style.AppTheme_Dark);
+//        }
+
+        if (getDisplayTheme() != null && getDisplayTheme().getValue().equals(Themes.DARK))
             setTheme(R.style.AppTheme_Dark);
-        }
+
         super.onCreate(savedInstanceState);
     }
 
@@ -72,6 +78,10 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    private UserSetting getDisplayTheme() {
+        return getRealm().where(UserSetting.class)
+                .equalTo(UserSetting.NAME, UserSetting.THEME).findFirst();
+    }
 
     // Overrides
 

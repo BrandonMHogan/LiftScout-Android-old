@@ -1,8 +1,10 @@
 package com.brandonhogan.liftscout.fragments.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.IntentCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +15,7 @@ import android.widget.ArrayAdapter;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.model.UserSetting;
+import com.brandonhogan.liftscout.foundation.navigation.NavigationManager;
 import com.brandonhogan.liftscout.foundation.utils.constants.Themes;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -37,7 +40,7 @@ public class SettingsDisplayFragment extends BaseFragment {
     private String oldThemeValue;
     private ArrayList<String> themes;
     private SweetAlertDialog dialog;
-
+    private UserSetting theme;
 
     // Bindings
     //
@@ -125,6 +128,7 @@ public class SettingsDisplayFragment extends BaseFragment {
                 }
                 else {
                     saveSettings();
+                    getNavigationManager().navigateBack(getActivity());
                 }
 
                 return true;
@@ -134,7 +138,11 @@ public class SettingsDisplayFragment extends BaseFragment {
 
 
     private UserSetting getTheme() {
-        UserSetting theme = getRealm().where(UserSetting.class)
+
+        if (theme != null)
+            return theme;
+
+        theme = getRealm().where(UserSetting.class)
                 .equalTo(UserSetting.NAME, UserSetting.THEME).findFirst();
 
         if (theme == null) {
@@ -146,10 +154,19 @@ public class SettingsDisplayFragment extends BaseFragment {
     }
 
     private void restartActivity() {
+        dialog.dismiss();
 
+        getActivity().finish();
+        final Intent intent = getActivity().getIntent();
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().startActivity(intent);
     }
 
     private void saveSettings() {
+        getRealm().beginTransaction();
+        getTheme().setValue(themes.get(themeSpinner.getSelectedIndex()));
+        getRealm().copyToRealmOrUpdate(getTheme());
 
+        getRealm().commitTransaction();
     }
 }
