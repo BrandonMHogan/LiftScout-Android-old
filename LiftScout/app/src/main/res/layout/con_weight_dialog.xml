@@ -6,71 +6,48 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:weightSum="1"
+        android:weightSum="1.1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:layout_gravity="center"
         android:orientation="horizontal">
 
-
-        <LinearLayout
+        <biz.kasual.materialnumberpicker.MaterialNumberPicker
+            android:id="@+id/weightNumberPicker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            app:npMinValue="1"
+            app:npMaxValue="500"
+            app:npDefaultValue="200"
+            app:npBackgroundColor="@color/float_transparent"
+            app:npTextColor="@color/colorPrimary"
+            app:npTextSize="@dimen/material_text_size_medium"/>
 
-            <com.shawnlin.numberpicker.NumberPicker
-                android:id="@+id/weightNumberPicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:np_width="64"
-                app:np_height="180"
-                app:np_dividerColor="@color/colorPrimary"
-                app:np_max="400"
-                app:np_min="0"
-                app:np_textColor="@color/colorPrimary"
-                app:np_textSize="@dimen/material_text_size_large"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/material_text_size_medium"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="."/>
 
-            <TextView
-                android:id="@+id/poundsLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/material_text_size_menu"
-                android:layout_gravity="center_horizontal"
-                android:text="Pounds"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
+        <biz.kasual.materialnumberpicker.MaterialNumberPicker
+            android:id="@+id/decimalNumberPicker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
-
-            <com.shawnlin.numberpicker.NumberPicker
-                android:id="@+id/decimalNumberPicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:np_width="64"
-                app:np_height="180"
-                app:np_dividerColor="@color/colorPrimary"
-                app:np_max="99"
-                app:np_min="0"
-                app:np_textColor="@color/colorPrimary"
-                app:np_textSize="@dimen/material_text_size_large"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/material_text_size_menu"
-                android:layout_gravity="center_horizontal"
-                android:text="Decimal"/>
-
-            </LinearLayout>
+            app:npMinValue="0"
+            app:npMaxValue="99"
+            app:npDefaultValue="0"
+            app:npBackgroundColor="@color/float_transparent"
+            app:npTextColor="@color/colorPrimary"
+            app:npTextSize="@dimen/material_text_size_medium"/>
 
     </LinearLayout>
 
