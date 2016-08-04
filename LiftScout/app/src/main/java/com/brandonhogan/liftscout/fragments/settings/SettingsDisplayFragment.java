@@ -3,7 +3,6 @@ package com.brandonhogan.liftscout.fragments.settings;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.IntentCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,12 +10,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.foundation.constants.Themes;
 import com.brandonhogan.liftscout.foundation.model.UserSetting;
-import com.brandonhogan.liftscout.foundation.navigation.NavigationManager;
-import com.brandonhogan.liftscout.foundation.utils.constants.Themes;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
@@ -71,15 +68,6 @@ public class SettingsDisplayFragment extends BaseFragment {
         themes.add(Themes.LIGHT);
 
         themeSpinner.setItems(themes);
-        themeSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-
-            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
-
-
-            }
-        });
-
         themeSpinner.setSelectedIndex(themes.indexOf(getTheme().getValue()));
     }
 

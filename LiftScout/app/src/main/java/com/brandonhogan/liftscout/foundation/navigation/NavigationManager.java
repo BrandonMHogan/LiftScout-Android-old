@@ -9,9 +9,9 @@ import com.brandonhogan.liftscout.fragments.ExerciseTypeListFragment;
 import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
 import com.brandonhogan.liftscout.fragments.home.HomeContainerFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsDisplayFragment;
+import com.brandonhogan.liftscout.fragments.settings.SettingsHomeFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
-import com.brandonhogan.liftscout.fragments.settings.SettingsHomeFragment;
 
 public class NavigationManager {
 

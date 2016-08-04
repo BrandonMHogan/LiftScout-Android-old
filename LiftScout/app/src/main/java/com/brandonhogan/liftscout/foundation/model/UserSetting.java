@@ -1,9 +1,6 @@
 package com.brandonhogan.liftscout.foundation.model;
 
-import java.util.ArrayList;
-
 import io.realm.RealmObject;
-import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
@@ -15,6 +12,7 @@ public class UserSetting extends RealmObject {
 
     // Types
     public static final String THEME = "theme";
+    public static final String TODAY_TRANSFORM = "todayTransform";
 
 //    @Ignore
 //    public static final ArrayList<String> TodayTransformType = new ArrayList<String>() {{

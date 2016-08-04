@@ -2,15 +2,14 @@ package com.brandonhogan.liftscout.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.foundation.constants.Themes;
 import com.brandonhogan.liftscout.foundation.model.UserSetting;
-import com.brandonhogan.liftscout.foundation.utils.constants.Themes;
 
 import io.realm.Realm;
 

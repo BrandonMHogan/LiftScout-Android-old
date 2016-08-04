@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.foundation.utils.constants;
+package com.brandonhogan.liftscout.foundation.constants;
 
 public class Themes {
     public static final String DARK = "Dark";

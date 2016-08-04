@@ -9,17 +9,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
+import com.ToxicBakery.viewpager.transforms.DepthPageTransformer;
+import com.ToxicBakery.viewpager.transforms.ForegroundToBackgroundTransformer;
+import com.ToxicBakery.viewpager.transforms.RotateDownTransformer;
+import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
 import com.ToxicBakery.viewpager.transforms.ScaleInOutTransformer;
+import com.ToxicBakery.viewpager.transforms.StackTransformer;
+import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
+import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
+import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.antonyt.infiniteviewpager.InfiniteViewPager;
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.foundation.constants.TodayTransforms;
 import com.brandonhogan.liftscout.foundation.model.User;
+import com.brandonhogan.liftscout.foundation.model.UserSetting;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
 import butterknife.Bind;
 
 public class HomeContainerFragment extends BaseFragment {
+
 
     // Instance
     //
@@ -33,6 +45,8 @@ public class HomeContainerFragment extends BaseFragment {
     private User user;
     private View rootView;
     private TodayPageAdapter adapter;
+    private UserSetting _todayTransformUserSetting;
+    private String currentTransform;
 
 
     // Binds
@@ -40,20 +54,12 @@ public class HomeContainerFragment extends BaseFragment {
     @Bind(R.id.viewpager)
     InfiniteViewPager viewPager;
 
-//    @Bind(R.id.bottom_sheet)
-//    BottomSheetLayout bottomSheetLayout;
-//
-//    @Bind(R.id.fab)
-//    FloatingActionButton fab;
-//
-//    @Bind(R.id.list_menu)
-//    ListView listView;
-
     @Bind(R.id.fabtoolbar)
     FABToolbarLayout toolbarLayout;
 
     @Bind(R.id.fabtoolbar_fab)
     FloatingActionButton fab;
+
 
     // Overrides
     //
@@ -67,7 +73,6 @@ public class HomeContainerFragment extends BaseFragment {
 
         return rootView;
     }
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -102,39 +107,65 @@ public class HomeContainerFragment extends BaseFragment {
         }
     }
 
-    private String getTransformType() {
-        return "blaw";
-    }
-
     private void setupPager() {
 
-        if (adapter != null) {
-            return;
+        if (adapter == null) {
+
+            adapter = new TodayPageAdapter(getChildFragmentManager());
+
+            PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
+            viewPager.setAdapter(wrappedAdapter);
+
+            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    toolbarLayout.hide();
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
         }
 
-        adapter = new TodayPageAdapter(getChildFragmentManager());
-
-        PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
-        viewPager.setAdapter(wrappedAdapter);
-
-        viewPager.setPageTransformer(true, new ScaleInOutTransformer());
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                toolbarLayout.hide();
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        switch (getTodayTransform().getValue()) {
+            case TodayTransforms.ACCORDION:
+                viewPager.setPageTransformer(true, new AccordionTransformer());
+                break;
+            case TodayTransforms.DEPTH_PAGE:
+                viewPager.setPageTransformer(true, new DepthPageTransformer());
+                break;
+            case TodayTransforms.FOREGROUND_TO_BACKGROUND:
+                viewPager.setPageTransformer(true, new ForegroundToBackgroundTransformer());
+                break;
+            case TodayTransforms.ROTATE_DOWN:
+                viewPager.setPageTransformer(true, new RotateDownTransformer());
+                break;
+            case TodayTransforms.ROTATE_UP:
+                viewPager.setPageTransformer(true, new RotateUpTransformer());
+                break;
+            case TodayTransforms.SCALE_IN_OUT:
+                viewPager.setPageTransformer(true, new ScaleInOutTransformer());
+                break;
+            case TodayTransforms.STACK:
+                viewPager.setPageTransformer(true, new StackTransformer());
+                break;
+            case TodayTransforms.ZOOM_IN:
+                viewPager.setPageTransformer(true, new ZoomInTransformer());
+                break;
+            case TodayTransforms.ZOOM_OUT:
+                viewPager.setPageTransformer(true, new ZoomOutTranformer());
+                break;
+            case TodayTransforms.ZOOM_OUT_SLIDE:
+                viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
+                break;
+        }
     }
 
     private void setupFab() {
@@ -144,5 +175,25 @@ public class HomeContainerFragment extends BaseFragment {
                 toolbarLayout.show();
             }
         });
+    }
+
+    private UserSetting getTodayTransform() {
+
+        if (_todayTransformUserSetting != null)
+            return _todayTransformUserSetting;
+
+        _todayTransformUserSetting = getRealm().where(UserSetting.class)
+                .equalTo(UserSetting.NAME, UserSetting.TODAY_TRANSFORM).findFirst();
+
+        if (_todayTransformUserSetting == null) {
+            _todayTransformUserSetting = new UserSetting();
+            _todayTransformUserSetting.setName(UserSetting.TODAY_TRANSFORM);
+            _todayTransformUserSetting.setValue(TodayTransforms.DEFAULT);
+
+            getRealm().beginTransaction();
+            getRealm().copyToRealmOrUpdate(_todayTransformUserSetting);
+            getRealm().commitTransaction();
+        }
+        return _todayTransformUserSetting;
     }
 }
