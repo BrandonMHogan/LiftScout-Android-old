@@ -1,51 +1,18 @@
 package com.brandonhogan.liftscout.foundation.controls;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.Fragment;
-import android.content.Context;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.NumberPicker;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.brandonhogan.liftscout.R;
 
+import biz.kasual.materialnumberpicker.MaterialNumberPicker;
+
 public class WeightDialog {
-
-    // Static Properties
-    //
-    private static final String WEIGHT_BUNDLE = "weightBundle";
-    private static final String THEME_BUNDLE = "themeBundle";
-    private static final String LISTENER_BUNDLE = "themeBundle";
-
-    // Static Properties
-    //
-
-
-    public WeightDialog(Activity activity, WeightDialogListener listener, double weight, boolean isDarkTheme) {
-//        WeightDialog dialog = new WeightDialog();
-
-//        Bundle args = new Bundle();
-//        args.putDouble(WEIGHT_BUNDLE, weight);
-//        args.putBoolean(THEME_BUNDLE, isDarkTheme);
-//        args.putParcelable(LISTENER_BUNDLE, listener);
-//        dialog.setArguments(args);
-
-//        return dialog;
-
-        this.activity = activity;
-        this.listener = listener;
-        this.weight = weight;
-        this.isDarkTheme = isDarkTheme;
-    }
 
 
     // Interface Listener
@@ -61,17 +28,24 @@ public class WeightDialog {
     private Activity activity;
     private double weight;
     private boolean isDarkTheme;
-    private NumberPicker weightPicker;
-    private NumberPicker decimalPicker;
+    private MaterialNumberPicker weightPicker;
+    private MaterialNumberPicker decimalPicker;
     private MaterialDialog dialog;
     private WeightDialogListener listener;
 
 
-    // Overrides
+    // Constructor
     //
+    public WeightDialog(Activity activity, WeightDialogListener listener, double weight, boolean isDarkTheme) {
+        this.activity = activity;
+        this.listener = listener;
+        this.weight = weight;
+        this.isDarkTheme = isDarkTheme;
+    }
 
 
-
+    // Private Functions
+    //
     private void onSave() {
         dismiss();
         listener.onSaveWeightDialog(weight);
@@ -82,6 +56,9 @@ public class WeightDialog {
         listener.onCancelWeightDialog();
     }
 
+
+    // Public Functions
+    //
     public void show() {
 
         if (dialog == null) {
