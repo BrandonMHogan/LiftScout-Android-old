@@ -15,6 +15,8 @@
     <string name="no">No</string>
     <string name="cancel">Cancel</string>
     <string name="restart">Restart</string>
+    <string name="close">Close</string>
+    <string name="save">Save</string>
 
     <!-- Drawer Navigations -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -48,9 +50,10 @@
     <!-- Dialogs -->
     <string name="dialog_close_app_title">Closing Lift Scout</string>
     <string name="dialog_close_app_message">Are you sure you wish to close Lift Scout?</string>
-
     <string name="dialog_restarting_app_theme_title">Restarting Lift Scout</string>
     <string name="dialog_restarting_app_theme_message">Changing themes requires the application to restart</string>
+    <string name="dialog_set_weight_title">Set Weight</string>
+
 
     <!-- Home Fragment -->
     <string name="frag_home_first_load_message">"Welcome to Lift Scout %s! This app will become your closest ally in your swole journey."</string>

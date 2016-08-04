@@ -18,15 +18,15 @@ public class BaseFragment extends Fragment {
 
     // Private Properties
     //
-    private final String classTag = this.getClass().getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
     private Realm realm;
     private final Object realmLock = new Object();
     private float oldTranslationZ;
 
     // Public Functions
     //
-    public String getClassTag() {
-        return classTag;
+    public String getTAG() {
+        return TAG;
     }
 
     public void setTitle(String title) {
@@ -59,7 +59,7 @@ public class BaseFragment extends Fragment {
                         realm.close();
                     }
                     catch (Exception ex) {
-                        Log.e(getClassTag(), "closeRealm() : Failed to close realm");
+                        Log.e(getTAG(), "closeRealm() : Failed to close realm");
                     }
                     finally {
                         realm = null;
@@ -90,7 +90,7 @@ public class BaseFragment extends Fragment {
 
                 @Override
                 public void onAnimationStart(Animator animator) {
-                    Log.v(getClassTag(), "Fragment Animation started.");
+                    Log.v(getTAG(), "Fragment Animation started.");
                     getNavigationManager().setInTransition(true);
 
                     if (getView() != null && enter) {
@@ -98,12 +98,12 @@ public class BaseFragment extends Fragment {
                         ViewCompat.setTranslationZ(getView(), 300.f);
                     }
 
-                    Log.d(classTag, "onAnimationStart: " + ViewCompat.getTranslationZ(getView()));
+                    Log.d(TAG, "onAnimationStart: " + ViewCompat.getTranslationZ(getView()));
                 }
 
                 @Override
                 public void onAnimationEnd(Animator animator) {
-                    Log.v(getClassTag(), "Fragment Animation ended.");
+                    Log.v(getTAG(), "Fragment Animation ended.");
                     getNavigationManager().setInTransition(false);
 
                     if (getView() != null && enter) {

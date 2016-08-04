@@ -1,10 +1,13 @@
 package com.brandonhogan.liftscout.fragments.home;
 
 import android.os.Bundle;
+import android.os.Parcel;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,16 +22,21 @@ import com.ToxicBakery.viewpager.transforms.StackTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.antonyt.infiniteviewpager.InfiniteViewPager;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.constants.TodayTransforms;
+import com.brandonhogan.liftscout.foundation.controls.WeightDialog;
 import com.brandonhogan.liftscout.foundation.model.User;
 import com.brandonhogan.liftscout.foundation.model.UserSetting;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class HomeContainerFragment extends BaseFragment {
 
@@ -195,5 +203,24 @@ public class HomeContainerFragment extends BaseFragment {
             getRealm().commitTransaction();
         }
         return _todayTransformUserSetting;
+    }
+
+    @OnClick(R.id.weight)
+    public void addWeightOnClick() {
+        Log.e(getTAG(), "Weight on click clicked!");
+
+        WeightDialog dialog = new WeightDialog(getActivity(), new WeightDialog.WeightDialogListener() {
+            @Override
+            public void onCancelWeightDialog() {
+
+            }
+
+            @Override
+            public void onSaveWeightDialog(double weight) {
+
+            }
+        }, 200, true);
+
+        dialog.show();
     }
 }
