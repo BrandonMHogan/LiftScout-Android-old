@@ -12,6 +12,7 @@ import android.view.View;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.model.User;
 import com.brandonhogan.liftscout.foundation.navigation.NavigationManager;
+import com.brandonhogan.liftscout.foundation.utils.DatabaseOutput;
 
 import java.util.Date;
 
@@ -115,6 +116,9 @@ public class MainActivity extends BaseActivity
             success = navigationManager.startSettings();
         } else if (id == R.id.nav_about) {
 
+        } else if (id == R.id.nav_realm) {
+            DatabaseOutput.SendRealmToPhone(this);
+            success = true;
         }
 
         if (success)

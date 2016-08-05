@@ -39,5 +39,13 @@
             android:icon="?attr/themedMenuAboutDrawable"
             android:title="@string/nav_about" />
     </group>
+    <group
+        android:id="@+id/drawer_menu_debug"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_realm"
+            android:icon="@drawable/error_circle"
+            android:title="@string/nav_realm" />
+    </group>
 
 </menu>

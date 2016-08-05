@@ -28,6 +28,7 @@ import com.brandonhogan.liftscout.foundation.controls.WeightDialog;
 import com.brandonhogan.liftscout.foundation.model.Progress;
 import com.brandonhogan.liftscout.foundation.model.User;
 import com.brandonhogan.liftscout.foundation.model.UserSetting;
+import com.brandonhogan.liftscout.foundation.utils.DatabaseOutput;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
@@ -89,6 +90,7 @@ public class HomeContainerFragment extends BaseFragment {
 
         setupPager();
         setupFab();
+
     }
 
     @Override
