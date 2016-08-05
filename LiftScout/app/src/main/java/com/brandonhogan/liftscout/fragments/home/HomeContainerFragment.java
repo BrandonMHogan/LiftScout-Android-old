@@ -28,7 +28,6 @@ import com.brandonhogan.liftscout.foundation.controls.WeightDialog;
 import com.brandonhogan.liftscout.foundation.model.Progress;
 import com.brandonhogan.liftscout.foundation.model.User;
 import com.brandonhogan.liftscout.foundation.model.UserSetting;
-import com.brandonhogan.liftscout.foundation.utils.DatabaseOutput;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
@@ -208,13 +207,14 @@ public class HomeContainerFragment extends BaseFragment {
 
 
     private Progress getTodayProgress() {
+        Date currentDate = adapter.dateByPosition(viewPager.getCurrentItem());
 
         _currentProgress = getRealm().where(Progress.class)
-                .equalTo(Progress.ID, adapter.getCurrentDate().getTime()).findFirst();
+                .equalTo(Progress.DATE, currentDate).findFirst();
 
         if (_currentProgress == null) {
             _currentProgress = new Progress();
-            _currentProgress.setDate(adapter.getCurrentDate());
+            _currentProgress.setDate(currentDate);
             _currentProgress.setWeight(getUser().getWeight());
 
             getRealm().beginTransaction();
@@ -234,8 +234,6 @@ public class HomeContainerFragment extends BaseFragment {
 
     @OnClick(R.id.weight)
     public void addWeightOnClick() {
-        Log.e(getTAG(), "Weight on click clicked!");
-
         WeightDialog dialog = new WeightDialog(getActivity(), new WeightDialog.WeightDialogListener() {
             @Override
             public void onCancelWeightDialog() {

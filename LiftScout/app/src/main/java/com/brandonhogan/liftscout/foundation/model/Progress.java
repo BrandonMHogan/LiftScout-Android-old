@@ -1,5 +1,8 @@
 package com.brandonhogan.liftscout.foundation.model;
 
+import com.brandonhogan.liftscout.foundation.utils.BhDate;
+
+import java.util.Calendar;
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -9,23 +12,17 @@ import io.realm.annotations.Required;
 public class Progress extends RealmObject {
 
     public static final String ID = "id";
-    public static final String WEIGHT = "WEIGHT";
+    public static final String DATE = "date";
+    public static final String WEIGHT = "weight";
 
 
     @PrimaryKey
-    long id; // The long version of the date because realm cannot save date objects
+    long id;
+
+    @Required
+    Date date;
 
     double weight;
-
-    Date realDate;
-
-    public Date getRealDate() {
-        return realDate;
-    }
-
-    public void setRealDate(Date realDate) {
-        this.realDate = realDate;
-    }
 
     public long getId() {
         return id;
@@ -36,10 +33,11 @@ public class Progress extends RealmObject {
     }
 
     public Date getDate() {
-        return new Date(id);
+        return date;
     }
 
     public void setDate(Date date) {
+        this.date = BhDate.trimTimeFromDate(date);
         this.id = date.getTime();
     }
 

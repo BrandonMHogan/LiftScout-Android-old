@@ -35,6 +35,8 @@ public class WeightDialog {
     //
     private Activity activity;
     private double weight;
+    private long intPart;
+    private double fracPart;
     private boolean isDarkTheme;
     private MaterialNumberPicker weightPicker;
     private MaterialNumberPicker decimalPicker;
@@ -49,6 +51,13 @@ public class WeightDialog {
         this.listener = listener;
         this.weight = weight;
         this.isDarkTheme = isDarkTheme;
+
+        this.intPart = (long) weight;
+        String decimalString = Double.toString(weight);
+        decimalString = decimalString.substring(decimalString.indexOf(".")+1);
+
+        this.fracPart = Double.parseDouble(decimalString);
+
     }
 
 
@@ -105,7 +114,9 @@ public class WeightDialog {
             weightPicker = (MaterialNumberPicker) dialog.getCustomView().findViewById(R.id.weightNumberPicker);
             decimalPicker = (MaterialNumberPicker) dialog.getCustomView().findViewById(R.id.decimalNumberPicker);
 
-            weightPicker.setValue((int)weight);
+            weightPicker.setValue((int)intPart);
+            decimalPicker.setValue((int)fracPart);
+
         }
 
         dialog.show();
