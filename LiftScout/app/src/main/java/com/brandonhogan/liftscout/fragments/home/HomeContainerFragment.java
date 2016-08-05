@@ -35,6 +35,7 @@ import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import io.realm.Sort;
 
 public class HomeContainerFragment extends BaseFragment {
 
@@ -185,6 +186,13 @@ public class HomeContainerFragment extends BaseFragment {
         getRealm().commitTransaction();
     }
 
+    private void updateUserWeight(double weight) {
+        getRealm().beginTransaction();
+        getUser().setWeight(weight);
+        getRealm().copyToRealmOrUpdate(_user);
+        getRealm().commitTransaction();
+    }
+
     private UserSetting getTodayTransform() {
 
         if (_todayTransformUserSetting != null)
@@ -230,6 +238,16 @@ public class HomeContainerFragment extends BaseFragment {
         getTodayProgress().setWeight(weight);
         getRealm().copyToRealmOrUpdate(_currentProgress);
         getRealm().commitTransaction();
+
+        Progress topDate = getRealm().where(Progress.class)
+                .greaterThanOrEqualTo(Progress.DATE, _currentProgress.getDate())
+                .findAllSorted(Progress.DATE, Sort.DESCENDING).first();
+
+        if (topDate != null && _currentProgress.getDate().compareTo(topDate.getDate()) >= 0 ) {
+            Log.d(getTAG(), "Current Date >= Top Progress Date. Will update user weight to " + weight);
+            updateUserWeight(weight);
+        }
+
     }
 
     @OnClick(R.id.weight)
@@ -243,6 +261,7 @@ public class HomeContainerFragment extends BaseFragment {
             @Override
             public void onSaveWeightDialog(double weight) {
                 updateTodayProgressWeight(weight);
+
             }
         }, getTodayProgress().getWeight(), true);
 
