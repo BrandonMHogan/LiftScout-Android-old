@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.foundation.controls;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -10,9 +11,16 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.brandonhogan.liftscout.R;
 
+import java.text.ParseException;
+
 import biz.kasual.materialnumberpicker.MaterialNumberPicker;
 
 public class WeightDialog {
+
+
+    // Private Static
+    //
+    private static final String TAG = "WeightDialog";
 
 
     // Interface Listener
@@ -48,6 +56,15 @@ public class WeightDialog {
     //
     private void onSave() {
         dismiss();
+
+        try {
+            String weightString = weightPicker.getValue() + "." + decimalPicker.getValue();
+            weight = java.text.NumberFormat.getInstance().parse(weightString).doubleValue();
+
+        } catch (ParseException ex) {
+            Log.e(TAG, "Failed to convert string to double :" + ex.getMessage());
+        }
+
         listener.onSaveWeightDialog(weight);
     }
 
@@ -84,6 +101,11 @@ public class WeightDialog {
                         }
                     })
                     .build();
+
+            weightPicker = (MaterialNumberPicker) dialog.getCustomView().findViewById(R.id.weightNumberPicker);
+            decimalPicker = (MaterialNumberPicker) dialog.getCustomView().findViewById(R.id.decimalNumberPicker);
+
+            weightPicker.setValue((int)weight);
         }
 
         dialog.show();
@@ -92,5 +114,4 @@ public class WeightDialog {
     public void dismiss() {
         dialog.dismiss();
     }
-
 }

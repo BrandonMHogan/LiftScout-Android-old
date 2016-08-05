@@ -1,8 +1,6 @@
 package com.brandonhogan.liftscout.fragments.home;
 
 import android.os.Bundle;
-import android.os.Parcel;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
@@ -22,18 +20,18 @@ import com.ToxicBakery.viewpager.transforms.StackTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.Theme;
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.antonyt.infiniteviewpager.InfiniteViewPager;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.constants.TodayTransforms;
 import com.brandonhogan.liftscout.foundation.controls.WeightDialog;
+import com.brandonhogan.liftscout.foundation.model.Progress;
 import com.brandonhogan.liftscout.foundation.model.User;
 import com.brandonhogan.liftscout.foundation.model.UserSetting;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
+
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -50,11 +48,13 @@ public class HomeContainerFragment extends BaseFragment {
 
     // Private Properties
     //
-    private User user;
     private View rootView;
     private TodayPageAdapter adapter;
+
+    // Do not call directly. Use Helper functions
+    private User _user;
     private UserSetting _todayTransformUserSetting;
-    private String currentTransform;
+    private Progress _currentProgress;
 
 
     // Binds
@@ -87,7 +87,6 @@ public class HomeContainerFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle("Home Sweet Home");
 
-        loadUserData();
         setupPager();
         setupFab();
     }
@@ -100,21 +99,6 @@ public class HomeContainerFragment extends BaseFragment {
 
     // Private Functions
     //
-    private void loadUserData() {
-        user = getRealm().where(User.class).findFirst();
-
-        if(user.isFirstLoad()) {
-            getRealm().beginTransaction();
-            user.setFirstLoad(false);
-            getRealm().commitTransaction();
-
-          //  welcomeMessage.setText(String.format(getContext().getString(R.string.frag_home_first_load_message), user.getName()));
-        }
-        else {
-        //    welcomeMessage.setText(String.format(getContext().getString(R.string.frag_home_welcome_back_message),user.getName()));
-        }
-    }
-
     private void setupPager() {
 
         if (adapter == null) {
@@ -132,7 +116,6 @@ public class HomeContainerFragment extends BaseFragment {
 
                 @Override
                 public void onPageSelected(int position) {
-
                 }
 
                 @Override
@@ -185,6 +168,22 @@ public class HomeContainerFragment extends BaseFragment {
         });
     }
 
+    private User getUser() {
+
+        if (_user != null)
+            return _user;
+
+        _user = getRealm().where(User.class).findFirst();
+
+        return _user;
+    }
+
+    private void updateUser() {
+        getRealm().beginTransaction();
+        getRealm().copyToRealmOrUpdate(_user);
+        getRealm().commitTransaction();
+    }
+
     private UserSetting getTodayTransform() {
 
         if (_todayTransformUserSetting != null)
@@ -205,6 +204,32 @@ public class HomeContainerFragment extends BaseFragment {
         return _todayTransformUserSetting;
     }
 
+
+    private Progress getTodayProgress() {
+
+        _currentProgress = getRealm().where(Progress.class)
+                .equalTo(Progress.ID, adapter.getCurrentDate().getTime()).findFirst();
+
+        if (_currentProgress == null) {
+            _currentProgress = new Progress();
+            _currentProgress.setDate(adapter.getCurrentDate());
+            _currentProgress.setWeight(getUser().getWeight());
+
+            getRealm().beginTransaction();
+            getRealm().copyToRealmOrUpdate(_currentProgress);
+            getRealm().commitTransaction();
+        }
+
+        return _currentProgress;
+    }
+
+    private void updateTodayProgressWeight(double weight) {
+        getRealm().beginTransaction();
+        getTodayProgress().setWeight(weight);
+        getRealm().copyToRealmOrUpdate(_currentProgress);
+        getRealm().commitTransaction();
+    }
+
     @OnClick(R.id.weight)
     public void addWeightOnClick() {
         Log.e(getTAG(), "Weight on click clicked!");
@@ -217,9 +242,9 @@ public class HomeContainerFragment extends BaseFragment {
 
             @Override
             public void onSaveWeightDialog(double weight) {
-
+                updateTodayProgressWeight(weight);
             }
-        }, 200, true);
+        }, getTodayProgress().getWeight(), true);
 
         dialog.show();
     }
