@@ -3,7 +3,6 @@ package com.brandonhogan.liftscout.fragments.home;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,8 +19,6 @@ import com.ToxicBakery.viewpager.transforms.StackTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
-import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
-import com.antonyt.infiniteviewpager.InfiniteViewPager;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.constants.TodayTransforms;
 import com.brandonhogan.liftscout.foundation.controls.WeightDialog;
@@ -61,7 +58,7 @@ public class HomeContainerFragment extends BaseFragment {
     // Binds
     //
     @Bind(R.id.viewpager)
-    InfiniteViewPager viewPager;
+    ViewPager viewPager;
 
     @Bind(R.id.fabtoolbar)
     FABToolbarLayout toolbarLayout;
@@ -106,9 +103,10 @@ public class HomeContainerFragment extends BaseFragment {
         if (adapter == null) {
 
             adapter = new TodayPageAdapter(getChildFragmentManager());
+            //PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
+            viewPager.setAdapter(adapter);
 
-            PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
-            viewPager.setAdapter(wrappedAdapter);
+            viewPager.setCurrentItem(adapter.TOTAL_DAYS);
 
             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
@@ -247,11 +245,17 @@ public class HomeContainerFragment extends BaseFragment {
             Log.d(getTAG(), "Current Date >= Top Progress Date. Will update user weight to " + weight);
             updateUserWeight(weight);
         }
-
     }
 
     @OnClick(R.id.weight)
     public void addWeightOnClick() {
+
+        double weight;
+        if (getTodayProgress().getWeight() == 0)
+            weight = getUser().getWeight();
+        else
+            weight = getTodayProgress().getWeight();
+
         WeightDialog dialog = new WeightDialog(getActivity(), new WeightDialog.WeightDialogListener() {
             @Override
             public void onCancelWeightDialog() {
@@ -261,9 +265,10 @@ public class HomeContainerFragment extends BaseFragment {
             @Override
             public void onSaveWeightDialog(double weight) {
                 updateTodayProgressWeight(weight);
+                adapter.update();
 
             }
-        }, getTodayProgress().getWeight(), true);
+        }, weight, true);
 
         dialog.show();
     }

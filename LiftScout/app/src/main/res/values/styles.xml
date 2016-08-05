@@ -145,6 +145,12 @@
         <item name="android:textSize">@dimen/material_text_size_caption</item>
     </style>
 
+    <style name="RobotoCaptionBold">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/material_text_size_caption</item>
+    </style>
+
     <style name="ModalContentText">
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">@dimen/modal_text_size</item>

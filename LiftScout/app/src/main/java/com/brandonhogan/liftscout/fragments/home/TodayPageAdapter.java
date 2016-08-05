@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.fragments.home;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
+import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.foundation.utils.BhDate;
 
@@ -12,11 +13,16 @@ import java.util.Date;
 public class TodayPageAdapter extends FragmentStatePagerAdapter
 {
 
+
+    // Private Properties
+    //
     private Date currentDate;
-    // The total number of possible days that will be shown
-    private static int LOOPS_COUNT = 366;
-    // The number of days in a direction (forward or back in time)
-    public static int TOTAL_DAYS = LOOPS_COUNT / 2;
+    private static int LOOPS_COUNT = 732; // The total number of possible days that will be shown
+
+
+    // Public Properties
+    //
+    public static int TOTAL_DAYS = LOOPS_COUNT / 2; // The number of days in a direction (forward or back in time)
 
 
     // Constructor
@@ -33,6 +39,24 @@ public class TodayPageAdapter extends FragmentStatePagerAdapter
         return TodayFragment.newInstance(dateByPosition(position));
     }
 
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        return super.instantiateItem(container, getRealPosition(position));
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        super.destroyItem(container, getRealPosition(position), object);
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        TodayFragment f = (TodayFragment) object;
+        if (f != null) {
+            f.update();
+        }
+        return super.getItemPosition(object);
+    }
 
     @Override
     public int getCount() {
@@ -43,18 +67,22 @@ public class TodayPageAdapter extends FragmentStatePagerAdapter
     // Public Functions
     //
     public Date dateByPosition(int position) {
-        int realPosition;
-
-        if (position < TOTAL_DAYS)
-            realPosition = (position % TOTAL_DAYS);
-        else
-            realPosition = (position % TOTAL_DAYS) - TOTAL_DAYS;
-
         Calendar calendar=Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, realPosition);
+        calendar.add(Calendar.DAY_OF_YEAR, getRealPosition(position) - TOTAL_DAYS);
 
         currentDate = BhDate.trimTimeFromDate(calendar.getTime());
 
         return currentDate;
+    }
+
+    public void update() {
+        notifyDataSetChanged();
+    }
+
+
+    // Private Properties
+    //
+    private int getRealPosition(int position) {
+        return position % LOOPS_COUNT;
     }
 }

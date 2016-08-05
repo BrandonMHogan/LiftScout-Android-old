@@ -49,9 +49,9 @@ public class WeightDialog {
     public WeightDialog(Activity activity, WeightDialogListener listener, double weight, boolean isDarkTheme) {
         this.activity = activity;
         this.listener = listener;
-        this.weight = weight;
         this.isDarkTheme = isDarkTheme;
 
+        this.weight = weight;
         this.intPart = (long) weight;
         String decimalString = Double.toString(weight);
         decimalString = decimalString.substring(decimalString.indexOf(".")+1);
