@@ -7,7 +7,7 @@ import io.realm.RealmConfiguration;
 
 public class AppController extends Application {
 
-    private static AppController mInstance;
+    protected static AppController mInstance;
   //  private Tracker mTracker;
 
     public static synchronized AppController getInstance() {
@@ -24,6 +24,7 @@ public class AppController extends Application {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
+
     }
 
 
