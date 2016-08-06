@@ -126,13 +126,17 @@ public class InitActivity extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.d(getTAG(), "Post Animation!");
                 startButton.setProgress(100);
+
+                final Handler handler2 = new Handler();
+                handler2.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadHome();
+                    }
+                }, 50);
             }
         }, 2000);
-
-
-       // loadHome();
     }
 
     private void loadHome() {
