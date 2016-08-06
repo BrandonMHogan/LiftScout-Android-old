@@ -22,6 +22,7 @@
     <dimen name="fragment_default_padding">15dp</dimen>
     <dimen name="fragment_default_xsmall_margin">1dp</dimen>
     <dimen name="fragment_default_small_margin">5dp</dimen>
+    <dimen name="fragment_default_margin">10dp</dimen>
 
     <!-- Card Views -->
     <dimen name="card_view_padding">1dp</dimen>

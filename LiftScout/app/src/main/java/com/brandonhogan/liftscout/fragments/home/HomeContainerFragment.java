@@ -20,6 +20,7 @@ import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.foundation.constants.TodayTransforms;
 import com.brandonhogan.liftscout.foundation.controls.WeightDialog;
 import com.brandonhogan.liftscout.foundation.model.Progress;
@@ -245,6 +246,12 @@ public class HomeContainerFragment extends BaseFragment {
             Log.d(getTAG(), "Current Date >= Top Progress Date. Will update user weight to " + weight);
             updateUserWeight(weight);
         }
+
+
+        Bundle params = new Bundle();
+        params.putString("date", _currentProgress.getDate().toString());
+        params.putDouble("weight", weight);
+        ((MainActivity)getActivity()).getFirebaseAnalytics().logEvent("weight_set", params);
     }
 
     @OnClick(R.id.weight)

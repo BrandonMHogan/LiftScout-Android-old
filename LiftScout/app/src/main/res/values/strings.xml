@@ -17,6 +17,9 @@
     <string name="restart">Restart</string>
     <string name="close">Close</string>
     <string name="save">Save</string>
+    <string name="routine">Routine</string>
+    <string name="weight">Weight</string>
+    <string name="photos">Photos</string>
 
     <!-- Drawer Navigations -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -73,6 +76,9 @@
     <string name="setting_home_description">Tailor the home screen to fit your needs</string>
     <string name="setting_today_transformer_spinner_title">Transition Type</string>
     <string name="setting_today_transformer_spinner_description">Change the transition type when swiping from day to day</string>
+    <string name="setting_today_weight_title">Enable Weight Tracking</string>
+    <string name="setting_today_photo_title">Enable Photo Tracking</string>
+    <string name="setting_today_routine_title">Enable Routine Tracking</string>
 
     <string name="setting_display_theme_spinner_title">Theme</string>
     <string name="setting_display_theme_spinner_description">Choose a theme that better fits your taste</string>

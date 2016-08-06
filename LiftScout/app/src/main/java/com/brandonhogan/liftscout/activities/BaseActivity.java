@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.constants.Themes;
 import com.brandonhogan.liftscout.foundation.model.UserSetting;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import io.realm.Realm;
 
@@ -21,6 +22,7 @@ public class BaseActivity extends AppCompatActivity {
     private String classTag = this.getClass().getSimpleName();
     private Realm realm;
     private final Object realmLock = new Object();
+    private FirebaseAnalytics mFirebaseAnalytics;
 
 
     // Public Properties
@@ -40,6 +42,10 @@ public class BaseActivity extends AppCompatActivity {
         return realm;
     }
 
+    public FirebaseAnalytics getFirebaseAnalytics() {
+        return mFirebaseAnalytics;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 //        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
@@ -48,6 +54,9 @@ public class BaseActivity extends AppCompatActivity {
 
         if (getDisplayTheme() != null && getDisplayTheme().getValue().equals(Themes.DARK))
             setTheme(R.style.AppTheme_Dark);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         super.onCreate(savedInstanceState);
     }

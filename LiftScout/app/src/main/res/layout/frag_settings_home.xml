@@ -12,25 +12,192 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/setting_today_transformer_spinner_title"
-            android:layout_marginBottom="@dimen/fragment_default_xsmall_margin"
-            style="@style/RobotoSubheadingBold" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/setting_today_transformer_spinner_description"
-            android:layout_marginBottom="@dimen/fragment_default_small_margin"
-            style="@style/RobotoCaption" />
+            android:orientation="vertical">
 
-        <com.jaredrummler.materialspinner.MaterialSpinner
-            android:id="@+id/todayTransformSpinner"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_today_transformer_spinner_title"
+                android:layout_marginBottom="@dimen/fragment_default_xsmall_margin"
+                style="@style/RobotoSubheadingBold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_today_transformer_spinner_description"
+                android:layout_marginBottom="@dimen/fragment_default_small_margin"
+                style="@style/RobotoCaption" />
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/todayTransformSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_text_color="?attr/android:textColorPrimary"
+                app:ms_background_color="?attr/android:windowBackground"/>
+
+        </LinearLayout>
+
+
+        <!-- Weight Section -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="@dimen/fragment_default_margin"
+            android:layout_marginBottom="@dimen/fragment_default_xsmall_margin">
+
+            <TextView
+                android:id="@+id/weight_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_today_weight_title"
+                android:layout_centerVertical="true"
+                style="@style/RobotoSubheadingBold" />
+
+            <com.brandonhogan.liftscout.foundation.controls.CircleCheckBox
+                android:id="@+id/weight_checkbox"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:borderThickness="2dp"
+                app:circleBorderColor="?attr/colorPrimaryDark"
+                app:innerCircleColor="?attr/colorPrimary"
+                app:innerCircleRadius="14dp"
+                app:outerCircleColor="?attr/colorPrimaryDark"
+                app:outerCircleRadius="6dp"
+                app:showOuterCircle="true" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/weight_expanding_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:ms_background_color="@color/black_transparent_10"/>
+            android:background="#90ba1f04"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expandable Layout provides an easy way to create a view called header with an expandable view. Views are external layout to allow a maximum of customization." />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/listview_border_color"
+            android:layout_height="@dimen/settings_divider_view_hieght"
+            android:layout_marginTop="@dimen/today_divider_top_margin"/>
+
+
+
+
+        <!-- Photo Section -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="@dimen/fragment_default_margin"
+            android:layout_marginBottom="@dimen/fragment_default_xsmall_margin">
+
+            <TextView
+                android:id="@+id/photo_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_today_photo_title"
+                android:layout_centerVertical="true"
+                style="@style/RobotoSubheadingBold" />
+
+            <com.brandonhogan.liftscout.foundation.controls.CircleCheckBox
+                android:id="@+id/photo_checkbox"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:borderThickness="2dp"
+                app:circleBorderColor="?attr/colorPrimaryDark"
+                app:innerCircleColor="?attr/colorPrimary"
+                app:innerCircleRadius="14dp"
+                app:outerCircleColor="?attr/colorPrimaryDark"
+                app:outerCircleRadius="6dp"
+                app:showOuterCircle="true" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/photo_expanding_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#90ba1f04"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expandable Layout provides an easy way to create a view called header with an expandable view. Views are external layout to allow a maximum of customization." />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/listview_border_color"
+            android:layout_height="@dimen/settings_divider_view_hieght"
+            android:layout_marginTop="@dimen/today_divider_top_margin"/>
+
+
+
+
+
+        <!-- Routine Section -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="@dimen/fragment_default_margin"
+            android:layout_marginBottom="@dimen/fragment_default_xsmall_margin">
+
+            <TextView
+                android:id="@+id/routine_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_today_routine_title"
+                android:layout_centerVertical="true"
+                style="@style/RobotoSubheadingBold" />
+
+            <com.brandonhogan.liftscout.foundation.controls.CircleCheckBox
+                android:id="@+id/routine_checkbox"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:borderThickness="2dp"
+                app:circleBorderColor="?attr/colorPrimaryDark"
+                app:innerCircleColor="?attr/colorPrimary"
+                app:innerCircleRadius="14dp"
+                app:outerCircleColor="?attr/colorPrimaryDark"
+                app:outerCircleRadius="6dp"
+                app:showOuterCircle="true" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/routine_expanding_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#90ba1f04"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expandable Layout provides an easy way to create a view called header with an expandable view. Views are external layout to allow a maximum of customization." />
+
+        </LinearLayout>
 
     </LinearLayout>
+
+
 </com.brandonhogan.liftscout.foundation.controls.BaseFrameLayout>

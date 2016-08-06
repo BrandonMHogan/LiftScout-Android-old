@@ -1,46 +1,49 @@
 {
   "project_info": {
-    "project_id": "lift-scout-ac7dd",
-    "project_number": "717012308871",
-    "name": "Lift Scout"
+    "project_number": "844062822101",
+    "firebase_url": "https://fir-lift-scout.firebaseio.com",
+    "project_id": "firebase-lift-scout",
+    "storage_bucket": "firebase-lift-scout.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:717012308871:android:a8713eb0d0fa7915",
-        "client_id": "android:com.brandonhogan.liftscout",
-        "client_type": 1,
+        "mobilesdk_app_id": "1:844062822101:android:a8713eb0d0fa7915",
         "android_client_info": {
-          "package_name": "com.brandonhogan.liftscout",
-          "certificate_hash": []
+          "package_name": "com.brandonhogan.liftscout"
         }
       },
-      "oauth_client": [],
-      "api_key": [],
+      "oauth_client": [
+        {
+          "client_id": "844062822101-5k9p5ujd1igq78e2spmg9vm9o1ahpaer.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "844062822101-5cdpmu7virvovtn0381gp2e8gksukrou.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNlDi_dpZwvrM0Bpz16sYt9BGr5g-9Ltc"
+        }
+      ],
       "services": {
         "analytics_service": {
           "status": 2,
           "analytics_property": {
-            "tracking_id": "UA-62768532-2"
+            "tracking_id": "UA-82053579-1"
           }
-        },
-        "cloud_messaging_service": {
-          "status": 1,
-          "apns_config": []
         },
         "appinvite_service": {
           "status": 1,
           "other_platform_oauth_client": []
         },
-        "google_signin_service": {
-          "status": 1
-        },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }
   ],
-  "client_info": [],
-  "ARTIFACT_VERSION": "1"
+  "configuration_version": "1"
 }
