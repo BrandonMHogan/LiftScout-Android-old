@@ -3,9 +3,10 @@ package com.brandonhogan.liftscout.foundation.controls;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-public class BaseFrameLayout extends RelativeLayout {
+public class BaseFrameLayout extends FrameLayout {
 
     private float yFraction = 0;
     private float xFraction = 0;
