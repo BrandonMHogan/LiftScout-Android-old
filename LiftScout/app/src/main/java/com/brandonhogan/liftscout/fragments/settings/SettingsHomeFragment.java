@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.constants.TodayTransforms;
 import com.brandonhogan.liftscout.foundation.controls.AnimCheckBox;
-import com.brandonhogan.liftscout.foundation.controls.CircleCheckBox;
 import com.brandonhogan.liftscout.foundation.model.UserSetting;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -39,11 +38,10 @@ public class SettingsHomeFragment extends BaseFragment {
     //
     private View rootView;
     private ArrayList<String> transformsAdapter;
-    private UserSetting _todayTransformUserSetting;
-
-    private boolean weightChecked;
-    private boolean photosChecked;
-    private boolean routineChecked;
+    private UserSetting _todayTransformType;
+    private UserSetting _todayShowWeight;
+    private UserSetting _todayShowPhoto;
+    private UserSetting _todayShowRoutine;
 
 
     // Bindings
@@ -85,9 +83,9 @@ public class SettingsHomeFragment extends BaseFragment {
         setTitle(getResources().getString(R.string.title_frag_settings_home));
 
         setupTransform();
-        setupCheckbox(weightCheckbox, weightSettingsLayout);
-        setupCheckbox(photoCheckbox, photoSettingsLayout);
-        setupCheckbox(routineCheckbox, routineSettingsLayout);
+        setupCheckbox(getShowWeight().getValueBoolean(), weightCheckbox, weightSettingsLayout);
+        setupCheckbox(getShowPhoto().getValueBoolean(), photoCheckbox, photoSettingsLayout);
+        setupCheckbox(getShowRoutine().getValueBoolean(), routineCheckbox, routineSettingsLayout);
     }
 
     @Override
@@ -131,24 +129,85 @@ public class SettingsHomeFragment extends BaseFragment {
         getTodayTransform().setValue(transformsAdapter.get(transformSpinner.getSelectedIndex()));
         getRealm().copyToRealmOrUpdate(getTodayTransform());
 
+        // Weight Checked
+        getShowWeight().setValue(weightCheckbox.isChecked());
+        getRealm().copyToRealmOrUpdate(getShowWeight());
+
+        // Photo Checked
+        getShowPhoto().setValue(photoCheckbox.isChecked());
+        getRealm().copyToRealmOrUpdate(getShowPhoto());
+
+        // Routine Checked
+        getShowRoutine().setValue(routineCheckbox.isChecked());
+        getRealm().copyToRealmOrUpdate(getShowRoutine());
+
         getRealm().commitTransaction();
     }
 
     private UserSetting getTodayTransform() {
 
-        if (_todayTransformUserSetting != null)
-            return _todayTransformUserSetting;
+        if (_todayTransformType != null)
+            return _todayTransformType;
 
-        _todayTransformUserSetting = getRealm().where(UserSetting.class)
+        _todayTransformType = getRealm().where(UserSetting.class)
                 .equalTo(UserSetting.NAME, UserSetting.TODAY_TRANSFORM).findFirst();
 
-        if (_todayTransformUserSetting == null) {
-            _todayTransformUserSetting = new UserSetting();
-            _todayTransformUserSetting.setName(UserSetting.TODAY_TRANSFORM);
-            _todayTransformUserSetting.setValue(TodayTransforms.DEFAULT);
+        if (_todayTransformType == null) {
+            _todayTransformType = new UserSetting();
+            _todayTransformType.setName(UserSetting.TODAY_TRANSFORM);
+            _todayTransformType.setValue(TodayTransforms.DEFAULT);
         }
-        return _todayTransformUserSetting;
+        return _todayTransformType;
     }
+
+    private UserSetting getShowWeight() {
+
+        if (_todayShowWeight != null)
+            return _todayShowWeight;
+
+        _todayShowWeight = getRealm().where(UserSetting.class)
+                .equalTo(UserSetting.NAME, UserSetting.TODAY_SHOW_WEIGHT).findFirst();
+
+        if (_todayShowWeight == null) {
+            _todayShowWeight = new UserSetting();
+            _todayShowWeight.setName(UserSetting.TODAY_SHOW_WEIGHT);
+            _todayShowWeight.setValue(false);
+        }
+        return _todayShowWeight;
+    }
+
+    private UserSetting getShowPhoto() {
+
+        if (_todayShowPhoto != null)
+            return _todayShowPhoto;
+
+        _todayShowPhoto = getRealm().where(UserSetting.class)
+                .equalTo(UserSetting.NAME, UserSetting.TODAY_SHOW_PHOTO).findFirst();
+
+        if (_todayShowPhoto == null) {
+            _todayShowPhoto = new UserSetting();
+            _todayShowPhoto.setName(UserSetting.TODAY_SHOW_PHOTO);
+            _todayShowPhoto.setValue(false);
+        }
+        return _todayShowPhoto;
+    }
+
+    private UserSetting getShowRoutine() {
+
+        if (_todayShowRoutine != null)
+            return _todayShowRoutine;
+
+        _todayShowRoutine = getRealm().where(UserSetting.class)
+                .equalTo(UserSetting.NAME, UserSetting.TODAY_SHOW_ROUTINE).findFirst();
+
+        if (_todayShowRoutine == null) {
+            _todayShowRoutine = new UserSetting();
+            _todayShowRoutine.setName(UserSetting.TODAY_SHOW_ROUTINE);
+            _todayShowRoutine.setValue(false);
+        }
+        return _todayShowRoutine;
+    }
+
 
     private void setupTransform() {
         transformsAdapter = new ArrayList<>();
@@ -168,9 +227,12 @@ public class SettingsHomeFragment extends BaseFragment {
         transformSpinner.setSelectedIndex(transformsAdapter.indexOf(getTodayTransform().getValue()));
     }
 
-    private void setupCheckbox(AnimCheckBox checkBox, final LinearLayout layout) {
-        layout.setVisibility(View.GONE);
-        checkBox.setChecked(false);
+    private void setupCheckbox(boolean show, AnimCheckBox checkBox, final LinearLayout layout) {
+
+        if (!show)
+            layout.setVisibility(View.GONE);
+
+        checkBox.setChecked(show);
 
         checkBox.setOnCheckedChangeListener(new AnimCheckBox.OnCheckedChangeListener() {
             @Override

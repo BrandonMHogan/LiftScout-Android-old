@@ -13,13 +13,10 @@ public class UserSetting extends RealmObject {
     // Types
     public static final String THEME = "theme";
     public static final String TODAY_TRANSFORM = "todayTransform";
+    public static final String TODAY_SHOW_WEIGHT = "today_showWeight";
+    public static final String TODAY_SHOW_PHOTO = "today_showPhoto";
+    public static final String TODAY_SHOW_ROUTINE = "today_showRoutine";
 
-//    @Ignore
-//    public static final ArrayList<String> TodayTransformType = new ArrayList<String>() {{
-//                add("Scale In Out");
-//                add("B");
-//                add("C");
-//            }};
 
     @PrimaryKey
     @Required
@@ -39,7 +36,15 @@ public class UserSetting extends RealmObject {
         return value;
     }
 
+    public boolean getValueBoolean() {
+        return value.equals("1");
+    }
+
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public void setValue(boolean value) {
+        this.value = value ? "1" : "0";
     }
 }
