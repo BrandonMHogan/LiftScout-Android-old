@@ -19,7 +19,7 @@ public class BaseActivity extends AppCompatActivity {
 
     // Private Properties
     //
-    private String classTag = this.getClass().getSimpleName();
+    private String TAG = this.getClass().getSimpleName();
     private Realm realm;
     private final Object realmLock = new Object();
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -27,8 +27,8 @@ public class BaseActivity extends AppCompatActivity {
 
     // Public Properties
     //
-    public String getClassTag() {
-        return classTag;
+    public String getTAG() {
+        return TAG;
     }
 
     public Realm getRealm() {
@@ -76,7 +76,7 @@ public class BaseActivity extends AppCompatActivity {
                         realm.close();
                     }
                     catch (Exception ex) {
-                        Log.e(getClassTag(), "closeRealm() : Failed to close realm");
+                        Log.e(getTAG(), "closeRealm() : Failed to close realm");
                     }
                     finally {
                         realm = null;

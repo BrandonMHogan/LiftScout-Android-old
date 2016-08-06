@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.controls.BhDatePicker;
 import com.brandonhogan.liftscout.foundation.model.User;
+import com.dd.CircularProgressButton;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,7 +41,8 @@ public class InitActivity extends BaseActivity {
     @Bind(R.id.age) BhDatePicker age;
     @Bind(R.id.weight) TextView weight;
     @Bind(R.id.unit_spinner) Spinner unitSpinner;
-    @Bind(R.id.start_button) Button startButton;
+    @Bind(R.id.start_button)
+    CircularProgressButton startButton;
 
     @Bind(R.id.weight_layout)
     LinearLayout weightLayout;
@@ -64,6 +67,9 @@ public class InitActivity extends BaseActivity {
 
     @OnClick(R.id.start_button)
     public void saveUserData() {
+
+        startButton.setIndeterminateProgressMode(true);
+        startButton.setProgress(50);
 
         String errorLog = "";
         boolean focusSet = false;
@@ -104,17 +110,29 @@ public class InitActivity extends BaseActivity {
 
             pDialog.show();
 
+            startButton.setProgress(-1);
+
             return;
         }
 
-        getRealm().beginTransaction();
 
+        getRealm().beginTransaction();
         User user = new User(nameValue, birthDateValue, weightValue, unitValue);
         getRealm().copyToRealmOrUpdate(user);
-
         getRealm().commitTransaction();
 
-        loadHome();
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(getTAG(), "Post Animation!");
+                startButton.setProgress(100);
+            }
+        }, 2000);
+
+
+       // loadHome();
     }
 
     private void loadHome() {
@@ -163,7 +181,7 @@ public class InitActivity extends BaseActivity {
                 }
 
                 showStartButton();
-                Log.d(getClassTag(), "Name set: " + nameSet + ". Length :" + s.length());
+                Log.d(getTAG(), "Name set: " + nameSet + ". Length :" + s.length());
             }
 
             @Override
@@ -191,7 +209,7 @@ public class InitActivity extends BaseActivity {
                 }
 
                 showStartButton();
-                Log.d(getClassTag(), "Weight set: " + weightSet + ". Length :" + s.length());
+                Log.d(getTAG(), "Weight set: " + weightSet + ". Length :" + s.length());
             }
 
             @Override
@@ -216,6 +234,8 @@ public class InitActivity extends BaseActivity {
     private void showStartButton() {
         if (nameSet && weightSet && ageSet)
             startButton.setVisibility(View.VISIBLE);
+
+        startButton.setProgress(0);
     }
 
     // Fades in the views

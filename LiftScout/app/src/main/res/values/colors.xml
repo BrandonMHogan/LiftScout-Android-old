@@ -103,6 +103,7 @@
     <color name="white_transparent_05">#0Dffffff</color>
 
     <!-- Green Transparencies -->
+    <color name="green_transparent_100">#00B200</color>
     <color name="green_transparent_90">#E600B200</color>
     <color name="green_transparent_80">#CC00B200</color>
     <color name="green_transparent_75">#7500B200</color>
