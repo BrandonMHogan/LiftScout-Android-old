@@ -101,4 +101,17 @@
     <color name="white_transparent_20">#33ffffff</color>
     <color name="white_transparent_10">#1Affffff</color>
     <color name="white_transparent_05">#0Dffffff</color>
+
+    <!-- Green Transparencies -->
+    <color name="green_transparent_90">#E600B200</color>
+    <color name="green_transparent_80">#CC00B200</color>
+    <color name="green_transparent_75">#7500B200</color>
+    <color name="green_transparent_70">#B300B200</color>
+    <color name="green_transparent_50">#8000B200</color>
+    <color name="green_transparent_40">#6600B200</color>
+    <color name="green_transparent_30">#4D00B200</color>
+    <color name="green_transparent_20">#3300B200</color>
+    <color name="green_transparent_10">#1A00B200</color>
+    <color name="green_transparent_05">#0D00B200</color>
+
 </resources>

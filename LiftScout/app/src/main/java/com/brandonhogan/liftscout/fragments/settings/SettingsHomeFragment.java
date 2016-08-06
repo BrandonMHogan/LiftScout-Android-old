@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.constants.TodayTransforms;
+import com.brandonhogan.liftscout.foundation.controls.AnimCheckBox;
 import com.brandonhogan.liftscout.foundation.controls.CircleCheckBox;
 import com.brandonhogan.liftscout.foundation.model.UserSetting;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
@@ -51,13 +52,13 @@ public class SettingsHomeFragment extends BaseFragment {
     MaterialSpinner transformSpinner;
 
     @Bind(R.id.weight_checkbox)
-    CircleCheckBox weightCheckbox;
+    AnimCheckBox weightCheckbox;
 
     @Bind(R.id.photo_checkbox)
-    CircleCheckBox photoCheckbox;
+    AnimCheckBox photoCheckbox;
 
     @Bind(R.id.routine_checkbox)
-    CircleCheckBox routineCheckbox;
+    AnimCheckBox routineCheckbox;
 
     @Bind(R.id.weight_expanding_layout)
     LinearLayout weightSettingsLayout;
@@ -84,9 +85,9 @@ public class SettingsHomeFragment extends BaseFragment {
         setTitle(getResources().getString(R.string.title_frag_settings_home));
 
         setupTransform();
-        setupWeight();
-        setupPhotos();
-        setupRoutine();
+        setupCheckbox(weightCheckbox, weightSettingsLayout);
+        setupCheckbox(photoCheckbox, photoSettingsLayout);
+        setupCheckbox(routineCheckbox, routineSettingsLayout);
     }
 
     @Override
@@ -167,65 +168,20 @@ public class SettingsHomeFragment extends BaseFragment {
         transformSpinner.setSelectedIndex(transformsAdapter.indexOf(getTodayTransform().getValue()));
     }
 
-    private void setupWeight() {
+    private void setupCheckbox(AnimCheckBox checkBox, final LinearLayout layout) {
+        layout.setVisibility(View.GONE);
+        checkBox.setChecked(false);
 
-        weightSettingsLayout.setVisibility(View.GONE);
-
-        weightCheckbox.setOnCheckedChangeListener(new CircleCheckBox.OnCheckedChangeListener() {
+        checkBox.setOnCheckedChangeListener(new AnimCheckBox.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CircleCheckBox view, boolean isChecked) {
-                weightChecked = isChecked;
-                weightExpansionCheck();
+            public void onChange(boolean checked) {
+                if (checked)
+                    expand(layout);
+                else
+                    collapse(layout);
             }
         });
     }
-
-    private void weightExpansionCheck() {
-        if (weightChecked)
-            expand(weightSettingsLayout);
-        else
-            collapse(weightSettingsLayout);
-    }
-
-    private void setupPhotos() {
-        photoSettingsLayout.setVisibility(View.GONE);
-
-        photoCheckbox.setOnCheckedChangeListener(new CircleCheckBox.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CircleCheckBox view, boolean isChecked) {
-                photosChecked = isChecked;
-                photosExpansionCheck();
-            }
-        });
-    }
-
-    private void photosExpansionCheck() {
-        if (photosChecked)
-            expand(photoSettingsLayout);
-        else
-            collapse(photoSettingsLayout);
-    }
-
-    private void setupRoutine() {
-        routineSettingsLayout.setVisibility(View.GONE);
-
-        routineCheckbox.setOnCheckedChangeListener(new CircleCheckBox.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CircleCheckBox view, boolean isChecked) {
-                routineChecked = isChecked;
-                routineExpansionCheck();
-            }
-        });
-    }
-
-    private void routineExpansionCheck() {
-        if (routineChecked)
-            expand(routineSettingsLayout);
-        else
-            collapse(routineSettingsLayout);
-    }
-
-
 
 
     public void expand(final View v) {

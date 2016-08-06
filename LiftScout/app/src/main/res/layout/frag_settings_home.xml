@@ -46,7 +46,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fragment_default_margin"
             android:layout_marginBottom="@dimen/fragment_default_xsmall_margin">
 
@@ -58,18 +58,15 @@
                 android:layout_centerVertical="true"
                 style="@style/RobotoSubheadingBold" />
 
-            <com.brandonhogan.liftscout.foundation.controls.CircleCheckBox
+            <com.brandonhogan.liftscout.foundation.controls.AnimCheckBox
                 android:id="@+id/weight_checkbox"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/settings_checkbox_size"
+                android:layout_height="@dimen/settings_checkbox_size"
+                android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                app:borderThickness="2dp"
-                app:circleBorderColor="?attr/colorPrimaryDark"
-                app:innerCircleColor="?attr/colorPrimary"
-                app:innerCircleRadius="14dp"
-                app:outerCircleColor="?attr/colorPrimaryDark"
-                app:outerCircleRadius="6dp"
-                app:showOuterCircle="true" />
+                app:stroke_width="4dp"
+                app:stroke_color="?attr/colorPrimary"
+                app:circle_color="@color/white_transparent_10" />
 
         </RelativeLayout>
 
@@ -113,18 +110,15 @@
                 android:layout_centerVertical="true"
                 style="@style/RobotoSubheadingBold" />
 
-            <com.brandonhogan.liftscout.foundation.controls.CircleCheckBox
+            <com.brandonhogan.liftscout.foundation.controls.AnimCheckBox
                 android:id="@+id/photo_checkbox"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/settings_checkbox_size"
+                android:layout_height="@dimen/settings_checkbox_size"
+                android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                app:borderThickness="2dp"
-                app:circleBorderColor="?attr/colorPrimaryDark"
-                app:innerCircleColor="?attr/colorPrimary"
-                app:innerCircleRadius="14dp"
-                app:outerCircleColor="?attr/colorPrimaryDark"
-                app:outerCircleRadius="6dp"
-                app:showOuterCircle="true" />
+                app:stroke_width="4dp"
+                app:stroke_color="?attr/colorPrimary"
+                app:circle_color="@color/white_transparent_10" />
 
         </RelativeLayout>
 
@@ -151,7 +145,6 @@
 
 
 
-
         <!-- Routine Section -->
 
         <RelativeLayout
@@ -168,18 +161,15 @@
                 android:layout_centerVertical="true"
                 style="@style/RobotoSubheadingBold" />
 
-            <com.brandonhogan.liftscout.foundation.controls.CircleCheckBox
+            <com.brandonhogan.liftscout.foundation.controls.AnimCheckBox
                 android:id="@+id/routine_checkbox"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/settings_checkbox_size"
+                android:layout_height="@dimen/settings_checkbox_size"
+                android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                app:borderThickness="2dp"
-                app:circleBorderColor="?attr/colorPrimaryDark"
-                app:innerCircleColor="?attr/colorPrimary"
-                app:innerCircleRadius="14dp"
-                app:outerCircleColor="?attr/colorPrimaryDark"
-                app:outerCircleRadius="6dp"
-                app:showOuterCircle="true" />
+                app:stroke_width="4dp"
+                app:stroke_color="?attr/colorPrimary"
+                app:circle_color="@color/white_transparent_10" />
 
         </RelativeLayout>
 

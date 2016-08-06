@@ -109,6 +109,7 @@
     <dimen name="settings_table_row_min_height">72dp</dimen>
     <dimen name="setting_layout_top_padding">0dp</dimen>
     <dimen name="settings_divider_view_hieght">1dp</dimen>
+    <dimen name="settings_checkbox_size">45dp</dimen>
 
     <!-- Today Layout -->
     <dimen name="today_divider_top_margin">5dp</dimen>

@@ -156,4 +156,10 @@
         <item name="android:textSize">@dimen/modal_text_size</item>
     </style>
 
+    <declare-styleable name="AnimCheckBox">
+        <attr name="stroke_width" format="dimension"/>
+        <attr name="stroke_color" format="color"/>
+        <attr name="circle_color" format="color"/>
+    </declare-styleable>
+
 </resources>
