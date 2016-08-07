@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.foundation.navigation.NavigationManager;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import butterknife.ButterKnife;
 import io.realm.Realm;
@@ -76,6 +77,21 @@ public class BaseFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
+
+        Bundle screenView = new Bundle();
+
+        screenView.putString(
+                FirebaseAnalytics.Param.ITEM_NAME,
+                TAG
+        );
+
+        mFirebaseAnalytics.logEvent(
+                FirebaseAnalytics.Event.VIEW_ITEM,
+                screenView
+        );
+
     }
 
     @Override
