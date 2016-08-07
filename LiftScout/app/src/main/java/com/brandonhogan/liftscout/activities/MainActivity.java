@@ -108,7 +108,7 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_calendar) {
             success = navigationManager.startCalendar();
         } else if (id == R.id.nav_exercises) {
-            success = navigationManager.startExerciseTypeList();
+            success = navigationManager.startCategoryList();
         } else if (id == R.id.nav_routines) {
 
         } else if (id == R.id.nav_graphs) {
@@ -189,7 +189,7 @@ public class MainActivity extends BaseActivity
             case "CalendarFragment":
                 navigationView.setCheckedItem(R.id.nav_calendar);
                 break;
-            case "ExerciseTypeListFragment":
+            case "CategoryListFragment":
                 navigationView.setCheckedItem(R.id.nav_exercises);
                 break;
             case "RoutineListFragment":

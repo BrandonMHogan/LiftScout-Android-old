@@ -113,6 +113,9 @@
     <dimen name="settings_checkbox_size">37dp</dimen>
     <dimen name="settings_checkbox_stroke_width">2dp</dimen>
 
+    <!-- Categories / Exercises -->
+    <dimen name="exercises_swipe_width">85dp</dimen>
+
     <!-- Today Layout -->
     <dimen name="today_divider_top_margin">5dp</dimen>
 </resources>

@@ -23,6 +23,15 @@
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="gray_dark">#343434</color>
+    <color name="green">#36CF8E</color>
+    <color name="blue">#3693D0</color>
+    <color name="red">#ff1744</color>
+
+    <!-- Category Colors -->
+    <color name="category_red">#ff1744</color>
+    <color name="category_blue">#3693D0</color>
+    <color name="category_green">#36CF8E</color>
+    <color name="category_orange">#FF9800</color>
 
     <!-- Border -->
     <color name="listview_border_color">#1F000000</color>

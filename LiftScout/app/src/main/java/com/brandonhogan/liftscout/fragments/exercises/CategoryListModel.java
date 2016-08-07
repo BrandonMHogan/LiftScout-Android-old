@@ -1,14 +1,18 @@
-package com.brandonhogan.liftscout.foundation.model;
+package com.brandonhogan.liftscout.fragments.exercises;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+import com.brandonhogan.liftscout.foundation.model.Category;
 
-public class ExerciseCategory extends RealmObject {
+public class CategoryListModel {
 
-    @PrimaryKey
     private int id;
     private String name;
     private int color;
+
+    public CategoryListModel(Category category) {
+        this.id = category.getId();
+        this.name = category.getName();
+        this.color = category.getColor();
+    }
 
     public int getId() {
         return id;
