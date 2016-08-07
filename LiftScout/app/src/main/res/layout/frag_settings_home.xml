@@ -67,9 +67,9 @@
                     android:layout_height="@dimen/settings_checkbox_size"
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
-                    app:stroke_width="4dp"
+                    app:stroke_width="@dimen/settings_checkbox_stroke_width"
                     app:stroke_color="?attr/colorPrimary"
-                    app:circle_color="@color/white_transparent_10" />
+                    app:circle_color="@color/white_transparent_05" />
 
             </RelativeLayout>
 
@@ -134,9 +134,9 @@
                     android:layout_height="@dimen/settings_checkbox_size"
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
-                    app:stroke_width="4dp"
+                    app:stroke_width="@dimen/settings_checkbox_stroke_width"
                     app:stroke_color="?attr/colorPrimary"
-                    app:circle_color="@color/white_transparent_10" />
+                    app:circle_color="@color/white_transparent_05" />
 
             </RelativeLayout>
 
@@ -186,9 +186,9 @@
                     android:layout_height="@dimen/settings_checkbox_size"
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
-                    app:stroke_width="4dp"
+                    app:stroke_width="@dimen/settings_checkbox_stroke_width"
                     app:stroke_color="?attr/colorPrimary"
-                    app:circle_color="@color/white_transparent_10" />
+                    app:circle_color="@color/white_transparent_05" />
 
             </RelativeLayout>
 

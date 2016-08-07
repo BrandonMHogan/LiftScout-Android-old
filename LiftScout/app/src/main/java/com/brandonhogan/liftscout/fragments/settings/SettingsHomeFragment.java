@@ -211,6 +211,7 @@ public class SettingsHomeFragment extends BaseFragment {
 
     private void setupTransform() {
         transformsAdapter = new ArrayList<>();
+        transformsAdapter.add(TodayTransforms.DEFAULT);
         transformsAdapter.add(TodayTransforms.ACCORDION);
         transformsAdapter.add(TodayTransforms.DEPTH_PAGE);
         transformsAdapter.add(TodayTransforms.FOREGROUND_TO_BACKGROUND);

@@ -15,5 +15,5 @@ public class TodayTransforms {
 
 
     // Default Transform
-    public static final String DEFAULT = SCALE_IN_OUT;
+    public static final String DEFAULT = "Default";
 }

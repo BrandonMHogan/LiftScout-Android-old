@@ -72,7 +72,7 @@
     <string name="setting_display_description">Adjust display settings including themes and colours</string>
     <string name="setting_notifications">Notifications</string>
     <string name="setting_notifications_description">Create, delete and modify existing local push notifications</string>
-    <string name="setting_home">Home View</string>
+    <string name="setting_home">Home</string>
     <string name="setting_home_description">Tailor the home screen to fit your needs</string>
     <string name="setting_today_transformer_spinner_title">Transition Type</string>
     <string name="setting_today_transformer_spinner_description">Change the transition type when swiping from day to day</string>

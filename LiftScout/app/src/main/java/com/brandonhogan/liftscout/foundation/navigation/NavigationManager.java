@@ -69,8 +69,8 @@ public class NavigationManager {
         mFragmentManager.beginTransaction()
                 .setCustomAnimations(in,
                         out,
-                        android.R.animator.fade_in,
-                        android.R.animator.fade_out)
+                        R.animator.fade_in,
+                        R.animator.fade_out)
                 .replace(R.id.fragment_manager, fragment)
                 .addToBackStack(fragment.getClass().getName())
                 .commit();
@@ -88,7 +88,7 @@ public class NavigationManager {
             return false;
 
         popToHomeFragment();
-        return replaceWithTransitions(fragment, R.animator.root_in, android.R.animator.fade_out);
+        return replaceWithTransitions(fragment, R.animator.root_in, R.animator.fade_out);
     }
 
     private boolean openAsHome(Fragment fragment) {
@@ -96,7 +96,7 @@ public class NavigationManager {
             return false;
 
         popEveryFragment();
-        return replaceWithTransitions(fragment, R.animator.root_in, android.R.animator.fade_out);
+        return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
     }
 
     private boolean open(Fragment fragment) {
