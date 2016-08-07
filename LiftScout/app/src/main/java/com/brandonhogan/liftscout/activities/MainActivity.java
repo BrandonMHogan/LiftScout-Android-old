@@ -44,11 +44,6 @@ public class MainActivity extends BaseActivity
         setSupportActionBar(toolbar);
 
         if (findViewById(R.id.fragment_manager) != null) {
-            //This is set when restoring from a previous state,
-            //so we do not want to try and load a new fragment
-            if (savedInstanceState != null) {
-                return;
-            }
 
             drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
              toggle = new ActionBarDrawerToggle(
@@ -63,6 +58,12 @@ public class MainActivity extends BaseActivity
             navigationManager.init(getFragmentManager());
             navigationManager.setNavigationListener(this);
 
+
+            //This is set when restoring from a previous state,
+            //so we do not want to try and load a new fragment
+            if (savedInstanceState != null) {
+                return;
+            }
 
             // This needs to be hit first regardless of where a notification will go. Home must
             // be the first item in the back stack

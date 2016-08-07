@@ -49,9 +49,9 @@ android {
         versionName "$branchName $versionMajor.$versionMinor.$versionPatch($versionBuild)"
 
         // Turn the version name into a version code
-        versionCode versionMajor.toInteger() +
-                versionMinor.toInteger() +
-                versionPatch.toInteger() +
+        versionCode versionMajor.toInteger() *10000 +
+                versionMinor.toInteger() *1000 +
+                versionPatch.toInteger() *100 +
                 versionBuild.toInteger()
 
         // Friendly print the version output to the Gradle console
