@@ -13,7 +13,6 @@ import com.brandonhogan.liftscout.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 
 /**
