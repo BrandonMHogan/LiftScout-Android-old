@@ -110,7 +110,13 @@
     <dimen name="settings_table_row_min_height">72dp</dimen>
     <dimen name="setting_layout_top_padding">0dp</dimen>
     <dimen name="settings_divider_view_hieght">1dp</dimen>
-    <dimen name="settings_checkbox_size">45dp</dimen>
+    <dimen name="settings_checkbox_size">37dp</dimen>
+    <dimen name="settings_checkbox_stroke_width">2dp</dimen>
+
+    <!-- Categories / Exercises -->
+    <dimen name="exercises_swipe_width">85dp</dimen>
+    <dimen name="exercises_list_item_height">60dp</dimen>
+    <dimen name="exercises_list_item_icon_size">28dp</dimen>
 
     <!-- Today Layout -->
     <dimen name="today_divider_top_margin">5dp</dimen>

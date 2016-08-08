@@ -2,7 +2,6 @@ package com.brandonhogan.liftscout.foundation.model;
 
 import com.brandonhogan.liftscout.foundation.utils.BhDate;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import io.realm.RealmObject;

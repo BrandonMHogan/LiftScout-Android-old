@@ -4,15 +4,21 @@ import com.brandonhogan.liftscout.foundation.model.factory.RealmAutoIncrement;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
-public class Exercise extends RealmObject {
+public class Category extends RealmObject {
+
+    // Static Property Names
+    public static final String ID = "id";
+    public static final String NAME = "name";
+    public static final String COLOR = "color";
 
 
     @PrimaryKey
-    private int id = RealmAutoIncrement.getInstance(this.getClass()).getNextIdFromModel();;
+    private int id = RealmAutoIncrement.getInstance(this.getClass()).getNextIdFromModel();
+    @Required
     private String name;
-    private Category category;
-    private int type;
+    private int color;
 
     public int getId() {
         return id;
@@ -30,19 +36,11 @@ public class Exercise extends RealmObject {
         this.name = name;
     }
 
-    public Category getCategory() {
-        return category;
+    public int getColor() {
+        return color;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
+    public void setColor(int color) {
+        this.color = color;
     }
 }

@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.foundation.controls.BhDatePicker;
+import com.brandonhogan.liftscout.foundation.model.Category;
 import com.brandonhogan.liftscout.foundation.model.User;
 import com.dd.CircularProgressButton;
 
@@ -121,6 +122,7 @@ public class InitActivity extends BaseActivity {
         getRealm().copyToRealmOrUpdate(user);
         getRealm().commitTransaction();
 
+        setupDefaultExercises();
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -234,6 +236,33 @@ public class InitActivity extends BaseActivity {
             }
         });
     }
+
+    private void setupDefaultExercises() {
+        getRealm().beginTransaction();
+
+        getRealm().delete(Category.class);
+
+        ArrayList categories = new ArrayList();
+
+        categories.add(createCategory("Abs", R.color.category_red));
+        categories.add(createCategory("Chest", R.color.category_orange));
+        categories.add(createCategory("Back", R.color.category_blue));
+        categories.add(createCategory("Legs", R.color.category_green));
+
+        getRealm().copyToRealmOrUpdate(categories);
+
+        getRealm().commitTransaction();
+
+    }
+
+    private Category createCategory(String name, int color) {
+        Category category = new Category();
+        category.setName(name);
+        category.setColor(color);
+
+        return category;
+    }
+
 
     private void showStartButton() {
         if (nameSet && weightSet && ageSet)

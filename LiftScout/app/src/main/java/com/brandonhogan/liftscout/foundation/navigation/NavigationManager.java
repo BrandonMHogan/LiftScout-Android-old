@@ -5,7 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.fragments.ExerciseTypeListFragment;
+import com.brandonhogan.liftscout.fragments.exercises.CategoryListFragment;
 import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
 import com.brandonhogan.liftscout.fragments.home.HomeContainerFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsDisplayFragment;
@@ -69,8 +69,8 @@ public class NavigationManager {
         mFragmentManager.beginTransaction()
                 .setCustomAnimations(in,
                         out,
-                        android.R.animator.fade_in,
-                        android.R.animator.fade_out)
+                        R.animator.fade_in,
+                        R.animator.fade_out)
                 .replace(R.id.fragment_manager, fragment)
                 .addToBackStack(fragment.getClass().getName())
                 .commit();
@@ -88,7 +88,7 @@ public class NavigationManager {
             return false;
 
         popToHomeFragment();
-        return replaceWithTransitions(fragment, R.animator.root_in, android.R.animator.fade_out);
+        return replaceWithTransitions(fragment, R.animator.root_in, R.animator.fade_out);
     }
 
     private boolean openAsHome(Fragment fragment) {
@@ -96,7 +96,7 @@ public class NavigationManager {
             return false;
 
         popEveryFragment();
-        return replaceWithTransitions(fragment, R.animator.root_in, android.R.animator.fade_out);
+        return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
     }
 
     private boolean open(Fragment fragment) {
@@ -206,8 +206,8 @@ public class NavigationManager {
     }
 
 
-    public boolean startExerciseTypeList() {
-        Fragment fragment = ExerciseTypeListFragment.newInstance();
+    public boolean startCategoryList() {
+        Fragment fragment = CategoryListFragment.newInstance();
         return openAsRoot(fragment);
     }
 

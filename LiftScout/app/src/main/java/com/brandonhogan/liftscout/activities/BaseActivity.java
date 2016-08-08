@@ -48,10 +48,6 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
-//            setTheme(R.style.AppTheme_Dark);
-//        }
-
         if (getDisplayTheme() != null && getDisplayTheme().getValue().equals(Themes.DARK))
             setTheme(R.style.AppTheme_Dark);
 

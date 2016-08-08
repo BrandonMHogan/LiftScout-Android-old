@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
+import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
 import com.ToxicBakery.viewpager.transforms.DepthPageTransformer;
 import com.ToxicBakery.viewpager.transforms.ForegroundToBackgroundTransformer;
 import com.ToxicBakery.viewpager.transforms.RotateDownTransformer;
@@ -156,6 +157,9 @@ public class HomeContainerFragment extends BaseFragment {
                 break;
             case TodayTransforms.ZOOM_OUT_SLIDE:
                 viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
+                break;
+            default:
+                viewPager.setPageTransformer(true, new DefaultTransformer());
                 break;
         }
     }
