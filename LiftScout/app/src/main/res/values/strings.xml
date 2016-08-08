@@ -40,7 +40,7 @@
     <string name="title_frag_settings_display">Display Settings</string>
     <string name="title_frag_settings_home">Home Settings</string>
     <string name="title_frag_settings_notification">Notification Settings</string>
-    <string name="title_activity_exercise_type_list">Exercises</string>
+    <string name="title_frag_category_list">Categories</string>
     <string name="title_frag_home">Home</string>
 
     <!-- Init user activity -->
