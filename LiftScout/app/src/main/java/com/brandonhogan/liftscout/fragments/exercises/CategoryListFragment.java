@@ -106,7 +106,7 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
 //                    public void onRowLongClicked(int position) {
 //                    }
 //                })
-                .setSwipeOptionViews(R.id.add, R.id.edit, R.id.change)
+                .setSwipeOptionViews(R.id.add, R.id.edit, R.id.delete)
                 .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
                     @Override
                     public void onSwipeOptionClicked(int viewID, int position) {
@@ -115,8 +115,8 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
                             message += "Add";
                         } else if (viewID == R.id.edit) {
                             message += "Edit";
-                        } else if (viewID == R.id.change) {
-                            message += "Change";
+                        } else if (viewID == R.id.delete) {
+                            message += "Delete";
                         }
                         message += " clicked for row " + (position + 1);
                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();

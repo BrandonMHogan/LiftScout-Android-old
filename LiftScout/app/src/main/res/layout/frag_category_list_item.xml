@@ -4,23 +4,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/exercises_list_item_height"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/rowBG"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:gravity="right"
         android:orientation="horizontal">
 
-
         <RelativeLayout
-            android:id="@+id/add"
+            android:id="@+id/delete"
             android:layout_width="@dimen/exercises_swipe_width"
             android:layout_height="match_parent"
-            android:background="@color/blue"
+            android:background="@color/red"
             android:clickable="true"
             android:focusable="true"
             android:orientation="vertical">
@@ -30,29 +29,16 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:background="?android:selectableItemBackground"
-                android:gravity="center"
+                android:gravity="center_vertical|left"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_add_white_24dp"
-                    android:tint="@android:color/white"/>
+                    android:layout_width="@dimen/exercises_list_item_icon_size"
+                    android:layout_height="@dimen/exercises_list_item_icon_size"
+                    android:layout_gravity="center_horizontal"
+                    android:tint="@android:color/white"
+                    app:srcCompat="@drawable/ic_delete_black_36dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="Add"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp"/>
             </LinearLayout>
         </RelativeLayout>
 
@@ -74,33 +60,20 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/exercises_list_item_icon_size"
+                    android:layout_height="@dimen/exercises_list_item_icon_size"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_edit_white_24dp"
+                    android:src="@drawable/ic_mode_edit_black_36dp"
                     android:tint="@android:color/white"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="Edit"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp"/>
             </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/change"
+            android:id="@+id/add"
             android:layout_width="@dimen/exercises_swipe_width"
             android:layout_height="match_parent"
-            android:background="@color/red"
+            android:background="@color/blue"
             android:clickable="true"
             android:focusable="true"
             android:orientation="vertical">
@@ -110,29 +83,16 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:background="?android:selectableItemBackground"
-                android:gravity="center_vertical|left"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/exercises_list_item_icon_size"
+                    android:layout_height="@dimen/exercises_list_item_icon_size"
                     android:layout_gravity="center_horizontal"
-                    android:tint="@android:color/white"
-                    app:srcCompat="@drawable/ic_done_black_36dp"/>
+                    android:src="@drawable/ic_add_black_36dp"
+                    android:tint="@android:color/white"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="Change"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp"/>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
@@ -141,7 +101,7 @@
         android:id="@+id/rowFG"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="?attr/android:windowBackground"
         android:clickable="true"
         android:elevation="4dp"
         android:focusable="true"
@@ -150,7 +110,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="?attr/selectableItemBackground"
             android:orientation="horizontal"
             android:paddingBottom="16dp"
@@ -159,7 +119,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="6"
                 android:orientation="horizontal">
@@ -174,8 +134,8 @@
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:text="No Calls Found"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     tools:text="Row 1"/>
