@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.foundation.controls.CategoryEditDialog;
 import com.brandonhogan.liftscout.foundation.model.Category;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
@@ -106,25 +107,23 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
 //                    public void onRowLongClicked(int position) {
 //                    }
 //                })
-                .setSwipeOptionViews(R.id.add, R.id.edit, R.id.delete)
+                .setSwipeOptionViews(R.id.delete, R.id.edit)
                 .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
                     @Override
                     public void onSwipeOptionClicked(int viewID, int position) {
-                        String message = "";
-                        if (viewID == R.id.add) {
-                            message += "Add";
+
+                        if (viewID == R.id.delete) {
+                            removeCategory(position);
                         } else if (viewID == R.id.edit) {
-                            message += "Edit";
-                        } else if (viewID == R.id.delete) {
-                            message += "Delete";
+                            editCategory(position);
                         }
-                        message += " clicked for row " + (position + 1);
-                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
     private List<CategoryListModel> getData() {
+
+
         List<CategoryListModel> list = new ArrayList<>();
 
         for (Category category : getCategories().sort(Category.NAME)) {
@@ -136,5 +135,27 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
 
     private RealmResults<Category> getCategories() {
         return getRealm().where(Category.class).findAll();
+    }
+
+    private void editCategory(int position) {
+
+
+        CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
+            @Override
+            public void onCancelCategoryEditDialog() {
+
+            }
+
+            @Override
+            public void onSaveCategoryEditDialog(CategoryListModel category) {
+
+            }
+        }, true, true, null);
+
+        dialog.show();
+    }
+
+    private void removeCategory(int position) {
+
     }
 }

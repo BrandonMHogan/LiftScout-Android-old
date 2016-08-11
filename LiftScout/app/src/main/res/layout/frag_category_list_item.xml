@@ -69,32 +69,6 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/add"
-            android:layout_width="@dimen/exercises_swipe_width"
-            android:layout_height="match_parent"
-            android:background="@color/blue"
-            android:clickable="true"
-            android:focusable="true"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:background="?android:selectableItemBackground"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/exercises_list_item_icon_size"
-                    android:layout_height="@dimen/exercises_list_item_icon_size"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_add_black_36dp"
-                    android:tint="@android:color/white"/>
-
-            </LinearLayout>
-        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout

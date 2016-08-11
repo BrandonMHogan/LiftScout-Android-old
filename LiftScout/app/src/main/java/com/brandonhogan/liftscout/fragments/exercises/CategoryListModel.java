@@ -14,6 +14,10 @@ public class CategoryListModel {
         this.color = category.getColor();
     }
 
+    public CategoryListModel() {
+
+    }
+
     public int getId() {
         return id;
     }
