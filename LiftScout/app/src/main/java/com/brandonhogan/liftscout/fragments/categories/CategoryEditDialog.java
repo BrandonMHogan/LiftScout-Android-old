@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.foundation.controls;
+package com.brandonhogan.liftscout.fragments.categories;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -10,7 +10,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.fragments.exercises.CategoryListModel;
 
 public class CategoryEditDialog {
 
@@ -38,7 +37,7 @@ public class CategoryEditDialog {
 
     private EditText nameEditText;
 
-    
+
 
     // Constructor
     //
@@ -80,7 +79,7 @@ public class CategoryEditDialog {
 
         if (dialog == null) {
 
-            View customTheme = LayoutInflater.from(activity).inflate(R.layout.con_category_edit_dialog, null);
+            View customTheme = LayoutInflater.from(activity).inflate(R.layout.dialog_category_edit, null);
 
             dialog = new MaterialDialog.Builder(activity)
                     .theme(isDarkTheme ? Theme.DARK : Theme.LIGHT)

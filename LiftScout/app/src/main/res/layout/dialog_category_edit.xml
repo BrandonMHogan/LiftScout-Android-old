@@ -14,7 +14,7 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textCapWords"
             android:hint="@string/frag_init_name_hint"
             android:textSize="@dimen/material_text_size_large"
             android:nextFocusForward="@+id/weight"

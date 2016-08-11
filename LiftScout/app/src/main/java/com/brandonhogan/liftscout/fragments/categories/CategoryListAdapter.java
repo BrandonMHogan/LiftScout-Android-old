@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.fragments.exercises;
+package com.brandonhogan.liftscout.fragments.categories;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

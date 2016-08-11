@@ -1,16 +1,15 @@
-package com.brandonhogan.liftscout.fragments.exercises;
+package com.brandonhogan.liftscout.fragments.categories;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.foundation.controls.CategoryEditDialog;
 import com.brandonhogan.liftscout.foundation.model.Category;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
@@ -20,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import io.realm.RealmResults;
-import io.realm.Sort;
 
 public class CategoryListFragment extends BaseFragment implements RecyclerTouchListener.RecyclerTouchListenerHelper {
 
@@ -40,11 +39,15 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
 
+    private List<CategoryListModel> _categories;
 
     // Binds
     //
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
+
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
 
 
     //Overrides
@@ -82,6 +85,11 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
         this.touchListener = listener;
     }
 
+    @OnClick(R.id.fab)
+    public void addOnClick() {
+        addCategory();
+    }
+
     // Private Functions
     //
     private void setupAdapter() {
@@ -95,7 +103,7 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
                 .setClickable(new RecyclerTouchListener.OnRowClickListener() {
                     @Override
                     public void onRowClicked(int position) {
-                        Toast.makeText(getActivity(), "Row " + (position + 1) + " clicked!", Toast.LENGTH_SHORT).show();
+                        getNavigationManager().startExerciseList(getData().get(position).getId());
                     }
 
                     @Override
@@ -123,14 +131,23 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
 
     private List<CategoryListModel> getData() {
 
+        if (_categories != null)
+            return _categories;
 
-        List<CategoryListModel> list = new ArrayList<>();
+        _categories = new ArrayList<>();
+
 
         for (Category category : getCategories().sort(Category.NAME)) {
-            list.add(new CategoryListModel(category));
+            _categories.add(new CategoryListModel(category));
         }
 
-        return list;
+        return _categories;
+    }
+
+    private void update() {
+        _categories = null;
+        getData();
+        mAdapter.notifyDataSetChanged();
     }
 
     private RealmResults<Category> getCategories() {
@@ -138,8 +155,6 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
     }
 
     private void editCategory(int position) {
-
-
         CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
             @Override
             public void onCancelCategoryEditDialog() {
@@ -150,7 +165,23 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
             public void onSaveCategoryEditDialog(CategoryListModel category) {
 
             }
-        }, true, true, null);
+        }, true, getData().get(position));
+
+        dialog.show();
+    }
+
+    private void addCategory() {
+        CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
+            @Override
+            public void onCancelCategoryEditDialog() {
+
+            }
+
+            @Override
+            public void onSaveCategoryEditDialog(CategoryListModel category) {
+
+            }
+        }, true, null);
 
         dialog.show();
     }

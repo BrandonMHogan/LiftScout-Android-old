@@ -5,8 +5,9 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.fragments.exercises.CategoryListFragment;
+import com.brandonhogan.liftscout.fragments.categories.CategoryListFragment;
 import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
+import com.brandonhogan.liftscout.fragments.exercises.ExerciseListFragment;
 import com.brandonhogan.liftscout.fragments.home.HomeContainerFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsHomeFragment;
@@ -206,9 +207,16 @@ public class NavigationManager {
     }
 
 
+    // Categories / Exercises
+    //
     public boolean startCategoryList() {
         Fragment fragment = CategoryListFragment.newInstance();
         return openAsRoot(fragment);
+    }
+
+    public boolean startExerciseList(int categoryId) {
+        Fragment fragment = ExerciseListFragment.newInstance(categoryId);
+        return open(fragment);
     }
 
 

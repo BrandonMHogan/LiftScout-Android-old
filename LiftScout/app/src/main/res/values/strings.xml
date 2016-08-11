@@ -41,6 +41,7 @@
     <string name="title_frag_settings_home">Home Settings</string>
     <string name="title_frag_settings_notification">Notification Settings</string>
     <string name="title_frag_category_list">Categories</string>
+    <string name="title_frag_exercise_list">Exercises</string>
     <string name="title_frag_home">Home</string>
 
     <!-- Init user activity -->
@@ -59,6 +60,11 @@
     <string name="dialog_set_weight_title">Set Weight</string>
     <string name="dialog_add_category_title">Add Category</string>
     <string name="dialog_edit_category_title">Edit Category</string>
+    <string name="dialog_add_exercise_title">Add Exercise</string>
+    <string name="dialog_edit_exercise_title">Edit Exercise</string>
+
+    <string name="dialog_exercise_remove_title">Deleting %s</string>
+    <string name="dialog_exercise_remove_message">Are you sure you wish to delete %s?</string>
 
 
     <!-- Home Fragment -->

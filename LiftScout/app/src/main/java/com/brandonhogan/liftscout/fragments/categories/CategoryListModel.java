@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.fragments.exercises;
+package com.brandonhogan.liftscout.fragments.categories;
 
 import com.brandonhogan.liftscout.foundation.model.Category;
 
