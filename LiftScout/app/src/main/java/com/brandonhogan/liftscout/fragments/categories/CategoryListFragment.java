@@ -20,6 +20,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.realm.RealmResults;
 
 public class CategoryListFragment extends BaseFragment implements RecyclerTouchListener.RecyclerTouchListenerHelper {
@@ -38,6 +39,7 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
     private CategoryListAdapter mAdapter;
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
+    private SweetAlertDialog dialog;
 
     private List<CategoryListModel> _categories;
 
@@ -121,7 +123,7 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
                     public void onSwipeOptionClicked(int viewID, int position) {
 
                         if (viewID == R.id.delete) {
-                            removeCategory(position);
+                            removeCategoryAlert(position);
                         } else if (viewID == R.id.edit) {
                             editCategory(position);
                         }
@@ -146,24 +148,44 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
 
     private void update() {
         _categories = null;
-        getData();
-        mAdapter.notifyDataSetChanged();
+        mAdapter.setList(getData());
     }
 
     private RealmResults<Category> getCategories() {
         return getRealm().where(Category.class).findAll();
     }
 
+    private void saveCategory(Category category) {
+        getRealm().beginTransaction();
+        getRealm().copyToRealmOrUpdate(category);
+        getRealm().commitTransaction();
+
+        update();
+    }
+
+    private void removeCategory(int id) {
+        getRealm().beginTransaction();
+        getRealm().where(Category.class).equalTo(Category.ID, id).findFirst().deleteFromRealm();
+        getRealm().commitTransaction();
+
+        update();
+    }
+
     private void editCategory(int position) {
         CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
             @Override
             public void onCancelCategoryEditDialog() {
-
             }
 
             @Override
             public void onSaveCategoryEditDialog(CategoryListModel category) {
 
+                Category newCategory = new Category();
+                newCategory.setName(category.getName());
+                newCategory.setColor(category.getColor());
+                newCategory.setId(category.getId());
+
+                saveCategory(newCategory);
             }
         }, true, getData().get(position));
 
@@ -179,14 +201,31 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
 
             @Override
             public void onSaveCategoryEditDialog(CategoryListModel category) {
-
+                Category newCategory = new Category();
+                newCategory.setName(category.getName());
+                saveCategory(newCategory);
             }
         }, true, null);
 
         dialog.show();
     }
 
-    private void removeCategory(int position) {
 
+    private void removeCategoryAlert(final int position) {
+        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(getString(R.string.dialog_category_remove_title))
+                .setContentText(getString(R.string.dialog_category_remove_message))
+                .setConfirmText(getString(R.string.yes))
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        removeCategory(getData().get(position).getId());
+                        dialog.cancel();
+                    }
+                })
+                .setCancelText(getString(R.string.cancel))
+                .showCancelButton(true);
+
+        dialog.show();
     }
 }

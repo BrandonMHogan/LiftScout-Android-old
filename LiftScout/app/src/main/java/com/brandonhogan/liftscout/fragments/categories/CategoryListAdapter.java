@@ -54,4 +54,10 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             //color.setColo
         }
     }
+
+    public void setList(List<CategoryListModel> list) {
+        modelList.clear();
+        modelList.addAll(list);
+        notifyDataSetChanged();
+    }
 }

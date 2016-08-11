@@ -62,7 +62,8 @@
     <string name="dialog_edit_category_title">Edit Category</string>
     <string name="dialog_add_exercise_title">Add Exercise</string>
     <string name="dialog_edit_exercise_title">Edit Exercise</string>
-
+    <string name="dialog_category_remove_title">Deleting %s</string>
+    <string name="dialog_category_remove_message">Are you sure you wish to delete %s?</string>
     <string name="dialog_exercise_remove_title">Deleting %s</string>
     <string name="dialog_exercise_remove_message">Are you sure you wish to delete %s?</string>
 
