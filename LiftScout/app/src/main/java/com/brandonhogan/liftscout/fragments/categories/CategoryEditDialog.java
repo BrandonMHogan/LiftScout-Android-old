@@ -110,6 +110,7 @@ public class CategoryEditDialog {
         }
 
         dialog.show();
+        nameEditText.requestFocus();
     }
 
     public void dismiss() {

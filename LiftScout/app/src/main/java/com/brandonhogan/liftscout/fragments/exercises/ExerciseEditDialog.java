@@ -109,6 +109,7 @@ public class ExerciseEditDialog {
         }
 
         dialog.show();
+        nameEditText.requestFocus();
     }
 
     public void dismiss() {
