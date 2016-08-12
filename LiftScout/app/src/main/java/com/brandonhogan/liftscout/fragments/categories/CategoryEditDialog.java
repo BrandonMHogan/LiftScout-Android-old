@@ -1,17 +1,20 @@
 package com.brandonhogan.liftscout.fragments.categories;
 
 import android.app.Activity;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.brandonhogan.liftscout.R;
+import com.thebluealliance.spectrum.SpectrumPalette;
 
-public class CategoryEditDialog {
+public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListener {
 
     // Private Static
     //
@@ -36,6 +39,7 @@ public class CategoryEditDialog {
     private CategoryEditDialogListener listener;
 
     private EditText nameEditText;
+    private SpectrumPalette palette;
 
 
 
@@ -63,6 +67,7 @@ public class CategoryEditDialog {
         dismiss();
 
         category.setName(nameEditText.getText().toString());
+
 
         listener.onSaveCategoryEditDialog(category);
     }
@@ -102,10 +107,16 @@ public class CategoryEditDialog {
                     .build();
 
             nameEditText = (EditText) dialog.getCustomView().findViewById(R.id.name);
+            palette = (SpectrumPalette) dialog.getCustomView().findViewById(R.id.palette);
 
+
+            int[] colors = activity.getResources().getIntArray(R.array.category_colors);
+            palette.setColors(colors);
+            palette.setOnColorSelectedListener(this);
 
             if (!isNew) {
                 nameEditText.setText(category.getName());
+                palette.setSelectedColor(category.getColor());
             }
         }
 
@@ -115,5 +126,11 @@ public class CategoryEditDialog {
 
     public void dismiss() {
         dialog.dismiss();
+    }
+
+    @Override
+    public void onColorSelected(@ColorInt int color) {
+        Toast.makeText(activity, "Color selected: #" + Integer.toHexString(color).toUpperCase(), Toast.LENGTH_SHORT).show();
+        category.setColor(color);
     }
 }

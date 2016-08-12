@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.fragments.categories;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +52,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
         public void bindData(CategoryListModel rowModel) {
             name.setText(rowModel.getName());
-            //color.setColo
+            ((GradientDrawable)color.getBackground()).setColor(rowModel.getColor());
         }
     }
 

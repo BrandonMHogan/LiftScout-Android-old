@@ -203,6 +203,7 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
             public void onSaveCategoryEditDialog(CategoryListModel category) {
                 Category newCategory = new Category();
                 newCategory.setName(category.getName());
+                newCategory.setColor(category.getColor());
                 saveCategory(newCategory);
             }
         }, true, null);
