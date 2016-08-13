@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.foundation.constants.Themes;
 import com.brandonhogan.liftscout.foundation.model.Category;
+import com.brandonhogan.liftscout.foundation.model.UserSetting;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
@@ -171,7 +173,18 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
         update();
     }
 
+    private UserSetting getDisplayTheme() {
+        return getRealm().where(UserSetting.class)
+                .equalTo(UserSetting.NAME, UserSetting.THEME).findFirst();
+    }
+
     private void editCategory(int position) {
+        boolean isDarkTheme = false;
+
+        if (getDisplayTheme().getValue().equals(Themes.DARK))
+            isDarkTheme = true;
+
+
         CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
             @Override
             public void onCancelCategoryEditDialog() {
@@ -187,12 +200,18 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
 
                 saveCategory(newCategory);
             }
-        }, true, getData().get(position));
+        }, isDarkTheme, getData().get(position));
 
         dialog.show();
     }
 
     private void addCategory() {
+        boolean isDarkTheme = false;
+
+        if (getDisplayTheme().getValue().equals(Themes.DARK))
+            isDarkTheme = true;
+
+
         CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
             @Override
             public void onCancelCategoryEditDialog() {
@@ -206,7 +225,7 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
                 newCategory.setColor(category.getColor());
                 saveCategory(newCategory);
             }
-        }, true, null);
+        }, isDarkTheme, null);
 
         dialog.show();
     }
