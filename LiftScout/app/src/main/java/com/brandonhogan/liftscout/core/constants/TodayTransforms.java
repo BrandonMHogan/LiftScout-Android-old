@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.foundation.constants;
+package com.brandonhogan.liftscout.core.constants;
 
 public class TodayTransforms {
 

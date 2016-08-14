@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.foundation.model.Category;
-import com.brandonhogan.liftscout.foundation.model.Exercise;
+import com.brandonhogan.liftscout.core.model.Category;
+import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;

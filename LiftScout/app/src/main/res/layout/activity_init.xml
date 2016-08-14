@@ -110,7 +110,7 @@
 
         </LinearLayout>
 
-        <com.brandonhogan.liftscout.foundation.controls.BhDatePicker
+        <com.brandonhogan.liftscout.core.controls.BhDatePicker
             android:id="@+id/age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

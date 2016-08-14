@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.foundation.controls;
+package com.brandonhogan.liftscout.core.controls;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;

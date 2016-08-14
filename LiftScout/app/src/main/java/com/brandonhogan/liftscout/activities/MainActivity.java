@@ -10,9 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.foundation.model.User;
-import com.brandonhogan.liftscout.foundation.navigation.NavigationManager;
-import com.brandonhogan.liftscout.foundation.utils.DatabaseOutput;
+import com.brandonhogan.liftscout.core.model.User;
+import com.brandonhogan.liftscout.core.navigation.NavigationManager;
+import com.brandonhogan.liftscout.core.utils.DatabaseOutput;
 
 import java.util.Date;
 

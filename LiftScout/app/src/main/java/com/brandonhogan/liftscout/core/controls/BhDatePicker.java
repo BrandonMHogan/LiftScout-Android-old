@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.foundation.controls;
+package com.brandonhogan.liftscout.core.controls;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.foundation.utils.BhDate;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 
 import java.util.Calendar;
 import java.util.Date;

@@ -2,23 +2,35 @@ package com.brandonhogan.liftscout.fragments.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.foundation.model.Progress;
+import com.brandonhogan.liftscout.core.model.Progress;
+import com.brandonhogan.liftscout.core.model.Rep;
+import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
+import com.brandonhogan.liftscout.fragments.exercises.ExerciseListAdapter;
+import com.brandonhogan.liftscout.fragments.home.workout.TodayItem;
+import com.brandonhogan.liftscout.fragments.home.workout.TodayItemClickListener;
+import com.brandonhogan.liftscout.fragments.home.workout.TodaySection;
+import com.brandonhogan.liftscout.fragments.home.workout.TodaySectionedExpandableLayoutHelper;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 import butterknife.Bind;
 
-public class TodayFragment extends BaseFragment {
+public class TodayFragment extends BaseFragment implements TodayItemClickListener {
 
 
     // Instance
@@ -49,8 +61,10 @@ public class TodayFragment extends BaseFragment {
     private Date date;
     private String year;
     private String dateString;
+    private TodayListAdapter mAdapter;
 
     private Progress _currentProgress;
+    private ArrayList<TodayListModel> _workout;
 
 
     // Binds
@@ -60,6 +74,10 @@ public class TodayFragment extends BaseFragment {
 
     @Bind(R.id.date_year)
     TextView dateYearView;
+
+    @Bind(R.id.recycler_view)
+    RecyclerView mRecyclerView;
+
 
 
     //Overrides
@@ -87,6 +105,7 @@ public class TodayFragment extends BaseFragment {
 
         setTitle();
         setWeight();
+        setupAdapter();
     }
 
 
@@ -94,6 +113,7 @@ public class TodayFragment extends BaseFragment {
     //
     private void clearLocalReferences() {
         _currentProgress = null;
+        _workout = null;
     }
 
     private void setTitle() {
@@ -110,6 +130,34 @@ public class TodayFragment extends BaseFragment {
             weightLayout.setVisibility(View.VISIBLE);
             weightView.setText(Double.toString(weight));
         }
+    }
+
+    private void setupAdapter() {
+//        mAdapter = new TodayListAdapter(getActivity(), getData());
+//        mRecyclerView.setAdapter(mAdapter);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+        TodaySectionedExpandableLayoutHelper todaySectionedExpandableLayoutHelper =
+                new TodaySectionedExpandableLayoutHelper(getActivity(),
+                mRecyclerView, this, 1);
+
+
+        for (Set set : getTodayProgress().getSets()) {
+
+            ArrayList<TodayItem> arrayList = new ArrayList<>();
+            double volume = 0;
+
+            for (Rep rep : set.getReps()) {
+                volume += rep.getWeight();
+                arrayList.add(new TodayItem(rep.getId(), rep.getCount(), rep.getWeight()));
+            }
+
+            todaySectionedExpandableLayoutHelper.addSection(set.getId(), set.getExercise().getName(), volume, arrayList);
+
+        }
+
+        todaySectionedExpandableLayoutHelper.notifyDataSetChanged();
     }
 
     private Progress getTodayProgress() {
@@ -131,11 +179,21 @@ public class TodayFragment extends BaseFragment {
         return _currentProgress;
     }
 
+    @Override
+    public void todayItemClicked(TodayItem item) {
+        Toast.makeText(getActivity(), "Item: " + item.getId() + " clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void todayItemClicked(TodaySection section) {
+        Toast.makeText(getActivity(), "Section: " + section.getName() + " clicked", Toast.LENGTH_SHORT).show();
+    }
 
     // Public Function
     //
     public void update() {
         clearLocalReferences();
         setWeight();
+       // mAdapter.setList(getData());
     }
 }

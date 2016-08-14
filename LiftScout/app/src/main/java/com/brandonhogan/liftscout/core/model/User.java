@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.foundation.model;
+package com.brandonhogan.liftscout.core.model;
 
 import java.util.Calendar;
 import java.util.Date;

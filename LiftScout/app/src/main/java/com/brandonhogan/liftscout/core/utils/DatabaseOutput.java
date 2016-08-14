@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.foundation.utils;
+package com.brandonhogan.liftscout.core.utils;
 
 import android.app.Activity;
 import android.content.Intent;

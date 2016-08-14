@@ -1,6 +1,6 @@
-package com.brandonhogan.liftscout.foundation.model;
+package com.brandonhogan.liftscout.core.model;
 
-import com.brandonhogan.liftscout.foundation.model.factory.RealmAutoIncrement;
+import com.brandonhogan.liftscout.core.model.factory.RealmAutoIncrement;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

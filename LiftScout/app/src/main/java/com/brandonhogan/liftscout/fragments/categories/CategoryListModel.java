@@ -1,6 +1,6 @@
 package com.brandonhogan.liftscout.fragments.categories;
 
-import com.brandonhogan.liftscout.foundation.model.Category;
+import com.brandonhogan.liftscout.core.model.Category;
 
 public class CategoryListModel {
 

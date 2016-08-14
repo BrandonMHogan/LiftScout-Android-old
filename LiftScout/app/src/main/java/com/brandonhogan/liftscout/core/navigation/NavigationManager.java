@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.foundation.navigation;
+package com.brandonhogan.liftscout.core.navigation;
 
 import android.app.Activity;
 import android.app.Fragment;

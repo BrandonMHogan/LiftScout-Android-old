@@ -1,9 +1,10 @@
-package com.brandonhogan.liftscout.foundation.model;
+package com.brandonhogan.liftscout.core.model;
 
-import com.brandonhogan.liftscout.foundation.utils.BhDate;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 
 import java.util.Date;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -13,15 +14,18 @@ public class Progress extends RealmObject {
     public static final String ID = "id";
     public static final String DATE = "date";
     public static final String WEIGHT = "weight";
+    public static final String SETS = "sets";
 
 
     @PrimaryKey
-    long id;
+    private long id;
 
     @Required
-    Date date;
+    private Date date;
 
-    double weight;
+    private double weight;
+
+    private RealmList<Set> sets;
 
     public long getId() {
         return id;
@@ -46,5 +50,13 @@ public class Progress extends RealmObject {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public RealmList<Set> getSets() {
+        return sets;
+    }
+
+    public void setSets(RealmList<Set> sets) {
+        this.sets = sets;
     }
 }

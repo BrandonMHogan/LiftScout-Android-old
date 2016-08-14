@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.foundation.model.factory;
+package com.brandonhogan.liftscout.core.model.factory;
 
 import java.util.HashMap;
 import java.util.Map;

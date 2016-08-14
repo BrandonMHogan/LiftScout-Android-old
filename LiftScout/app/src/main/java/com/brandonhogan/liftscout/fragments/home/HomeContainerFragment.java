@@ -22,18 +22,23 @@ import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.activities.MainActivity;
-import com.brandonhogan.liftscout.foundation.constants.TodayTransforms;
-import com.brandonhogan.liftscout.foundation.controls.WeightDialog;
-import com.brandonhogan.liftscout.foundation.model.Progress;
-import com.brandonhogan.liftscout.foundation.model.User;
-import com.brandonhogan.liftscout.foundation.model.UserSetting;
+import com.brandonhogan.liftscout.core.constants.TodayTransforms;
+import com.brandonhogan.liftscout.core.controls.WeightDialog;
+import com.brandonhogan.liftscout.core.model.Exercise;
+import com.brandonhogan.liftscout.core.model.Progress;
+import com.brandonhogan.liftscout.core.model.Rep;
+import com.brandonhogan.liftscout.core.model.Set;
+import com.brandonhogan.liftscout.core.model.User;
+import com.brandonhogan.liftscout.core.model.UserSetting;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import io.realm.RealmList;
 import io.realm.Sort;
 
 public class HomeContainerFragment extends BaseFragment {
@@ -89,6 +94,33 @@ public class HomeContainerFragment extends BaseFragment {
 
         setupPager();
         setupFab();
+
+
+//        getRealm().beginTransaction();
+//
+//        Exercise exercise = getRealm().where(Exercise.class).findFirst();
+//
+//        Set set = new Set();
+//        set.setExercise(getRealm().where(Exercise.class).findFirst());
+//            Rep rep1 = new Rep();
+//            rep1.setWeight(200);
+//            rep1.setCount(5);
+//            Rep rep2 = new Rep();
+//            rep2.setWeight(205);
+//            rep2.setCount(5);
+//            Rep rep3 = new Rep();
+//            rep3.setWeight(210);
+//            rep3.setCount(5);
+//
+//            RealmList<Rep>reps = new RealmList<>();
+//            reps.add(rep1);
+//            reps.add(rep2);
+//            reps.add(rep3);
+//        set.setReps(reps);
+//
+//        getTodayProgress().getSets().add(set);
+//        getRealm().copyToRealmOrUpdate(_currentProgress);
+//        getRealm().commitTransaction();
 
     }
 

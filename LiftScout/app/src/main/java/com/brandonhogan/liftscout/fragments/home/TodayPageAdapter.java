@@ -5,7 +5,7 @@ import android.app.FragmentManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
-import com.brandonhogan.liftscout.foundation.utils.BhDate;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 
 import java.util.Calendar;
 import java.util.Date;

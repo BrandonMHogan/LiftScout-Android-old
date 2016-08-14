@@ -113,7 +113,7 @@
     <dimen name="setting_layout_top_padding">0dp</dimen>
     <dimen name="settings_divider_view_hieght">1dp</dimen>
     <dimen name="settings_checkbox_size">37dp</dimen>
-    <dimen name="settings_checkbox_stroke_width">2dp</dimen>
+    <dimen name="settings_checkbox_stroke_width">1dp</dimen>
 
     <!-- Categories / Exercises -->
     <dimen name="exercises_swipe_width">85dp</dimen>
@@ -122,4 +122,10 @@
 
     <!-- Today Layout -->
     <dimen name="today_divider_top_margin">5dp</dimen>
+    <dimen name="today_section_padding">7dp</dimen>
+    <dimen name="today_section_text_size">20sp</dimen>
+    <dimen name="today_item_height">35dp</dimen>
+    <dimen name="today_item_margin">2dp</dimen>
+
+    <dimen name="today_section_text_padding_left">15dp</dimen>
 </resources>

@@ -13,9 +13,9 @@ import android.view.animation.Transformation;
 import android.widget.LinearLayout;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.foundation.constants.TodayTransforms;
-import com.brandonhogan.liftscout.foundation.controls.AnimCheckBox;
-import com.brandonhogan.liftscout.foundation.model.UserSetting;
+import com.brandonhogan.liftscout.core.constants.TodayTransforms;
+import com.brandonhogan.liftscout.core.controls.AnimCheckBox;
+import com.brandonhogan.liftscout.core.model.UserSetting;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 

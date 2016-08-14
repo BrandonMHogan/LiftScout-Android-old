@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.foundation.utils;
+package com.brandonhogan.liftscout.core.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
