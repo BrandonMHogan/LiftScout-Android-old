@@ -16,7 +16,6 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-
     <com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout
         android:id="@+id/fabtoolbar"
         android:layout_width="match_parent"
@@ -76,7 +75,6 @@
                 android:layout_weight="1"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_menu_dumbbell_black"/>
-
 
         </LinearLayout>
 

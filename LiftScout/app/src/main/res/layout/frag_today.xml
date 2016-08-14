@@ -11,11 +11,16 @@
     card_view:cardElevation="@dimen/card_view_elevation"
     card_view:cardUseCompatPadding="true">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/card_view_inner_content_padding">
+
     <LinearLayout
+        android:id="@+id/date_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/card_view_inner_content_padding">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/date_year"
@@ -37,41 +42,40 @@
             android:layout_height="@dimen/settings_divider_view_hieght"
             android:layout_marginTop="@dimen/today_divider_top_margin"/>
 
+    </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/weight_layout"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_below="@+id/date_layout">
 
-            <LinearLayout
-                android:id="@+id/weight_layout"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/RobotoCaptionBold"
+            android:text="@string/frag_today_weight"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/RobotoCaptionBold"
-                    android:text="@string/frag_today_weight"/>
-
-                <TextView
-                    android:id="@+id/weightView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/RobotoCaption"
-                    android:text="@string/frag_today_weight"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:overScrollMode="never"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/weightView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/RobotoCaption"
+            android:text="@string/frag_today_weight"/>
 
     </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/weight_layout"/>
+
+    </RelativeLayout>
+
+
 </android.support.v7.widget.CardView>

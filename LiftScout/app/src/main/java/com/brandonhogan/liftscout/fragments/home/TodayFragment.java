@@ -12,12 +12,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.model.Progress;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.brandonhogan.liftscout.fragments.exercises.ExerciseListAdapter;
+import com.brandonhogan.liftscout.fragments.home.today.WorkoutItem;
+import com.brandonhogan.liftscout.fragments.home.today.WorkoutSection;
+import com.brandonhogan.liftscout.fragments.home.today.WorkoutSectionAdapter;
 import com.brandonhogan.liftscout.fragments.home.workout.TodayItem;
 import com.brandonhogan.liftscout.fragments.home.workout.TodayItemClickListener;
 import com.brandonhogan.liftscout.fragments.home.workout.TodaySection;
@@ -25,7 +29,9 @@ import com.brandonhogan.liftscout.fragments.home.workout.TodaySectionedExpandabl
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -138,26 +144,75 @@ public class TodayFragment extends BaseFragment implements TodayItemClickListene
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        TodaySectionedExpandableLayoutHelper todaySectionedExpandableLayoutHelper =
-                new TodaySectionedExpandableLayoutHelper(getActivity(),
-                mRecyclerView, this, 1);
+//        TodaySectionedExpandableLayoutHelper todaySectionedExpandableLayoutHelper =
+//                new TodaySectionedExpandableLayoutHelper(getActivity(),
+//                mRecyclerView, this, 1);
+//
+//
+//        for (Set set : getTodayProgress().getSets()) {
+//
+//            ArrayList<TodayItem> arrayList = new ArrayList<>();
+//            double volume = 0;
+//
+//            for (Rep rep : set.getReps()) {
+//                volume += rep.getWeight();
+//                arrayList.add(new TodayItem(rep.getId(), rep.getCount(), rep.getWeight()));
+//            }
+//
+//            todaySectionedExpandableLayoutHelper.addSection(set.getId(), set.getExercise().getName(), volume, arrayList);
+//
+//        }
+//
+//        todaySectionedExpandableLayoutHelper.notifyDataSetChanged();
 
 
-        for (Set set : getTodayProgress().getSets()) {
+        WorkoutSectionAdapter adapter;
 
-            ArrayList<TodayItem> arrayList = new ArrayList<>();
-            double volume = 0;
+        WorkoutItem beef = new WorkoutItem("beef");
+        WorkoutItem cheese = new WorkoutItem("cheese");
+        WorkoutItem salsa = new WorkoutItem("salsa");
+        WorkoutItem tortilla = new WorkoutItem("tortilla");
+        WorkoutItem ketchup = new WorkoutItem("ketchup");
+        WorkoutItem bun = new WorkoutItem("bun");
 
-            for (Rep rep : set.getReps()) {
-                volume += rep.getWeight();
-                arrayList.add(new TodayItem(rep.getId(), rep.getCount(), rep.getWeight()));
+        WorkoutSection taco = new WorkoutSection("taco", Arrays.asList(beef, cheese, salsa, tortilla));
+        WorkoutSection quesadilla = new WorkoutSection("quesadilla", Arrays.asList(cheese, tortilla));
+        WorkoutSection burger = new WorkoutSection("burger", Arrays.asList(beef, cheese, ketchup, bun));
+
+        WorkoutSection burger2 = new WorkoutSection("burger 2", Arrays.asList(beef, cheese, ketchup, bun));
+        WorkoutSection burger3 = new WorkoutSection("burger 3", Arrays.asList(beef, cheese, ketchup, bun));
+        WorkoutSection burger4 = new WorkoutSection("burger 4", Arrays.asList(beef, cheese, ketchup, bun));
+
+
+        final List<WorkoutSection> recipes = Arrays.asList(taco, quesadilla, burger, burger2, burger3, burger4);
+
+        adapter = new WorkoutSectionAdapter(getActivity(), recipes);
+        adapter.setExpandCollapseListener(new ExpandableRecyclerAdapter.ExpandCollapseListener() {
+            @Override
+            public void onListItemExpanded(int position) {
+                WorkoutSection expandedRecipe = recipes.get(position);
+
+                String toastMsg = "expanded: " + expandedRecipe.getName();
+                Toast.makeText(getActivity(),
+                        toastMsg,
+                        Toast.LENGTH_SHORT)
+                        .show();
             }
 
-            todaySectionedExpandableLayoutHelper.addSection(set.getId(), set.getExercise().getName(), volume, arrayList);
+            @Override
+            public void onListItemCollapsed(int position) {
+                WorkoutSection collapsedRecipe = recipes.get(position);
 
-        }
+                String toastMsg = "collapsed: " + collapsedRecipe.getName();
+                Toast.makeText(getActivity(),
+                        toastMsg,
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
 
-        todaySectionedExpandableLayoutHelper.notifyDataSetChanged();
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     private Progress getTodayProgress() {
