@@ -7,15 +7,21 @@ import java.util.List;
 public class WorkoutSection implements ParentListItem {
 
     private String mName;
+    private double mVolume;
     private List<WorkoutItem> mItems;
 
-    public WorkoutSection(String name, List<WorkoutItem> items) {
+    public WorkoutSection(String name, double volume, List<WorkoutItem> items) {
         mName = name;
+        mVolume = volume;
         mItems = items;
     }
 
     public String getName() {
         return mName;
+    }
+
+    public double getVolume() {
+        return mVolume;
     }
 
     @Override

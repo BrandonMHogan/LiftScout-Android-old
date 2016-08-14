@@ -15,18 +15,21 @@ public class WorkoutSectionViewHolder extends ParentViewHolder {
     private static final float INITIAL_POSITION = 0.0f;
     private static final float ROTATED_POSITION = 180f;
 
-    private final ImageView mArrowExpandImageView;
-    private TextView mRecipeTextView;
+    private final ImageView expandArrow;
+    private TextView workoutName;
+    private TextView workoutVolume;
 
     public WorkoutSectionViewHolder(View itemView) {
         super(itemView);
-        mRecipeTextView = (TextView) itemView.findViewById(R.id.recipe_textview);
+        workoutName = (TextView) itemView.findViewById(R.id.workout_name);
+        workoutVolume = (TextView) itemView.findViewById(R.id.workout_volume);
 
-        mArrowExpandImageView = (ImageView) itemView.findViewById(R.id.arrow_expand_imageview);
+        expandArrow = (ImageView) itemView.findViewById(R.id.arrow_expand_imageview);
     }
 
     public void bind(WorkoutSection section) {
-        mRecipeTextView.setText(section.getName());
+        workoutName.setText(section.getName());
+        workoutVolume.setText(Double.toString(section.getVolume()));
     }
 
     @SuppressLint("NewApi")
@@ -35,9 +38,9 @@ public class WorkoutSectionViewHolder extends ParentViewHolder {
         super.setExpanded(expanded);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             if (expanded) {
-                mArrowExpandImageView.setRotation(ROTATED_POSITION);
+                expandArrow.setRotation(ROTATED_POSITION);
             } else {
-                mArrowExpandImageView.setRotation(INITIAL_POSITION);
+                expandArrow.setRotation(INITIAL_POSITION);
             }
         }
     }
@@ -61,7 +64,7 @@ public class WorkoutSectionViewHolder extends ParentViewHolder {
 
             rotateAnimation.setDuration(200);
             rotateAnimation.setFillAfter(true);
-            mArrowExpandImageView.startAnimation(rotateAnimation);
+            expandArrow.startAnimation(rotateAnimation);
         }
     }
 }

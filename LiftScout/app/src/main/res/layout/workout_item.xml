@@ -2,12 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/card_view_padding">
+    android:orientation="horizontal"
+    android:padding="@dimen/card_view_padding"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="50dp">
 
-    <TextView android:id="@+id/ingredient_textview"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/material_text_size_caption"/>
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView android:id="@+id/item_reps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/material_text_size_medium"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textSize="@dimen/material_text_size_caption"
+            android:text="reps"/>
+
+    </LinearLayout>
+
+    <TextView android:id="@+id/item_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="205.0"
+        android:textSize="@dimen/material_text_size_medium"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textSize="@dimen/material_text_size_caption"
+        android:text="lbs"/>
 
 </LinearLayout>

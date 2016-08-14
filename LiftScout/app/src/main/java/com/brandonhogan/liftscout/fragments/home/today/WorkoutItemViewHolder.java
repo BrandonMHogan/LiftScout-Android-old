@@ -12,7 +12,7 @@ public class WorkoutItemViewHolder extends ChildViewHolder {
 
     public WorkoutItemViewHolder(View itemView) {
         super(itemView);
-        mIngredientTextView = (TextView) itemView.findViewById(R.id.ingredient_textview);
+        mIngredientTextView = (TextView) itemView.findViewById(R.id.item_reps);
     }
 
     public void bind(WorkoutItem ingredient) {

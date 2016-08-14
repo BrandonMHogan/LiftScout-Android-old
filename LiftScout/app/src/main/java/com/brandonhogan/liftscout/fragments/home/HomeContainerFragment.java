@@ -101,21 +101,29 @@ public class HomeContainerFragment extends BaseFragment {
 //        Exercise exercise = getRealm().where(Exercise.class).findFirst();
 //
 //        Set set = new Set();
-//        set.setExercise(getRealm().where(Exercise.class).findFirst());
+//        set.setExercise(exercise);
 //            Rep rep1 = new Rep();
-//            rep1.setWeight(200);
+//            rep1.setWeight(225);
 //            rep1.setCount(5);
 //            Rep rep2 = new Rep();
-//            rep2.setWeight(205);
+//            rep2.setWeight(225);
 //            rep2.setCount(5);
 //            Rep rep3 = new Rep();
-//            rep3.setWeight(210);
+//            rep3.setWeight(225);
 //            rep3.setCount(5);
+//        Rep rep4 = new Rep();
+//        rep4.setWeight(225);
+//        rep4.setCount(5);
+//        Rep rep5 = new Rep();
+//        rep5.setWeight(225);
+//        rep5.setCount(5);
 //
 //            RealmList<Rep>reps = new RealmList<>();
 //            reps.add(rep1);
 //            reps.add(rep2);
 //            reps.add(rep3);
+//            reps.add(rep4);
+//            reps.add(rep5);
 //        set.setReps(reps);
 //
 //        getTodayProgress().getSets().add(set);

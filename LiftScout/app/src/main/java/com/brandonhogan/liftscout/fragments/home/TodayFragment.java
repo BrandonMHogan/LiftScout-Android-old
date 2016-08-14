@@ -67,7 +67,9 @@ public class TodayFragment extends BaseFragment implements TodayItemClickListene
     private Date date;
     private String year;
     private String dateString;
-    private TodayListAdapter mAdapter;
+    //private TodayListAdapter mAdapter;
+    private WorkoutSectionAdapter mAdapter;
+    List<WorkoutSection> sections;
 
     private Progress _currentProgress;
     private ArrayList<TodayListModel> _workout;
@@ -139,58 +141,11 @@ public class TodayFragment extends BaseFragment implements TodayItemClickListene
     }
 
     private void setupAdapter() {
-//        mAdapter = new TodayListAdapter(getActivity(), getData());
-//        mRecyclerView.setAdapter(mAdapter);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
-//        TodaySectionedExpandableLayoutHelper todaySectionedExpandableLayoutHelper =
-//                new TodaySectionedExpandableLayoutHelper(getActivity(),
-//                mRecyclerView, this, 1);
-//
-//
-//        for (Set set : getTodayProgress().getSets()) {
-//
-//            ArrayList<TodayItem> arrayList = new ArrayList<>();
-//            double volume = 0;
-//
-//            for (Rep rep : set.getReps()) {
-//                volume += rep.getWeight();
-//                arrayList.add(new TodayItem(rep.getId(), rep.getCount(), rep.getWeight()));
-//            }
-//
-//            todaySectionedExpandableLayoutHelper.addSection(set.getId(), set.getExercise().getName(), volume, arrayList);
-//
-//        }
-//
-//        todaySectionedExpandableLayoutHelper.notifyDataSetChanged();
-
-
-        WorkoutSectionAdapter adapter;
-
-        WorkoutItem beef = new WorkoutItem("beef");
-        WorkoutItem cheese = new WorkoutItem("cheese");
-        WorkoutItem salsa = new WorkoutItem("salsa");
-        WorkoutItem tortilla = new WorkoutItem("tortilla");
-        WorkoutItem ketchup = new WorkoutItem("ketchup");
-        WorkoutItem bun = new WorkoutItem("bun");
-
-        WorkoutSection taco = new WorkoutSection("taco", Arrays.asList(beef, cheese, salsa, tortilla));
-        WorkoutSection quesadilla = new WorkoutSection("quesadilla", Arrays.asList(cheese, tortilla));
-        WorkoutSection burger = new WorkoutSection("burger", Arrays.asList(beef, cheese, ketchup, bun));
-
-        WorkoutSection burger2 = new WorkoutSection("burger 2", Arrays.asList(beef, cheese, ketchup, bun));
-        WorkoutSection burger3 = new WorkoutSection("burger 3", Arrays.asList(beef, cheese, ketchup, bun));
-        WorkoutSection burger4 = new WorkoutSection("burger 4", Arrays.asList(beef, cheese, ketchup, bun));
-
-
-        final List<WorkoutSection> recipes = Arrays.asList(taco, quesadilla, burger, burger2, burger3, burger4);
-
-        adapter = new WorkoutSectionAdapter(getActivity(), recipes);
-        adapter.setExpandCollapseListener(new ExpandableRecyclerAdapter.ExpandCollapseListener() {
+        mAdapter = new WorkoutSectionAdapter(getActivity(), getData());
+        mAdapter.setExpandCollapseListener(new ExpandableRecyclerAdapter.ExpandCollapseListener() {
             @Override
             public void onListItemExpanded(int position) {
-                WorkoutSection expandedRecipe = recipes.get(position);
+                WorkoutSection expandedRecipe = getData().get(position);
 
                 String toastMsg = "expanded: " + expandedRecipe.getName();
                 Toast.makeText(getActivity(),
@@ -201,7 +156,7 @@ public class TodayFragment extends BaseFragment implements TodayItemClickListene
 
             @Override
             public void onListItemCollapsed(int position) {
-                WorkoutSection collapsedRecipe = recipes.get(position);
+                WorkoutSection collapsedRecipe = getData().get(position);
 
                 String toastMsg = "collapsed: " + collapsedRecipe.getName();
                 Toast.makeText(getActivity(),
@@ -211,8 +166,29 @@ public class TodayFragment extends BaseFragment implements TodayItemClickListene
             }
         });
 
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    private List<WorkoutSection> getData() {
+
+        if (sections != null)
+            return sections;
+
+        sections = new ArrayList<>();
+
+        for (Set set : getTodayProgress().getSets()) {
+
+            double volume = 0;
+            ArrayList<WorkoutItem> items = new ArrayList<>();
+            for (Rep rep : set.getReps()) {
+                items.add(new WorkoutItem(rep.getWeight()+""));
+                volume += rep.getWeight();
+            }
+
+            sections.add(new WorkoutSection(set.getExercise().getName(), volume, items));
+        }
+        return sections;
     }
 
     private Progress getTodayProgress() {
