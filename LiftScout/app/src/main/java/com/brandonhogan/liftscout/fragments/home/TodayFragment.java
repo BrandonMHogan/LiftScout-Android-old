@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,25 +17,19 @@ import com.brandonhogan.liftscout.core.model.Progress;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
-import com.brandonhogan.liftscout.fragments.exercises.ExerciseListAdapter;
 import com.brandonhogan.liftscout.fragments.home.today.WorkoutItem;
 import com.brandonhogan.liftscout.fragments.home.today.WorkoutSection;
 import com.brandonhogan.liftscout.fragments.home.today.WorkoutSectionAdapter;
-import com.brandonhogan.liftscout.fragments.home.workout.TodayItem;
-import com.brandonhogan.liftscout.fragments.home.workout.TodayItemClickListener;
-import com.brandonhogan.liftscout.fragments.home.workout.TodaySection;
-import com.brandonhogan.liftscout.fragments.home.workout.TodaySectionedExpandableLayoutHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import butterknife.Bind;
 
-public class TodayFragment extends BaseFragment implements TodayItemClickListener {
+public class TodayFragment extends BaseFragment {
 
 
     // Instance
@@ -67,12 +60,10 @@ public class TodayFragment extends BaseFragment implements TodayItemClickListene
     private Date date;
     private String year;
     private String dateString;
-    //private TodayListAdapter mAdapter;
     private WorkoutSectionAdapter mAdapter;
     List<WorkoutSection> sections;
 
     private Progress _currentProgress;
-    private ArrayList<TodayListModel> _workout;
 
 
     // Binds
@@ -121,7 +112,6 @@ public class TodayFragment extends BaseFragment implements TodayItemClickListene
     //
     private void clearLocalReferences() {
         _currentProgress = null;
-        _workout = null;
     }
 
     private void setTitle() {
@@ -182,7 +172,7 @@ public class TodayFragment extends BaseFragment implements TodayItemClickListene
             double volume = 0;
             ArrayList<WorkoutItem> items = new ArrayList<>();
             for (Rep rep : set.getReps()) {
-                items.add(new WorkoutItem(rep.getWeight()+""));
+                items.add(new WorkoutItem(rep.getCount(), rep.getWeight()));
                 volume += rep.getWeight();
             }
 
@@ -208,16 +198,6 @@ public class TodayFragment extends BaseFragment implements TodayItemClickListene
         }
 
         return _currentProgress;
-    }
-
-    @Override
-    public void todayItemClicked(TodayItem item) {
-        Toast.makeText(getActivity(), "Item: " + item.getId() + " clicked", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void todayItemClicked(TodaySection section) {
-        Toast.makeText(getActivity(), "Section: " + section.getName() + " clicked", Toast.LENGTH_SHORT).show();
     }
 
     // Public Function

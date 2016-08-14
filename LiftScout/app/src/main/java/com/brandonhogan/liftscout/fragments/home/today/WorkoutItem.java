@@ -2,13 +2,19 @@ package com.brandonhogan.liftscout.fragments.home.today;
 
 public class WorkoutItem {
 
-    private String mName;
+    private int mReps;
+    private double mWeight;
 
-    public WorkoutItem(String name) {
-        mName = name;
+    public WorkoutItem(int reps, double weight) {
+        mReps = reps;
+        mWeight = weight;
     }
 
-    public String getName() {
-        return mName;
+    public int getmReps() {
+        return mReps;
+    }
+
+    public double getmWeight() {
+        return mWeight;
     }
 }

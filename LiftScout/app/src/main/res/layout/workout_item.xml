@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="@dimen/card_view_padding"
-    android:layout_marginStart="20dp"
+    android:layout_marginStart="30dp"
     android:layout_marginEnd="50dp">
 
     <LinearLayout
@@ -30,7 +30,6 @@
     <TextView android:id="@+id/item_weight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="205.0"
         android:textSize="@dimen/material_text_size_medium"/>
 
     <TextView

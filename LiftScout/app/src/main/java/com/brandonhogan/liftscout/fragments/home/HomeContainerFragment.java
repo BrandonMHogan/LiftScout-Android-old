@@ -24,21 +24,16 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.core.constants.TodayTransforms;
 import com.brandonhogan.liftscout.core.controls.WeightDialog;
-import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.core.model.Progress;
-import com.brandonhogan.liftscout.core.model.Rep;
-import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.core.model.User;
 import com.brandonhogan.liftscout.core.model.UserSetting;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import io.realm.RealmList;
 import io.realm.Sort;
 
 public class HomeContainerFragment extends BaseFragment {

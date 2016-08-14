@@ -8,14 +8,17 @@ import com.brandonhogan.liftscout.R;
 
 public class WorkoutItemViewHolder extends ChildViewHolder {
 
-    private TextView mIngredientTextView;
+    private TextView mReps;
+    private TextView mWeight;
 
     public WorkoutItemViewHolder(View itemView) {
         super(itemView);
-        mIngredientTextView = (TextView) itemView.findViewById(R.id.item_reps);
+        mReps = (TextView) itemView.findViewById(R.id.item_reps);
+        mWeight = (TextView) itemView.findViewById(R.id.item_weight);
     }
 
-    public void bind(WorkoutItem ingredient) {
-        mIngredientTextView.setText(ingredient.getName());
+    public void bind(WorkoutItem item) {
+        mReps.setText(Integer.toString(item.getmReps()));
+        mWeight.setText(Double.toString(item.getmWeight()));
     }
 }
