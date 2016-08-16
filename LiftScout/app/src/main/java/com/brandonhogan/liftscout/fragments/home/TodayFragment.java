@@ -11,19 +11,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.model.Progress;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
-import com.brandonhogan.liftscout.fragments.home.today.WorkoutItem;
-import com.brandonhogan.liftscout.fragments.home.today.WorkoutSection;
-import com.brandonhogan.liftscout.fragments.home.today.WorkoutSectionAdapter;
+import com.brandonhogan.liftscout.fragments.home.workout.WorkoutItem;
+import com.brandonhogan.liftscout.fragments.home.workout.WorkoutSection;
+import com.mikepenz.fastadapter.FastAdapter;
+import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.IItem;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -60,8 +63,8 @@ public class TodayFragment extends BaseFragment {
     private Date date;
     private String year;
     private String dateString;
-    private WorkoutSectionAdapter mAdapter;
-    List<WorkoutSection> sections;
+    private FastItemAdapter mAdapter;
+    List<IItem> _workout;
 
     private Progress _currentProgress;
 
@@ -112,6 +115,7 @@ public class TodayFragment extends BaseFragment {
     //
     private void clearLocalReferences() {
         _currentProgress = null;
+        _workout = null;
     }
 
     private void setTitle() {
@@ -131,54 +135,48 @@ public class TodayFragment extends BaseFragment {
     }
 
     private void setupAdapter() {
-        mAdapter = new WorkoutSectionAdapter(getActivity(), getData());
-        mAdapter.setExpandCollapseListener(new ExpandableRecyclerAdapter.ExpandCollapseListener() {
+
+        mAdapter = new FastItemAdapter<>();
+
+        mAdapter.withSelectable(true);
+        mAdapter.add(getData());
+
+        mAdapter.withOnClickListener(new FastAdapter.OnClickListener<WorkoutItem>() {
             @Override
-            public void onListItemExpanded(int position) {
-                WorkoutSection expandedRecipe = getData().get(position);
-
-                String toastMsg = "expanded: " + expandedRecipe.getName();
-                Toast.makeText(getActivity(),
-                        toastMsg,
-                        Toast.LENGTH_SHORT)
-                        .show();
-            }
-
-            @Override
-            public void onListItemCollapsed(int position) {
-                WorkoutSection collapsedRecipe = getData().get(position);
-
-                String toastMsg = "collapsed: " + collapsedRecipe.getName();
-                Toast.makeText(getActivity(),
-                        toastMsg,
-                        Toast.LENGTH_SHORT)
-                        .show();
+            public boolean onClick(View v, IAdapter<WorkoutItem> adapter, WorkoutItem item, int position) {
+                // Handle click here
+                Toast.makeText(getActivity(), "Item : " + item.setId, Toast.LENGTH_SHORT).show();
+                return true;
             }
         });
+
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
-    private List<WorkoutSection> getData() {
+    private List<IItem> getData() {
 
-        if (sections != null)
-            return sections;
+        if (_workout != null)
+            return _workout;
 
-        sections = new ArrayList<>();
+        _workout = new ArrayList<>();
 
         for (Set set : getTodayProgress().getSets()) {
 
+            List<IItem> items = new LinkedList<>();
             double volume = 0;
-            ArrayList<WorkoutItem> items = new ArrayList<>();
+
             for (Rep rep : set.getReps()) {
-                items.add(new WorkoutItem(rep.getCount(), rep.getWeight()));
+                items.add(new WorkoutItem(set.getId(), rep.getCount(), rep.getWeight()));
                 volume += rep.getWeight();
             }
 
-            sections.add(new WorkoutSection(set.getExercise().getName(), volume, items));
+            WorkoutSection expandableItem = new WorkoutSection(set.getExercise().getName(), volume);
+            expandableItem.withSubItems(items);
+            _workout.add(expandableItem);
         }
-        return sections;
+        return _workout;
     }
 
     private Progress getTodayProgress() {
@@ -205,6 +203,6 @@ public class TodayFragment extends BaseFragment {
     public void update() {
         clearLocalReferences();
         setWeight();
-       // mAdapter.setList(getData());
+        mAdapter.setNewList(getData());
     }
 }

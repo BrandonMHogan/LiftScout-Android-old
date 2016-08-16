@@ -5,8 +5,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.fragments.categories.CategoryListFragment;
 import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
+import com.brandonhogan.liftscout.fragments.categories.CategoryListFragment;
 import com.brandonhogan.liftscout.fragments.exercises.ExerciseListFragment;
 import com.brandonhogan.liftscout.fragments.home.HomeContainerFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsDisplayFragment;
