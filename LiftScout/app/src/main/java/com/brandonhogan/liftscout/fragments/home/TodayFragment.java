@@ -144,8 +144,7 @@ public class TodayFragment extends BaseFragment {
         mAdapter.withOnClickListener(new FastAdapter.OnClickListener<WorkoutItem>() {
             @Override
             public boolean onClick(View v, IAdapter<WorkoutItem> adapter, WorkoutItem item, int position) {
-                // Handle click here
-                Toast.makeText(getActivity(), "Item : " + item.setId, Toast.LENGTH_SHORT).show();
+                getNavigationManager().startWorkoutContainer(item.setId);
                 return true;
             }
         });

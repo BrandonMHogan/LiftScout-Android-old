@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.fragments.home;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
@@ -10,7 +11,7 @@ import com.brandonhogan.liftscout.core.utils.BhDate;
 import java.util.Calendar;
 import java.util.Date;
 
-public class TodayPageAdapter extends FragmentStatePagerAdapter
+public class TodayPageAdapter extends FragmentPagerAdapter
 {
 
 

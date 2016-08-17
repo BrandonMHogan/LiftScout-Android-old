@@ -13,6 +13,7 @@ import com.brandonhogan.liftscout.fragments.settings.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsHomeFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
+import com.brandonhogan.liftscout.fragments.workout.WorkoutContainerFragment;
 
 public class NavigationManager {
 
@@ -216,6 +217,13 @@ public class NavigationManager {
 
     public boolean startExerciseList(int categoryId) {
         Fragment fragment = ExerciseListFragment.newInstance(categoryId);
+        return open(fragment);
+    }
+
+
+    // Set Edit
+    public boolean startWorkoutContainer(int setId) {
+        Fragment fragment = WorkoutContainerFragment.newInstance(setId);
         return open(fragment);
     }
 
