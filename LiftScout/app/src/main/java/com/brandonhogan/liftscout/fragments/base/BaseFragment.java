@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.brandonhogan.liftscout.activities.MainActivity;
-import com.brandonhogan.liftscout.foundation.navigation.NavigationManager;
+import com.brandonhogan.liftscout.core.navigation.NavigationManager;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import butterknife.ButterKnife;

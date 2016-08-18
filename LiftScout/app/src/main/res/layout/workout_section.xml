@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:windowBackground"
+    android:padding="@dimen/card_view_padding"
+    android:layout_marginTop="5dp">
+
+    <TextView android:id="@+id/workout_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/material_text_size_medium"
+        android:layout_marginStart="5dp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:id="@+id/volume_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="50dp">
+
+
+        <TextView android:id="@+id/workout_volume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/material_text_size_medium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/material_text_size_medium"
+            android:layout_marginStart="4dp"
+            android:textStyle="bold"
+            android:text="lbs"/>
+
+    </LinearLayout>
+
+    <ImageView android:id="@+id/arrow_expand_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_expand_more_black_36dp"/>
+
+</RelativeLayout>

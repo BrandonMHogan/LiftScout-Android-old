@@ -8,12 +8,11 @@ import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.foundation.constants.Themes;
-import com.brandonhogan.liftscout.foundation.model.UserSetting;
+import com.brandonhogan.liftscout.core.constants.Themes;
+import com.brandonhogan.liftscout.core.model.UserSetting;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class BaseActivity extends AppCompatActivity {
 

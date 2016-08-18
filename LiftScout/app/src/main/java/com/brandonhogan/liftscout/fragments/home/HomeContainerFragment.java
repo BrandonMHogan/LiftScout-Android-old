@@ -21,12 +21,13 @@ import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.aaadev.AAADevWorkout;
 import com.brandonhogan.liftscout.activities.MainActivity;
-import com.brandonhogan.liftscout.foundation.constants.TodayTransforms;
-import com.brandonhogan.liftscout.foundation.controls.WeightDialog;
-import com.brandonhogan.liftscout.foundation.model.Progress;
-import com.brandonhogan.liftscout.foundation.model.User;
-import com.brandonhogan.liftscout.foundation.model.UserSetting;
+import com.brandonhogan.liftscout.core.constants.TodayTransforms;
+import com.brandonhogan.liftscout.core.controls.WeightDialog;
+import com.brandonhogan.liftscout.core.model.Progress;
+import com.brandonhogan.liftscout.core.model.User;
+import com.brandonhogan.liftscout.core.model.UserSetting;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
@@ -75,7 +76,6 @@ public class HomeContainerFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        if (rootView == null)
             rootView = inflater.inflate(R.layout.frag_home, container, false);
 
 
@@ -90,6 +90,13 @@ public class HomeContainerFragment extends BaseFragment {
         setupPager();
         setupFab();
 
+
+        //        AAADevWorkout.clearSets(getRealm());
+//
+//        AAADevWorkout.addSet(getRealm(), getTodayProgress(), 0);
+//        AAADevWorkout.addSet(getRealm(), getTodayProgress(), 1);
+//        AAADevWorkout.addSet(getRealm(), getTodayProgress(), 2);
+
     }
 
     @Override
@@ -102,30 +109,26 @@ public class HomeContainerFragment extends BaseFragment {
     //
     private void setupPager() {
 
-        if (adapter == null) {
+        adapter = new TodayPageAdapter(getChildFragmentManager());
+        viewPager.setAdapter(adapter);
 
-            adapter = new TodayPageAdapter(getChildFragmentManager());
-            //PagerAdapter wrappedAdapter = new InfinitePagerAdapter(adapter);
-            viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(adapter.TOTAL_DAYS);
 
-            viewPager.setCurrentItem(adapter.TOTAL_DAYS);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                toolbarLayout.hide();
+            }
 
-            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                    toolbarLayout.hide();
-                }
+            @Override
+            public void onPageSelected(int position) {
+            }
 
-                @Override
-                public void onPageSelected(int position) {
-                }
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
-                @Override
-                public void onPageScrollStateChanged(int state) {
-
-                }
-            });
-        }
+            }
+        });
 
         switch (getTodayTransform().getValue()) {
             case TodayTransforms.ACCORDION:
@@ -256,6 +259,11 @@ public class HomeContainerFragment extends BaseFragment {
         params.putString("date", _currentProgress.getDate().toString());
         params.putDouble("weight", weight);
         ((MainActivity)getActivity()).getFirebaseAnalytics().logEvent("weight_set", params);
+    }
+
+    @OnClick(R.id.set)
+    public void addSetOnClick() {
+        getNavigationManager().startCategoryListAddSet(getTodayProgress().getDate());
     }
 
     @OnClick(R.id.weight)

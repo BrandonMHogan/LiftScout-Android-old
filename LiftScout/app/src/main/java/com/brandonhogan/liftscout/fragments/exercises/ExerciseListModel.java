@@ -1,6 +1,6 @@
 package com.brandonhogan.liftscout.fragments.exercises;
 
-import com.brandonhogan.liftscout.foundation.model.Exercise;
+import com.brandonhogan.liftscout.core.model.Exercise;
 
 public class ExerciseListModel {
     private int id;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.brandonhogan.liftscout.foundation.controls.BaseFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.brandonhogan.liftscout.core.controls.BaseFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -20,4 +20,4 @@
         app:fabSize="normal"
         android:src="@drawable/ic_add_white_24dp"/>
 
-</com.brandonhogan.liftscout.foundation.controls.BaseFrameLayout>
+</com.brandonhogan.liftscout.core.controls.BaseFrameLayout>
