@@ -20,9 +20,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.foundation.controls.BhDatePicker;
-import com.brandonhogan.liftscout.foundation.model.Category;
-import com.brandonhogan.liftscout.foundation.model.User;
+import com.brandonhogan.liftscout.core.controls.BhDatePicker;
+import com.brandonhogan.liftscout.core.model.Category;
+import com.brandonhogan.liftscout.core.model.User;
 import com.dd.CircularProgressButton;
 
 import java.util.ArrayList;

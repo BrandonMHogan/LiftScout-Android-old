@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "844062822101-2t53tmga9672ltgb80nok3ek9v5vdn7o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brandonhogan.liftscout",
+            "certificate_hash": "51C9848AE84A40DD639733AD30EE83FDA5E01D5E"
+          }
+        },
+        {
           "client_id": "844062822101-5k9p5ujd1igq78e2spmg9vm9o1ahpaer.apps.googleusercontent.com",
           "client_type": 3
         },
@@ -34,6 +42,41 @@
           "analytics_property": {
             "tracking_id": "UA-82053579-1"
           }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844062822101:android:02fa3586dd1f35d0",
+        "android_client_info": {
+          "package_name": "com.brandonhogan.liftscout.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "844062822101-5k9p5ujd1igq78e2spmg9vm9o1ahpaer.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "844062822101-5cdpmu7virvovtn0381gp2e8gksukrou.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNlDi_dpZwvrM0Bpz16sYt9BGr5g-9Ltc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
         },
         "appinvite_service": {
           "status": 1,

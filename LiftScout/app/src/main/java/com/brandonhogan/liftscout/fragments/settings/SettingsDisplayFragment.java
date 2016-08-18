@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.foundation.constants.Themes;
-import com.brandonhogan.liftscout.foundation.model.UserSetting;
+import com.brandonhogan.liftscout.core.constants.Themes;
+import com.brandonhogan.liftscout.core.model.UserSetting;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 

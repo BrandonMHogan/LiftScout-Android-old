@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.brandonhogan.liftscout.foundation.controls.BaseFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.brandonhogan.liftscout.core.controls.BaseFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -15,7 +15,6 @@
             android:layout_height="match_parent"/>
 
     </android.support.design.widget.CoordinatorLayout>
-
 
     <com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout
         android:id="@+id/fabtoolbar"
@@ -70,16 +69,15 @@
                 android:src="@drawable/ic_menu_scale"/>
 
             <ImageView
-                android:id="@+id/workout"
+                android:id="@+id/set"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_menu_dumbbell_black"/>
 
-
         </LinearLayout>
 
     </com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout>
 
-</com.brandonhogan.liftscout.foundation.controls.BaseFrameLayout>
+</com.brandonhogan.liftscout.core.controls.BaseFrameLayout>

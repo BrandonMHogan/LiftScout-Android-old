@@ -2,18 +2,32 @@ package com.brandonhogan.liftscout.fragments.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.foundation.model.Progress;
+import com.brandonhogan.liftscout.core.model.Progress;
+import com.brandonhogan.liftscout.core.model.Rep;
+import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
+import com.brandonhogan.liftscout.fragments.home.workout.WorkoutItem;
+import com.brandonhogan.liftscout.fragments.home.workout.WorkoutSection;
+import com.mikepenz.fastadapter.FastAdapter;
+import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.IItem;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -49,6 +63,8 @@ public class TodayFragment extends BaseFragment {
     private Date date;
     private String year;
     private String dateString;
+    private FastItemAdapter mAdapter;
+    List<IItem> _workout;
 
     private Progress _currentProgress;
 
@@ -60,6 +76,10 @@ public class TodayFragment extends BaseFragment {
 
     @Bind(R.id.date_year)
     TextView dateYearView;
+
+    @Bind(R.id.recycler_view)
+    RecyclerView mRecyclerView;
+
 
 
     //Overrides
@@ -87,6 +107,7 @@ public class TodayFragment extends BaseFragment {
 
         setTitle();
         setWeight();
+        setupAdapter();
     }
 
 
@@ -94,6 +115,7 @@ public class TodayFragment extends BaseFragment {
     //
     private void clearLocalReferences() {
         _currentProgress = null;
+        _workout = null;
     }
 
     private void setTitle() {
@@ -110,6 +132,50 @@ public class TodayFragment extends BaseFragment {
             weightLayout.setVisibility(View.VISIBLE);
             weightView.setText(Double.toString(weight));
         }
+    }
+
+    private void setupAdapter() {
+
+        mAdapter = new FastItemAdapter<>();
+
+        mAdapter.withSelectable(true);
+        mAdapter.add(getData());
+
+        mAdapter.withOnClickListener(new FastAdapter.OnClickListener<WorkoutItem>() {
+            @Override
+            public boolean onClick(View v, IAdapter<WorkoutItem> adapter, WorkoutItem item, int position) {
+                getNavigationManager().startWorkoutContainerWithSet(item.setId);
+                return true;
+            }
+        });
+
+
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    private List<IItem> getData() {
+
+        if (_workout != null)
+            return _workout;
+
+        _workout = new ArrayList<>();
+
+        for (Set set : getTodayProgress().getSets()) {
+
+            List<IItem> items = new LinkedList<>();
+            double volume = 0;
+
+            for (Rep rep : set.getReps()) {
+                items.add(new WorkoutItem(set.getId(), rep.getCount(), rep.getWeight()));
+                volume += rep.getWeight();
+            }
+
+            WorkoutSection expandableItem = new WorkoutSection(set.getExercise().getName(), volume);
+            expandableItem.withSubItems(items);
+            _workout.add(expandableItem);
+        }
+        return _workout;
     }
 
     private Progress getTodayProgress() {
@@ -131,11 +197,11 @@ public class TodayFragment extends BaseFragment {
         return _currentProgress;
     }
 
-
     // Public Function
     //
     public void update() {
         clearLocalReferences();
         setWeight();
+        mAdapter.setNewList(getData());
     }
 }

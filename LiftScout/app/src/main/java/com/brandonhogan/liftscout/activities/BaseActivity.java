@@ -8,8 +8,8 @@ import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.foundation.constants.Themes;
-import com.brandonhogan.liftscout.foundation.model.UserSetting;
+import com.brandonhogan.liftscout.core.constants.Themes;
+import com.brandonhogan.liftscout.core.model.UserSetting;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import io.realm.Realm;
@@ -48,7 +48,9 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        if (getDisplayTheme() != null && getDisplayTheme().getValue().equals(Themes.DARK))
+        if (getDisplayTheme().getValue().equals(Themes.LIGHT))
+            setTheme(R.style.AppTheme_Light);
+        else
             setTheme(R.style.AppTheme_Dark);
 
         // Obtain the FirebaseAnalytics instance.
@@ -83,8 +85,21 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     private UserSetting getDisplayTheme() {
-        return getRealm().where(UserSetting.class)
+        UserSetting setting = getRealm().where(UserSetting.class)
                 .equalTo(UserSetting.NAME, UserSetting.THEME).findFirst();
+
+        if (setting == null || !setting.isValid()) {
+
+            setting = new UserSetting();
+            setting.setName(UserSetting.THEME);
+            setting.setValue(Themes.DARK);
+
+            getRealm().beginTransaction();
+            getRealm().copyToRealmOrUpdate(setting);
+            getRealm().commitTransaction();
+        }
+
+        return setting;
     }
 
     // Overrides

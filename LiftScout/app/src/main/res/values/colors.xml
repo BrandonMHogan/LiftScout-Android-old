@@ -28,10 +28,33 @@
     <color name="red">#ff1744</color>
 
     <!-- Category Colors -->
+    <color name="category_light_red">#f44336</color>
     <color name="category_red">#ff1744</color>
     <color name="category_blue">#3693D0</color>
     <color name="category_green">#36CF8E</color>
+    <color name="category_light_green">#8bc34a</color>
     <color name="category_orange">#FF9800</color>
+    <color name="category_brown">#4e342e</color>
+    <color name="category_purple">#512da8</color>
+    <color name="category_dark_purple">#ea80fc</color>
+    <color name="category_pink">#f06292</color>
+    <color name="category_dark_pink">#e91e63</color>
+    <color name="category_yellow">#ffd600</color>
+
+    <array name="category_colors">
+        <item>@color/category_light_red</item>
+        <item>@color/category_red</item>
+        <item>@color/category_blue</item>
+        <item>@color/category_green</item>
+        <item>@color/category_light_green</item>
+        <item>@color/category_orange</item>
+        <item>@color/category_brown</item>
+        <item>@color/category_dark_purple</item>
+        <item>@color/category_purple</item>
+        <item>@color/category_pink</item>
+        <item>@color/category_dark_pink</item>
+        <item>@color/category_yellow</item>
+    </array>
 
     <!-- Border -->
     <color name="listview_border_color">#1F000000</color>
