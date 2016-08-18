@@ -15,6 +15,8 @@ import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
 import com.brandonhogan.liftscout.fragments.workout.WorkoutContainerFragment;
 
+import java.util.Date;
+
 public class NavigationManager {
 
     private static final String TAG = "NavigationManager";
@@ -215,16 +217,31 @@ public class NavigationManager {
         return openAsRoot(fragment);
     }
 
+    public boolean startCategoryListAddSet(Date date) {
+        Fragment fragment = CategoryListFragment.newInstance(date);
+        return openAsRoot(fragment);
+    }
+
     public boolean startExerciseList(int categoryId) {
         Fragment fragment = ExerciseListFragment.newInstance(categoryId);
         return open(fragment);
     }
 
+    public boolean startExerciseListAddSet(int categoryId, Date date) {
+        Fragment fragment = ExerciseListFragment.newInstance(categoryId, date);
+        return open(fragment);
+    }
+
 
     // Set Edit
-    public boolean startWorkoutContainer(int setId) {
+    public boolean startWorkoutContainerWithSet(int setId) {
         Fragment fragment = WorkoutContainerFragment.newInstance(setId);
         return open(fragment);
+    }
+
+    public boolean startWorkoutContainerWithExercise(int exerciseId, Date date) {
+        Fragment fragment = WorkoutContainerFragment.newInstance(exerciseId, date);
+        return openAsRoot(fragment);
     }
 
 

@@ -90,7 +90,8 @@ public class HomeContainerFragment extends BaseFragment {
         setupPager();
         setupFab();
 
-//        AAADevWorkout.clearSets(getRealm());
+
+        //        AAADevWorkout.clearSets(getRealm());
 //
 //        AAADevWorkout.addSet(getRealm(), getTodayProgress(), 0);
 //        AAADevWorkout.addSet(getRealm(), getTodayProgress(), 1);
@@ -258,6 +259,11 @@ public class HomeContainerFragment extends BaseFragment {
         params.putString("date", _currentProgress.getDate().toString());
         params.putDouble("weight", weight);
         ((MainActivity)getActivity()).getFirebaseAnalytics().logEvent("weight_set", params);
+    }
+
+    @OnClick(R.id.set)
+    public void addSetOnClick() {
+        getNavigationManager().startCategoryListAddSet(getTodayProgress().getDate());
     }
 
     @OnClick(R.id.weight)

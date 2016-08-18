@@ -18,6 +18,7 @@ import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -28,9 +29,25 @@ import io.realm.RealmResults;
 public class CategoryListFragment extends BaseFragment implements RecyclerTouchListener.RecyclerTouchListenerHelper {
 
 
+
+    private final static String BUNDLE_ADD_SET_DATE = "addSetDateBundle";
+
+
     // Instance
     //
+    public static CategoryListFragment newInstance(Date addSetDate) {
+
+        Bundle args = new Bundle();
+        args.putSerializable(BUNDLE_ADD_SET_DATE, addSetDate);
+
+        CategoryListFragment fragment = new CategoryListFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
     public static CategoryListFragment newInstance() {
+
         return new CategoryListFragment();
     }
 
@@ -42,6 +59,7 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
     private SweetAlertDialog dialog;
+    private Date addSetDate;
 
     private List<CategoryListModel> _categories;
 
@@ -66,6 +84,13 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        try {
+            addSetDate = (Date)this.getArguments().getSerializable(BUNDLE_ADD_SET_DATE);
+        } catch (Exception ex) {
+
+        }
+
 
         setTitle(getResources().getString(R.string.title_frag_category_list));
 
@@ -107,7 +132,13 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
                 .setClickable(new RecyclerTouchListener.OnRowClickListener() {
                     @Override
                     public void onRowClicked(int position) {
-                        getNavigationManager().startExerciseList(getData().get(position).getId());
+
+                        if (addSetDate != null) {
+                            getNavigationManager().startExerciseListAddSet(getData().get(position).getId(), addSetDate);
+                        }
+                        else {
+                            getNavigationManager().startExerciseList(getData().get(position).getId());
+                        }
                     }
 
                     @Override

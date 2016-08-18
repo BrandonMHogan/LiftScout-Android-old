@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -26,14 +28,26 @@ import io.realm.RealmResults;
 
 public class ExerciseListFragment extends BaseFragment implements RecyclerTouchListener.RecyclerTouchListenerHelper {
 
-    private final static String CATEGORY_ID = "categoryIdBundle";
+    private final static String BUNDLE_CATEGORY_ID = "categoryIdBundle";
+    private final static String BUNDLE_ADD_SET_DATE = "addSetDateBundle";
 
-    // Instance
+    // Instances
     //
-    public static ExerciseListFragment newInstance(int categoryId) {
+    public static ExerciseListFragment newInstance(int categoryId, Date addSetDate) {
 
         Bundle args = new Bundle();
-        args.putInt(CATEGORY_ID, categoryId);
+        args.putInt(BUNDLE_CATEGORY_ID, categoryId);
+        args.putSerializable(BUNDLE_ADD_SET_DATE, addSetDate);
+
+        ExerciseListFragment fragment = new ExerciseListFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+    public static ExerciseListFragment newInstance(int categoryId) {
+        Bundle args = new Bundle();
+        args.putInt(BUNDLE_CATEGORY_ID, categoryId);
 
         ExerciseListFragment fragment = new ExerciseListFragment();
         fragment.setArguments(args);
@@ -52,6 +66,7 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
 
     private List<ExerciseListModel> _exercises;
     private int categoryId;
+    private Date addSetDate;
 
 
     // Binds
@@ -77,7 +92,8 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
         super.onViewCreated(view, savedInstanceState);
 
         Bundle bundle = this.getArguments();
-        categoryId = bundle.getInt(CATEGORY_ID, -1);
+        categoryId = bundle.getInt(BUNDLE_CATEGORY_ID, -1);
+        addSetDate = (Date)bundle.getSerializable(BUNDLE_ADD_SET_DATE);
 
         setTitle(getCategory().getName());
 
@@ -121,7 +137,13 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
                     public void onRowClicked(int position) {
                         // TODO : If coming from workout, this should select and redirect back to workout
                         // else, just open the swipe menu
-                        onTouchListener.openSwipeOptions(position);
+
+                        if (addSetDate != null) {
+                            addSet(position);
+                        }
+                        else {
+                            onTouchListener.openSwipeOptions(position);
+                        }
                     }
 
                     @Override
@@ -245,5 +267,9 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
                 .showCancelButton(true);
 
         dialog.show();
+    }
+
+    private void addSet(final int position) {
+        getNavigationManager().startWorkoutContainerWithExercise(getData().get(position).getId(), addSetDate);
     }
 }
