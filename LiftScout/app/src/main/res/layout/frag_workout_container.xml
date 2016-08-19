@@ -5,6 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:windowBackground">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <android.support.design.widget.TabLayout
         android:id="@+id/workout_tab_layout"
         android:layout_width="match_parent"
@@ -20,6 +24,9 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/workout_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/workout_tab_layout"/>
+
+    </RelativeLayout>
 
 </com.brandonhogan.liftscout.core.controls.BaseFrameLayout>
