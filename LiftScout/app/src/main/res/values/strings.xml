@@ -14,12 +14,14 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="cancel">Cancel</string>
+    <string name="clear">Clear</string>
     <string name="restart">Restart</string>
     <string name="close">Close</string>
     <string name="save">Save</string>
     <string name="routine">Routine</string>
     <string name="weight">Weight</string>
     <string name="photos">Photos</string>
+    <string name="reps">Reps</string>
 
     <!-- Drawer Navigations -->
     <string name="navigation_drawer_open">Open navigation drawer</string>

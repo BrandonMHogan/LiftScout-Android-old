@@ -20,8 +20,6 @@ import android.widget.RelativeLayout;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.controls.filters.DecimalDigitsInputFilter;
 
-import java.text.DecimalFormat;
-
 public class NumberPicker extends RelativeLayout {
 
     // Private Properties
@@ -99,7 +97,7 @@ public class NumberPicker extends RelativeLayout {
 
         editText.setText(currentNumber);
 
-        Drawable drawable = getResources().getDrawable(R.drawable.con_number_picker_background);
+        Drawable drawable = getResources().getDrawable(R.drawable.background_round_corner);
         drawable.setColorFilter(new PorterDuffColorFilter(backgroundColor, PorterDuff.Mode.SRC));
         if(Build.VERSION.SDK_INT > 16)
             layout.setBackground(drawable);

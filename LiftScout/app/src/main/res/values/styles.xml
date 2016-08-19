@@ -158,10 +158,10 @@
         <item name="android:textSize">@dimen/modal_text_size</item>
     </style>
 
-    <declare-styleable name="AnimCheckBox">
-        <attr name="stroke_width" format="dimension"/>
-        <attr name="stroke_color" format="color"/>
-        <attr name="circle_color" format="color"/>
-    </declare-styleable>
+    <style name="SaveButton" parent="Theme.AppCompat.Light">
+        <item name="android:background">@drawable/background_round_corner</item>
+        <item name="colorControlHighlight">@color/green_transparent_75</item>
+        <item name="colorButtonNormal">@color/blue</item>
+    </style>
 
 </resources>
