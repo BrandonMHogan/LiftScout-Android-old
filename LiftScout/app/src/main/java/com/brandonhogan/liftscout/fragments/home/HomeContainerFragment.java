@@ -21,7 +21,6 @@ import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.aaadev.AAADevWorkout;
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.core.constants.TodayTransforms;
 import com.brandonhogan.liftscout.core.controls.WeightDialog;
@@ -122,6 +121,7 @@ public class HomeContainerFragment extends BaseFragment {
 
             @Override
             public void onPageSelected(int position) {
+                updateTodayProgress();
             }
 
             @Override
@@ -165,6 +165,8 @@ public class HomeContainerFragment extends BaseFragment {
                 viewPager.setPageTransformer(true, new DefaultTransformer());
                 break;
         }
+
+        updateTodayProgress();
     }
 
     private void setupFab() {
@@ -263,6 +265,10 @@ public class HomeContainerFragment extends BaseFragment {
         params.putString("date", _currentProgress.getDate().toString());
         params.putDouble("weight", weight);
         ((MainActivity)getActivity()).getFirebaseAnalytics().logEvent("weight_set", params);
+    }
+
+    private void updateTodayProgress() {
+        getProgressManager().setTodayProgress(adapter.dateByPosition(viewPager.getCurrentItem()));
     }
 
     @OnClick(R.id.set)

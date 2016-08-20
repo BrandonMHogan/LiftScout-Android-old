@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.core.navigation;
+package com.brandonhogan.liftscout.core.managers;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -14,8 +14,6 @@ import com.brandonhogan.liftscout.fragments.settings.SettingsHomeFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
 import com.brandonhogan.liftscout.fragments.workout.WorkoutContainerFragment;
-
-import java.util.Date;
 
 public class NavigationManager {
 

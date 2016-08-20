@@ -9,13 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.aaadev.AAADevWorkout;
 import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
-
-import java.util.Date;
 
 import butterknife.Bind;
 
@@ -65,7 +62,6 @@ public class WorkoutContainerFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.frag_workout_container, container, false);
-
         return rootView;
     }
 

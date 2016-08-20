@@ -12,7 +12,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.brandonhogan.liftscout.activities.MainActivity;
-import com.brandonhogan.liftscout.core.navigation.NavigationManager;
+import com.brandonhogan.liftscout.core.managers.NavigationManager;
+import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import butterknife.ButterKnife;
@@ -39,6 +40,10 @@ public class BaseFragment extends Fragment {
 
     public NavigationManager getNavigationManager() {
         return ((MainActivity)getActivity()).getNavigationManager();
+    }
+
+    public ProgressManager getProgressManager() {
+        return ((MainActivity)getActivity()).getProgressManager();
     }
 
     public Realm getRealm() {
@@ -106,7 +111,6 @@ public class BaseFragment extends Fragment {
                 FirebaseAnalytics.Event.VIEW_ITEM,
                 screenView
         );
-
     }
 
     @Override
