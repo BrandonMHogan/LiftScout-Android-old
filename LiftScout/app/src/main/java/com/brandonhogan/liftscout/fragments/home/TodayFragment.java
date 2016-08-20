@@ -144,7 +144,7 @@ public class TodayFragment extends BaseFragment {
         mAdapter.withOnClickListener(new FastAdapter.OnClickListener<WorkoutItem>() {
             @Override
             public boolean onClick(View v, IAdapter<WorkoutItem> adapter, WorkoutItem item, int position) {
-                getNavigationManager().startWorkoutContainerWithSet(item.setId);
+                getNavigationManager().startWorkoutContainer(getTodayProgress().getId(), item.exerciseId);
                 return true;
             }
         });
@@ -167,7 +167,7 @@ public class TodayFragment extends BaseFragment {
             double volume = 0;
 
             for (Rep rep : set.getReps()) {
-                items.add(new WorkoutItem(set.getId(), rep.getCount(), rep.getWeight()));
+                items.add(new WorkoutItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight()));
                 volume += rep.getWeight();
             }
 

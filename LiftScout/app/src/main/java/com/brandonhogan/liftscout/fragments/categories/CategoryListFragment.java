@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.constants.Themes;
 import com.brandonhogan.liftscout.core.model.Category;
 import com.brandonhogan.liftscout.core.model.UserSetting;
@@ -30,15 +31,15 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
 
 
 
-    private final static String BUNDLE_ADD_SET_DATE = "addSetDateBundle";
+    private final static String BUNDLE_ADD_SET_PROGRESS_ID = "addSetProgressIdBundle";
 
 
     // Instance
     //
-    public static CategoryListFragment newInstance(Date addSetDate) {
+    public static CategoryListFragment newInstance(long progressId) {
 
         Bundle args = new Bundle();
-        args.putSerializable(BUNDLE_ADD_SET_DATE, addSetDate);
+        args.putLong(BUNDLE_ADD_SET_PROGRESS_ID, progressId);
 
         CategoryListFragment fragment = new CategoryListFragment();
         fragment.setArguments(args);
@@ -47,8 +48,13 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
     }
 
     public static CategoryListFragment newInstance() {
+        Bundle args = new Bundle();
+        args.putLong(BUNDLE_ADD_SET_PROGRESS_ID, Bundles.SHIT_ID);
 
-        return new CategoryListFragment();
+        CategoryListFragment fragment = new CategoryListFragment();
+        fragment.setArguments(args);
+
+        return fragment;
     }
 
 
@@ -59,7 +65,7 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
     private SweetAlertDialog dialog;
-    private Date addSetDate;
+    private long addSetProgressId;
 
     private List<CategoryListModel> _categories;
 
@@ -85,11 +91,7 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        try {
-            addSetDate = (Date)this.getArguments().getSerializable(BUNDLE_ADD_SET_DATE);
-        } catch (Exception ex) {
-
-        }
+        addSetProgressId = getArguments().getLong(BUNDLE_ADD_SET_PROGRESS_ID, Bundles.SHIT_ID);
 
 
         setTitle(getResources().getString(R.string.title_frag_category_list));
@@ -133,8 +135,8 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
                     @Override
                     public void onRowClicked(int position) {
 
-                        if (addSetDate != null) {
-                            getNavigationManager().startExerciseListAddSet(getData().get(position).getId(), addSetDate);
+                        if (addSetProgressId != Bundles.SHIT_ID) {
+                            getNavigationManager().startExerciseListAddSet(getData().get(position).getId(), addSetProgressId);
                         }
                         else {
                             getNavigationManager().startExerciseList(getData().get(position).getId());

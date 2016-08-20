@@ -133,6 +133,8 @@
     <dimen name="tracker_top_margin">15dp</dimen>
     <dimen name="tracker_inner_margin">5dp</dimen>
     <dimen name="tracker_outer_margin">7dp</dimen>
+    <dimen name="tracker_outer_bottom_margin">20dp</dimen>
+    <dimen name="tracker_divider_elevation">5dp</dimen>
     <dimen name="tracker_font_size">7sp</dimen>
     <dimen name="tracker_button_width">160dp</dimen>
     <dimen name="tracker_button_height">47dp</dimen>

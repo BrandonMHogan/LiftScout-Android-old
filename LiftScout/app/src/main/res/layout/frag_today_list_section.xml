@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="@dimen/today_section_padding"
-        android:paddingBottom="@dimen/today_section_padding"
-        android:background="#26A69A">
+        android:paddingBottom="@dimen/today_section_padding">
 
         <TextView
             android:id="@+id/section_name"

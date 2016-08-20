@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.brandonhogan.liftscout"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 24
 
         // Fetch the version according to git latest tag

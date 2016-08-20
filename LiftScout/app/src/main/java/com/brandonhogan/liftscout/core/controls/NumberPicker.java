@@ -24,8 +24,6 @@ public class NumberPicker extends RelativeLayout {
 
     // Private Properties
 
-    private String currentNumber = "0";
-
     private float textSize;
     private int textColor;
     private int backgroundColor;
@@ -95,7 +93,7 @@ public class NumberPicker extends RelativeLayout {
             editText.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(3,2)});
         }
 
-        editText.setText(currentNumber);
+        editText.setText("0");
 
         Drawable drawable = getResources().getDrawable(R.drawable.background_round_corner);
         drawable.setColorFilter(new PorterDuffColorFilter(backgroundColor, PorterDuff.Mode.SRC));
@@ -131,7 +129,6 @@ public class NumberPicker extends RelativeLayout {
             value = String.valueOf(integerValue);
         }
 
-        currentNumber = value;
         editText.setText(value);
     }
 
@@ -166,15 +163,16 @@ public class NumberPicker extends RelativeLayout {
             @Override
             public void afterTextChanged(Editable editable) {
                 if (editable.toString().length() > 0) {
-//
-//                    if (allowDecimal) {
-//                        if (Float.valueOf(editable.toString()) > maxValue)
-//                            editText.setText(maxValue);
-//                    }
-//                    else {
-//                        if (Integer.valueOf(editable.toString()) > maxValue)
-//                            editText.setText(Integer.toString(maxValue));
-//                    }
+
+                    if (allowDecimal) {
+                        if (Float.valueOf(editable.toString()) > maxValue) {
+                            editText.setText(maxValue);
+                        }
+                    }
+                    else {
+                        if (Integer.valueOf(editable.toString()) > maxValue)
+                            editText.setText(Integer.toString(maxValue));
+                    }
                 }
             }
         });
@@ -185,7 +183,7 @@ public class NumberPicker extends RelativeLayout {
 
     public String getNumber()
     {
-        return String.valueOf(currentNumber);
+        return editText.getText().toString();
     }
 
     public void setNumber(int number)

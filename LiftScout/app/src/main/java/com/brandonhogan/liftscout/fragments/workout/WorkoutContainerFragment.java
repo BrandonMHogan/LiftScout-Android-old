@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.aaadev.AAADevWorkout;
+import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
@@ -21,32 +23,19 @@ public class WorkoutContainerFragment extends BaseFragment {
 
     // Static Properties
     //
+    private static final String BUNDLE_PROGRESS_ID = "progressIdBundle";
     private static final String BUNDLE_EXERCISE_ID = "exerciseIdBundle";
-    private static final String BUNDLE_DATE = "dateBundle";
-    private static final String BUNDLE_SET_ID = "setIdBundle";
-    private static final int SHIT_ID = 99999;
-
 
     // Instance
     //
-    public static WorkoutContainerFragment newInstance(int setId)
+
+    public static WorkoutContainerFragment newInstance(long progressId, int exerciseId)
     {
         WorkoutContainerFragment frag = new WorkoutContainerFragment();
         Bundle bundle = new Bundle();
 
-        bundle.putInt(BUNDLE_SET_ID, setId);
-        frag.setArguments(bundle);
-
-        return frag;
-    }
-
-    public static WorkoutContainerFragment newInstance(int exerciseId, Date date)
-    {
-        WorkoutContainerFragment frag = new WorkoutContainerFragment();
-        Bundle bundle = new Bundle();
-
+        bundle.putLong(BUNDLE_PROGRESS_ID, progressId);
         bundle.putInt(BUNDLE_EXERCISE_ID, exerciseId);
-        bundle.putSerializable(BUNDLE_DATE, date);
         frag.setArguments(bundle);
 
         return frag;
@@ -56,9 +45,8 @@ public class WorkoutContainerFragment extends BaseFragment {
     // Private Properties
     //
     private View rootView;
-    private int setId;
     private int exerciseId;
-    private Date date;
+    private long progressId;
     private Set _set;
 
 
@@ -85,17 +73,10 @@ public class WorkoutContainerFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setId = getArguments().getInt(BUNDLE_SET_ID, SHIT_ID);
+        progressId = getArguments().getLong(BUNDLE_PROGRESS_ID, Bundles.SHIT_ID);
+        exerciseId = getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID);
 
-        try {
-            exerciseId = getArguments().getInt(BUNDLE_EXERCISE_ID, SHIT_ID);
-            date = (Date)getArguments().getSerializable(BUNDLE_DATE);
-
-        } catch (Exception ex) {
-        }
-
-
-        setTitle(getSet().getExercise().getName());
+        setTitle(getTitle());
 
 
         tabLayout.addTab(tabLayout.newTab().setText("Tracker"));
@@ -109,7 +90,7 @@ public class WorkoutContainerFragment extends BaseFragment {
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         final WorkoutContainerAdapter adapter = new WorkoutContainerAdapter
-                (getChildFragmentManager(), setId);
+                (getChildFragmentManager(), progressId, exerciseId);
 
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);
@@ -132,19 +113,8 @@ public class WorkoutContainerFragment extends BaseFragment {
         });
     }
 
-    private Set getSet() {
-        if (_set != null)
-            return _set;
-
-        if (setId == SHIT_ID) {
-            _set = new Set();
-            _set.setExercise(getRealm().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst());
-        }
-        else {
-            _set = getRealm().where(Set.class).equalTo(Set.ID, setId).findFirst();
-        }
-
-        return _set;
+    private String getTitle() {
+        return getRealm().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst().getName();
     }
 
 }

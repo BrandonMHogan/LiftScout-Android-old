@@ -217,8 +217,8 @@ public class NavigationManager {
         return openAsRoot(fragment);
     }
 
-    public boolean startCategoryListAddSet(Date date) {
-        Fragment fragment = CategoryListFragment.newInstance(date);
+    public boolean startCategoryListAddSet(long progressId) {
+        Fragment fragment = CategoryListFragment.newInstance(progressId);
         return openAsRoot(fragment);
     }
 
@@ -227,20 +227,15 @@ public class NavigationManager {
         return open(fragment);
     }
 
-    public boolean startExerciseListAddSet(int categoryId, Date date) {
-        Fragment fragment = ExerciseListFragment.newInstance(categoryId, date);
+    public boolean startExerciseListAddSet(int categoryId, long progressId) {
+        Fragment fragment = ExerciseListFragment.newInstance(categoryId, progressId);
         return open(fragment);
     }
 
 
     // Set Edit
-    public boolean startWorkoutContainerWithSet(int setId) {
-        Fragment fragment = WorkoutContainerFragment.newInstance(setId);
-        return open(fragment);
-    }
-
-    public boolean startWorkoutContainerWithExercise(int exerciseId, Date date) {
-        Fragment fragment = WorkoutContainerFragment.newInstance(exerciseId, date);
+    public boolean startWorkoutContainer(long progressId, int exerciseId) {
+        Fragment fragment = WorkoutContainerFragment.newInstance(progressId, exerciseId);
         return openAsRoot(fragment);
     }
 

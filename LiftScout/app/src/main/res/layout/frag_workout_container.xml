@@ -17,6 +17,8 @@
         android:background="@color/float_transparent"
         android:minHeight="?attr/actionBarSize"
         app:tabIndicatorColor="?attr/colorPrimary"
+        app:tabTextColor="?attr/android:textColor"
+        app:tabSelectedTextColor="?attr/android:textColor"
         app:tabMinWidth="120dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:elevation="5dp" />

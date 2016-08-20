@@ -13,6 +13,7 @@ public class AAADevWorkout {
     public static final void clearSets(Realm realm) {
         realm.beginTransaction();
         realm.where(Set.class).findAll().deleteAllFromRealm();
+        realm.where(Rep.class).findAll().deleteAllFromRealm();
         realm.commitTransaction();
     }
 

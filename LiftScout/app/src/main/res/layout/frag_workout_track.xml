@@ -35,10 +35,10 @@
                     android:text="@string/weight"/>
 
                 <com.brandonhogan.liftscout.core.controls.NumberPicker
-                    android:id="@+id/rep_number_picker"
+                    android:id="@+id/weight_number_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:backGroundColor="@color/colorPrimary"
+                    app:backGroundColor="@color/black_transparent_20"
                     app:textSize="@dimen/tracker_font_size"
                     app:textColor="@color/white"
                     app:maxValue="9999"
@@ -63,10 +63,10 @@
                     android:text="@string/reps"/>
 
                 <com.brandonhogan.liftscout.core.controls.NumberPicker
-                    android:id="@+id/weight_number_picker"
+                    android:id="@+id/rep_number_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:backGroundColor="@color/colorPrimary"
+                    app:backGroundColor="@color/black_transparent_20"
                     app:textSize="@dimen/tracker_font_size"
                     app:textColor="@color/white"
                     app:increment="1"
@@ -90,8 +90,7 @@
                 android:background="@drawable/background_round_corner_ripple"
                 android:backgroundTint="@color/blue"
                 android:textColor="@color/white"
-                android:layout_marginEnd="@dimen/tracker_inner_margin"
-                android:text="@string/save"/>
+                android:layout_marginEnd="@dimen/tracker_inner_margin" />
 
             <Button
                 android:id="@+id/second_button"
@@ -105,6 +104,19 @@
                 android:text="@string/clear"/>
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/tracker_outer_bottom_margin"
+            android:background="@color/divider"
+            android:elevation="@dimen/tracker_divider_elevation"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

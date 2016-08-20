@@ -267,7 +267,7 @@ public class HomeContainerFragment extends BaseFragment {
 
     @OnClick(R.id.set)
     public void addSetOnClick() {
-        getNavigationManager().startCategoryListAddSet(getTodayProgress().getDate());
+        getNavigationManager().startCategoryListAddSet(getTodayProgress().getId());
     }
 
     @OnClick(R.id.weight)

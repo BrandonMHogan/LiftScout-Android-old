@@ -68,7 +68,8 @@
     <string name="dialog_category_remove_message">Are you sure you wish to delete %s?</string>
     <string name="dialog_exercise_remove_title">Deleting %s</string>
     <string name="dialog_exercise_remove_message">Are you sure you wish to delete %s?</string>
-
+    <string name="dialog_rep_remove_title">Deleting Rep</string>
+    <string name="dialog_rep_remove_message">Are you sure you wish to delete this rep?</string>
 
     <!-- Home Fragment -->
     <string name="frag_home_first_load_message">"Welcome to Lift Scout %s! This app will become your closest ally in your swole journey."</string>
