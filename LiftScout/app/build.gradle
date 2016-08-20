@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'lskeystore'
+            keyPassword 'Zero9900'
+            storeFile file('/Users/bhogan/bh/lift-scout-android/lskeystore.jks')
+            storePassword 'Zero9900'
+        }
+    }
     compileSdkVersion 24
     buildToolsVersion "23.0.3"
 
@@ -9,10 +17,8 @@ android {
         applicationId "com.brandonhogan.liftscout"
         minSdkVersion 21
         targetSdkVersion 24
-
         // Fetch the version according to git latest tag
         def longVersionName = "git -C ${rootDir} describe --tags --long".execute().text.trim()
-
         // No tag found
         if (longVersionName.isEmpty())
             throw new GradleException("\n--------" + "GRADLE ERROR--------"
@@ -21,13 +27,10 @@ android {
                     "must be in the Major.Minor.Patch format."
                     + "\n"
                     + "Example : 1.2.3")
-
-
         def branchName = "git -C ${rootDir} rev-parse --abbrev-ref HEAD".execute().text.trim()
         def (fullVersionTag, versionBuild, gitSha) = longVersionName.tokenize('-')
-        def(versionMajor, versionMinor, versionPatch) = fullVersionTag.tokenize('.')
-
-        if (versionMajor == null  || versionMinor == null || versionPatch == null) {
+        def (versionMajor, versionMinor, versionPatch) = fullVersionTag.tokenize('.')
+        if (versionMajor == null || versionMinor == null || versionPatch == null) {
             throw new GradleException("\n--------" + "GRADLE ERROR--------"
                     + "\n"
                     + " - Could not find a valid tag associated to this build. Tag versioning " +
@@ -35,16 +38,12 @@ android {
                     + "\n"
                     + "Example : 1.2.3")
         }
-
         if (!versionMajor.isNumber())
             throw new GradleException("Tag version major is not numeric. " + versionMajor)
-
         if (!versionMinor.isNumber())
             throw new GradleException("Tag version minor is not numeric. " + versionMinor)
-
         if (!versionPatch.isNumber())
             throw new GradleException("Tag version patch is not numeric. " + versionPatch)
-
         // Set the version name
         versionName "$branchName $versionMajor.$versionMinor.$versionPatch($versionBuild)"
 
@@ -53,6 +52,7 @@ android {
                 versionMinor.toInteger() *1000 +
                 versionPatch.toInteger() *100 +
                 versionBuild.toInteger()
+
 
         // Friendly print the version output to the Gradle console
         printf("\n--------" + "VERSION DATA--------"
@@ -65,13 +65,13 @@ android {
                 + "\n"
                 + "- Long Version Name: " + longVersionName
                 + "\n----------------------------\n")
-
+        signingConfig signingConfigs.config
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
         debug {
             debuggable true
@@ -79,6 +79,8 @@ android {
             minifyEnabled false
             applicationIdSuffix '.debug'
         }
+    }
+    productFlavors {
     }
 }
 
@@ -90,27 +92,36 @@ dependencies {
     compile 'com.android.support:support-v13:24.1.1'
     compile 'com.android.support:cardview-v7:24.1.1'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.prolificinteractive:material-calendarview:1.2.0' // Calendar
-    compile 'cn.pedant.sweetalert:library:1.3' // Fancy Alerts
-    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar' // Today ViewPager Transforms
-    compile 'com.jaredrummler:material-spinner:1.1.0' // Spinner
-    compile 'com.github.fafaldo:fab-toolbar:1.2.0' // Fab toolbar
-    compile 'com.afollestad.material-dialogs:core:0.8.6.2' // Material Dialogs
-    compile 'biz.kasual:materialnumberpicker:1.2.1' // Number Picker used in weight dialog
-    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3' // Submit Button
-    compile 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0' // Recycler View
-    compile 'com.thebluealliance:spectrum:0.5.0' // Color Pickers
-    compile 'com.brandonhogan.accordionview:accordionview:0.1.1' // Accordion Control
-    compile('com.mikepenz:fastadapter:1.6.0@aar') { // Fast Recycler Adapter
+    // Calendar
+    compile 'com.prolificinteractive:material-calendarview:1.2.0'
+    // Fancy Alerts
+    compile 'cn.pedant.sweetalert:library:1.3'
+    // Today ViewPager Transforms
+    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    // Spinner
+    compile 'com.jaredrummler:material-spinner:1.1.0'
+    // Fab toolbar
+    compile 'com.github.fafaldo:fab-toolbar:1.2.0'
+    // Material Dialogs
+    compile 'com.afollestad.material-dialogs:core:0.8.6.2'
+    // Number Picker used in weight dialog
+    compile 'biz.kasual:materialnumberpicker:1.2.1'
+    // Submit Button
+    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
+    // Recycler View
+    compile 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0'
+    // Color Pickers
+    compile 'com.thebluealliance:spectrum:0.5.0'
+    // Accordion Control
+    compile 'com.brandonhogan.accordionview:accordionview:0.1.1'
+    // Fast Recycler Adapter
+    compile('com.mikepenz:fastadapter:1.6.0@aar') {
         transitive = true
     }
-
-
     // Firebase
     compile 'com.google.firebase:firebase-core:9.4.0'
     compile 'com.google.firebase:firebase-crash:9.4.0'
     compile 'com.google.android.gms:play-services-tagmanager:9.4.0'
-
 }
 
 apply plugin: 'com.google.gms.google-services'
