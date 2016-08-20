@@ -9,19 +9,17 @@ import android.view.ViewGroup;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 
-import java.util.Date;
-
 public class WorkoutHistoryFragment extends BaseFragment {
 
 
     // Instance
     //
-    public static WorkoutHistoryFragment newInstance(int setId)
+    public static WorkoutHistoryFragment newInstance(long progressId)
     {
         WorkoutHistoryFragment frag = new WorkoutHistoryFragment();
         Bundle bundle = new Bundle();
 
-        bundle.putLong(SET_ID_BUNDLE, setId);
+        bundle.putLong(BUNDLE_PROGRESS_ID, progressId);
         frag.setArguments(bundle);
 
         return frag;
@@ -35,7 +33,7 @@ public class WorkoutHistoryFragment extends BaseFragment {
 
     // Static Properties
     //
-    private static final String SET_ID_BUNDLE = "setIdBundle";
+    private static final String BUNDLE_PROGRESS_ID = "progressIdBundle";
 
 
     //Overrides

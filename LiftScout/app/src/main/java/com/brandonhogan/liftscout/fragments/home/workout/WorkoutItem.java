@@ -10,11 +10,13 @@ import com.mikepenz.fastadapter.items.AbstractItem;
 public class WorkoutItem extends AbstractItem<WorkoutItem, WorkoutItem.ViewHolder> {
 
     public int setId;
+    public int exerciseId;
     public int reps;
     public double weight;
 
-    public WorkoutItem(int setId, int reps, double weight) {
+    public WorkoutItem(int setId, int exerciseId, int reps, double weight) {
         this.setId = setId;
+        this.exerciseId = exerciseId;
         this.reps = reps;
         this.weight = weight;
     }

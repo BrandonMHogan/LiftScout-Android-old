@@ -2,13 +2,122 @@
 <com.brandonhogan.liftscout.core.controls.BaseFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:windowBackground">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?android:windowBackground" >
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Track"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginTop="@dimen/tracker_top_margin"
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/tracker_outer_margin"
+            android:layout_marginEnd="@dimen/tracker_outer_margin"
+            android:layout_gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/tracker_inner_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="@string/weight"/>
+
+                <com.brandonhogan.liftscout.core.controls.NumberPicker
+                    android:id="@+id/weight_number_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:backGroundColor="@color/black_transparent_20"
+                    app:textSize="@dimen/tracker_font_size"
+                    app:textColor="@color/white"
+                    app:maxValue="9999"
+                    app:increment="1"
+                    app:allowDecimal="true"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/tracker_inner_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="@string/reps"/>
+
+                <com.brandonhogan.liftscout.core.controls.NumberPicker
+                    android:id="@+id/rep_number_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:backGroundColor="@color/black_transparent_20"
+                    app:textSize="@dimen/tracker_font_size"
+                    app:textColor="@color/white"
+                    app:increment="1"
+                    app:maxValue="999"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/first_button"
+                android:layout_width="@dimen/tracker_button_width"
+                android:layout_height="@dimen/tracker_button_height"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/background_round_corner_ripple"
+                android:backgroundTint="@color/blue"
+                android:textColor="@color/white"
+                android:layout_marginEnd="@dimen/tracker_inner_margin" />
+
+            <Button
+                android:id="@+id/second_button"
+                android:layout_width="@dimen/tracker_button_width"
+                android:layout_height="@dimen/tracker_button_height"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/background_round_corner_ripple"
+                android:backgroundTint="@color/black_transparent_30"
+                android:textColor="@color/white"
+                android:layout_marginStart="@dimen/tracker_inner_margin"
+                android:text="@string/clear"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/tracker_outer_bottom_margin"
+            android:background="@color/divider"
+            android:elevation="@dimen/tracker_divider_elevation"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </com.brandonhogan.liftscout.core.controls.BaseFrameLayout>

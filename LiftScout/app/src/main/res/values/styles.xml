@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textColorSecondary">@color/textColorSecondary</item>
         <item name="android:textColorPrimaryInverse">@color/textColorPrimaryInverse</item>
@@ -32,6 +33,7 @@
         <item name="colorPrimary">@color/colorPrimaryInverse</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkInverse</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/textColorPrimaryInverse</item>
         <item name="android:textColorPrimary">@color/textColorPrimaryInverse</item>
         <item name="android:textColorSecondary">@color/textColorSecondaryInverse</item>
         <item name="android:textColorPrimaryInverse">@color/textColorPrimary</item>
@@ -158,10 +160,10 @@
         <item name="android:textSize">@dimen/modal_text_size</item>
     </style>
 
-    <declare-styleable name="AnimCheckBox">
-        <attr name="stroke_width" format="dimension"/>
-        <attr name="stroke_color" format="color"/>
-        <attr name="circle_color" format="color"/>
-    </declare-styleable>
+    <style name="SaveButton" parent="Theme.AppCompat.Light">
+        <item name="android:background">@drawable/background_round_corner</item>
+        <item name="colorControlHighlight">@color/green_transparent_75</item>
+        <item name="colorButtonNormal">@color/blue</item>
+    </style>
 
 </resources>

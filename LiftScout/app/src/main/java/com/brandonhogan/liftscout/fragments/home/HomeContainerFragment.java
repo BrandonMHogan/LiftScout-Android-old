@@ -85,13 +85,12 @@ public class HomeContainerFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle("Home Sweet Home");
+        setTitle(getString(R.string.app_name));
 
         setupPager();
         setupFab();
 
-
-        //        AAADevWorkout.clearSets(getRealm());
+//        AAADevWorkout.clearSets(getRealm());
 //
 //        AAADevWorkout.addSet(getRealm(), getTodayProgress(), 0);
 //        AAADevWorkout.addSet(getRealm(), getTodayProgress(), 1);
@@ -103,6 +102,7 @@ public class HomeContainerFragment extends BaseFragment {
     public void onPause() {
         super.onPause();
         toolbarLayout.hide(); // Hides because it bugs out if left open and returned sometimes
+        clearTodayTransform();
     }
 
     // Private Functions
@@ -199,6 +199,10 @@ public class HomeContainerFragment extends BaseFragment {
         getRealm().commitTransaction();
     }
 
+    private void clearTodayTransform() {
+        _todayTransformUserSetting = null;
+    }
+
     private UserSetting getTodayTransform() {
 
         if (_todayTransformUserSetting != null)
@@ -263,7 +267,7 @@ public class HomeContainerFragment extends BaseFragment {
 
     @OnClick(R.id.set)
     public void addSetOnClick() {
-        getNavigationManager().startCategoryListAddSet(getTodayProgress().getDate());
+        getNavigationManager().startCategoryListAddSet(getTodayProgress().getId());
     }
 
     @OnClick(R.id.weight)

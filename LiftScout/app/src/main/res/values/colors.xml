@@ -5,7 +5,7 @@
     <color name="colorPrimaryDark">#F57C00</color>
     <color name="colorPrimaryLight">#FFE0B2</color>
     <color name="colorAccent">#FF5252</color>
-    <color name="textColorPrimary">#9E9E9E</color>
+    <color name="textColorPrimary">#3f3f3f</color>
     <color name="textColorSecondary">#9E9E9E</color>
     <color name="activity_background_light">#FFFFFF</color>
     <color name="fillColor">#ececec</color>
@@ -26,6 +26,7 @@
     <color name="green">#36CF8E</color>
     <color name="blue">#3693D0</color>
     <color name="red">#ff1744</color>
+    <color name="divider">#67676767</color>
 
     <!-- Category Colors -->
     <color name="category_light_red">#f44336</color>

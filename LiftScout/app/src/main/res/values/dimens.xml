@@ -128,4 +128,14 @@
     <dimen name="today_item_margin">2dp</dimen>
 
     <dimen name="today_section_text_padding_left">15dp</dimen>
+
+    <!-- Workout Section -->
+    <dimen name="tracker_top_margin">15dp</dimen>
+    <dimen name="tracker_inner_margin">10dp</dimen>
+    <dimen name="tracker_outer_margin">12dp</dimen>
+    <dimen name="tracker_outer_bottom_margin">20dp</dimen>
+    <dimen name="tracker_divider_elevation">5dp</dimen>
+    <dimen name="tracker_font_size">5sp</dimen>
+    <dimen name="tracker_button_width">160dp</dimen>
+    <dimen name="tracker_button_height">47dp</dimen>
 </resources>

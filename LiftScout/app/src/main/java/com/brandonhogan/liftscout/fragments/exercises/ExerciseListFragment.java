@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.model.Category;
 import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
@@ -29,15 +30,15 @@ import io.realm.RealmResults;
 public class ExerciseListFragment extends BaseFragment implements RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private final static String BUNDLE_CATEGORY_ID = "categoryIdBundle";
-    private final static String BUNDLE_ADD_SET_DATE = "addSetDateBundle";
+    private final static String BUNDLE_ADD_SET_PROGRESS_ID = "addSetProgressIdBundle";
 
     // Instances
     //
-    public static ExerciseListFragment newInstance(int categoryId, Date addSetDate) {
+    public static ExerciseListFragment newInstance(int categoryId, long progressId) {
 
         Bundle args = new Bundle();
         args.putInt(BUNDLE_CATEGORY_ID, categoryId);
-        args.putSerializable(BUNDLE_ADD_SET_DATE, addSetDate);
+        args.putLong(BUNDLE_ADD_SET_PROGRESS_ID, progressId);
 
         ExerciseListFragment fragment = new ExerciseListFragment();
         fragment.setArguments(args);
@@ -66,7 +67,7 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
 
     private List<ExerciseListModel> _exercises;
     private int categoryId;
-    private Date addSetDate;
+    private long addSetProgressId;
 
 
     // Binds
@@ -93,7 +94,7 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
 
         Bundle bundle = this.getArguments();
         categoryId = bundle.getInt(BUNDLE_CATEGORY_ID, -1);
-        addSetDate = (Date)bundle.getSerializable(BUNDLE_ADD_SET_DATE);
+        addSetProgressId = bundle.getLong(BUNDLE_ADD_SET_PROGRESS_ID, Bundles.SHIT_ID);
 
         setTitle(getCategory().getName());
 
@@ -138,7 +139,7 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
                         // TODO : If coming from workout, this should select and redirect back to workout
                         // else, just open the swipe menu
 
-                        if (addSetDate != null) {
+                        if (addSetProgressId != Bundles.SHIT_ID) {
                             addSet(position);
                         }
                         else {
@@ -270,6 +271,6 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
     }
 
     private void addSet(final int position) {
-        getNavigationManager().startWorkoutContainerWithExercise(getData().get(position).getId(), addSetDate);
+        getNavigationManager().startWorkoutContainer(addSetProgressId, getData().get(position).getId());
     }
 }

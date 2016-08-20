@@ -2,11 +2,14 @@ package com.brandonhogan.liftscout.fragments.base;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.core.navigation.NavigationManager;
@@ -70,6 +73,18 @@ public class BaseFragment extends Fragment {
         }
     }
 
+    public static void hideKeyboard(Context ctx) {
+        InputMethodManager inputManager = (InputMethodManager) ctx
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        // check if no view has focus:
+        View v = ((Activity) ctx).getCurrentFocus();
+        if (v == null)
+            return;
+
+        inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
 
     // Overrides
     //
@@ -92,6 +107,12 @@ public class BaseFragment extends Fragment {
                 screenView
         );
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        hideKeyboard(getActivity());
     }
 
     @Override
