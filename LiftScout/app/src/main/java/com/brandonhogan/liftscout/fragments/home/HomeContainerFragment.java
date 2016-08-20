@@ -85,7 +85,7 @@ public class HomeContainerFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle("Home Sweet Home");
+        setTitle(getString(R.string.app_name));
 
         setupPager();
         setupFab();

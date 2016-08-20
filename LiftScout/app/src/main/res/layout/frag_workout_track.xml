@@ -98,7 +98,7 @@
                 android:layout_height="@dimen/tracker_button_height"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/background_round_corner_ripple"
-                android:backgroundTint="@color/gray_dark"
+                android:backgroundTint="@color/black_transparent_30"
                 android:textColor="@color/white"
                 android:layout_marginStart="@dimen/tracker_inner_margin"
                 android:text="@string/clear"/>
