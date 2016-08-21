@@ -2,6 +2,8 @@ package com.brandonhogan.liftscout;
 
 import android.app.Application;
 
+import com.squareup.leakcanary.LeakCanary;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -24,5 +26,6 @@ public class AppController extends Application {
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
 
+        LeakCanary.install(this);
     }
 }
