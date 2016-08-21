@@ -76,8 +76,7 @@ public class TodayFragment extends BaseFragment {
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
-
-
+    
 
     //Overrides
     //
@@ -145,10 +144,8 @@ public class TodayFragment extends BaseFragment {
             }
         });
 
-
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         Set updatedSet = getProgressManager().getUpdatedSet();
         if (updatedSet != null) {
@@ -203,6 +200,7 @@ public class TodayFragment extends BaseFragment {
 
         return _currentProgress;
     }
+
 
     // Public Function
     //
