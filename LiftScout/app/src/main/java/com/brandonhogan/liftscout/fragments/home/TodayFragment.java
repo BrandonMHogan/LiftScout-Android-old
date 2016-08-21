@@ -63,9 +63,7 @@ public class TodayFragment extends BaseFragment {
     private String year;
     private String dateString;
     private FastItemAdapter mAdapter;
-    List<IItem> _workout;
-
-    private Progress _currentProgress;
+    List<WorkoutSection> _workout;
 
 
     // Binds
@@ -113,7 +111,6 @@ public class TodayFragment extends BaseFragment {
     // Private Functions
     //
     private void clearLocalReferences() {
-        _currentProgress = null;
         _workout = null;
     }
 
@@ -151,11 +148,25 @@ public class TodayFragment extends BaseFragment {
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+        Set updatedSet = getProgressManager().getUpdatedSet();
+        if (updatedSet != null) {
+            int pos = 0;
+            for (WorkoutSection section : _workout) {
+                if (section.setId == updatedSet.getId()) {
+                    mAdapter.expand(pos);
+                    getProgressManager().clearUpdatedSet();
+                    break;
+                }
+                pos +=1;
+            }
+        }
     }
 
-    private List<IItem> getData() {
+    private List<WorkoutSection> getData() {
 
-        if (_workout != null)
+        if (_workout != null && _workout.size() > 0 && !getProgressManager().isSetUpdated())
             return _workout;
 
         _workout = new ArrayList<>();
@@ -170,7 +181,7 @@ public class TodayFragment extends BaseFragment {
                 volume += rep.getWeight();
             }
 
-            WorkoutSection expandableItem = new WorkoutSection(set.getExercise().getName(), volume);
+            WorkoutSection expandableItem = new WorkoutSection(set.getId(), set.getExercise().getName(), volume);
             expandableItem.withSubItems(items);
             _workout.add(expandableItem);
         }
@@ -178,10 +189,7 @@ public class TodayFragment extends BaseFragment {
     }
 
     private Progress getTodayProgress() {
-        if (_currentProgress != null && _currentProgress.isValid())
-            return _currentProgress;
-
-        _currentProgress = getRealm().where(Progress.class)
+        Progress _currentProgress = getRealm().where(Progress.class)
                 .equalTo(Progress.DATE, date).findFirst();
 
         if (_currentProgress == null) {

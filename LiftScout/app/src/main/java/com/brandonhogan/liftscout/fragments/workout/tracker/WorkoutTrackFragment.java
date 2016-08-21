@@ -221,6 +221,8 @@ public class WorkoutTrackFragment extends BaseFragment implements RecyclerTouchL
 
         selectedRep = null;
 
+        getProgressManager().updateSet(set);
+
         update();
     }
 

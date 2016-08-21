@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity
             // This needs to be hit first regardless of where a notification will go. Home must
             // be the first item in the back stack
             navigationManager.startHome();
-          //  AAADevWorkout.clearSets(getRealm());
+            //AAADevWorkout.clearSets(getRealm());
         }
     }
 

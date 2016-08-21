@@ -16,6 +16,7 @@ public class ProgressManager {
 
     private MainActivity mActivity;
     private Progress mTodayProgress;
+    private Set mUpdatedSet;
 
     /**
      * Initialize the NavigationManager with a FragmentManager, which will be used at the
@@ -49,5 +50,21 @@ public class ProgressManager {
             mActivity.getRealm().copyToRealmOrUpdate(mTodayProgress);
             mActivity.getRealm().commitTransaction();
         }
+    }
+
+    public boolean isSetUpdated() {
+        return mUpdatedSet != null;
+    }
+
+    public Set getUpdatedSet() {
+        return mUpdatedSet;
+    }
+
+    public void updateSet(Set set) {
+        mUpdatedSet = set;
+    }
+
+    public void clearUpdatedSet() {
+        mUpdatedSet = null;
     }
 }
