@@ -129,6 +129,7 @@ public class WorkoutTrackFragment extends BaseFragment implements RecyclerTouchL
             set = new Set();
             set.setExercise(getRealm().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst());
             set.setReps(new RealmList<Rep>());
+            set.setOrderId(getProgressManager().getTodayProgress().getSets().size());
         }
     }
 

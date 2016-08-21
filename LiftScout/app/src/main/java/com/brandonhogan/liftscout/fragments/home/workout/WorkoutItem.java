@@ -5,20 +5,35 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
+import com.mikepenz.fastadapter.IDraggable;
+import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
-public class WorkoutItem extends AbstractItem<WorkoutItem, WorkoutItem.ViewHolder> {
+public class WorkoutItem extends AbstractItem<WorkoutItem, WorkoutItem.ViewHolder> implements IDraggable<WorkoutItem, IItem> {
 
     public int setId;
     public int exerciseId;
     public int reps;
     public double weight;
+    private boolean mIsDraggable = false;
 
     public WorkoutItem(int setId, int exerciseId, int reps, double weight) {
         this.setId = setId;
         this.exerciseId = exerciseId;
         this.reps = reps;
         this.weight = weight;
+
+    }
+
+    @Override
+    public boolean isDraggable() {
+        return mIsDraggable;
+    }
+
+    @Override
+    public WorkoutItem withIsDraggable(boolean draggable) {
+        this.mIsDraggable = draggable;
+        return this;
     }
 
     //The unique ID for this type of item
