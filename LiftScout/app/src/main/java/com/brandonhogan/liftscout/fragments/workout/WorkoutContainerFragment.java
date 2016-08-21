@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.model.Exercise;
-import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 
 import butterknife.Bind;

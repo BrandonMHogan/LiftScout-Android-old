@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.aaadev.AAADevWorkout;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.model.User;

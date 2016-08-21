@@ -1,7 +1,5 @@
 package com.brandonhogan.liftscout.core.managers;
 
-import android.util.Log;
-
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.core.model.Progress;
 import com.brandonhogan.liftscout.core.model.Set;

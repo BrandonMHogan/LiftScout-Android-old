@@ -30,8 +30,6 @@ import com.brandonhogan.liftscout.core.model.UserSetting;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
-import java.util.Date;
-
 import butterknife.Bind;
 import butterknife.OnClick;
 import io.realm.Sort;
