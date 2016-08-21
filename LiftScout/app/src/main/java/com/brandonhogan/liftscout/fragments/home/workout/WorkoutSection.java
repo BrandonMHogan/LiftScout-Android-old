@@ -24,6 +24,7 @@ public class WorkoutSection extends AbstractItem<WorkoutSection, WorkoutSection.
     //the static ViewHolderFactory which will be used to generate the ViewHolder for this Item
     private static final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
 
+    public int setId;
     public String name;
     public double volume;
 
@@ -32,7 +33,8 @@ public class WorkoutSection extends AbstractItem<WorkoutSection, WorkoutSection.
 
     private FastAdapter.OnClickListener<WorkoutSection> mOnClickListener;
 
-    public WorkoutSection(String name, double volume) {
+    public WorkoutSection(int setId, String name, double volume) {
+        this.setId = setId;
         this.name = name;
         this.volume = volume;
     }

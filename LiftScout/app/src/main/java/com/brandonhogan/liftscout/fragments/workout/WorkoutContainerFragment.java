@@ -9,32 +9,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.aaadev.AAADevWorkout;
 import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.model.Exercise;
-import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
-
-import java.util.Date;
 
 import butterknife.Bind;
 
 public class WorkoutContainerFragment extends BaseFragment {
 
+
     // Static Properties
     //
-    private static final String BUNDLE_PROGRESS_ID = "progressIdBundle";
     private static final String BUNDLE_EXERCISE_ID = "exerciseIdBundle";
+
 
     // Instance
     //
-
-    public static WorkoutContainerFragment newInstance(long progressId, int exerciseId)
+    public static WorkoutContainerFragment newInstance(int exerciseId)
     {
         WorkoutContainerFragment frag = new WorkoutContainerFragment();
         Bundle bundle = new Bundle();
 
-        bundle.putLong(BUNDLE_PROGRESS_ID, progressId);
         bundle.putInt(BUNDLE_EXERCISE_ID, exerciseId);
         frag.setArguments(bundle);
 
@@ -46,8 +41,6 @@ public class WorkoutContainerFragment extends BaseFragment {
     //
     private View rootView;
     private int exerciseId;
-    private long progressId;
-    private Set _set;
 
 
     // Binds
@@ -65,7 +58,6 @@ public class WorkoutContainerFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.frag_workout_container, container, false);
-
         return rootView;
     }
 
@@ -73,11 +65,9 @@ public class WorkoutContainerFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        progressId = getArguments().getLong(BUNDLE_PROGRESS_ID, Bundles.SHIT_ID);
         exerciseId = getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID);
 
         setTitle(getTitle());
-
 
         tabLayout.addTab(tabLayout.newTab().setText("Tracker"));
         tabLayout.addTab(tabLayout.newTab().setText("History"));
@@ -90,7 +80,7 @@ public class WorkoutContainerFragment extends BaseFragment {
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         final WorkoutContainerAdapter adapter = new WorkoutContainerAdapter
-                (getChildFragmentManager(), progressId, exerciseId);
+                (getChildFragmentManager(), exerciseId);
 
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);

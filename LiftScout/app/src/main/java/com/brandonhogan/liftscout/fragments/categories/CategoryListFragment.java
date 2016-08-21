@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.constants.Themes;
 import com.brandonhogan.liftscout.core.model.Category;
 import com.brandonhogan.liftscout.core.model.UserSetting;
@@ -19,7 +18,6 @@ import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -31,25 +29,15 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
 
 
 
-    private final static String BUNDLE_ADD_SET_PROGRESS_ID = "addSetProgressIdBundle";
+    private final static String BUNDLE_ADD_SET = "addSetBundle";
 
 
     // Instance
     //
-    public static CategoryListFragment newInstance(long progressId) {
+    public static CategoryListFragment newInstance(boolean addSet) {
 
         Bundle args = new Bundle();
-        args.putLong(BUNDLE_ADD_SET_PROGRESS_ID, progressId);
-
-        CategoryListFragment fragment = new CategoryListFragment();
-        fragment.setArguments(args);
-
-        return fragment;
-    }
-
-    public static CategoryListFragment newInstance() {
-        Bundle args = new Bundle();
-        args.putLong(BUNDLE_ADD_SET_PROGRESS_ID, Bundles.SHIT_ID);
+        args.putBoolean(BUNDLE_ADD_SET, addSet);
 
         CategoryListFragment fragment = new CategoryListFragment();
         fragment.setArguments(args);
@@ -65,7 +53,7 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
     private SweetAlertDialog dialog;
-    private long addSetProgressId;
+    private boolean addSet;
 
     private List<CategoryListModel> _categories;
 
@@ -91,7 +79,7 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        addSetProgressId = getArguments().getLong(BUNDLE_ADD_SET_PROGRESS_ID, Bundles.SHIT_ID);
+        addSet = getArguments().getBoolean(BUNDLE_ADD_SET);
 
 
         setTitle(getResources().getString(R.string.title_frag_category_list));
@@ -135,8 +123,8 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
                     @Override
                     public void onRowClicked(int position) {
 
-                        if (addSetProgressId != Bundles.SHIT_ID) {
-                            getNavigationManager().startExerciseListAddSet(getData().get(position).getId(), addSetProgressId);
+                        if (addSet) {
+                            getNavigationManager().startExerciseListAddSet(getData().get(position).getId());
                         }
                         else {
                             getNavigationManager().startExerciseList(getData().get(position).getId());

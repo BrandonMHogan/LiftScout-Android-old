@@ -5,13 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.model.Category;
 import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
@@ -19,7 +17,6 @@ import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -30,15 +27,15 @@ import io.realm.RealmResults;
 public class ExerciseListFragment extends BaseFragment implements RecyclerTouchListener.RecyclerTouchListenerHelper {
 
     private final static String BUNDLE_CATEGORY_ID = "categoryIdBundle";
-    private final static String BUNDLE_ADD_SET_PROGRESS_ID = "addSetProgressIdBundle";
+    private final static String BUNDLE_ADD_SET = "addSetBundle";
 
     // Instances
     //
-    public static ExerciseListFragment newInstance(int categoryId, long progressId) {
+    public static ExerciseListFragment newInstance(int categoryId, boolean addSet) {
 
         Bundle args = new Bundle();
         args.putInt(BUNDLE_CATEGORY_ID, categoryId);
-        args.putLong(BUNDLE_ADD_SET_PROGRESS_ID, progressId);
+        args.putBoolean(BUNDLE_ADD_SET, addSet);
 
         ExerciseListFragment fragment = new ExerciseListFragment();
         fragment.setArguments(args);
@@ -67,7 +64,7 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
 
     private List<ExerciseListModel> _exercises;
     private int categoryId;
-    private long addSetProgressId;
+    private boolean addSet;
 
 
     // Binds
@@ -94,7 +91,7 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
 
         Bundle bundle = this.getArguments();
         categoryId = bundle.getInt(BUNDLE_CATEGORY_ID, -1);
-        addSetProgressId = bundle.getLong(BUNDLE_ADD_SET_PROGRESS_ID, Bundles.SHIT_ID);
+        addSet = bundle.getBoolean(BUNDLE_ADD_SET);
 
         setTitle(getCategory().getName());
 
@@ -139,7 +136,7 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
                         // TODO : If coming from workout, this should select and redirect back to workout
                         // else, just open the swipe menu
 
-                        if (addSetProgressId != Bundles.SHIT_ID) {
+                        if (addSet) {
                             addSet(position);
                         }
                         else {
@@ -271,6 +268,6 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
     }
 
     private void addSet(final int position) {
-        getNavigationManager().startWorkoutContainer(addSetProgressId, getData().get(position).getId());
+        getNavigationManager().startWorkoutContainer(getData().get(position).getId());
     }
 }

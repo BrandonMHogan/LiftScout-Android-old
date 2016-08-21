@@ -10,8 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.managers.NavigationManager;
+import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.model.User;
-import com.brandonhogan.liftscout.core.navigation.NavigationManager;
 import com.brandonhogan.liftscout.core.utils.DatabaseOutput;
 
 import java.util.Date;
@@ -22,11 +23,15 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         NavigationManager.NavigationListener {
 
+    // Private Static Properties
+    //
+    private static final String SAVE_STATE_TODAY_PROGRESS_DATE = "saveStateTodayProgressDate";
 
     // Private Properties
     //
     private DrawerLayout drawer;
     private NavigationManager navigationManager;
+    private ProgressManager mProgressManager;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private SweetAlertDialog dialog;
@@ -58,16 +63,24 @@ public class MainActivity extends BaseActivity
             navigationManager.init(getFragmentManager());
             navigationManager.setNavigationListener(this);
 
+            mProgressManager = new ProgressManager();
+            mProgressManager.init(this);
 
             //This is set when restoring from a previous state,
             //so we do not want to try and load a new fragment
             if (savedInstanceState != null) {
+                Date todayDate = (Date)savedInstanceState.getSerializable(SAVE_STATE_TODAY_PROGRESS_DATE);
+                mProgressManager.setTodayProgress(todayDate);
+
+                setDrawerIndicator();
+
                 return;
             }
 
             // This needs to be hit first regardless of where a notification will go. Home must
             // be the first item in the back stack
             navigationManager.startHome();
+            //AAADevWorkout.clearSets(getRealm());
         }
     }
 
@@ -81,6 +94,16 @@ public class MainActivity extends BaseActivity
     protected void onPause() {
         super.onPause();
         updateUserData();
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putSerializable(SAVE_STATE_TODAY_PROGRESS_DATE,
+                mProgressManager.getTodayProgress().getDate());
+
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -138,6 +161,10 @@ public class MainActivity extends BaseActivity
 
     public NavigationManager getNavigationManager() {
         return navigationManager;
+    }
+
+    public ProgressManager getProgressManager() {
+        return mProgressManager;
     }
 
 
@@ -207,6 +234,10 @@ public class MainActivity extends BaseActivity
 
         }
 
+        setDrawerIndicator();
+    }
+
+    private void setDrawerIndicator() {
         boolean rootFragment = navigationManager.isRootFragmentVisible();
 
         toggle.setDrawerIndicatorEnabled(rootFragment);

@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.model.Progress;
@@ -64,9 +63,7 @@ public class TodayFragment extends BaseFragment {
     private String year;
     private String dateString;
     private FastItemAdapter mAdapter;
-    List<IItem> _workout;
-
-    private Progress _currentProgress;
+    List<WorkoutSection> _workout;
 
 
     // Binds
@@ -79,8 +76,7 @@ public class TodayFragment extends BaseFragment {
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
-
-
+    
 
     //Overrides
     //
@@ -114,7 +110,6 @@ public class TodayFragment extends BaseFragment {
     // Private Functions
     //
     private void clearLocalReferences() {
-        _currentProgress = null;
         _workout = null;
     }
 
@@ -144,19 +139,31 @@ public class TodayFragment extends BaseFragment {
         mAdapter.withOnClickListener(new FastAdapter.OnClickListener<WorkoutItem>() {
             @Override
             public boolean onClick(View v, IAdapter<WorkoutItem> adapter, WorkoutItem item, int position) {
-                getNavigationManager().startWorkoutContainer(getTodayProgress().getId(), item.exerciseId);
+                getNavigationManager().startWorkoutContainer(item.exerciseId);
                 return true;
             }
         });
 
-
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        Set updatedSet = getProgressManager().getUpdatedSet();
+        if (updatedSet != null) {
+            int pos = 0;
+            for (WorkoutSection section : _workout) {
+                if (section.setId == updatedSet.getId()) {
+                    mAdapter.expand(pos);
+                    getProgressManager().clearUpdatedSet();
+                    break;
+                }
+                pos +=1;
+            }
+        }
     }
 
-    private List<IItem> getData() {
+    private List<WorkoutSection> getData() {
 
-        if (_workout != null)
+        if (_workout != null && _workout.size() > 0 && !getProgressManager().isSetUpdated())
             return _workout;
 
         _workout = new ArrayList<>();
@@ -171,7 +178,7 @@ public class TodayFragment extends BaseFragment {
                 volume += rep.getWeight();
             }
 
-            WorkoutSection expandableItem = new WorkoutSection(set.getExercise().getName(), volume);
+            WorkoutSection expandableItem = new WorkoutSection(set.getId(), set.getExercise().getName(), volume);
             expandableItem.withSubItems(items);
             _workout.add(expandableItem);
         }
@@ -179,10 +186,7 @@ public class TodayFragment extends BaseFragment {
     }
 
     private Progress getTodayProgress() {
-        if (_currentProgress != null && _currentProgress.isValid())
-            return _currentProgress;
-
-        _currentProgress = getRealm().where(Progress.class)
+        Progress _currentProgress = getRealm().where(Progress.class)
                 .equalTo(Progress.DATE, date).findFirst();
 
         if (_currentProgress == null) {
@@ -196,6 +200,7 @@ public class TodayFragment extends BaseFragment {
 
         return _currentProgress;
     }
+
 
     // Public Function
     //

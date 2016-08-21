@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.core.navigation;
+package com.brandonhogan.liftscout.core.managers;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -14,8 +14,6 @@ import com.brandonhogan.liftscout.fragments.settings.SettingsHomeFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
 import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
 import com.brandonhogan.liftscout.fragments.workout.WorkoutContainerFragment;
-
-import java.util.Date;
 
 public class NavigationManager {
 
@@ -213,12 +211,12 @@ public class NavigationManager {
     // Categories / Exercises
     //
     public boolean startCategoryList() {
-        Fragment fragment = CategoryListFragment.newInstance();
+        Fragment fragment = CategoryListFragment.newInstance(false);
         return openAsRoot(fragment);
     }
 
-    public boolean startCategoryListAddSet(long progressId) {
-        Fragment fragment = CategoryListFragment.newInstance(progressId);
+    public boolean startCategoryListAddSet() {
+        Fragment fragment = CategoryListFragment.newInstance(true);
         return openAsRoot(fragment);
     }
 
@@ -227,15 +225,15 @@ public class NavigationManager {
         return open(fragment);
     }
 
-    public boolean startExerciseListAddSet(int categoryId, long progressId) {
-        Fragment fragment = ExerciseListFragment.newInstance(categoryId, progressId);
+    public boolean startExerciseListAddSet(int categoryId) {
+        Fragment fragment = ExerciseListFragment.newInstance(categoryId, true);
         return open(fragment);
     }
 
 
     // Set Edit
-    public boolean startWorkoutContainer(long progressId, int exerciseId) {
-        Fragment fragment = WorkoutContainerFragment.newInstance(progressId, exerciseId);
+    public boolean startWorkoutContainer(int exerciseId) {
+        Fragment fragment = WorkoutContainerFragment.newInstance(exerciseId);
         return openAsRoot(fragment);
     }
 
