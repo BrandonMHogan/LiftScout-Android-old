@@ -143,7 +143,7 @@ public class TodayFragment extends BaseFragment {
         mAdapter.withOnClickListener(new FastAdapter.OnClickListener<WorkoutItem>() {
             @Override
             public boolean onClick(View v, IAdapter<WorkoutItem> adapter, WorkoutItem item, int position) {
-                getNavigationManager().startWorkoutContainer(getTodayProgress().getId(), item.exerciseId);
+                getNavigationManager().startWorkoutContainer(item.exerciseId);
                 return true;
             }
         });

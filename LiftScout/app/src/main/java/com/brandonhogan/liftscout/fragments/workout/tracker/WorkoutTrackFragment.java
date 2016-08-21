@@ -14,7 +14,6 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.controls.NumberPicker;
 import com.brandonhogan.liftscout.core.model.Exercise;
-import com.brandonhogan.liftscout.core.model.Progress;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.fragments.base.BaseFragment;
@@ -34,17 +33,15 @@ public class WorkoutTrackFragment extends BaseFragment implements RecyclerTouchL
     // Static Properties
     //
     private static final String BUNDLE_EXERCISE_ID = "exerciseIdBundle";
-    private static final String BUNDLE_PROGRESS_ID = "progressIdBundle";
 
 
     // Instance
     //
-    public static WorkoutTrackFragment newInstance(long progressId, int exerciseId)
+    public static WorkoutTrackFragment newInstance(int exerciseId)
     {
         WorkoutTrackFragment frag = new WorkoutTrackFragment();
         Bundle bundle = new Bundle();
 
-        bundle.putLong(BUNDLE_PROGRESS_ID, progressId);
         bundle.putInt(BUNDLE_EXERCISE_ID, exerciseId);
         frag.setArguments(bundle);
 
@@ -56,7 +53,6 @@ public class WorkoutTrackFragment extends BaseFragment implements RecyclerTouchL
     //
     private View rootView;
     private int exerciseId;
-    private long progressId;
     private boolean isNewSet;
 
     private WorkoutTrackerAdapter mAdapter;
@@ -65,9 +61,8 @@ public class WorkoutTrackFragment extends BaseFragment implements RecyclerTouchL
     private SweetAlertDialog dialog;
 
     private List<TrackerListModel> _workout;
-    private Set _set;
+    private Set set;
     private Rep selectedRep;
-    private Progress progress;
 
     // Binds
     //
@@ -101,8 +96,8 @@ public class WorkoutTrackFragment extends BaseFragment implements RecyclerTouchL
         super.onViewCreated(view, savedInstanceState);
 
         exerciseId = getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID);
-        progressId = getArguments().getLong(BUNDLE_PROGRESS_ID, Bundles.SHIT_ID);
 
+        setSet();
         setupButtons();
         setupAdapter();
     }
@@ -122,6 +117,19 @@ public class WorkoutTrackFragment extends BaseFragment implements RecyclerTouchL
     @Override
     public void setOnActivityTouchListener(OnActivityTouchListener listener) {
         this.touchListener = listener;
+    }
+
+    private void setSet() {
+        set = getProgressManager().getTodayProgress()
+                .getSets().where().equalTo("exercise.id", exerciseId).findFirst();
+
+        if (set == null) {
+            isNewSet = true;
+
+            set = new Set();
+            set.setExercise(getRealm().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst());
+            set.setReps(new RealmList<Rep>());
+        }
     }
 
     private void setupButtons() {
@@ -168,7 +176,7 @@ public class WorkoutTrackFragment extends BaseFragment implements RecyclerTouchL
         _workout = new ArrayList<>();
 
         int rowNum = 1;
-        for (Rep rep : getRep()) {
+        for (Rep rep : set.getReps()) {
             _workout.add(new TrackerListModel(
                     rowNum,
                     rep,
@@ -182,36 +190,14 @@ public class WorkoutTrackFragment extends BaseFragment implements RecyclerTouchL
 
     private void update() {
         _workout = null;
-        _set = null;
         mAdapter.setList(getData());
     }
 
-    private Set getSet() {
-
-        if (_set != null)
-            return _set;
-
-        progress = getRealm().where(Progress.class).equalTo(Progress.ID, progressId).findFirst();
-        _set = progress.getSets().where().equalTo("exercise.id", exerciseId).findFirst();
-
-        if (_set == null) {
-            isNewSet = true;
-
-            _set = new Set();
-            _set.setExercise(getRealm().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst());
-            _set.setReps(new RealmList<Rep>());
-        }
-
-        return _set;
-    }
-
-    private RealmList<Rep> getRep() {
-        return getSet().getReps();
-    }
-
     private void saveRep() {
-        Rep rep = (selectedRep == null ? new Rep() : selectedRep);
+        Rep rep = new Rep();
 
+        Log.e(getTAG(), "Set Id: " + set.getId());
+        Log.e(getTAG(), "Rep Id: " + rep.getId());
 
         int count = Integer.valueOf(repNumberPicker.getNumber());
         rep.setCount(count);
@@ -221,16 +207,16 @@ public class WorkoutTrackFragment extends BaseFragment implements RecyclerTouchL
 
 
         getRealm().beginTransaction();
+        set.getReps().add(rep);
 
         if (isNewSet) {
-            progress = getRealm().where(Progress.class).equalTo(Progress.ID, progressId).findFirst();
-            progress.getSets().add(_set);
+            getProgressManager().getTodayProgress().getSets().add(set);
             isNewSet = false;
         }
+        else {
+            getRealm().copyToRealmOrUpdate(set);
+        }
 
-        _set.getReps().add(rep);
-        getRealm().copyToRealmOrUpdate(progress);
-        getRealm().copyToRealmOrUpdate(_set);
         getRealm().commitTransaction();
 
         selectedRep = null;
@@ -248,7 +234,7 @@ public class WorkoutTrackFragment extends BaseFragment implements RecyclerTouchL
 
     private void editRep(int position) {
         Log.e(getTAG(), "Still need to implement Editing Reps");
-        selectedRep = getSet().getReps().where().equalTo(Rep.ID, getData().get(position).getId()).findFirst();
+        //selectedRep = getSet().getReps().where().equalTo(Rep.ID, getData().get(position).getId()).findFirst();
 
 
     }

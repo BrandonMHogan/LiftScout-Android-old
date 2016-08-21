@@ -8,12 +8,10 @@ import com.brandonhogan.liftscout.fragments.workout.tracker.WorkoutTrackFragment
 
 
 public class WorkoutContainerAdapter extends FragmentStatePagerAdapter {
-    long progressId;
     int exerciseId;
 
-    public WorkoutContainerAdapter(FragmentManager fm, long progressId, int exerciseId) {
+    public WorkoutContainerAdapter(FragmentManager fm, int exerciseId) {
         super(fm);
-        this.progressId = progressId;
         this.exerciseId = exerciseId;
     }
 
@@ -22,17 +20,17 @@ public class WorkoutContainerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                return WorkoutTrackFragment.newInstance(progressId, exerciseId);
+                return WorkoutTrackFragment.newInstance(exerciseId);
             case 1:
-                return WorkoutHistoryFragment.newInstance(progressId);
+                return WorkoutHistoryFragment.newInstance(exerciseId);
             case 2:
-                return WorkoutHistoryFragment.newInstance(progressId);
+                return WorkoutHistoryFragment.newInstance(exerciseId);
             case 3:
-                return WorkoutHistoryFragment.newInstance(progressId);
+                return WorkoutHistoryFragment.newInstance(exerciseId);
             case 4:
-                return WorkoutHistoryFragment.newInstance(progressId);
+                return WorkoutHistoryFragment.newInstance(exerciseId);
             case 5:
-                return WorkoutHistoryFragment.newInstance(progressId);
+                return WorkoutHistoryFragment.newInstance(exerciseId);
 
             default:
                 return null;

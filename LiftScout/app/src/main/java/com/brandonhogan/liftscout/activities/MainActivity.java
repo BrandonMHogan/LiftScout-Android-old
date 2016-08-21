@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.aaadev.AAADevWorkout;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.model.User;
@@ -80,6 +81,7 @@ public class MainActivity extends BaseActivity
             // This needs to be hit first regardless of where a notification will go. Home must
             // be the first item in the back stack
             navigationManager.startHome();
+          //  AAADevWorkout.clearSets(getRealm());
         }
     }
 

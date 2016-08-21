@@ -4,8 +4,11 @@ import android.util.Log;
 
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.core.model.Progress;
+import com.brandonhogan.liftscout.core.model.Set;
 
 import java.util.Date;
+
+import io.realm.RealmList;
 
 public class ProgressManager {
 
@@ -13,8 +16,6 @@ public class ProgressManager {
 
     private MainActivity mActivity;
     private Progress mTodayProgress;
-    private Date todayDate;
-
 
     /**
      * Initialize the NavigationManager with a FragmentManager, which will be used at the
@@ -27,22 +28,11 @@ public class ProgressManager {
     }
 
     public Progress getTodayProgress() {
-        if (mTodayProgress == null || !mTodayProgress.isValid()) {
-            if (todayDate == null) {
-                Log.e(TAG, "No date or Progress was supplied to the manager. Returning null");
-                return null;
-            }
-
-            mTodayProgress = mActivity.getRealm().where(Progress.class)
-                    .equalTo(Progress.DATE, todayDate).findFirst();
-        }
-
         return mTodayProgress;
     }
 
     public void setTodayProgress(Progress mTodayProgress) {
         this.mTodayProgress = mTodayProgress;
-        todayDate = mTodayProgress.getDate();
     }
 
     public void setTodayProgress(Date date) {
@@ -53,12 +43,11 @@ public class ProgressManager {
         if (mTodayProgress == null) {
             mTodayProgress = new Progress();
             mTodayProgress.setDate(date);
+            mTodayProgress.setSets(new RealmList<Set>());
 
             mActivity.getRealm().beginTransaction();
             mActivity.getRealm().copyToRealmOrUpdate(mTodayProgress);
             mActivity.getRealm().commitTransaction();
         }
-
-        todayDate = mTodayProgress.getDate();
     }
 }
