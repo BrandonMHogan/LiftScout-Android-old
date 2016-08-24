@@ -5,15 +5,15 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
-import com.brandonhogan.liftscout.fragments.categories.CategoryListFragment;
-import com.brandonhogan.liftscout.fragments.exercises.ExerciseListFragment;
-import com.brandonhogan.liftscout.fragments.home.HomeContainerFragment;
-import com.brandonhogan.liftscout.fragments.settings.SettingsDisplayFragment;
-import com.brandonhogan.liftscout.fragments.settings.SettingsHomeFragment;
-import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
-import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
-import com.brandonhogan.liftscout.fragments.workout.WorkoutContainerFragment;
+import com.brandonhogan.liftscout.views.calendar.CalendarFragment;
+import com.brandonhogan.liftscout.views.categories.CategoryListFragment;
+import com.brandonhogan.liftscout.views.exercises.ExerciseListFragment;
+import com.brandonhogan.liftscout.views.home.HomeContainerFragment;
+import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
+import com.brandonhogan.liftscout.views.settings.SettingsHomeFragment;
+import com.brandonhogan.liftscout.views.settings.SettingsListFragment;
+import com.brandonhogan.liftscout.views.settings.SettingsProfileFragment;
+import com.brandonhogan.liftscout.views.workout.WorkoutContainerFragment;
 
 public class NavigationManager {
 

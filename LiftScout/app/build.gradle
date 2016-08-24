@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     signingConfigs {
@@ -92,10 +93,17 @@ dependencies {
     compile 'com.android.support:support-v13:24.1.1'
     compile 'com.android.support:cardview-v7:24.1.1'
 
+    // Leak Canary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
 
+    // Dagger 2
+    compile 'com.google.dagger:dagger:2.0.1'
+    apt 'com.google.dagger:dagger-compiler:2.0.1'
+    compile 'javax.annotation:jsr250-api:1.0'
+
+    // Butterknife
     compile 'com.jakewharton:butterknife:7.0.1'
     // Calendar
     compile 'com.prolificinteractive:material-calendarview:1.2.0'

@@ -20,12 +20,14 @@ public class AppController extends Application {
         super.onCreate();
         mInstance = this;
 
-        //Establishes the default realm and its configuration
+        initRealmConfiguration();
+        LeakCanary.install(this);
+    }
+
+    private void initRealmConfiguration() {
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this)
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
-
-        LeakCanary.install(this);
     }
 }
