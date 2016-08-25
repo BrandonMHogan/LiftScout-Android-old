@@ -9,6 +9,7 @@ import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
 import com.brandonhogan.liftscout.views.home.HomeContainerFragment;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayPresenter;
+import com.brandonhogan.liftscout.views.settings.home.SettingsHomePresenter;
 
 import javax.inject.Singleton;
 import dagger.Component;
@@ -26,6 +27,7 @@ public interface AppComponent {
     // Settings
     void inject(SettingsDisplayFragment fragment);
     void inject(SettingsDisplayPresenter presenter);
+    void inject(SettingsHomePresenter presenter);
 
 
     // Repos

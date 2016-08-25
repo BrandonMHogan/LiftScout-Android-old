@@ -14,8 +14,6 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class UserModelUnitTest {
 
-    private static final String FAKE_APP_STRING = "Lift Scout";
-
     private static final double DELTA = 1e-15;
 
     @Test

@@ -11,7 +11,7 @@ public interface SettingsDisplayContract {
     }
 
     interface Presenter {
-        void loadThemes();
+        void viewCreated();
         void onThemeSelected(int position);
         void onSave(boolean validated);
     }

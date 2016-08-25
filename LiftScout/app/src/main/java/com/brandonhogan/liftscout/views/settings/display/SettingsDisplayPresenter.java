@@ -26,18 +26,17 @@ public class SettingsDisplayPresenter implements SettingsDisplayContract.Present
 
     // Private Properties
     //
-    private SettingsDisplayContract.View mView;
+    private SettingsDisplayContract.View view;
     private String originalThemeValue;
     private String currentSelectedTheme;
     private ArrayList<String> themes;
-    private SweetAlertDialog dialog;
 
 
     // Constructor
     //
     public SettingsDisplayPresenter(SettingsDisplayContract.View view) {
         Injector.getAppComponent().inject(this);
-        mView = view;
+        this.view = view;
 
         originalThemeValue = userManager.getTheme().getValue();
     }
@@ -48,20 +47,20 @@ public class SettingsDisplayPresenter implements SettingsDisplayContract.Present
     private void saveSettings(boolean restartNeeded) {
         userManager.setTheme(currentSelectedTheme);
 
-        mView.saveSuccess(restartNeeded);
+        view.saveSuccess(restartNeeded);
     }
 
 
     // Contract
     //
     @Override
-    public void loadThemes() {
+    public void viewCreated() {
 
         themes = new ArrayList<>();
         themes.add(Themes.DARK);
         themes.add(Themes.LIGHT);
 
-        mView.populateThemes(themes, themes.indexOf(originalThemeValue));
+        view.populateThemes(themes, themes.indexOf(originalThemeValue));
     }
 
     @Override
@@ -70,7 +69,7 @@ public class SettingsDisplayPresenter implements SettingsDisplayContract.Present
         boolean valueChanged = !originalThemeValue.equals(currentSelectedTheme);
 
         if (!validated && valueChanged)
-            mView.showAlert();
+            view.showAlert();
         else
             saveSettings(valueChanged);
     }

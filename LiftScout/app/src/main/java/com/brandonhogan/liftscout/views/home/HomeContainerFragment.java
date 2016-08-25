@@ -23,14 +23,11 @@ import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.activities.MainActivity;
-import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.constants.TodayTransforms;
 import com.brandonhogan.liftscout.core.controls.WeightDialog;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Progress;
-import com.brandonhogan.liftscout.core.model.User;
-import com.brandonhogan.liftscout.core.model.UserSetting;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
@@ -134,7 +131,7 @@ public class HomeContainerFragment extends BaseFragment {
             }
         });
 
-        switch (userManager.getTodayTransformSetting().getValue()) {
+        switch (userManager.getTransformValue()) {
             case TodayTransforms.ACCORDION:
                 viewPager.setPageTransformer(true, new AccordionTransformer());
                 break;

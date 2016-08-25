@@ -63,7 +63,7 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
 
         setTitle(getResources().getString(R.string.title_frag_settings_display));
 
-        presenter.loadThemes();
+        presenter.viewCreated();
     }
 
     @Override

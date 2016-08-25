@@ -46,14 +46,18 @@ public class UserManager {
         user = userRepo.getUser();
     }
 
-    public UserSetting getTodayTransformSetting() {
+    public String getTransformValue() {
         UserSetting setting = userSettingsRepo.getUserSetting(UserSetting.TODAY_TRANSFORM);
 
         if (setting == null) {
             setting = userSettingsRepo.createUserSetting(UserSetting.TODAY_TRANSFORM, TodayTransforms.DEFAULT);
         }
 
-        return setting;
+        return setting.getValue();
+    }
+
+    public boolean setTransform(String value) {
+        return userSettingsRepo.setUserSetting(UserSetting.TODAY_TRANSFORM, value);
     }
 
     public UserSetting getTheme() {

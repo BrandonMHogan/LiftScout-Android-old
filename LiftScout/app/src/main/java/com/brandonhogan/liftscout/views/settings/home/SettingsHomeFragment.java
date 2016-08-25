@@ -17,14 +17,15 @@ import com.brandonhogan.liftscout.core.constants.TodayTransforms;
 import com.brandonhogan.liftscout.core.controls.AnimCheckBox;
 import com.brandonhogan.liftscout.core.model.UserSetting;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
+import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayContract;
+import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayPresenter;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 
-public class SettingsHomeFragment extends BaseFragment {
-
+public class SettingsHomeFragment extends BaseFragment implements SettingsHomeContract.View {
 
 
     // Instance
@@ -37,11 +38,7 @@ public class SettingsHomeFragment extends BaseFragment {
     // Private Properties
     //
     private View rootView;
-    private ArrayList<String> transformsAdapter;
-    private UserSetting _todayTransformType;
-    private UserSetting _todayShowWeight;
-    private UserSetting _todayShowPhoto;
-    private UserSetting _todayShowRoutine;
+    private SettingsHomeContract.Presenter presenter;
 
 
     // Bindings
@@ -67,6 +64,7 @@ public class SettingsHomeFragment extends BaseFragment {
     @Bind(R.id.routine_expanding_layout)
     LinearLayout routineSettingsLayout;
 
+
     //Overrides
     //
     @Nullable
@@ -82,10 +80,8 @@ public class SettingsHomeFragment extends BaseFragment {
 
         setTitle(getResources().getString(R.string.title_frag_settings_home));
 
-        setupTransform();
-        setupCheckbox(getShowWeight().getValueBoolean(), weightCheckbox, weightSettingsLayout);
-        setupCheckbox(getShowPhoto().getValueBoolean(), photoCheckbox, photoSettingsLayout);
-        setupCheckbox(getShowRoutine().getValueBoolean(), routineCheckbox, routineSettingsLayout);
+        presenter = new SettingsHomePresenter(this);
+        presenter.viewCreated();
     }
 
     @Override
@@ -115,117 +111,11 @@ public class SettingsHomeFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-                saveSettings();
-                getNavigationManager().navigateBack(getActivity());
+                presenter.onSave();
+
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void saveSettings() {
-        getRealm().beginTransaction();
-
-        // Today Transform
-        getTodayTransform().setValue(transformsAdapter.get(transformSpinner.getSelectedIndex()));
-        getRealm().copyToRealmOrUpdate(getTodayTransform());
-
-        // Weight Checked
-        getShowWeight().setValue(weightCheckbox.isChecked());
-        getRealm().copyToRealmOrUpdate(getShowWeight());
-
-        // Photo Checked
-        getShowPhoto().setValue(photoCheckbox.isChecked());
-        getRealm().copyToRealmOrUpdate(getShowPhoto());
-
-        // Routine Checked
-        getShowRoutine().setValue(routineCheckbox.isChecked());
-        getRealm().copyToRealmOrUpdate(getShowRoutine());
-
-        getRealm().commitTransaction();
-    }
-
-    private UserSetting getTodayTransform() {
-
-        if (_todayTransformType != null)
-            return _todayTransformType;
-
-        _todayTransformType = getRealm().where(UserSetting.class)
-                .equalTo(UserSetting.NAME, UserSetting.TODAY_TRANSFORM).findFirst();
-
-        if (_todayTransformType == null) {
-            _todayTransformType = new UserSetting();
-            _todayTransformType.setName(UserSetting.TODAY_TRANSFORM);
-            _todayTransformType.setValue(TodayTransforms.DEFAULT);
-        }
-        return _todayTransformType;
-    }
-
-    private UserSetting getShowWeight() {
-
-        if (_todayShowWeight != null)
-            return _todayShowWeight;
-
-        _todayShowWeight = getRealm().where(UserSetting.class)
-                .equalTo(UserSetting.NAME, UserSetting.TODAY_SHOW_WEIGHT).findFirst();
-
-        if (_todayShowWeight == null) {
-            _todayShowWeight = new UserSetting();
-            _todayShowWeight.setName(UserSetting.TODAY_SHOW_WEIGHT);
-            _todayShowWeight.setValue(false);
-        }
-        return _todayShowWeight;
-    }
-
-    private UserSetting getShowPhoto() {
-
-        if (_todayShowPhoto != null)
-            return _todayShowPhoto;
-
-        _todayShowPhoto = getRealm().where(UserSetting.class)
-                .equalTo(UserSetting.NAME, UserSetting.TODAY_SHOW_PHOTO).findFirst();
-
-        if (_todayShowPhoto == null) {
-            _todayShowPhoto = new UserSetting();
-            _todayShowPhoto.setName(UserSetting.TODAY_SHOW_PHOTO);
-            _todayShowPhoto.setValue(false);
-        }
-        return _todayShowPhoto;
-    }
-
-    private UserSetting getShowRoutine() {
-
-        if (_todayShowRoutine != null)
-            return _todayShowRoutine;
-
-        _todayShowRoutine = getRealm().where(UserSetting.class)
-                .equalTo(UserSetting.NAME, UserSetting.TODAY_SHOW_ROUTINE).findFirst();
-
-        if (_todayShowRoutine == null) {
-            _todayShowRoutine = new UserSetting();
-            _todayShowRoutine.setName(UserSetting.TODAY_SHOW_ROUTINE);
-            _todayShowRoutine.setValue(false);
-        }
-        return _todayShowRoutine;
-    }
-
-
-    private void setupTransform() {
-        transformsAdapter = new ArrayList<>();
-        transformsAdapter.add(TodayTransforms.DEFAULT);
-        transformsAdapter.add(TodayTransforms.ACCORDION);
-        transformsAdapter.add(TodayTransforms.DEPTH_PAGE);
-        transformsAdapter.add(TodayTransforms.FOREGROUND_TO_BACKGROUND);
-        transformsAdapter.add(TodayTransforms.ROTATE_DOWN);
-        transformsAdapter.add(TodayTransforms.ROTATE_UP);
-        transformsAdapter.add(TodayTransforms.SCALE_IN_OUT);
-        transformsAdapter.add(TodayTransforms.STACK);
-        transformsAdapter.add(TodayTransforms.ZOOM_IN);
-        transformsAdapter.add(TodayTransforms.ZOOM_OUT);
-        transformsAdapter.add(TodayTransforms.ZOOM_OUT_SLIDE);
-
-
-        transformSpinner.setItems(transformsAdapter);
-        transformSpinner.setSelectedIndex(transformsAdapter.indexOf(getTodayTransform().getValue()));
     }
 
     private void setupCheckbox(boolean show, AnimCheckBox checkBox, final LinearLayout layout) {
@@ -299,5 +189,26 @@ public class SettingsHomeFragment extends BaseFragment {
         // 1dp/ms
         a.setDuration((int)(initialHeight / v.getContext().getResources().getDisplayMetrics().density));
         v.startAnimation(a);
+    }
+
+
+    // Contract
+    //
+    @Override
+    public void populateTransforms(ArrayList<String> themes, int position) {
+        transformSpinner.setItems(themes);
+        transformSpinner.setSelectedIndex(position);
+
+        transformSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                presenter.onTransformSelected(position);
+            }
+        });
+    }
+
+    @Override
+    public void saveSuccess() {
+        getNavigationManager().navigateBack(getActivity());
     }
 }
