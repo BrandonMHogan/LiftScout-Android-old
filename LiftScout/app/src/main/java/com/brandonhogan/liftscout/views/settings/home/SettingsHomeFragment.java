@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.views.settings;
+package com.brandonhogan.liftscout.views.settings.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
