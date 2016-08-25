@@ -58,14 +58,11 @@ public class HomeContainerFragment extends BaseFragment {
     @Inject
     UserManager userManager;
 
+
     // Private Properties
     //
     private View rootView;
     private TodayPageAdapter adapter;
-
-    // Do not call directly. Use Helper functions
-    private User _user;
-    private UserSetting _todayTransformUserSetting;
 
 
     // Binds
@@ -109,7 +106,6 @@ public class HomeContainerFragment extends BaseFragment {
     public void onPause() {
         super.onPause();
         toolbarLayout.hide(); // Hides because it bugs out if left open and returned sometimes
-        clearTodayTransform();
     }
 
     // Private Functions
@@ -138,7 +134,7 @@ public class HomeContainerFragment extends BaseFragment {
             }
         });
 
-        switch (getTodayTransform().getValue()) {
+        switch (userManager.getTodayTransformSetting().getValue()) {
             case TodayTransforms.ACCORDION:
                 viewPager.setPageTransformer(true, new AccordionTransformer());
                 break;
@@ -186,53 +182,6 @@ public class HomeContainerFragment extends BaseFragment {
         });
     }
 
-    private User getUser() {
-
-        if (_user != null)
-            return _user;
-
-        _user = getRealm().where(User.class).findFirst();
-
-        return _user;
-    }
-
-    private void updateUser() {
-        getRealm().beginTransaction();
-        getRealm().copyToRealmOrUpdate(_user);
-        getRealm().commitTransaction();
-    }
-
-    private void updateUserWeight(double weight) {
-        getRealm().beginTransaction();
-        getUser().setWeight(weight);
-        getRealm().copyToRealmOrUpdate(_user);
-        getRealm().commitTransaction();
-    }
-
-    private void clearTodayTransform() {
-        _todayTransformUserSetting = null;
-    }
-
-    private UserSetting getTodayTransform() {
-
-        if (_todayTransformUserSetting != null)
-            return _todayTransformUserSetting;
-
-        _todayTransformUserSetting = getRealm().where(UserSetting.class)
-                .equalTo(UserSetting.NAME, UserSetting.TODAY_TRANSFORM).findFirst();
-
-        if (_todayTransformUserSetting == null) {
-            _todayTransformUserSetting = new UserSetting();
-            _todayTransformUserSetting.setName(UserSetting.TODAY_TRANSFORM);
-            _todayTransformUserSetting.setValue(TodayTransforms.DEFAULT);
-
-            getRealm().beginTransaction();
-            getRealm().copyToRealmOrUpdate(_todayTransformUserSetting);
-            getRealm().commitTransaction();
-        }
-        return _todayTransformUserSetting;
-    }
-
     private void updateTodayProgressWeight(double weight) {
         getRealm().beginTransaction();
         progressManager.getTodayProgress().setWeight(weight);
@@ -245,7 +194,7 @@ public class HomeContainerFragment extends BaseFragment {
 
         if (topDate != null && progressManager.getTodayProgress().getDate().compareTo(topDate.getDate()) >= 0 ) {
             Log.d(getTAG(), "Current Date >= Top Progress Date. Will update user weight to " + weight);
-            updateUserWeight(weight);
+            userManager.setWeight(weight);
         }
 
 
@@ -269,7 +218,7 @@ public class HomeContainerFragment extends BaseFragment {
 
         double weight;
         if (progressManager.getTodayProgress().getWeight() == 0)
-            weight = getUser().getWeight();
+            weight = userManager.getWeight();
         else
             weight = progressManager.getTodayProgress().getWeight();
 

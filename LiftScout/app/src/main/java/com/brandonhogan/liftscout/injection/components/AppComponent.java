@@ -5,7 +5,10 @@ import com.brandonhogan.liftscout.injection.module.AppModule;
 import com.brandonhogan.liftscout.injection.module.DatabaseModule;
 import com.brandonhogan.liftscout.injection.module.UserModule;
 import com.brandonhogan.liftscout.repository.impl.UserRepoImpl;
+import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
 import com.brandonhogan.liftscout.views.home.HomeContainerFragment;
+import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
+import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayPresenter;
 
 import javax.inject.Singleton;
 import dagger.Component;
@@ -14,11 +17,18 @@ import dagger.Component;
 @Component(modules = {AppModule.class, DatabaseModule.class, UserModule.class})
 public interface AppComponent {
 
-    void inject(HomeContainerFragment fragment);
+    // Activities
     void inject(MainActivity activity);
 
+    // Fragments
+    void inject(HomeContainerFragment fragment);
+
+    // Settings
+    void inject(SettingsDisplayFragment fragment);
+    void inject(SettingsDisplayPresenter presenter);
 
 
     // Repos
-    void inject(UserRepoImpl userRepoImpl);
+    void inject(UserRepoImpl userRepo);
+    void inject(UserSettingsRepoImpl userSettingsRepo);
 }

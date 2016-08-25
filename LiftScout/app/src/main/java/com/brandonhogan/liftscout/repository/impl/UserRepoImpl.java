@@ -23,11 +23,11 @@ public class UserRepoImpl implements UserRepo {
 
     @Override
     public void setUserName(String name) {
-
+        throw new UnsupportedOperationException("Setting username is not yet implemented");
     }
 
     @Override
     public void setWeight(double weight) {
-
+        throw new UnsupportedOperationException("Setting weight is not yet implemented");
     }
 }

@@ -12,8 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.constants.Themes;
-import com.brandonhogan.liftscout.core.model.UserSetting;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
@@ -24,6 +23,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class SettingsDisplayFragment extends BaseFragment implements SettingsDisplayContract.View {
 
+
     // Instance
     //
     public static SettingsDisplayFragment newInstance() {
@@ -33,13 +33,10 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
 
     // Private Properties
     //
-    private SettingsDisplayContract.UserActionListener userActionListener;
-
+    private SettingsDisplayContract.Presenter presenter;
     private View rootView;
-    private String oldThemeValue;
-    private ArrayList<String> themes;
     private SweetAlertDialog dialog;
-    private UserSetting theme;
+
 
     // Bindings
     //
@@ -53,20 +50,20 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.frag_settings_display, container, false);
+
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        userActionListener = new SettingsDisplayPresenter(this);
+        Injector.getAppComponent().inject(this);
+
+        presenter = new SettingsDisplayPresenter(this);
+
         setTitle(getResources().getString(R.string.title_frag_settings_display));
 
-
-        // Sets the original theme value so I can see if it has been changed when we try and save.
-        oldThemeValue = getTheme().getValue();
-
-        userActionListener.loadThemes();
+        presenter.loadThemes();
     }
 
     @Override
@@ -91,31 +88,7 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-
-                // If current selected no longer matches what they came in with,
-                // we need to warn them that saving will restart the activity
-                if (!oldThemeValue.equals(themes.get(themeSpinner.getSelectedIndex()))) {
-
-                    dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                            .setTitleText(getString(R.string.dialog_restarting_app_theme_title))
-                            .setContentText(getString(R.string.dialog_restarting_app_theme_message))
-                            .setConfirmText(getString(R.string.restart))
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    saveSettings();
-                                    restartActivity();
-                                }
-                            })
-                            .setCancelText(getString(R.string.cancel))
-                            .showCancelButton(true);
-
-                    dialog.show();
-                }
-                else {
-                    saveSettings();
-                    getNavigationManager().navigateBack(getActivity());
-                }
+                presenter.onSave(false);
 
                 return true;
         }
@@ -123,41 +96,55 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
     }
 
     @Override
-    public void populateThemes(ArrayList<String> themes) {
+    public void populateThemes(ArrayList<String> themes, int selected) {
         themeSpinner.setItems(themes);
-        themeSpinner.setSelectedIndex(themes.indexOf(getTheme().getValue()));
+        themeSpinner.setSelectedIndex(selected);
+
+        themeSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                presenter.onThemeSelected(position);
+            }
+        });
     }
 
-    private UserSetting getTheme() {
+    @Override
+    public void saveSuccess(boolean restart) {
 
-        if (theme != null)
-            return theme;
+        if (restart)
+            restartActivity();
+        else
+            getNavigationManager().navigateBack(getActivity());
 
-        theme = getRealm().where(UserSetting.class)
-                .equalTo(UserSetting.NAME, UserSetting.THEME).findFirst();
+    }
 
-        if (theme == null) {
-            theme = new UserSetting();
-            theme.setName(UserSetting.THEME);
-            theme.setValue(Themes.LIGHT);
-        }
-         return theme;
+    @Override
+    public void showAlert() {
+        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(getString(R.string.dialog_restarting_app_theme_title))
+                .setContentText(getString(R.string.dialog_restarting_app_theme_message))
+                .setConfirmText(getString(R.string.restart))
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        dialogAccepted();
+                    }
+                })
+                .setCancelText(getString(R.string.cancel))
+                .showCancelButton(true);
+
+        dialog.show();
+    }
+
+    private void dialogAccepted() {
+        dialog.cancel();
+        presenter.onSave(true);
     }
 
     private void restartActivity() {
-        dialog.dismiss();
-
         getActivity().finish();
         final Intent intent = getActivity().getIntent();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
         getActivity().startActivity(intent);
-    }
-
-    private void saveSettings() {
-        getRealm().beginTransaction();
-        getTheme().setValue(themes.get(themeSpinner.getSelectedIndex()));
-        getRealm().copyToRealmOrUpdate(getTheme());
-
-        getRealm().commitTransaction();
     }
 }

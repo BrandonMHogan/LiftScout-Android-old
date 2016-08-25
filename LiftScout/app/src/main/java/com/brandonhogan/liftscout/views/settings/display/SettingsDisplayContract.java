@@ -1,21 +1,19 @@
 package com.brandonhogan.liftscout.views.settings.display;
 
-import com.brandonhogan.liftscout.core.model.UserSetting;
-
 import java.util.ArrayList;
 
 public interface SettingsDisplayContract {
 
     interface View {
-        void populateThemes(ArrayList<String> themes);
+        void populateThemes(ArrayList<String> themes, int position);
+        void saveSuccess(boolean restart);
+        void showAlert();
     }
 
-    interface UserActionListener {
+    interface Presenter {
         void loadThemes();
-        void currentTheme(UserSetting theme);
-
         void onThemeSelected(int position);
-        void onSave();
+        void onSave(boolean validated);
     }
 
 }
