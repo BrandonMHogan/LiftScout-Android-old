@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
@@ -22,13 +23,19 @@ import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.activities.MainActivity;
+import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.constants.TodayTransforms;
 import com.brandonhogan.liftscout.core.controls.WeightDialog;
+import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Progress;
 import com.brandonhogan.liftscout.core.model.User;
 import com.brandonhogan.liftscout.core.model.UserSetting;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -36,13 +43,20 @@ import io.realm.Sort;
 
 public class HomeContainerFragment extends BaseFragment {
 
-
     // Instance
     //
     public static HomeContainerFragment newInstance() {
         return new HomeContainerFragment();
     }
 
+
+    // Injections
+    //
+    @Inject
+    ProgressManager progressManager;
+
+    @Inject
+    UserManager userManager;
 
     // Private Properties
     //
@@ -81,10 +95,14 @@ public class HomeContainerFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Injector.getAppComponent().inject(this);
         setTitle(getString(R.string.app_name));
 
         setupPager();
         setupFab();
+
+        Toast.makeText(getActivity(), "UserName : " + userManager.getName(),
+                Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -217,28 +235,28 @@ public class HomeContainerFragment extends BaseFragment {
 
     private void updateTodayProgressWeight(double weight) {
         getRealm().beginTransaction();
-        getProgressManager().getTodayProgress().setWeight(weight);
-        getRealm().copyToRealmOrUpdate(getProgressManager().getTodayProgress());
+        progressManager.getTodayProgress().setWeight(weight);
+        getRealm().copyToRealmOrUpdate(progressManager.getTodayProgress());
         getRealm().commitTransaction();
 
         Progress topDate = getRealm().where(Progress.class)
-                .greaterThanOrEqualTo(Progress.DATE, getProgressManager().getTodayProgress().getDate())
+                .greaterThanOrEqualTo(Progress.DATE, progressManager.getTodayProgress().getDate())
                 .findAllSorted(Progress.DATE, Sort.DESCENDING).first();
 
-        if (topDate != null && getProgressManager().getTodayProgress().getDate().compareTo(topDate.getDate()) >= 0 ) {
+        if (topDate != null && progressManager.getTodayProgress().getDate().compareTo(topDate.getDate()) >= 0 ) {
             Log.d(getTAG(), "Current Date >= Top Progress Date. Will update user weight to " + weight);
             updateUserWeight(weight);
         }
 
 
         Bundle params = new Bundle();
-        params.putString("date", getProgressManager().getTodayProgress().getDate().toString());
+        params.putString("date", progressManager.getTodayProgress().getDate().toString());
         params.putDouble("weight", weight);
         ((MainActivity)getActivity()).getFirebaseAnalytics().logEvent("weight_set", params);
     }
 
     private void updateTodayProgress() {
-        getProgressManager().setTodayProgress(adapter.dateByPosition(viewPager.getCurrentItem()));
+        progressManager.setTodayProgress(adapter.dateByPosition(viewPager.getCurrentItem()));
     }
 
     @OnClick(R.id.set)
@@ -250,10 +268,10 @@ public class HomeContainerFragment extends BaseFragment {
     public void addWeightOnClick() {
 
         double weight;
-        if (getProgressManager().getTodayProgress().getWeight() == 0)
+        if (progressManager.getTodayProgress().getWeight() == 0)
             weight = getUser().getWeight();
         else
-            weight = getProgressManager().getTodayProgress().getWeight();
+            weight = progressManager.getTodayProgress().getWeight();
 
         WeightDialog dialog = new WeightDialog(getActivity(), new WeightDialog.WeightDialogListener() {
             @Override

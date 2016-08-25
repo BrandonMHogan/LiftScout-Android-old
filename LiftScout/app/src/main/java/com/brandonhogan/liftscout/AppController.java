@@ -2,7 +2,10 @@ package com.brandonhogan.liftscout;
 
 import android.app.Application;
 
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.squareup.leakcanary.LeakCanary;
+
+import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -20,8 +23,13 @@ public class AppController extends Application {
         super.onCreate();
         mInstance = this;
 
+        initDagger();
         initRealmConfiguration();
         LeakCanary.install(this);
+    }
+
+    private void initDagger() {
+        Injector.initAppComponent(this);
     }
 
     private void initRealmConfiguration() {

@@ -31,6 +31,7 @@ public class NavigationManager {
     private FragmentManager mFragmentManager;
     private NavigationListener navigationListener;
     private boolean isInTransition = false;
+    private FragmentManager.OnBackStackChangedListener backstackListener;
 
 
     // Public Properties
@@ -43,6 +44,17 @@ public class NavigationManager {
         return mFragmentManager.findFragmentById(R.id.fragment_manager);
     }
 
+    public NavigationManager() {
+        backstackListener = new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if (navigationListener != null) {
+                    navigationListener.onBackstackChanged();
+                }
+            }
+        };
+    }
+
     /**
      * Initialize the NavigationManager with a FragmentManager, which will be used at the
      * fragment transactions.
@@ -51,14 +63,9 @@ public class NavigationManager {
      */
     public void init(FragmentManager fragmentManager) {
         mFragmentManager = fragmentManager;
-        mFragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                if (navigationListener != null) {
-                    navigationListener.onBackstackChanged();
-                }
-            }
-        });
+
+        mFragmentManager.removeOnBackStackChangedListener(backstackListener);
+        mFragmentManager.addOnBackStackChangedListener(backstackListener);
     }
 
     /**

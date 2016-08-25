@@ -10,13 +10,17 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.aaadev.AAADevWorkout;
+import com.brandonhogan.liftscout.core.aaadev.AAADevWorkout;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.model.User;
 import com.brandonhogan.liftscout.core.utils.DatabaseOutput;
+import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.repository.DatabaseRealm;
 
 import java.util.Date;
+
+import javax.inject.Inject;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -24,20 +28,27 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         NavigationManager.NavigationListener {
 
+
     // Private Static Properties
     //
     private static final String SAVE_STATE_TODAY_PROGRESS_DATE = "saveStateTodayProgressDate";
+
 
     // Private Properties
     //
     private DrawerLayout drawer;
     private NavigationManager navigationManager;
-    private ProgressManager mProgressManager;
+   // private ProgressManager mProgressManager;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private SweetAlertDialog dialog;
     private Toolbar toolbar;
 
+    @Inject
+    ProgressManager mProgressManager;
+
+    @Inject
+    DatabaseRealm databaseRealm;
 
     // Overrides
     //
@@ -45,6 +56,7 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Injector.getAppComponent().inject(this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,7 +76,7 @@ public class MainActivity extends BaseActivity
             navigationManager.init(getFragmentManager());
             navigationManager.setNavigationListener(this);
 
-            mProgressManager = new ProgressManager();
+           // mProgressManager = new ProgressManager();
             mProgressManager.init(this);
 
             //This is set when restoring from a previous state,
@@ -97,6 +109,11 @@ public class MainActivity extends BaseActivity
         updateUserData();
     }
 
+    @Override
+    public void onDestroy() {
+        databaseRealm.close();
+        super.onDestroy();
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

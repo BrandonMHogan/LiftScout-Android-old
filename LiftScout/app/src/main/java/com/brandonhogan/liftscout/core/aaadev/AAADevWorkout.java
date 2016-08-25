@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.aaadev;
+package com.brandonhogan.liftscout.core.aaadev;
 
 import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.core.model.Progress;
