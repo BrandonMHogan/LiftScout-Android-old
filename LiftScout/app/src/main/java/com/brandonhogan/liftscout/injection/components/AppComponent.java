@@ -13,6 +13,7 @@ import com.brandonhogan.liftscout.repository.impl.ProgressRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.SetRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
+import com.brandonhogan.liftscout.views.exercises.ExerciseListPresenter;
 import com.brandonhogan.liftscout.views.home.HomeContainerFragment;
 import com.brandonhogan.liftscout.views.home.TodayFragment;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
@@ -39,6 +40,9 @@ public interface AppComponent {
     // Fragments
     void inject(HomeContainerFragment fragment);
     void inject(TodayFragment fragment);
+
+    // Category / Exercise
+    void inject(ExerciseListPresenter presenter);
 
     // Workout
     void inject(TrackerFragment fragment);

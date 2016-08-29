@@ -20,6 +20,11 @@ public class CategoryRepoImpl implements CategoryRepo {
         Injector.getAppComponent().inject(this);
     }
 
+    private int getNextKey() {
+        Number max = databaseRealm.getRealmInstance().where(Category.class).max(Category.ID);
+        return (max != null) ? max.intValue() + 1 : 0;
+    }
+
     @Override
     public Category getCategory(int categoryId) {
         return databaseRealm.getRealmInstance()

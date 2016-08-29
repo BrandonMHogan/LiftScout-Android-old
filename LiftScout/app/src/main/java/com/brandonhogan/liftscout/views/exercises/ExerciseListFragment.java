@@ -24,10 +24,16 @@ import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.realm.RealmResults;
 
-public class ExerciseListFragment extends BaseFragment implements RecyclerTouchListener.RecyclerTouchListenerHelper {
+public class ExerciseListFragment extends BaseFragment implements
+        ExerciseListContract.View,
+        RecyclerTouchListener.RecyclerTouchListenerHelper {
 
+
+    // Private Static Properties
+    //
     private final static String BUNDLE_CATEGORY_ID = "categoryIdBundle";
     private final static String BUNDLE_ADD_SET = "addSetBundle";
+
 
     // Instances
     //
@@ -57,14 +63,14 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
     // Private Properties
     //
     private View rootView;
+    private ExerciseListContract.Presenter presenter;
     private ExerciseListAdapter mAdapter;
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
     SweetAlertDialog dialog;
 
     private List<ExerciseListModel> _exercises;
-    private int categoryId;
-    private boolean addSet;
+
 
 
     // Binds
@@ -88,14 +94,11 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        presenter = new ExerciseListPresenter(this,
+                this.getArguments().getInt(BUNDLE_CATEGORY_ID),
+                this.getArguments().getBoolean(BUNDLE_ADD_SET));
 
-        Bundle bundle = this.getArguments();
-        categoryId = bundle.getInt(BUNDLE_CATEGORY_ID, -1);
-        addSet = bundle.getBoolean(BUNDLE_ADD_SET);
-
-        setTitle(getCategory().getName());
-
-        setupAdapter();
+        presenter.viewCreated();
     }
 
     @Override
@@ -120,10 +123,72 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
         createExercise();
     }
 
+
     // Private Functions
     //
-    private void setupAdapter() {
-        mAdapter = new ExerciseListAdapter(getActivity(), getData());
+    private void editExercise(int position) {
+        ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
+            @Override
+            public void onCancelExerciseEditDialog() {
+
+            }
+
+            @Override
+            public void onSaveExerciseEditDialog(ExerciseListModel exercise) {
+                presenter.updateExercise(exercise);
+            }
+        }, true, presenter.getExercise(position));
+
+        dialog.show();
+    }
+
+    private void createExercise() {
+        ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
+            @Override
+            public void onCancelExerciseEditDialog() {
+
+            }
+
+            @Override
+            public void onSaveExerciseEditDialog(ExerciseListModel exercise) {
+                presenter.createExercise(exercise);
+            }
+        }, true, null);
+
+        dialog.show();
+    }
+
+    private void removeExerciseAlert(final int position) {
+        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(getString(R.string.dialog_exercise_remove_title))
+                .setContentText(getString(R.string.dialog_exercise_remove_message))
+                .setConfirmText(getString(R.string.yes))
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        presenter.deleteExercise(position);
+                        dialog.cancel();
+                    }
+                })
+                .setCancelText(getString(R.string.cancel))
+                .showCancelButton(true);
+
+        dialog.show();
+    }
+
+
+
+    // Contracts
+    //
+
+    @Override
+    public void applyTitle(String title) {
+        setTitle(title);
+    }
+
+    @Override
+    public void updateAdapter(List<ExerciseListModel> data) {
+        mAdapter = new ExerciseListAdapter(getActivity(), data);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -133,15 +198,7 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
                 .setClickable(new RecyclerTouchListener.OnRowClickListener() {
                     @Override
                     public void onRowClicked(int position) {
-                        // TODO : If coming from workout, this should select and redirect back to workout
-                        // else, just open the swipe menu
-
-                        if (addSet) {
-                            addSet(position);
-                        }
-                        else {
-                            onTouchListener.openSwipeOptions(position);
-                        }
+                        presenter.rowClicked(position);
                     }
 
                     @Override
@@ -167,107 +224,13 @@ public class ExerciseListFragment extends BaseFragment implements RecyclerTouchL
                 });
     }
 
-    private List<ExerciseListModel> getData() {
-
-        if (_exercises != null)
-            return _exercises;
-
-        _exercises = new ArrayList<>();
-
-        for (Exercise exercise : getExercises().sort(Category.NAME)) {
-            _exercises.add(new ExerciseListModel(exercise));
-        }
-
-        return _exercises;
+    @Override
+    public void itemSelected(int exerciseId) {
+        getNavigationManager().startWorkoutContainer(exerciseId);
     }
 
-    private void update() {
-        _exercises = null;
-        mAdapter.setList(getData());
-    }
-
-    private RealmResults<Exercise> getExercises() {
-        return getRealm().where(Exercise.class).equalTo(Exercise.CATEGORY_ID, categoryId).findAll();
-    }
-
-    private Category getCategory() {
-        return getRealm().where(Category.class).equalTo(Category.ID, categoryId).findFirst();
-    }
-
-    private void saveExercise(Exercise exercise) {
-        getRealm().beginTransaction();
-        getRealm().copyToRealmOrUpdate(exercise);
-        getRealm().commitTransaction();
-
-        update();
-    }
-
-    private void removeExercise(int id) {
-        getRealm().beginTransaction();
-        getRealm().where(Exercise.class).equalTo(Exercise.ID, id).findFirst().deleteFromRealm();
-        getRealm().commitTransaction();
-
-        update();
-    }
-
-    private void editExercise(int position) {
-        ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
-            @Override
-            public void onCancelExerciseEditDialog() {
-
-            }
-
-            @Override
-            public void onSaveExerciseEditDialog(ExerciseListModel exercise) {
-                Exercise newExercise = new Exercise();
-                newExercise.setName(exercise.getName());
-                newExercise.setCategoryId(categoryId);
-                newExercise.setId(exercise.getId());
-                saveExercise(newExercise);
-            }
-        }, true, getData().get(position));
-
-        dialog.show();
-    }
-
-    private void createExercise() {
-        ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
-            @Override
-            public void onCancelExerciseEditDialog() {
-
-            }
-
-            @Override
-            public void onSaveExerciseEditDialog(ExerciseListModel exercise) {
-                Exercise newExercise = new Exercise();
-                newExercise.setName(exercise.getName());
-                newExercise.setCategoryId(categoryId);
-                saveExercise(newExercise);
-            }
-        }, true, null);
-
-        dialog.show();
-    }
-
-    private void removeExerciseAlert(final int position) {
-        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getString(R.string.dialog_exercise_remove_title))
-                .setContentText(getString(R.string.dialog_exercise_remove_message))
-                .setConfirmText(getString(R.string.yes))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        removeExercise(getData().get(position).getId());
-                        dialog.cancel();
-                    }
-                })
-                .setCancelText(getString(R.string.cancel))
-                .showCancelButton(true);
-
-        dialog.show();
-    }
-
-    private void addSet(final int position) {
-        getNavigationManager().startWorkoutContainer(getData().get(position).getId());
+    @Override
+    public void swipeItem(int position) {
+        onTouchListener.openSwipeOptions(position);
     }
 }

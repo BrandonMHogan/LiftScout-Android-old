@@ -9,6 +9,9 @@ import com.brandonhogan.liftscout.repository.ExerciseRepo;
 
 import javax.inject.Inject;
 
+import io.realm.RealmList;
+import io.realm.RealmResults;
+
 public class ExerciseRepoImpl implements ExerciseRepo {
 
     private static final String TAG = "ExerciseRepoImpl";
@@ -20,6 +23,18 @@ public class ExerciseRepoImpl implements ExerciseRepo {
         Injector.getAppComponent().inject(this);
     }
 
+    private int getNextKey() {
+        Number max = databaseRealm.getRealmInstance().where(Exercise.class).max(Exercise.ID);
+        return (max != null) ? max.intValue() + 1 : 0;
+    }
+
+    @Override
+    public RealmResults<Exercise> getExercises(int categoryId) {
+        return databaseRealm.getRealmInstance()
+            .where(Exercise.class)
+            .equalTo(Exercise.CATEGORY_ID, categoryId)
+            .findAll();
+    }
 
     @Override
     public Exercise getExercise(int exerciseId) {
@@ -32,8 +47,29 @@ public class ExerciseRepoImpl implements ExerciseRepo {
     @Override
     public void setExercise(Exercise exercise) {
         try {
+            if (exercise.getId() == 0)
+                exercise.setId(getNextKey());
+
             databaseRealm.getRealmInstance().beginTransaction();
             databaseRealm.getRealmInstance().copyToRealmOrUpdate(exercise);
+            databaseRealm.getRealmInstance().commitTransaction();
+        }
+        catch (Exception ex) {
+            Log.e(TAG, ex.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteExercise(int exerciseId) {
+        try {
+            databaseRealm.getRealmInstance().beginTransaction();
+
+            databaseRealm.getRealmInstance()
+                    .where(Exercise.class)
+                    .equalTo(Exercise.ID, exerciseId)
+                    .findFirst()
+                    .deleteFromRealm();
+
             databaseRealm.getRealmInstance().commitTransaction();
         }
         catch (Exception ex) {

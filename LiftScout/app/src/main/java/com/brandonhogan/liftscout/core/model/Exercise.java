@@ -14,7 +14,7 @@ public class Exercise extends RealmObject {
 
 
     @PrimaryKey
-    private int id = RealmAutoIncrement.getInstance(this.getClass()).getNextIdFromModel();
+    private int id;
 
     private int categoryId;
 
