@@ -98,9 +98,16 @@ public class ProgressManager {
         Set set = todayProgress.getSets().where().equalTo("exercise.id", exerciseId).findFirst();
 
         if (set == null) {
+            Number orderNum = todayProgress.getSets().where().max(Set.ORDER_ID);
+            int order = 0;
+
+            if (orderNum != null)
+                order = orderNum.intValue() + 1;
+
             set = new Set();
             set.setExercise(exerciseRepo.getExercise(exerciseId));
             set.setReps(new RealmList<Rep>());
+            set.setOrderId(order);
 
             setRepo.addSet(todayProgress, set);
         }
@@ -143,6 +150,7 @@ public class ProgressManager {
     // Reps
 
     public void addRepToTodayProgress(Set set, Rep rep) {
+
         setRepo.addRep(set, rep);
     }
 
