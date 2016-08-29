@@ -22,6 +22,13 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
+    public void setUser(User user) {
+        databaseRealm.getRealmInstance().beginTransaction();
+        databaseRealm.getRealmInstance().copyToRealmOrUpdate(user);
+        databaseRealm.getRealmInstance().commitTransaction();
+    }
+
+    @Override
     public void setUserName(String name) {
         throw new UnsupportedOperationException("Setting username is not yet implemented");
     }

@@ -10,10 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.aaadev.AAADevWorkout;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
-import com.brandonhogan.liftscout.core.model.User;
 import com.brandonhogan.liftscout.core.utils.DatabaseOutput;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
@@ -38,14 +36,13 @@ public class MainActivity extends BaseActivity
     //
     private DrawerLayout drawer;
     private NavigationManager navigationManager;
-   // private ProgressManager mProgressManager;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private SweetAlertDialog dialog;
     private Toolbar toolbar;
 
     @Inject
-    ProgressManager mProgressManager;
+    ProgressManager progressManager;
 
     @Inject
     DatabaseRealm databaseRealm;
@@ -76,14 +73,12 @@ public class MainActivity extends BaseActivity
             navigationManager.init(getFragmentManager());
             navigationManager.setNavigationListener(this);
 
-           // mProgressManager = new ProgressManager();
-            mProgressManager.init(this);
 
             //This is set when restoring from a previous state,
             //so we do not want to try and load a new fragment
             if (savedInstanceState != null) {
                 Date todayDate = (Date)savedInstanceState.getSerializable(SAVE_STATE_TODAY_PROGRESS_DATE);
-                mProgressManager.setTodayProgress(todayDate);
+                progressManager.setTodayProgress(todayDate);
 
                 setDrawerIndicator();
 
@@ -119,7 +114,7 @@ public class MainActivity extends BaseActivity
     protected void onSaveInstanceState(Bundle outState) {
 
         outState.putSerializable(SAVE_STATE_TODAY_PROGRESS_DATE,
-                mProgressManager.getTodayProgress().getDate());
+                progressManager.getTodayProgress().getDate());
 
         super.onSaveInstanceState(outState);
     }
@@ -181,18 +176,17 @@ public class MainActivity extends BaseActivity
         return navigationManager;
     }
 
-    public ProgressManager getProgressManager() {
-        return mProgressManager;
-    }
-
 
     // Private Functions
     //
     private void updateUserData() {
-        getRealm().beginTransaction();
-        User user = getRealm().where(User.class).findFirst();
-        user.setLastUsed(new Date());
-        getRealm().commitTransaction();
+
+        //TODO : Replace once userManager is fully DI
+
+//        getRealm().beginTransaction();
+//        User user = getRealm().where(User.class).findFirst();
+//        user.setLastUsed(new Date());
+//        getRealm().commitTransaction();
     }
 
     private void showExitDialog() {

@@ -22,6 +22,7 @@
     <string name="weight">Weight</string>
     <string name="photos">Photos</string>
     <string name="reps">Reps</string>
+    <string name="rep">Rep</string>
 
     <!-- Drawer Navigations -->
     <string name="navigation_drawer_open">Open navigation drawer</string>

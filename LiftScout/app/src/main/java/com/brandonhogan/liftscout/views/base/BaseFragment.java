@@ -42,10 +42,6 @@ public class BaseFragment extends Fragment {
         return ((MainActivity)getActivity()).getNavigationManager();
     }
 
-    public ProgressManager getProgressManager() {
-        return ((MainActivity)getActivity()).getProgressManager();
-    }
-
     public Realm getRealm() {
         if (realm == null || realm.isClosed()) {
             synchronized (realmLock) {

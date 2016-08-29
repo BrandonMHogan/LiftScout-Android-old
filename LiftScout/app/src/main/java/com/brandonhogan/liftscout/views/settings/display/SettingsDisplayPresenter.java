@@ -10,8 +10,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
-
 public class SettingsDisplayPresenter implements SettingsDisplayContract.Presenter {
 
 
@@ -38,7 +36,7 @@ public class SettingsDisplayPresenter implements SettingsDisplayContract.Present
         Injector.getAppComponent().inject(this);
         this.view = view;
 
-        originalThemeValue = userManager.getTheme().getValue();
+        originalThemeValue = userManager.getThemeValue();
     }
 
 

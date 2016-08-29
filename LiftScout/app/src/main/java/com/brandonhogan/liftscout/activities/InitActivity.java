@@ -116,11 +116,8 @@ public class InitActivity extends BaseActivity {
             return;
         }
 
-
-        getRealm().beginTransaction();
         User user = new User(nameValue, birthDateValue, weightValue, unitValue);
-        getRealm().copyToRealmOrUpdate(user);
-        getRealm().commitTransaction();
+        userManager.setUser(user);
 
         setupDefaultExercises();
 
@@ -238,20 +235,21 @@ public class InitActivity extends BaseActivity {
     }
 
     private void setupDefaultExercises() {
-        getRealm().beginTransaction();
-
-        getRealm().delete(Category.class);
-
-        ArrayList categories = new ArrayList();
-
-        categories.add(createCategory("Abs", R.color.category_red));
-        categories.add(createCategory("Chest", R.color.category_orange));
-        categories.add(createCategory("Back", R.color.category_blue));
-        categories.add(createCategory("Legs", R.color.category_green));
-
-        getRealm().copyToRealmOrUpdate(categories);
-
-        getRealm().commitTransaction();
+        //TODO : fix when DI is ready
+//        getRealm().beginTransaction();
+//
+//        getRealm().delete(Category.class);
+//
+//        ArrayList categories = new ArrayList();
+//
+//        categories.add(createCategory("Abs", R.color.category_red));
+//        categories.add(createCategory("Chest", R.color.category_orange));
+//        categories.add(createCategory("Back", R.color.category_blue));
+//        categories.add(createCategory("Legs", R.color.category_green));
+//
+//        getRealm().copyToRealmOrUpdate(categories);
+//
+//        getRealm().commitTransaction();
 
     }
 

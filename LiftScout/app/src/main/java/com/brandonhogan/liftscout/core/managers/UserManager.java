@@ -28,6 +28,21 @@ public class UserManager {
         user = userRepo.getUser();
     }
 
+    public boolean validUser() {
+        user = userRepo.getUser();
+        return user != null;
+    }
+
+    public User getUser() {
+        user = userRepo.getUser();
+        return user;
+    }
+
+    public void setUser(User user) {
+        userRepo.setUser(user);
+        this.user = user;
+    }
+
     public String getName() {
         return user.getName();
     }
@@ -60,14 +75,14 @@ public class UserManager {
         return userSettingsRepo.setUserSetting(UserSetting.TODAY_TRANSFORM, value);
     }
 
-    public UserSetting getTheme() {
+    public String getThemeValue() {
         UserSetting setting = userSettingsRepo.getUserSetting(UserSetting.THEME);
 
         if (setting == null) {
             setting = userSettingsRepo.createUserSetting(UserSetting.THEME, Themes.DARK);
         }
 
-        return setting;
+        return setting.getValue();
     }
 
     public boolean setTheme(String value) {

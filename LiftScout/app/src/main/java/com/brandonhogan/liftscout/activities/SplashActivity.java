@@ -35,10 +35,8 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                User user = getRealm().where(User.class).findFirst();
-
                 // User has used the app before and should be directed to the main activity
-                if (user != null){
+                if (userManager.validUser()){
                     toMain();
                 }
                 else {

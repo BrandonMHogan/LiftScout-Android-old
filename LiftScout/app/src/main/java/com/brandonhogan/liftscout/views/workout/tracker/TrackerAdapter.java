@@ -12,11 +12,11 @@ import com.brandonhogan.liftscout.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkoutTrackerAdapter extends RecyclerView.Adapter<WorkoutTrackerAdapter.TrackerViewHolder> {
+public class TrackerAdapter extends RecyclerView.Adapter<TrackerAdapter.TrackerViewHolder> {
     LayoutInflater inflater;
     List<TrackerListModel> modelList;
 
-    public WorkoutTrackerAdapter(Context context, List<TrackerListModel> list) {
+    public TrackerAdapter(Context context, List<TrackerListModel> list) {
         inflater = LayoutInflater.from(context);
         modelList = new ArrayList<>(list);
     }

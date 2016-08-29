@@ -12,10 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.model.Progress;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.core.utils.Constants;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.home.workout.WorkoutItem;
 import com.brandonhogan.liftscout.views.home.workout.WorkoutSection;
@@ -33,6 +35,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 
@@ -56,6 +60,12 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
     // Static Properties
     //
     private static final String DATE_BUNDLE = "dateBundle";
+
+
+    // Injections
+    //
+    @Inject
+    ProgressManager progressManager;
 
 
     // Private Properties
@@ -97,6 +107,7 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Injector.getAppComponent().inject(this);
 
         date = new Date(getArguments().getLong(DATE_BUNDLE));
 
@@ -121,7 +132,7 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
     }
 
     private void setWeight() {
-        double weight = getTodayProgress().getWeight();
+        double weight = progressManager.getTodayProgress().getWeight();
 
         if (weight == 0)
             weightLayout.setVisibility(View.GONE);
@@ -167,18 +178,19 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
 
         // Checks the manager to see if a set has been updated.
         // If so, it will check the current sets to see if it matches, and updates it
-        Set updatedSet = getProgressManager().getUpdatedSet();
-        if (updatedSet != null) {
-            int pos = 0;
-            for (WorkoutSection section : _workout) {
-                if (section.setId == updatedSet.getId()) {
-                    mAdapter.expand(pos);
-                    getProgressManager().clearUpdatedSet();
-                    break;
-                }
-                pos +=1;
-            }
-        }
+        //TODO : Reapply once progressManager is fully updated for DI
+//        Set updatedSet = getProgressManager().getUpdatedSet();
+//        if (updatedSet != null) {
+//            int pos = 0;
+//            for (WorkoutSection section : _workout) {
+//                if (section.setId == updatedSet.getId()) {
+//                    mAdapter.expand(pos);
+//                    getProgressManager().clearUpdatedSet();
+//                    break;
+//                }
+//                pos +=1;
+//            }
+//        }
     }
 
     @Override
@@ -191,8 +203,8 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
 
             // Will update the orderId of the sets and save to realm
             getRealm().beginTransaction();
-            Set setA = getTodayProgress().getSets().where().equalTo(Set.ID, sectionA.setId).findFirst();
-            Set setB = getTodayProgress().getSets().where().equalTo(Set.ID, sectionB.setId).findFirst();
+            Set setA = progressManager.getTodayProgress().getSets().where().equalTo(Set.ID, sectionA.setId).findFirst();
+            Set setB = progressManager.getTodayProgress().getSets().where().equalTo(Set.ID, sectionB.setId).findFirst();
 
             int orderA = setA.getOrderId();
             int orderB = setB.getOrderId();
@@ -209,12 +221,16 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
 
     private List<WorkoutSection> getData() {
 
-        if (_workout != null && _workout.size() > 0 && !getProgressManager().isSetUpdated())
+        //TODO : reapply the isSetUpdated when i get the progressManager fully setup for DI
+        //if (_workout != null && _workout.size() > 0 && !getProgressManager().isSetUpdated())
+        if (_workout != null && _workout.size() > 0)
             return _workout;
 
         _workout = new ArrayList<>();
 
-        for (Set set : getTodayProgress().getSets().sort(Set.ORDER_ID)) {
+        int apple = progressManager.getTodayProgress().getSets().size();
+
+        for (Set set : progressManager.getTodayProgress().getSets().sort(Set.ORDER_ID)) {
 
             List<IItem> items = new LinkedList<>();
             double volume = 0;
@@ -231,21 +247,7 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
         return _workout;
     }
 
-    private Progress getTodayProgress() {
-        Progress _currentProgress = getRealm().where(Progress.class)
-                .equalTo(Progress.DATE, date).findFirst();
 
-        if (_currentProgress == null) {
-            _currentProgress = new Progress();
-            _currentProgress.setDate(date);
-
-            getRealm().beginTransaction();
-            getRealm().copyToRealmOrUpdate(_currentProgress);
-            getRealm().commitTransaction();
-        }
-
-        return _currentProgress;
-    }
 
 
     // Public Function

@@ -1,68 +1,137 @@
 package com.brandonhogan.liftscout.core.managers;
 
-import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.core.model.Progress;
+import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
+import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.repository.CategoryRepo;
+import com.brandonhogan.liftscout.repository.DatabaseRealm;
+import com.brandonhogan.liftscout.repository.ExerciseRepo;
+import com.brandonhogan.liftscout.repository.ProgressRepo;
+import com.brandonhogan.liftscout.repository.SetRepo;
+import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
+import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
+import com.brandonhogan.liftscout.repository.impl.ProgressRepoImpl;
+import com.brandonhogan.liftscout.repository.impl.SetRepoImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
+
+import javax.inject.Inject;
 
 import io.realm.RealmList;
 
 public class ProgressManager {
 
+
+    // Injectors
+    //
+    @Inject
+    DatabaseRealm databaseRealm;
+
+
+    // Private Static Properties
+    //
     private static final String TAG = "ProgressManager";
 
-    private MainActivity mActivity;
-    private Progress mTodayProgress;
-    private Set mUpdatedSet;
 
-    /**
-     * Initialize the NavigationManager with a FragmentManager, which will be used at the
-     * fragment transactions.
-     *
-     * @param activity
-     */
-    public void init (MainActivity activity) {
-        mActivity = activity;
+    // Private Properties
+    //
+    private ProgressRepo progressRepo;
+    private SetRepo setRepo;
+    private CategoryRepo categoryRepo;
+    private ExerciseRepo exerciseRepo;
+
+    private Progress todayProgress;
+    private Set updatedSet;
+
+
+    // Constructor
+    //
+    public ProgressManager() {
+        Injector.getAppComponent().inject(this);
+
+        progressRepo = new ProgressRepoImpl();
+        setRepo = new SetRepoImpl();
+        categoryRepo = new CategoryRepoImpl();
+        exerciseRepo = new ExerciseRepoImpl();
+
+        // Will default to today
+        setTodayProgress(new Date());
     }
 
+
+    // Today Progress
+    /*
+        Will keep a reference of the current days progress object and allow for quick
+        access to it
+     */
     public Progress getTodayProgress() {
-        return mTodayProgress;
+        return todayProgress;
     }
 
     public void setTodayProgress(Progress mTodayProgress) {
-        this.mTodayProgress = mTodayProgress;
+        this.todayProgress = mTodayProgress;
+        progressRepo.setProgress(todayProgress);
     }
 
     public void setTodayProgress(Date date) {
-        mTodayProgress = mActivity.getRealm().where(Progress.class)
-                .equalTo(Progress.DATE, date).findFirst();
 
+        todayProgress = databaseRealm.getRealmInstance()
+                .where(Progress.class)
+                .equalTo(Progress.DATE, date)
+                .findFirst();
 
-        if (mTodayProgress == null) {
-            mTodayProgress = new Progress();
-            mTodayProgress.setDate(date);
-            mTodayProgress.setSets(new RealmList<Set>());
-
-            mActivity.getRealm().beginTransaction();
-            mActivity.getRealm().copyToRealmOrUpdate(mTodayProgress);
-            mActivity.getRealm().commitTransaction();
+        if (todayProgress == null) {
+            todayProgress = new Progress();
+            todayProgress.setDate(date);
+            todayProgress.setSets(new RealmList<Set>());
         }
+
+        progressRepo.setProgress(todayProgress);
     }
 
+    public Set getTodayProgressSet(int exerciseId) {
+        Set set = todayProgress.getSets().where().equalTo("exercise.id", exerciseId).findFirst();
+
+        if (set == null) {
+            set = new Set();
+            set.setExercise(exerciseRepo.getExercise(exerciseId));
+            set.setReps(new RealmList<Rep>());
+
+            setRepo.addSet(todayProgress, set);
+        }
+
+        return set;
+    }
+
+    public void updateTodayProgressSet(Set set) {
+        setRepo.updateSet(set);
+    }
+
+    public void addRepToTodayProgress(Set set, Rep rep) {
+        setRepo.addRep(set, rep);
+    }
+
+
+
+    // Set Updater
+    /*
+        When a set is edited, and we need to track it back to the home fragments
+     */
     public boolean isSetUpdated() {
-        return mUpdatedSet != null;
+        return updatedSet != null;
     }
 
     public Set getUpdatedSet() {
-        return mUpdatedSet;
+        return updatedSet;
     }
 
     public void updateSet(Set set) {
-        mUpdatedSet = set;
+        updatedSet = set;
     }
 
     public void clearUpdatedSet() {
-        mUpdatedSet = null;
+        updatedSet = null;
     }
 }
