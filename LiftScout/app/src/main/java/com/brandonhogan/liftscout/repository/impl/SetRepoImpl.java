@@ -55,6 +55,18 @@ public class SetRepoImpl implements SetRepo {
     }
 
     @Override
+    public void updateSetOrder(Set set, int order) {
+        try {
+            databaseRealm.getRealmInstance().beginTransaction();
+            set.setOrderId(order);
+            databaseRealm.getRealmInstance().commitTransaction();
+        }
+        catch (Exception ex) {
+            Log.e(TAG, ex.getMessage());
+        }
+    }
+
+    @Override
     public void addRep(Set set, Rep rep) {
         try {
             databaseRealm.getRealmInstance().beginTransaction();

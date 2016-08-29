@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.core.managers;
 import com.brandonhogan.liftscout.core.model.Progress;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.CategoryRepo;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
@@ -57,7 +58,7 @@ public class ProgressManager {
         exerciseRepo = new ExerciseRepoImpl();
 
         // Will default to today
-        setTodayProgress(new Date());
+        setTodayProgress(BhDate.trimTimeFromDate(new Date()));
     }
 
 
@@ -86,9 +87,11 @@ public class ProgressManager {
             todayProgress = new Progress();
             todayProgress.setDate(date);
             todayProgress.setSets(new RealmList<Set>());
-        }
 
-        progressRepo.setProgress(todayProgress);
+            progressRepo.setProgress(todayProgress);
+
+            todayProgress = progressRepo.getProgress(todayProgress.getId());
+        }
     }
 
     public Set getTodayProgressSet(int exerciseId) {
@@ -105,14 +108,43 @@ public class ProgressManager {
         return set;
     }
 
+
+    // Sets
+
     public void updateTodayProgressSet(Set set) {
         setRepo.updateSet(set);
     }
 
+    public void swapSetOrders(int setAId, int setBId) {
+        Set setA = setRepo.getSet(setAId);
+        Set setB = setRepo.getSet(setBId);
+
+        int setAOrderId = setA.getOrderId();
+        int setBOrderId = setB.getOrderId();
+
+        setRepo.updateSetOrder(setA, setBOrderId);
+        setRepo.updateSetOrder(setB, setAOrderId);
+    }
+
+    public void updateSetOrder(int setId, int orderId) {
+        setRepo.updateSetOrder(setRepo.getSet(setId), orderId);
+    }
+
+    public RealmList<Set> getSetsByDate(Date date) {
+        Progress progress = progressRepo.getProgress(date);
+
+        if (progress == null)
+            return null;
+        else
+            return progress.getSets();
+    }
+
+
+    // Reps
+
     public void addRepToTodayProgress(Set set, Rep rep) {
         setRepo.addRep(set, rep);
     }
-
 
 
     // Set Updater

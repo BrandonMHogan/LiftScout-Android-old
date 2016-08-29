@@ -179,28 +179,6 @@ public class HomeContainerFragment extends BaseFragment {
         });
     }
 
-    private void updateTodayProgressWeight(double weight) {
-        getRealm().beginTransaction();
-        progressManager.getTodayProgress().setWeight(weight);
-        getRealm().copyToRealmOrUpdate(progressManager.getTodayProgress());
-        getRealm().commitTransaction();
-
-        Progress topDate = getRealm().where(Progress.class)
-                .greaterThanOrEqualTo(Progress.DATE, progressManager.getTodayProgress().getDate())
-                .findAllSorted(Progress.DATE, Sort.DESCENDING).first();
-
-        if (topDate != null && progressManager.getTodayProgress().getDate().compareTo(topDate.getDate()) >= 0 ) {
-            Log.d(getTAG(), "Current Date >= Top Progress Date. Will update user weight to " + weight);
-            userManager.setWeight(weight);
-        }
-
-
-        Bundle params = new Bundle();
-        params.putString("date", progressManager.getTodayProgress().getDate().toString());
-        params.putDouble("weight", weight);
-        ((MainActivity)getActivity()).getFirebaseAnalytics().logEvent("weight_set", params);
-    }
-
     private void updateTodayProgress() {
         progressManager.setTodayProgress(adapter.dateByPosition(viewPager.getCurrentItem()));
     }
@@ -227,7 +205,7 @@ public class HomeContainerFragment extends BaseFragment {
 
             @Override
             public void onSaveWeightDialog(double weight) {
-                updateTodayProgressWeight(weight);
+                //updateTodayProgressWeight(weight);
                 adapter.update();
 
             }

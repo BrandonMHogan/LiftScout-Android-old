@@ -9,6 +9,8 @@ import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.ProgressRepo;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 
 public class ProgressRepoImpl implements ProgressRepo {
@@ -32,7 +34,15 @@ public class ProgressRepoImpl implements ProgressRepo {
     }
 
     @Override
-    public void setProgress(Progress progress) {
+    public Progress getProgress(Date date) {
+        return databaseRealm.getRealmInstance()
+                .where(Progress.class)
+                .equalTo(Progress.DATE, date)
+                .findFirst();
+    }
+
+    @Override
+    public Progress setProgress(Progress progress) {
 
         try {
             databaseRealm.getRealmInstance().beginTransaction();
@@ -41,6 +51,9 @@ public class ProgressRepoImpl implements ProgressRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            return null;
         }
+
+        return  progress;
     }
 }

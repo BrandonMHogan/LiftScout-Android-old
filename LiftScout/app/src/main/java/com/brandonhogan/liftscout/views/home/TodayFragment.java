@@ -39,6 +39,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import io.realm.RealmList;
 
 public class TodayFragment extends BaseFragment implements ItemTouchCallback {
 
@@ -76,7 +77,6 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
     private String year;
     private String dateString;
     private FastItemAdapter mAdapter;
-    List<WorkoutSection> _workout;
 
 
     // Binds
@@ -119,13 +119,24 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
         setupAdapter();
     }
 
+    @Override
+    public boolean itemTouchOnMove(int oldPosition, int newPosition) {
+        if (mAdapter.getAdapterItem(newPosition) instanceof WorkoutSection) {
+            Collections.swap(mAdapter.getAdapterItems(), oldPosition, newPosition); // change position
+
+            WorkoutSection sectionA = ((WorkoutSection)mAdapter.getAdapterItem(newPosition));
+            WorkoutSection sectionB = ((WorkoutSection)mAdapter.getAdapterItem(oldPosition));
+
+            progressManager.swapSetOrders(sectionA.setId, sectionB.setId);
+
+            mAdapter.notifyAdapterItemMoved(oldPosition, newPosition);
+        }
+        return true;
+    }
+
 
     // Private Functions
     //
-    private void clearLocalReferences() {
-        _workout = null;
-    }
-
     private void setTitle() {
         dateView.setText(dateString);
         dateYearView.setText(year);
@@ -178,59 +189,30 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
 
         // Checks the manager to see if a set has been updated.
         // If so, it will check the current sets to see if it matches, and updates it
-        //TODO : Reapply once progressManager is fully updated for DI
-//        Set updatedSet = getProgressManager().getUpdatedSet();
-//        if (updatedSet != null) {
-//            int pos = 0;
-//            for (WorkoutSection section : _workout) {
-//                if (section.setId == updatedSet.getId()) {
-//                    mAdapter.expand(pos);
-//                    getProgressManager().clearUpdatedSet();
-//                    break;
-//                }
-//                pos +=1;
-//            }
-//        }
-    }
-
-    @Override
-    public boolean itemTouchOnMove(int oldPosition, int newPosition) {
-        if (mAdapter.getAdapterItem(newPosition) instanceof WorkoutSection) {
-            Collections.swap(mAdapter.getAdapterItems(), oldPosition, newPosition); // change position
-
-            WorkoutSection sectionA = ((WorkoutSection)mAdapter.getAdapterItem(newPosition));
-            WorkoutSection sectionB = ((WorkoutSection)mAdapter.getAdapterItem(oldPosition));
-
-            // Will update the orderId of the sets and save to realm
-            getRealm().beginTransaction();
-            Set setA = progressManager.getTodayProgress().getSets().where().equalTo(Set.ID, sectionA.setId).findFirst();
-            Set setB = progressManager.getTodayProgress().getSets().where().equalTo(Set.ID, sectionB.setId).findFirst();
-
-            int orderA = setA.getOrderId();
-            int orderB = setB.getOrderId();
-
-            setA.setOrderId(orderB);
-            setB.setOrderId(orderA);
-            getRealm().commitTransaction();
-
-            mAdapter.notifyAdapterItemMoved(oldPosition, newPosition);
+        Set updatedSet = progressManager.getUpdatedSet();
+        if (updatedSet != null) {
+            int pos = 0;
+            for (WorkoutSection section : getData()) {
+                if (section.setId == updatedSet.getId()) {
+                    mAdapter.expand(pos);
+                    progressManager.clearUpdatedSet();
+                    break;
+                }
+                pos +=1;
+            }
         }
-        return true;
     }
-
 
     private List<WorkoutSection> getData() {
 
-        //TODO : reapply the isSetUpdated when i get the progressManager fully setup for DI
-        //if (_workout != null && _workout.size() > 0 && !getProgressManager().isSetUpdated())
-        if (_workout != null && _workout.size() > 0)
-            return _workout;
+        List<WorkoutSection> workout = new ArrayList<>();
 
-        _workout = new ArrayList<>();
+        RealmList<Set> sets = progressManager.getSetsByDate(date);
 
-        int apple = progressManager.getTodayProgress().getSets().size();
+        if (sets == null)
+            return workout;
 
-        for (Set set : progressManager.getTodayProgress().getSets().sort(Set.ORDER_ID)) {
+        for (Set set : sets.sort(Set.ORDER_ID)) {
 
             List<IItem> items = new LinkedList<>();
             double volume = 0;
@@ -242,19 +224,16 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
 
             WorkoutSection expandableItem = new WorkoutSection(set.getId(), set.getExercise().getName(), volume);
             expandableItem.withSubItems(items);
-            _workout.add(expandableItem);
+            workout.add(expandableItem);
         }
-        return _workout;
+        return workout;
     }
-
-
 
 
     // Public Function
     //
     @SuppressWarnings("unchecked")
     public void update() {
-        clearLocalReferences();
         setWeight();
         mAdapter.setNewList(getData());
     }
