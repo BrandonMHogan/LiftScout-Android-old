@@ -7,6 +7,7 @@ public interface TrackerContract {
     interface View {
         void updateAdapter(List<TrackerListModel> data);
         String getRepsLabel(boolean isMultiple);
+        void saveSuccess(int position);
     }
 
     interface Presenter {

@@ -54,6 +54,7 @@ public class TrackerFragment extends BaseFragment implements
     private TrackerContract.Presenter presenter;
 
     private TrackerAdapter mAdapter;
+    private LinearLayoutManager layoutManager;
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
     private SweetAlertDialog dialog;
@@ -141,7 +142,9 @@ public class TrackerFragment extends BaseFragment implements
 
             mAdapter = new TrackerAdapter(getActivity(), data);
             mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+            layoutManager = new LinearLayoutManager(getActivity());
+            mRecyclerView.setLayoutManager(layoutManager);
 
             onTouchListener = new RecyclerTouchListener(getActivity(), mRecyclerView);
 
@@ -178,4 +181,8 @@ public class TrackerFragment extends BaseFragment implements
         return isMultiple ? getString(R.string.reps) : getString(R.string.rep);
     }
 
+    @Override
+    public void saveSuccess(int position) {
+        layoutManager.scrollToPosition(position);
+    }
 }

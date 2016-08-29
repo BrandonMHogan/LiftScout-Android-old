@@ -71,6 +71,7 @@ public class SetRepoImpl implements SetRepo {
         try {
             databaseRealm.getRealmInstance().beginTransaction();
             set.getReps().add(rep);
+            databaseRealm.getRealmInstance().copyToRealmOrUpdate(set);
             databaseRealm.getRealmInstance().commitTransaction();
         }
         catch (Exception ex) {

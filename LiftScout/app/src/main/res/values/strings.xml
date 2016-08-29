@@ -96,6 +96,13 @@
     <string name="setting_display_theme_spinner_title">Theme</string>
     <string name="setting_display_theme_spinner_description">Choose a theme that better fits your taste</string>
 
+    <!-- Workout Container -->
+    <string name="workout_tracker_title">Tracker</string>
+    <string name="workout_history_title">History</string>
+    <string name="workout_graphs_title">Graphs</string>
+    <string name="workout_statistics_title">Statistics</string>
+    <string name="workout_goals_title">Goals</string>
+
     <!-- Errors -->
     <string name="error_title">Uh oh!</string>
     <string name="error_name">Name is required</string>

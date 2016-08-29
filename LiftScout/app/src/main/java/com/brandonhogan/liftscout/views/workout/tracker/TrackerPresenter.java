@@ -91,5 +91,7 @@ public class TrackerPresenter implements TrackerContract.Presenter {
 
         progressManager.updateSet(set);
         resetAdapter();
+
+        view.saveSuccess(adapterData.size() - 1);
     }
 }

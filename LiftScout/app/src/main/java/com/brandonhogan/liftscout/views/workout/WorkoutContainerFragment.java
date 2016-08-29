@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.model.Exercise;
+import com.brandonhogan.liftscout.repository.ExerciseRepo;
+import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import butterknife.Bind;
@@ -69,12 +71,11 @@ public class WorkoutContainerFragment extends BaseFragment {
 
         setTitle(getTitle());
 
-        tabLayout.addTab(tabLayout.newTab().setText("Tracker"));
-        tabLayout.addTab(tabLayout.newTab().setText("History"));
-        tabLayout.addTab(tabLayout.newTab().setText("History 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("History 3"));
-        tabLayout.addTab(tabLayout.newTab().setText("History 4"));
-        tabLayout.addTab(tabLayout.newTab().setText("History 5"));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_tracker_title)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_history_title)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_graphs_title)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_statistics_title)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_goals_title)));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -104,7 +105,7 @@ public class WorkoutContainerFragment extends BaseFragment {
     }
 
     private String getTitle() {
-        return getRealm().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst().getName();
+        ExerciseRepo exerciseRepo = new ExerciseRepoImpl();
+        return exerciseRepo.getExercise(exerciseId).getName();
     }
-
 }
