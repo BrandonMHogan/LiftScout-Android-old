@@ -25,10 +25,13 @@ import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.realm.RealmResults;
 
-public class CategoryListFragment extends BaseFragment implements RecyclerTouchListener.RecyclerTouchListenerHelper {
+public class CategoryListFragment extends BaseFragment implements
+        CategoryListContract.View,
+        RecyclerTouchListener.RecyclerTouchListenerHelper {
 
 
-
+    // Private Static Properties
+    //
     private final static String BUNDLE_ADD_SET = "addSetBundle";
 
 
@@ -49,13 +52,12 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
     // Private Properties
     //
     private View rootView;
+    private CategoryListContract.Presenter presenter;
     private CategoryListAdapter mAdapter;
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
     private SweetAlertDialog dialog;
-    private boolean addSet;
 
-    private List<CategoryListModel> _categories;
 
     // Binds
     //
@@ -78,13 +80,12 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        presenter = new CategoryListPresenter(this,
+                getArguments().getBoolean(BUNDLE_ADD_SET));
 
-        addSet = getArguments().getBoolean(BUNDLE_ADD_SET);
-
+        presenter.viewCreated();
 
         setTitle(getResources().getString(R.string.title_frag_category_list));
-
-        setupAdapter();
     }
 
     @Override
@@ -106,13 +107,69 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
 
     @OnClick(R.id.fab)
     public void addOnClick() {
-        addCategory();
+        createCategory();
     }
+
 
     // Private Functions
     //
-    private void setupAdapter() {
-        mAdapter = new CategoryListAdapter(getActivity(), getData());
+    private void editCategory(int position) {
+        CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
+            @Override
+            public void onCancelCategoryEditDialog() {
+            }
+
+            @Override
+            public void onSaveCategoryEditDialog(CategoryListModel category) {
+                presenter.updateCategory(category);
+            }
+        }, true, presenter.getCategory(position));
+
+        dialog.show();
+    }
+
+    private void createCategory() {
+        CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
+            @Override
+            public void onCancelCategoryEditDialog() {
+
+            }
+
+            @Override
+            public void onSaveCategoryEditDialog(CategoryListModel category) {
+                presenter.createCategory(category);
+            }
+        }, true, null);
+
+        dialog.show();
+    }
+
+
+    private void removeCategoryAlert(final int position) {
+        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(getString(R.string.dialog_category_remove_title))
+                .setContentText(getString(R.string.dialog_category_remove_message))
+                .setConfirmText(getString(R.string.yes))
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        presenter.deleteCategory(position);
+                        dialog.cancel();
+                    }
+                })
+                .setCancelText(getString(R.string.cancel))
+                .showCancelButton(true);
+
+        dialog.show();
+    }
+
+
+    // Contracts
+    //
+
+    @Override
+    public void updateAdapter(List<CategoryListModel> data) {
+        mAdapter = new CategoryListAdapter(getActivity(), data);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -122,13 +179,7 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
                 .setClickable(new RecyclerTouchListener.OnRowClickListener() {
                     @Override
                     public void onRowClicked(int position) {
-
-                        if (addSet) {
-                            getNavigationManager().startExerciseListAddSet(getData().get(position).getId());
-                        }
-                        else {
-                            getNavigationManager().startExerciseList(getData().get(position).getId());
-                        }
+                        presenter.rowClicked(position);
                     }
 
                     @Override
@@ -154,119 +205,11 @@ public class CategoryListFragment extends BaseFragment implements RecyclerTouchL
                 });
     }
 
-    private List<CategoryListModel> getData() {
-
-        if (_categories != null)
-            return _categories;
-
-        _categories = new ArrayList<>();
-
-
-        for (Category category : getCategories().sort(Category.NAME)) {
-            _categories.add(new CategoryListModel(category));
-        }
-
-        return _categories;
-    }
-
-    private void update() {
-        _categories = null;
-        mAdapter.setList(getData());
-    }
-
-    private RealmResults<Category> getCategories() {
-        return getRealm().where(Category.class).findAll();
-    }
-
-    private void saveCategory(Category category) {
-        getRealm().beginTransaction();
-        getRealm().copyToRealmOrUpdate(category);
-        getRealm().commitTransaction();
-
-        update();
-    }
-
-    private void removeCategory(int id) {
-        getRealm().beginTransaction();
-        getRealm().where(Category.class).equalTo(Category.ID, id).findFirst().deleteFromRealm();
-        getRealm().commitTransaction();
-
-        update();
-    }
-
-    private UserSetting getDisplayTheme() {
-        return getRealm().where(UserSetting.class)
-                .equalTo(UserSetting.NAME, UserSetting.THEME).findFirst();
-    }
-
-    private void editCategory(int position) {
-        boolean isDarkTheme = false;
-
-        if (getDisplayTheme().getValue().equals(Themes.DARK))
-            isDarkTheme = true;
-
-
-        CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
-            @Override
-            public void onCancelCategoryEditDialog() {
-            }
-
-            @Override
-            public void onSaveCategoryEditDialog(CategoryListModel category) {
-
-                Category newCategory = new Category();
-                newCategory.setName(category.getName());
-                newCategory.setColor(category.getColor());
-                newCategory.setId(category.getId());
-
-                saveCategory(newCategory);
-            }
-        }, isDarkTheme, getData().get(position));
-
-        dialog.show();
-    }
-
-    private void addCategory() {
-        boolean isDarkTheme = false;
-
-        if (getDisplayTheme().getValue().equals(Themes.DARK))
-            isDarkTheme = true;
-
-
-        CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
-            @Override
-            public void onCancelCategoryEditDialog() {
-
-            }
-
-            @Override
-            public void onSaveCategoryEditDialog(CategoryListModel category) {
-                Category newCategory = new Category();
-                newCategory.setName(category.getName());
-                newCategory.setColor(category.getColor());
-                saveCategory(newCategory);
-            }
-        }, isDarkTheme, null);
-
-        dialog.show();
-    }
-
-
-    private void removeCategoryAlert(final int position) {
-        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getString(R.string.dialog_category_remove_title))
-                .setContentText(getString(R.string.dialog_category_remove_message))
-                .setConfirmText(getString(R.string.yes))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        removeCategory(getData().get(position).getId());
-                        dialog.cancel();
-                    }
-                })
-                .setCancelText(getString(R.string.cancel))
-                .showCancelButton(true);
-
-        dialog.show();
+    @Override
+    public void itemSelected(int id, boolean isAddSet) {
+        if (isAddSet)
+            getNavigationManager().startExerciseListAddSet(id);
+        else
+            getNavigationManager().startExerciseList(id);
     }
 }

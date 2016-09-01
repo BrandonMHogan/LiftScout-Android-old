@@ -9,6 +9,8 @@ import com.brandonhogan.liftscout.repository.DatabaseRealm;
 
 import javax.inject.Inject;
 
+import io.realm.RealmResults;
+
 public class CategoryRepoImpl implements CategoryRepo {
 
     private static final String TAG = "CategoryRepoImpl";
@@ -34,10 +36,38 @@ public class CategoryRepoImpl implements CategoryRepo {
     }
 
     @Override
+    public RealmResults<Category> getCategories() {
+        return databaseRealm.getRealmInstance()
+                .where(Category.class)
+                .findAll();
+    }
+
+    @Override
     public void setCategory(Category category) {
         try {
+            if (category.getId() == 0)
+                category.setId(getNextKey());
+
             databaseRealm.getRealmInstance().beginTransaction();
             databaseRealm.getRealmInstance().copyToRealmOrUpdate(category);
+            databaseRealm.getRealmInstance().commitTransaction();
+        }
+        catch (Exception ex) {
+            Log.e(TAG, ex.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteCategory(int categoryId) {
+        try {
+            databaseRealm.getRealmInstance().beginTransaction();
+
+            databaseRealm.getRealmInstance()
+                    .where(Category.class)
+                    .equalTo(Category.ID, categoryId)
+                    .findFirst()
+                    .deleteFromRealm();
+
             databaseRealm.getRealmInstance().commitTransaction();
         }
         catch (Exception ex) {

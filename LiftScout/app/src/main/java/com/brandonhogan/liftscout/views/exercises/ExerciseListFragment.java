@@ -69,9 +69,6 @@ public class ExerciseListFragment extends BaseFragment implements
     private OnActivityTouchListener touchListener;
     SweetAlertDialog dialog;
 
-    private List<ExerciseListModel> _exercises;
-
-
 
     // Binds
     //
