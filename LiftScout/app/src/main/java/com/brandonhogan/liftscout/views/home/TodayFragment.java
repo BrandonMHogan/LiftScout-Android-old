@@ -12,11 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.managers.ProgressManager;
-import com.brandonhogan.liftscout.core.model.Progress;
-import com.brandonhogan.liftscout.core.model.Rep;
-import com.brandonhogan.liftscout.core.model.Set;
-import com.brandonhogan.liftscout.core.utils.Constants;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.home.workout.WorkoutItem;
@@ -28,20 +23,13 @@ import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter_extensions.drag.ItemTouchCallback;
 import com.mikepenz.fastadapter_extensions.drag.SimpleDragCallback;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
-
-import javax.inject.Inject;
 
 import butterknife.Bind;
-import io.realm.RealmList;
 
-public class TodayFragment extends BaseFragment implements ItemTouchCallback {
+public class TodayFragment extends BaseFragment implements TodayContact.View, ItemTouchCallback {
 
 
     // Instance
@@ -63,19 +51,11 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
     private static final String DATE_BUNDLE = "dateBundle";
 
 
-    // Injections
-    //
-    @Inject
-    ProgressManager progressManager;
-
-
     // Private Properties
     //
+    private TodayPresenter presenter;
     private TextView weightView;
     private LinearLayout weightLayout;
-    private Date date;
-    private String year;
-    private String dateString;
     private FastItemAdapter mAdapter;
 
 
@@ -108,15 +88,8 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Injector.getAppComponent().inject(this);
-
-        date = new Date(getArguments().getLong(DATE_BUNDLE));
-
-        dateString = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT, Locale.getDefault()).format(date);
-        year = new SimpleDateFormat(Constants.SIMPLE_DATE_YEAR_FORMAT, Locale.getDefault()).format(date);
-
-        setTitle();
-        setWeight();
-        setupAdapter();
+        presenter = new TodayPresenter(this, getArguments().getLong(DATE_BUNDLE));
+        presenter.viewCreate();
     }
 
     @Override
@@ -127,41 +100,44 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
             WorkoutSection sectionA = ((WorkoutSection)mAdapter.getAdapterItem(newPosition));
             WorkoutSection sectionB = ((WorkoutSection)mAdapter.getAdapterItem(oldPosition));
 
-            progressManager.swapSetOrders(sectionA.setId, sectionB.setId);
+            presenter.itemTouchOnMove(sectionA.setId, sectionB.setId);
 
             mAdapter.notifyAdapterItemMoved(oldPosition, newPosition);
         }
         return true;
     }
 
+    // Public Functions
+    public void update() {
+        presenter.update();
+    }
 
-    // Private Functions
+
+    // Contracts
     //
-    private void setTitle() {
-        dateView.setText(dateString);
+    @Override
+    public void setupTitle(String date, String year) {
+        dateView.setText(date);
         dateYearView.setText(year);
     }
 
-    private void setWeight() {
-        double weight = progressManager.getTodayProgress().getWeight();
-
-        if (weight == 0)
+    @Override
+    public void setupWeight(String weight) {
+        if (weight == null)
             weightLayout.setVisibility(View.GONE);
         else {
             weightLayout.setVisibility(View.VISIBLE);
-            weightView.setText(Double.toString(weight));
+            weightView.setText(weight);
         }
     }
 
     @SuppressWarnings("unchecked")
-    private void setupAdapter() {
+    @Override
+    public void setupAdapter(List<WorkoutSection> data, int expandPosition) {
 
         mAdapter = new FastItemAdapter<>();
-
-
         mAdapter.withSelectable(true);
-
-        mAdapter.add(getData());
+        mAdapter.add(data);
 
         mAdapter.withOnClickListener(new FastAdapter.OnClickListener<WorkoutItem>() {
             @Override
@@ -187,54 +163,6 @@ public class TodayFragment extends BaseFragment implements ItemTouchCallback {
         ItemTouchHelper touchHelper = new ItemTouchHelper(touchCallback);
         touchHelper.attachToRecyclerView(mRecyclerView);
 
-        // Checks the manager to see if a set has been updated.
-        // If so, it will check the current sets to see if it matches, and updates it
-        Set updatedSet = progressManager.getUpdatedSet();
-        if (updatedSet != null) {
-            int pos = 0;
-            for (WorkoutSection section : getData()) {
-                if (section.setId == updatedSet.getId()) {
-                    mAdapter.expand(pos);
-                    progressManager.clearUpdatedSet();
-                    break;
-                }
-                pos +=1;
-            }
-        }
-    }
-
-    private List<WorkoutSection> getData() {
-
-        List<WorkoutSection> workout = new ArrayList<>();
-
-        RealmList<Set> sets = progressManager.getSetsByDate(date);
-
-        if (sets == null)
-            return workout;
-
-        for (Set set : sets.sort(Set.ORDER_ID)) {
-
-            List<IItem> items = new LinkedList<>();
-            double volume = 0;
-
-            for (Rep rep : set.getReps()) {
-                items.add(new WorkoutItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight()));
-                volume += rep.getWeight();
-            }
-
-            WorkoutSection expandableItem = new WorkoutSection(set.getId(), set.getExercise().getName(), volume);
-            expandableItem.withSubItems(items);
-            workout.add(expandableItem);
-        }
-        return workout;
-    }
-
-
-    // Public Function
-    //
-    @SuppressWarnings("unchecked")
-    public void update() {
-        setWeight();
-        mAdapter.setNewList(getData());
+        mAdapter.expand(expandPosition);
     }
 }

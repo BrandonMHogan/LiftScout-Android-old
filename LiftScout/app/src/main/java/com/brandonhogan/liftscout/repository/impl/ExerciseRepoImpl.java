@@ -9,7 +9,6 @@ import com.brandonhogan.liftscout.repository.ExerciseRepo;
 
 import javax.inject.Inject;
 
-import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public class ExerciseRepoImpl implements ExerciseRepo {

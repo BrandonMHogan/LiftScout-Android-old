@@ -3,8 +3,6 @@ package com.brandonhogan.liftscout.injection.module;
 import android.app.Application;
 import android.content.Context;
 
-import com.brandonhogan.liftscout.core.constants.Bundles;
-
 import javax.inject.Singleton;
 
 import dagger.Module;

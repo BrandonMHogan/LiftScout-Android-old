@@ -1,10 +1,10 @@
 package com.brandonhogan.liftscout.model;
 
+import com.brandonhogan.liftscout.core.model.User;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import com.brandonhogan.liftscout.core.model.User;
 
 import static org.junit.Assert.assertEquals;
 

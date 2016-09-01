@@ -9,8 +9,6 @@ import com.brandonhogan.liftscout.repository.UserSettingsRepo;
 
 import javax.inject.Inject;
 
-import io.realm.exceptions.RealmException;
-
 public class UserSettingsRepoImpl implements UserSettingsRepo {
 
     private static final String TAG = "UserSettingsRepoImpl";

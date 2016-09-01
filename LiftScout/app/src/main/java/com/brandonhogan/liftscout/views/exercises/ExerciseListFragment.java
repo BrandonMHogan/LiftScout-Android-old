@@ -10,19 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.model.Category;
-import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import io.realm.RealmResults;
 
 public class ExerciseListFragment extends BaseFragment implements
         ExerciseListContract.View,

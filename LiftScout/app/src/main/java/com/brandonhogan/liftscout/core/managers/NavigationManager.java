@@ -9,10 +9,10 @@ import com.brandonhogan.liftscout.views.calendar.CalendarFragment;
 import com.brandonhogan.liftscout.views.categories.CategoryListFragment;
 import com.brandonhogan.liftscout.views.exercises.ExerciseListFragment;
 import com.brandonhogan.liftscout.views.home.HomeContainerFragment;
-import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
-import com.brandonhogan.liftscout.views.settings.home.SettingsHomeFragment;
 import com.brandonhogan.liftscout.views.settings.SettingsListFragment;
 import com.brandonhogan.liftscout.views.settings.SettingsProfileFragment;
+import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
+import com.brandonhogan.liftscout.views.settings.home.SettingsHomeFragment;
 import com.brandonhogan.liftscout.views.workout.WorkoutContainerFragment;
 
 public class NavigationManager {

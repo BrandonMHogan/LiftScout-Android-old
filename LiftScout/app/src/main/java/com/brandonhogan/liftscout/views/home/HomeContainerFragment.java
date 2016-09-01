@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +21,10 @@ import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.core.constants.TodayTransforms;
 import com.brandonhogan.liftscout.core.controls.WeightDialog;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
-import com.brandonhogan.liftscout.core.model.Progress;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
@@ -36,7 +33,6 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import io.realm.Sort;
 
 public class HomeContainerFragment extends BaseFragment {
 

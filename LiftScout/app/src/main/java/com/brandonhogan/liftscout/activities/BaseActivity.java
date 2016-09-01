@@ -9,14 +9,10 @@ import android.view.inputmethod.InputMethodManager;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Themes;
 import com.brandonhogan.liftscout.core.managers.UserManager;
-import com.brandonhogan.liftscout.core.model.UserSetting;
 import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import javax.inject.Inject;
-
-import io.realm.Realm;
 
 public class BaseActivity extends AppCompatActivity {
 

@@ -17,6 +17,7 @@ import com.brandonhogan.liftscout.views.categories.CategoryListPresenter;
 import com.brandonhogan.liftscout.views.exercises.ExerciseListPresenter;
 import com.brandonhogan.liftscout.views.home.HomeContainerFragment;
 import com.brandonhogan.liftscout.views.home.TodayFragment;
+import com.brandonhogan.liftscout.views.home.TodayPresenter;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayPresenter;
 import com.brandonhogan.liftscout.views.settings.home.SettingsHomePresenter;
@@ -24,6 +25,7 @@ import com.brandonhogan.liftscout.views.workout.tracker.TrackerFragment;
 import com.brandonhogan.liftscout.views.workout.tracker.TrackerPresenter;
 
 import javax.inject.Singleton;
+
 import dagger.Component;
 
 @Singleton
@@ -41,6 +43,7 @@ public interface AppComponent {
     // Fragments
     void inject(HomeContainerFragment fragment);
     void inject(TodayFragment fragment);
+    void inject(TodayPresenter presenter);
 
     // Category / Exercise
     void inject(ExerciseListPresenter presenter);

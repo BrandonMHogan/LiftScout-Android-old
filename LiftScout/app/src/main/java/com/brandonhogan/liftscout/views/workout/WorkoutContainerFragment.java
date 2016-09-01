@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
-import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.views.base.BaseFragment;

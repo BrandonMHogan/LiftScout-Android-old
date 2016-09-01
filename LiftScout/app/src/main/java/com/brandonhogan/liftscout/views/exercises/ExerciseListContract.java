@@ -1,7 +1,5 @@
 package com.brandonhogan.liftscout.views.exercises;
 
-import com.brandonhogan.liftscout.core.model.Exercise;
-
 import java.util.List;
 
 public interface ExerciseListContract {

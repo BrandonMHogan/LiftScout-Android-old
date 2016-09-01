@@ -15,7 +15,6 @@ import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ProgressRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.SetRepoImpl;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.inject.Inject;
