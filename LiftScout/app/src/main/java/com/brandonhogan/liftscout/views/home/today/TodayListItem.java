@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.views.home.workout;
+package com.brandonhogan.liftscout.views.home.today;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -9,7 +9,7 @@ import com.mikepenz.fastadapter.IDraggable;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
-public class WorkoutItem extends AbstractItem<WorkoutItem, WorkoutItem.ViewHolder> implements IDraggable<WorkoutItem, IItem> {
+public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.ViewHolder> implements IDraggable<TodayListItem, IItem> {
 
     public int setId;
     public int exerciseId;
@@ -17,7 +17,7 @@ public class WorkoutItem extends AbstractItem<WorkoutItem, WorkoutItem.ViewHolde
     public double weight;
     private boolean mIsDraggable = false;
 
-    public WorkoutItem(int setId, int exerciseId, int reps, double weight) {
+    public TodayListItem(int setId, int exerciseId, int reps, double weight) {
         this.setId = setId;
         this.exerciseId = exerciseId;
         this.reps = reps;
@@ -31,7 +31,7 @@ public class WorkoutItem extends AbstractItem<WorkoutItem, WorkoutItem.ViewHolde
     }
 
     @Override
-    public WorkoutItem withIsDraggable(boolean draggable) {
+    public TodayListItem withIsDraggable(boolean draggable) {
         this.mIsDraggable = draggable;
         return this;
     }

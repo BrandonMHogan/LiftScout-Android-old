@@ -1,6 +1,4 @@
-package com.brandonhogan.liftscout.views.home;
-
-import com.brandonhogan.liftscout.views.home.workout.WorkoutSection;
+package com.brandonhogan.liftscout.views.home.today;
 
 import java.util.List;
 
@@ -8,7 +6,7 @@ public interface TodayContact {
     interface View {
         void setupTitle(String date, String year);
         void setupWeight(String weight);
-        void setupAdapter(List<WorkoutSection> data, int expandPosition);
+        void setupAdapter(List<TodayListSection> data, int expandPosition);
     }
 
     interface Presenter {

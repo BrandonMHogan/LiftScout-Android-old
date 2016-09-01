@@ -8,7 +8,7 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.calendar.CalendarFragment;
 import com.brandonhogan.liftscout.views.categories.CategoryListFragment;
 import com.brandonhogan.liftscout.views.exercises.ExerciseListFragment;
-import com.brandonhogan.liftscout.views.home.HomeContainerFragment;
+import com.brandonhogan.liftscout.views.home.HomeFragment;
 import com.brandonhogan.liftscout.views.settings.SettingsListFragment;
 import com.brandonhogan.liftscout.views.settings.SettingsProfileFragment;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
@@ -182,7 +182,7 @@ public class NavigationManager {
     }
 
     public boolean startHome() {
-        Fragment fragment = HomeContainerFragment.newInstance();
+        Fragment fragment = HomeFragment.newInstance();
         return openAsHome(fragment);
     }
 

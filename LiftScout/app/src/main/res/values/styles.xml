@@ -160,6 +160,13 @@
         <item name="android:textSize">@dimen/modal_text_size</item>
     </style>
 
+    <style name="FABContentTitle">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">@dimen/material_text_size_large</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="SaveButton" parent="Theme.AppCompat.Light">
         <item name="android:background">@drawable/background_round_corner</item>
         <item name="colorControlHighlight">@color/green_transparent_75</item>

@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.views.home.workout;
+package com.brandonhogan.liftscout.views.home.today;
 
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
@@ -20,7 +20,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class WorkoutSection extends AbstractItem<WorkoutSection, WorkoutSection.ViewHolder> implements IExpandable<WorkoutSection, IItem> {
+public class TodayListSection extends AbstractItem<TodayListSection, TodayListSection.ViewHolder> implements IExpandable<TodayListSection, IItem> {
     //the static ViewHolderFactory which will be used to generate the ViewHolder for this Item
     private static final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
 
@@ -31,9 +31,9 @@ public class WorkoutSection extends AbstractItem<WorkoutSection, WorkoutSection.
     private List<IItem> mSubItems;
     private boolean mExpanded = false;
 
-    private FastAdapter.OnClickListener<WorkoutSection> mOnClickListener;
+    private FastAdapter.OnClickListener<TodayListSection> mOnClickListener;
 
-    public WorkoutSection(int setId, String name, double volume) {
+    public TodayListSection(int setId, String name, double volume) {
         this.setId = setId;
         this.name = name;
         this.volume = volume;
@@ -45,7 +45,7 @@ public class WorkoutSection extends AbstractItem<WorkoutSection, WorkoutSection.
     }
 
     @Override
-    public WorkoutSection withIsExpanded(boolean expanded) {
+    public TodayListSection withIsExpanded(boolean expanded) {
         mExpanded = expanded;
         return this;
     }
@@ -60,24 +60,24 @@ public class WorkoutSection extends AbstractItem<WorkoutSection, WorkoutSection.
         return true;
     }
 
-    public WorkoutSection withSubItems(List<IItem> subItems) {
+    public TodayListSection withSubItems(List<IItem> subItems) {
         this.mSubItems = subItems;
         return this;
     }
 
-    public FastAdapter.OnClickListener<WorkoutSection> getOnClickListener() {
+    public FastAdapter.OnClickListener<TodayListSection> getOnClickListener() {
         return mOnClickListener;
     }
 
-    public WorkoutSection withOnClickListener(FastAdapter.OnClickListener<WorkoutSection> mOnClickListener) {
+    public TodayListSection withOnClickListener(FastAdapter.OnClickListener<TodayListSection> mOnClickListener) {
         this.mOnClickListener = mOnClickListener;
         return this;
     }
 
     //we define a clickListener in here so we can directly animate
-    final private FastAdapter.OnClickListener<WorkoutSection> onClickListener = new FastAdapter.OnClickListener<WorkoutSection>() {
+    final private FastAdapter.OnClickListener<TodayListSection> onClickListener = new FastAdapter.OnClickListener<TodayListSection>() {
         @Override
-        public boolean onClick(View v, IAdapter adapter, WorkoutSection item, int position) {
+        public boolean onClick(View v, IAdapter adapter, TodayListSection item, int position) {
             if (item.getSubItems() != null) {
                 if (!item.isExpanded()) {
                     ViewCompat.animate(v.findViewById(R.id.arrow_expand_imageview)).rotation(180).start();
@@ -96,7 +96,7 @@ public class WorkoutSection extends AbstractItem<WorkoutSection, WorkoutSection.
      * @return
      */
     @Override
-    public FastAdapter.OnClickListener<WorkoutSection> getOnItemClickListener() {
+    public FastAdapter.OnClickListener<TodayListSection> getOnItemClickListener() {
         return onClickListener;
     }
 

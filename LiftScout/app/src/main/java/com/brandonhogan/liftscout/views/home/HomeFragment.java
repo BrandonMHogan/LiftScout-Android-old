@@ -27,6 +27,7 @@ import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
+import com.brandonhogan.liftscout.views.home.today.TodayPageAdapter;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
 import javax.inject.Inject;
@@ -34,28 +35,20 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class HomeContainerFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     // Instance
     //
-    public static HomeContainerFragment newInstance() {
-        return new HomeContainerFragment();
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
     }
-
-
-    // Injections
-    //
-    @Inject
-    ProgressManager progressManager;
-
-    @Inject
-    UserManager userManager;
 
 
     // Private Properties
     //
     private View rootView;
     private TodayPageAdapter adapter;
+    private HomeContract.Presenter presenter;
 
 
     // Binds
@@ -85,14 +78,13 @@ public class HomeContainerFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Injector.getAppComponent().inject(this);
+        presenter = new HomePresenter(this);
+        presenter.viewCreated();
+
         setTitle(getString(R.string.app_name));
 
         setupPager();
         setupFab();
-
-        Toast.makeText(getActivity(), "UserName : " + userManager.getName(),
-                Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -127,7 +119,7 @@ public class HomeContainerFragment extends BaseFragment {
             }
         });
 
-        switch (userManager.getTransformValue()) {
+        switch (presenter.getTransformValue()) {
             case TodayTransforms.ACCORDION:
                 viewPager.setPageTransformer(true, new AccordionTransformer());
                 break;
@@ -176,37 +168,17 @@ public class HomeContainerFragment extends BaseFragment {
     }
 
     private void updateTodayProgress() {
-        progressManager.setTodayProgress(adapter.dateByPosition(viewPager.getCurrentItem()));
+        presenter.updateTodayProgress(adapter.dateByPosition(viewPager.getCurrentItem()));
     }
 
-    @OnClick(R.id.set)
+    @OnClick(R.id.routine_add)
     public void addSetOnClick() {
         getNavigationManager().startCategoryListAddSet();
     }
 
-    @OnClick(R.id.weight)
-    public void addWeightOnClick() {
-
-        double weight;
-        if (progressManager.getTodayProgress().getWeight() == 0)
-            weight = userManager.getWeight();
-        else
-            weight = progressManager.getTodayProgress().getWeight();
-
-        WeightDialog dialog = new WeightDialog(getActivity(), new WeightDialog.WeightDialogListener() {
-            @Override
-            public void onCancelWeightDialog() {
-
-            }
-
-            @Override
-            public void onSaveWeightDialog(double weight) {
-                //updateTodayProgressWeight(weight);
-                adapter.update();
-
-            }
-        }, weight, true);
-
-        dialog.show();
+    @OnClick(R.id.exercise_add)
+    public void addExerciseOnClick() {
+        getNavigationManager().startCategoryListAddSet();
     }
+
 }

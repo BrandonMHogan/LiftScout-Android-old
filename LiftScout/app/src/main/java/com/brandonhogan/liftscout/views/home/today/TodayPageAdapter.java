@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.views.home;
+package com.brandonhogan.liftscout.views.home.today;
 
 import android.app.Fragment;
 import android.app.FragmentManager;

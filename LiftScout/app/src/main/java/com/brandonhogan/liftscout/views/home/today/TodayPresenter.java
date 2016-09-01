@@ -1,12 +1,10 @@
-package com.brandonhogan.liftscout.views.home;
+package com.brandonhogan.liftscout.views.home.today;
 
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.core.utils.Constants;
 import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.views.home.workout.WorkoutItem;
-import com.brandonhogan.liftscout.views.home.workout.WorkoutSection;
 import com.mikepenz.fastadapter.IItem;
 
 import java.text.SimpleDateFormat;
@@ -33,7 +31,7 @@ public class TodayPresenter implements TodayContact.Presenter {
     private Date date;
     private String dateString;
     private String dateYear;
-    private ArrayList<WorkoutSection> adapterData;
+    private ArrayList<TodayListSection> adapterData;
 
 
     // Constructor
@@ -62,11 +60,11 @@ public class TodayPresenter implements TodayContact.Presenter {
                 double volume = 0;
 
                 for (Rep rep : set.getReps()) {
-                    items.add(new WorkoutItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight()));
+                    items.add(new TodayListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight()));
                     volume += rep.getWeight();
                 }
 
-                WorkoutSection expandableItem = new WorkoutSection(set.getId(), set.getExercise().getName(), volume);
+                TodayListSection expandableItem = new TodayListSection(set.getId(), set.getExercise().getName(), volume);
                 expandableItem.withSubItems(items);
                 adapterData.add(expandableItem);
             }
@@ -77,7 +75,7 @@ public class TodayPresenter implements TodayContact.Presenter {
         Set updatedSet = progressManager.getUpdatedSet();
         if (updatedSet != null) {
             int pos = 0;
-            for (WorkoutSection section : adapterData) {
+            for (TodayListSection section : adapterData) {
                 if (section.setId == updatedSet.getId()) {
                     view.setupAdapter(adapterData, pos);
                     progressManager.clearUpdatedSet();

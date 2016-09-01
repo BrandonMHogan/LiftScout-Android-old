@@ -222,7 +222,7 @@ public class MainActivity extends BaseActivity
         String fragment = navigationManager.getCurrentFragment().getClass().getSimpleName();
 
         switch (fragment) {
-            case "HomeContainerFragment":
+            case "HomeFragment":
                 navigationView.setCheckedItem(R.id.nav_home);
                 break;
             case "CalendarFragment":

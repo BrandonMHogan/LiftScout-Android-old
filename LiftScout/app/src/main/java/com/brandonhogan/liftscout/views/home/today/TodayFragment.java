@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.views.home;
+package com.brandonhogan.liftscout.views.home.today;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,10 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
-import com.brandonhogan.liftscout.views.home.workout.WorkoutItem;
-import com.brandonhogan.liftscout.views.home.workout.WorkoutSection;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IItem;
@@ -87,18 +84,17 @@ public class TodayFragment extends BaseFragment implements TodayContact.View, It
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Injector.getAppComponent().inject(this);
         presenter = new TodayPresenter(this, getArguments().getLong(DATE_BUNDLE));
         presenter.viewCreate();
     }
 
     @Override
     public boolean itemTouchOnMove(int oldPosition, int newPosition) {
-        if (mAdapter.getAdapterItem(newPosition) instanceof WorkoutSection) {
+        if (mAdapter.getAdapterItem(newPosition) instanceof TodayListSection) {
             Collections.swap(mAdapter.getAdapterItems(), oldPosition, newPosition); // change position
 
-            WorkoutSection sectionA = ((WorkoutSection)mAdapter.getAdapterItem(newPosition));
-            WorkoutSection sectionB = ((WorkoutSection)mAdapter.getAdapterItem(oldPosition));
+            TodayListSection sectionA = ((TodayListSection)mAdapter.getAdapterItem(newPosition));
+            TodayListSection sectionB = ((TodayListSection)mAdapter.getAdapterItem(oldPosition));
 
             presenter.itemTouchOnMove(sectionA.setId, sectionB.setId);
 
@@ -107,7 +103,9 @@ public class TodayFragment extends BaseFragment implements TodayContact.View, It
         return true;
     }
 
+
     // Public Functions
+    //
     public void update() {
         presenter.update();
     }
@@ -133,15 +131,15 @@ public class TodayFragment extends BaseFragment implements TodayContact.View, It
 
     @SuppressWarnings("unchecked")
     @Override
-    public void setupAdapter(List<WorkoutSection> data, int expandPosition) {
+    public void setupAdapter(List<TodayListSection> data, int expandPosition) {
 
         mAdapter = new FastItemAdapter<>();
         mAdapter.withSelectable(true);
         mAdapter.add(data);
 
-        mAdapter.withOnClickListener(new FastAdapter.OnClickListener<WorkoutItem>() {
+        mAdapter.withOnClickListener(new FastAdapter.OnClickListener<TodayListItem>() {
             @Override
-            public boolean onClick(View v, IAdapter<WorkoutItem> adapter, WorkoutItem item, int position) {
+            public boolean onClick(View v, IAdapter<TodayListItem> adapter, TodayListItem item, int position) {
                 getNavigationManager().startWorkoutContainer(item.exerciseId);
                 return true;
             }
