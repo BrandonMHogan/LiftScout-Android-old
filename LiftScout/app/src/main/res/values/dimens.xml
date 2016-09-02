@@ -102,6 +102,25 @@
     <dimen name="material_text_size_title">20sp</dimen>
     <dimen name="material_text_size_title_toolbar">20dp</dimen>
 
+
+
+
+    <!-- Home / Today -->
+    <dimen name="home_fab_horizontal_margin">30dp</dimen>
+    <dimen name="home_fab_item_container_height">70dp</dimen>
+    <dimen name="home_fab_item_icon_height">23dp</dimen>
+    <dimen name="home_fab_item_icon_end_margin">5dp</dimen>
+
+    <dimen name="today_divider_top_margin">5dp</dimen>
+    <dimen name="today_section_padding">7dp</dimen>
+    <dimen name="today_section_text_size">20sp</dimen>
+    <dimen name="today_item_height">35dp</dimen>
+    <dimen name="today_item_margin">2dp</dimen>
+
+    <dimen name="today_section_text_padding_left">15dp</dimen>
+
+
+
     <!-- Settings Layout -->
     <dimen name="settings_table_layout_padding_top">0dp</dimen>
     <dimen name="settings_table_row_horizontal_padding">16dp</dimen>
@@ -120,15 +139,6 @@
     <dimen name="exercises_swipe_width">85dp</dimen>
     <dimen name="exercises_list_item_height">60dp</dimen>
     <dimen name="exercises_list_item_icon_size">28dp</dimen>
-
-    <!-- Today Layout -->
-    <dimen name="today_divider_top_margin">5dp</dimen>
-    <dimen name="today_section_padding">7dp</dimen>
-    <dimen name="today_section_text_size">20sp</dimen>
-    <dimen name="today_item_height">35dp</dimen>
-    <dimen name="today_item_margin">2dp</dimen>
-
-    <dimen name="today_section_text_padding_left">15dp</dimen>
 
     <!-- Workout Section -->
     <dimen name="tracker_top_margin">15dp</dimen>

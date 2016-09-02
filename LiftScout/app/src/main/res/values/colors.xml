@@ -21,11 +21,11 @@
     <color name="fillColorInverse">#3c363c</color>
 
     <!-- Green Theme -->
-    <color name="colorPrimary_ThemeGreen">#378a3b</color>
-    <color name="colorPrimaryDark_ThemeGreen">#1d4d1f</color>
-    <color name="colorPrimaryLight_ThemeGreen">#FFE0B2</color>
-    <color name="colorAccent_ThemeGreen">#2e0099</color>
-    <color name="textColorPrimary_ThemeGreen">#9E9E9E</color>
+    <color name="colorPrimary_ThemeGreen">#277554</color>
+    <color name="colorPrimaryDark_ThemeGreen">#003A21</color>
+    <color name="colorPrimaryLight_ThemeGreen">#75AF96</color>
+    <color name="colorAccent_ThemeGreen">#294F6D</color>
+    <color name="textColorPrimary_ThemeGreen">#B1B1B1</color>
     <color name="textColorSecondary_ThemeGreen">#9E9E9E</color>
     <color name="backgroundColor_ThemeGreen">#ff433d43</color>
     <color name="fillColor_ThemeGreen">#3c363c</color>
