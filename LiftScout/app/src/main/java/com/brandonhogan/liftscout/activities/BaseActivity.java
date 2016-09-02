@@ -42,6 +42,8 @@ public class BaseActivity extends AppCompatActivity {
 
         if (userManager.getThemeValue().equals(Themes.LIGHT))
             setTheme(R.style.AppTheme_Light);
+        else if(userManager.getThemeValue().equals(Themes.GREEN_DARK))
+            setTheme(R.style.AppTheme_Green_Dark);
         else
             setTheme(R.style.AppTheme_Dark);
 

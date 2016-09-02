@@ -9,6 +9,7 @@
     <color name="textColorSecondary">#9E9E9E</color>
     <color name="activity_background_light">#FFFFFF</color>
     <color name="fillColor">#ececec</color>
+
     <!-- Dark Theme -->
     <color name="colorPrimaryInverse">#FF9800</color>
     <color name="colorPrimaryDarkInverse">#F57C00</color>
@@ -18,6 +19,16 @@
     <color name="textColorSecondaryInverse">#9E9E9E</color>
     <color name="activity_background_dark">#ff433d43</color>
     <color name="fillColorInverse">#3c363c</color>
+
+    <!-- Green Theme -->
+    <color name="colorPrimary_ThemeGreen">#378a3b</color>
+    <color name="colorPrimaryDark_ThemeGreen">#1d4d1f</color>
+    <color name="colorPrimaryLight_ThemeGreen">#FFE0B2</color>
+    <color name="colorAccent_ThemeGreen">#2e0099</color>
+    <color name="textColorPrimary_ThemeGreen">#9E9E9E</color>
+    <color name="textColorSecondary_ThemeGreen">#9E9E9E</color>
+    <color name="backgroundColor_ThemeGreen">#ff433d43</color>
+    <color name="fillColor_ThemeGreen">#3c363c</color>
 
     <!-- Generic -->
     <color name="black">#000000</color>

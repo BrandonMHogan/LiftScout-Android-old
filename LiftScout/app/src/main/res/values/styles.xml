@@ -57,6 +57,34 @@
     <style name="AppTheme.Dark" parent="AppTheme.Dark.Base">
     </style>
 
+    <!-- Green Theme -->
+    <style name="AppTheme.Green.Dark.Base" parent="Theme.AppCompat" >
+        <item name="colorPrimary">@color/colorPrimary_ThemeGreen</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_ThemeGreen</item>
+        <item name="colorAccent">@color/colorAccent_ThemeGreen</item>
+        <item name="android:textColor">@color/textColorPrimary_ThemeGreen</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary_ThemeGreen</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary_ThemeGreen</item>
+        <item name="android:textColorPrimaryInverse">@color/textColorPrimary_ThemeGreen</item>
+        <item name="android:textColorSecondaryInverse">@color/textColorSecondary</item>
+        <item name="android:windowBackground">@color/backgroundColor_ThemeGreen</item>
+        <item name="android:fillColor">@color/fillColor_ThemeGreen</item>
+
+        <item name="themedMenuHomeDrawable">@drawable/ic_menu_home_white</item>
+        <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_white</item>
+        <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
+        <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_white</item>
+        <item name="themedMenuGraphsDrawable">@drawable/ic_menu_bar_chart_white</item>
+        <item name="themedMenuSettingsDrawable">@drawable/ic_menu_settings_white</item>
+        <item name="themedMenuAboutDrawable">@drawable/ic_menu_info_white</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Green.Dark" parent="AppTheme.Green.Dark.Base" >
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 

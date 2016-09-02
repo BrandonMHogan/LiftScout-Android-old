@@ -57,6 +57,7 @@ public class SettingsDisplayPresenter implements SettingsDisplayContract.Present
         themes = new ArrayList<>();
         themes.add(Themes.DARK);
         themes.add(Themes.LIGHT);
+        themes.add(Themes.GREEN_DARK);
 
         view.populateThemes(themes, themes.indexOf(originalThemeValue));
     }
