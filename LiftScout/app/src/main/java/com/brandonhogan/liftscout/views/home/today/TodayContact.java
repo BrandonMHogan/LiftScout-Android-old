@@ -7,6 +7,7 @@ public interface TodayContact {
         void setupTitle(String date, String year);
         void setupWeight(String weight);
         void setupAdapter(List<TodayListSection> data, int expandPosition);
+        String getEmptySetMessage();
     }
 
     interface Presenter {

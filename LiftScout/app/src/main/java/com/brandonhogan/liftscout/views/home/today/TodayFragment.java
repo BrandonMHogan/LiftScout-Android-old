@@ -163,4 +163,9 @@ public class TodayFragment extends BaseFragment implements TodayContact.View, It
 
         mAdapter.expand(expandPosition);
     }
+
+    @Override
+    public String getEmptySetMessage() {
+        return getString(R.string.frag_today_empty_set_msg);
+    }
 }

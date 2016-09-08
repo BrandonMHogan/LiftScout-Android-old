@@ -30,10 +30,11 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
 
     private List<IItem> mSubItems;
     private boolean mExpanded = false;
+    private boolean isEmpty;
 
     private FastAdapter.OnClickListener<TodayListSection> mOnClickListener;
 
-    public TodayListSection(int setId, String name, double volume) {
+    public TodayListSection(int setId, String name, double volume, boolean isEmpty) {
         this.setId = setId;
         this.name = name;
         this.volume = volume;
@@ -42,6 +43,10 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
     @Override
     public boolean isExpanded() {
         return mExpanded;
+    }
+
+    public boolean isEmpty() {
+        return isEmpty;
     }
 
     @Override

@@ -118,6 +118,7 @@
     <dimen name="today_item_margin">2dp</dimen>
 
     <dimen name="today_section_text_padding_left">15dp</dimen>
+    <dimen name="today_workout_item_height">35dp</dimen>
 
 
 

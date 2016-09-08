@@ -78,6 +78,7 @@
     <string name="frag_home_welcome_back_message">Welcome back %s!</string>
 
     <string name="frag_today_weight">Weight</string>
+    <string name="frag_today_empty_set_msg">Click here to add a repetition!</string>
 
     <!-- Settings -->
     <string name="setting_profile">Profile</string>

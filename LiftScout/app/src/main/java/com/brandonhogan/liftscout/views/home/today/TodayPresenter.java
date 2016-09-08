@@ -58,13 +58,18 @@ public class TodayPresenter implements TodayContact.Presenter {
 
                 List<IItem> items = new LinkedList<>();
                 double volume = 0;
+                boolean isEmpty = true;
 
                 for (Rep rep : set.getReps()) {
                     items.add(new TodayListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight()));
                     volume += rep.getWeight();
+                    isEmpty = false;
                 }
 
-                TodayListSection expandableItem = new TodayListSection(set.getId(), set.getExercise().getName(), volume);
+                if (isEmpty)
+                    items.add(new TodayListItem(set.getId(), set.getExercise().getId(), true, view.getEmptySetMessage()));
+
+                TodayListSection expandableItem = new TodayListSection(set.getId(), set.getExercise().getName(), volume, isEmpty);
                 expandableItem.withSubItems(items);
                 adapterData.add(expandableItem);
             }

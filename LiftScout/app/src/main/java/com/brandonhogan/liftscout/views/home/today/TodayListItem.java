@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.views.home.today;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
@@ -16,13 +17,21 @@ public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.Vie
     public int reps;
     public double weight;
     private boolean mIsDraggable = false;
+    private boolean isEmpty = false;
+    private String emptyMsg;
 
     public TodayListItem(int setId, int exerciseId, int reps, double weight) {
         this.setId = setId;
         this.exerciseId = exerciseId;
         this.reps = reps;
         this.weight = weight;
+    }
 
+    public TodayListItem(int setId, int exerciseId, boolean isEmpty, String emptyMessage) {
+        this.setId = setId;
+        this.exerciseId = exerciseId;
+        this.isEmpty = isEmpty;
+        this.emptyMsg = emptyMessage;
     }
 
     @Override
@@ -54,22 +63,36 @@ public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.Vie
         //call super so the selection is already handled for you
         super.bindView(viewHolder);
 
-        //bind our data
-        //set the text for the reps
-        viewHolder.reps.setText(Integer.toString(reps));
-        //set the text for the description or hide
-        viewHolder.weight.setText(Double.toString(weight));
+        if (isEmpty) {
+            viewHolder.repLayout.setVisibility(View.GONE);
+            viewHolder.noRep.setVisibility(View.VISIBLE);
+
+            viewHolder.noRep.setText(emptyMsg);
+        }
+        else {
+            viewHolder.repLayout.setVisibility(View.VISIBLE);
+            viewHolder.noRep.setVisibility(View.GONE);
+
+            //set the text for the reps
+            viewHolder.reps.setText(Integer.toString(reps));
+            //set the text for the description or hide
+            viewHolder.weight.setText(Double.toString(weight));
+        }
     }
 
     //The viewHolder used for this item. This viewHolder is always reused by the RecyclerView so scrolling is blazing fast
     protected static class ViewHolder extends RecyclerView.ViewHolder {
+        protected LinearLayout repLayout;
         protected TextView reps;
         protected TextView weight;
+        protected TextView noRep;
 
         public ViewHolder(View view) {
             super(view);
+            this.repLayout = (LinearLayout) view.findViewById(R.id.rep_layout);
             this.reps = (TextView) view.findViewById(R.id.item_reps);
             this.weight = (TextView) view.findViewById(R.id.item_weight);
+            this.noRep = (TextView) view.findViewById(R.id.no_rep);
         }
     }
 }
