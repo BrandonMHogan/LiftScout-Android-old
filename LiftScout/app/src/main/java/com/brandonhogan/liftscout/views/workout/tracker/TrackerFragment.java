@@ -6,6 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -59,6 +62,7 @@ public class TrackerFragment extends BaseFragment implements
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
     private SweetAlertDialog dialog;
+    private MenuItem deleteMenu;
 
 
     // Binds
@@ -101,6 +105,55 @@ public class TrackerFragment extends BaseFragment implements
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        deleteMenu = menu.findItem(R.id.action_delete);
+        deleteMenu.setVisible(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_delete:
+
+                String message =
+                        String.format(getString(R.string.dialog_tracker_delete_message)
+                                , presenter.getExerciseName());
+
+                dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText(getString(R.string.dialog_tracker_delete_title))
+                        .setContentText(message)
+                        .setConfirmText(getString(R.string.delete))
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                dialog.cancel();
+                                presenter.onDelete();
+                            }
+                        })
+                        .setCancelText(getString(R.string.cancel))
+                        .showCancelButton(true);
+
+                dialog.show();
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         if(saveState != null) {
@@ -128,6 +181,12 @@ public class TrackerFragment extends BaseFragment implements
     public void onPause() {
         super.onPause();
         mRecyclerView.removeOnItemTouchListener(onTouchListener);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        deleteMenu.setVisible(false);
     }
 
     @Override
@@ -203,5 +262,10 @@ public class TrackerFragment extends BaseFragment implements
     @Override
     public void saveSuccess(int position) {
         layoutManager.scrollToPosition(position);
+    }
+
+    @Override
+    public void deleteSuccess() {
+        getNavigationManager().navigateBack(getActivity());
     }
 }

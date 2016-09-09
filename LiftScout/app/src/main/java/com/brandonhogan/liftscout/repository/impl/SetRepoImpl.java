@@ -55,6 +55,22 @@ public class SetRepoImpl implements SetRepo {
     }
 
     @Override
+    public void deleteSet(Set set) {
+        try {
+            databaseRealm.getRealmInstance().beginTransaction();
+            databaseRealm.getRealmInstance()
+                    .where(Set.class)
+                    .equalTo(Set.ID, set.getId())
+                    .findFirst()
+                    .deleteFromRealm();
+            databaseRealm.getRealmInstance().commitTransaction();
+        }
+        catch (Exception ex) {
+            Log.e(TAG, ex.getMessage());
+        }
+    }
+
+    @Override
     public void updateSetOrder(Set set, int order) {
         try {
             databaseRealm.getRealmInstance().beginTransaction();

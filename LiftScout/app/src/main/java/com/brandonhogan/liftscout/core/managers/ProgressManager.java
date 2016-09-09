@@ -145,6 +145,10 @@ public class ProgressManager {
             return progress.getSets();
     }
 
+    public void deleteSet(Set set) {
+        setRepo.deleteSet(set);
+    }
+
 
     // Reps
 

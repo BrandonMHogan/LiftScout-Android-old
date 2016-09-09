@@ -68,10 +68,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-            rootView = inflater.inflate(R.layout.frag_home, container, false);
-
-
+        rootView = inflater.inflate(R.layout.frag_home, container, false);
         return rootView;
     }
 

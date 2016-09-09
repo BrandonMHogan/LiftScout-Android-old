@@ -94,4 +94,15 @@ public class TrackerPresenter implements TrackerContract.Presenter {
 
         view.saveSuccess(adapterData.size() - 1);
     }
+
+    @Override
+    public void onDelete() {
+        progressManager.deleteSet(set);
+        view.deleteSuccess();
+    }
+
+    @Override
+    public String getExerciseName() {
+        return set.getExercise().getName();
+    }
 }
