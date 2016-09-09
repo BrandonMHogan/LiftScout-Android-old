@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.repository.impl;
 
 import android.util.Log;
 
+import com.brandonhogan.liftscout.core.model.Category;
 import com.brandonhogan.liftscout.core.model.Progress;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
@@ -22,6 +23,16 @@ public class SetRepoImpl implements SetRepo {
         Injector.getAppComponent().inject(this);
     }
 
+    private int getNextSetKey() {
+        Number max = databaseRealm.getRealmInstance().where(Set.class).max(Category.ID);
+        return (max != null) ? max.intValue() + 1 : 0;
+    }
+
+    private int getNextRepKey() {
+        Number max = databaseRealm.getRealmInstance().where(Rep.class).max(Category.ID);
+        return (max != null) ? max.intValue() + 1 : 0;
+    }
+
     @Override
     public Set getSet(int setId) {
         return databaseRealm.getRealmInstance()
@@ -34,6 +45,10 @@ public class SetRepoImpl implements SetRepo {
     public void addSet(Progress progress, Set set) {
         try {
             databaseRealm.getRealmInstance().beginTransaction();
+
+            if (set.getId() == 0)
+                set.setId(getNextSetKey());
+
             progress.getSets().add(set);
             databaseRealm.getRealmInstance().commitTransaction();
         }
@@ -86,6 +101,10 @@ public class SetRepoImpl implements SetRepo {
     public void addRep(Set set, Rep rep) {
         try {
             databaseRealm.getRealmInstance().beginTransaction();
+
+            if (rep.getId() == 0)
+                rep.setId(getNextRepKey());
+
             set.getReps().add(rep);
             databaseRealm.getRealmInstance().copyToRealmOrUpdate(set);
             databaseRealm.getRealmInstance().commitTransaction();

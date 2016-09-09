@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -88,7 +87,7 @@ public class TrackerFragment extends BaseFragment implements
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_workout_track, container, false);
+        rootView = inflater.inflate(R.layout.frag_tracker, container, false);
 
         return rootView;
     }
@@ -234,18 +233,6 @@ public class TrackerFragment extends BaseFragment implements
 
                         @Override
                         public void onIndependentViewClicked(int independentViewID, int position) {
-                        }
-                    })
-                    .setSwipeOptionViews(R.id.delete, R.id.edit)
-                    .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
-                        @Override
-                        public void onSwipeOptionClicked(int viewID, int position) {
-
-                            if (viewID == R.id.delete) {
-                                //removeRepAlert(position);
-                            } else if (viewID == R.id.edit) {
-                                //editRep(position);
-                            }
                         }
                     });
         }

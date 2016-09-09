@@ -23,7 +23,7 @@ public class TrackerAdapter extends RecyclerView.Adapter<TrackerAdapter.TrackerV
 
     @Override
     public TrackerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.frag_workout_tracker_list_item, parent, false);
+        View view = inflater.inflate(R.layout.frag_tracker_list_item, parent, false);
         return new TrackerViewHolder(view);
     }
 
