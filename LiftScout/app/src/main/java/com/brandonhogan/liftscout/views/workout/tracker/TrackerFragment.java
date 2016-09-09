@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ public class TrackerFragment extends BaseFragment implements
     // Static Properties
     //
     private static final String BUNDLE_EXERCISE_ID = "exerciseIdBundle";
+    private static final String SAVE_STATE_WEIGHT = "saveStateWeight";
+    private static final String SAVE_STATE_REPS = "saveStateReps";
 
 
     // Instance
@@ -89,12 +92,30 @@ public class TrackerFragment extends BaseFragment implements
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         Injector.getAppComponent().inject(this);
+
         presenter = new TrackerPresenter(this, getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID));
         presenter.viewCreated();
 
         setupButtons();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(saveState != null) {
+            weightNumberPicker.setNumber(Float.valueOf(saveState.getString(SAVE_STATE_WEIGHT)));
+            repNumberPicker.setNumber(Integer.valueOf(saveState.getString(SAVE_STATE_REPS)));
+            saveState = null;
+        }
+    }
+
+    @Override
+    protected Bundle saveState() {
+        Bundle bundle = new Bundle();
+        bundle.putString(SAVE_STATE_WEIGHT, weightNumberPicker.getNumber());
+        bundle.putString(SAVE_STATE_REPS, repNumberPicker.getNumber());
+        return bundle;
     }
 
     @Override

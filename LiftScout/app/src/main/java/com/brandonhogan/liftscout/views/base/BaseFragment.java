@@ -27,6 +27,21 @@ public class BaseFragment extends Fragment {
     private final Object realmLock = new Object();
     private float oldTranslationZ;
 
+
+    // Protected Properties
+    //
+    protected Bundle saveState;
+    protected static final String STATE_BUNDLE = "todayState";
+
+
+    // Protected Functions
+    //
+    // This should be overridden on any fragment that wishes to save state
+    protected Bundle saveState() {
+        return null;
+    }
+
+
     // Public Functions
     //
     public String getTAG() {
@@ -93,6 +108,10 @@ public class BaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        if (savedInstanceState != null && saveState == null) {
+            saveState = savedInstanceState.getBundle(STATE_BUNDLE);
+        }
+
         FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
 
         Bundle screenView = new Bundle();
@@ -112,6 +131,18 @@ public class BaseFragment extends Fragment {
     public void onPause() {
         super.onPause();
         hideKeyboard(getActivity());
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroy();
+        saveState = saveState();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBundle(STATE_BUNDLE, saveState());
     }
 
     @Override
