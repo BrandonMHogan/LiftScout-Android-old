@@ -13,5 +13,6 @@ public interface SetRepo {
 
     void addRep(Set set, Rep rep);
     void updateRep(Rep rep);
+    void deleteRep(int repId);
     Set getSet(int setId);
 }

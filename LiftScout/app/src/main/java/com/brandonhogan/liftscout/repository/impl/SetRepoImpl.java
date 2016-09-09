@@ -54,6 +54,7 @@ public class SetRepoImpl implements SetRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
         }
     }
 
@@ -66,6 +67,7 @@ public class SetRepoImpl implements SetRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
         }
     }
 
@@ -82,6 +84,7 @@ public class SetRepoImpl implements SetRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
         }
     }
 
@@ -94,6 +97,7 @@ public class SetRepoImpl implements SetRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
         }
     }
 
@@ -111,6 +115,7 @@ public class SetRepoImpl implements SetRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
         }
     }
 
@@ -123,6 +128,24 @@ public class SetRepoImpl implements SetRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
+        }
+    }
+
+    @Override
+    public void deleteRep(int repId) {
+        try {
+            databaseRealm.getRealmInstance().beginTransaction();
+            databaseRealm.getRealmInstance()
+                    .where(Rep.class)
+                    .equalTo(Rep.ID, repId)
+                    .findFirst()
+                    .deleteFromRealm();
+            databaseRealm.getRealmInstance().commitTransaction();
+        }
+        catch (Exception ex) {
+            Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
         }
     }
 }

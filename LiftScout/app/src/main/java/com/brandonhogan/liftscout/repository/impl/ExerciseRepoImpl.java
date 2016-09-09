@@ -55,6 +55,7 @@ public class ExerciseRepoImpl implements ExerciseRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
         }
     }
 
@@ -73,6 +74,7 @@ public class ExerciseRepoImpl implements ExerciseRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
         }
     }
 }

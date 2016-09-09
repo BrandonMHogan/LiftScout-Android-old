@@ -153,8 +153,15 @@ public class ProgressManager {
     // Reps
 
     public void addRepToTodayProgress(Set set, Rep rep) {
-
         setRepo.addRep(set, rep);
+    }
+
+    public void updateRep(Rep rep) {
+        setRepo.updateRep(rep);
+    }
+
+    public void deleteRep(int repId) {
+        setRepo.deleteRep(repId);
     }
 
 

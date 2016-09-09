@@ -54,6 +54,7 @@ public class CategoryRepoImpl implements CategoryRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
         }
     }
 
@@ -72,6 +73,7 @@ public class CategoryRepoImpl implements CategoryRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
         }
     }
 }

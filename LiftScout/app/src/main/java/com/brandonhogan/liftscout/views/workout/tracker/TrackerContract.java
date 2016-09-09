@@ -1,5 +1,8 @@
 package com.brandonhogan.liftscout.views.workout.tracker;
 
+import com.brandonhogan.liftscout.core.model.Rep;
+import com.brandonhogan.liftscout.core.model.Set;
+
 import java.util.List;
 
 public interface TrackerContract {
@@ -9,6 +12,7 @@ public interface TrackerContract {
         String getRepsLabel(boolean isMultiple);
         void saveSuccess(int position);
         void deleteSuccess();
+        void onSelect(TrackerListModel rep);
     }
 
     interface Presenter {
@@ -16,7 +20,9 @@ public interface TrackerContract {
         void updateAdapter();
         void onSave(String reps, String weight);
         void onDelete();
+        void onSelect(int position);
+        void onButtonTwoPressed();
+        void onDeleteRep();
         String getExerciseName();
     }
-
 }

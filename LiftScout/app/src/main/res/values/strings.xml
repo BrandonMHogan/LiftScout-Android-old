@@ -19,6 +19,7 @@
     <string name="delete">Delete</string>
     <string name="close">Close</string>
     <string name="save">Save</string>
+    <string name="update">Update</string>
     <string name="routine">Routine</string>
     <string name="exercise">Exercise</string>
     <string name="weight">Weight</string>

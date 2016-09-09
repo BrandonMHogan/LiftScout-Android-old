@@ -49,6 +49,7 @@ public class ProgressRepoImpl implements ProgressRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
             return null;
         }
 

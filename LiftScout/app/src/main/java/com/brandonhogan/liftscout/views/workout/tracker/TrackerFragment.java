@@ -100,7 +100,7 @@ public class TrackerFragment extends BaseFragment implements
         presenter = new TrackerPresenter(this, getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID));
         presenter.viewCreated();
 
-        setupButtons();
+        resetButtons();
     }
 
     @Override
@@ -193,11 +193,6 @@ public class TrackerFragment extends BaseFragment implements
         this.touchListener = listener;
     }
 
-    private void setupButtons() {
-        firstButton.setText(getString(R.string.save));
-        secondButton.setText(getString(R.string.clear));
-    }
-
     @OnClick(R.id.first_button)
     public void firstButtonOnClick() {
         presenter.onSave(repNumberPicker.getNumber(), weightNumberPicker.getNumber());
@@ -205,9 +200,24 @@ public class TrackerFragment extends BaseFragment implements
 
     @OnClick(R.id.second_button)
     public void secondButtonOnClick() {
+        presenter.onButtonTwoPressed();
         repNumberPicker.setNumber(0);
         weightNumberPicker.setNumber(0);
     }
+
+
+    // Private Functions
+    //
+    private void resetButtons() {
+        firstButton.setText(getString(R.string.save));
+        secondButton.setText(getString(R.string.clear));
+    }
+
+    private void updateValues(TrackerListModel model) {
+        weightNumberPicker.setNumber((float)model.getWeight());
+        repNumberPicker.setNumber(model.getCount());
+    }
+
 
 
     // Contract
@@ -229,6 +239,7 @@ public class TrackerFragment extends BaseFragment implements
                     .setClickable(new RecyclerTouchListener.OnRowClickListener() {
                         @Override
                         public void onRowClicked(int position) {
+                            presenter.onSelect(position);
                         }
 
                         @Override
@@ -239,6 +250,10 @@ public class TrackerFragment extends BaseFragment implements
         else {
             mAdapter.setList(data);
         }
+
+        if (data != null && data.size() > 0)
+            updateValues(data.get(data.size()-1));
+
     }
 
     @Override
@@ -249,10 +264,19 @@ public class TrackerFragment extends BaseFragment implements
     @Override
     public void saveSuccess(int position) {
         layoutManager.scrollToPosition(position);
+        resetButtons();
     }
 
     @Override
     public void deleteSuccess() {
         getNavigationManager().navigateBack(getActivity());
+    }
+
+    @Override
+    public void onSelect(TrackerListModel rep) {
+        updateValues(rep);
+
+        firstButton.setText(getString(R.string.update));
+        secondButton.setText(getString(R.string.delete));
     }
 }

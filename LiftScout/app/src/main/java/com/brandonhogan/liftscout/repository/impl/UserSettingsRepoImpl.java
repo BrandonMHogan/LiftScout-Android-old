@@ -39,6 +39,7 @@ public class UserSettingsRepoImpl implements UserSettingsRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
             return null;
         }
 
@@ -58,6 +59,7 @@ public class UserSettingsRepoImpl implements UserSettingsRepo {
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
             return false;
         }
 

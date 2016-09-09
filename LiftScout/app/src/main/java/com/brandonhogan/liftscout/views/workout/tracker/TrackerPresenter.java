@@ -23,7 +23,8 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     private int exerciseId;
     private Set set;
     private ArrayList<TrackerListModel> adapterData;
-    private boolean isNewSet;
+    private TrackerListModel editingRep;
+
 
 
     // Constructor
@@ -87,11 +88,17 @@ public class TrackerPresenter implements TrackerContract.Presenter {
         double weight = Double.valueOf(weightValue);
         rep.setWeight(weight);
 
-        progressManager.addRepToTodayProgress(set, rep);
+        if(editingRep != null) {
+            rep.setId(editingRep.getId());
+            progressManager.updateRep(rep);
+        }
+        else {
+            progressManager.addRepToTodayProgress(set, rep);
+        }
 
         progressManager.updateSet(set);
         resetAdapter();
-
+        editingRep = null;
         view.saveSuccess(adapterData.size() - 1);
     }
 
@@ -104,5 +111,24 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     @Override
     public String getExerciseName() {
         return set.getExercise().getName();
+    }
+
+    @Override
+    public void onSelect(int position) {
+        editingRep = adapterData.get(position);
+        view.onSelect(editingRep);
+    }
+
+    @Override
+    public void onDeleteRep() {
+        if (editingRep != null) {
+            progressManager.deleteRep(editingRep.getId());
+            resetAdapter();
+        }
+    }
+
+    @Override
+    public void onButtonTwoPressed() {
+        onDeleteRep();
     }
 }
