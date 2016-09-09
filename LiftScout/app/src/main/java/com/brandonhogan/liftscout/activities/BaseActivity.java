@@ -4,24 +4,25 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Themes;
-import com.brandonhogan.liftscout.core.model.UserSetting;
+import com.brandonhogan.liftscout.core.managers.UserManager;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import io.realm.Realm;
+import javax.inject.Inject;
 
 public class BaseActivity extends AppCompatActivity {
+
+    @Inject
+    UserManager userManager;
 
 
     // Private Properties
     //
     private String TAG = this.getClass().getSimpleName();
-    private Realm realm;
-    private final Object realmLock = new Object();
     private FirebaseAnalytics mFirebaseAnalytics;
 
 
@@ -31,25 +32,20 @@ public class BaseActivity extends AppCompatActivity {
         return TAG;
     }
 
-    public Realm getRealm() {
-        if (realm == null || realm.isClosed()) {
-            synchronized (realmLock) {
-                if (realm == null || realm.isClosed()) {
-                    realm = Realm.getDefaultInstance();
-                }
-            }
-        }
-        return realm;
-    }
-
     public FirebaseAnalytics getFirebaseAnalytics() {
         return mFirebaseAnalytics;
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        if (getDisplayTheme().getValue().equals(Themes.LIGHT))
+        Injector.getAppComponent().inject(this);
+
+        if (userManager.getThemeValue().equals(Themes.LIGHT))
             setTheme(R.style.AppTheme_Light);
+        else if(userManager.getThemeValue().equals(Themes.GREEN_DARK))
+            setTheme(R.style.AppTheme_Green_Dark);
+        else if(userManager.getThemeValue().equals(Themes.PURPLE_DARK))
+            setTheme(R.style.AppTheme_Purple_Dark);
         else
             setTheme(R.style.AppTheme_Dark);
 
@@ -64,55 +60,15 @@ public class BaseActivity extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
     }
 
-    // Private Functions
-    //
-    private void closeRealm() {
-        if (realm != null && !realm.isClosed()) {
-            synchronized (realmLock) {
-                if (realm != null && !realm.isClosed()) {
-                    try {
-                        realm.close();
-                    }
-                    catch (Exception ex) {
-                        Log.e(getTAG(), "closeRealm() : Failed to close realm");
-                    }
-                    finally {
-                        realm = null;
-                    }
-                }
-            }
-        }
-    }
-
-    private UserSetting getDisplayTheme() {
-        UserSetting setting = getRealm().where(UserSetting.class)
-                .equalTo(UserSetting.NAME, UserSetting.THEME).findFirst();
-
-        if (setting == null || !setting.isValid()) {
-
-            setting = new UserSetting();
-            setting.setName(UserSetting.THEME);
-            setting.setValue(Themes.DARK);
-
-            getRealm().beginTransaction();
-            getRealm().copyToRealmOrUpdate(setting);
-            getRealm().commitTransaction();
-        }
-
-        return setting;
-    }
-
     // Overrides
 
     @Override
     public void onStop() {
         super.onStop();
-        closeRealm();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        closeRealm();
     }
 }

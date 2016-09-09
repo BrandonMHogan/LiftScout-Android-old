@@ -9,6 +9,7 @@
     <color name="textColorSecondary">#9E9E9E</color>
     <color name="activity_background_light">#FFFFFF</color>
     <color name="fillColor">#ececec</color>
+
     <!-- Dark Theme -->
     <color name="colorPrimaryInverse">#FF9800</color>
     <color name="colorPrimaryDarkInverse">#F57C00</color>
@@ -18,6 +19,26 @@
     <color name="textColorSecondaryInverse">#9E9E9E</color>
     <color name="activity_background_dark">#ff433d43</color>
     <color name="fillColorInverse">#3c363c</color>
+
+    <!-- Green Theme -->
+    <color name="colorPrimary_ThemeGreen">#277554</color>
+    <color name="colorPrimaryDark_ThemeGreen">#003A21</color>
+    <color name="colorPrimaryLight_ThemeGreen">#75AF96</color>
+    <color name="colorAccent_ThemeGreen">#294F6D</color>
+    <color name="textColorPrimary_ThemeGreen">#B1B1B1</color>
+    <color name="textColorSecondary_ThemeGreen">#9E9E9E</color>
+    <color name="backgroundColor_ThemeGreen">#ff433d43</color>
+    <color name="fillColor_ThemeGreen">#3c363c</color>
+
+    <!-- Purple Theme -->
+    <color name="colorPrimary_ThemePurple">#562A72</color>
+    <color name="colorPrimaryDark_ThemePurple">#240339</color>
+    <color name="colorPrimaryLight_ThemePurple">#9675AB</color>
+    <color name="colorAccent_ThemePurple">#862D63</color>
+    <color name="textColorPrimary_ThemePurple">#B1B1B1</color>
+    <color name="textColorSecondary_ThemePurple">#9E9E9E</color>
+    <color name="backgroundColor_ThemePurple">#ff433d43</color>
+    <color name="fillColor_ThemePurple">#3c363c</color>
 
     <!-- Generic -->
     <color name="black">#000000</color>

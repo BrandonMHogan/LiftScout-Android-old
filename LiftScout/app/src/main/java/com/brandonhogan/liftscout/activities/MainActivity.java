@@ -10,13 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.aaadev.AAADevWorkout;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
-import com.brandonhogan.liftscout.core.model.User;
 import com.brandonhogan.liftscout.core.utils.DatabaseOutput;
+import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.repository.DatabaseRealm;
 
 import java.util.Date;
+
+import javax.inject.Inject;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -24,20 +26,26 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         NavigationManager.NavigationListener {
 
+
     // Private Static Properties
     //
     private static final String SAVE_STATE_TODAY_PROGRESS_DATE = "saveStateTodayProgressDate";
+
 
     // Private Properties
     //
     private DrawerLayout drawer;
     private NavigationManager navigationManager;
-    private ProgressManager mProgressManager;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private SweetAlertDialog dialog;
     private Toolbar toolbar;
 
+    @Inject
+    ProgressManager progressManager;
+
+    @Inject
+    DatabaseRealm databaseRealm;
 
     // Overrides
     //
@@ -45,6 +53,7 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Injector.getAppComponent().inject(this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,14 +73,12 @@ public class MainActivity extends BaseActivity
             navigationManager.init(getFragmentManager());
             navigationManager.setNavigationListener(this);
 
-            mProgressManager = new ProgressManager();
-            mProgressManager.init(this);
 
             //This is set when restoring from a previous state,
             //so we do not want to try and load a new fragment
             if (savedInstanceState != null) {
                 Date todayDate = (Date)savedInstanceState.getSerializable(SAVE_STATE_TODAY_PROGRESS_DATE);
-                mProgressManager.setTodayProgress(todayDate);
+                progressManager.setTodayProgress(todayDate);
 
                 setDrawerIndicator();
 
@@ -81,7 +88,7 @@ public class MainActivity extends BaseActivity
             // This needs to be hit first regardless of where a notification will go. Home must
             // be the first item in the back stack
             navigationManager.startHome();
-            //AAADevWorkout.clearSets(getRealm());
+            //AAADevWorkout.clearSets(databaseRealm.getRealmInstance());
         }
     }
 
@@ -97,12 +104,17 @@ public class MainActivity extends BaseActivity
         updateUserData();
     }
 
+    @Override
+    public void onDestroy() {
+        databaseRealm.close();
+        super.onDestroy();
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
 
         outState.putSerializable(SAVE_STATE_TODAY_PROGRESS_DATE,
-                mProgressManager.getTodayProgress().getDate());
+                progressManager.getTodayProgress().getDate());
 
         super.onSaveInstanceState(outState);
     }
@@ -164,18 +176,17 @@ public class MainActivity extends BaseActivity
         return navigationManager;
     }
 
-    public ProgressManager getProgressManager() {
-        return mProgressManager;
-    }
-
 
     // Private Functions
     //
     private void updateUserData() {
-        getRealm().beginTransaction();
-        User user = getRealm().where(User.class).findFirst();
-        user.setLastUsed(new Date());
-        getRealm().commitTransaction();
+
+        //TODO : Replace once userManager is fully DI
+
+//        getRealm().beginTransaction();
+//        User user = getRealm().where(User.class).findFirst();
+//        user.setLastUsed(new Date());
+//        getRealm().commitTransaction();
     }
 
     private void showExitDialog() {
@@ -211,7 +222,7 @@ public class MainActivity extends BaseActivity
         String fragment = navigationManager.getCurrentFragment().getClass().getSimpleName();
 
         switch (fragment) {
-            case "HomeContainerFragment":
+            case "HomeFragment":
                 navigationView.setCheckedItem(R.id.nav_home);
                 break;
             case "CalendarFragment":

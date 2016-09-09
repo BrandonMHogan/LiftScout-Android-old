@@ -1,7 +1,5 @@
 package com.brandonhogan.liftscout.core.model;
 
-import com.brandonhogan.liftscout.core.model.factory.RealmAutoIncrement;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -14,7 +12,7 @@ public class Exercise extends RealmObject {
 
 
     @PrimaryKey
-    private int id = RealmAutoIncrement.getInstance(this.getClass()).getNextIdFromModel();
+    private int id;
 
     private int categoryId;
 

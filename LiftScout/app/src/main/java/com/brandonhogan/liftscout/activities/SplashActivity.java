@@ -8,7 +8,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.model.User;
 
 public class SplashActivity extends BaseActivity {
 
@@ -35,10 +34,8 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                User user = getRealm().where(User.class).findFirst();
-
                 // User has used the app before and should be directed to the main activity
-                if (user != null){
+                if (userManager.validUser()){
                     toMain();
                 }
                 else {

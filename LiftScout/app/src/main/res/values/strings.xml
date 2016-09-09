@@ -16,12 +16,16 @@
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
     <string name="restart">Restart</string>
+    <string name="delete">Delete</string>
     <string name="close">Close</string>
     <string name="save">Save</string>
+    <string name="update">Update</string>
     <string name="routine">Routine</string>
+    <string name="exercise">Exercise</string>
     <string name="weight">Weight</string>
     <string name="photos">Photos</string>
     <string name="reps">Reps</string>
+    <string name="rep">Rep</string>
 
     <!-- Drawer Navigations -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -70,12 +74,15 @@
     <string name="dialog_exercise_remove_message">Are you sure you wish to delete %s?</string>
     <string name="dialog_rep_remove_title">Deleting Rep</string>
     <string name="dialog_rep_remove_message">Are you sure you wish to delete this rep?</string>
+    <string name="dialog_tracker_delete_title">Deleting Set</string>
+    <string name="dialog_tracker_delete_message">Are you sure you wish to delete this set of %s?</string>
 
     <!-- Home Fragment -->
     <string name="frag_home_first_load_message">"Welcome to Lift Scout %s! This app will become your closest ally in your swole journey."</string>
     <string name="frag_home_welcome_back_message">Welcome back %s!</string>
 
     <string name="frag_today_weight">Weight</string>
+    <string name="frag_today_empty_set_msg">Click here to add a repetition!</string>
 
     <!-- Settings -->
     <string name="setting_profile">Profile</string>
@@ -94,6 +101,13 @@
 
     <string name="setting_display_theme_spinner_title">Theme</string>
     <string name="setting_display_theme_spinner_description">Choose a theme that better fits your taste</string>
+
+    <!-- Workout Container -->
+    <string name="workout_tracker_title">Tracker</string>
+    <string name="workout_history_title">History</string>
+    <string name="workout_graphs_title">Graphs</string>
+    <string name="workout_statistics_title">Statistics</string>
+    <string name="workout_goals_title">Goals</string>
 
     <!-- Errors -->
     <string name="error_title">Uh oh!</string>

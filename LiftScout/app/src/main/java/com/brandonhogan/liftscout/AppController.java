@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout;
 
 import android.app.Application;
 
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.squareup.leakcanary.LeakCanary;
 
 import io.realm.Realm;
@@ -20,12 +21,19 @@ public class AppController extends Application {
         super.onCreate();
         mInstance = this;
 
-        //Establishes the default realm and its configuration
+        initDagger();
+        initRealmConfiguration();
+        LeakCanary.install(this);
+    }
+
+    private void initDagger() {
+        Injector.initAppComponent(this);
+    }
+
+    private void initRealmConfiguration() {
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this)
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
-
-        LeakCanary.install(this);
     }
 }

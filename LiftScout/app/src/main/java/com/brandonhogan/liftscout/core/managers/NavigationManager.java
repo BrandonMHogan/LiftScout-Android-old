@@ -5,15 +5,15 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.fragments.calendar.CalendarFragment;
-import com.brandonhogan.liftscout.fragments.categories.CategoryListFragment;
-import com.brandonhogan.liftscout.fragments.exercises.ExerciseListFragment;
-import com.brandonhogan.liftscout.fragments.home.HomeContainerFragment;
-import com.brandonhogan.liftscout.fragments.settings.SettingsDisplayFragment;
-import com.brandonhogan.liftscout.fragments.settings.SettingsHomeFragment;
-import com.brandonhogan.liftscout.fragments.settings.SettingsListFragment;
-import com.brandonhogan.liftscout.fragments.settings.SettingsProfileFragment;
-import com.brandonhogan.liftscout.fragments.workout.WorkoutContainerFragment;
+import com.brandonhogan.liftscout.views.calendar.CalendarFragment;
+import com.brandonhogan.liftscout.views.categories.CategoryListFragment;
+import com.brandonhogan.liftscout.views.exercises.ExerciseListFragment;
+import com.brandonhogan.liftscout.views.home.HomeFragment;
+import com.brandonhogan.liftscout.views.settings.SettingsListFragment;
+import com.brandonhogan.liftscout.views.settings.SettingsProfileFragment;
+import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
+import com.brandonhogan.liftscout.views.settings.home.SettingsHomeFragment;
+import com.brandonhogan.liftscout.views.workout.WorkoutContainerFragment;
 
 public class NavigationManager {
 
@@ -31,6 +31,7 @@ public class NavigationManager {
     private FragmentManager mFragmentManager;
     private NavigationListener navigationListener;
     private boolean isInTransition = false;
+    private FragmentManager.OnBackStackChangedListener backstackListener;
 
 
     // Public Properties
@@ -43,6 +44,17 @@ public class NavigationManager {
         return mFragmentManager.findFragmentById(R.id.fragment_manager);
     }
 
+    public NavigationManager() {
+        backstackListener = new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if (navigationListener != null) {
+                    navigationListener.onBackstackChanged();
+                }
+            }
+        };
+    }
+
     /**
      * Initialize the NavigationManager with a FragmentManager, which will be used at the
      * fragment transactions.
@@ -51,14 +63,9 @@ public class NavigationManager {
      */
     public void init(FragmentManager fragmentManager) {
         mFragmentManager = fragmentManager;
-        mFragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                if (navigationListener != null) {
-                    navigationListener.onBackstackChanged();
-                }
-            }
-        });
+
+        mFragmentManager.removeOnBackStackChangedListener(backstackListener);
+        mFragmentManager.addOnBackStackChangedListener(backstackListener);
     }
 
     /**
@@ -175,7 +182,7 @@ public class NavigationManager {
     }
 
     public boolean startHome() {
-        Fragment fragment = HomeContainerFragment.newInstance();
+        Fragment fragment = HomeFragment.newInstance();
         return openAsHome(fragment);
     }
 
