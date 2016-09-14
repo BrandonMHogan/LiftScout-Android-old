@@ -23,6 +23,7 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     private int exerciseId;
     private Set set;
     private ArrayList<TrackerListModel> adapterData;
+    private int selectedPosition;
     private TrackerListModel editingRep;
 
 
@@ -98,8 +99,9 @@ public class TrackerPresenter implements TrackerContract.Presenter {
 
         progressManager.updateSet(set);
         resetAdapter();
+
+        view.saveSuccess(editingRep == null ? adapterData.size() - 1 : selectedPosition);
         editingRep = null;
-        view.saveSuccess(adapterData.size() - 1);
     }
 
     @Override
@@ -115,6 +117,7 @@ public class TrackerPresenter implements TrackerContract.Presenter {
 
     @Override
     public void onSelect(int position) {
+        selectedPosition = position;
         editingRep = adapterData.get(position);
         view.onSelect(editingRep);
     }

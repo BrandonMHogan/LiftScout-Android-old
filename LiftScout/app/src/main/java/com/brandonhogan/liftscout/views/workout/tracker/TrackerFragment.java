@@ -240,12 +240,15 @@ public class TrackerFragment extends BaseFragment implements
                         @Override
                         public void onRowClicked(int position) {
                             presenter.onSelect(position);
+                            mAdapter.selected(position);
                         }
 
                         @Override
                         public void onIndependentViewClicked(int independentViewID, int position) {
                         }
                     });
+
+
         }
         else {
             mAdapter.setList(data);
@@ -263,6 +266,7 @@ public class TrackerFragment extends BaseFragment implements
 
     @Override
     public void saveSuccess(int position) {
+        mAdapter.clearSelected();
         layoutManager.scrollToPosition(position);
         resetButtons();
     }

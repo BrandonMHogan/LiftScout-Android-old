@@ -24,12 +24,12 @@
             android:paddingLeft="16dp"
             android:paddingTop="16dp">
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/display_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="6"
-                android:orientation="horizontal">
+                android:layout_weight="6">
 
                 <TextView
                     android:id="@+id/row_num"
@@ -48,7 +48,8 @@
                     android:gravity="center_vertical"
                     android:maxLines="1"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginStart="50dp"/>
 
                 <TextView
                     android:id="@+id/weight_metric"
@@ -58,7 +59,8 @@
                     android:maxLines="1"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:layout_marginEnd="25dp"/>
+                    android:layout_marginStart="2dp"
+                    android:layout_toEndOf="@id/weight"/>
 
 
                 <TextView
@@ -68,7 +70,8 @@
                     android:gravity="center_vertical"
                     android:maxLines="1"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginStart="180dp"/>
 
                 <TextView
                     android:id="@+id/count_metric"
@@ -77,9 +80,11 @@
                     android:gravity="center_vertical"
                     android:maxLines="1"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginStart="2dp"
+                    android:layout_toEndOf="@id/count"/>
 
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
 
