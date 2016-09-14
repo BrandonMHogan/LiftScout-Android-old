@@ -104,10 +104,41 @@ public class TrackerPresenter implements TrackerContract.Presenter {
         editingRep = null;
     }
 
+    /*
+        Called when the delete button is pressed in the view.
+        If a set is empty, then delete the set
+        If a set is not empty, show the delete set alert
+        If a rep is selected, show the delete rep alert
+     */
     @Override
     public void onDelete() {
+
+        if (editingRep == null) {
+            if (set.getReps().isEmpty())
+                onDeleteSet();
+            else
+                view.showDeleteSetAlert();
+        }
+        else {
+            view.showDeleteRepAlert();
+        }
+    }
+
+    @Override
+    public void onDeleteSet() {
         progressManager.deleteSet(set);
-        view.deleteSuccess();
+        progressManager.clearUpdatedSet();
+        view.deleteSetSuccess();
+    }
+
+    @Override
+    public void onDeleteRep() {
+        if (editingRep != null) {
+            progressManager.deleteRep(editingRep.getId());
+            editingRep = null;
+            resetAdapter();
+            view.clear(false);
+        }
     }
 
     @Override
@@ -123,15 +154,14 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     }
 
     @Override
-    public void onDeleteRep() {
-        if (editingRep != null) {
-            progressManager.deleteRep(editingRep.getId());
-            resetAdapter();
-        }
-    }
-
-    @Override
     public void onButtonTwoPressed() {
-        onDeleteRep();
+
+        if (editingRep == null) {
+            view.clear(true);
+        }
+        else {
+            editingRep = null;
+            view.clear(false);
+        }
     }
 }

@@ -74,8 +74,10 @@
     <string name="dialog_exercise_remove_message">Are you sure you wish to delete %s?</string>
     <string name="dialog_rep_remove_title">Deleting Rep</string>
     <string name="dialog_rep_remove_message">Are you sure you wish to delete this rep?</string>
-    <string name="dialog_tracker_delete_title">Deleting Set</string>
-    <string name="dialog_tracker_delete_message">Are you sure you wish to delete this set of %s?</string>
+    <string name="dialog_tracker_delete_set_title">Deleting Workout</string>
+    <string name="dialog_tracker_delete_set_message">Are you sure you wish to delete this entire set of %s?</string>
+    <string name="dialog_tracker_delete_rep_title">Deleting Set</string>
+    <string name="dialog_tracker_delete_rep_message">Are you sure you wish to delete this selected set?</string>
 
     <!-- Home Fragment -->
     <string name="frag_home_first_load_message">"Welcome to Lift Scout %s! This app will become your closest ally in your swole journey."</string>
