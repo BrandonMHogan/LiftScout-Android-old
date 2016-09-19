@@ -27,7 +27,6 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     private TrackerListModel editingRep;
 
 
-
     // Constructor
     //
     public TrackerPresenter(TrackerContract.View view, int exerciseId) {
@@ -76,6 +75,23 @@ public class TrackerPresenter implements TrackerContract.Presenter {
         }
 
         view.updateAdapter(adapterData);
+
+
+        if (adapterData != null && adapterData.size() > 0) {
+            TrackerListModel model = adapterData.get(adapterData.size() -1);
+            view.updateValues((float)model.getWeight(), model.getCount());
+        }
+        else {
+            // Need to check to see what weight/rep was used last time this exercise was done
+            Set set = progressManager.getPreviousSet(exerciseId);
+
+            if(set != null && set.getReps() != null && !set.getReps().isEmpty()) {
+                Rep rep = set.getReps().get(0);
+
+                view.updateValues((float)rep.getWeight(), rep.getCount());
+            }
+
+        }
     }
 
     @Override

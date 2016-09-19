@@ -10,7 +10,12 @@ import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.SetRepo;
 
+import java.util.Date;
+
 import javax.inject.Inject;
+
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class SetRepoImpl implements SetRepo {
 
@@ -39,6 +44,22 @@ public class SetRepoImpl implements SetRepo {
                 .where(Set.class)
                 .equalTo(Set.ID, setId)
                 .findFirst();
+    }
+
+    @Override
+    public Set getPreviousSet(Date date, int exerciseId) {
+        RealmResults<Progress> progress = databaseRealm.getRealmInstance()
+                .where(Progress.class)
+                .lessThan(Progress.DATE, date)
+                .beginGroup()
+                    .equalTo("sets.exercise.id", exerciseId)
+                .endGroup()
+                .findAllSorted(Progress.DATE, Sort.DESCENDING);
+
+        if (!progress.isEmpty())
+            return progress.first().getSets().where().equalTo("exercise.id", exerciseId).findFirst();
+        else
+            return null;
     }
 
     @Override

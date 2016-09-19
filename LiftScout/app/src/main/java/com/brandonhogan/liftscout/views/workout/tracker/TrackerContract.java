@@ -6,6 +6,7 @@ public interface TrackerContract {
 
     interface View {
         void updateAdapter(List<TrackerListModel> data);
+        void updateValues(float weight, int reps);
         String getRepsLabel(boolean isMultiple);
         void saveSuccess(int position);
         void showDeleteSetAlert();

@@ -165,7 +165,8 @@ public class TrackerFragment extends BaseFragment implements
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        deleteMenu.setVisible(false);
+        if (deleteMenu != null)
+            deleteMenu.setVisible(false);
     }
 
     @Override
@@ -191,11 +192,17 @@ public class TrackerFragment extends BaseFragment implements
         secondButton.setText(getString(R.string.clear));
     }
 
+
+    @Override
+    public void updateValues(float weight, int reps) {
+        weightNumberPicker.setNumber(weight);
+        repNumberPicker.setNumber(reps);
+    }
+
     private void updateValues(TrackerListModel model) {
         weightNumberPicker.setNumber((float)model.getWeight());
         repNumberPicker.setNumber(model.getCount());
     }
-
 
 
     // Contract
@@ -231,10 +238,6 @@ public class TrackerFragment extends BaseFragment implements
         else {
             mAdapter.setList(data);
         }
-
-        if (data != null && data.size() > 0)
-            updateValues(data.get(data.size()-1));
-
     }
 
     @Override
