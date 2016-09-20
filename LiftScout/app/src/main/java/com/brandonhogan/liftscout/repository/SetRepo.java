@@ -6,6 +6,9 @@ import com.brandonhogan.liftscout.core.model.Set;
 
 import java.util.Date;
 
+import io.realm.RealmList;
+import io.realm.RealmResults;
+
 public interface SetRepo {
 
     void addSet(Progress progress, Set set);
@@ -18,4 +21,5 @@ public interface SetRepo {
     void updateRep(Rep rep);
     void deleteRep(int repId);
     Set getSet(int setId);
+    RealmResults<Set> getSets(int exerciseId);
 }

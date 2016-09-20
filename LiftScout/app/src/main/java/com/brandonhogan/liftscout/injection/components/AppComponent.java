@@ -20,6 +20,7 @@ import com.brandonhogan.liftscout.views.home.today.TodayPresenter;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayPresenter;
 import com.brandonhogan.liftscout.views.settings.home.SettingsHomePresenter;
+import com.brandonhogan.liftscout.views.workout.history.HistoryPresenter;
 import com.brandonhogan.liftscout.views.workout.tracker.TrackerFragment;
 import com.brandonhogan.liftscout.views.workout.tracker.TrackerPresenter;
 
@@ -50,6 +51,7 @@ public interface AppComponent {
     // Workout
     void inject(TrackerFragment fragment);
     void inject(TrackerPresenter presenter);
+    void inject(HistoryPresenter presenter);
 
     // Settings
     void inject(SettingsDisplayFragment fragment);

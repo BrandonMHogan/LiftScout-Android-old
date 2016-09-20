@@ -14,6 +14,7 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import io.realm.RealmList;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -44,6 +45,14 @@ public class SetRepoImpl implements SetRepo {
                 .where(Set.class)
                 .equalTo(Set.ID, setId)
                 .findFirst();
+    }
+
+    @Override
+    public RealmResults<Set> getSets(int exerciseId) {
+        return databaseRealm.getRealmInstance()
+                .where(Set.class)
+                .equalTo("exercise.id", exerciseId)
+                .findAllSorted(Set.DATE, Sort.DESCENDING);
     }
 
     @Override

@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
 
+import com.brandonhogan.liftscout.views.workout.graph.GraphFragment;
+import com.brandonhogan.liftscout.views.workout.history.HistoryFragment;
 import com.brandonhogan.liftscout.views.workout.tracker.TrackerFragment;
 
 
@@ -22,15 +24,15 @@ public class WorkoutContainerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return TrackerFragment.newInstance(exerciseId);
             case 1:
-                return WorkoutHistoryFragment.newInstance(exerciseId);
+                return HistoryFragment.newInstance(exerciseId);
             case 2:
-                return WorkoutHistoryFragment.newInstance(exerciseId);
+                return GraphFragment.newInstance(exerciseId);
             case 3:
-                return WorkoutHistoryFragment.newInstance(exerciseId);
+                return GraphFragment.newInstance(exerciseId);
             case 4:
-                return WorkoutHistoryFragment.newInstance(exerciseId);
+                return GraphFragment.newInstance(exerciseId);
             case 5:
-                return WorkoutHistoryFragment.newInstance(exerciseId);
+                return GraphFragment.newInstance(exerciseId);
 
             default:
                 return null;

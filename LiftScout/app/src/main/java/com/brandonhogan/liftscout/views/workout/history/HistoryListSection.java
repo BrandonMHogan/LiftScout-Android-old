@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.views.home.today;
+package com.brandonhogan.liftscout.views.workout.history;
 
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IExpandable;
@@ -15,12 +16,13 @@ import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TodayListSection extends AbstractItem<TodayListSection, TodayListSection.ViewHolder> implements IExpandable<TodayListSection, IItem> {
+public class HistoryListSection extends AbstractItem<HistoryListSection, HistoryListSection.ViewHolder> implements IExpandable<HistoryListSection, IItem> {
     //the static ViewHolderFactory which will be used to generate the ViewHolder for this Item
     private static final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
 
@@ -32,11 +34,11 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
     private boolean mExpanded = false;
     private boolean isEmpty;
 
-    private FastAdapter.OnClickListener<TodayListSection> mOnClickListener;
+    private FastAdapter.OnClickListener<HistoryListSection> mOnClickListener;
 
-    public TodayListSection(int setId, String name, double volume, boolean isEmpty) {
+    public HistoryListSection(int setId, Date date, double volume, boolean isEmpty) {
         this.setId = setId;
-        this.name = name;
+        this.name = BhDate.toSimpleStringDate(date);
         this.volume = volume;
     }
 
@@ -50,7 +52,7 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
     }
 
     @Override
-    public TodayListSection withIsExpanded(boolean expanded) {
+    public HistoryListSection withIsExpanded(boolean expanded) {
         mExpanded = expanded;
         return this;
     }
@@ -65,24 +67,24 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
         return true;
     }
 
-    public TodayListSection withSubItems(List<IItem> subItems) {
+    public HistoryListSection withSubItems(List<IItem> subItems) {
         this.mSubItems = subItems;
         return this;
     }
 
-    public FastAdapter.OnClickListener<TodayListSection> getOnClickListener() {
+    public FastAdapter.OnClickListener<HistoryListSection> getOnClickListener() {
         return mOnClickListener;
     }
 
-    public TodayListSection withOnClickListener(FastAdapter.OnClickListener<TodayListSection> mOnClickListener) {
+    public HistoryListSection withOnClickListener(FastAdapter.OnClickListener<HistoryListSection> mOnClickListener) {
         this.mOnClickListener = mOnClickListener;
         return this;
     }
 
     //we define a clickListener in here so we can directly animate
-    final private FastAdapter.OnClickListener<TodayListSection> onClickListener = new FastAdapter.OnClickListener<TodayListSection>() {
+    final private FastAdapter.OnClickListener<HistoryListSection> onClickListener = new FastAdapter.OnClickListener<HistoryListSection>() {
         @Override
-        public boolean onClick(View v, IAdapter adapter, TodayListSection item, int position) {
+        public boolean onClick(View v, IAdapter adapter, HistoryListSection item, int position) {
             if (item.getSubItems() != null) {
                 if (!item.isExpanded()) {
                     ViewCompat.animate(v.findViewById(R.id.arrow_expand_imageview)).rotation(180).start();
@@ -101,7 +103,7 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
      * @return
      */
     @Override
-    public FastAdapter.OnClickListener<TodayListSection> getOnItemClickListener() {
+    public FastAdapter.OnClickListener<HistoryListSection> getOnItemClickListener() {
         return onClickListener;
     }
 

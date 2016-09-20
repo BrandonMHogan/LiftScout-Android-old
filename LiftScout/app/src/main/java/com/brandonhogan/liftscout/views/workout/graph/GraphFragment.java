@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.views.workout;
+package com.brandonhogan.liftscout.views.workout.graph;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,18 +9,19 @@ import android.view.ViewGroup;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
-public class WorkoutHistoryFragment extends BaseFragment {
+public class GraphFragment extends BaseFragment {
 
 
     // Static Properties
     //
     private static final String BUNDLE_EXERCISE_ID = "exerciseIdBundle";
 
+
     // Instance
     //
-    public static WorkoutHistoryFragment newInstance(int exerciseId)
+    public static GraphFragment newInstance(int exerciseId)
     {
-        WorkoutHistoryFragment frag = new WorkoutHistoryFragment();
+        GraphFragment frag = new GraphFragment();
         Bundle bundle = new Bundle();
 
         bundle.putInt(BUNDLE_EXERCISE_ID, exerciseId);
@@ -40,7 +41,7 @@ public class WorkoutHistoryFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_workout_history, container, false);
+        rootView = inflater.inflate(R.layout.frag_workout_graph, container, false);
 
         return rootView;
     }
@@ -48,5 +49,6 @@ public class WorkoutHistoryFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
     }
 }

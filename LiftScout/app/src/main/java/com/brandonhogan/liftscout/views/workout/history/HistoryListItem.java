@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.views.home.today;
+package com.brandonhogan.liftscout.views.workout.history;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -6,11 +6,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
-import com.mikepenz.fastadapter.IDraggable;
-import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
-public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.ViewHolder> implements IDraggable<TodayListItem, IItem> {
+public class HistoryListItem extends AbstractItem<HistoryListItem, HistoryListItem.ViewHolder> {
 
     public int setId;
     public int exerciseId;
@@ -20,29 +18,18 @@ public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.Vie
     private boolean isEmpty = false;
     private String emptyMsg;
 
-    public TodayListItem(int setId, int exerciseId, int reps, double weight) {
+    public HistoryListItem(int setId, int exerciseId, int reps, double weight) {
         this.setId = setId;
         this.exerciseId = exerciseId;
         this.reps = reps;
         this.weight = weight;
     }
 
-    public TodayListItem(int setId, int exerciseId, boolean isEmpty, String emptyMessage) {
+    public HistoryListItem(int setId, int exerciseId, boolean isEmpty, String emptyMessage) {
         this.setId = setId;
         this.exerciseId = exerciseId;
         this.isEmpty = isEmpty;
         this.emptyMsg = emptyMessage;
-    }
-
-    @Override
-    public boolean isDraggable() {
-        return mIsDraggable;
-    }
-
-    @Override
-    public TodayListItem withIsDraggable(boolean draggable) {
-        this.mIsDraggable = draggable;
-        return this;
     }
 
     //The unique ID for this type of item
