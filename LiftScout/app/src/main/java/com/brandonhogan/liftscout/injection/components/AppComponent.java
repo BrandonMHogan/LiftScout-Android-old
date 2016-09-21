@@ -1,7 +1,6 @@
 package com.brandonhogan.liftscout.injection.components;
 
 import com.brandonhogan.liftscout.activities.BaseActivity;
-import com.brandonhogan.liftscout.activities.InitActivity;
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.injection.module.AppModule;
@@ -37,7 +36,6 @@ public interface AppComponent {
 
     // Activities
     void inject(BaseActivity activity);
-    void inject(InitActivity activity);
     void inject(MainActivity activity);
 
     // Fragments

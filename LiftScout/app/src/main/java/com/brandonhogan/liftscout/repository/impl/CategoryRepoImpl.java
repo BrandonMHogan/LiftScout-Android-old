@@ -24,7 +24,7 @@ public class CategoryRepoImpl implements CategoryRepo {
 
     private int getNextKey() {
         Number max = databaseRealm.getRealmInstance().where(Category.class).max(Category.ID);
-        return (max != null) ? max.intValue() + 1 : 0;
+        return (max != null) ? max.intValue() + 1 : 1;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class CategoryRepoImpl implements CategoryRepo {
     }
 
     @Override
-    public void setCategory(Category category) {
+    public Category setCategory(Category category) {
         try {
             if (category.getId() == 0)
                 category.setId(getNextKey());
@@ -51,10 +51,16 @@ public class CategoryRepoImpl implements CategoryRepo {
             databaseRealm.getRealmInstance().beginTransaction();
             databaseRealm.getRealmInstance().copyToRealmOrUpdate(category);
             databaseRealm.getRealmInstance().commitTransaction();
+
+            return databaseRealm.getRealmInstance()
+                    .where(Category.class)
+                    .equalTo(Category.ID, category.getId())
+                    .findFirst();
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
             databaseRealm.getRealmInstance().cancelTransaction();
+            return null;
         }
     }
 

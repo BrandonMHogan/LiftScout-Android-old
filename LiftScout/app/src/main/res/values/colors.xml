@@ -48,6 +48,8 @@
     <color name="blue">#3693D0</color>
     <color name="red">#ff1744</color>
     <color name="divider">#67676767</color>
+    <color name="delete_red">#80ff1744</color>
+    <color name="edit_green">#8036CF8E</color>
 
     <!-- Category Colors -->
     <color name="category_light_red">#f44336</color>

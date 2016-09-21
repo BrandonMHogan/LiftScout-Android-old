@@ -11,9 +11,7 @@ public class User extends RealmObject {
 
     @PrimaryKey
     private int id;
-    @Required
     private String name;
-    @Required
     private Date birthDate;
     private double weight;
     @Required
@@ -26,11 +24,8 @@ public class User extends RealmObject {
 
     public User() {}
 
-    public User(String name, Date birthDate, double weight, String unitType) {
-        this.id = name.hashCode();
-        this.name = name;
-        this.birthDate = birthDate;
-        this.weight = weight;
+    public User(String unitType) {
+        this.id = 1;
         this.unitType = unitType;
         this.startDate = new Date();
         this.lastUsed = this.startDate;

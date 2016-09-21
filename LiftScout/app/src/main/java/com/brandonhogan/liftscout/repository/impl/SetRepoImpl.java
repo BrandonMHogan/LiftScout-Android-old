@@ -31,12 +31,12 @@ public class SetRepoImpl implements SetRepo {
 
     private int getNextSetKey() {
         Number max = databaseRealm.getRealmInstance().where(Set.class).max(Category.ID);
-        return (max != null) ? max.intValue() + 1 : 0;
+        return (max != null) ? max.intValue() + 1 : 1;
     }
 
     private int getNextRepKey() {
         Number max = databaseRealm.getRealmInstance().where(Rep.class).max(Category.ID);
-        return (max != null) ? max.intValue() + 1 : 0;
+        return (max != null) ? max.intValue() + 1 : 1;
     }
 
     @Override

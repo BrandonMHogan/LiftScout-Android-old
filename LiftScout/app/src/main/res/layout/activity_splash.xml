@@ -1,6 +1,6 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_dark"
@@ -11,7 +11,40 @@
         android:layout_width="@dimen/logo_scout_width"
         android:layout_height="@dimen/logo_scout_height"
         style="@style/Logo_Scout"
-        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
         android:contentDescription="@null"/>
 
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/progress_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/progress_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryLight"
+            style="@style/RobotoHeadline"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:visibility="gone"
+            android:text="Initializing Application"/>
+
+        <com.brandonhogan.liftscout.core.controls.MaterialProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_margin="30dp"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:duration="1500"
+            app:progressColour="@color/colorPrimary"
+            app:backgroundColour="@color/colorPrimaryLight" />
+
+    </LinearLayout>
+
+</RelativeLayout>
