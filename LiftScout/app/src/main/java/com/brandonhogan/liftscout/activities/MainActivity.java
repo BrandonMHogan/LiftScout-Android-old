@@ -152,7 +152,7 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_settings) {
             success = navigationManager.startSettings();
         } else if (id == R.id.nav_about) {
-
+            success = navigationManager.startAbout();
         } else if (id == R.id.nav_realm) {
             DatabaseOutput.SendRealmToPhone(this);
             success = true;

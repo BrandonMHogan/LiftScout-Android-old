@@ -24,7 +24,7 @@ public class ExerciseRepoImpl implements ExerciseRepo {
 
     private int getNextKey() {
         Number max = databaseRealm.getRealmInstance().where(Exercise.class).max(Exercise.ID);
-        return (max != null) ? max.intValue() + 1 : 0;
+        return (max != null) ? max.intValue() + 1 : 1;
     }
 
     @Override

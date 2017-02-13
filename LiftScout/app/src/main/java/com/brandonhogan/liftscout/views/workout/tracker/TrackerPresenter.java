@@ -23,8 +23,8 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     private int exerciseId;
     private Set set;
     private ArrayList<TrackerListModel> adapterData;
+    private int selectedPosition;
     private TrackerListModel editingRep;
-
 
 
     // Constructor
@@ -75,6 +75,23 @@ public class TrackerPresenter implements TrackerContract.Presenter {
         }
 
         view.updateAdapter(adapterData);
+
+
+        if (adapterData != null && adapterData.size() > 0) {
+            TrackerListModel model = adapterData.get(adapterData.size() -1);
+            view.updateValues((float)model.getWeight(), model.getCount());
+        }
+        else {
+            // Need to check to see what weight/rep was used last time this exercise was done
+            Set set = progressManager.getPreviousSet(exerciseId);
+
+            if(set != null && set.getReps() != null && !set.getReps().isEmpty()) {
+                Rep rep = set.getReps().get(0);
+
+                view.updateValues((float)rep.getWeight(), rep.getCount());
+            }
+
+        }
     }
 
     @Override
@@ -98,14 +115,46 @@ public class TrackerPresenter implements TrackerContract.Presenter {
 
         progressManager.updateSet(set);
         resetAdapter();
+
+        view.saveSuccess(editingRep == null ? adapterData.size() - 1 : selectedPosition);
         editingRep = null;
-        view.saveSuccess(adapterData.size() - 1);
+    }
+
+    /*
+        Called when the delete button is pressed in the view.
+        If a set is empty, then delete the set
+        If a set is not empty, show the delete set alert
+        If a rep is selected, show the delete rep alert
+     */
+    @Override
+    public void onDelete() {
+
+        if (editingRep == null) {
+            if (set.getReps().isEmpty())
+                onDeleteSet();
+            else
+                view.showDeleteSetAlert();
+        }
+        else {
+            view.showDeleteRepAlert();
+        }
     }
 
     @Override
-    public void onDelete() {
+    public void onDeleteSet() {
         progressManager.deleteSet(set);
-        view.deleteSuccess();
+        progressManager.clearUpdatedSet();
+        view.deleteSetSuccess();
+    }
+
+    @Override
+    public void onDeleteRep() {
+        if (editingRep != null) {
+            progressManager.deleteRep(editingRep.getId());
+            editingRep = null;
+            resetAdapter();
+            view.clear(false);
+        }
     }
 
     @Override
@@ -115,20 +164,20 @@ public class TrackerPresenter implements TrackerContract.Presenter {
 
     @Override
     public void onSelect(int position) {
+        selectedPosition = position;
         editingRep = adapterData.get(position);
         view.onSelect(editingRep);
     }
 
     @Override
-    public void onDeleteRep() {
-        if (editingRep != null) {
-            progressManager.deleteRep(editingRep.getId());
-            resetAdapter();
-        }
-    }
-
-    @Override
     public void onButtonTwoPressed() {
-        onDeleteRep();
+
+        if (editingRep == null) {
+            view.clear(true);
+        }
+        else {
+            editingRep = null;
+            view.clear(false);
+        }
     }
 }

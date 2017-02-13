@@ -126,27 +126,7 @@ public class TrackerFragment extends BaseFragment implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-
-                String message =
-                        String.format(getString(R.string.dialog_tracker_delete_message)
-                                , presenter.getExerciseName());
-
-                dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText(getString(R.string.dialog_tracker_delete_title))
-                        .setContentText(message)
-                        .setConfirmText(getString(R.string.delete))
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                dialog.cancel();
-                                presenter.onDelete();
-                            }
-                        })
-                        .setCancelText(getString(R.string.cancel))
-                        .showCancelButton(true);
-
-                dialog.show();
-
+                presenter.onDelete();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -185,7 +165,8 @@ public class TrackerFragment extends BaseFragment implements
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        deleteMenu.setVisible(false);
+        if (deleteMenu != null)
+            deleteMenu.setVisible(false);
     }
 
     @Override
@@ -201,8 +182,6 @@ public class TrackerFragment extends BaseFragment implements
     @OnClick(R.id.second_button)
     public void secondButtonOnClick() {
         presenter.onButtonTwoPressed();
-        repNumberPicker.setNumber(0);
-        weightNumberPicker.setNumber(0);
     }
 
 
@@ -213,11 +192,17 @@ public class TrackerFragment extends BaseFragment implements
         secondButton.setText(getString(R.string.clear));
     }
 
+
+    @Override
+    public void updateValues(float weight, int reps) {
+        weightNumberPicker.setNumber(weight);
+        repNumberPicker.setNumber(reps);
+    }
+
     private void updateValues(TrackerListModel model) {
         weightNumberPicker.setNumber((float)model.getWeight());
         repNumberPicker.setNumber(model.getCount());
     }
-
 
 
     // Contract
@@ -240,20 +225,19 @@ public class TrackerFragment extends BaseFragment implements
                         @Override
                         public void onRowClicked(int position) {
                             presenter.onSelect(position);
+                            mAdapter.selected(position);
                         }
 
                         @Override
                         public void onIndependentViewClicked(int independentViewID, int position) {
                         }
                     });
+
+
         }
         else {
             mAdapter.setList(data);
         }
-
-        if (data != null && data.size() > 0)
-            updateValues(data.get(data.size()-1));
-
     }
 
     @Override
@@ -263,12 +247,13 @@ public class TrackerFragment extends BaseFragment implements
 
     @Override
     public void saveSuccess(int position) {
+        mAdapter.clearSelected();
         layoutManager.scrollToPosition(position);
         resetButtons();
     }
 
     @Override
-    public void deleteSuccess() {
+    public void deleteSetSuccess() {
         getNavigationManager().navigateBack(getActivity());
     }
 
@@ -277,6 +262,60 @@ public class TrackerFragment extends BaseFragment implements
         updateValues(rep);
 
         firstButton.setText(getString(R.string.update));
-        secondButton.setText(getString(R.string.delete));
+        secondButton.setText(getString(R.string.cancel));
+    }
+
+    @Override
+    public void showDeleteRepAlert() {
+
+        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(getString(R.string.dialog_tracker_delete_rep_title))
+                .setContentText(getString(R.string.dialog_tracker_delete_rep_message))
+                .setConfirmText(getString(R.string.delete))
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        dialog.cancel();
+                        presenter.onDeleteRep();
+                    }
+                })
+                .setCancelText(getString(R.string.cancel))
+                .showCancelButton(true);
+
+        dialog.show();
+    }
+
+    @Override
+    public void showDeleteSetAlert() {
+        String message =
+                String.format(getString(R.string.dialog_tracker_delete_set_message)
+                        , presenter.getExerciseName());
+
+        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(getString(R.string.dialog_tracker_delete_set_title))
+                .setContentText(message)
+                .setConfirmText(getString(R.string.delete))
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        dialog.cancel();
+                        presenter.onDeleteSet();
+                    }
+                })
+                .setCancelText(getString(R.string.cancel))
+                .showCancelButton(true);
+
+        dialog.show();
+    }
+
+    @Override
+    public void clear(boolean clearValues) {
+        mAdapter.clearSelected();
+        resetButtons();
+
+        if (clearValues) {
+            repNumberPicker.setNumber(0);
+            weightNumberPicker.setNumber(0);
+        }
     }
 }

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.brandonhogan.liftscout.core.controls.BaseFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:windowBackground">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" >
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/settings_table_layout_padding_top"
+                android:id="@+id/SettingsTableLayout"
+                android:layout_marginStart="@dimen/settings_table_row_horizontal_padding"
+                android:layout_marginEnd="@dimen/settings_table_row_horizontal_padding">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_scout_orange"/>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/app_name"
+                    android:textAlignment="center"
+                    android:layout_gravity="center_horizontal"
+                    style="@style/RobotoDisplay01"/>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="40dp"
+                    android:text="@string/app_description"/>
+
+                <!-- Version Section -->
+                <RelativeLayout
+                    android:id="@+id/versionRow"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/settings_table_row_min_height" >
+
+                    <TextView
+                        android:text="@string/about_version"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textSize="@dimen/settings_table_body_text_size"/>
+
+                    <TextView
+                        android:id="@+id/version_number"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="end"
+                        android:gravity="end"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+                <View android:layout_width="match_parent"
+                    android:background="@color/listview_border_color"
+                    android:layout_height="@dimen/settings_divider_view_hieght"/>
+
+
+
+                <!-- Version Section -->
+                <RelativeLayout
+                    android:id="@+id/developerRow"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/settings_table_row_min_height">
+
+                    <TextView
+                        android:text="@string/about_developer"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textSize="@dimen/settings_table_body_text_size"/>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="end"
+                        android:gravity="end"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/app_developer"/>
+
+                </RelativeLayout>
+
+                <View android:layout_width="match_parent"
+                    android:background="@color/listview_border_color"
+                    android:layout_height="@dimen/settings_divider_view_hieght"/>
+
+
+
+                <!-- Version Section -->
+                <RelativeLayout
+                    android:id="@+id/contactRow"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/settings_table_row_min_height">
+
+                    <TextView
+                        android:text="@string/about_feedback"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textSize="@dimen/settings_table_body_text_size"/>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="end"
+                        android:gravity="end"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/app_feedback"/>
+
+                </RelativeLayout>
+
+                <View android:layout_width="match_parent"
+                    android:background="@color/listview_border_color"
+                    android:layout_height="@dimen/settings_divider_view_hieght"/>
+
+            </TableLayout>
+        </ScrollView>
+    </FrameLayout>
+</com.brandonhogan.liftscout.core.controls.BaseFrameLayout>

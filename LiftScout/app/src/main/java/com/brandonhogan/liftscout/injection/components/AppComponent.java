@@ -1,7 +1,6 @@
 package com.brandonhogan.liftscout.injection.components;
 
 import com.brandonhogan.liftscout.activities.BaseActivity;
-import com.brandonhogan.liftscout.activities.InitActivity;
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.injection.module.AppModule;
@@ -15,13 +14,12 @@ import com.brandonhogan.liftscout.repository.impl.UserRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
 import com.brandonhogan.liftscout.views.categories.CategoryListPresenter;
 import com.brandonhogan.liftscout.views.exercises.ExerciseListPresenter;
-import com.brandonhogan.liftscout.views.home.HomeFragment;
 import com.brandonhogan.liftscout.views.home.HomePresenter;
-import com.brandonhogan.liftscout.views.home.today.TodayFragment;
 import com.brandonhogan.liftscout.views.home.today.TodayPresenter;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayPresenter;
 import com.brandonhogan.liftscout.views.settings.home.SettingsHomePresenter;
+import com.brandonhogan.liftscout.views.workout.history.HistoryPresenter;
 import com.brandonhogan.liftscout.views.workout.tracker.TrackerFragment;
 import com.brandonhogan.liftscout.views.workout.tracker.TrackerPresenter;
 
@@ -38,7 +36,6 @@ public interface AppComponent {
 
     // Activities
     void inject(BaseActivity activity);
-    void inject(InitActivity activity);
     void inject(MainActivity activity);
 
     // Fragments
@@ -52,6 +49,7 @@ public interface AppComponent {
     // Workout
     void inject(TrackerFragment fragment);
     void inject(TrackerPresenter presenter);
+    void inject(HistoryPresenter presenter);
 
     // Settings
     void inject(SettingsDisplayFragment fragment);

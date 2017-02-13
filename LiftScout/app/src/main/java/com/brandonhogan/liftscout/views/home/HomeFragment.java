@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
@@ -22,15 +21,9 @@ import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.TodayTransforms;
-import com.brandonhogan.liftscout.core.controls.WeightDialog;
-import com.brandonhogan.liftscout.core.managers.ProgressManager;
-import com.brandonhogan.liftscout.core.managers.UserManager;
-import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.home.today.TodayPageAdapter;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
-
-import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.OnClick;

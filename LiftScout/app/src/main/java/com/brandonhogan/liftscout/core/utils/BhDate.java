@@ -16,6 +16,10 @@ public class BhDate {
         return formatDay.format(date) + ", " + format.format(date);
     }
 
+    public static String toSimpleStringDate(Date date) {
+        return new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT, Locale.getDefault()).format(date);
+    }
+
     public static Date trimTimeFromDate(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);

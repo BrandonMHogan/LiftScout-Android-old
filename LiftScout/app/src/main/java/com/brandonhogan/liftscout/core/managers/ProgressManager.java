@@ -20,6 +20,7 @@ import java.util.Date;
 import javax.inject.Inject;
 
 import io.realm.RealmList;
+import io.realm.RealmResults;
 
 public class ProgressManager {
 
@@ -105,6 +106,7 @@ public class ProgressManager {
 
             set = new Set();
             set.setExercise(exerciseRepo.getExercise(exerciseId));
+            set.setDate(todayProgress.getDate());
             set.setReps(new RealmList<Rep>());
             set.setOrderId(order);
 
@@ -145,8 +147,16 @@ public class ProgressManager {
             return progress.getSets();
     }
 
+    public RealmResults<Set> getSetsByExercise(int exerciseId) {
+        return setRepo.getSets(exerciseId);
+    }
+
     public void deleteSet(Set set) {
         setRepo.deleteSet(set);
+    }
+
+    public Set getPreviousSet(int exerciseId) {
+        return setRepo.getPreviousSet(todayProgress.getDate(), exerciseId);
     }
 
 

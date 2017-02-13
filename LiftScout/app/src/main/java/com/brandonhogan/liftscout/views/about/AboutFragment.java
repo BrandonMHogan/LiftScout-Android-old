@@ -1,32 +1,25 @@
-package com.brandonhogan.liftscout.views.workout;
+package com.brandonhogan.liftscout.views.about;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.brandonhogan.liftscout.BuildConfig;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
-public class WorkoutHistoryFragment extends BaseFragment {
+import butterknife.Bind;
 
-
-    // Static Properties
-    //
-    private static final String BUNDLE_EXERCISE_ID = "exerciseIdBundle";
+public class AboutFragment extends BaseFragment {
 
     // Instance
     //
-    public static WorkoutHistoryFragment newInstance(int exerciseId)
-    {
-        WorkoutHistoryFragment frag = new WorkoutHistoryFragment();
-        Bundle bundle = new Bundle();
-
-        bundle.putInt(BUNDLE_EXERCISE_ID, exerciseId);
-        frag.setArguments(bundle);
-
-        return frag;
+    public static AboutFragment newInstance() {
+        return new AboutFragment();
     }
 
 
@@ -35,18 +28,28 @@ public class WorkoutHistoryFragment extends BaseFragment {
     private View rootView;
 
 
+    // Bindings
+    //
+    @Bind(R.id.version_number)
+    TextView versionNumber;
+
+
     //Overrides
     //
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_workout_history, container, false);
-
+        rootView = inflater.inflate(R.layout.frag_about, null);
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        setTitle(getResources().getString(R.string.title_frag_about));
+
+
+        versionNumber.setText(BuildConfig.VERSION_NAME);
     }
 }

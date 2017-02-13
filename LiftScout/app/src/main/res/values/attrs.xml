@@ -24,4 +24,10 @@
         <attr name="increment" format="float"/>
     </declare-styleable>
 
+    <declare-styleable name="MaterialProgressBar">
+        <attr name="progressColour" format="color" />
+        <attr name="secondaryProgressColour" format="color" />
+        <attr name="backgroundColour" format="color" />
+        <attr name="duration" format="integer" />
+    </declare-styleable>
 </resources>

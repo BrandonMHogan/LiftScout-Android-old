@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.views.about.AboutFragment;
 import com.brandonhogan.liftscout.views.calendar.CalendarFragment;
 import com.brandonhogan.liftscout.views.categories.CategoryListFragment;
 import com.brandonhogan.liftscout.views.exercises.ExerciseListFragment;
@@ -212,6 +213,14 @@ public class NavigationManager {
     public boolean startSettingsHome() {
         Fragment fragment = SettingsHomeFragment.newInstance();
         return open(fragment);
+    }
+
+
+    // About
+    //
+    public boolean startAbout() {
+        Fragment fragment = AboutFragment.newInstance();
+        return openAsRoot(fragment);
     }
 
 

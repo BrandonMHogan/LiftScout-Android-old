@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.views.workout.tracker;
+package com.brandonhogan.liftscout.views.workout.history;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,11 +9,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.views.workout.tracker.TrackerListModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackerAdapter extends RecyclerView.Adapter<TrackerAdapter.TrackerViewHolder> {
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.TrackerViewHolder> {
 
     private static final int NO_POSITION_DEFAULT = 9999;
 
@@ -21,7 +22,7 @@ public class TrackerAdapter extends RecyclerView.Adapter<TrackerAdapter.TrackerV
     List<TrackerListModel> modelList;
     private int selected_position = NO_POSITION_DEFAULT;
 
-    public TrackerAdapter(Context context, List<TrackerListModel> list) {
+    public HistoryAdapter(Context context, List<TrackerListModel> list) {
         inflater = LayoutInflater.from(context);
         modelList = new ArrayList<>(list);
     }
