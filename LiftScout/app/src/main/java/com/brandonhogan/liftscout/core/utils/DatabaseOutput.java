@@ -32,7 +32,7 @@ public class DatabaseOutput {
             // copy current realm to "export.realm"
             realm.writeCopyTo(exportRealmFile);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.d(TAG, "Print Realm DB Failed. :" + e.getMessage());
             e.printStackTrace();
         }
