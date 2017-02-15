@@ -2,17 +2,11 @@ package com.brandonhogan.liftscout.core.constants;
 
 public class TodayTransforms {
 
-    public static final String ACCORDION = "Accordion";
-    public static final String DEPTH_PAGE = "Depth Page";
-    public static final String FOREGROUND_TO_BACKGROUND = "Foreground to Background";
-    public static final String ROTATE_DOWN = "Rotate Down";
-    public static final String ROTATE_UP = "Rotate Up";
-    public static final String SCALE_IN_OUT = "Scale In Out";
-    public static final String STACK = "Stack";
-    public static final String ZOOM_IN = "Zoom In";
-    public static final String ZOOM_OUT = "Zoom Out";
-    public static final String ZOOM_OUT_SLIDE = "Zoom Out Slide";
-
+    public static final String OVERSHOOT = "Overshoot";
+    public static final String LINEAR = "Linear";
+    public static final String FAST_OUT_LINEAR_IN = "Fast Out Linear In";
+    public static final String BOUNCE = "Bounce";
+    public static final String ACCELERATE_DECELERATE = "Accelerate Decelerate";
 
     // Default Transform
     public static final String DEFAULT = "Default";

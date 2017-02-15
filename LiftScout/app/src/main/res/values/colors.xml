@@ -18,6 +18,7 @@
     <color name="textColorPrimaryInverse">#9E9E9E</color>
     <color name="textColorSecondaryInverse">#9E9E9E</color>
     <color name="activity_background_dark">#ff433d43</color>
+    <color name="activity_background_dark_notrans">#433d43</color>
     <color name="fillColorInverse">#3c363c</color>
 
     <!-- Green Theme -->

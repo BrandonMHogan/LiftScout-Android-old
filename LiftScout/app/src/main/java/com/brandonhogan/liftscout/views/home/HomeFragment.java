@@ -4,9 +4,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.animation.FastOutLinearInInterpolator;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.CycleInterpolator;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
+import android.view.animation.PathInterpolator;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
@@ -21,8 +31,12 @@ import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.TodayTransforms;
+import com.brandonhogan.liftscout.core.interpolators.CubicAccelerateDecelerateInterpolator;
+import com.brandonhogan.liftscout.core.interpolators.HesitateInterpolator;
+import com.brandonhogan.liftscout.core.interpolators.JellyBounceInterpolator;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.home.today.TodayPageAdapter;
+import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
 import butterknife.Bind;
@@ -47,7 +61,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     // Binds
     //
     @Bind(R.id.viewpager)
-    ViewPager viewPager;
+    HorizontalInfiniteCycleViewPager viewPager;
 
     @Bind(R.id.fabtoolbar)
     FABToolbarLayout toolbarLayout;
@@ -89,7 +103,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
         adapter = new TodayPageAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
-
         viewPager.setCurrentItem(adapter.TOTAL_DAYS);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -105,43 +118,28 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
 
         switch (presenter.getTransformValue()) {
-            case TodayTransforms.ACCORDION:
-                viewPager.setPageTransformer(true, new AccordionTransformer());
+            case TodayTransforms.OVERSHOOT:
+                viewPager.setInterpolator(new OvershootInterpolator());
+                viewPager.setScrollDuration(550);
                 break;
-            case TodayTransforms.DEPTH_PAGE:
-                viewPager.setPageTransformer(true, new DepthPageTransformer());
+            case TodayTransforms.FAST_OUT_LINEAR_IN:
+                viewPager.setInterpolator(new FastOutLinearInInterpolator());
+                viewPager.setScrollDuration(500);
                 break;
-            case TodayTransforms.FOREGROUND_TO_BACKGROUND:
-                viewPager.setPageTransformer(true, new ForegroundToBackgroundTransformer());
+            case TodayTransforms.BOUNCE:
+                viewPager.setInterpolator(new BounceInterpolator());
+                viewPager.setScrollDuration(900);
                 break;
-            case TodayTransforms.ROTATE_DOWN:
-                viewPager.setPageTransformer(true, new RotateDownTransformer());
-                break;
-            case TodayTransforms.ROTATE_UP:
-                viewPager.setPageTransformer(true, new RotateUpTransformer());
-                break;
-            case TodayTransforms.SCALE_IN_OUT:
-                viewPager.setPageTransformer(true, new ScaleInOutTransformer());
-                break;
-            case TodayTransforms.STACK:
-                viewPager.setPageTransformer(true, new StackTransformer());
-                break;
-            case TodayTransforms.ZOOM_IN:
-                viewPager.setPageTransformer(true, new ZoomInTransformer());
-                break;
-            case TodayTransforms.ZOOM_OUT:
-                viewPager.setPageTransformer(true, new ZoomOutTranformer());
-                break;
-            case TodayTransforms.ZOOM_OUT_SLIDE:
-                viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
+            case TodayTransforms.ACCELERATE_DECELERATE:
+                viewPager.setInterpolator(new AccelerateDecelerateInterpolator());
+                viewPager.setScrollDuration(550);
                 break;
             default:
-                viewPager.setPageTransformer(true, new DefaultTransformer());
+                viewPager.setInterpolator(new LinearInterpolator());
                 break;
         }
 
