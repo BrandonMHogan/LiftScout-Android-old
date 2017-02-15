@@ -80,4 +80,9 @@ public class HistoryPresenter implements HistoryContract.Presenter {
     public void viewCreated() {
         updateAdapter();
     }
+
+    @Override
+    public void update() {
+        updateAdapter();
+    }
 }

@@ -97,6 +97,8 @@ dependencies {
 
     // Butterknife
     compile 'com.jakewharton:butterknife:7.0.1'
+    // Event Bus
+    compile 'org.greenrobot:eventbus:3.0.0'
     // Calendar
     compile 'com.prolificinteractive:material-calendarview:1.2.0'
     // Fancy Alerts

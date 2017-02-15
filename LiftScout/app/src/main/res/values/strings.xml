@@ -121,6 +121,9 @@
     <string name="workout_statistics_title">Statistics</string>
     <string name="workout_goals_title">Goals</string>
 
+    <!-- Workout - Sections -->
+    <string name="frag_history_empty_set_msg">No sets have been added</string>
+
     <!-- Errors -->
     <string name="error_title">Uh oh!</string>
     <string name="error_name">Name is required</string>
