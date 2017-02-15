@@ -53,7 +53,7 @@ public class GraphPresenter implements GraphContract.Presenter {
         List<GraphDataSet> items = new LinkedList<>();
 
         if (sets != null) {
-            for (int count = 0; count < sets.size(); count++) {
+            for (int count = sets.size() -1; count >= 0; count--) {
 
                 double volume = 0;
 

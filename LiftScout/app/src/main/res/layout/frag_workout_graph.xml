@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="300dp"
+        android:layout_marginBottom="20dp"/>
 
-</LinearLayout>
+    <!--</ScrollView>-->
+
+    <com.etiennelawlor.discreteslider.library.ui.DiscreteSlider
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_gravity="bottom"
+
+        app:backdropFillColor="@color/gray_btn_bg_pressed_color"
+        app:backdropStrokeColor="@color/gray_dark"
+        app:backdropStrokeWidth="1dp"
+        app:horizontalBarThickness="4dp"
+        app:tickMarkCount="5"
+        app:tickMarkRadius="8dp"
+        app:position="1"
+        app:thumb="@drawable/graph_thumb"
+        app:progressDrawable="@drawable/graph_progress"/>
+
+</RelativeLayout>
