@@ -9,10 +9,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.view.ViewPager
+        <!--<android.support.v4.view.ViewPager-->
+            <!--android:id="@+id/viewpager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"/>-->
+
+        <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:icvp_center_page_scale_offset="10dp"
+            app:icvp_max_page_scale="1"
+            app:icvp_medium_scaled="false"
+            app:icvp_min_page_scale="0.5"
+            app:icvp_min_page_scale_offset="5dp"
+            app:icvp_scroll_duration="250"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

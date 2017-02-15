@@ -31,8 +31,6 @@ public class WorkoutContainerAdapter extends FragmentStatePagerAdapter {
                 return GraphFragment.newInstance(exerciseId);
             case 4:
                 return GraphFragment.newInstance(exerciseId);
-            case 5:
-                return GraphFragment.newInstance(exerciseId);
 
             default:
                 return null;
@@ -41,6 +39,6 @@ public class WorkoutContainerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 6;
+        return 5;
     }
 }

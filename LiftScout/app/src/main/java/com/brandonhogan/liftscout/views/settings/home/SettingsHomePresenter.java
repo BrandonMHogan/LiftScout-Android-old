@@ -36,16 +36,10 @@ public class SettingsHomePresenter implements SettingsHomeContract.Presenter {
         transforms = new ArrayList<>();
 
         transforms.add(TodayTransforms.DEFAULT);
-        transforms.add(TodayTransforms.ACCORDION);
-        transforms.add(TodayTransforms.DEPTH_PAGE);
-        transforms.add(TodayTransforms.FOREGROUND_TO_BACKGROUND);
-        transforms.add(TodayTransforms.ROTATE_DOWN);
-        transforms.add(TodayTransforms.ROTATE_UP);
-        transforms.add(TodayTransforms.SCALE_IN_OUT);
-        transforms.add(TodayTransforms.STACK);
-        transforms.add(TodayTransforms.ZOOM_IN);
-        transforms.add(TodayTransforms.ZOOM_OUT);
-        transforms.add(TodayTransforms.ZOOM_OUT_SLIDE);
+        transforms.add(TodayTransforms.OVERSHOOT);
+        transforms.add(TodayTransforms.FAST_OUT_LINEAR_IN);
+        transforms.add(TodayTransforms.BOUNCE);
+        transforms.add(TodayTransforms.ACCELERATE_DECELERATE);
 
         view.populateTransforms(transforms, transforms.indexOf(userManager.getTransformValue()));
     }
