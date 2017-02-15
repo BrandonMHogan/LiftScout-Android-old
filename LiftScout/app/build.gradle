@@ -97,12 +97,13 @@ dependencies {
 
     // Butterknife
     compile 'com.jakewharton:butterknife:7.0.1'
+    // Event Bus
+    compile 'org.greenrobot:eventbus:3.0.0'
     // Calendar
     compile 'com.prolificinteractive:material-calendarview:1.2.0'
     // Fancy Alerts
     compile 'cn.pedant.sweetalert:library:1.3'
-    // Today ViewPager Transforms
-    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+
     // Spinner
     compile 'com.jaredrummler:material-spinner:1.1.0'
     // Fab toolbar

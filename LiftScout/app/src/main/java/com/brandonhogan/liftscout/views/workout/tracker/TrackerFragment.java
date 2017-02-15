@@ -17,8 +17,11 @@ import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.controls.NumberPicker;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
+import com.brandonhogan.liftscout.views.workout.TrackerEvent;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -238,6 +241,8 @@ public class TrackerFragment extends BaseFragment implements
         else {
             mAdapter.setList(data);
         }
+
+        EventBus.getDefault().post(new TrackerEvent(true));
     }
 
     @Override

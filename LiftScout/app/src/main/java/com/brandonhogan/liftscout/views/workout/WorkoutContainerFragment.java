@@ -83,6 +83,7 @@ public class WorkoutContainerFragment extends BaseFragment {
                 (getChildFragmentManager(), exerciseId);
 
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(5);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

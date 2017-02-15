@@ -11,5 +11,6 @@ public interface HistoryContract {
 
     interface Presenter {
         void viewCreated();
+        void update();
     }
 }

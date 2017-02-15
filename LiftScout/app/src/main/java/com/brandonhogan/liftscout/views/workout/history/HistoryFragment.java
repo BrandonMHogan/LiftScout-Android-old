@@ -8,23 +8,30 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.home.today.TodayListItem;
+import com.brandonhogan.liftscout.views.workout.TrackerEvent;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter_extensions.drag.SimpleDragCallback;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 
 public class HistoryFragment extends BaseFragment implements HistoryContract.View {
-
 
     // Static Properties
     //
@@ -75,6 +82,18 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
         presenter.viewCreated();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
 
     //Contracts
     //
@@ -108,6 +127,11 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
 
     @Override
     public String getEmptySetMessage() {
-        return getString(R.string.frag_today_empty_set_msg);
+        return getString(R.string.frag_history_empty_set_msg);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onTrackerEvent(TrackerEvent event) {
+        presenter.update();
     }
 }
