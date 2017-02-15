@@ -103,6 +103,8 @@ dependencies {
     compile 'com.prolificinteractive:material-calendarview:1.2.0'
     // Fancy Alerts
     compile 'cn.pedant.sweetalert:library:1.3'
+    //Charts / Graphs
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 
     // Spinner
     compile 'com.jaredrummler:material-spinner:1.1.0'
