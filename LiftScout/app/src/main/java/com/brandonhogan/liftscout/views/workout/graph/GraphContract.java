@@ -1,9 +1,20 @@
 package com.brandonhogan.liftscout.views.workout.graph;
 
+import java.util.List;
+
 /**
  * Created by Brandon on 2/15/2017.
  * Description :
  */
 
-public class GraphContract {
+public interface GraphContract {
+
+    interface View {
+        void setGraph(List<GraphDataSet> data, int uniqueDateCount);
+    }
+
+    interface Presenter {
+        void viewCreated();
+        void update();
+    }
 }
