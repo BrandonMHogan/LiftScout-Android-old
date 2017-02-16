@@ -14,7 +14,9 @@ public interface GraphContract {
     }
 
     interface Presenter {
-        void viewCreated();
+        void viewCreated(int position);
         void update();
+        void update(int position);
+        void onTypeSelected(String type);
     }
 }

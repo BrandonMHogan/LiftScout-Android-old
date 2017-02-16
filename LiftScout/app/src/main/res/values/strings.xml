@@ -29,6 +29,12 @@
     <string name="photos">Photos</string>
     <string name="reps">Reps</string>
     <string name="rep">Rep</string>
+    <string name="one_week">1 Week</string>
+    <string name="one_month">1 Month</string>
+    <string name="three_months">3 Months</string>
+    <string name="six_months">6 Months</string>
+    <string name="one_year">1 Year</string>
+    <string name="all">All</string>
 
     <!-- Drawer Navigations -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -130,6 +136,9 @@
     <string name="error_weight">Weight is required</string>
     <string name="error_age">Age is required</string>
 
+
+    <!-- Graph Types -->
+    <string name="graph_volume">Workout Volume</string>
 
     <!-- Default Categories / Exercises -->
     <string name="category_abs">Abs</string>

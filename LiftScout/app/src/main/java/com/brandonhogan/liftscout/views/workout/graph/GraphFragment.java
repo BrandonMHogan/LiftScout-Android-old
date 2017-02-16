@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
@@ -24,6 +25,8 @@ import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
+import com.jaredrummler.materialspinner.MaterialSpinner;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -47,6 +50,9 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
 
     @Bind(R.id.range_text)
     TextView rangeText;
+
+    @Bind(R.id.graph_type)
+    MaterialSpinner graphType;
 
     // Static Properties
     //
@@ -89,9 +95,10 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setupSelector();
         setupGraph();
         setupSlider();
-        presenter.viewCreated();
+        presenter.viewCreated(1);
     }
 
     @Override
@@ -113,7 +120,7 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
             return;
 
         if (uniqueDateCount > 6) {
-            xAxis.setLabelCount(6);
+            xAxis.setLabelCount(5);
             lineChart.setScaleEnabled(true);
         }
         else {
@@ -131,8 +138,8 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
             values.add(new Entry(date, volume));
 
             if (volume > graphMaxValue) {
-                graphMaxValue = volume + 20;
-                lineChart.getAxisLeft().setAxisMaximum(graphMaxValue);
+                graphMaxValue = volume;
+                lineChart.getAxisLeft().setAxisMaximum(graphMaxValue+ 20);
             }
         }
 
@@ -143,6 +150,8 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
             set1.setValues(values);
             lineChart.getData().notifyDataChanged();
             lineChart.notifyDataSetChanged();
+            lineChart.invalidate();
+            lineChart.animateXY(0,400);
         }
         else {
             // create a dataset and give it a type
@@ -186,37 +195,53 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         presenter.update();
     }
 
-    private void setupGraph() {
-        // Typeface mTf = Typeface.createFromAsset(getResources().getAssets(), "OpenSans-Regular.ttf");
+    private void setupSelector() {
 
+        final ArrayList<String> types = new ArrayList<>();
+        types.add(getString(R.string.graph_volume));
+
+        graphType.setItems(types);
+        graphType.setSelectedIndex(0);
+
+        graphType.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                presenter.onTypeSelected(types.get(position));
+            }
+        });
+    }
+
+    private void setupGraph() {
+        lineChart.animate();
         lineChart.getDescription().setEnabled(false);
         lineChart.getLegend().setEnabled(false);
         lineChart.setTouchEnabled(true);
-
         lineChart.setDrawGridBackground(false);
         lineChart.setDragEnabled(true);
         lineChart.setPinchZoom(false);
-
         lineChart.getXAxis().setDrawGridLines(true);
 
+        lineChart.getAxisRight().setEnabled(false);
+
+        // Y Axis setup
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
-        //  leftAxis.setTypeface(mTf);
-        leftAxis.setTextSize(9f);
-       // leftAxis.setTextColor(Color.DKGRAY);
+        leftAxis.setTextSize(11f);
+        leftAxis.setAxisMaximum(graphMaxValue);
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setDrawGridLines(true);
         leftAxis.setValueFormatter(new DefaultAxisValueFormatter(4));
 
+        // X Axis setup
         xAxis = lineChart.getXAxis();
-        //  xAxis.setTypeface(mTf);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(true);
-        xAxis.setTextSize(9f);
+        xAxis.setTextSize(11f);
         xAxis.setGranularity(1f);
+        xAxis.setDrawGridLines(false);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
 
             private SimpleDateFormat mFormat = new SimpleDateFormat("dd MMM");
-            private boolean apple = false;
-
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
 
@@ -224,12 +249,6 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
                 return mFormat.format(date);
             }
         });
-
-        lineChart.getAxisRight().setEnabled(false);
-        lineChart.getAxisLeft().setAxisMaximum(graphMaxValue);
-        lineChart.getAxisLeft().setAxisMinimum(0f);
-        lineChart.getAxisLeft().setDrawGridLines(false);
-        lineChart.getXAxis().setDrawGridLines(false);
 
         presenter = new GraphPresenter(this, getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID));
     }
@@ -241,21 +260,26 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
 
                 switch (position) {
                     case 0:
-                        rangeText.setText("1 Week");
+                        rangeText.setText(getString(R.string.one_week));
                         break;
                     case 1:
-                        rangeText.setText("1 Month");
+                        rangeText.setText(getString(R.string.one_month));
                         break;
                     case 2:
-                        rangeText.setText("3 Months");
+                        rangeText.setText(getString(R.string.three_months));
                         break;
                     case 3:
-                        rangeText.setText("6 Months");
+                        rangeText.setText(getString(R.string.six_months));
+                        break;
+                    case 4:
+                        rangeText.setText(getString(R.string.one_year));
                         break;
                     default:
-                        rangeText.setText("All");
+                        rangeText.setText(getString(R.string.all));
                         break;
                 }
+
+                presenter.update(position);
             }
         });
     }

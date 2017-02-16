@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
+import com.brandonhogan.liftscout.AppController;
 import com.brandonhogan.liftscout.R;
 
 
@@ -55,7 +56,7 @@ public class AnimCheckBox extends View {
 
     private void init(AttributeSet attrs){
         if (attrs != null){
-            TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.AnimCheckBox);
+            TypedArray array = AppController.getInstance().obtainStyledAttributes(attrs, R.styleable.AnimCheckBox);
             mStrokeWidth = (int)array.getDimension(R.styleable.AnimCheckBox_stroke_width, dip(mStrokeWidth));
             mStrokeColor = array.getColor(R.styleable.AnimCheckBox_stroke_color, mStrokeColor);
             mCircleColor = array.getColor(R.styleable.AnimCheckBox_circle_color, mCircleColor);
@@ -291,7 +292,7 @@ public class AnimCheckBox extends View {
     }
 
     private int dip(int dip){
-        return (int)getContext().getResources().getDisplayMetrics().density * dip;
+        return (int) AppController.getInstance().getResources().getDisplayMetrics().density * dip;
     }
 
     @Override

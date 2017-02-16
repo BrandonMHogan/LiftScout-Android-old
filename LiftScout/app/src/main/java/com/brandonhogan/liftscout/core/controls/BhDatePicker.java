@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
+import com.brandonhogan.liftscout.AppController;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.utils.BhDate;
 
@@ -99,7 +100,7 @@ public class BhDatePicker extends FrameLayout {
     // Private Functions
 
     private void initControl() {
-        final View view = inflate(getContext(), R.layout.con_date_picker, this);
+        final View view = inflate(AppController.getInstance(), R.layout.con_date_picker, this);
 
         inputLayout = (TextInputLayout) findViewById(R.id.input_layout);
 
@@ -111,7 +112,7 @@ public class BhDatePicker extends FrameLayout {
             public boolean onTouch(View v, MotionEvent event) {
                 if (v.hasFocus() && dialog == null) {
                     showDialog();
-                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) AppController.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
                 return false;
@@ -123,7 +124,7 @@ public class BhDatePicker extends FrameLayout {
             public void onFocusChange(View view, boolean b) {
                 if(b && dialog == null) {
                     showDialog();
-                    InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager)AppController.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
             }
@@ -160,7 +161,7 @@ public class BhDatePicker extends FrameLayout {
             }
         };
 
-        dialog = new DatePickerDialog(getContext(), listener, year, month, day);
+        dialog = new DatePickerDialog(AppController.getInstance(), listener, year, month, day);
 
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
