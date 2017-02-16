@@ -4,11 +4,9 @@ import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.views.workout.history.HistoryListItem;
-import com.brandonhogan.liftscout.views.workout.history.HistoryListSection;
-import com.mikepenz.fastadapter.IItem;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -52,6 +50,9 @@ public class GraphPresenter implements GraphContract.Presenter {
         RealmResults<Set> sets = progressManager.getSetsByExercise(exerciseId);
         List<GraphDataSet> items = new LinkedList<>();
 
+        int uniqueDateCount = 0;
+        ArrayList<Date> dates = new ArrayList<>();
+
         if (sets != null) {
             for (int count = sets.size() -1; count >= 0; count--) {
 
@@ -62,12 +63,19 @@ public class GraphPresenter implements GraphContract.Presenter {
                 }
 
                 if (volume > 0){
-                    GraphDataSet item = new GraphDataSet(count, volume);
+                    Date date = sets.get(count).getDate();
+
+                    if (!dates.contains(date)) {
+                        uniqueDateCount ++;
+                        dates.add(date);
+                    }
+
+                    GraphDataSet item = new GraphDataSet(date.getTime(), volume);
                     items.add(item);
                 }
 
             }
         }
-        view.setGraph(items);
+        view.setGraph(items, uniqueDateCount);
     }
 }

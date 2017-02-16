@@ -6,15 +6,15 @@ package com.brandonhogan.liftscout.views.workout.graph;
  */
 
 public class GraphDataSet {
-    private int id;
+    private long id;
     private double value;
 
-    public GraphDataSet(int id, double value) {
+    public GraphDataSet(long id, double value) {
         this.id = id;
         this.value = value;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

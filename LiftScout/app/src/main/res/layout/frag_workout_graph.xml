@@ -55,8 +55,8 @@
             app:backdropStrokeWidth="1dp"
             app:horizontalBarThickness="2dp"
             app:tickMarkCount="5"
-            app:tickMarkRadius="5dp"
-            app:position="2"
+            app:tickMarkRadius="7dp"
+            app:position="1"
             app:thumb="@drawable/graph_thumb"
             app:progressDrawable="@drawable/graph_progress"/>
 
