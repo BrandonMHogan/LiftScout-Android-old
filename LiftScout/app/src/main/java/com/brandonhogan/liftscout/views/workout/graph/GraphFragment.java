@@ -112,10 +112,14 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         if (data.isEmpty())
             return;
 
-        if (uniqueDateCount > 6)
+        if (uniqueDateCount > 6) {
             xAxis.setLabelCount(6);
-        else
+            lineChart.setScaleEnabled(true);
+        }
+        else {
             xAxis.setLabelCount(uniqueDateCount);
+            lineChart.setScaleEnabled(false);
+        }
 
         ArrayList<Entry> values = new ArrayList<Entry>();
 
@@ -191,7 +195,6 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
 
         lineChart.setDrawGridBackground(false);
         lineChart.setDragEnabled(true);
-        lineChart.setScaleEnabled(true);
         lineChart.setPinchZoom(false);
 
         lineChart.getXAxis().setDrawGridLines(true);
@@ -199,7 +202,7 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
         //  leftAxis.setTypeface(mTf);
-        leftAxis.setTextSize(8f);
+        leftAxis.setTextSize(9f);
        // leftAxis.setTextColor(Color.DKGRAY);
         leftAxis.setValueFormatter(new DefaultAxisValueFormatter(4));
 
@@ -207,7 +210,8 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         //  xAxis.setTypeface(mTf);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(true);
-        xAxis.setTextSize(8f);
+        xAxis.setTextSize(9f);
+        xAxis.setGranularity(1f);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
 
             private SimpleDateFormat mFormat = new SimpleDateFormat("dd MMM");
