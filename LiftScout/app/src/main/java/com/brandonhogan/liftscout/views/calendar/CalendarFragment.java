@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.brandonhogan.liftscout.AppController;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.calendar.decorators.EventDecorator;
@@ -85,7 +86,7 @@ public class CalendarFragment extends BaseFragment implements OnDateSelectedList
         //If you change a decorate, you need to invalidate decorators
         oneDayDecorator.setDate(date.getDate());
         widget.invalidateDecorators();
-        Toast.makeText(getContext(), "Day: " + date.getDate().toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(AppController.getInstance(), "Day: " + date.getDate().toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

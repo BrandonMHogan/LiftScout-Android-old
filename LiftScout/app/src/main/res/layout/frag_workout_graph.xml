@@ -1,65 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chart"
+    <RelativeLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_height="match_parent">
 
-    <!--</ScrollView>-->
+        <!--<ScrollView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/card_view_inner_content_padding"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-
-        <View
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/graph_type"
             android:layout_width="match_parent"
-            android:background="@color/listview_border_color"
-            android:layout_height="@dimen/settings_divider_view_hieght"
-            android:layout_marginTop="@dimen/today_divider_top_margin"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            app:ms_background_color="?attr/android:fillColor"/>
 
-        <TextView
-            android:id="@+id/range_text"
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:gravity="center_horizontal"
-            android:text="1 Month"
-            style="@style/RobotoBody02"/>
+            android:layout_height="300dp"
+            android:layout_below="@id/graph_type"
+            android:layout_marginBottom="20dp"/>
+
+        <!--</ScrollView>-->
 
 
-        <com.etiennelawlor.discreteslider.library.ui.DiscreteSlider
-            android:id="@+id/slider"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_gravity="bottom"
-            app:backdropFillColor="@color/gray_btn_bg_pressed_color"
-            app:backdropStrokeColor="@color/gray_dark"
-            app:backdropStrokeWidth="1dp"
-            app:horizontalBarThickness="2dp"
-            app:tickMarkCount="5"
-            app:tickMarkRadius="7dp"
-            app:position="1"
-            app:thumb="@drawable/graph_thumb"
-            app:progressDrawable="@drawable/graph_progress"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/card_view_inner_content_padding">
 
-    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/listview_border_color"
+                android:layout_height="@dimen/settings_divider_view_hieght"
+                android:layout_marginTop="@dimen/today_divider_top_margin"/>
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/range_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:gravity="center_horizontal"
+                android:text="@string/one_month"
+                style="@style/RobotoBody02"/>
+
+
+            <com.etiennelawlor.discreteslider.library.ui.DiscreteSlider
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_gravity="bottom"
+                app:backdropFillColor="@color/gray_btn_bg_pressed_color"
+                app:backdropStrokeColor="@color/gray_dark"
+                app:backdropStrokeWidth="1dp"
+                app:horizontalBarThickness="2dp"
+                app:tickMarkCount="6"
+                app:tickMarkRadius="7dp"
+                app:position="1"
+                app:thumb="@drawable/graph_thumb"
+                app:progressDrawable="@drawable/graph_progress"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</FrameLayout>

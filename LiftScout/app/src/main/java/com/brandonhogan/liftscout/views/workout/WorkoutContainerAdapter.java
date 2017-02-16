@@ -28,9 +28,9 @@ public class WorkoutContainerAdapter extends FragmentStatePagerAdapter {
             case 2:
                 return GraphFragment.newInstance(exerciseId);
             case 3:
-                return GraphFragment.newInstance(exerciseId);
+                return HistoryFragment.newInstance(exerciseId);
             case 4:
-                return GraphFragment.newInstance(exerciseId);
+                return HistoryFragment.newInstance(exerciseId);
 
             default:
                 return null;
