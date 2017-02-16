@@ -19,22 +19,47 @@
 
     <!--</ScrollView>-->
 
-    <com.etiennelawlor.discreteslider.library.ui.DiscreteSlider
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:layout_gravity="bottom"
 
-        app:backdropFillColor="@color/gray_btn_bg_pressed_color"
-        app:backdropStrokeColor="@color/gray_dark"
-        app:backdropStrokeWidth="1dp"
-        app:horizontalBarThickness="4dp"
-        app:tickMarkCount="5"
-        app:tickMarkRadius="8dp"
-        app:position="1"
-        app:thumb="@drawable/graph_thumb"
-        app:progressDrawable="@drawable/graph_progress"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/card_view_inner_content_padding"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/listview_border_color"
+            android:layout_height="@dimen/settings_divider_view_hieght"
+            android:layout_marginTop="@dimen/today_divider_top_margin"/>
+
+        <TextView
+            android:id="@+id/range_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:gravity="center_horizontal"
+            android:text="1 Month"
+            style="@style/RobotoBody02"/>
+
+
+        <com.etiennelawlor.discreteslider.library.ui.DiscreteSlider
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_gravity="bottom"
+            app:backdropFillColor="@color/gray_btn_bg_pressed_color"
+            app:backdropStrokeColor="@color/gray_dark"
+            app:backdropStrokeWidth="1dp"
+            app:horizontalBarThickness="2dp"
+            app:tickMarkCount="5"
+            app:tickMarkRadius="5dp"
+            app:position="2"
+            app:thumb="@drawable/graph_thumb"
+            app:progressDrawable="@drawable/graph_progress"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
@@ -17,6 +18,7 @@ import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.workout.TrackerEvent;
 import com.brandonhogan.liftscout.views.workout.history.HistoryListSection;
 import com.brandonhogan.liftscout.views.workout.history.HistoryPresenter;
+import com.etiennelawlor.discreteslider.library.ui.DiscreteSlider;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -40,6 +42,12 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
 
     @Bind(R.id.chart)
     LineChart lineChart;
+
+    @Bind(R.id.slider)
+    DiscreteSlider slider;
+
+    @Bind(R.id.range_text)
+    TextView rangeText;
 
     // Static Properties
     //
@@ -81,37 +89,8 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-       // Typeface mTf = Typeface.createFromAsset(getResources().getAssets(), "OpenSans-Regular.ttf");
-
-        lineChart.getDescription().setEnabled(false);
-        lineChart.setTouchEnabled(true);
-
-        lineChart.setDrawGridBackground(false);
-        lineChart.setDragEnabled(true);
-        lineChart.setScaleEnabled(true);
-        lineChart.setPinchZoom(false);
-
-
-        YAxis leftAxis = lineChart.getAxisLeft();
-        leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
-      //  leftAxis.setTypeface(mTf);
-        leftAxis.setTextSize(8f);
-        leftAxis.setTextColor(Color.DKGRAY);
-        leftAxis.setValueFormatter(new PercentFormatter());
-
-        XAxis xAxis = lineChart.getXAxis();
-      //  xAxis.setTypeface(mTf);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextSize(8f);
-        xAxis.setTextColor(Color.DKGRAY);
-
-        lineChart.getAxisRight().setEnabled(false);
-        lineChart.getAxisLeft().setAxisMaximum(graphMaxValue);
-        lineChart.getAxisLeft().setAxisMinimum(0f);
-        lineChart.getAxisLeft().setDrawGridLines(false);
-        lineChart.getXAxis().setDrawGridLines(false);
-
-        presenter = new GraphPresenter(this, getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID));
+        setupGraph();
+        setupSlider();
         presenter.viewCreated();
     }
 
@@ -196,5 +175,65 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTrackerEvent(TrackerEvent event) {
         presenter.update();
+    }
+
+    private void setupGraph() {
+        // Typeface mTf = Typeface.createFromAsset(getResources().getAssets(), "OpenSans-Regular.ttf");
+
+        lineChart.getDescription().setEnabled(false);
+        lineChart.setTouchEnabled(true);
+
+        lineChart.setDrawGridBackground(false);
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(true);
+        lineChart.setPinchZoom(false);
+
+
+        YAxis leftAxis = lineChart.getAxisLeft();
+        leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
+        //  leftAxis.setTypeface(mTf);
+        leftAxis.setTextSize(8f);
+        leftAxis.setTextColor(Color.DKGRAY);
+        leftAxis.setValueFormatter(new PercentFormatter());
+
+        XAxis xAxis = lineChart.getXAxis();
+        //  xAxis.setTypeface(mTf);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextSize(8f);
+        xAxis.setTextColor(Color.DKGRAY);
+
+        lineChart.getAxisRight().setEnabled(false);
+        lineChart.getAxisLeft().setAxisMaximum(graphMaxValue);
+        lineChart.getAxisLeft().setAxisMinimum(0f);
+        lineChart.getAxisLeft().setDrawGridLines(false);
+        lineChart.getXAxis().setDrawGridLines(false);
+
+        presenter = new GraphPresenter(this, getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID));
+    }
+
+    private void setupSlider() {
+        slider.setOnDiscreteSliderChangeListener(new DiscreteSlider.OnDiscreteSliderChangeListener() {
+            @Override
+            public void onPositionChanged(int position) {
+
+                switch (position) {
+                    case 0:
+                        rangeText.setText("1 Week");
+                        break;
+                    case 1:
+                        rangeText.setText("1 Month");
+                        break;
+                    case 2:
+                        rangeText.setText("3 Months");
+                        break;
+                    case 3:
+                        rangeText.setText("6 Months");
+                        break;
+                    default:
+                        rangeText.setText("All");
+                        break;
+                }
+            }
+        });
     }
 }
