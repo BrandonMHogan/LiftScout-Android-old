@@ -39,6 +39,7 @@
             android:textSize="@dimen/material_text_size_medium"/>
 
         <TextView
+            android:id="@+id/item_measurement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"

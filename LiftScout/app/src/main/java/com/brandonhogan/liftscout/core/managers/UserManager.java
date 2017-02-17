@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.core.managers;
 
+import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.brandonhogan.liftscout.core.constants.Themes;
 import com.brandonhogan.liftscout.core.constants.TodayTransforms;
 import com.brandonhogan.liftscout.core.model.User;
@@ -87,5 +88,19 @@ public class UserManager {
 
     public boolean setTheme(String value) {
         return userSettingsRepo.setUserSetting(UserSetting.THEME, value);
+    }
+
+    public String getMeasurementValue() {
+        UserSetting setting = userSettingsRepo.getUserSetting(UserSetting.MEASUREMENT);
+
+        if (setting == null) {
+            setting = userSettingsRepo.createUserSetting(UserSetting.MEASUREMENT, Measurements.POUNDS);
+        }
+
+        return setting.getValue();
+    }
+
+    public boolean setMeasurement(String value) {
+        return userSettingsRepo.setUserSetting(UserSetting.MEASUREMENT, value);
     }
 }

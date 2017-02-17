@@ -12,6 +12,7 @@ public class UserSetting extends RealmObject {
 
     // Types
     public static final String THEME = "theme";
+    public static final String MEASUREMENT = "measurement";
     public static final String TODAY_TRANSFORM = "todayTransform";
     public static final String TODAY_SHOW_WEIGHT = "today_showWeight";
     public static final String TODAY_SHOW_PHOTO = "today_showPhoto";

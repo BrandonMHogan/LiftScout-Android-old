@@ -12,9 +12,9 @@ import com.brandonhogan.liftscout.views.exercises.ExerciseListFragment;
 import com.brandonhogan.liftscout.views.graphs.GraphsContainerFragment;
 import com.brandonhogan.liftscout.views.home.HomeFragment;
 import com.brandonhogan.liftscout.views.settings.SettingsListFragment;
-import com.brandonhogan.liftscout.views.settings.SettingsProfileFragment;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.views.settings.home.SettingsHomeFragment;
+import com.brandonhogan.liftscout.views.settings.profile.SettingsProfileFragment;
 import com.brandonhogan.liftscout.views.workout.WorkoutContainerFragment;
 
 public class NavigationManager {

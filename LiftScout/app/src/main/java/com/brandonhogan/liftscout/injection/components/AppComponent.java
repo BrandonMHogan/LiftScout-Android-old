@@ -19,6 +19,7 @@ import com.brandonhogan.liftscout.views.home.today.TodayPresenter;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayPresenter;
 import com.brandonhogan.liftscout.views.settings.home.SettingsHomePresenter;
+import com.brandonhogan.liftscout.views.settings.profile.SettingsProfilePresenter;
 import com.brandonhogan.liftscout.views.workout.graph.GraphPresenter;
 import com.brandonhogan.liftscout.views.workout.history.HistoryPresenter;
 import com.brandonhogan.liftscout.views.workout.tracker.TrackerFragment;
@@ -57,6 +58,7 @@ public interface AppComponent {
     void inject(SettingsDisplayFragment fragment);
     void inject(SettingsDisplayPresenter presenter);
     void inject(SettingsHomePresenter presenter);
+    void inject(SettingsProfilePresenter presenter);
 
 
     // Repos
