@@ -9,11 +9,12 @@ import com.brandonhogan.liftscout.views.about.AboutFragment;
 import com.brandonhogan.liftscout.views.calendar.CalendarFragment;
 import com.brandonhogan.liftscout.views.categories.CategoryListFragment;
 import com.brandonhogan.liftscout.views.exercises.ExerciseListFragment;
+import com.brandonhogan.liftscout.views.graphs.GraphsContainerFragment;
 import com.brandonhogan.liftscout.views.home.HomeFragment;
 import com.brandonhogan.liftscout.views.settings.SettingsListFragment;
-import com.brandonhogan.liftscout.views.settings.SettingsProfileFragment;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.views.settings.home.SettingsHomeFragment;
+import com.brandonhogan.liftscout.views.settings.profile.SettingsProfileFragment;
 import com.brandonhogan.liftscout.views.workout.WorkoutContainerFragment;
 
 public class NavigationManager {
@@ -223,6 +224,12 @@ public class NavigationManager {
         return openAsRoot(fragment);
     }
 
+    // Graphs
+    //
+    public boolean startGraphsContainer() {
+        Fragment fragment = GraphsContainerFragment.newInstance();
+        return openAsRoot(fragment);
+    }
 
     // Categories / Exercises
     //

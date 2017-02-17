@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.views.home.today;
 
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.core.utils.Constants;
@@ -24,6 +25,9 @@ public class TodayPresenter implements TodayContact.Presenter {
     //
     @Inject
     ProgressManager progressManager;
+
+    @Inject
+    UserManager userManager;
 
     // Private Properties
     //
@@ -61,15 +65,15 @@ public class TodayPresenter implements TodayContact.Presenter {
                 boolean isEmpty = true;
 
                 for (Rep rep : set.getReps()) {
-                    items.add(new TodayListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight()));
-                    volume += rep.getWeight();
+                    items.add(new TodayListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue()));
+                    volume += (rep.getWeight() * rep.getCount());
                     isEmpty = false;
                 }
 
                 if (isEmpty)
                     items.add(new TodayListItem(set.getId(), set.getExercise().getId(), true, view.getEmptySetMessage()));
 
-                TodayListSection expandableItem = new TodayListSection(set.getId(), set.getExercise().getName(), volume, isEmpty);
+                TodayListSection expandableItem = new TodayListSection(set.getId(), set.getExercise().getName(), volume, userManager.getMeasurementValue(), isEmpty);
                 expandableItem.withSubItems(items);
                 adapterData.add(expandableItem);
             }

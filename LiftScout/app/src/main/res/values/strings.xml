@@ -114,6 +114,12 @@
     <string name="setting_display_theme_spinner_title">Theme</string>
     <string name="setting_display_theme_spinner_description">Choose a theme that better fits your taste</string>
 
+    <string name="setting_profile_name_title">Full Name</string>
+    <string name="setting_profile_name_description">Change your name</string>
+
+    <string name="setting_profile_measurement_spinner_title">Unit of Measurement</string>
+    <string name="setting_profile_measurement_spinner_description">Choose a unit of measurement you want to use for your weight</string>
+
     <!-- About -->
     <string name="about_version">Version</string>
     <string name="about_developer">Developed By</string>
@@ -139,6 +145,10 @@
 
     <!-- Graph Types -->
     <string name="graph_volume">Workout Volume</string>
+
+    <!-- Graphs Container -->
+    <string name="graphs_categories">Categories</string>
+    <string name="graphs_exercises">Exercises</string>
 
     <!-- Default Categories / Exercises -->
     <string name="category_abs">Abs</string>

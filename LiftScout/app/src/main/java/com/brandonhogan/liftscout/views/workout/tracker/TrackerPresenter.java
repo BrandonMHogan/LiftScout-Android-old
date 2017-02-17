@@ -1,6 +1,8 @@
 package com.brandonhogan.liftscout.views.workout.tracker;
 
+import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.injection.components.Injector;
@@ -17,6 +19,9 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     @Inject
     ProgressManager progressManager;
 
+    @Inject
+    UserManager userManager;
+
     // Private Properties
     //
     private TrackerContract.View view;
@@ -25,6 +30,7 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     private ArrayList<TrackerListModel> adapterData;
     private int selectedPosition;
     private TrackerListModel editingRep;
+    private String measurementType;
 
 
     // Constructor
@@ -34,7 +40,7 @@ public class TrackerPresenter implements TrackerContract.Presenter {
 
         this.view = view;
         this.exerciseId = exerciseId;
-
+        measurementType = userManager.getMeasurementValue();
     }
 
 
@@ -65,11 +71,12 @@ public class TrackerPresenter implements TrackerContract.Presenter {
         if (set != null) {
             int rowNum = 1;
             for (Rep rep : set.getReps()) {
+
                 adapterData.add(new TrackerListModel(
                         rowNum,
                         rep,
                         view.getRepsLabel(rep.getCount() > 1),
-                        "lbs"));
+                        Measurements.getCompressedType(measurementType, rep.getWeight() > 1)));
                 rowNum += 1;
             }
         }

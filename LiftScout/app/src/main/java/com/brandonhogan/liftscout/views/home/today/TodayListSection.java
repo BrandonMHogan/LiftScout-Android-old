@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IExpandable;
@@ -27,6 +28,7 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
     public int setId;
     public String name;
     public double volume;
+    public String measurement;
 
     private List<IItem> mSubItems;
     private boolean mExpanded = false;
@@ -34,10 +36,11 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
 
     private FastAdapter.OnClickListener<TodayListSection> mOnClickListener;
 
-    public TodayListSection(int setId, String name, double volume, boolean isEmpty) {
+    public TodayListSection(int setId, String name, double volume, String measurement, boolean isEmpty) {
         this.setId = setId;
         this.name = name;
         this.volume = volume;
+        this.measurement = measurement;
     }
 
     @Override
@@ -145,6 +148,7 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
 
         viewHolder.name.setText(name);
         viewHolder.volume.setText(Double.toString(volume));
+        viewHolder.metric.setText(Measurements.getCompressedType(measurement, volume > 1));
 
         //make sure all animations are stopped
         viewHolder.icon.clearAnimation();
@@ -190,6 +194,9 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
 
         @Bind(R.id.workout_volume)
         TextView volume;
+
+        @Bind(R.id.workout_metric)
+        TextView metric;
 
         @Bind(R.id.arrow_expand_imageview)
         ImageView icon;

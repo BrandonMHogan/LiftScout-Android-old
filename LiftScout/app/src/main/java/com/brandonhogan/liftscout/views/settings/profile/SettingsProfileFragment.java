@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.views.settings.home;
+package com.brandonhogan.liftscout.views.settings.profile;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -16,33 +17,40 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 
-public class SettingsHomeFragment extends BaseFragment implements SettingsHomeContract.View {
+/**
+ * Created by Brandon on 2/17/2017.
+ * Description :
+ */
+
+public class SettingsProfileFragment extends BaseFragment implements SettingsProfileContract.View {
 
 
     // Instance
     //
-    public static SettingsHomeFragment newInstance() {
-        return new SettingsHomeFragment();
+    public static SettingsProfileFragment newInstance() {
+        return new SettingsProfileFragment();
     }
 
 
     // Private Properties
     //
+    private SettingsProfileContract.Presenter presenter;
     private View rootView;
-    private SettingsHomeContract.Presenter presenter;
 
 
     // Bindings
     //
-    @Bind(R.id.todayTransformSpinner)
-    MaterialSpinner transformSpinner;
+    @Bind(R.id.measurementSpinner)
+    MaterialSpinner measurementSpinner;
+
 
     //Overrides
     //
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_settings_home, container, false);
+        rootView = inflater.inflate(R.layout.frag_settings_profile, container, false);
+
         return rootView;
     }
 
@@ -50,15 +58,11 @@ public class SettingsHomeFragment extends BaseFragment implements SettingsHomeCo
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setTitle(getResources().getString(R.string.title_frag_settings_home));
+        presenter = new SettingsProfilePresenter(this);
 
-        presenter = new SettingsHomePresenter(this);
+        setTitle(getResources().getString(R.string.title_frag_settings_profile));
+
         presenter.viewCreated();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     @Override
@@ -90,24 +94,21 @@ public class SettingsHomeFragment extends BaseFragment implements SettingsHomeCo
         return super.onOptionsItemSelected(item);
     }
 
-
-    // Contract
-    //
-    @Override
-    public void populateTransforms(ArrayList<String> themes, int position) {
-        transformSpinner.setItems(themes);
-        transformSpinner.setSelectedIndex(position);
-
-        transformSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-                presenter.onTransformSelected(position);
-            }
-        });
-    }
-
     @Override
     public void saveSuccess() {
         getNavigationManager().navigateBack(getActivity());
+    }
+
+    @Override
+    public void populateMeasurements(ArrayList<String> measurements, int position) {
+        measurementSpinner.setItems(measurements);
+        measurementSpinner.setSelectedIndex(position);
+
+        measurementSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                presenter.onMeasurementSelected(position);
+            }
+        });
     }
 }
