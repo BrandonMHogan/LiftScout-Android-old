@@ -140,6 +140,10 @@
     <!-- Graph Types -->
     <string name="graph_volume">Workout Volume</string>
 
+    <!-- Graphs Container -->
+    <string name="graphs_categories">Categories</string>
+    <string name="graphs_exercises">Exercises</string>
+
     <!-- Default Categories / Exercises -->
     <string name="category_abs">Abs</string>
     <string name="category_chest">Chest</string>
