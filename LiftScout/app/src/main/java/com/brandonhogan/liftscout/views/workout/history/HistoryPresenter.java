@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.views.workout.history;
 
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.injection.components.Injector;
@@ -21,6 +22,9 @@ public class HistoryPresenter implements HistoryContract.Presenter {
     //
     @Inject
     ProgressManager progressManager;
+
+    @Inject
+    UserManager userManager;
 
     // Private Properties
     //
@@ -53,7 +57,7 @@ public class HistoryPresenter implements HistoryContract.Presenter {
                 boolean isEmpty = true;
 
                 for (Rep rep : set.getReps()) {
-                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight()));
+                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue()));
                     volume += rep.getWeight();
                     isEmpty = false;
                 }
@@ -61,7 +65,7 @@ public class HistoryPresenter implements HistoryContract.Presenter {
                 if (isEmpty)
                     items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), true, view.getEmptySetMessage()));
 
-                HistoryListSection expandableItem = new HistoryListSection(set.getId(), set.getDate(), volume, isEmpty);
+                HistoryListSection expandableItem = new HistoryListSection(set.getId(), set.getDate(), volume, userManager.getMeasurementValue(), isEmpty);
                 expandableItem.withIsExpanded(true);
                 expandableItem.withSubItems(items);
                 adapterData.add(expandableItem);
