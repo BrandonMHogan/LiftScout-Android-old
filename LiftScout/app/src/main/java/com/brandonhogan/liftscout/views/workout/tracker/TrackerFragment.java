@@ -11,10 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.controls.NumberPicker;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.workout.TrackerEvent;
@@ -23,6 +25,7 @@ import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -69,6 +72,9 @@ public class TrackerFragment extends BaseFragment implements
 
     // Binds
     //
+    @Bind(R.id.date)
+    TextView dateTextView;
+
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
@@ -207,6 +213,10 @@ public class TrackerFragment extends BaseFragment implements
         repNumberPicker.setNumber(model.getCount());
     }
 
+    @Override
+    public void setDate(Date date) {
+        dateTextView.setText(BhDate.toSimpleStringDate(date));
+    }
 
     // Contract
     //

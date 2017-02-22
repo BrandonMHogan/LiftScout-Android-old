@@ -37,9 +37,6 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
     //the static ViewHolderFactory which will be used to generate the ViewHolder for this Item
     private static final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
 
-    public static final int EVENT_EDIT_SET = 1;
-    public static final int EVENT_VIEW_WORKOUT = 2;
-
     public int setId;
     public String name;
     public Date date;
@@ -225,13 +222,15 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
 
         @OnClick(R.id.edit_section_icon)
         void onEditClick() {
-            dialog = new SweetAlertDialog(view.getContext(), SweetAlertDialog.WARNING_TYPE)
+            dialog = new SweetAlertDialog(view.getContext(), SweetAlertDialog.NORMAL_TYPE)
+                    .
                     .setTitleText(view.getContext().getString(R.string.dialog_edit_history_title))
                     .setContentText(view.getContext().getString(R.string.dialog_edit_history_message, name.getText()))
-                    .setConfirmText(view.getContext().getString(R.string.restart))
+                    .setConfirmText(view.getContext().getString(R.string.edit))
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            dialog.cancel();
                             EventBus.getDefault().post(new HistoryTrackerEvent(1, date));
                         }
                     })

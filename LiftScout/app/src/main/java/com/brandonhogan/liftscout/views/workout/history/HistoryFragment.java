@@ -118,8 +118,9 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
     }
 
     @Override
-    public void goToHome() {
-        getNavigationManager().startHome();
+    public void editTracker() {
+        int exerciseId = getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID);
+        getNavigationManager().startWorkoutContainer(exerciseId, true);
     }
 
     @Override

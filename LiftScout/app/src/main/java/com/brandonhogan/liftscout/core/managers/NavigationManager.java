@@ -95,7 +95,11 @@ public class NavigationManager {
      * @param fragment
      */
     private boolean openAsRoot(Fragment fragment) {
-        if (!verifyTransition(fragment))
+        return openAsRoot(fragment, false);
+    }
+
+    private boolean openAsRoot(Fragment fragment, boolean force) {
+        if (!verifyTransition(fragment, force))
             return false;
 
         popToHomeFragment();
@@ -103,7 +107,7 @@ public class NavigationManager {
     }
 
     private boolean openAsHome(Fragment fragment) {
-        if (!verifyTransition(fragment))
+        if (!verifyTransition(fragment, false))
             return false;
 
         popEveryFragment();
@@ -111,13 +115,13 @@ public class NavigationManager {
     }
 
     private boolean open(Fragment fragment) {
-        if (!verifyTransition(fragment))
+        if (!verifyTransition(fragment, false))
             return false;
 
         return replaceWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
     }
 
-    private boolean verifyTransition(Fragment fragment) {
+    private boolean verifyTransition(Fragment fragment, boolean force) {
         if (mFragmentManager == null)
             return false;
 
@@ -127,7 +131,7 @@ public class NavigationManager {
         Fragment currentFragment = mFragmentManager.findFragmentById(R.id.fragment_manager);
 
         // Do not reload the same fragment current in the fragment container
-        if (currentFragment != null && fragment.getClass().getName().equals(currentFragment.getClass().getName()))
+        if (!force && currentFragment != null && fragment.getClass().getName().equals(currentFragment.getClass().getName()))
             return false;
 
         // If a fragment is already in transition, prevent additional replacement
@@ -258,6 +262,11 @@ public class NavigationManager {
     public boolean startWorkoutContainer(int exerciseId) {
         Fragment fragment = WorkoutContainerFragment.newInstance(exerciseId);
         return openAsRoot(fragment);
+    }
+
+    public boolean startWorkoutContainer(int exerciseId, boolean force) {
+        Fragment fragment = WorkoutContainerFragment.newInstance(exerciseId);
+        return openAsRoot(fragment, force);
     }
 
 

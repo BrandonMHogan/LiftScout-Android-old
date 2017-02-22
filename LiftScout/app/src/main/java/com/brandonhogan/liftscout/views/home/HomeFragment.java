@@ -36,6 +36,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     private View rootView;
     private TodayPageAdapter adapter;
     private HomeContract.Presenter presenter;
+    private ViewPager.OnPageChangeListener onPageChangeListener;
 
 
     // Binds
@@ -75,6 +76,13 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     public void onPause() {
         super.onPause();
         toolbarLayout.hide(); // Hides because it bugs out if left open and returned sometimes
+        viewPager.addOnPageChangeListener(null);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewPager.addOnPageChangeListener(onPageChangeListener);
     }
 
     // Private Functions
@@ -85,21 +93,26 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(adapter.TOTAL_DAYS);
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                toolbarLayout.hide();
-            }
 
-            @Override
-            public void onPageSelected(int position) {
-                updateTodayProgress();
-            }
+        if(onPageChangeListener == null) {
+            onPageChangeListener = new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    toolbarLayout.hide();
+                }
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
+                @Override
+                public void onPageSelected(int position) {
+                    updateTodayProgress();
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+                }
+            };
+
+            viewPager.setOnPageChangeListener(onPageChangeListener);
+        }
 
         switch (presenter.getTransformValue()) {
             case TodayTransforms.OVERSHOOT:
@@ -122,8 +135,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                 viewPager.setInterpolator(new LinearInterpolator());
                 break;
         }
-
-        updateTodayProgress();
     }
 
     private void setupFab() {

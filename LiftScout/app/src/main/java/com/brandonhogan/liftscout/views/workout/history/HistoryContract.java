@@ -7,7 +7,7 @@ public interface HistoryContract {
     interface View {
         void setupAdapter(List<HistoryListSection> data);
         String getEmptySetMessage();
-        void goToHome();
+        void editTracker();
     }
 
     interface Presenter {

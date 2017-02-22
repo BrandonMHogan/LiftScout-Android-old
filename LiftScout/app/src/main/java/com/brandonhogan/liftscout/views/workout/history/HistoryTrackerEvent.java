@@ -8,6 +8,10 @@ import java.util.Date;
  */
 
 public class HistoryTrackerEvent {
+
+    public static final int EVENT_EDIT_SET = 1;
+    public static final int EVENT_VIEW_WORKOUT = 2;
+
     public final int eventID;
     public final Date date;
 

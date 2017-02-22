@@ -57,6 +57,7 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     @Override
     public void viewCreated() {
         updateAdapter();
+        view.setDate(progressManager.getTodayProgress().getDate());
     }
 
     @Override

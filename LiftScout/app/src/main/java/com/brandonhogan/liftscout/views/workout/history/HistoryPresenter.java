@@ -95,8 +95,11 @@ public class HistoryPresenter implements HistoryContract.Presenter {
 
     @Override
     public void editEvent(HistoryTrackerEvent event) {
-        progressManager.setTodayProgress(event.date);
-        view.goToHome();
+
+        if (event.eventID == HistoryTrackerEvent.EVENT_EDIT_SET) {
+            progressManager.setTodayProgress(event.date);
+            view.editTracker();
+        }
 
     }
 }
