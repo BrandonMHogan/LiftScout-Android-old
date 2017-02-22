@@ -22,7 +22,7 @@
             <TextView android:id="@+id/item_reps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/material_text_size_medium"/>
+                android:textSize="@dimen/material_text_size_menu"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
         <TextView android:id="@+id/item_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/material_text_size_medium"/>
+            android:textSize="@dimen/material_text_size_menu"/>
 
         <TextView
             android:id="@+id/item_measurement"
@@ -53,6 +53,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:textSize="@dimen/material_text_size_medium"/>
+        android:textSize="@dimen/material_text_size_menu"/>
 
 </LinearLayout>

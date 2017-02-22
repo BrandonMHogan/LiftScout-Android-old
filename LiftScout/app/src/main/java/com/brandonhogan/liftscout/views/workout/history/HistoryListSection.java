@@ -223,7 +223,6 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
         @OnClick(R.id.edit_section_icon)
         void onEditClick() {
             dialog = new SweetAlertDialog(view.getContext(), SweetAlertDialog.NORMAL_TYPE)
-                    .
                     .setTitleText(view.getContext().getString(R.string.dialog_edit_history_title))
                     .setContentText(view.getContext().getString(R.string.dialog_edit_history_message, name.getText()))
                     .setConfirmText(view.getContext().getString(R.string.edit))

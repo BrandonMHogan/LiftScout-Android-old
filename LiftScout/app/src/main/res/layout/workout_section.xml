@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:textSize="@dimen/material_text_size_medium"
+        android:textSize="@dimen/material_text_size_menu"
         android:layout_marginStart="5dp"
         android:textStyle="bold"/>
 
@@ -29,7 +29,7 @@
             android:id="@+id/workout_set_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/material_text_size_medium"
+            android:textSize="@dimen/material_text_size_menu"
             android:textStyle="bold"/>
 
     </LinearLayout>
@@ -45,10 +45,11 @@
         android:src="@drawable/ic_mode_edit_white_36dp"/>
 
     <ImageView android:id="@+id/arrow_expand_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_expand_more_black_36dp"/>
+        android:tint="?android:textColor"
+        android:src="@drawable/ic_keyboard_arrow_down_white_36dp"/>
 
 </RelativeLayout>
