@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
@@ -35,6 +36,9 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
 
     // Binds
     //
+    @Bind(R.id.date)
+    TextView date;
+
     @Bind(R.id.calendar_view)
     CompactCalendarView calendar;
 
@@ -72,13 +76,16 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
-                Log.d(getTAG(), "Month was scrolled to: " + firstDayOfNewMonth);
+                presenter.onMonthScroll(firstDayOfNewMonth);
             }
         });
     }
 
     @Override
-    public void setEvents(ArrayList<Event> events) {
+    public void setEvents(String monthTitle, ArrayList<Event> events) {
+        calendar.removeAllEvents();
         calendar.addEvents(events);
+
+        date.setText(monthTitle);
     }
 }

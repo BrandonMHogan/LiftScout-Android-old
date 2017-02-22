@@ -6,25 +6,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:windowBackground">
 
-    <android.support.design.widget.CoordinatorLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <com.github.sundeepk.compactcalendarview.CompactCalendarView
-            android:id="@+id/calendar_view"
-            android:layout_width="fill_parent"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:layout_height="250dp"
-            app:compactCalendarTargetHeight="250dp"
-            app:compactCalendarBackgroundColor="?android:windowBackground"
-            app:compactCalendarTextSize="12sp"
-            app:compactCalendarTextColor="?android:textColor"
-            app:compactCalendarCurrentSelectedDayBackgroundColor="?android:colorAccent"
-            app:compactCalendarCurrentDayBackgroundColor="?android:windowBackground"
-            app:compactCalendarMultiEventIndicatorColor="?android:textColor"
-            />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_margin="5dp"
+            style="@style/RobotoTitle"/>
 
-    </android.support.design.widget.CoordinatorLayout>
+        <android.support.design.widget.CoordinatorLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.github.sundeepk.compactcalendarview.CompactCalendarView
+                android:id="@+id/calendar_view"
+                android:layout_width="fill_parent"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_height="250dp"
+                app:compactCalendarTargetHeight="250dp"
+                app:compactCalendarBackgroundColor="?android:windowBackground"
+                app:compactCalendarTextSize="12sp"
+                app:compactCalendarTextColor="?android:textColor"
+                app:compactCalendarCurrentSelectedDayBackgroundColor="?android:colorAccent"
+                app:compactCalendarCurrentDayBackgroundColor="?android:windowBackground"
+                app:compactCalendarMultiEventIndicatorColor="?android:textColor"
+                />
+
+        </android.support.design.widget.CoordinatorLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/tracker_outer_bottom_margin"
+            android:background="@color/divider"
+            android:elevation="@dimen/tracker_divider_elevation"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
 </com.brandonhogan.liftscout.core.controls.BaseFrameLayout>

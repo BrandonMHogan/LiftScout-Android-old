@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.views.calendar;
 import com.brandonhogan.liftscout.core.managers.CalendarManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.model.CalendarEvent;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
@@ -44,11 +45,25 @@ public class CalendarPresenter implements CalendarContract.Presenter {
     //
     @Override
     public void viewCreated() {
-
         Date date = progressManager.getTodayProgress().getDate();
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
+
+        String monthTitle = BhDate.toMonthYearStringDate(cal.getTime());
+        view.setEvents(monthTitle, getEvents(cal));
+    }
+
+    @Override
+    public void onMonthScroll(Date firstDayOfNewMonth) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(firstDayOfNewMonth);
+
+        String monthTitle = BhDate.toMonthYearStringDate(cal.getTime());
+        view.setEvents(monthTitle, getEvents(cal));
+    }
+
+    private ArrayList<Event> getEvents(Calendar cal) {
 
         int month = cal.get(Calendar.MONTH);
         int year = cal.get(Calendar.YEAR);
@@ -60,7 +75,6 @@ public class CalendarPresenter implements CalendarContract.Presenter {
             viewEvents.add(new Event(event.getColor(), event.getDate().getTime()));
         }
 
-        view.setEvents(viewEvents);
-
+        return viewEvents;
     }
 }

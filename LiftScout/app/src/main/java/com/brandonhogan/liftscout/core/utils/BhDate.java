@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.brandonhogan.liftscout.core.utils.Constants.MONTH_YEAR_DATE_FORMAT;
 import static com.brandonhogan.liftscout.core.utils.Constants.SIMPLE_DATE_FORMAT;
 
 public class BhDate {
@@ -36,6 +37,10 @@ public class BhDate {
 
     public static String toSimpleStringDate(Date date) {
         return new SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(date);
+    }
+
+    public static String toMonthYearStringDate(Date date) {
+        return new SimpleDateFormat(MONTH_YEAR_DATE_FORMAT, Locale.getDefault()).format(date);
     }
 
     public static Date trimTimeFromDate(Date date) {
