@@ -73,8 +73,8 @@ public class WorkoutContainerFragment extends BaseFragment {
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_tracker_title)));
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_history_title)));
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_graphs_title)));
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_statistics_title)));
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_goals_title)));
+//        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_statistics_title)));
+//        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_goals_title)));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
@@ -29,6 +30,8 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
     public int setId;
     public String name;
     public double volume;
+    public int setCount;
+    public String measurement;
 
     private List<IItem> mSubItems;
     private boolean mExpanded = false;
@@ -36,10 +39,12 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
 
     private FastAdapter.OnClickListener<HistoryListSection> mOnClickListener;
 
-    public HistoryListSection(int setId, Date date, double volume, boolean isEmpty) {
+    public HistoryListSection(int setId, Date date, double volume, int setCount, String measurement, boolean isEmpty) {
         this.setId = setId;
         this.name = BhDate.toSimpleStringDate(date);
         this.volume = volume;
+        this.setCount = setCount;
+        this.measurement = measurement;
     }
 
     @Override
@@ -146,7 +151,11 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
         Context ctx = viewHolder.itemView.getContext();
 
         viewHolder.name.setText(name);
-        viewHolder.volume.setText(Double.toString(volume));
+
+        String count = Integer.toString(setCount);
+        count += " " + (setCount == 1 ? ctx.getResources().getString(R.string.set) : ctx.getResources().getString(R.string.sets));
+
+        viewHolder.setCount.setText(count);
 
         //make sure all animations are stopped
         viewHolder.icon.clearAnimation();
@@ -190,8 +199,8 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
         @Bind(R.id.workout_name)
         TextView name;
 
-        @Bind(R.id.workout_volume)
-        TextView volume;
+        @Bind(R.id.workout_set_count)
+        TextView setCount;
 
         @Bind(R.id.arrow_expand_imageview)
         ImageView icon;

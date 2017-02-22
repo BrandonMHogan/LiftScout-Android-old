@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
 public class HistoryListItem extends AbstractItem<HistoryListItem, HistoryListItem.ViewHolder> {
@@ -14,15 +15,17 @@ public class HistoryListItem extends AbstractItem<HistoryListItem, HistoryListIt
     public int exerciseId;
     public int reps;
     public double weight;
+    public String measurement;
     private boolean mIsDraggable = false;
     private boolean isEmpty = false;
     private String emptyMsg;
 
-    public HistoryListItem(int setId, int exerciseId, int reps, double weight) {
+    public HistoryListItem(int setId, int exerciseId, int reps, double weight, String measurement) {
         this.setId = setId;
         this.exerciseId = exerciseId;
         this.reps = reps;
         this.weight = weight;
+        this.measurement = measurement;
     }
 
     public HistoryListItem(int setId, int exerciseId, boolean isEmpty, String emptyMessage) {
@@ -64,6 +67,7 @@ public class HistoryListItem extends AbstractItem<HistoryListItem, HistoryListIt
             viewHolder.reps.setText(Integer.toString(reps));
             //set the text for the description or hide
             viewHolder.weight.setText(Double.toString(weight));
+            viewHolder.measurement.setText(Measurements.getCompressedType(measurement, weight > 1));
         }
     }
 
@@ -73,12 +77,14 @@ public class HistoryListItem extends AbstractItem<HistoryListItem, HistoryListIt
         protected TextView reps;
         protected TextView weight;
         protected TextView noRep;
+        protected TextView measurement;
 
         public ViewHolder(View view) {
             super(view);
             this.repLayout = (LinearLayout) view.findViewById(R.id.rep_layout);
             this.reps = (TextView) view.findViewById(R.id.item_reps);
             this.weight = (TextView) view.findViewById(R.id.item_weight);
+            this.measurement = (TextView) view.findViewById(R.id.item_measurement);
             this.noRep = (TextView) view.findViewById(R.id.no_rep);
         }
     }

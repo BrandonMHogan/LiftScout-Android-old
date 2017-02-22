@@ -28,6 +28,7 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
     public int setId;
     public String name;
     public double volume;
+    public int setCount;
     public String measurement;
 
     private List<IItem> mSubItems;
@@ -36,10 +37,11 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
 
     private FastAdapter.OnClickListener<TodayListSection> mOnClickListener;
 
-    public TodayListSection(int setId, String name, double volume, String measurement, boolean isEmpty) {
+    public TodayListSection(int setId, String name, double volume, int setCount, String measurement, boolean isEmpty) {
         this.setId = setId;
         this.name = name;
         this.volume = volume;
+        this.setCount = setCount;
         this.measurement = measurement;
     }
 
@@ -147,8 +149,11 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
         Context ctx = viewHolder.itemView.getContext();
 
         viewHolder.name.setText(name);
-        viewHolder.volume.setText(Double.toString(volume));
-        viewHolder.metric.setText(Measurements.getCompressedType(measurement, volume > 1));
+
+        String count = Integer.toString(setCount);
+        count +=  " " + (setCount == 1 ? ctx.getResources().getString(R.string.set) : ctx.getResources().getString(R.string.sets));
+
+        viewHolder.setCount.setText(count);
 
         //make sure all animations are stopped
         viewHolder.icon.clearAnimation();
@@ -192,11 +197,8 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
         @Bind(R.id.workout_name)
         TextView name;
 
-        @Bind(R.id.workout_volume)
-        TextView volume;
-
-        @Bind(R.id.workout_metric)
-        TextView metric;
+        @Bind(R.id.workout_set_count)
+        TextView setCount;
 
         @Bind(R.id.arrow_expand_imageview)
         ImageView icon;

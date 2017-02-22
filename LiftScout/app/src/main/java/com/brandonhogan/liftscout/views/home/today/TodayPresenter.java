@@ -63,6 +63,7 @@ public class TodayPresenter implements TodayContact.Presenter {
                 List<IItem> items = new LinkedList<>();
                 double volume = 0;
                 boolean isEmpty = true;
+                int setCount = 0;
 
                 for (Rep rep : set.getReps()) {
                     items.add(new TodayListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue()));
@@ -72,8 +73,11 @@ public class TodayPresenter implements TodayContact.Presenter {
 
                 if (isEmpty)
                     items.add(new TodayListItem(set.getId(), set.getExercise().getId(), true, view.getEmptySetMessage()));
+                else
+                    setCount = set.getReps().size();
 
-                TodayListSection expandableItem = new TodayListSection(set.getId(), set.getExercise().getName(), volume, userManager.getMeasurementValue(), isEmpty);
+
+                TodayListSection expandableItem = new TodayListSection(set.getId(), set.getExercise().getName(), volume, setCount, userManager.getMeasurementValue(), isEmpty);
                 expandableItem.withSubItems(items);
                 adapterData.add(expandableItem);
             }

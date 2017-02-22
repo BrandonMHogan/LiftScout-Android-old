@@ -6,11 +6,13 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +23,11 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.controls.filters.DecimalDigitsInputFilter;
 
 public class NumberPicker extends RelativeLayout {
+
+    // Private Static Properties
+    private static final int AUTO_DELAY_TIME_DEFAULT = 200;
+    private static final int AUTO_DELAY_TIME_HOLD_CHANGE_DEFAULT = 8;
+    private static final int AUTO_DELAY_TIME_MIN = 10;
 
     // Private Properties
 
@@ -34,6 +41,10 @@ public class NumberPicker extends RelativeLayout {
     private EditText editText;
     private Button addButton;
     private Button subButton;
+    private Handler repeatUpdateHandler;
+    private boolean autoIncrement = false;
+    private boolean autoDecrement = false;
+    private int autoDelayTime = AUTO_DELAY_TIME_DEFAULT;
 
 
     // Constructors
@@ -134,6 +145,8 @@ public class NumberPicker extends RelativeLayout {
 
     private void setOnClick() {
 
+        repeatUpdateHandler = new Handler();
+
         subButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
@@ -145,6 +158,46 @@ public class NumberPicker extends RelativeLayout {
             @Override
             public void onClick(View mView) {
                 changeValue(true);
+            }
+        });
+
+        addButton.setOnLongClickListener(new View.OnLongClickListener(){
+                                             public boolean onLongClick(View arg0) {
+                                                 autoIncrement = true;
+                                                 repeatUpdateHandler.post( new RptUpdater() );
+                                                 return false;
+                                             }
+                                         }
+        );
+
+        addButton.setOnTouchListener( new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                if( (event.getAction()==MotionEvent.ACTION_UP || event.getAction()==MotionEvent.ACTION_CANCEL)
+                        && autoIncrement ){
+                    autoIncrement = false;
+                    autoDelayTime = AUTO_DELAY_TIME_DEFAULT;
+                }
+                return false;
+            }
+        });
+
+        subButton.setOnLongClickListener(new View.OnLongClickListener(){
+                                             public boolean onLongClick(View arg0) {
+                                                 autoDecrement = true;
+                                                 repeatUpdateHandler.post( new RptUpdater() );
+                                                 return false;
+                                             }
+                                         }
+        );
+
+        subButton.setOnTouchListener( new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                if( (event.getAction()==MotionEvent.ACTION_UP || event.getAction()==MotionEvent.ACTION_CANCEL)
+                        && autoDecrement ){
+                    autoDecrement = false;
+                    autoDelayTime = AUTO_DELAY_TIME_DEFAULT;
+                }
+                return false;
             }
         });
 
@@ -194,5 +247,25 @@ public class NumberPicker extends RelativeLayout {
     public void setNumber(float number)
     {
         editText.setText(String.valueOf(number));
+    }
+
+
+    class RptUpdater implements Runnable {
+        public void run() {
+            if( autoIncrement ){
+                repeater(true);
+
+            } else if( autoDecrement ){
+                repeater(false);
+            }
+        }
+
+        private void repeater(boolean increment) {
+            changeValue(increment);
+            if (autoDelayTime > AUTO_DELAY_TIME_MIN)
+                autoDelayTime -= AUTO_DELAY_TIME_HOLD_CHANGE_DEFAULT;
+
+            repeatUpdateHandler.postDelayed( new RptUpdater(), autoDelayTime );
+        }
     }
 }
