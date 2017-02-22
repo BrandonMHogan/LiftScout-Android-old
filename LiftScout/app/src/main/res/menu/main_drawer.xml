@@ -17,10 +17,10 @@
             android:id="@+id/nav_exercises"
             android:icon="?attr/themedMenuExerciseDrawable"
             android:title="@string/nav_exercises" />
-        <item
-            android:id="@+id/nav_routines"
-            android:icon="?attr/themedMenuRoutineDrawable"
-            android:title="@string/nav_routines" />
+        <!--<item-->
+            <!--android:id="@+id/nav_routines"-->
+            <!--android:icon="?attr/themedMenuRoutineDrawable"-->
+            <!--android:title="@string/nav_routines" />-->
         <item
             android:id="@+id/nav_graphs"
             android:icon="?attr/themedMenuGraphsDrawable"
