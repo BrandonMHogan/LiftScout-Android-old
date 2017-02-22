@@ -26,20 +26,11 @@
 
 
         <TextView
-            android:id="@+id/workout_volume"
+            android:id="@+id/workout_set_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/material_text_size_medium"
             android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/workout_metric"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/material_text_size_medium"
-            android:layout_marginStart="4dp"
-            android:textStyle="bold"
-            android:text="lbs"/>
 
     </LinearLayout>
 

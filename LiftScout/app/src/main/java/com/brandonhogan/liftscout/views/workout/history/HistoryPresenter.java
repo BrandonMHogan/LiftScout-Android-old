@@ -55,6 +55,7 @@ public class HistoryPresenter implements HistoryContract.Presenter {
                 List<IItem> items = new LinkedList<>();
                 double volume = 0;
                 boolean isEmpty = true;
+                int setCount = 0;
 
                 for (Rep rep : set.getReps()) {
                     items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue()));
@@ -64,8 +65,10 @@ public class HistoryPresenter implements HistoryContract.Presenter {
 
                 if (isEmpty)
                     items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), true, view.getEmptySetMessage()));
+                else
+                    setCount = set.getReps().size();
 
-                HistoryListSection expandableItem = new HistoryListSection(set.getId(), set.getDate(), volume, userManager.getMeasurementValue(), isEmpty);
+                HistoryListSection expandableItem = new HistoryListSection(set.getId(), set.getDate(), volume, setCount, userManager.getMeasurementValue(), isEmpty);
                 expandableItem.withIsExpanded(true);
                 expandableItem.withSubItems(items);
                 adapterData.add(expandableItem);
