@@ -154,10 +154,11 @@ public class MainActivity extends BaseActivity
             success = navigationManager.startSettings();
         } else if (id == R.id.nav_about) {
             success = navigationManager.startAbout();
-        } else if (id == R.id.nav_realm) {
-            DatabaseOutput.SendRealmToPhone(this);
-            success = true;
         }
+//        else if (id == R.id.nav_realm) {
+//            DatabaseOutput.SendRealmToPhone(this);
+//            success = true;
+//        }
 
         if (success)
             drawer.closeDrawer(GravityCompat.START);
