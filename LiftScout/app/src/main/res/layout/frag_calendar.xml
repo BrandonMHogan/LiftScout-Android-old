@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:windowBackground">
 
     <android.support.design.widget.CoordinatorLayout
@@ -10,13 +11,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:mcv_showOtherDates="all"
-            app:mcv_selectionColor="#00F" />
+        <com.github.sundeepk.compactcalendarview.CompactCalendarView
+            android:id="@+id/calendar_view"
+            android:layout_width="fill_parent"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="250dp"
+            app:compactCalendarTargetHeight="250dp"
+            app:compactCalendarBackgroundColor="?android:windowBackground"
+            app:compactCalendarTextSize="12sp"
+            app:compactCalendarTextColor="?android:textColor"
+            app:compactCalendarCurrentSelectedDayBackgroundColor="?android:colorAccent"
+            app:compactCalendarCurrentDayBackgroundColor="?android:windowBackground"
+            app:compactCalendarMultiEventIndicatorColor="?android:textColor"
+            />
 
     </android.support.design.widget.CoordinatorLayout>
 </com.brandonhogan.liftscout.core.controls.BaseFrameLayout>

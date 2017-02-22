@@ -8,6 +8,7 @@ import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.ProgressRepo;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -42,6 +43,25 @@ public class ProgressRepoImpl implements ProgressRepo {
                 .where(Progress.class)
                 .equalTo(Progress.DATE, date)
                 .findFirst();
+    }
+
+    @Override
+    public RealmResults<Progress> getAllProgressForMonth(int month, int year) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.YEAR, year);
+
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        Date first = cal.getTime();
+
+        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+        Date last = cal.getTime();
+
+        return databaseRealm.getRealmInstance()
+                .where(Progress.class)
+                .between(Progress.DATE, first, last)
+                .findAll();
     }
 
     @Override
