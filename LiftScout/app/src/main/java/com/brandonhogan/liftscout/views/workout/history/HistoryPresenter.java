@@ -92,4 +92,11 @@ public class HistoryPresenter implements HistoryContract.Presenter {
     public void update() {
         updateAdapter();
     }
+
+    @Override
+    public void editEvent(HistoryTrackerEvent event) {
+        progressManager.setTodayProgress(event.date);
+        view.goToHome();
+
+    }
 }

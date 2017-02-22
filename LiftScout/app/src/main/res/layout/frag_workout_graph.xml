@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_below="@id/graph_type"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp" />
 
         <!--</ScrollView>-->
 

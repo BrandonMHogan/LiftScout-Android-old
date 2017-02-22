@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,6 +118,11 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
     }
 
     @Override
+    public void goToHome() {
+        getNavigationManager().startHome();
+    }
+
+    @Override
     public String getEmptySetMessage() {
         return getString(R.string.frag_history_empty_set_msg);
     }
@@ -124,5 +130,10 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTrackerEvent(TrackerEvent event) {
         presenter.update();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onTrackerEvent(HistoryTrackerEvent event) {
+        presenter.editEvent(event);
     }
 }

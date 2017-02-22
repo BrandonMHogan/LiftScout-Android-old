@@ -1,9 +1,14 @@
 package com.brandonhogan.liftscout.core.utils;
 
+
+
+import android.util.Log;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import static com.brandonhogan.liftscout.core.utils.Constants.SIMPLE_DATE_FORMAT;
 
 public class BhDate {
 
@@ -16,8 +21,21 @@ public class BhDate {
         return formatDay.format(date) + ", " + format.format(date);
     }
 
+    public static Date toDateFromString(String dateString) {
+        SimpleDateFormat format = new SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault());
+
+        try {
+            return format.parse(dateString);
+        }
+        catch (java.text.ParseException ex) {
+            Log.e("BhDate", ex.getMessage());
+        }
+
+        return null;
+    }
+
     public static String toSimpleStringDate(Date date) {
-        return new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT, Locale.getDefault()).format(date);
+        return new SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(date);
     }
 
     public static Date trimTimeFromDate(Date date) {

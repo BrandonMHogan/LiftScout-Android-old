@@ -203,10 +203,14 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
         @Bind(R.id.arrow_expand_imageview)
         ImageView icon;
 
+        @Bind(R.id.edit_section_icon)
+        ImageView editIcon;
+
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
             this.view = view;
+            editIcon.setVisibility(View.GONE);
         }
     }
 }
