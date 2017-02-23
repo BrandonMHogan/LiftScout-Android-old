@@ -34,6 +34,9 @@ public class SettingsHomeFragment extends BaseFragment implements SettingsHomeCo
 
     // Bindings
     //
+    @Bind(R.id.homeDefaultSpinner)
+    MaterialSpinner homeDefaultSpinner;
+
     @Bind(R.id.todayTransformSpinner)
     MaterialSpinner transformSpinner;
 
@@ -102,6 +105,19 @@ public class SettingsHomeFragment extends BaseFragment implements SettingsHomeCo
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
                 presenter.onTransformSelected(position);
+            }
+        });
+    }
+
+    @Override
+    public void populateHomeDefaults(ArrayList<String> screens, int position) {
+        homeDefaultSpinner.setItems(screens);
+        homeDefaultSpinner.setSelectedIndex(position);
+
+        homeDefaultSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                presenter.onHomeDefaultSelected(position);
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.core.managers;
 
+import com.brandonhogan.liftscout.core.constants.DefaultScreens;
 import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.brandonhogan.liftscout.core.constants.Themes;
 import com.brandonhogan.liftscout.core.constants.TodayTransforms;
@@ -60,6 +61,20 @@ public class UserManager {
     public void setWeight(double weight) {
         userRepo.setWeight(weight);
         user = userRepo.getUser();
+    }
+
+    public String getHomeDefaultValue() {
+        UserSetting setting = userSettingsRepo.getUserSetting(UserSetting.HOME_DEFAULT_SCREEN);
+
+        if (setting == null) {
+            setting = userSettingsRepo.createUserSetting(UserSetting.HOME_DEFAULT_SCREEN, DefaultScreens.TODAY);
+        }
+
+        return setting.getValue();
+    }
+
+    public boolean setHomeDefault(String value) {
+        return userSettingsRepo.setUserSetting(UserSetting.HOME_DEFAULT_SCREEN, value);
     }
 
     public String getTransformValue() {

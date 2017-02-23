@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.constants.DefaultScreens;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
@@ -86,7 +87,13 @@ public class MainActivity extends BaseActivity
 
             // This needs to be hit first regardless of where a notification will go. Home must
             // be the first item in the back stack
-            navigationManager.startToday();
+
+            if (userManager.getHomeDefaultValue().equals(DefaultScreens.CALENDAR)) {
+                navigationManager.startCalendar();
+            }
+            else {
+                navigationManager.startToday();
+            }
             //AAADevWorkout.clearSets(databaseRealm.getRealmInstance());
         }
     }

@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.views.settings.home;
 
+import com.brandonhogan.liftscout.core.constants.DefaultScreens;
 import com.brandonhogan.liftscout.core.constants.TodayTransforms;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
@@ -21,7 +22,9 @@ public class SettingsHomePresenter implements SettingsHomeContract.Presenter {
     //
     private SettingsHomeContract.View view;
     private ArrayList<String> transforms;
+    private ArrayList<String> homeDefaults;
     private String currentTransformValue;
+    private String currentHomeDefaultValue;
 
     public SettingsHomePresenter(SettingsHomeContract.View view) {
         Injector.getAppComponent().inject(this);
@@ -33,6 +36,41 @@ public class SettingsHomePresenter implements SettingsHomeContract.Presenter {
     //
     @Override
     public void viewCreated() {
+        setupHomeDefaults();
+        setupTransforms();
+    }
+
+    @Override
+    public void onTransformSelected(int position) {
+        currentTransformValue = transforms.get(position);
+    }
+
+    @Override
+    public void onHomeDefaultSelected(int position) {
+        currentHomeDefaultValue = homeDefaults.get(position);
+    }
+
+    @Override
+    public void onSave() {
+        userManager.setTransform(currentTransformValue);
+        userManager.setHomeDefault(currentHomeDefaultValue);
+
+        view.saveSuccess();
+    }
+
+    // Private Functions
+    //
+
+    private void setupHomeDefaults() {
+        homeDefaults = new ArrayList<>();
+
+        homeDefaults.add(DefaultScreens.TODAY);
+        homeDefaults.add(DefaultScreens.CALENDAR);
+
+        view.populateHomeDefaults(homeDefaults, homeDefaults.indexOf(userManager.getHomeDefaultValue()));
+    }
+
+    private void setupTransforms() {
         transforms = new ArrayList<>();
 
         transforms.add(TodayTransforms.DEFAULT);
@@ -42,16 +80,5 @@ public class SettingsHomePresenter implements SettingsHomeContract.Presenter {
         transforms.add(TodayTransforms.ACCELERATE_DECELERATE);
 
         view.populateTransforms(transforms, transforms.indexOf(userManager.getTransformValue()));
-    }
-
-    @Override
-    public void onTransformSelected(int position) {
-        currentTransformValue = transforms.get(position);
-    }
-
-    @Override
-    public void onSave() {
-        userManager.setTransform(currentTransformValue);
-        view.saveSuccess();
     }
 }

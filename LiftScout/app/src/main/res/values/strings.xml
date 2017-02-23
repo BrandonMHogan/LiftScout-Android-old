@@ -111,6 +111,8 @@
     <string name="setting_notifications_description">Create, delete and modify existing local push notifications</string>
     <string name="setting_home">Home</string>
     <string name="setting_home_description">Tailor the home screen to fit your needs</string>
+    <string name="setting_home_default_spinner_title">Home Screen</string>
+    <string name="setting_home_default_spinner_description">Choose which screen you want to be displayed first when the app is started</string>
     <string name="setting_today_transformer_spinner_title">Transition Type</string>
     <string name="setting_today_transformer_spinner_description">Change the transition type when swiping from day to day</string>
     <string name="setting_today_weight_title">Enable Weight Tracking</string>
