@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/nav_header_height"
-    android:background="?attr/colorPrimary"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimaryDark"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -11,21 +11,15 @@
         android:orientation="horizontal"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:layout_gravity="bottom|center">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/ic_scout_orange"/>
+        android:layout_gravity="center">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lift Scout - In Develop"
-            android:layout_marginStart="10dp"
-            style="@style/RobotoSubheading"/>
+            android:text="@string/app_name"
+            android:layout_marginStart="15dp"
+            android:textColor="@color/white"
+            style="@style/RobotoTitle"/>
 
     </LinearLayout>
 
