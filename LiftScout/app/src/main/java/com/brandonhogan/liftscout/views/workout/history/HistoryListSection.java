@@ -51,9 +51,9 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
 
     private FastAdapter.OnClickListener<HistoryListSection> mOnClickListener;
 
-    public HistoryListSection(int setId, Date date, int exerciseId, double volume, int setCount, String measurement, boolean isEmpty) {
+    public HistoryListSection(int setId, Date date, String name, int exerciseId, double volume, int setCount, String measurement, boolean isEmpty) {
         this.setId = setId;
-        this.name = BhDate.toSimpleStringDate(date);
+        this.name = name;
         this.date = date;
         this.exerciseId = exerciseId;
         this.volume = volume;

@@ -131,7 +131,7 @@ public class CalendarPresenter implements CalendarContract.Presenter {
                 else
                     setCount = set.getReps().size();
 
-                HistoryListSection expandableItem = new HistoryListSection(set.getId(), set.getDate(), set.getExercise().getId(), volume, setCount, userManager.getMeasurementValue(), isEmpty);
+                HistoryListSection expandableItem = new HistoryListSection(set.getId(), set.getDate(), set.getExercise().getName(), set.getExercise().getId(), volume, setCount, userManager.getMeasurementValue(), isEmpty);
                 expandableItem.withIsExpanded(true);
                 expandableItem.withSubItems(items);
                 adapterData.add(expandableItem);

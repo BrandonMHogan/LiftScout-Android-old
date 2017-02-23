@@ -4,6 +4,7 @@ import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.mikepenz.fastadapter.IItem;
 
@@ -68,7 +69,7 @@ public class HistoryPresenter implements HistoryContract.Presenter {
                 else
                     setCount = set.getReps().size();
 
-                HistoryListSection expandableItem = new HistoryListSection(set.getId(), set.getDate(), set.getExercise().getId(), volume, setCount, userManager.getMeasurementValue(), isEmpty);
+                HistoryListSection expandableItem = new HistoryListSection(set.getId(), set.getDate(), BhDate.toSimpleStringDate(set.getDate()), set.getExercise().getId(), volume, setCount, userManager.getMeasurementValue(), isEmpty);
                 expandableItem.withIsExpanded(true);
                 expandableItem.withSubItems(items);
                 adapterData.add(expandableItem);
