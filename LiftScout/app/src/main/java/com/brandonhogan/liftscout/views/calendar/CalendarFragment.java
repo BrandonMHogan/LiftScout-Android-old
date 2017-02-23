@@ -75,6 +75,9 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        setTitle(getString(R.string.app_name));
+
         setupCalendar();
         presenter.viewCreated();
     }
