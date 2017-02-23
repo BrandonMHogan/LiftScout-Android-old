@@ -13,7 +13,7 @@
         <item name="android:windowBackground">@color/activity_background_light</item>
         <item name="android:fillColor">@color/fillColor</item>
 
-        <item name="themedMenuHomeDrawable">@drawable/ic_menu_home_black</item>
+        <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
         <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_black</item>
         <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_black</item>
         <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_black</item>
@@ -41,7 +41,7 @@
         <item name="android:windowBackground">@color/activity_background_dark</item>
         <item name="android:fillColor">@color/fillColorInverse</item>
 
-        <item name="themedMenuHomeDrawable">@drawable/ic_menu_home_white</item>
+        <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
         <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_white</item>
         <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
         <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_white</item>

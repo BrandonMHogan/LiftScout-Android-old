@@ -5,9 +5,9 @@
         android:id="@+id/drawer_menu_top"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_today"
             android:icon="?attr/themedMenuHomeDrawable"
-            android:title="@string/nav_home"
+            android:title="@string/nav_today"
             android:checked="true"/>
         <item
             android:id="@+id/nav_calendar"

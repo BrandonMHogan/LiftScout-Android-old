@@ -12,7 +12,6 @@ import android.view.View;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
-import com.brandonhogan.liftscout.core.utils.DatabaseOutput;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 
@@ -87,7 +86,7 @@ public class MainActivity extends BaseActivity
 
             // This needs to be hit first regardless of where a notification will go. Home must
             // be the first item in the back stack
-            navigationManager.startHome();
+            navigationManager.startToday();
             //AAADevWorkout.clearSets(databaseRealm.getRealmInstance());
         }
     }
@@ -102,6 +101,7 @@ public class MainActivity extends BaseActivity
     protected void onPause() {
         super.onPause();
         updateUserData();
+        navigationManager.setNavigationListener(null); // Prevent memory leak on recreate
     }
 
     @Override
@@ -139,8 +139,8 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
         boolean success = false;
 
-        if (id == R.id.nav_home) {
-            success = navigationManager.startHome();
+        if (id == R.id.nav_today) {
+            success = navigationManager.startToday();
         } else if (id == R.id.nav_calendar) {
             progressManager.setTodayProgress(new Date());
             success = navigationManager.startCalendar();
@@ -194,7 +194,7 @@ public class MainActivity extends BaseActivity
 
     private void showExitDialog() {
 
-        dialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+        dialog = new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(getString(R.string.dialog_close_app_title))
                 .setContentText(getString(R.string.dialog_close_app_message))
                 .setConfirmText(getString(R.string.yes))
@@ -226,7 +226,7 @@ public class MainActivity extends BaseActivity
 
         switch (fragment) {
             case "HomeFragment":
-                navigationView.setCheckedItem(R.id.nav_home);
+                navigationView.setCheckedItem(R.id.nav_today);
                 break;
             case "CalendarFragment":
                 navigationView.setCheckedItem(R.id.nav_calendar);

@@ -187,7 +187,7 @@ public class NavigationManager {
         }
     }
 
-    public boolean startHome() {
+    public boolean startToday() {
         Fragment fragment = HomeFragment.newInstance();
         return openAsHome(fragment);
     }

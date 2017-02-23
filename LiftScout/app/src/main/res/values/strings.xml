@@ -43,6 +43,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_home">Home</string>
+    <string name="nav_today">Today</string>
     <string name="nav_calendar">Calendar</string>
     <string name="nav_routines">Routines</string>
     <string name="nav_exercises">Exercises</string>
