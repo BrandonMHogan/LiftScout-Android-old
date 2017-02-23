@@ -29,8 +29,8 @@
                 android:layout_width="fill_parent"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:layout_height="250dp"
-                app:compactCalendarTargetHeight="250dp"
+                android:layout_height="180dp"
+                app:compactCalendarTargetHeight="180dp"
                 app:compactCalendarBackgroundColor="?android:windowBackground"
                 app:compactCalendarTextSize="12sp"
                 app:compactCalendarTextColor="?android:textColor"
@@ -41,14 +41,12 @@
 
         </android.support.design.widget.CoordinatorLayout>
 
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/tracker_outer_bottom_margin"
+            android:layout_marginTop="10dp"
             android:background="@color/divider"
             android:elevation="@dimen/tracker_divider_elevation"/>
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"

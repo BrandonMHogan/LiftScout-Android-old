@@ -68,7 +68,7 @@ public class HistoryPresenter implements HistoryContract.Presenter {
                 else
                     setCount = set.getReps().size();
 
-                HistoryListSection expandableItem = new HistoryListSection(set.getId(), set.getDate(), volume, setCount, userManager.getMeasurementValue(), isEmpty);
+                HistoryListSection expandableItem = new HistoryListSection(set.getId(), set.getDate(), set.getExercise().getId(), volume, setCount, userManager.getMeasurementValue(), isEmpty);
                 expandableItem.withIsExpanded(true);
                 expandableItem.withSubItems(items);
                 adapterData.add(expandableItem);

@@ -41,6 +41,7 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
     public String name;
     public Date date;
     public double volume;
+    public int exerciseId;
     public int setCount;
     public String measurement;
 
@@ -50,10 +51,11 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
 
     private FastAdapter.OnClickListener<HistoryListSection> mOnClickListener;
 
-    public HistoryListSection(int setId, Date date, double volume, int setCount, String measurement, boolean isEmpty) {
+    public HistoryListSection(int setId, Date date, int exerciseId, double volume, int setCount, String measurement, boolean isEmpty) {
         this.setId = setId;
         this.name = BhDate.toSimpleStringDate(date);
         this.date = date;
+        this.exerciseId = exerciseId;
         this.volume = volume;
         this.setCount = setCount;
         this.measurement = measurement;
@@ -162,6 +164,7 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
 
         viewHolder.name.setText(name);
         viewHolder.date = date;
+        viewHolder.exerciseId = exerciseId;
 
         String count = Integer.toString(setCount);
         count += " " + (setCount == 1 ? ctx.getResources().getString(R.string.set) : ctx.getResources().getString(R.string.sets));
@@ -200,6 +203,7 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
         protected final View view;
         private SweetAlertDialog dialog;
         private Date date;
+        private int exerciseId;
 
         @Bind(R.id.workout_name)
         TextView name;
@@ -230,7 +234,7 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
                             dialog.cancel();
-                            EventBus.getDefault().post(new HistoryTrackerEvent(1, date));
+                            EventBus.getDefault().post(new HistoryTrackerEvent(1, date, exerciseId));
                         }
                     })
                     .setCancelText(view.getContext().getString(R.string.cancel))

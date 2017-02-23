@@ -14,9 +14,11 @@ public class HistoryTrackerEvent {
 
     public final int eventID;
     public final Date date;
+    public final int exerciseId;
 
-    public HistoryTrackerEvent(int eventID, Date date) {
+    public HistoryTrackerEvent(int eventID, Date date, int exerciseId) {
         this.eventID = eventID;
         this.date = date;
+        this.exerciseId = exerciseId;
     }
 }
