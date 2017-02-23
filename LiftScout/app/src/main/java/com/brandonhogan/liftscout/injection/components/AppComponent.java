@@ -22,6 +22,7 @@ import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayPresente
 import com.brandonhogan.liftscout.views.settings.home.SettingsHomePresenter;
 import com.brandonhogan.liftscout.views.settings.profile.SettingsProfilePresenter;
 import com.brandonhogan.liftscout.views.workout.graph.GraphPresenter;
+import com.brandonhogan.liftscout.views.workout.history.HistoryFragment;
 import com.brandonhogan.liftscout.views.workout.history.HistoryPresenter;
 import com.brandonhogan.liftscout.views.workout.tracker.TrackerFragment;
 import com.brandonhogan.liftscout.views.workout.tracker.TrackerPresenter;

@@ -92,7 +92,7 @@
     <string name="dialog_tracker_delete_rep_title">Deleting Set</string>
     <string name="dialog_tracker_delete_rep_message">Are you sure you wish to delete this selected set?</string>
     <string name="dialog_edit_history_title">Edit Set</string>
-    <string name="dialog_edit_history_message">Are you sure you want to edit the set for %s</string>
+    <string name="dialog_edit_history_message">Are you sure you want to edit this set</string>
 
     <!-- Home Fragment -->
     <string name="frag_home_first_load_message">"Welcome to Lift Scout %s! This app will become your closest ally in your swole journey."</string>

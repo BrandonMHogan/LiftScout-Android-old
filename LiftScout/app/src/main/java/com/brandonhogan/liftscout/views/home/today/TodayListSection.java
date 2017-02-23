@@ -89,11 +89,6 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
         @Override
         public boolean onClick(View v, IAdapter adapter, TodayListSection item, int position) {
             if (item.getSubItems() != null) {
-                if (!item.isExpanded()) {
-                    ViewCompat.animate(v.findViewById(R.id.arrow_expand_imageview)).rotation(180).start();
-                } else {
-                    ViewCompat.animate(v.findViewById(R.id.arrow_expand_imageview)).rotation(0).start();
-                }
                 return mOnClickListener != null ? mOnClickListener.onClick(v, adapter, item, position) : true;
             }
             return mOnClickListener != null ? mOnClickListener.onClick(v, adapter, item, position) : false;
@@ -155,14 +150,6 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
 
         viewHolder.setCount.setText(count);
 
-        //make sure all animations are stopped
-        viewHolder.icon.clearAnimation();
-
-        if (isExpanded()) {
-            ViewCompat.setRotation(viewHolder.icon, 0);
-        } else {
-            ViewCompat.setRotation(viewHolder.icon, 180);
-        }
     }
 
 
@@ -200,17 +187,10 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
         @Bind(R.id.workout_set_count)
         TextView setCount;
 
-        @Bind(R.id.arrow_expand_imageview)
-        ImageView icon;
-
-        @Bind(R.id.edit_section_icon)
-        ImageView editIcon;
-
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
             this.view = view;
-            editIcon.setVisibility(View.GONE);
         }
     }
 }

@@ -194,7 +194,7 @@ public class NavigationManager {
 
     public boolean startCalendar() {
         Fragment fragment = CalendarFragment.newInstance();
-        return openAsRoot(fragment);
+        return openAsHome(fragment);
     }
 
 

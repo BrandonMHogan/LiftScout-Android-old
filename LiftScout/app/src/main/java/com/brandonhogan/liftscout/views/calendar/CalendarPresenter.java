@@ -23,7 +23,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.realm.RealmList;
-import io.realm.RealmResults;
 
 /**
  * Created by Brandon on 2/22/2017.
@@ -68,7 +67,7 @@ public class CalendarPresenter implements CalendarContract.Presenter {
         cal.setTime(date);
 
         String monthTitle = BhDate.toMonthYearStringDate(cal.getTime());
-        view.setEvents(monthTitle, getEvents(cal));
+        view.setEvents(monthTitle, date, getEvents(cal));
 
         updateAdapter();
     }
@@ -81,13 +80,19 @@ public class CalendarPresenter implements CalendarContract.Presenter {
         cal.setTime(date);
 
         String monthTitle = BhDate.toMonthYearStringDate(cal.getTime());
-        view.setEvents(monthTitle, getEvents(cal));
+        view.setEvents(monthTitle, date, getEvents(cal));
     }
 
     @Override
     public void dateSelected(Date date) {
         this.date = date;
         updateAdapter();
+    }
+
+    @Override
+    public void setClicked(int exerciseId) {
+        progressManager.setTodayProgress(date);
+        view.editTracker(exerciseId);
     }
 
     // Private Functions
@@ -121,13 +126,13 @@ public class CalendarPresenter implements CalendarContract.Presenter {
                 int setCount = 0;
 
                 for (Rep rep : set.getReps()) {
-                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue()));
+                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), set.getDate(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue()));
                     volume += rep.getWeight();
                     isEmpty = false;
                 }
 
                 if (isEmpty)
-                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), true, view.getEmptySetMessage()));
+                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), set.getDate(), true, view.getEmptySetMessage()));
                 else
                     setCount = set.getReps().size();
 
@@ -145,9 +150,7 @@ public class CalendarPresenter implements CalendarContract.Presenter {
     public void editEvent(HistoryTrackerEvent event) {
 
         if (event.eventID == HistoryTrackerEvent.EVENT_EDIT_SET) {
-            progressManager.setTodayProgress(event.date);
-            view.editTracker(event.exerciseId);
+            setClicked(event.exerciseId);
         }
-
     }
 }

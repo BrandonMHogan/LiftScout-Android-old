@@ -1,19 +1,11 @@
 package com.brandonhogan.liftscout.views.workout.history;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.constants.Measurements;
-import com.brandonhogan.liftscout.core.managers.ProgressManager;
-import com.brandonhogan.liftscout.core.utils.BhDate;
-import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.views.workout.TrackerEvent;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IExpandable;
@@ -21,17 +13,10 @@ import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.Date;
 import java.util.List;
-
-import javax.inject.Inject;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class HistoryListSection extends AbstractItem<HistoryListSection, HistoryListSection.ViewHolder> implements IExpandable<HistoryListSection, IItem> {
     //the static ViewHolderFactory which will be used to generate the ViewHolder for this Item
@@ -163,8 +148,6 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
         Context ctx = viewHolder.itemView.getContext();
 
         viewHolder.name.setText(name);
-        viewHolder.date = date;
-        viewHolder.exerciseId = exerciseId;
 
         String count = Integer.toString(setCount);
         count += " " + (setCount == 1 ? ctx.getResources().getString(R.string.set) : ctx.getResources().getString(R.string.sets));
@@ -201,9 +184,6 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
      */
     protected static class ViewHolder extends RecyclerView.ViewHolder {
         protected final View view;
-        private SweetAlertDialog dialog;
-        private Date date;
-        private int exerciseId;
 
         @Bind(R.id.workout_name)
         TextView name;
@@ -211,36 +191,10 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
         @Bind(R.id.workout_set_count)
         TextView setCount;
 
-        @Bind(R.id.edit_section_icon)
-        ImageView editIcon;
-
-        @Bind(R.id.arrow_expand_imageview)
-        ImageView expandIcon;
-
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
             this.view = view;
-            expandIcon.setVisibility(View.GONE);
-        }
-
-        @OnClick(R.id.edit_section_icon)
-        void onEditClick() {
-            dialog = new SweetAlertDialog(view.getContext(), SweetAlertDialog.NORMAL_TYPE)
-                    .setTitleText(view.getContext().getString(R.string.dialog_edit_history_title))
-                    .setContentText(view.getContext().getString(R.string.dialog_edit_history_message, name.getText()))
-                    .setConfirmText(view.getContext().getString(R.string.edit))
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            dialog.cancel();
-                            EventBus.getDefault().post(new HistoryTrackerEvent(1, date, exerciseId));
-                        }
-                    })
-                    .setCancelText(view.getContext().getString(R.string.cancel))
-                    .showCancelButton(true);
-
-            dialog.show();
         }
     }
 }

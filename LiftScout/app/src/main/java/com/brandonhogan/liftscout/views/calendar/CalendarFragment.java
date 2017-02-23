@@ -52,7 +52,7 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     // Binds
     //
     @Bind(R.id.date)
-    TextView date;
+    TextView titleTextView;
 
     @Bind(R.id.calendar_view)
     CompactCalendarView calendar;
@@ -107,16 +107,18 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
                 presenter.onMonthScroll(firstDayOfNewMonth);
+                presenter.dateSelected(firstDayOfNewMonth);
             }
         });
     }
 
     @Override
-    public void setEvents(String monthTitle, ArrayList<Event> events) {
+    public void setEvents(String monthTitle, Date date, ArrayList<Event> events) {
+        calendar.setCurrentDate(date);
         calendar.removeAllEvents();
         calendar.addEvents(events);
 
-        date.setText(monthTitle);
+        titleTextView.setText(monthTitle);
     }
 
     @Override
@@ -128,7 +130,7 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
         mAdapter.withOnClickListener(new FastAdapter.OnClickListener<HistoryListItem>() {
             @Override
             public boolean onClick(View v, IAdapter<HistoryListItem> adapter, HistoryListItem item, int position) {
-                getNavigationManager().startWorkoutContainer(item.exerciseId);
+                presenter.setClicked(item.exerciseId);
                 return true;
             }
         });

@@ -9,6 +9,7 @@ import com.brandonhogan.liftscout.injection.components.Injector;
 import com.mikepenz.fastadapter.IItem;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -59,13 +60,13 @@ public class HistoryPresenter implements HistoryContract.Presenter {
                 int setCount = 0;
 
                 for (Rep rep : set.getReps()) {
-                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue()));
+                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), set.getDate(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue()));
                     volume += rep.getWeight();
                     isEmpty = false;
                 }
 
                 if (isEmpty)
-                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), true, view.getEmptySetMessage()));
+                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), set.getDate(), true, view.getEmptySetMessage()));
                 else
                     setCount = set.getReps().size();
 
@@ -95,12 +96,8 @@ public class HistoryPresenter implements HistoryContract.Presenter {
     }
 
     @Override
-    public void editEvent(HistoryTrackerEvent event) {
-
-        if (event.eventID == HistoryTrackerEvent.EVENT_EDIT_SET) {
-            progressManager.setTodayProgress(event.date);
-            view.editTracker();
-        }
-
+    public void setClicked(int exerciseId, Date date) {
+        progressManager.setTodayProgress(date);
+        view.editTracker(exerciseId);
     }
 }

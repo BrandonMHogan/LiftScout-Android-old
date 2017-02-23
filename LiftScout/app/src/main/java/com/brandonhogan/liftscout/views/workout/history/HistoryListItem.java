@@ -9,28 +9,33 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
+import java.util.Date;
+
 public class HistoryListItem extends AbstractItem<HistoryListItem, HistoryListItem.ViewHolder> {
 
     public int setId;
     public int exerciseId;
     public int reps;
     public double weight;
+    public Date date;
     public String measurement;
     private boolean mIsDraggable = false;
     private boolean isEmpty = false;
     private String emptyMsg;
 
-    public HistoryListItem(int setId, int exerciseId, int reps, double weight, String measurement) {
+    public HistoryListItem(int setId, int exerciseId, Date date, int reps, double weight, String measurement) {
         this.setId = setId;
         this.exerciseId = exerciseId;
+        this.date = date;
         this.reps = reps;
         this.weight = weight;
         this.measurement = measurement;
     }
 
-    public HistoryListItem(int setId, int exerciseId, boolean isEmpty, String emptyMessage) {
+    public HistoryListItem(int setId, int exerciseId, Date date, boolean isEmpty, String emptyMessage) {
         this.setId = setId;
         this.exerciseId = exerciseId;
+        this.date = date;
         this.isEmpty = isEmpty;
         this.emptyMsg = emptyMessage;
     }

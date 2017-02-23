@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.brandonhogan.liftscout.core.model.Progress;
 import com.brandonhogan.liftscout.core.model.Set;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.ProgressRepo;
@@ -41,7 +42,7 @@ public class ProgressRepoImpl implements ProgressRepo {
     public Progress getProgress(Date date) {
         return databaseRealm.getRealmInstance()
                 .where(Progress.class)
-                .equalTo(Progress.DATE, date)
+                .equalTo(Progress.DATE, BhDate.trimTimeFromDate(date))
                 .findFirst();
     }
 
@@ -49,14 +50,24 @@ public class ProgressRepoImpl implements ProgressRepo {
     public RealmResults<Progress> getAllProgressForMonth(int month, int year) {
 
         Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH, 1);
         cal.set(Calendar.MONTH, month);
         cal.set(Calendar.YEAR, year);
 
-        cal.set(Calendar.DAY_OF_MONTH, 1);
-        Date first = cal.getTime();
+        cal.set(Calendar.HOUR_OF_DAY, cal.getActualMinimum(Calendar.HOUR_OF_DAY));
+        cal.set(Calendar.MINUTE, cal.getActualMinimum(Calendar.MINUTE));
+        cal.set(Calendar.SECOND, cal.getActualMinimum(Calendar.SECOND));
+        cal.set(Calendar.MILLISECOND, cal.getActualMinimum(Calendar.MILLISECOND));
+
+        Date first = BhDate.trimTimeFromDate(cal.getTime());
 
         cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-        Date last = cal.getTime();
+        cal.set(Calendar.HOUR_OF_DAY, cal.getActualMaximum(Calendar.HOUR_OF_DAY));
+        cal.set(Calendar.MINUTE, cal.getActualMaximum(Calendar.MINUTE));
+        cal.set(Calendar.SECOND, cal.getActualMaximum(Calendar.SECOND));
+        cal.set(Calendar.MILLISECOND, cal.getActualMaximum(Calendar.MILLISECOND));
+
+        Date last = BhDate.trimTimeFromDate(cal.getTime());
 
         return databaseRealm.getRealmInstance()
                 .where(Progress.class)

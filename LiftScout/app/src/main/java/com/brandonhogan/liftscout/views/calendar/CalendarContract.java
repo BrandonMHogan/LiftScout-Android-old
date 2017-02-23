@@ -16,7 +16,7 @@ import java.util.List;
 public class CalendarContract {
 
     interface View {
-        void setEvents(String monthTitle, ArrayList<Event> events);
+        void setEvents(String monthTitle, Date date, ArrayList<Event> events);
         void setupAdapter(List<HistoryListSection> data);
         void editTracker(int exerciseId);
         String getEmptySetMessage();
@@ -27,5 +27,6 @@ public class CalendarContract {
         void dateSelected(Date date);
         void onMonthScroll(Date firstDayOfNewMonth);
         void editEvent(HistoryTrackerEvent event);
+        void setClicked(int exerciseId);
     }
 }

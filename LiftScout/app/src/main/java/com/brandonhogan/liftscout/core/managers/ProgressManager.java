@@ -78,6 +78,8 @@ public class ProgressManager {
 
     public void setTodayProgress(Date date) {
 
+        date = BhDate.trimTimeFromDate(date);
+
         todayProgress = databaseRealm.getRealmInstance()
                 .where(Progress.class)
                 .equalTo(Progress.DATE, date)

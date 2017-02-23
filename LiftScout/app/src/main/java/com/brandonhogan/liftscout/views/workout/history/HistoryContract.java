@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.views.workout.history;
 
+import java.util.Date;
 import java.util.List;
 
 public interface HistoryContract {
@@ -7,12 +8,12 @@ public interface HistoryContract {
     interface View {
         void setupAdapter(List<HistoryListSection> data);
         String getEmptySetMessage();
-        void editTracker();
+        void editTracker(int exerciseId);
     }
 
     interface Presenter {
         void viewCreated();
         void update();
-        void editEvent(HistoryTrackerEvent event);
+        void setClicked(int exerciseId, Date date);
     }
 }

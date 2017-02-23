@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
+
 import butterknife.Bind;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class HistoryFragment extends BaseFragment implements HistoryContract.View {
 
@@ -48,6 +49,7 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
     private View rootView;
     private HistoryContract.Presenter presenter;
     private FastItemAdapter mAdapter;
+    private SweetAlertDialog dialog;
 
 
     //Bindings
@@ -98,7 +100,7 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
         mAdapter.withOnClickListener(new FastAdapter.OnClickListener<HistoryListItem>() {
             @Override
             public boolean onClick(View v, IAdapter<HistoryListItem> adapter, HistoryListItem item, int position) {
-                getNavigationManager().startWorkoutContainer(item.exerciseId);
+                showEditDialog(item);
                 return true;
             }
         });
@@ -118,8 +120,7 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
     }
 
     @Override
-    public void editTracker() {
-        int exerciseId = getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID);
+    public void editTracker(int exerciseId) {
         getNavigationManager().startWorkoutContainer(exerciseId, true);
     }
 
@@ -128,13 +129,33 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
         return getString(R.string.frag_history_empty_set_msg);
     }
 
+
+    // Bus Subscriptions
+    //
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTrackerEvent(TrackerEvent event) {
         presenter.update();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onTrackerEvent(HistoryTrackerEvent event) {
-        presenter.editEvent(event);
+
+    // Private Functions
+    //
+
+    private void showEditDialog(final HistoryListItem item) {
+        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.NORMAL_TYPE)
+                .setTitleText(getString(R.string.dialog_edit_history_title))
+                .setContentText(getString(R.string.dialog_edit_history_message))
+                .setConfirmText(getString(R.string.edit))
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        dialog.cancel();
+                        presenter.setClicked(item.exerciseId, item.date);
+                    }
+                })
+                .setCancelText(getString(R.string.cancel))
+                .showCancelButton(true);
+
+        dialog.show();
     }
 }

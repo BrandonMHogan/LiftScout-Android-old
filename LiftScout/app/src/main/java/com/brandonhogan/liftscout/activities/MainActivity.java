@@ -142,6 +142,7 @@ public class MainActivity extends BaseActivity
         if (id == R.id.nav_home) {
             success = navigationManager.startHome();
         } else if (id == R.id.nav_calendar) {
+            progressManager.setTodayProgress(new Date());
             success = navigationManager.startCalendar();
         } else if (id == R.id.nav_exercises) {
             success = navigationManager.startCategoryList();
