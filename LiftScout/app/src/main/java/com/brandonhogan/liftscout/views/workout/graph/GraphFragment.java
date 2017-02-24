@@ -1,9 +1,11 @@
 package com.brandonhogan.liftscout.views.workout.graph;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,6 +121,8 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         if (data.isEmpty())
             return;
 
+        graphMaxValue = 100;
+
         if (uniqueDateCount > 6) {
             xAxis.setLabelCount(5);
             lineChart.setScaleEnabled(true);
@@ -212,6 +216,12 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
     }
 
     private void setupGraph() {
+
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = getActivity().getTheme();
+        theme.resolveAttribute(android.R.attr.textColor, typedValue, true);
+        int color = typedValue.data;
+
         lineChart.animate();
         lineChart.getDescription().setEnabled(false);
         lineChart.getLegend().setEnabled(false);
@@ -219,8 +229,6 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         lineChart.setDrawGridBackground(false);
         lineChart.setDragEnabled(true);
         lineChart.setPinchZoom(false);
-        lineChart.getXAxis().setDrawGridLines(true);
-
         lineChart.getAxisRight().setEnabled(false);
 
         // Y Axis setup
@@ -230,11 +238,13 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         leftAxis.setAxisMaximum(graphMaxValue);
         leftAxis.setAxisMinimum(0f);
         leftAxis.setDrawGridLines(true);
+        leftAxis.setTextColor(color);
         leftAxis.setValueFormatter(new DefaultAxisValueFormatter(4));
 
         // X Axis setup
         xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextColor(color);
         xAxis.setDrawGridLines(true);
         xAxis.setTextSize(11f);
         xAxis.setGranularity(1f);
