@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.views.calendar;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,6 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class CalendarFragment extends BaseFragment implements CalendarContract.View {
 
@@ -53,6 +55,9 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     //
     @Bind(R.id.date)
     TextView titleTextView;
+
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
 
     @Bind(R.id.calendar_view)
     CompactCalendarView calendar;
@@ -158,6 +163,12 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     @Override
     public void editTracker(int exerciseId) {
         getNavigationManager().startWorkoutContainer(exerciseId, true);
+    }
+
+    @OnClick(R.id.fab)
+    public void onFabClick() {
+
+        getNavigationManager().startCategoryListAddSet();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

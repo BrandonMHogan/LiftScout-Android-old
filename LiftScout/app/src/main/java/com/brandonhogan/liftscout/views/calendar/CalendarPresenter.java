@@ -86,6 +86,7 @@ public class CalendarPresenter implements CalendarContract.Presenter {
     @Override
     public void dateSelected(Date date) {
         this.date = date;
+        progressManager.setTodayProgress(date);
         updateAdapter();
     }
 
