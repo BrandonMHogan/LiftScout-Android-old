@@ -6,53 +6,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:windowBackground">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:layout_margin="5dp"
-            style="@style/RobotoTitle"/>
 
-        <android.support.design.widget.CoordinatorLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_margin="5dp"
+                style="@style/RobotoTitle"/>
 
-            <com.github.sundeepk.compactcalendarview.CompactCalendarView
-                android:id="@+id/calendar_view"
-                android:layout_width="fill_parent"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:layout_height="180dp"
-                app:compactCalendarTargetHeight="180dp"
-                app:compactCalendarBackgroundColor="?android:windowBackground"
-                app:compactCalendarTextSize="12sp"
-                app:compactCalendarTextColor="?android:textColor"
-                app:compactCalendarCurrentSelectedDayBackgroundColor="?android:colorAccent"
-                app:compactCalendarCurrentDayBackgroundColor="?android:windowBackground"
-                app:compactCalendarMultiEventIndicatorColor="?android:textColor"
-                />
+            <android.support.design.widget.CoordinatorLayout
+                android:id="@+id/calendar_container"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date">
 
-        </android.support.design.widget.CoordinatorLayout>
+                <com.github.sundeepk.compactcalendarview.CompactCalendarView
+                    android:id="@+id/calendar_view"
+                    android:layout_width="fill_parent"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_height="180dp"
+                    app:compactCalendarTargetHeight="180dp"
+                    app:compactCalendarBackgroundColor="?android:windowBackground"
+                    app:compactCalendarTextSize="12sp"
+                    app:compactCalendarTextColor="?android:textColor"
+                    app:compactCalendarCurrentSelectedDayBackgroundColor="?android:colorAccent"
+                    app:compactCalendarCurrentDayBackgroundColor="?android:windowBackground"
+                    app:compactCalendarMultiEventIndicatorColor="?android:textColor"
+                    />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/divider"
-            android:elevation="@dimen/tracker_divider_elevation"/>
+            </android.support.design.widget.CoordinatorLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/divider"
+                android:layout_below="@id/calendar_container"
+                android:elevation="@dimen/tracker_divider_elevation"/>
 
-    </LinearLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="-46dp"
+                app:fabSize="normal"
+                android:src="@drawable/ic_add_white_24dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/divider"/>
+
+    </RelativeLayout>
 
 </com.brandonhogan.liftscout.core.controls.BaseFrameLayout>
