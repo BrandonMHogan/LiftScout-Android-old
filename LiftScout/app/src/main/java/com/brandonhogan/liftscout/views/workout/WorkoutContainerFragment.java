@@ -76,8 +76,8 @@ public class WorkoutContainerFragment extends BaseFragment {
 //        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_statistics_title)));
 //        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_goals_title)));
 
-        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
-        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
         final WorkoutContainerAdapter adapter = new WorkoutContainerAdapter
                 (getChildFragmentManager(), exerciseId);
