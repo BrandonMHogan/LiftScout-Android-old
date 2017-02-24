@@ -81,6 +81,8 @@
     <dimen name="text_edit_clear_margin_top">10dp</dimen>
     <dimen name="text_edit_margin_left">0dp</dimen>
 
+    <dimen name="graph_height">300dp</dimen>
+
     <!-- Material Font sizes -->
     <dimen name="material_text_size_body_1">14sp</dimen>
     <dimen name="material_text_size_body_2">14sp</dimen>

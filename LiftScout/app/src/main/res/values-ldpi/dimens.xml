@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Graph -->
+    <dimen name="graph_height">180dp</dimen>
+
+    <!-- Number Picker -->
+    <dimen name="tracker_font_size">18sp</dimen>
+
+    <!-- Tracker Buttons -->
+    <dimen name="tracker_button_width">120dp</dimen>
+    <dimen name="tracker_button_height">42dp</dimen>
+
+</resources>
