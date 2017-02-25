@@ -200,10 +200,16 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
             // set data
             lineChart.setData(data2);
         }
+
+        setSelected("","");
     }
 
     @Override
     public void setSelected(String date, String value) {
+
+        if(date.isEmpty())
+            lineChart.highlightValue(null);
+
         selectedItemDate.setText(date);
         selectedItemVale.setText(value);
     }
