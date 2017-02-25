@@ -25,7 +25,9 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.Utils;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
@@ -52,6 +54,12 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
 
     @Bind(R.id.range_text)
     TextView rangeText;
+
+    @Bind(R.id.selected_item_date)
+    TextView selectedItemDate;
+
+    @Bind(R.id.selected_item_value)
+    TextView selectedItemVale;
 
     @Bind(R.id.graph_type)
     MaterialSpinner graphType;
@@ -136,8 +144,8 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
 
         for (int i = 0; i < data.size(); i++) {
 
-            float volume = (float)data.get(i).getValue();
-            float date = (float)data.get(i).getId();
+            float volume = ((float)data.get(i).getValue());
+            float date = ((float)(data.get(i).getId() / 1000.0));
 
             values.add(new Entry(date, volume));
 
@@ -194,6 +202,12 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         }
     }
 
+    @Override
+    public void setSelected(String date, String value) {
+        selectedItemDate.setText(date);
+        selectedItemVale.setText(value);
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTrackerEvent(TrackerEvent event) {
         presenter.update();
@@ -221,6 +235,18 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         Resources.Theme theme = getActivity().getTheme();
         theme.resolveAttribute(android.R.attr.textColor, typedValue, true);
         int color = typedValue.data;
+
+        lineChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                presenter.onItemSelected(e);
+            }
+
+            @Override
+            public void onNothingSelected() {
+                setSelected("","");
+            }
+        });
 
         lineChart.animate();
         lineChart.getDescription().setEnabled(false);

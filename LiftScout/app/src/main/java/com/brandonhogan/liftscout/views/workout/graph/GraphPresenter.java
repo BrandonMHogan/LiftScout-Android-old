@@ -1,9 +1,12 @@
 package com.brandonhogan.liftscout.views.workout.graph;
 
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
+import com.github.mikephil.charting.data.Entry;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,6 +28,9 @@ public class GraphPresenter implements GraphContract.Presenter {
     //
     @Inject
     ProgressManager progressManager;
+
+    @Inject
+    UserManager userManager;
 
     // Private Properties
     //
@@ -116,5 +122,16 @@ public class GraphPresenter implements GraphContract.Presenter {
     @Override
     public void onTypeSelected(String type) {
 
+    }
+
+    @Override
+    public void onItemSelected(Entry entry) {
+        long time = ((long)(entry.getX() * 1000));
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+
+        String value = Float.toString(((long)entry.getY())) + " " + userManager.getMeasurementValue();
+
+        view.setSelected(BhDate.toSimpleStringDate(calendar.getTime()), value);
     }
 }
