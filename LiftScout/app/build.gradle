@@ -134,6 +134,9 @@ dependencies {
 
     compile 'com.github.devlight:infinitecycleviewpager:1.0.2'
 
+    // Material intro screen
+    compile 'agency.tango.android:material-intro-screen:0.0.5'
+
     // Firebase
     compile 'com.google.firebase:firebase-core:9.4.0'
     compile 'com.google.firebase:firebase-crash:9.4.0'

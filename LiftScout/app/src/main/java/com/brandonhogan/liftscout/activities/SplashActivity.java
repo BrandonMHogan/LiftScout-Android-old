@@ -55,6 +55,7 @@ public class SplashActivity extends BaseActivity {
                 // User has used the app before and should be directed to the main activity
                 if (userManager.validUser()){
                     toMain();
+                    toIntro();
                 }
                 else {
                     initDefaults();
@@ -207,6 +208,13 @@ public class SplashActivity extends BaseActivity {
 
     private void toMain() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(intent);
+        //finish();
+    }
+
+    private void toIntro() {
+        Intent intent = new Intent(this, IntroActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(intent);
         finish();
