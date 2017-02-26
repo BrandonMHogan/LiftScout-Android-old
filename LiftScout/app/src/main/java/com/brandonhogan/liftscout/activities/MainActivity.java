@@ -102,6 +102,7 @@ public class MainActivity extends BaseActivity
     protected void onResume() {
         super.onResume();
         updateUserData();
+        navigationManager.setNavigationListener(this);
     }
 
     @Override
@@ -201,7 +202,7 @@ public class MainActivity extends BaseActivity
 
     private void showExitDialog() {
 
-        dialog = new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.WARNING_TYPE)
+        dialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(getString(R.string.dialog_close_app_title))
                 .setContentText(getString(R.string.dialog_close_app_message))
                 .setConfirmText(getString(R.string.yes))
