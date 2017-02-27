@@ -55,9 +55,10 @@
 
 
     <color name="intro_slide_one">#ff343434</color>
-    <color name="intro_slide_two">#ff3d3e3f</color>
-    <color name="intro_slide_three">#ff4b4e51</color>
-    <color name="intro_slide_four">#ff4f4d5e</color>
+    <color name="intro_slide_two">#ff3b3c3d</color>
+    <color name="intro_slide_three">#ff434547</color>
+    <color name="intro_slide_four">#ff4a4d51</color>
+    <color name="intro_slide_five">#ff535960</color>
 
 
     <!-- Category Colors -->

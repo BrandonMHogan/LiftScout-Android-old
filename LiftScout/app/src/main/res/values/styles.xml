@@ -208,7 +208,7 @@
 
     <style name="RobotoCaption">
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textSize">@dimen/material_text_size_caption</item>
+        <item name="android:textSize">@dimen/material_text_size_button</item>
     </style>
 
     <style name="RobotoCaptionBold">

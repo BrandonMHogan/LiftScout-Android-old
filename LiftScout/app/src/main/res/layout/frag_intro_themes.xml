@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<agency.tango.materialintroscreen.parallax.ParallaxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/intro_padding_bottom">
+
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_invert_colors_white_48dp"
+        android:layout_height="@dimen/intro_icon_size"
+        android:layout_width="@dimen/intro_icon_size"
+        tools:layout_margin="@dimen/intro_margin"
+        android:layout_marginTop="@dimen/intro_margin_top"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        style="@style/RobotoDisplay01"
+        app:layout_parallaxFactor="0.2"
+        android:text="@string/intro_slide_four_title"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginStart="@dimen/intro_margin_left"
+        android:layout_marginEnd="@dimen/intro_margin_right"
+        android:text="@string/intro_slide_four_description"
+        app:layout_parallaxFactor="0.4"
+        style="@style/RobotoCaption" />
+
+
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:id="@+id/theme_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_parallaxFactor="0.6"
+        android:layout_marginStart="@dimen/intro_margin_left"
+        android:layout_marginEnd="@dimen/intro_margin_right"
+        android:layout_marginTop="@dimen/fragment_default_margin"/>
+
+
+    <View
+        android:id="@+id/primary_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/intro_color_palette_height"
+        app:layout_parallaxFactor="0.6"
+        android:layout_marginTop="@dimen/intro_margin_top"
+        android:layout_marginStart="@dimen/intro_margin_left"
+        android:layout_marginEnd="@dimen/intro_margin_right"
+        android:background="@color/colorPrimary"/>
+
+    <View
+        android:id="@+id/primary_dark_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/intro_color_palette_height"
+        app:layout_parallaxFactor="0.6"
+        android:layout_marginStart="@dimen/intro_margin_left"
+        android:layout_marginEnd="@dimen/intro_margin_right"
+        android:background="@color/colorPrimaryDark"/>
+
+
+    <View
+        android:id="@+id/accent_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/intro_color_palette_height"
+        app:layout_parallaxFactor="0.6"
+        android:layout_marginStart="@dimen/intro_margin_left"
+        android:layout_marginEnd="@dimen/intro_margin_right"
+        android:background="@color/colorAccent"/>
+
+    <View
+        android:id="@+id/background_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/intro_color_palette_height"
+        app:layout_parallaxFactor="0.6"
+        android:layout_marginStart="@dimen/intro_margin_left"
+        android:layout_marginEnd="@dimen/intro_margin_right"
+        android:background="@color/activity_background_dark"/>
+
+
+</agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

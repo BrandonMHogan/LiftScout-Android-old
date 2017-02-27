@@ -55,7 +55,6 @@ public class SplashActivity extends BaseActivity {
                 // User has used the app before and should be directed to the main activity
                 if (userManager.validUser()){
                     toMain();
-                    toIntro();
                 }
                 else {
                     userManager.setUser(new User());

@@ -59,7 +59,7 @@ public class IntroSettingsSlideFragment extends SlideFragment implements IntroSe
 
     @Override
     public int backgroundColor() {
-        return R.color.intro_slide_four;
+        return R.color.intro_slide_two;
     }
 
     @Override

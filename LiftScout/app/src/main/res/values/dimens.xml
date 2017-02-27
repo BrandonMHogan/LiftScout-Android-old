@@ -29,8 +29,9 @@
 
     <!-- Intro -->
     <dimen name="intro_padding_bottom">55dp</dimen>
-    <dimen name="intro_icon_size">140dp</dimen>
+    <dimen name="intro_icon_size">135dp</dimen>
     <dimen name="intro_margin">30dp</dimen>
+    <dimen name="intro_margin_top_first">25dp</dimen>
     <dimen name="intro_margin_top">20dp</dimen>
     <dimen name="intro_margin_left">20dp</dimen>
     <dimen name="intro_margin_right">20dp</dimen>
@@ -38,6 +39,7 @@
     <dimen name="intro_button_height">50dp</dimen>
     <dimen name="intro_button_height_image">100dp</dimen>
     <dimen name="intro_button_width">200dp</dimen>
+    <dimen name="intro_color_palette_height">32dp</dimen>
 
     <!-- Card Views -->
     <dimen name="card_view_padding">1dp</dimen>

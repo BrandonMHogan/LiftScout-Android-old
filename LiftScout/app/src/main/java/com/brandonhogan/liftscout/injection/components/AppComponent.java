@@ -16,6 +16,7 @@ import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
 import com.brandonhogan.liftscout.views.Intro.exercises.IntroExercisesSlideFragment;
 import com.brandonhogan.liftscout.views.Intro.exercises.IntroExercisesSlidePresenter;
 import com.brandonhogan.liftscout.views.Intro.settings.IntroSettingsSlidePresenter;
+import com.brandonhogan.liftscout.views.Intro.themes.IntroThemeSlidePresenter;
 import com.brandonhogan.liftscout.views.calendar.CalendarPresenter;
 import com.brandonhogan.liftscout.views.categories.CategoryListPresenter;
 import com.brandonhogan.liftscout.views.exercises.ExerciseListPresenter;
@@ -53,6 +54,7 @@ public interface AppComponent {
     // Intro
     void inject(IntroSettingsSlidePresenter presenter);
     void inject(IntroExercisesSlidePresenter presenter);
+    void inject(IntroThemeSlidePresenter presenter);
 
     // Calendar
     void inject(CalendarPresenter presenter);

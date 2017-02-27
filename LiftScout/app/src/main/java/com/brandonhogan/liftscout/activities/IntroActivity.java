@@ -19,7 +19,10 @@ import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.views.Intro.exercises.IntroExercisesSlideFragment;
+import com.brandonhogan.liftscout.views.Intro.first.IntroFirstSlideFragment;
+import com.brandonhogan.liftscout.views.Intro.last.IntroLastSlideFragment;
 import com.brandonhogan.liftscout.views.Intro.settings.IntroSettingsSlideFragment;
+import com.brandonhogan.liftscout.views.Intro.themes.IntroThemeSlideFragment;
 
 import javax.inject.Inject;
 
@@ -50,29 +53,11 @@ public class IntroActivity extends MaterialIntroActivity {
                     }
                 });
 
-
-        addSlide(new SlideFragmentBuilder()
-                        .backgroundColor(R.color.intro_slide_one)
-                        .buttonsColor(R.color.colorAccent_ThemeGreen)
-                        .image(R.drawable.icon_grey_xxhdpi)
-                        .title(getString(R.string.intro_slide_one_title))
-                        .description(getString(R.string.intro_slide_one_description))
-                        .build());
-
-
+        addSlide(new IntroFirstSlideFragment());
         addSlide(new IntroSettingsSlideFragment());
         addSlide(new IntroExercisesSlideFragment());
-
-
-        addSlide(new SlideFragmentBuilder()
-                .backgroundColor(R.color.intro_slide_three)
-                .buttonsColor(R.color.colorAccent_ThemeGreen)
-                .image(R.drawable.ic_invert_colors_white_48dp)
-                .title(getString(R.string.intro_slide_one_title))
-                .description(getString(R.string.intro_slide_one_description))
-                .build());
-
-
+        addSlide(new IntroThemeSlideFragment());
+        addSlide(new IntroLastSlideFragment());
     }
 
     @Override
