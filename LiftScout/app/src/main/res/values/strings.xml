@@ -68,7 +68,11 @@
     <string name="intro_slide_one_title">Welcome to Lift Scout!</string>
     <string name="intro_slide_one_description">\n\rThank you for using Lift Scout, an imperative tool both in and outside of the gym! \n\r\n\r Before starting, we need to setup a few things.</string>
     <string name="intro_slide_two_title">Settings</string>
-    <string name="intro_slide_two_description">\n\r Setup the app to work the way you want.</string>
+    <string name="intro_slide_two_description">\n\r You can change these settings anytime later from the settings menu</string>
+    <string name="intro_slide_three_title">Default Exercises</string>
+    <string name="intro_slide_three_added_description">Exercises have been added</string>
+    <string name="intro_slide_three_description">\n\r Lift Scout lets you add, edit, and delete both categories and exercises. To make things easier for you, we can add many of the most common exercises for you to start with.</string>
+    <string name="intro_slide_three_button">Add Exercises</string>
 
     <!-- Init user activity -->
     <string name="frag_init_welcome_title">"Welcome to Lift Scout!"</string>

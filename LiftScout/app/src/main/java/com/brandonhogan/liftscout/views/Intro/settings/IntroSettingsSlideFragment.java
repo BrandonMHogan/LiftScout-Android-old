@@ -1,17 +1,12 @@
-package com.brandonhogan.liftscout.views.Intro;
+package com.brandonhogan.liftscout.views.Intro.settings;
 
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.views.settings.home.SettingsHomeContract;
-import com.brandonhogan.liftscout.views.settings.home.SettingsHomePresenter;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;

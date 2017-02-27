@@ -118,4 +118,18 @@ public class UserManager {
     public boolean setMeasurement(String value) {
         return userSettingsRepo.setUserSetting(UserSetting.MEASUREMENT, value);
     }
+
+    public boolean getLoadedDefaultExercises() {
+        UserSetting setting = userSettingsRepo.getUserSetting(UserSetting.LOADED_DEFAULT_EXERCISES);
+
+        if (setting == null) {
+            setting = userSettingsRepo.createUserSetting(UserSetting.LOADED_DEFAULT_EXERCISES, "false");
+        }
+
+        return setting.getValue().equals("true");
+    }
+
+    public boolean setLoadedDefaultExercises(boolean value) {
+        return userSettingsRepo.setUserSetting(UserSetting.LOADED_DEFAULT_EXERCISES, value ? "true" : "false");
+    }
 }

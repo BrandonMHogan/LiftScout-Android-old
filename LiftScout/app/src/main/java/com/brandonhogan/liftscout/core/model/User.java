@@ -15,18 +15,12 @@ public class User extends RealmObject {
     private Date birthDate;
     private double weight;
     @Required
-    private String unitType;
-    @Required
     private Date startDate;
     @Required
     private Date lastUsed;
-    private boolean firstLoad = true;
 
-    public User() {}
-
-    public User(String unitType) {
+    public User() {
         this.id = 1;
-        this.unitType = unitType;
         this.startDate = new Date();
         this.lastUsed = this.startDate;
     }
@@ -60,14 +54,6 @@ public class User extends RealmObject {
         this.weight = weight;
     }
 
-    public String getUnitType() {
-        return unitType;
-    }
-
-    public void setUnitType(String unitType) {
-        this.unitType = unitType;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -83,15 +69,6 @@ public class User extends RealmObject {
     public void setLastUsed(Date lastUsed) {
         this.lastUsed = lastUsed;
     }
-
-    public boolean isFirstLoad() {
-        return firstLoad;
-    }
-
-    public void setFirstLoad(boolean firstLoad) {
-        this.firstLoad = firstLoad;
-    }
-
 
     public Integer getAge() {
         Calendar dob = Calendar.getInstance();

@@ -1,11 +1,9 @@
-package com.brandonhogan.liftscout.views.Intro;
+package com.brandonhogan.liftscout.views.Intro.settings;
 
 import com.brandonhogan.liftscout.core.constants.DefaultScreens;
 import com.brandonhogan.liftscout.core.constants.Measurements;
-import com.brandonhogan.liftscout.core.constants.TodayTransforms;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.views.settings.home.SettingsHomeContract;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.injection.components;
 
 import com.brandonhogan.liftscout.activities.BaseActivity;
+import com.brandonhogan.liftscout.activities.IntroActivity;
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.injection.module.AppModule;
@@ -12,7 +13,9 @@ import com.brandonhogan.liftscout.repository.impl.ProgressRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.SetRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
-import com.brandonhogan.liftscout.views.Intro.IntroSettingsSlidePresenter;
+import com.brandonhogan.liftscout.views.Intro.exercises.IntroExercisesSlideFragment;
+import com.brandonhogan.liftscout.views.Intro.exercises.IntroExercisesSlidePresenter;
+import com.brandonhogan.liftscout.views.Intro.settings.IntroSettingsSlidePresenter;
 import com.brandonhogan.liftscout.views.calendar.CalendarPresenter;
 import com.brandonhogan.liftscout.views.categories.CategoryListPresenter;
 import com.brandonhogan.liftscout.views.exercises.ExerciseListPresenter;
@@ -23,7 +26,6 @@ import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayPresente
 import com.brandonhogan.liftscout.views.settings.home.SettingsHomePresenter;
 import com.brandonhogan.liftscout.views.settings.profile.SettingsProfilePresenter;
 import com.brandonhogan.liftscout.views.workout.graph.GraphPresenter;
-import com.brandonhogan.liftscout.views.workout.history.HistoryFragment;
 import com.brandonhogan.liftscout.views.workout.history.HistoryPresenter;
 import com.brandonhogan.liftscout.views.workout.tracker.TrackerFragment;
 import com.brandonhogan.liftscout.views.workout.tracker.TrackerPresenter;
@@ -41,6 +43,7 @@ public interface AppComponent {
 
     // Activities
     void inject(BaseActivity activity);
+    void inject(IntroActivity activity);
     void inject(MainActivity activity);
 
     // Fragments
@@ -49,6 +52,7 @@ public interface AppComponent {
 
     // Intro
     void inject(IntroSettingsSlidePresenter presenter);
+    void inject(IntroExercisesSlidePresenter presenter);
 
     // Calendar
     void inject(CalendarPresenter presenter);

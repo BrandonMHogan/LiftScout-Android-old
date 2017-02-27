@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.views.Intro;
+package com.brandonhogan.liftscout.views.Intro.settings;
 
 import java.util.ArrayList;
 

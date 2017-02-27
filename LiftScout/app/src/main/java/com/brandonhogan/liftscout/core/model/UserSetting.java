@@ -15,6 +15,7 @@ public class UserSetting extends RealmObject {
     public static final String MEASUREMENT = "measurement";
     public static final String HOME_DEFAULT_SCREEN = "homeDefault";
     public static final String TODAY_TRANSFORM = "todayTransform";
+    public static final String LOADED_DEFAULT_EXERCISES = "loadedDefaultExercises";
     public static final String TODAY_SHOW_WEIGHT = "today_showWeight";
     public static final String TODAY_SHOW_PHOTO = "today_showPhoto";
     public static final String TODAY_SHOW_ROUTINE = "today_showRoutine";

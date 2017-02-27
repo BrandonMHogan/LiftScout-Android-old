@@ -1,0 +1,111 @@
+package com.brandonhogan.liftscout.views.Intro.exercises;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.views.Intro.settings.IntroSettingsSlideContract;
+import com.brandonhogan.liftscout.views.Intro.settings.IntroSettingsSlidePresenter;
+import com.jaredrummler.materialspinner.MaterialSpinner;
+
+import java.util.ArrayList;
+
+import agency.tango.materialintroscreen.SlideFragment;
+import agency.tango.materialintroscreen.parallax.ParallaxLinearLayout;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+/**
+ * Created by Brandon on 2/27/2017.
+ * Description :
+ */
+
+public class IntroExercisesSlideFragment extends SlideFragment implements IntroExercisesSlideContract.View {
+
+
+    // Bindings
+    //
+    @Bind(R.id.create_button)
+    Button createButton;
+
+    @Bind(R.id.image_button)
+    ImageButton imageButton;
+
+    @Bind(R.id.image_button_desc)
+    TextView imageButtonDescription;
+
+    @Bind(R.id.layout)
+    ParallaxLinearLayout layout;
+
+    // Private Properties
+    //
+    private IntroExercisesSlideContract.Presenter presenter;
+
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.frag_intro_exercises, container, false);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
+
+        presenter = new IntroExercisesSlidePresenter(this);
+        presenter.viewCreated();
+    }
+
+    @Override
+    public int backgroundColor() {
+        return R.color.intro_slide_four;
+    }
+
+    @Override
+    public int buttonsColor() {
+        return R.color.colorAccent_ThemeGreen;
+    }
+
+    @Override
+    public boolean canMoveFurther() {
+        return true;
+    }
+
+    @OnClick(R.id.create_button)
+    public void onCreateClick() {
+        presenter.onButtonPressed();
+    }
+
+    @Override
+    public void exercisesCreated(String value) {
+        Snackbar snackbar = Snackbar
+                .make(layout, value, Snackbar.LENGTH_LONG);
+        snackbar.show();
+
+        createButton.setEnabled(false);
+        createButton.setVisibility(View.GONE);
+        imageButton.setVisibility(View.VISIBLE);
+        imageButtonDescription.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public int getColor(int color) {
+        return getResources().getColor(color);
+    }
+
+    @Override
+    public String getStringValue(int value) {
+        return getString(value);
+    }
+}
