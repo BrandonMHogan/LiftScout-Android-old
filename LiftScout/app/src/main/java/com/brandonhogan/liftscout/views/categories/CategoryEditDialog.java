@@ -124,18 +124,12 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
         nameEditText.requestFocus();
     }
 
-    public void dismiss() {
+    private void dismiss() {
         dialog.dismiss();
     }
 
     @Override
     public void onColorSelected(@ColorInt int color) {
-        int apple = R.color.category_purple;
-        String orange = Integer.toHexString(R.color.category_purple).toUpperCase();
-        int pear = Integer.parseInt(orange, 16);
-        long peach = Long.parseLong(orange, 16);
-
-        Toast.makeText(activity, "Color selected: #" + Integer.toHexString(color).toUpperCase(), Toast.LENGTH_SHORT).show();
         category.setColor(color);
     }
 }
