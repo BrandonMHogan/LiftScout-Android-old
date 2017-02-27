@@ -114,6 +114,9 @@
     <style name="AppTheme.Purple.Dark" parent="AppTheme.Purple.Dark.Base" >
     </style>
 
+    <style name="Theme.Intro.Mine" parent="Theme.Intro">
+        <item name="ms_background_color">@color/fillColor</item>
+    </style>
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

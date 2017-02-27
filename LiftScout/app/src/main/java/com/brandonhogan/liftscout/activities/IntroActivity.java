@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.views.Intro.IntroSettingsSlideFragment;
 
 import agency.tango.materialintroscreen.MaterialIntroActivity;
-import agency.tango.materialintroscreen.MessageButtonBehaviour;
 import agency.tango.materialintroscreen.SlideFragmentBuilder;
 import agency.tango.materialintroscreen.animations.IViewTranslation;
 
@@ -32,36 +32,37 @@ public class IntroActivity extends MaterialIntroActivity {
 
 
         addSlide(new SlideFragmentBuilder()
-                        .backgroundColor(R.color.blue)
-                        .buttonsColor(R.color.gray_dark)
-                        .image(R.drawable.ic_add_white_24dp)
-                        .title("Organize your time with us")
-                        .description("Would you try?")
-                        .build(),
-                new MessageButtonBehaviour(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showMessage("We provide solutions to make you love your work");
-                    }
-                }, "Work with love"));
+                        .backgroundColor(R.color.intro_slide_one)
+                        .buttonsColor(R.color.colorAccent_ThemeGreen)
+                        .image(R.drawable.icon_grey_xxhdpi)
+                        .title(getString(R.string.intro_slide_one_title))
+                        .description(getString(R.string.intro_slide_one_description))
+                        .build());
+
+
+        addSlide(new IntroSettingsSlideFragment());
+
+        addSlide(new SlideFragmentBuilder()
+                .backgroundColor(R.color.intro_slide_two)
+                .buttonsColor(R.color.colorAccent_ThemeGreen)
+                .image(R.drawable.icon_grey_xxhdpi)
+                .title(getString(R.string.intro_slide_one_title))
+                .description(getString(R.string.intro_slide_one_description))
+                .build());
 
 
         addSlide(new SlideFragmentBuilder()
-                .backgroundColor(R.color.green)
-                .buttonsColor(R.color.red)
-                .title("Want more?")
-                .description("Go on")
+                .backgroundColor(R.color.intro_slide_three)
+                .buttonsColor(R.color.colorAccent_ThemeGreen)
+                .image(R.drawable.icon_grey_xxhdpi)
+                .title(getString(R.string.intro_slide_one_title))
+                .description(getString(R.string.intro_slide_one_description))
                 .build());
 
 
 
-        addSlide(new SlideFragmentBuilder()
-                        .backgroundColor(R.color.blue)
-                        .buttonsColor(R.color.gray_dark)
-                        .image(R.drawable.ic_add_white_24dp)
-                        .title("Organize your time with us")
-                        .description("Would you try?")
-                        .build());
+
+
     }
 
 

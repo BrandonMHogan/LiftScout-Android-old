@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<agency.tango.materialintroscreen.parallax.ParallaxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:layout_margin="25dp"
+    android:paddingBottom="50dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_parallaxFactor="0.2"
+        android:text="@string/intro_slide_two_title"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="20dp"
+        style="@style/RobotoDisplay01" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:layout_marginTop="200dp"
+        app:layout_parallaxFactor="0.7"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_home_default_spinner_title"
+            android:layout_marginBottom="@dimen/fragment_default_xsmall_margin"
+            style="@style/RobotoSubheadingBold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_home_default_spinner_description"
+            android:layout_marginBottom="@dimen/fragment_default_small_margin"
+            style="@style/RobotoCaption" />
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/homeDefaultSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:layout_marginTop="120dp"
+        app:layout_parallaxFactor="0.7"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_profile_measurement_spinner_title"
+            android:layout_marginBottom="@dimen/fragment_default_xsmall_margin"
+            app:layout_parallaxFactor="0.4"
+            style="@style/RobotoSubheadingBold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_profile_measurement_spinner_description"
+            android:layout_marginBottom="@dimen/fragment_default_small_margin"
+            style="@style/RobotoCaption" />
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/measurementSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    
+</agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

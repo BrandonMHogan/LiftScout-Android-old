@@ -52,6 +52,14 @@
     <color name="delete_red">#80ff1744</color>
     <color name="edit_green">#8036CF8E</color>
 
+
+
+    <color name="intro_slide_one">#ff343434</color>
+    <color name="intro_slide_two">#ff3d3e3f</color>
+    <color name="intro_slide_three">#ff4b4e51</color>
+    <color name="intro_slide_four">#ff4f4d5e</color>
+
+
     <!-- Category Colors -->
     <color name="category_light_red">#f44336</color>
     <color name="category_red">#ff1744</color>

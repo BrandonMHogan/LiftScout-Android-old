@@ -64,6 +64,12 @@
     <string name="title_frag_exercise_list">Exercises</string>
     <string name="title_frag_home">Home</string>
 
+    <!-- Intro Activity -->
+    <string name="intro_slide_one_title">Welcome to Lift Scout!</string>
+    <string name="intro_slide_one_description">\n\rThank you for using Lift Scout, an imperative tool both in and outside of the gym! \n\r\n\r Before starting, we need to setup a few things.</string>
+    <string name="intro_slide_two_title">Settings</string>
+    <string name="intro_slide_two_description">\n\r Setup the app to work the way you want.</string>
+
     <!-- Init user activity -->
     <string name="frag_init_welcome_title">"Welcome to Lift Scout!"</string>
     <string name="frag_init_welcome_message">"Before we get started, we need to set up a few details."</string>
@@ -112,7 +118,7 @@
     <string name="setting_home">Home</string>
     <string name="setting_home_description">Tailor the home screen to fit your needs</string>
     <string name="setting_home_default_spinner_title">Home Screen</string>
-    <string name="setting_home_default_spinner_description">Choose which screen you want to be displayed first when the app is started</string>
+    <string name="setting_home_default_spinner_description">Would you prefer to see a calendar or the current day only when the app first starts</string>
     <string name="setting_today_transformer_spinner_title">Transition Type</string>
     <string name="setting_today_transformer_spinner_description">Change the transition type when swiping from day to day</string>
     <string name="setting_today_weight_title">Enable Weight Tracking</string>
@@ -126,7 +132,7 @@
     <string name="setting_profile_name_description">Change your name</string>
 
     <string name="setting_profile_measurement_spinner_title">Unit of Measurement</string>
-    <string name="setting_profile_measurement_spinner_description">Choose a unit of measurement you want to use for your weight</string>
+    <string name="setting_profile_measurement_spinner_description">Choose the unit of measurement you want to use for your weight</string>
 
     <!-- About -->
     <string name="about_version">Version</string>
