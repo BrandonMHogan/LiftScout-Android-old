@@ -39,6 +39,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 import butterknife.Bind;
 
 public class GraphFragment extends BaseFragment implements GraphContract.View {
@@ -90,7 +92,6 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
     private float graphMaxValue = 100;
     private XAxis xAxis;
 
-
     //Overrides
     //
     @Nullable
@@ -131,7 +132,7 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
 
         graphMaxValue = 100;
 
-        if (uniqueDateCount > 6) {
+        if (uniqueDateCount > 5) {
             xAxis.setLabelCount(5);
             lineChart.setScaleEnabled(true);
         }
@@ -145,7 +146,8 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         for (int i = 0; i < data.size(); i++) {
 
             float volume = ((float)data.get(i).getValue());
-            float date = ((float)(data.get(i).getId() / 1000.0));
+            float date = data.get(i).getId();
+
 
             values.add(new Entry(date, volume));
 
@@ -281,14 +283,13 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         xAxis.setTextSize(11f);
         xAxis.setGranularity(1f);
         xAxis.setDrawGridLines(false);
+
         xAxis.setValueFormatter(new IAxisValueFormatter() {
 
-            private SimpleDateFormat mFormat = new SimpleDateFormat("dd MMM");
+            private SimpleDateFormat mFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-
-                Date date = new Date((long)value);
-                return mFormat.format(date);
+                return mFormat.format(new Date((long)value));
             }
         });
 

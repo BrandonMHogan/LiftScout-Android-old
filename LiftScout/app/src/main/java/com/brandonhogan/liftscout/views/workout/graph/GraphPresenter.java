@@ -37,6 +37,7 @@ public class GraphPresenter implements GraphContract.Presenter {
     private GraphContract.View view;
     private int exerciseId;
     private int position = 0;
+    private List<GraphDataSet> items;
 
     // Constructor
     //
@@ -88,7 +89,7 @@ public class GraphPresenter implements GraphContract.Presenter {
 
         sets = sets.where().between("date", calendar.getTime(), new Date()).findAll();
 
-        List<GraphDataSet> items = new LinkedList<>();
+        items = new LinkedList<>();
 
         int uniqueDateCount = 0;
         ArrayList<Date> dates = new ArrayList<>();
@@ -121,17 +122,24 @@ public class GraphPresenter implements GraphContract.Presenter {
 
     @Override
     public void onTypeSelected(String type) {
-
     }
 
     @Override
     public void onItemSelected(Entry entry) {
-        long time = ((long)(entry.getX() * 1000));
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(time);
-
         String value = Float.toString(((long)entry.getY())) + " " + userManager.getMeasurementValue();
+        view.setSelected(BhDate.toSimpleStringDate(getDateByFloat(entry.getX())), value);
+    }
 
-        view.setSelected(BhDate.toSimpleStringDate(calendar.getTime()), value);
+
+    private Date getDateByFloat(float value) {
+        Calendar calendar = Calendar.getInstance();
+
+        for(GraphDataSet item : items) {
+            if ((float)item.getId() == value) {
+                calendar.setTimeInMillis(item.getId());
+                break;
+            }
+        }
+        return calendar.getTime();
     }
 }
