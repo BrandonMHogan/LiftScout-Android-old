@@ -5,7 +5,9 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.about.AboutFragment;
+import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.calendar.CalendarFragment;
 import com.brandonhogan.liftscout.views.categories.CategoryListFragment;
 import com.brandonhogan.liftscout.views.exercises.ExerciseListFragment;
@@ -16,6 +18,8 @@ import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment
 import com.brandonhogan.liftscout.views.settings.home.SettingsHomeFragment;
 import com.brandonhogan.liftscout.views.settings.profile.SettingsProfileFragment;
 import com.brandonhogan.liftscout.views.workout.WorkoutContainerFragment;
+
+import javax.inject.Inject;
 
 public class NavigationManager {
 
@@ -34,6 +38,7 @@ public class NavigationManager {
     private NavigationListener navigationListener;
     private boolean isInTransition = false;
     private FragmentManager.OnBackStackChangedListener backstackListener;
+    private String currentFragmentName;
 
 
     // Public Properties
@@ -75,7 +80,9 @@ public class NavigationManager {
      *
      * @param fragment
      */
-    private boolean replaceWithTransitions(Fragment fragment, int in, int out) {
+    private boolean replaceWithTransitions(BaseFragment fragment, int in, int out) {
+
+        currentFragmentName = fragment.getClass().getName();
 
         mFragmentManager.beginTransaction()
                 .setCustomAnimations(in,
@@ -83,7 +90,7 @@ public class NavigationManager {
                         R.animator.fade_in,
                         R.animator.fade_out)
                 .replace(R.id.fragment_manager, fragment)
-                .addToBackStack(fragment.getClass().getName())
+                .addToBackStack(fragment.getTAG())
                 .commit();
 
         return true;
@@ -94,11 +101,11 @@ public class NavigationManager {
      *
      * @param fragment
      */
-    private boolean openAsRoot(Fragment fragment) {
+    private boolean openAsRoot(BaseFragment fragment) {
         return openAsRoot(fragment, false);
     }
 
-    private boolean openAsRoot(Fragment fragment, boolean force) {
+    private boolean openAsRoot(BaseFragment fragment, boolean force) {
         if (!verifyTransition(fragment, force))
             return false;
 
@@ -106,7 +113,7 @@ public class NavigationManager {
         return replaceWithTransitions(fragment, R.animator.root_in, R.animator.fade_out);
     }
 
-    private boolean openAsHome(Fragment fragment) {
+    private boolean openAsHome(BaseFragment fragment) {
         if (!verifyTransition(fragment, false))
             return false;
 
@@ -114,14 +121,14 @@ public class NavigationManager {
         return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
     }
 
-    private boolean open(Fragment fragment) {
+    private boolean open(BaseFragment fragment) {
         if (!verifyTransition(fragment, false))
             return false;
 
         return replaceWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
     }
 
-    private boolean verifyTransition(Fragment fragment, boolean force) {
+    private boolean verifyTransition(BaseFragment fragment, boolean force) {
         if (mFragmentManager == null)
             return false;
 
@@ -173,6 +180,14 @@ public class NavigationManager {
         }
     }
 
+    private boolean popToFragmentName(String name) {
+        return mFragmentManager.popBackStackImmediate(name, 0);
+    }
+
+    private boolean popToFragmentPosition(int pos) {
+        return mFragmentManager.popBackStackImmediate(pos, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
     /**
      * Navigates back by popping teh back stack. If there is no more items left we finish the current activity.
      *
@@ -188,12 +203,12 @@ public class NavigationManager {
     }
 
     public boolean startToday() {
-        Fragment fragment = HomeFragment.newInstance();
+        BaseFragment fragment = HomeFragment.newInstance();
         return openAsHome(fragment);
     }
 
     public boolean startCalendar() {
-        Fragment fragment = CalendarFragment.newInstance();
+        BaseFragment fragment = CalendarFragment.newInstance();
         return openAsHome(fragment);
     }
 
@@ -201,22 +216,22 @@ public class NavigationManager {
     // Settings
     //
     public boolean startSettings() {
-        Fragment fragment = SettingsListFragment.newInstance();
+        BaseFragment fragment = SettingsListFragment.newInstance();
         return openAsRoot(fragment);
     }
 
     public boolean startSettingsProfile() {
-        Fragment fragment = SettingsProfileFragment.newInstance();
+        BaseFragment fragment = SettingsProfileFragment.newInstance();
         return open(fragment);
     }
 
     public boolean startSettingsDisplay() {
-        Fragment fragment = SettingsDisplayFragment.newInstance();
+        BaseFragment fragment = SettingsDisplayFragment.newInstance();
         return open(fragment);
     }
 
     public boolean startSettingsHome() {
-        Fragment fragment = SettingsHomeFragment.newInstance();
+        BaseFragment fragment = SettingsHomeFragment.newInstance();
         return open(fragment);
     }
 
@@ -224,48 +239,62 @@ public class NavigationManager {
     // About
     //
     public boolean startAbout() {
-        Fragment fragment = AboutFragment.newInstance();
+        BaseFragment fragment = AboutFragment.newInstance();
         return openAsRoot(fragment);
     }
 
     // Graphs
     //
-    public boolean startGraphsContainer() {
-        Fragment fragment = GraphsContainerFragment.newInstance();
-        return openAsRoot(fragment);
+    public boolean startGraphsContainer(boolean isSearch) {
+        BaseFragment fragment = GraphsContainerFragment.newInstance();
+
+        if (isSearch)
+            return popToFragmentName(fragment.getTAG()) || openAsRoot(fragment);
+
+       return openAsRoot(fragment);
     }
 
     // Categories / Exercises
     //
     public boolean startCategoryList() {
-        Fragment fragment = CategoryListFragment.newInstance(false);
+        BaseFragment fragment = CategoryListFragment.newInstance(false);
         return openAsRoot(fragment);
     }
 
     public boolean startCategoryListAddSet() {
-        Fragment fragment = CategoryListFragment.newInstance(true);
+        BaseFragment fragment = CategoryListFragment.newInstance(true);
         return openAsRoot(fragment);
     }
 
+    public boolean startCategoryListGraphSearch() {
+        BaseFragment fragment = CategoryListFragment.newInstance(false);
+        return open(fragment);
+    }
+
     public boolean startExerciseList(int categoryId) {
-        Fragment fragment = ExerciseListFragment.newInstance(categoryId);
+        BaseFragment fragment = ExerciseListFragment.newInstance(categoryId);
         return open(fragment);
     }
 
     public boolean startExerciseListAddSet(int categoryId) {
-        Fragment fragment = ExerciseListFragment.newInstance(categoryId, true);
+        BaseFragment fragment = ExerciseListFragment.newInstance(categoryId, true);
+        return open(fragment);
+    }
+
+    public boolean startExerciseListSearch(int categoryId) {
+        BaseFragment fragment = ExerciseListFragment.newInstance(categoryId, false);
         return open(fragment);
     }
 
 
     // Set Edit
     public boolean startWorkoutContainer(int exerciseId) {
-        Fragment fragment = WorkoutContainerFragment.newInstance(exerciseId);
+        BaseFragment fragment = WorkoutContainerFragment.newInstance(exerciseId);
         return openAsRoot(fragment);
     }
 
     public boolean startWorkoutContainer(int exerciseId, boolean force) {
-        Fragment fragment = WorkoutContainerFragment.newInstance(exerciseId);
+        BaseFragment fragment = WorkoutContainerFragment.newInstance(exerciseId);
         return openAsRoot(fragment, force);
     }
 
@@ -283,5 +312,9 @@ public class NavigationManager {
 
     public void setNavigationListener(NavigationListener navigationListener) {
         this.navigationListener = navigationListener;
+    }
+
+    public String getCurrentFragmentName() {
+        return currentFragmentName;
     }
 }

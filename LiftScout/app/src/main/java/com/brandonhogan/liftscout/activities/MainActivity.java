@@ -158,7 +158,7 @@ public class MainActivity extends BaseActivity
 //        } else if (id == R.id.nav_routines) {
 
         } else if (id == R.id.nav_graphs) {
-            success = navigationManager.startGraphsContainer();
+            success = navigationManager.startGraphsContainer(false);
         } else if (id == R.id.nav_settings) {
             success = navigationManager.startSettings();
         } else if (id == R.id.nav_about) {

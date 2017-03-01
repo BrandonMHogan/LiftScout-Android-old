@@ -218,8 +218,12 @@ public class ExerciseListFragment extends BaseFragment implements
     }
 
     @Override
-    public void itemSelected(int exerciseId) {
-        getNavigationManager().startWorkoutContainer(exerciseId);
+    public void itemSelected(int exerciseId, boolean isSearch) {
+
+        if (isSearch)
+            getNavigationManager().startGraphsContainer(true);
+        else
+            getNavigationManager().startWorkoutContainer(exerciseId);
     }
 
     @Override

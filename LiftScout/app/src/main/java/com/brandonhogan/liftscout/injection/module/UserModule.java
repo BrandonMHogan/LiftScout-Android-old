@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.injection.module;
 
 import com.brandonhogan.liftscout.core.managers.CalendarManager;
+import com.brandonhogan.liftscout.core.managers.GraphManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 
@@ -28,5 +29,11 @@ public class UserModule {
     @Singleton
     CalendarManager calendarManager() {
         return new CalendarManager();
+    }
+
+    @Provides
+    @Singleton
+    GraphManager graphManager() {
+        return new GraphManager();
     }
 }

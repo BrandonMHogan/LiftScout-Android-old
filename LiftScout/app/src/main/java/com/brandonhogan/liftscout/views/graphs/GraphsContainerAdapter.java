@@ -5,7 +5,7 @@ import android.app.FragmentManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
 
 import com.brandonhogan.liftscout.views.graphs.categories.GraphsCategoriesFragment;
-import com.brandonhogan.liftscout.views.graphs.exercises.ExercisesFragment;
+import com.brandonhogan.liftscout.views.graphs.exercises.GraphExercisesFragment;
 
 /**
  * Created by Brandon on 2/16/2017.
@@ -25,7 +25,7 @@ public class GraphsContainerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return GraphsCategoriesFragment.newInstance();
             case 1:
-                return ExercisesFragment.newInstance();
+                return GraphExercisesFragment.newInstance();
             default:
                 return null;
         }

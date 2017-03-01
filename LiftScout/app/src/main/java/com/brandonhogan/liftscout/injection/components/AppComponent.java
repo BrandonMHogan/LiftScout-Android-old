@@ -13,7 +13,6 @@ import com.brandonhogan.liftscout.repository.impl.ProgressRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.SetRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
-import com.brandonhogan.liftscout.views.Intro.exercises.IntroExercisesSlideFragment;
 import com.brandonhogan.liftscout.views.Intro.exercises.IntroExercisesSlidePresenter;
 import com.brandonhogan.liftscout.views.Intro.settings.IntroSettingsSlidePresenter;
 import com.brandonhogan.liftscout.views.Intro.themes.IntroThemeSlidePresenter;
@@ -21,6 +20,8 @@ import com.brandonhogan.liftscout.views.calendar.CalendarPresenter;
 import com.brandonhogan.liftscout.views.categories.CategoryListPresenter;
 import com.brandonhogan.liftscout.views.exercises.ExerciseListPresenter;
 import com.brandonhogan.liftscout.views.graphs.categories.GraphsCategoriesPresenter;
+import com.brandonhogan.liftscout.views.graphs.exercises.GraphExercisesFragment;
+import com.brandonhogan.liftscout.views.graphs.exercises.GraphExercisesPresenter;
 import com.brandonhogan.liftscout.views.home.HomePresenter;
 import com.brandonhogan.liftscout.views.home.today.TodayPresenter;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
@@ -62,6 +63,8 @@ public interface AppComponent {
 
     // Graphs
     void inject(GraphsCategoriesPresenter presenter);
+    void inject(GraphExercisesPresenter presenter);
+    void inject(GraphExercisesFragment presenter);
 
     // Category / Exercise
     void inject(ExerciseListPresenter presenter);

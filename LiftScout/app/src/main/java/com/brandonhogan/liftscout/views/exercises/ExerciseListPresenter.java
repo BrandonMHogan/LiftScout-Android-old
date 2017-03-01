@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.views.exercises;
 
+import com.brandonhogan.liftscout.core.managers.GraphManager;
 import com.brandonhogan.liftscout.core.model.Category;
 import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.injection.components.Injector;
@@ -10,10 +11,14 @@ import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import io.realm.RealmResults;
 
 public class ExerciseListPresenter implements ExerciseListContract.Presenter {
-    
+
+    @Inject
+    GraphManager graphManager;
 
     // Private Properties
     //
@@ -71,8 +76,14 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
 
     @Override
     public void rowClicked(int position) {
-        if (isAddSet) {
-            view.itemSelected(adapterData.get(position).getId());
+
+        // Since we are searching for the id, store it now into the manager
+        if (graphManager.isInSearch()) {
+            graphManager.setCurrentExerciseId(adapterData.get(position).getId());
+        }
+
+        if (isAddSet || graphManager.isInSearch()) {
+            view.itemSelected(adapterData.get(position).getId(), graphManager.isInSearch());
         }
         else {
             view.swipeItem(position);
