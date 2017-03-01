@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
-import com.brandonhogan.liftscout.views.graphs.categories.CategoriesFragment;
 
 /**
  * Created by Brandon on 2/16/2017.

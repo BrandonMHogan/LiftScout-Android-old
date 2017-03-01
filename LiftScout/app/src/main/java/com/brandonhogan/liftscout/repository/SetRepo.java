@@ -22,4 +22,5 @@ public interface SetRepo {
     void deleteRep(int repId);
     Set getSet(int setId);
     RealmResults<Set> getSets(int exerciseId);
+    RealmResults<Set> getSets();
 }

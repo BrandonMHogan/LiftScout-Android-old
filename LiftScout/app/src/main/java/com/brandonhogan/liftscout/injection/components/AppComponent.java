@@ -20,6 +20,7 @@ import com.brandonhogan.liftscout.views.Intro.themes.IntroThemeSlidePresenter;
 import com.brandonhogan.liftscout.views.calendar.CalendarPresenter;
 import com.brandonhogan.liftscout.views.categories.CategoryListPresenter;
 import com.brandonhogan.liftscout.views.exercises.ExerciseListPresenter;
+import com.brandonhogan.liftscout.views.graphs.categories.GraphsCategoriesPresenter;
 import com.brandonhogan.liftscout.views.home.HomePresenter;
 import com.brandonhogan.liftscout.views.home.today.TodayPresenter;
 import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
@@ -58,6 +59,9 @@ public interface AppComponent {
 
     // Calendar
     void inject(CalendarPresenter presenter);
+
+    // Graphs
+    void inject(GraphsCategoriesPresenter presenter);
 
     // Category / Exercise
     void inject(ExerciseListPresenter presenter);

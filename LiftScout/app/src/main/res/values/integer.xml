@@ -4,4 +4,10 @@
     <integer name="animation_speed_root_in">120</integer>
     <integer name="animation_speed_root_in_alpha">200</integer>
     <integer name="animation_speed_root_out">100</integer>
+
+    <integer name="graph_pie_font_size">15</integer>
+    <integer name="graph_pie_center_font_size">18</integer>
+    <integer name="graph_pie_radius_hole">54</integer>
+    <integer name="graph_pie_radius_hole_transparent">55</integer>
+
 </resources>

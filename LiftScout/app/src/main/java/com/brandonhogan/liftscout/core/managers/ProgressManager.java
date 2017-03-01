@@ -153,6 +153,10 @@ public class ProgressManager {
         return setRepo.getSets(exerciseId);
     }
 
+    public RealmResults<Set> getAllSets() {
+        return setRepo.getSets();
+    }
+
     public void deleteSet(Set set) {
         setRepo.deleteSet(set);
     }

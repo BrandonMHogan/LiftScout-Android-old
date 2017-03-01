@@ -1,22 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.brandonhogan.liftscout.core.controls.BaseFrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:windowBackground" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_margin="@dimen/fragment_default_margin">
 
-        <TextView
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/graph_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Category Graphs"/>
+            android:layout_alignParentTop="true"
+            app:ms_background_color="?attr/android:fillColor"/>
 
-    </LinearLayout>
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pie_chart"
+            android:layout_width="375dp"
+            android:layout_height="375dp"
+            android:layout_below="@id/graph_type"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"/>
 
-</com.brandonhogan.liftscout.core.controls.BaseFrameLayout>
+        <TextView
+            android:id="@+id/selected_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/chart"/>
+
+        <TextView
+            android:id="@+id/selected_item_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/selected_item_date"/>
+
+
+    </RelativeLayout>
+</FrameLayout>

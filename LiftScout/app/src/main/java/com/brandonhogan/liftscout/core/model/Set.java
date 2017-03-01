@@ -4,6 +4,7 @@ import java.util.Date;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
 
 public class Set extends RealmObject {
@@ -24,6 +25,7 @@ public class Set extends RealmObject {
 
     private RealmList<Rep> reps;
 
+    @Index
     private Date date;
 
     public int getId() {

@@ -39,6 +39,16 @@
     <string name="one_year">1 Year</string>
     <string name="all">All</string>
 
+
+    <!-- Constants -->
+
+    <!-- Constants - Charts -->
+    <string name="charts_category_total_workout">Total Workout</string>
+    <string name="charts_category_total_sets">Total Sets</string>
+    <string name="charts_category_total_reps">Total Reps</string>
+
+
+
     <!-- Drawer Navigations -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

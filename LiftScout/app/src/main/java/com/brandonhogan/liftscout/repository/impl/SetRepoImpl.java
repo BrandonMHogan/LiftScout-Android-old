@@ -40,6 +40,13 @@ public class SetRepoImpl implements SetRepo {
     }
 
     @Override
+    public RealmResults<Set> getSets() {
+        return databaseRealm.getRealmInstance()
+                .where(Set.class)
+                .findAll();
+    }
+
+    @Override
     public Set getSet(int setId) {
         return databaseRealm.getRealmInstance()
                 .where(Set.class)
