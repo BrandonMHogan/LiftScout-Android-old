@@ -72,19 +72,22 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
     @Override
     public void onResume() {
         super.onResume();
+
+        getNavigationManager().unlockDrawer();
         presenter.onResume();
     }
 
     @Override
     public void setSelectedExercise(int id, String name) {
         myButton.setText(name);
-        lineGraph.setExercise(id);
+        lineGraph.setExercise(id, name);
     }
 
     @OnClick(R.id.my_button)
     void onClick() {
         graphManager.setInSearch(true);
         graphManager.setGraphName(getNavigationManager().getCurrentFragmentName());
+        getNavigationManager().lockDrawer();
         getNavigationManager().startCategoryListGraphSearch();
     }
 }

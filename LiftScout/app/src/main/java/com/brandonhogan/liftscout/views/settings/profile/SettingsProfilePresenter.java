@@ -1,7 +1,6 @@
 package com.brandonhogan.liftscout.views.settings.profile;
 
 import com.brandonhogan.liftscout.core.constants.Measurements;
-import com.brandonhogan.liftscout.core.constants.Themes;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
 

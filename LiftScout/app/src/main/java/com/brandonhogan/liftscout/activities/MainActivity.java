@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity
             navigationView.setNavigationItemSelectedListener(this);
 
             navigationManager = new NavigationManager();
-            navigationManager.init(getFragmentManager());
+            navigationManager.init(getFragmentManager(), drawer);
             navigationManager.setNavigationListener(this);
 
 
@@ -110,6 +110,8 @@ public class MainActivity extends BaseActivity
         super.onPause();
         updateUserData();
         navigationManager.setNavigationListener(null); // Prevent memory leak on recreate
+        navigationManager.setDrawer(null);
+        navigationManager.setmFragmentManager(null);
     }
 
     @Override

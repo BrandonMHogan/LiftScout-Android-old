@@ -12,12 +12,12 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
+
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.TodayTransforms;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.home.today.TodayPageAdapter;
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
-import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -44,10 +44,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Bind(R.id.viewpager)
     HorizontalInfiniteCycleViewPager viewPager;
 
-    @Bind(R.id.fabtoolbar)
-    FABToolbarLayout toolbarLayout;
-
-    @Bind(R.id.fabtoolbar_fab)
+    @Bind(R.id.fab)
     FloatingActionButton fab;
 
 
@@ -69,13 +66,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         setTitle(getString(R.string.app_name));
 
         setupPager();
-        setupFab();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        toolbarLayout.hide(); // Hides because it bugs out if left open and returned sometimes
         viewPager.addOnPageChangeListener(null);
     }
 
@@ -98,7 +93,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             onPageChangeListener = new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                    toolbarLayout.hide();
                 }
 
                 @Override
@@ -137,27 +131,13 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         }
     }
 
-    private void setupFab() {
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toolbarLayout.show();
-            }
-        });
-    }
 
     private void updateTodayProgress() {
         presenter.updateTodayProgress(adapter.dateByPosition(viewPager.getCurrentItem()));
     }
 
-    @OnClick(R.id.routine_add)
+    @OnClick(R.id.fab)
     public void addSetOnClick() {
         getNavigationManager().startCategoryListAddSet();
     }
-
-    @OnClick(R.id.exercise_add)
-    public void addExerciseOnClick() {
-        getNavigationManager().startCategoryListAddSet();
-    }
-
 }

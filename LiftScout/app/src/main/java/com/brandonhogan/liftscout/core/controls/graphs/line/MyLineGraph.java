@@ -94,6 +94,7 @@ public class MyLineGraph extends FrameLayout {
     private ArrayList<String> graphTypes;
     private int currentGraphType;
     private int exerciseId;
+    private String exerciseName;
     private List<GraphDataSet> items;
     private boolean exerciseIsSet = false;
     private int newRangePosition;
@@ -416,8 +417,10 @@ public class MyLineGraph extends FrameLayout {
 
     private void setGraph(List<GraphDataSet> data, int uniqueDateCount) {
 
-        if (data.isEmpty())
+        if (data.isEmpty() || data.size() < 2) {
+            lineChart.setNoDataText(String.format(getResources().getString(R.string.charts_empty_exercise_no_data), exerciseName));
             return;
+        }
 
         graphMaxValue = GRAPH_MAX_VALUE_DEFAULT;
         lineChart.getAxisLeft().setAxisMaximum(graphMaxValue);
@@ -491,8 +494,9 @@ public class MyLineGraph extends FrameLayout {
     // Public Functions
     //
 
-    public void setExercise(int exerciseId) {
+    public void setExercise(int exerciseId, String exerciseName) {
         this.exerciseId = exerciseId;
+        this.exerciseName = exerciseName;
         exerciseIsSet = true;
         currentRangePosition = newRangePosition = 0;
         slider.setPosition(currentRangePosition);

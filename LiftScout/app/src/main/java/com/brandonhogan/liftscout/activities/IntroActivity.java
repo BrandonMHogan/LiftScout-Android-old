@@ -1,23 +1,13 @@
 package com.brandonhogan.liftscout.activities;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.support.annotation.FloatRange;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.support.annotation.FloatRange;
 import android.view.View;
 import android.widget.Toast;
 
-import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.managers.UserManager;
-import com.brandonhogan.liftscout.core.model.Category;
-import com.brandonhogan.liftscout.core.model.Exercise;
-import com.brandonhogan.liftscout.core.model.User;
 import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.repository.CategoryRepo;
-import com.brandonhogan.liftscout.repository.ExerciseRepo;
-import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
-import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.views.Intro.exercises.IntroExercisesSlideFragment;
 import com.brandonhogan.liftscout.views.Intro.first.IntroFirstSlideFragment;
 import com.brandonhogan.liftscout.views.Intro.last.IntroLastSlideFragment;
@@ -27,8 +17,6 @@ import com.brandonhogan.liftscout.views.Intro.themes.IntroThemeSlideFragment;
 import javax.inject.Inject;
 
 import agency.tango.materialintroscreen.MaterialIntroActivity;
-import agency.tango.materialintroscreen.MessageButtonBehaviour;
-import agency.tango.materialintroscreen.SlideFragmentBuilder;
 import agency.tango.materialintroscreen.animations.IViewTranslation;
 
 public class IntroActivity extends MaterialIntroActivity {

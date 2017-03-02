@@ -10,8 +10,6 @@ import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 /**

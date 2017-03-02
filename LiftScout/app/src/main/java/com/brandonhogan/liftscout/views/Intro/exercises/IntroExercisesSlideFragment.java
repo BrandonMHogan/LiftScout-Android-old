@@ -11,11 +11,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.views.Intro.settings.IntroSettingsSlideContract;
-import com.brandonhogan.liftscout.views.Intro.settings.IntroSettingsSlidePresenter;
-import com.jaredrummler.materialspinner.MaterialSpinner;
-
-import java.util.ArrayList;
 
 import agency.tango.materialintroscreen.SlideFragment;
 import agency.tango.materialintroscreen.parallax.ParallaxLinearLayout;

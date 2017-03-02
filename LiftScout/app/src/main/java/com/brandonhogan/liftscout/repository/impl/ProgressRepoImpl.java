@@ -3,7 +3,6 @@ package com.brandonhogan.liftscout.repository.impl;
 import android.util.Log;
 
 import com.brandonhogan.liftscout.core.model.Progress;
-import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
@@ -14,9 +13,7 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
-import io.realm.RealmList;
 import io.realm.RealmResults;
-import io.realm.Sort;
 
 public class ProgressRepoImpl implements ProgressRepo {
 

@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;

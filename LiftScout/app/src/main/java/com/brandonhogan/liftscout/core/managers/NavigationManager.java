@@ -3,9 +3,9 @@ package com.brandonhogan.liftscout.core.managers;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.about.AboutFragment;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.calendar.CalendarFragment;
@@ -18,8 +18,6 @@ import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment
 import com.brandonhogan.liftscout.views.settings.home.SettingsHomeFragment;
 import com.brandonhogan.liftscout.views.settings.profile.SettingsProfileFragment;
 import com.brandonhogan.liftscout.views.workout.WorkoutContainerFragment;
-
-import javax.inject.Inject;
 
 public class NavigationManager {
 
@@ -39,6 +37,7 @@ public class NavigationManager {
     private boolean isInTransition = false;
     private FragmentManager.OnBackStackChangedListener backstackListener;
     private String currentFragmentName;
+    private DrawerLayout drawer;
 
 
     // Public Properties
@@ -68,8 +67,9 @@ public class NavigationManager {
      *
      * @param fragmentManager
      */
-    public void init(FragmentManager fragmentManager) {
+    public void init(FragmentManager fragmentManager, DrawerLayout drawer) {
         mFragmentManager = fragmentManager;
+        this.drawer = drawer;
 
         mFragmentManager.removeOnBackStackChangedListener(backstackListener);
         mFragmentManager.addOnBackStackChangedListener(backstackListener);
@@ -314,7 +314,31 @@ public class NavigationManager {
         this.navigationListener = navigationListener;
     }
 
+    public FragmentManager getmFragmentManager() {
+        return mFragmentManager;
+    }
+
+    public void setmFragmentManager(FragmentManager mFragmentManager) {
+        this.mFragmentManager = mFragmentManager;
+    }
+
+    public DrawerLayout getDrawer() {
+        return drawer;
+    }
+
+    public void setDrawer(DrawerLayout drawer) {
+        this.drawer = drawer;
+    }
+
     public String getCurrentFragmentName() {
         return currentFragmentName;
+    }
+
+    public void lockDrawer() {
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+    }
+
+    public void unlockDrawer() {
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
     }
 }

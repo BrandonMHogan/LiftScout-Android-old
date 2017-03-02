@@ -62,10 +62,8 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter.viewCreated();
-
         graph.init(getActivity().getTheme());
-        graph.setExercise(getArguments().getInt(BUNDLE_EXERCISE_ID));
+        presenter.viewCreated();
     }
 
     @Override
@@ -79,6 +77,12 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         EventBus.getDefault().unregister(this);
         super.onStop();
     }
+
+    @Override
+    public void setupGraph(int exerciseId, String name) {
+        graph.setExercise(exerciseId, name);
+    }
+
 
     // Subscriptions
     //

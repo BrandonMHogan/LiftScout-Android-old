@@ -1,7 +1,5 @@
 package com.brandonhogan.liftscout.views.Intro.themes;
 
-import android.content.res.TypedArray;
-
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Themes;
 import com.brandonhogan.liftscout.core.managers.UserManager;

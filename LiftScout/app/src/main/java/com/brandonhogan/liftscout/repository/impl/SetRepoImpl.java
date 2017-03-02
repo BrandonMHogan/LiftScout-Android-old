@@ -14,7 +14,6 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
-import io.realm.RealmList;
 import io.realm.RealmResults;
 import io.realm.Sort;
 

@@ -3,19 +3,13 @@ package com.brandonhogan.liftscout.views.graphs.exercises;
 import com.brandonhogan.liftscout.core.managers.GraphManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
-import com.brandonhogan.liftscout.core.model.Category;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.CategoryRepo;
 import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
-import com.brandonhogan.liftscout.views.graphs.categories.GraphsCategoriesContract;
-
-import java.util.ArrayList;
 
 import javax.inject.Inject;
-
-import io.realm.RealmResults;
 
 /**
  * Created by Brandon on 3/1/2017.
@@ -62,9 +56,14 @@ public class GraphExercisesPresenter implements GraphExercisesContract.Presenter
 
         // If we were in search, then collect the id and clear the search
         if (graphManager.isInSearch()) {
-            currentExerciseId = graphManager.getCurrentExerciseId();
             graphManager.setInSearch(false);
 
+
+            // If nothing is selected, then don't try and set an exercise
+            if (!graphManager.isSelectionMade())
+                return;
+
+            currentExerciseId = graphManager.getCurrentExerciseId();
             view.setSelectedExercise(currentExerciseId, exerciseRepo.getExercise(currentExerciseId).getName());
         }
     }

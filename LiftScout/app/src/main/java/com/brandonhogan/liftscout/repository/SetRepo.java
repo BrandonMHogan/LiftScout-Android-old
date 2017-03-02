@@ -6,7 +6,6 @@ import com.brandonhogan.liftscout.core.model.Set;
 
 import java.util.Date;
 
-import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public interface SetRepo {

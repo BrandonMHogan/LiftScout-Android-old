@@ -2,16 +2,10 @@ package com.brandonhogan.liftscout.views.home.today;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.utils.BhDate;
-import com.gigamole.infinitecycleviewpager.VerticalInfiniteCycleViewPager;
 
 import java.util.Calendar;
 import java.util.Date;

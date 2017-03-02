@@ -8,6 +8,7 @@ package com.brandonhogan.liftscout.core.managers;
 public class GraphManager {
 
     private boolean isInSearch = false;
+    private boolean selectionMade = false;
     private int currentExerciseId;
     private String graphName;
 
@@ -27,11 +28,20 @@ public class GraphManager {
         isInSearch = inSearch;
     }
 
+    public boolean isSelectionMade() {
+        return selectionMade;
+    }
+
+    public void setSelectionMade(boolean selectionMade) {
+        this.selectionMade = selectionMade;
+    }
+
     public int getCurrentExerciseId() {
         return currentExerciseId;
     }
 
     public void setCurrentExerciseId(int currentExerciseId) {
         this.currentExerciseId = currentExerciseId;
+        this.selectionMade = true;
     }
 }

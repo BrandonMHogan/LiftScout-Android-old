@@ -15,6 +15,7 @@ import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
 import java.util.Date;
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

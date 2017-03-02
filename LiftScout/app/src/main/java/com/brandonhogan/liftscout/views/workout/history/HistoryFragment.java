@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
@@ -15,11 +16,12 @@ import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import java.util.List;
 
+import java.util.List;
 
 import butterknife.Bind;
 import cn.pedant.SweetAlert.SweetAlertDialog;

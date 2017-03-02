@@ -1,10 +1,7 @@
 package com.brandonhogan.liftscout.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -13,15 +10,7 @@ import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.controls.MaterialProgressBar;
-import com.brandonhogan.liftscout.core.model.Category;
-import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.core.model.User;
-import com.brandonhogan.liftscout.repository.CategoryRepo;
-import com.brandonhogan.liftscout.repository.ExerciseRepo;
-import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
-import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
-
-import java.util.ArrayList;
 
 public class SplashActivity extends BaseActivity {
 

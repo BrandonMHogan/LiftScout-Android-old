@@ -1,14 +1,11 @@
 package com.brandonhogan.liftscout.views.home.today;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IExpandable;

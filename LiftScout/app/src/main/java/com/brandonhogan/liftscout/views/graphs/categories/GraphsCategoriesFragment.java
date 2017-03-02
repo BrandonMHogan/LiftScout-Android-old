@@ -18,7 +18,6 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
