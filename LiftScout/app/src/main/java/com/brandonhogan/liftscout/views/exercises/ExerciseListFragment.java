@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
+import com.brandonhogan.liftscout.views.categories.CategoryListModel;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
@@ -152,9 +153,12 @@ public class ExerciseListFragment extends BaseFragment implements
     }
 
     private void removeExerciseAlert(final int position) {
+
+        ExerciseListModel model = presenter.getExercise(position);
+
         dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getString(R.string.dialog_exercise_remove_title))
-                .setContentText(getString(R.string.dialog_exercise_remove_message))
+                .setTitleText(String.format(getString(R.string.dialog_exercise_remove_title), model.getName()))
+                .setContentText(String.format(getString(R.string.dialog_exercise_remove_message), model.getName()))
                 .setConfirmText(getString(R.string.yes))
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
