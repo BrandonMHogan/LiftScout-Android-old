@@ -60,7 +60,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:gravity="center_horizontal"
-                android:text="@string/one_month"
+                android:text="@string/one_week"
                 style="@style/RobotoBody02"/>
 
 
