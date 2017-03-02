@@ -47,6 +47,7 @@
     <string name="charts_category_total_workout">Total Workout</string>
     <string name="charts_category_total_sets">Total Sets</string>
     <string name="charts_category_total_reps">Total Reps</string>
+    <string name="charts_empty_exercise">Choose an exercise</string>
 
 
 

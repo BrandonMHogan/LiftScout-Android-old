@@ -33,7 +33,6 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.Utils;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.text.SimpleDateFormat;
@@ -100,6 +99,8 @@ public class MyLineGraph extends FrameLayout {
     private int newRangePosition;
     private int currentRangePosition;
     private boolean isFirstSet = true;
+    private int textColor;
+    private int fillColor;
 
 
     // Constructors
@@ -127,7 +128,10 @@ public class MyLineGraph extends FrameLayout {
 
         TypedValue typedValue = new TypedValue();
         theme.resolveAttribute(android.R.attr.textColor, typedValue, true);
-        int color = typedValue.data;
+        textColor = typedValue.data;
+
+        theme.resolveAttribute(android.R.attr.colorAccent, typedValue, true);
+        fillColor = typedValue.data;
 
         lineChart.animate();
         lineChart.getDescription().setEnabled(false);
@@ -137,6 +141,8 @@ public class MyLineGraph extends FrameLayout {
         lineChart.setDragEnabled(true);
         lineChart.setPinchZoom(false);
         lineChart.getAxisRight().setEnabled(false);
+        lineChart.setNoDataText(getResources().getString(R.string.charts_empty_exercise));
+        lineChart.setNoDataTextColor(textColor);
 
         // Y Axis setup
         YAxis leftAxis = lineChart.getAxisLeft();
@@ -145,13 +151,13 @@ public class MyLineGraph extends FrameLayout {
         leftAxis.setAxisMaximum(graphMaxValue);
         leftAxis.setAxisMinimum(0f);
         leftAxis.setDrawGridLines(true);
-        leftAxis.setTextColor(color);
+        leftAxis.setTextColor(textColor);
         leftAxis.setValueFormatter(new DefaultAxisValueFormatter(4));
 
         // X Axis setup
         xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextColor(color);
+        xAxis.setTextColor(textColor);
         xAxis.setDrawGridLines(true);
         xAxis.setTextSize(11f);
         xAxis.setGranularity(1f);
@@ -193,7 +199,7 @@ public class MyLineGraph extends FrameLayout {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
                 currentGraphType = position;
-                update();
+                update(true);
             }
         });
     }
@@ -225,7 +231,7 @@ public class MyLineGraph extends FrameLayout {
                 }
 
                 newRangePosition = position;
-                update();
+                update(false);
             }
         });
 
@@ -468,14 +474,7 @@ public class MyLineGraph extends FrameLayout {
             set1.setFormLineWidth(1f);
             set1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
             set1.setFormSize(15.f);
-
-            if (Utils.getSDKInt() >= 18) {
-                // fill drawable only supported on api level 18 and above
-                //  Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fade_red);
-                set1.setFillColor(Color.BLUE);
-            } else {
-                set1.setFillColor(Color.BLACK);
-            }
+            set1.setFillColor(fillColor);
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
             dataSets.add(set1); // add the datasets
@@ -495,19 +494,20 @@ public class MyLineGraph extends FrameLayout {
     public void setExercise(int exerciseId) {
         this.exerciseId = exerciseId;
         exerciseIsSet = true;
-        update();
+        currentRangePosition = newRangePosition = 0;
+        slider.setPosition(currentRangePosition);
+        update(true);
     }
 
-    public void update() {
+    public void update(boolean force) {
 
         if (!exerciseIsSet)
             return;
 
         // don't rebuild if the date range was not changed
-        if (newRangePosition == currentRangePosition && !isFirstSet)
+        if (!force && newRangePosition == currentRangePosition)
             return;
 
-        isFirstSet = false;
         currentRangePosition = newRangePosition;
 
         RealmResults<Set> sets = progressManager.getSetsByExercise(exerciseId);
