@@ -103,6 +103,8 @@ public class MainActivity extends BaseActivity
         super.onResume();
         updateUserData();
         navigationManager.setNavigationListener(this);
+        navigationManager.setDrawer(drawer);
+        navigationManager.setmFragmentManager(getFragmentManager());
     }
 
     @Override

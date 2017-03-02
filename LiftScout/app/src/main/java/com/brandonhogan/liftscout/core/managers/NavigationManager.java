@@ -335,10 +335,12 @@ public class NavigationManager {
     }
 
     public void lockDrawer() {
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        if (drawer != null)
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     public void unlockDrawer() {
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        if (drawer != null)
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
     }
 }
