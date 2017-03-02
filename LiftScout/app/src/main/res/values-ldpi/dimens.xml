@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Graph -->
-    <dimen name="graph_height">180dp</dimen>
+    <dimen name="graph_height">130dp</dimen>
 
     <!-- Number Picker -->
     <dimen name="tracker_font_size">18sp</dimen>

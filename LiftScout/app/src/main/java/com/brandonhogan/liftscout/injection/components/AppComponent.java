@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.injection.components;
 import com.brandonhogan.liftscout.activities.BaseActivity;
 import com.brandonhogan.liftscout.activities.IntroActivity;
 import com.brandonhogan.liftscout.activities.MainActivity;
+import com.brandonhogan.liftscout.core.controls.graphs.line.MyLineGraph;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.injection.module.AppModule;
 import com.brandonhogan.liftscout.injection.module.DatabaseModule;
@@ -65,6 +66,7 @@ public interface AppComponent {
     void inject(GraphsCategoriesPresenter presenter);
     void inject(GraphExercisesPresenter presenter);
     void inject(GraphExercisesFragment presenter);
+    void inject(MyLineGraph view);
 
     // Category / Exercise
     void inject(ExerciseListPresenter presenter);

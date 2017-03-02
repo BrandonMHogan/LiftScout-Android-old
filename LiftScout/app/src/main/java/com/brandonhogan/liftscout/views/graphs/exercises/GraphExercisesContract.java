@@ -11,9 +11,11 @@ import java.util.ArrayList;
 
 public class GraphExercisesContract {
     interface View {
+        void setSelectedExercise(int id, String name);
     }
 
     interface Presenter {
         void viewCreated();
+        void onResume();
     }
 }

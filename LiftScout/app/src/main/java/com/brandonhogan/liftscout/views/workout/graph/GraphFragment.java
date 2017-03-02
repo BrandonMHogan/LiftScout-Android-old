@@ -30,26 +30,8 @@ import butterknife.Bind;
 
 public class GraphFragment extends BaseFragment implements GraphContract.View {
 
-
-    // Bindings
-    //
-    @Bind(R.id.chart)
-    LineChart lineChart;
-
-    @Bind(R.id.slider)
-    DiscreteSlider slider;
-
-    @Bind(R.id.range_text)
-    TextView rangeText;
-
-    @Bind(R.id.selected_item_date)
-    TextView selectedItemDate;
-
-    @Bind(R.id.selected_item_value)
-    TextView selectedItemVale;
-
-    @Bind(R.id.graph_type)
-    MaterialSpinner graphType;
+    @Bind(R.id.my_line_graph)
+    MyLineGraph graph;
 
     // Static Properties
     //
@@ -74,7 +56,6 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
     //
     private View rootView;
     private GraphContract.Presenter presenter;
-    private MyLineGraph graph;
 
 
     //Overrides
@@ -82,7 +63,7 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_graph_exercise, container, false);
+        rootView = inflater.inflate(R.layout.frag_workout_graph, container, false);
 
         return rootView;
     }
@@ -91,9 +72,10 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setupGraph();
-        setupSlider();
-        presenter.viewCreated(1);
+
+        graph.init(getActivity().getTheme());
+        graph.setExercise(getArguments().getInt(BUNDLE_EXERCISE_ID));
+       // presenter.viewCreated(1);
     }
 
     @Override
@@ -108,89 +90,11 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
         super.onStop();
     }
 
-    @Override
-    public void setGraph(List<GraphDataSet> data, int uniqueDateCount) {
-        graph.setGraph(data, uniqueDateCount);
-        setSelected("","");
-    }
-
-    @Override
-    public void populateGraphTypes(ArrayList<String> types, int position) {
-        graphType.setItems(types);
-        graphType.setSelectedIndex(position);
-
-        graphType.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-                presenter.onGraphTypeSelected(position);
-            }
-        });
-    }
-
-    @Override
-    public void setSelected(String date, String value) {
-
-        if(date.isEmpty())
-            lineChart.highlightValue(null);
-
-        selectedItemDate.setText(date);
-        selectedItemVale.setText(value);
-    }
-
-    private void setupGraph() {
-        graph = new MyLineGraph(getActivity().getTheme(), lineChart);
-        lineChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, Highlight h) {
-                presenter.onItemSelected(e);
-            }
-
-            @Override
-            public void onNothingSelected() {
-                setSelected("","");
-            }
-        });
-
-        presenter = new GraphPresenter(this, getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID));
-    }
-
-    private void setupSlider() {
-        slider.setOnDiscreteSliderChangeListener(new DiscreteSlider.OnDiscreteSliderChangeListener() {
-            @Override
-            public void onPositionChanged(int position) {
-
-                switch (position) {
-                    case 0:
-                        rangeText.setText(getString(R.string.one_week));
-                        break;
-                    case 1:
-                        rangeText.setText(getString(R.string.one_month));
-                        break;
-                    case 2:
-                        rangeText.setText(getString(R.string.three_months));
-                        break;
-                    case 3:
-                        rangeText.setText(getString(R.string.six_months));
-                        break;
-                    case 4:
-                        rangeText.setText(getString(R.string.one_year));
-                        break;
-                    default:
-                        rangeText.setText(getString(R.string.all));
-                        break;
-                }
-
-                presenter.update(position);
-            }
-        });
-    }
-
-
     // Subscriptions
     //
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTrackerEvent(TrackerEvent event) {
-        presenter.update();
+        graph.update();
     }
 }

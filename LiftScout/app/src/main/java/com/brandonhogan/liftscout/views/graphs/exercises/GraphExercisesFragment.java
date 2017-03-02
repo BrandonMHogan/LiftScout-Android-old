@@ -5,14 +5,17 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.controls.graphs.line.MyLineGraph;
 import com.brandonhogan.liftscout.core.managers.GraphManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
@@ -24,6 +27,12 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
 
     @Inject
     GraphManager graphManager;
+
+    @Bind(R.id.my_button)
+    Button myButton;
+
+    @Bind(R.id.my_line_graph)
+    MyLineGraph lineGraph;
 
     // Instance
     //
@@ -56,6 +65,20 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
 
         presenter = new GraphExercisesPresenter(this);
         presenter.viewCreated();
+
+        lineGraph.init(getActivity().getTheme());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
+    public void setSelectedExercise(int id, String name) {
+        myButton.setText(name);
+        lineGraph.setExercise(id);
     }
 
     @OnClick(R.id.my_button)
