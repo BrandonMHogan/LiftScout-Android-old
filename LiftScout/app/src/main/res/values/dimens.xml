@@ -27,6 +27,10 @@
     <dimen name="fragment_default_margin">10dp</dimen>
     <dimen name="fragment_default_large_margin">20dp</dimen>
 
+    <!-- Tab Defaults -->
+    <dimen name="tab_indicator_height">4dp</dimen>
+    <dimen name="tab_elevation">2dp</dimen>
+
     <!-- Intro -->
     <dimen name="intro_padding_bottom">55dp</dimen>
     <dimen name="intro_icon_size">135dp</dimen>

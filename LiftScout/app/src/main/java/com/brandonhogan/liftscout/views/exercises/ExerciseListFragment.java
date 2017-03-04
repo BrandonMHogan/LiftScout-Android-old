@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
-import com.brandonhogan.liftscout.views.categories.CategoryListModel;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 

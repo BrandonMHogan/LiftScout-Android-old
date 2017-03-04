@@ -20,11 +20,19 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         NavigationManager.NavigationListener {
+
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawer;
+
+    @Bind(R.id.nav_view)
+    NavigationView navigationView;
 
 
     // Private Static Properties
@@ -34,9 +42,7 @@ public class MainActivity extends BaseActivity
 
     // Private Properties
     //
-    private DrawerLayout drawer;
     private NavigationManager navigationManager;
-    private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private SweetAlertDialog dialog;
     private Toolbar toolbar;
@@ -53,6 +59,8 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ButterKnife.bind(this);
         Injector.getAppComponent().inject(this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -60,28 +68,23 @@ public class MainActivity extends BaseActivity
 
         if (findViewById(R.id.fragment_manager) != null) {
 
-            drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
              toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawer.addDrawerListener(toggle);
             toggle.syncState();
 
-            navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
             navigationManager = new NavigationManager();
             navigationManager.init(getFragmentManager(), drawer);
             navigationManager.setNavigationListener(this);
 
-
             //This is set when restoring from a previous state,
             //so we do not want to try and load a new fragment
             if (savedInstanceState != null) {
                 Date todayDate = (Date)savedInstanceState.getSerializable(SAVE_STATE_TODAY_PROGRESS_DATE);
                 progressManager.setTodayProgress(todayDate);
-
                 setDrawerIndicator();
-
                 return;
             }
 
@@ -94,7 +97,6 @@ public class MainActivity extends BaseActivity
             else {
                 navigationManager.startToday();
             }
-            //AAADevWorkout.clearSets(databaseRealm.getRealmInstance());
         }
     }
 
@@ -289,4 +291,6 @@ public class MainActivity extends BaseActivity
 
         toggle.syncState();
     }
+
+
 }

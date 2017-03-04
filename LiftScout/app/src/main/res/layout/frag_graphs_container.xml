@@ -14,14 +14,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar"
-            android:background="@color/float_transparent"
+            android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            app:tabIndicatorColor="?attr/colorPrimary"
-            app:tabTextColor="?attr/android:textColor"
-            app:tabSelectedTextColor="?attr/android:textColor"
+            app:tabIndicatorColor="?attr/colorAccent"
+            app:tabIndicatorHeight="@dimen/tab_indicator_height"
             app:tabMinWidth="120dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:elevation="5dp" />
+            android:elevation="@dimen/tab_elevation" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/graphs_viewpager"

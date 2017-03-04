@@ -49,6 +49,7 @@
     <string name="charts_category_total_reps">Total Reps</string>
     <string name="charts_empty_exercise">Choose an exercise</string>
     <string name="charts_empty_exercise_no_data">Not enough data for %s.</string>
+    <string name="charts_select_exercise">Choose Exercise</string>
 
 
 

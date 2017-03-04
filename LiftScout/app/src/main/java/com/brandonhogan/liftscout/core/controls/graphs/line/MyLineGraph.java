@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.core.utils.BhDate;
+import com.brandonhogan.liftscout.core.utils.ColorUtil;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.workout.graph.GraphDataSet;
 import com.etiennelawlor.discreteslider.library.ui.DiscreteSlider;
@@ -127,12 +127,8 @@ public class MyLineGraph extends FrameLayout {
 
     public void init(Resources.Theme theme) {
 
-        TypedValue typedValue = new TypedValue();
-        theme.resolveAttribute(android.R.attr.textColor, typedValue, true);
-        textColor = typedValue.data;
-
-        theme.resolveAttribute(android.R.attr.colorAccent, typedValue, true);
-        fillColor = typedValue.data;
+        textColor = ColorUtil.getAttributeColor(theme, android.R.attr.textColor);
+        fillColor = ColorUtil.getAttributeColor(theme, android.R.attr.colorAccent);
 
         lineChart.animate();
         lineChart.getDescription().setEnabled(false);

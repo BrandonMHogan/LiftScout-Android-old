@@ -73,8 +73,6 @@ public class WorkoutContainerFragment extends BaseFragment {
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_tracker_title)));
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_history_title)));
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_graphs_title)));
-//        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_statistics_title)));
-//        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_goals_title)));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
@@ -101,6 +99,16 @@ public class WorkoutContainerFragment extends BaseFragment {
 
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private String getTitle() {
