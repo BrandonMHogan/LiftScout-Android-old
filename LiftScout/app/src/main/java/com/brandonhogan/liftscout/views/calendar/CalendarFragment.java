@@ -2,10 +2,12 @@ package com.brandonhogan.liftscout.views.calendar;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -31,7 +33,6 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 
 public class CalendarFragment extends BaseFragment implements CalendarContract.View {
 
@@ -53,9 +54,6 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     //
     @Bind(R.id.date)
     TextView titleTextView;
-
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
 
     @Bind(R.id.calendar_view)
     CompactCalendarView calendar;
@@ -83,6 +81,35 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
 
         setupCalendar();
         presenter.viewCreated();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem addMenu = menu.findItem(R.id.action_add);
+        addMenu.setVisible(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                getNavigationManager().startCategoryListAddSet();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -161,12 +188,6 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     @Override
     public void editTracker(int exerciseId) {
         getNavigationManager().startWorkoutContainer(exerciseId, true);
-    }
-
-    @OnClick(R.id.fab)
-    public void onFabClick() {
-
-        getNavigationManager().startCategoryListAddSet();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

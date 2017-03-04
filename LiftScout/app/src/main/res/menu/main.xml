@@ -13,7 +13,15 @@
         android:id="@+id/action_delete"
         android:orderInCategory="200"
         android:icon="@android:drawable/ic_menu_delete"
-        android:title="Delete"
+        android:title="@string/delete"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_add"
+        android:orderInCategory="300"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/add"
         android:visible="false"
         app:showAsAction="ifRoom" />
 

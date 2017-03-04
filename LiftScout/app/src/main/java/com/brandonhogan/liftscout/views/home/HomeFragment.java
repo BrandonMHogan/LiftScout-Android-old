@@ -2,10 +2,12 @@ package com.brandonhogan.liftscout.views.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -20,7 +22,6 @@ import com.brandonhogan.liftscout.views.home.today.TodayPageAdapter;
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 
 public class HomeFragment extends BaseFragment implements HomeContract.View {
 
@@ -44,9 +45,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Bind(R.id.viewpager)
     HorizontalInfiniteCycleViewPager viewPager;
 
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
-
 
     // Overrides
     //
@@ -66,6 +64,35 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         setTitle(getString(R.string.app_name));
 
         setupPager();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem addMenu = menu.findItem(R.id.action_add);
+        addMenu.setVisible(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                getNavigationManager().startCategoryListAddSet();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -134,10 +161,5 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     private void updateTodayProgress() {
         presenter.updateTodayProgress(adapter.dateByPosition(viewPager.getCurrentItem()));
-    }
-
-    @OnClick(R.id.fab)
-    public void addSetOnClick() {
-        getNavigationManager().startCategoryListAddSet();
     }
 }

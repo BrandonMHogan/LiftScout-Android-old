@@ -53,16 +53,6 @@
                 android:layout_below="@id/calendar_container"
                 android:elevation="@dimen/tracker_divider_elevation"/>
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/divider"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="-46dp"
-                app:fabSize="normal"
-                android:src="@drawable/ic_add_white_24dp"/>
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
