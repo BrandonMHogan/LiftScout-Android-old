@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "844062822101-2t53tmga9672ltgb80nok3ek9v5vdn7o.apps.googleusercontent.com",
+          "client_id": "844062822101-131g91m244dmqo7s46objtvnfhshprfe.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.brandonhogan.liftscout",
-            "certificate_hash": "51C9848AE84A40DD639733AD30EE83FDA5E01D5E"
+            "certificate_hash": "d89333e4ed21c779e33c55496c691cdd4de7fc27"
           }
         },
         {
@@ -60,6 +60,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "844062822101-6mgs3u897am54utqgpqtp3k33k2un65o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brandonhogan.liftscout.debug",
+            "certificate_hash": "19f829c2ca9784b22927929f8dd1b1e22caafa60"
+          }
+        },
         {
           "client_id": "844062822101-5k9p5ujd1igq78e2spmg9vm9o1ahpaer.apps.googleusercontent.com",
           "client_type": 3

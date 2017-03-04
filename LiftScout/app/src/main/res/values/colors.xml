@@ -7,8 +7,8 @@
     <color name="colorAccent">#FF5252</color>
     <color name="textColorPrimary">#3f3f3f</color>
     <color name="textColorSecondary">#9E9E9E</color>
-    <color name="activity_background_light">#FFFFFF</color>
-    <color name="fillColor">#ececec</color>
+    <color name="activity_background_light">#e5e5e5</color>
+    <color name="fillColor">#b2b2b2</color>
 
     <!-- Dark Theme -->
     <color name="colorPrimaryInverse">#FF9800</color>
@@ -62,18 +62,18 @@
 
 
     <!-- Category Colors -->
-    <color name="category_light_red">#f44336</color>
-    <color name="category_red">#ff1744</color>
-    <color name="category_blue">#3693D0</color>
-    <color name="category_green">#36CF8E</color>
-    <color name="category_light_green">#8bc34a</color>
-    <color name="category_orange">#FF9800</color>
-    <color name="category_brown">#4e342e</color>
-    <color name="category_purple">#512da8</color>
-    <color name="category_dark_purple">#ea80fc</color>
-    <color name="category_pink">#f06292</color>
-    <color name="category_dark_pink">#e91e63</color>
-    <color name="category_yellow">#ffd600</color>
+    <color name="category_light_red">#80f44336</color>
+    <color name="category_red">#80ff1744</color>
+    <color name="category_blue">#803693D0</color>
+    <color name="category_green">#8036CF8E</color>
+    <color name="category_light_green">#808bc34a</color>
+    <color name="category_orange">#80FF9800</color>
+    <color name="category_bright_green">#8076ee00</color>
+    <color name="category_purple">#80512da8</color>
+    <color name="category_dark_purple">#80ea80fc</color>
+    <color name="category_pink">#80f06292</color>
+    <color name="category_dark_pink">#80e91e63</color>
+    <color name="category_yellow">#80ffd600</color>
 
     <array name="category_colors">
         <item>@color/category_light_red</item>
@@ -82,7 +82,7 @@
         <item>@color/category_green</item>
         <item>@color/category_light_green</item>
         <item>@color/category_orange</item>
-        <item>@color/category_brown</item>
+        <item>@color/category_bright_green</item>
         <item>@color/category_dark_purple</item>
         <item>@color/category_purple</item>
         <item>@color/category_pink</item>

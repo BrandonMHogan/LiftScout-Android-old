@@ -134,7 +134,7 @@ public class IntroExercisesSlidePresenter implements IntroExercisesSlideContract
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_cable_rear_delt_fly), shoulders));
 
 
-        Category biceps = categoryRepo.setCategory(createCategory(view.getStringValue(R.string.category_biceps), R.color.category_brown));
+        Category biceps = categoryRepo.setCategory(createCategory(view.getStringValue(R.string.category_biceps), R.color.category_bright_green));
 
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_barbell_curl), biceps));
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_barbell_drag_curl), biceps));
