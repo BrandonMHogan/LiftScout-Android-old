@@ -413,8 +413,13 @@ public class MyLineGraph extends FrameLayout {
 
     private void setGraph(List<GraphDataSet> data, int uniqueDateCount) {
 
-        if (data.isEmpty() || data.size() < 2) {
+        if (data.isEmpty()) {
             lineChart.setNoDataText(String.format(getResources().getString(R.string.charts_empty_exercise_no_data), exerciseName));
+            return;
+        }
+        else if (data.size() < 2) {
+            lineChart.setNoDataText(String.format(getResources().getString(R.string.charts_empty_exercise_not_enough_data), exerciseName));
+            lineChart.setData(null);
             return;
         }
 
@@ -449,8 +454,10 @@ public class MyLineGraph extends FrameLayout {
         LineDataSet set1;
 
         if (lineChart.getData() != null && lineChart.getData().getDataSetCount() > 0) {
+
             set1 = (LineDataSet) lineChart.getData().getDataSetByIndex(0);
             set1.setValues(values);
+
             lineChart.getData().notifyDataChanged();
             lineChart.notifyDataSetChanged();
             lineChart.invalidate();
@@ -483,6 +490,7 @@ public class MyLineGraph extends FrameLayout {
 
             // set data
             lineChart.setData(data2);
+            lineChart.animateXY(0,400);
         }
     }
 
