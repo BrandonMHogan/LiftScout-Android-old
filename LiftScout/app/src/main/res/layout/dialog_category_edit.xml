@@ -18,6 +18,7 @@
             android:inputType="textCapWords"
             android:hint="@string/frag_init_name_hint"
             android:textSize="@dimen/material_text_size_large"
+            android:maxLength="@integer/category_name_max_length"
             android:nextFocusForward="@+id/weight"
             android:ems="10" />
 

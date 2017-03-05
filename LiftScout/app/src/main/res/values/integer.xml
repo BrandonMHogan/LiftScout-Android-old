@@ -10,4 +10,7 @@
     <integer name="graph_pie_radius_hole">54</integer>
     <integer name="graph_pie_radius_hole_transparent">55</integer>
 
+    <integer name="category_name_max_length">30</integer>
+    <integer name="exercise_name_max_length">30</integer>
+
 </resources>
