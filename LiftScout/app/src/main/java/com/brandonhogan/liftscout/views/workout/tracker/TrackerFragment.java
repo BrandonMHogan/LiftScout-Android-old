@@ -250,6 +250,7 @@ public class TrackerFragment extends BaseFragment implements
                 @Override
                 public void onRowLongClicked(int position) {
                     presenter.onSelect(position);
+                    mAdapter.selected(position);
                     showDeleteRepAlert();
                 }
             });
