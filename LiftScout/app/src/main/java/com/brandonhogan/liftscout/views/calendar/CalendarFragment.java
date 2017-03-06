@@ -33,6 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class CalendarFragment extends BaseFragment implements CalendarContract.View {
 
@@ -48,6 +49,7 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     private View rootView;
     private CalendarContract.Presenter presenter;
     private FastItemAdapter mAdapter;
+    private SweetAlertDialog dialog;
 
 
     // Binds
@@ -145,6 +147,25 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
         });
     }
 
+    public void showDeleteRepAlert(final HistoryListSection section, final int position) {
+
+        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(getString(R.string.dialog_tracker_delete_rep_title))
+                .setContentText(getString(R.string.dialog_tracker_delete_rep_message))
+                .setConfirmText(getString(R.string.delete))
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        dialog.cancel();
+                        presenter.onDeleteSection(section, position);
+                    }
+                })
+                .setCancelText(getString(R.string.cancel))
+                .showCancelButton(true);
+
+        dialog.show();
+    }
+
     @Override
     public void setEvents(String monthTitle, Date date, ArrayList<Event> events) {
         calendar.setCurrentDate(date);
@@ -152,6 +173,11 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
         calendar.addEvents(events);
 
         titleTextView.setText(monthTitle);
+    }
+
+    @Override
+    public void onSetDeleted(int posiition, int count) {
+        mAdapter.removeItemRange(posiition, count);
     }
 
     @Override
@@ -171,7 +197,7 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
         mAdapter.withOnLongClickListener(new FastAdapter.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v, IAdapter adapter, IItem item, int position) {
-                mAdapter.collapse();
+                showDeleteRepAlert(((HistoryListSection)mAdapter.getAdapterItem(position)), position);
                 return false;
             }
         });

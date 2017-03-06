@@ -20,6 +20,7 @@ public class CalendarContract {
         void setupAdapter(List<HistoryListSection> data);
         void editTracker(int exerciseId);
         String getEmptySetMessage();
+        void onSetDeleted(int position, int count);
     }
 
     interface Presenter {
@@ -28,5 +29,6 @@ public class CalendarContract {
         void onMonthScroll(Date firstDayOfNewMonth);
         void editEvent(HistoryTrackerEvent event);
         void setClicked(int exerciseId);
+        void onDeleteSection(HistoryListSection section, int position);
     }
 }

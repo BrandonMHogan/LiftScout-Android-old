@@ -96,6 +96,18 @@ public class CalendarPresenter implements CalendarContract.Presenter {
         view.editTracker(exerciseId);
     }
 
+    @Override
+    public void onDeleteSection(HistoryListSection section, int position) {
+        adapterData.remove(adapterData.indexOf(section));
+
+        //The adapter will remove a range. Which is the children, plus the section
+        int count = section.getSubItems().size() + 1;
+
+        progressManager.deleteSet(section.setId);
+        progressManager.clearUpdatedSet();
+        view.onSetDeleted(position, count);
+    }
+
     // Private Functions
     //
     private ArrayList<Event> getEvents(Calendar cal) {

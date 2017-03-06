@@ -161,6 +161,10 @@ public class ProgressManager {
         setRepo.deleteSet(set);
     }
 
+    public void deleteSet(int setId) {
+        setRepo.deleteSet(setId);
+    }
+
     public Set getPreviousSet(int exerciseId) {
         return setRepo.getPreviousSet(todayProgress.getDate(), exerciseId);
     }

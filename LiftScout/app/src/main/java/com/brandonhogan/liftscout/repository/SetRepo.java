@@ -13,6 +13,7 @@ public interface SetRepo {
     void addSet(Progress progress, Set set);
     void updateSet(Set set);
     void deleteSet(Set set);
+    void deleteSet(int setId);
     void updateSetOrder(Set set, int order);
     Set getPreviousSet(Date date, int exerciseId);
 
