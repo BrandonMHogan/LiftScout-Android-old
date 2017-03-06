@@ -6,6 +6,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -59,9 +62,6 @@ public class CategoryListFragment extends BaseFragment implements
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
-
 
     //Overrides
     //
@@ -84,6 +84,35 @@ public class CategoryListFragment extends BaseFragment implements
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem addMenu = menu.findItem(R.id.action_add);
+        addMenu.setVisible(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                createCategory();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         mRecyclerView.addOnItemTouchListener(onTouchListener);
@@ -98,11 +127,6 @@ public class CategoryListFragment extends BaseFragment implements
     @Override
     public void setOnActivityTouchListener(OnActivityTouchListener listener) {
         this.touchListener = listener;
-    }
-
-    @OnClick(R.id.fab)
-    public void addOnClick() {
-        createCategory();
     }
 
 
