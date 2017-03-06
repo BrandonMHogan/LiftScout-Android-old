@@ -177,8 +177,8 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     }
 
     @Override
-    public void onSetDeleted(int posiition, int count) {
-        mAdapter.removeItemRange(posiition, count);
+    public void onSetDeleted(int position, int count) {
+        mAdapter.removeItemRange(position, count);
     }
 
     @Override

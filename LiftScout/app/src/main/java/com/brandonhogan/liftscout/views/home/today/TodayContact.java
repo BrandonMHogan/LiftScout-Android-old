@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.views.home.today;
 
+
 import java.util.List;
 
 public interface TodayContact {
@@ -8,11 +9,13 @@ public interface TodayContact {
         void setupWeight(String weight);
         void setupAdapter(List<TodayListSection> data, int expandPosition);
         String getEmptySetMessage();
+        void onSetDeleted(int position, int count);
     }
 
     interface Presenter {
         void viewCreate();
         void update();
         void itemTouchOnMove(int oldId, int newId);
+        void onDeleteSection(TodayListSection section, int position);
     }
 }

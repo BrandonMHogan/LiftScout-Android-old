@@ -117,6 +117,18 @@ public class TodayPresenter implements TodayContact.Presenter {
     }
 
     @Override
+    public void onDeleteSection(TodayListSection section, int position) {
+        adapterData.remove(adapterData.indexOf(section));
+
+        //The adapter will remove a range. Which is the children, plus the section
+        int count = section.getSubItems().size() + 1;
+
+        progressManager.deleteSet(section.setId);
+        progressManager.clearUpdatedSet();
+        view.onSetDeleted(position, count);
+    }
+
+    @Override
     public void itemTouchOnMove(int oldId, int newId) {
         progressManager.swapSetOrders(oldId, newId);
     }

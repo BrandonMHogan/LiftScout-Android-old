@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +16,14 @@ import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
-import com.mikepenz.fastadapter_extensions.drag.ItemTouchCallback;
-import com.mikepenz.fastadapter_extensions.drag.SimpleDragCallback;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class TodayFragment extends BaseFragment implements TodayContact.View, ItemTouchCallback {
+public class TodayFragment extends BaseFragment implements TodayContact.View {
 
 
     // Instance
@@ -54,6 +51,7 @@ public class TodayFragment extends BaseFragment implements TodayContact.View, It
     private TextView weightView;
     private LinearLayout weightLayout;
     private FastItemAdapter mAdapter;
+    private SweetAlertDialog dialog;
 
 
     // Binds
@@ -88,21 +86,6 @@ public class TodayFragment extends BaseFragment implements TodayContact.View, It
         presenter.viewCreate();
     }
 
-    @Override
-    public boolean itemTouchOnMove(int oldPosition, int newPosition) {
-        if (mAdapter.getAdapterItem(newPosition) instanceof TodayListSection) {
-            Collections.swap(mAdapter.getAdapterItems(), oldPosition, newPosition); // change position
-
-            TodayListSection sectionA = ((TodayListSection)mAdapter.getAdapterItem(newPosition));
-            TodayListSection sectionB = ((TodayListSection)mAdapter.getAdapterItem(oldPosition));
-
-            presenter.itemTouchOnMove(sectionA.setId, sectionB.setId);
-
-            mAdapter.notifyAdapterItemMoved(oldPosition, newPosition);
-        }
-        return true;
-    }
-
 
     // Public Functions
     //
@@ -110,6 +93,24 @@ public class TodayFragment extends BaseFragment implements TodayContact.View, It
         presenter.update();
     }
 
+    public void showDeleteRepAlert(final TodayListSection section, final int position) {
+
+        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(getString(R.string.dialog_tracker_delete_rep_title))
+                .setContentText(getString(R.string.dialog_tracker_delete_rep_message))
+                .setConfirmText(getString(R.string.delete))
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        dialog.cancel();
+                        presenter.onDeleteSection(section, position);
+                    }
+                })
+                .setCancelText(getString(R.string.cancel))
+                .showCancelButton(true);
+
+        dialog.show();
+    }
 
     // Contracts
     //
@@ -148,7 +149,7 @@ public class TodayFragment extends BaseFragment implements TodayContact.View, It
         mAdapter.withOnLongClickListener(new FastAdapter.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v, IAdapter adapter, IItem item, int position) {
-                mAdapter.collapse();
+                showDeleteRepAlert(((TodayListSection)mAdapter.getAdapterItem(position)), position);
                 return false;
             }
         });
@@ -156,12 +157,12 @@ public class TodayFragment extends BaseFragment implements TodayContact.View, It
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // Enabled Drag and drop
-        SimpleDragCallback touchCallback = new SimpleDragCallback(this);
-        ItemTouchHelper touchHelper = new ItemTouchHelper(touchCallback);
-        touchHelper.attachToRecyclerView(mRecyclerView);
-
         mAdapter.expand(expandPosition);
+    }
+
+    @Override
+    public void onSetDeleted(int position, int count) {
+        mAdapter.removeItemRange(position, count);
     }
 
     @Override
