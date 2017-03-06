@@ -1,5 +1,7 @@
 package com.brandonhogan.liftscout.views.Intro.exercises;
 
+import android.util.Log;
+
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Category;
@@ -11,6 +13,14 @@ import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 
 import javax.inject.Inject;
+
+import io.reactivex.Completable;
+import io.reactivex.CompletableEmitter;
+import io.reactivex.CompletableObserver;
+import io.reactivex.CompletableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Brandon on 2/27/2017.
@@ -44,20 +54,54 @@ public class IntroExercisesSlidePresenter implements IntroExercisesSlideContract
 
     @Override
     public void onButtonPressed() {
-        view.exercisesCreated(initDefaults());
+//
+//        if (userManager.getLoadedDefaultExercises()) {
+//            view.exercisesCreated("You have already setup the default exercises");
+//            return;
+//        }
+
+        Completable completable = Completable.create(new CompletableOnSubscribe() {
+            @Override
+            public void subscribe(CompletableEmitter e) throws Exception {
+                setupDefaults();
+                e.onComplete();
+            }
+        });
+
+        completable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getCompletableObserver());
+
+
+
     }
 
 
+    private CompletableObserver getCompletableObserver() {
+        return new CompletableObserver() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.d("", " onSubscribe : " + d.isDisposed());
+            }
 
-    private String initDefaults() {
+            @Override
+            public void onComplete() {
+                Log.d("", " onComplete");
+                view.exercisesCreated("Exercises Created!");
+            }
 
-        if (userManager.getLoadedDefaultExercises()) {
-            return "You have already setup the default exercises";
-        }
+            @Override
+            public void onError(Throwable e) {
+                Log.d("", " onError : " + e.getMessage());
+            }
+        };
+    }
 
+
+    private void setupDefaults() {
         CategoryRepo categoryRepo = new CategoryRepoImpl();
         ExerciseRepo exerciseRepo = new ExerciseRepoImpl();
-
 
         Category abs = categoryRepo.setCategory(createCategory(view.getStringValue(R.string.category_abs), R.color.category_red));
 
@@ -156,11 +200,8 @@ public class IntroExercisesSlidePresenter implements IntroExercisesSlideContract
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_dumbbell_overhead_tricep_extension), triceps));
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_ring_dip), triceps));
 
-
         userManager.setLoadedDefaultExercises(true);
-        return "Your exercises have been created!";
     }
-
 
     private Category createCategory(String name, int color) {
 
