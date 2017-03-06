@@ -21,6 +21,7 @@ import com.brandonhogan.liftscout.core.utils.ColorUtil;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.workout.graph.GraphDataSet;
 import com.etiennelawlor.discreteslider.library.ui.DiscreteSlider;
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -240,6 +241,7 @@ public class MyLineGraph extends FrameLayout {
             lineChart.highlightValue(null);
 
         selectedItemDate.setText(date);
+
         selectedItemVale.setText(value);
     }
 
@@ -248,7 +250,8 @@ public class MyLineGraph extends FrameLayout {
         String value = "";
 
         if (graphTypes.get(currentGraphType).equals(Charts.MAX_REPS) || graphTypes.get(currentGraphType).equals(Charts.TOTAL_REPS))
-            value = Float.toString(((long)entry.getY())) + " reps";
+            value = (Float.toString(((long)entry.getY())).replaceAll("\\.0*$", "")) + " reps";
+
         else
             value = Float.toString(((long)entry.getY())) + " " + userManager.getMeasurementValue();
 
@@ -418,7 +421,7 @@ public class MyLineGraph extends FrameLayout {
             return;
         }
         else if (data.size() < 2) {
-            lineChart.setNoDataText(String.format(getResources().getString(R.string.charts_empty_exercise_not_enough_data), exerciseName));
+            lineChart.setNoDataText(getResources().getString(R.string.charts_empty_exercise_not_enough_data));
             lineChart.setData(null);
             return;
         }
