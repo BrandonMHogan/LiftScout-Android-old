@@ -168,6 +168,7 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
 
     @Override
     public void setEvents(String monthTitle, Date date, ArrayList<Event> events) {
+        calendar.removeAllEvents();
         calendar.setCurrentDate(date);
         calendar.removeAllEvents();
         calendar.addEvents(events);

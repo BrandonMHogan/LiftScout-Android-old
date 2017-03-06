@@ -4,10 +4,16 @@ import com.brandonhogan.liftscout.core.managers.CalendarManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.CalendarEvent;
+import com.brandonhogan.liftscout.core.model.Category;
+import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.repository.CategoryRepo;
+import com.brandonhogan.liftscout.repository.ExerciseRepo;
+import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
+import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.views.workout.history.HistoryListItem;
 import com.brandonhogan.liftscout.views.workout.history.HistoryListSection;
 import com.brandonhogan.liftscout.views.workout.history.HistoryTrackerEvent;
@@ -47,12 +53,16 @@ public class CalendarPresenter implements CalendarContract.Presenter {
     private CalendarContract.View view;
     private ArrayList<HistoryListSection> adapterData;
     private Date date;
+    private ExerciseRepo exerciseRepo;
+    private CategoryRepo categoryRepo;
 
 
     // Constructor
     //
     public CalendarPresenter(CalendarContract.View view) {
         Injector.getAppComponent().inject(this);
+        exerciseRepo = new ExerciseRepoImpl();
+        categoryRepo = new CategoryRepoImpl();
         this.view = view;
     }
 
@@ -106,14 +116,12 @@ public class CalendarPresenter implements CalendarContract.Presenter {
         progressManager.deleteSet(section.setId);
         progressManager.clearUpdatedSet();
         view.onSetDeleted(position, count);
+        onMonthScroll(date);
     }
 
     // Private Functions
     //
     private ArrayList<Event> getEvents(Calendar cal) {
-
-        int month = cal.get(Calendar.MONTH);
-        int year = cal.get(Calendar.YEAR);
 
         ArrayList<CalendarEvent> events = calendarManager.getEventsForMonthYear(cal.get(Calendar.MONTH), cal.get(Calendar.YEAR));
 

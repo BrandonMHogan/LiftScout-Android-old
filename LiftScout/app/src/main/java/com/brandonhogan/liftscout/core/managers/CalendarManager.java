@@ -33,7 +33,6 @@ public class CalendarManager {
         categoryRepo = new CategoryRepoImpl();
     }
 
-
     public ArrayList<CalendarEvent> getEventsForMonthYear(int month, int year) {
 
         ArrayList<CalendarEvent> events = new ArrayList<>();
