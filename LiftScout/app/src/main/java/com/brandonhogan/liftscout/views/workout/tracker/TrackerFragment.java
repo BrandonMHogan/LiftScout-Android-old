@@ -246,6 +246,14 @@ public class TrackerFragment extends BaseFragment implements
                         }
                     });
 
+            onTouchListener.setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
+                @Override
+                public void onRowLongClicked(int position) {
+                    presenter.onSelect(position);
+                    showDeleteRepAlert();
+                }
+            });
+
 
         }
         else {
