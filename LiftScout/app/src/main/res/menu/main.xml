@@ -10,8 +10,16 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_delete"
+        android:id="@+id/action_timer"
         android:orderInCategory="200"
+        android:icon="@drawable/ic_timer_white_48dp"
+        android:title="@string/timer"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_delete"
+        android:orderInCategory="300"
         android:icon="@drawable/ic_delete_white_48dp"
         android:title="@string/delete"
         android:visible="false"
@@ -19,10 +27,11 @@
 
     <item
         android:id="@+id/action_add"
-        android:orderInCategory="300"
+        android:orderInCategory="400"
         android:icon="@drawable/ic_add_white_48dp"
         android:title="@string/add"
         android:visible="false"
         app:showAsAction="ifRoom" />
+
 
 </menu>
