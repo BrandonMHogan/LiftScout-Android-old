@@ -1,6 +1,5 @@
 package com.brandonhogan.liftscout.views.settings.display;
 
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
