@@ -112,7 +112,7 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
                 .doAfterTerminate(new Action() {
                     @Override
                     public void run() throws Exception {
-                        view.onRestTimerTerminate(exerciseTrackVibrate);
+                        view.onRestTimerTerminate(getExerciseRestVibrate());
                         disposable.dispose();
                     }
                 })
