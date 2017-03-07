@@ -67,6 +67,8 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     private MaterialDialog settingsDialog;
     private SweetAlertDialog deleteDialog;
 
+    private boolean isDisplayed = false;
+
 
     // Binds
     //
@@ -182,11 +184,13 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     @Override
     public void onPause() {
         super.onPause();
+        isDisplayed = false;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        isDisplayed = true;
     }
 
     @Override
@@ -221,9 +225,14 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     }
 
     private void resetRestTimer() {
-        notificationServiceManager.clearNotification();
-        timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_48dp, getActivity().getTheme()));
-        timerMenu.setTitle(getString(R.string.timer));
+
+        if (isDisplayed)
+            notificationServiceManager.clearNotification();
+
+        if (timerMenu != null) {
+            timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_48dp, getActivity().getTheme()));
+            timerMenu.setTitle(getString(R.string.timer));
+        }
         presenter.onRestTimerStop();
     }
 
