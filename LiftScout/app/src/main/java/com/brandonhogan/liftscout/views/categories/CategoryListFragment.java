@@ -2,7 +2,6 @@ package com.brandonhogan.liftscout.views.categories;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,7 +19,6 @@ import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class CategoryListFragment extends BaseFragment implements

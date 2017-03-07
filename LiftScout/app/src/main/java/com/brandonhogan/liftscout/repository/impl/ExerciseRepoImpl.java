@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.repository.impl;
 
 import android.util.Log;
 
+import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
@@ -71,6 +72,63 @@ public class ExerciseRepoImpl implements ExerciseRepo {
                     .deleteFromRealm();
 
             databaseRealm.getRealmInstance().commitTransaction();
+        }
+        catch (Exception ex) {
+            Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
+        }
+    }
+
+    @Override
+    public int getExerciseRestTimer(int exerciseId) {
+        Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst();
+
+        if (exercise!= null && exercise.isValid())
+            return exercise.getRestTimer();
+        else
+            return R.integer.default_rest_timer;
+    }
+
+    @Override
+    public void setExerciseRestTimer(int exerciseId, int time) {
+        try {
+            databaseRealm.getRealmInstance().beginTransaction();
+
+            Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst();
+            if (exercise != null && exercise.isValid()) {
+                exercise.setRestTimer(time);
+                databaseRealm.getRealmInstance().commitTransaction();
+            }
+            else {
+                databaseRealm.getRealmInstance().cancelTransaction();
+            }
+        }
+        catch (Exception ex) {
+            Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
+        }
+    }
+
+    @Override
+    public boolean getExerciseRestVibrate(int exerciseId) {
+        Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst();
+
+        return exercise!= null && exercise.isValid() && exercise.isRestVibrate();
+    }
+
+    @Override
+    public void setExerciseRestVibrate(int exerciseId, boolean vibrate) {
+        try {
+            databaseRealm.getRealmInstance().beginTransaction();
+
+            Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst();
+            if (exercise != null && exercise.isValid()) {
+                exercise.setRestVibrate(vibrate);
+                databaseRealm.getRealmInstance().commitTransaction();
+            }
+            else {
+                databaseRealm.getRealmInstance().cancelTransaction();
+            }
         }
         catch (Exception ex) {
             Log.e(TAG, ex.getMessage());

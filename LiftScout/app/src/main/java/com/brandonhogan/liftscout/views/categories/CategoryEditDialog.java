@@ -9,7 +9,6 @@ import android.widget.EditText;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.Theme;
 import com.brandonhogan.liftscout.R;
 import com.thebluealliance.spectrum.SpectrumPalette;
 
@@ -86,7 +85,6 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
             View customTheme = LayoutInflater.from(activity).inflate(R.layout.dialog_category_edit, null);
 
             dialog = new MaterialDialog.Builder(activity)
-                    .theme(isDarkTheme ? Theme.DARK : Theme.LIGHT)
                     .title(isNew ? R.string.dialog_add_category_title : R.string.dialog_edit_category_title)
                     .customView(customTheme, false)
                     .positiveText(R.string.save)

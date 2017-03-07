@@ -1,22 +1,33 @@
 package com.brandonhogan.liftscout.views.workout;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
-import com.brandonhogan.liftscout.repository.ExerciseRepo;
-import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
+import com.brandonhogan.liftscout.core.controls.MaterialDialog;
+import com.brandonhogan.liftscout.core.controls.NotificationChrono;
+import com.brandonhogan.liftscout.core.controls.NumberPicker;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import butterknife.Bind;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class WorkoutContainerFragment extends BaseFragment {
+import static android.content.Context.NOTIFICATION_SERVICE;
+
+public class WorkoutContainerFragment extends BaseFragment implements WorkoutContainerContract.View {
 
 
     // Static Properties
@@ -41,7 +52,17 @@ public class WorkoutContainerFragment extends BaseFragment {
     // Private Properties
     //
     private View rootView;
-    private int exerciseId;
+    private WorkoutContainerContract.Presenter presenter;
+
+    private MenuItem deleteMenu;
+    private MenuItem settingsMenu;
+    private MenuItem timerMenu;
+
+    private NotificationManager notificationManager;
+    private NotificationChrono notificationChrono;
+
+    private MaterialDialog settingsDialog;
+    private SweetAlertDialog deleteDialog;
 
 
     // Binds
@@ -66,9 +87,10 @@ public class WorkoutContainerFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        exerciseId = getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID);
+        presenter = new WorkoutContainerPresenter(this, getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID));
+        presenter.viewCreated();
 
-        setTitle(getTitle());
+        setTitle(presenter.getExerciseName());
 
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_tracker_title)));
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_history_title)));
@@ -78,7 +100,7 @@ public class WorkoutContainerFragment extends BaseFragment {
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
         final WorkoutContainerAdapter adapter = new WorkoutContainerAdapter
-                (getChildFragmentManager(), exerciseId);
+                (getChildFragmentManager(), presenter.getExerciseId());
 
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(4);
@@ -99,6 +121,56 @@ public class WorkoutContainerFragment extends BaseFragment {
 
             }
         });
+
+
+        setupSettings();
+        notificationManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+        notificationChrono = new NotificationChrono(getActivity().getApplicationContext(), 123123, true, getString(R.string.rest_timer), notificationManager);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        deleteMenu = menu.findItem(R.id.action_delete);
+        deleteMenu.setVisible(true);
+
+        timerMenu = menu.findItem(R.id.action_timer);
+        timerMenu.setVisible(true);
+
+        settingsMenu = menu.findItem(R.id.action_settings);
+        settingsMenu.setVisible(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_delete:
+                showDeleteAlert();
+                return true;
+            case R.id.action_timer:
+                if (timerMenu.getIcon() == null) {
+                    resetRestTimer();
+                    return false;
+                }
+                presenter.onTimerClicked();
+                return true;
+            case R.id.action_settings:
+                showSettings();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -111,8 +183,89 @@ public class WorkoutContainerFragment extends BaseFragment {
         super.onResume();
     }
 
-    private String getTitle() {
-        ExerciseRepo exerciseRepo = new ExerciseRepoImpl();
-        return exerciseRepo.getExercise(exerciseId).getName();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        resetRestTimer();
+    }
+
+    @Override
+    public void deleteSetSuccess() {
+        getNavigationManager().navigateBack(getActivity());
+    }
+
+    @Override
+    public void onRestTimerTick(int time) {
+        notificationChrono.updateNotification(getResources().getQuantityString(R.plurals.timer_message, time, time));
+        timerMenu.setIcon(null);
+        timerMenu.setTitle(Integer.toString(time));
+    }
+
+    @Override
+    public void onRestTimerTerminate(boolean vibrate) {
+        if (vibrate) {
+            Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(1000);
+        }
+        resetRestTimer();
+    }
+
+    private void resetRestTimer() {
+        notificationChrono.clearNotification();
+        timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_48dp, getActivity().getTheme()));
+        timerMenu.setTitle(getString(R.string.timer));
+        presenter.onRestTimerStop();
+    }
+
+    private void setupSettings() {
+
+        settingsDialog = new MaterialDialog(
+                getActivity(),
+                R.string.settings,
+                R.layout.dialog_tracker_settings,
+                false,
+                new com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@android.support.annotation.NonNull
+                                                com.afollestad.materialdialogs.MaterialDialog dialog,
+                                        @android.support.annotation.NonNull
+                                                DialogAction which) {
+
+                        View view = dialog.getView();
+                        NumberPicker picker = (NumberPicker)view.findViewById(R.id.number_picker);
+
+                        presenter.onSettingsSave(picker.getNumberAsInt(), true);
+                    }
+                });
+
+        View view = settingsDialog.getView();
+        NumberPicker picker = (NumberPicker)view.findViewById(R.id.number_picker);
+        picker.setNumber(presenter.getExerciseRestTimer());
+    }
+
+    private void showSettings() {
+        settingsDialog.show();
+    }
+
+    private void showDeleteAlert() {
+        String message =
+                String.format(getString(R.string.dialog_tracker_delete_set_message)
+                        , presenter.getExerciseName());
+
+        deleteDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(getString(R.string.dialog_tracker_delete_set_title))
+                .setContentText(message)
+                .setConfirmText(getString(R.string.delete))
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        deleteDialog.cancel();
+                        presenter.onDeleteSet();
+                    }
+                })
+                .setCancelText(getString(R.string.cancel))
+                .showCancelButton(true);
+
+        deleteDialog.show();
     }
 }

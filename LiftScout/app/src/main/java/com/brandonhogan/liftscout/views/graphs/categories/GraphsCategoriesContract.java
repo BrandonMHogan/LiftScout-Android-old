@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Description :
  */
 
-public class GraphsCategoriesContract {
+public interface GraphsCategoriesContract {
 
     interface View {
         void setPieChart(ArrayList<CategoryGraph> categories, int title);

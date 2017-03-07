@@ -5,7 +5,7 @@ package com.brandonhogan.liftscout.views.graphs.exercises;
  * Description :
  */
 
-public class GraphExercisesContract {
+public interface GraphExercisesContract {
     interface View {
         void setSelectedExercise(int id, String name);
     }

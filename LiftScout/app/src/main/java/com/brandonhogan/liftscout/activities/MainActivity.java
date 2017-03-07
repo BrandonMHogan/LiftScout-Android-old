@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity
     private ActionBarDrawerToggle toggle;
     private SweetAlertDialog dialog;
     private Toolbar toolbar;
+    private int timerInterval;
 
     @Inject
     ProgressManager progressManager;
@@ -188,6 +189,27 @@ public class MainActivity extends BaseActivity
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle(title);
     }
+
+//
+//        io.reactivex.Observable.interval(0, 1, TimeUnit.SECONDS)
+//                .timeInterval()
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .take(interval)
+//                .doAfterTerminate(new Action() {
+//                    @Override
+//                    public void run() throws Exception {
+//                        view.onRestTimerTerminate(exerciseTrackVibrate);
+//                        disposable.dispose();
+//                    }
+//                })
+//                .subscribe(new Consumer<Timed<Long>>() {
+//                    @Override
+//                    public void accept(@NonNull Timed<Long> longTimed) throws Exception {
+//                        exerciseTimerTracked -= 1;
+//                        view.onRestTimerTick(exerciseTimerTracked);
+//                    }
+//                });
+//    }
 
     public NavigationManager getNavigationManager() {
         return navigationManager;

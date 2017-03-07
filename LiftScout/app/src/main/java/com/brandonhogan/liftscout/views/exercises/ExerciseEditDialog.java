@@ -8,7 +8,6 @@ import android.widget.EditText;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.Theme;
 import com.brandonhogan.liftscout.R;
 
 public class ExerciseEditDialog {
@@ -81,7 +80,6 @@ public class ExerciseEditDialog {
             View customTheme = LayoutInflater.from(activity).inflate(R.layout.dialog_exercise_edit, null);
 
             dialog = new MaterialDialog.Builder(activity)
-                    .theme(isDarkTheme ? Theme.DARK : Theme.LIGHT)
                     .title(isNew ? R.string.dialog_add_exercise_title : R.string.dialog_edit_exercise_title)
                     .customView(customTheme, false)
                     .positiveText(R.string.save)

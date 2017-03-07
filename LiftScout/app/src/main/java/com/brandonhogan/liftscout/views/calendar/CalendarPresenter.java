@@ -4,8 +4,6 @@ import com.brandonhogan.liftscout.core.managers.CalendarManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.CalendarEvent;
-import com.brandonhogan.liftscout.core.model.Category;
-import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.core.utils.BhDate;

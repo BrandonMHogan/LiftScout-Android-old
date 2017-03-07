@@ -103,7 +103,7 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.github.lawloretienne:discreteslider:0.0.9'
     compile 'com.jaredrummler:material-spinner:1.1.0'
-    compile 'com.afollestad.material-dialogs:core:0.8.6.2'
+    compile 'com.afollestad.material-dialogs:core:0.9.3.0'
     compile 'biz.kasual:materialnumberpicker:1.2.1'
     compile 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0'
     compile 'com.thebluealliance:spectrum:0.5.0'

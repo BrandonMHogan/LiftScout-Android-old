@@ -1,16 +1,10 @@
 package com.brandonhogan.liftscout.views.workout.tracker;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,7 +12,6 @@ import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
-import com.brandonhogan.liftscout.core.controls.NotificationChrono;
 import com.brandonhogan.liftscout.core.controls.NumberPicker;
 import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
@@ -31,19 +24,10 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Timed;
-
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class TrackerFragment extends BaseFragment implements
         TrackerContract.View, RecyclerTouchListener.RecyclerTouchListenerHelper {
@@ -80,15 +64,7 @@ public class TrackerFragment extends BaseFragment implements
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
     private SweetAlertDialog dialog;
-    private MenuItem deleteMenu;
-    private MenuItem timerMenu;
 
-    private NotificationManager notificationManager;
-    private NotificationChrono notificationChrono;
-    private Disposable disposable;
-
-
-    int time = 8;
 
     // Binds
     //
@@ -130,85 +106,6 @@ public class TrackerFragment extends BaseFragment implements
         presenter.viewCreated();
 
         resetButtons();
-
-        notificationManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
-        notificationChrono = new NotificationChrono(getActivity().getApplicationContext(), 123123, true, "Timer", notificationManager);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        deleteMenu = menu.findItem(R.id.action_delete);
-        deleteMenu.setVisible(true);
-
-        timerMenu = menu.findItem(R.id.action_timer);
-        timerMenu.setVisible(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_delete:
-                presenter.onDelete();
-                return true;
-            case R.id.action_timer:
-                setTimer();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void setTimer() {
-
-        if (timerMenu.getIcon() == null) {
-            stopTimer();
-            return;
-        }
-
-        disposable = io.reactivex.Observable.interval(0, 1, TimeUnit.SECONDS)
-                .timeInterval()
-                .observeOn(AndroidSchedulers.mainThread())
-                .take(time)
-                .doAfterTerminate(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        Vibrator vibrator = (Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-                        vibrator.vibrate(1000);
-                        stopTimer();
-                    }
-                })
-                .subscribe(new Consumer<Timed<Long>>() {
-                    @Override
-                    public void accept(@NonNull Timed<Long> longTimed) throws Exception {
-                        time -= 1;
-                        notificationChrono.updateNotification(getResources().getQuantityString(R.plurals.timer_message, time, time));
-                        timerMenu.setIcon(null);
-                        timerMenu.setTitle(Integer.toString(time));
-
-                    }
-                });
-    }
-
-    private void stopTimer() {
-        disposable.dispose();
-
-        notificationChrono.clearNotification();
-        time = 8;
-
-        timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_48dp, getActivity().getTheme()));
-        timerMenu.setTitle(getString(R.string.timer));
     }
 
     @Override
@@ -239,16 +136,7 @@ public class TrackerFragment extends BaseFragment implements
     public void onPause() {
         super.onPause();
         mRecyclerView.removeOnItemTouchListener(onTouchListener);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (deleteMenu != null)
-            deleteMenu.setVisible(false);
-
-        if (timerMenu != null)
-            timerMenu.setVisible(false);
+       //presenter.onRestTimerStop();
     }
 
     @Override
@@ -273,7 +161,6 @@ public class TrackerFragment extends BaseFragment implements
         firstButton.setText(getString(R.string.save));
         secondButton.setText(getString(R.string.clear));
     }
-
 
     @Override
     public void updateValues(float weight, int reps) {
@@ -374,29 +261,6 @@ public class TrackerFragment extends BaseFragment implements
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         dialog.cancel();
                         presenter.onDeleteRep();
-                    }
-                })
-                .setCancelText(getString(R.string.cancel))
-                .showCancelButton(true);
-
-        dialog.show();
-    }
-
-    @Override
-    public void showDeleteSetAlert() {
-        String message =
-                String.format(getString(R.string.dialog_tracker_delete_set_message)
-                        , presenter.getExerciseName());
-
-        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getString(R.string.dialog_tracker_delete_set_title))
-                .setContentText(message)
-                .setConfirmText(getString(R.string.delete))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        dialog.cancel();
-                        presenter.onDeleteSet();
                     }
                 })
                 .setCancelText(getString(R.string.cancel))

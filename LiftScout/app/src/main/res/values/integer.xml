@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <integer name="default_rest_timer">60</integer>
+
     <integer name="animation_speed_slide">700</integer>
     <integer name="animation_speed_root_in">20</integer>
     <integer name="animation_speed_root_in_alpha">220</integer>
@@ -12,5 +14,7 @@
 
     <integer name="category_name_max_length">30</integer>
     <integer name="exercise_name_max_length">30</integer>
+
+    <integer name="tracker_timer_interval_max_length">4</integer>
 
 </resources>

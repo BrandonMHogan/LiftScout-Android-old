@@ -9,6 +9,8 @@ public class Exercise extends RealmObject {
     public static final String ID = "id";
     public static final String CATEGORY_ID = "categoryId";
     public static final String NAME = "name";
+    public static final String REST_TIMER = "restTimer";
+    public static final String REST_VIBRATE = "restVibrate";
 
 
     @PrimaryKey
@@ -20,6 +22,10 @@ public class Exercise extends RealmObject {
     private String name;
 
     private int type;
+
+    private int restTimer = 60;
+
+    private boolean restVibrate = true;
 
     public int getId() {
         return id;
@@ -51,5 +57,21 @@ public class Exercise extends RealmObject {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getRestTimer() {
+        return restTimer;
+    }
+
+    public void setRestTimer(int restTimer) {
+        this.restTimer = restTimer;
+    }
+
+    public boolean isRestVibrate() {
+        return restVibrate;
+    }
+
+    public void setRestVibrate(boolean restVibrate) {
+        this.restVibrate = restVibrate;
     }
 }

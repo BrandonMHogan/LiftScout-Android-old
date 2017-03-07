@@ -21,7 +21,6 @@ import com.brandonhogan.liftscout.core.utils.ColorUtil;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.workout.graph.GraphDataSet;
 import com.etiennelawlor.discreteslider.library.ui.DiscreteSlider;
-import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;

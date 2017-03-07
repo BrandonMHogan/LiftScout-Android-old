@@ -128,33 +128,6 @@ public class TrackerPresenter implements TrackerContract.Presenter {
         editingRep = null;
     }
 
-    /*
-        Called when the delete button is pressed in the view.
-        If a set is empty, then delete the set
-        If a set is not empty, show the delete set alert
-        If a rep is selected, show the delete rep alert
-     */
-    @Override
-    public void onDelete() {
-
-        if (editingRep == null) {
-            if (set.getReps().isEmpty())
-                onDeleteSet();
-            else
-                view.showDeleteSetAlert();
-        }
-        else {
-            view.showDeleteRepAlert();
-        }
-    }
-
-    @Override
-    public void onDeleteSet() {
-        progressManager.deleteSet(set);
-        progressManager.clearUpdatedSet();
-        view.deleteSetSuccess();
-    }
-
     @Override
     public void onDeleteRep() {
         if (editingRep != null) {
@@ -163,11 +136,6 @@ public class TrackerPresenter implements TrackerContract.Presenter {
             resetAdapter();
             view.clear(false);
         }
-    }
-
-    @Override
-    public String getExerciseName() {
-        return set.getExercise().getName();
     }
 
     @Override

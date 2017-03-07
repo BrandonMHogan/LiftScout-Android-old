@@ -10,4 +10,8 @@ public interface ExerciseRepo {
     Exercise getExercise(int exerciseId);
     void setExercise(Exercise exercise);
     void deleteExercise(int exercise);
+    void setExerciseRestTimer(int exerciseId, int time);
+    int getExerciseRestTimer(int exerciseId);
+    void setExerciseRestVibrate(int exerciseId, boolean vibrate);
+    boolean getExerciseRestVibrate(int exerciseId);
 }
