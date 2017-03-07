@@ -198,7 +198,12 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
         mAdapter.withOnLongClickListener(new FastAdapter.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v, IAdapter adapter, IItem item, int position) {
-                showDeleteRepAlert(((HistoryListSection)mAdapter.getAdapterItem(position)), position);
+                try {
+                    showDeleteRepAlert(((HistoryListSection) mAdapter.getAdapterItem(position)), position);
+                }
+                catch (Exception ex) {
+
+                }
                 return false;
             }
         });

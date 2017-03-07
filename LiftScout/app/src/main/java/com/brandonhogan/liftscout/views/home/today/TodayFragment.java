@@ -149,7 +149,14 @@ public class TodayFragment extends BaseFragment implements TodayContact.View {
         mAdapter.withOnLongClickListener(new FastAdapter.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v, IAdapter adapter, IItem item, int position) {
-                showDeleteRepAlert(((TodayListSection)mAdapter.getAdapterItem(position)), position);
+                // Listener will trigger for both the section and the item, and was crashing if you
+                // long clicked a child item.
+                try {
+                    showDeleteRepAlert(((TodayListSection) mAdapter.getAdapterItem(position)), position);
+                }
+                catch (Exception ex) {
+
+                }
                 return false;
             }
         });
