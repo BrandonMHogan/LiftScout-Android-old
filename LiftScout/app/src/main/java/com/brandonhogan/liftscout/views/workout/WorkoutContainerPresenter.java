@@ -86,9 +86,10 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     }
 
     @Override
-    public void onSettingsSave(int timerValue, boolean vibrate) {
+    public void onSettingsSave(int timerValue, boolean vibrate, boolean sound) {
         exerciseRepo.setExerciseRestTimer(exerciseId, timerValue);
         exerciseRepo.setExerciseRestVibrate(exerciseId, vibrate);
+        exerciseRepo.setExerciseRestSound(exerciseId, sound);
         exerciseTimer = timerValue;
     }
 
@@ -112,6 +113,12 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     }
 
     @Override
+    public boolean getExerciseRestSound() {
+        exerciseTrackVibrate = exerciseRepo.getExerciseRestSound(exerciseId);
+        return exerciseTrackVibrate;
+    }
+
+    @Override
     public void onTimerClicked() {
         exerciseTimerTracked = getExerciseRestTimer() + 1;
         runTimer();
@@ -119,6 +126,10 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
 
     @Override
     public void onTimerClicked(int time) {
+
+        if (time <= 0)
+            return;
+
         exerciseTimerTracked = time + 1;
         runTimer();
     }
@@ -137,7 +148,7 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
                 .doAfterTerminate(new Action() {
                     @Override
                     public void run() throws Exception {
-                        view.onRestTimerTerminate(getExerciseRestVibrate());
+                        view.onRestTimerTerminate(getExerciseRestVibrate(), getExerciseRestSound());
                         disposable.dispose();
                     }
                 })

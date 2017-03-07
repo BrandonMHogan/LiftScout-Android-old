@@ -8,7 +8,7 @@ package com.brandonhogan.liftscout.views.workout;
 public interface WorkoutContainerContract {
     interface View {
         void onRestTimerTick(int time);
-        void onRestTimerTerminate(boolean vibrate);
+        void onRestTimerTerminate(boolean vibrate, boolean sound);
         void deleteSetSuccess();
     }
 
@@ -17,10 +17,11 @@ public interface WorkoutContainerContract {
         int getExerciseId();
         String getExerciseName();
         long getDateLong();
-        void onSettingsSave(int timerValue, boolean vibrate);
+        void onSettingsSave(int timerValue, boolean vibrate, boolean sound);
         int getExerciseRestTimer();
         int getRemainingRestTime();
         boolean getExerciseRestVibrate();
+        boolean getExerciseRestSound();
 
         void onTimerClicked();
         void onTimerClicked(int time);

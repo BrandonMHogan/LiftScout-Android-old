@@ -2,11 +2,15 @@ package com.brandonhogan.liftscout.views.workout;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -221,11 +225,17 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     }
 
     @Override
-    public void onRestTimerTerminate(boolean vibrate) {
+    public void onRestTimerTerminate(boolean vibrate, boolean sound) {
         if (vibrate) {
             Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
             vibrator.vibrate(1000);
         }
+
+        if (sound) {
+            ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_RING, 100);
+            toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 700);
+        }
+
         resetRestTimer();
     }
 
@@ -257,14 +267,22 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
                         View view = dialog.getView();
                         NumberPicker picker = (NumberPicker)view.findViewById(R.id.number_picker);
+                        SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.vibrate_switch);
+                        SwitchCompat soundSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
 
-                        presenter.onSettingsSave(picker.getNumberAsInt(), true);
+
+                        presenter.onSettingsSave(picker.getNumberAsInt(), vibrateSwitch.isChecked(), soundSwitch.isChecked());
                     }
                 });
 
         View view = settingsDialog.getView();
         NumberPicker picker = (NumberPicker)view.findViewById(R.id.number_picker);
+        SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.vibrate_switch);
+        SwitchCompat soundSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
+
         picker.setNumber(presenter.getExerciseRestTimer());
+        vibrateSwitch.setChecked(presenter.getExerciseRestVibrate());
+        soundSwitch.setChecked(presenter.getExerciseRestSound());
     }
 
     private void showSettings() {
