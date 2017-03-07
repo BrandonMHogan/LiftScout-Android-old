@@ -19,6 +19,7 @@ public interface WorkoutContainerContract {
         long getDateLong();
         void onSettingsSave(int timerValue, boolean vibrate);
         int getExerciseRestTimer();
+        int getRemainingRestTime();
         boolean getExerciseRestVibrate();
 
         void onTimerClicked();

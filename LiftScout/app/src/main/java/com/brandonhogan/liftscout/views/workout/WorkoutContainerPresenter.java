@@ -93,6 +93,11 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     }
 
     @Override
+    public int getRemainingRestTime() {
+        return exerciseTimerTracked;
+    }
+
+    @Override
     public int getExerciseRestTimer() {
         if (exerciseTimer == 0)
             exerciseTimer = exerciseRepo.getExerciseRestTimer(exerciseId);

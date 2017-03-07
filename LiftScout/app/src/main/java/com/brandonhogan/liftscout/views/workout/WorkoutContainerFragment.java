@@ -155,6 +155,11 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
         deleteMenu.setVisible(true);
 
         timerMenu = menu.findItem(R.id.action_timer);
+        if (presenter.getRemainingRestTime() > 0) {
+            timerMenu.setIcon(null);
+            timerMenu.setTitle(Integer.toString(presenter.getRemainingRestTime()));
+        }
+
         timerMenu.setVisible(true);
 
         settingsMenu = menu.findItem(R.id.action_settings);
