@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.views.settings.display;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -144,6 +145,7 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
     private void restartActivity() {
         getActivity().finish();
         final Intent intent = getActivity().getIntent();
+        intent.replaceExtras(new Bundle());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
         getActivity().startActivity(intent);
     }
