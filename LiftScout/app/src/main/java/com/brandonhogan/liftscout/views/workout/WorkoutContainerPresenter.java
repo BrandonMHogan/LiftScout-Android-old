@@ -72,6 +72,11 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     }
 
     @Override
+    public long getDateLong() {
+        return progressManager.getCurrentDate().getTime();
+    }
+
+    @Override
     public void onDeleteSet() {
         Set set = progressManager.getTodayProgressSet(exerciseId);
 
@@ -104,7 +109,22 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     @Override
     public void onTimerClicked() {
         exerciseTimerTracked = getExerciseRestTimer() + 1;
+        runTimer();
+    }
 
+    @Override
+    public void onTimerClicked(int time) {
+        exerciseTimerTracked = time + 1;
+        runTimer();
+    }
+
+    @Override
+    public void onRestTimerStop() {
+        if (disposable != null)
+            disposable.dispose();
+    }
+
+    private void runTimer() {
         disposable = io.reactivex.Observable.interval(0, 1, TimeUnit.SECONDS)
                 .timeInterval()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -123,11 +143,5 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
                         view.onRestTimerTick(exerciseTimerTracked);
                     }
                 });
-    }
-
-    @Override
-    public void onRestTimerStop() {
-        if (disposable != null)
-            disposable.dispose();
     }
 }

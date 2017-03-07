@@ -16,10 +16,13 @@ public interface WorkoutContainerContract {
         void viewCreated();
         int getExerciseId();
         String getExerciseName();
+        long getDateLong();
         void onSettingsSave(int timerValue, boolean vibrate);
         int getExerciseRestTimer();
         boolean getExerciseRestVibrate();
+
         void onTimerClicked();
+        void onTimerClicked(int time);
         void onRestTimerStop();
         void onDeleteSet();
     }

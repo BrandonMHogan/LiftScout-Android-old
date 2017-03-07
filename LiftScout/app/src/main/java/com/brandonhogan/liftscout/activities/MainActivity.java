@@ -13,6 +13,8 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.DefaultScreens;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.managers.NotificationServiceManager;
+import com.brandonhogan.liftscout.core.utils.LogUtil;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 
@@ -92,12 +94,32 @@ public class MainActivity extends BaseActivity
             // This needs to be hit first regardless of where a notification will go. Home must
             // be the first item in the back stack
 
+            Bundle bundle = getIntent().getExtras();
+
+            if (bundle != null) {
+
+                LogUtil.printIntents(bundle, getTAG());
+
+                String notificationId = (String) bundle.get(NotificationServiceManager.NOTIFICATION_ID);
+
+                if (notificationId != null) {
+                    switch (notificationId) {
+                        case NotificationServiceManager.REST_TIMER_TRIGGER_NOTIFICATION:
+                            progressManager.setTodayProgress((long) bundle.get(NotificationServiceManager.REST_TIMER_TRIGGER_DATE));
+                            navigationManager.startWorkoutContainer((int) bundle.get(NotificationServiceManager.REST_TIMER_TRIGGER_EXERCISE_ID), (int) bundle.get(NotificationServiceManager.REST_TIMER_TRIGGER_TIME));
+                            break;
+                    }
+                    return;
+                }
+            }
+
+
+            // If no notifications or any other kind of bundle was set, we will default to calendar or today
             if (userManager.getHomeDefaultValue().equals(DefaultScreens.CALENDAR)) {
                 navigationManager.startCalendar();
+                return;
             }
-            else {
-                navigationManager.startToday();
-            }
+            navigationManager.startToday();
         }
     }
 

@@ -16,10 +16,9 @@ import android.view.ViewGroup;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.controls.MaterialDialog;
-import com.brandonhogan.liftscout.core.controls.NotificationChrono;
 import com.brandonhogan.liftscout.core.controls.NumberPicker;
+import com.brandonhogan.liftscout.core.managers.NotificationServiceManager;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import butterknife.Bind;
@@ -29,20 +28,24 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class WorkoutContainerFragment extends BaseFragment implements WorkoutContainerContract.View {
 
+    public static final int REST_TIMER_NOTIFICATION_ID = 1231233232;
+
 
     // Static Properties
     //
     private static final String BUNDLE_EXERCISE_ID = "exerciseIdBundle";
+    private static final String BUNDLE_REST_TIMER = "restTimerBundle";
 
 
     // Instance
     //
-    public static WorkoutContainerFragment newInstance(int exerciseId)
+    public static WorkoutContainerFragment newInstance(int exerciseId, int timer)
     {
         WorkoutContainerFragment frag = new WorkoutContainerFragment();
         Bundle bundle = new Bundle();
 
         bundle.putInt(BUNDLE_EXERCISE_ID, exerciseId);
+        bundle.putInt(BUNDLE_REST_TIMER, timer);
         frag.setArguments(bundle);
 
         return frag;
@@ -59,7 +62,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     private MenuItem timerMenu;
 
     private NotificationManager notificationManager;
-    private NotificationChrono notificationChrono;
+    private NotificationServiceManager notificationServiceManager;
 
     private MaterialDialog settingsDialog;
     private SweetAlertDialog deleteDialog;
@@ -87,7 +90,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter = new WorkoutContainerPresenter(this, getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID));
+        presenter = new WorkoutContainerPresenter(this, getArguments().getInt(BUNDLE_EXERCISE_ID));
         presenter.viewCreated();
 
         setTitle(presenter.getExerciseName());
@@ -124,8 +127,11 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
 
         setupSettings();
-        notificationManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
-        notificationChrono = new NotificationChrono(getActivity().getApplicationContext(), 123123, true, getString(R.string.rest_timer), notificationManager);
+        notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
+        notificationServiceManager = new NotificationServiceManager();
+        notificationServiceManager.RestTimerNotification(getActivity().getApplicationContext(), REST_TIMER_NOTIFICATION_ID, true, getString(R.string.rest_timer), presenter.getExerciseId(), presenter.getDateLong(), 0, notificationManager);
+
+        presenter.onTimerClicked(getArguments().getInt(BUNDLE_REST_TIMER));
     }
 
     @Override
@@ -196,9 +202,13 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
     @Override
     public void onRestTimerTick(int time) {
-        notificationChrono.updateNotification(getResources().getQuantityString(R.plurals.timer_message, time, time));
-        timerMenu.setIcon(null);
-        timerMenu.setTitle(Integer.toString(time));
+
+        notificationServiceManager.updateTimerText(getResources().getQuantityString(R.plurals.timer_message, time, time), time);
+
+        if (timerMenu != null) {
+            timerMenu.setIcon(null);
+            timerMenu.setTitle(Integer.toString(time));
+        }
     }
 
     @Override
@@ -211,7 +221,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     }
 
     private void resetRestTimer() {
-        notificationChrono.clearNotification();
+        notificationServiceManager.clearNotification();
         timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_48dp, getActivity().getTheme()));
         timerMenu.setTitle(getString(R.string.timer));
         presenter.onRestTimerStop();

@@ -96,6 +96,10 @@ public class ProgressManager {
         }
     }
 
+    public void setTodayProgress(long date) {
+        setTodayProgress(new Date(date));
+    }
+
     public Set getTodayProgressSet(int exerciseId) {
         Set set = todayProgress.getSets().where().equalTo("exercise.id", exerciseId).findFirst();
 
@@ -118,6 +122,9 @@ public class ProgressManager {
         return set;
     }
 
+    public Date getCurrentDate() {
+        return todayProgress.getDate();
+    }
 
     // Sets
 

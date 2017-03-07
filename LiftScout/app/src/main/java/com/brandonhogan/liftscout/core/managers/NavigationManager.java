@@ -283,13 +283,18 @@ public class NavigationManager {
 
     // Set Edit
     public boolean startWorkoutContainer(int exerciseId) {
-        BaseFragment fragment = WorkoutContainerFragment.newInstance(exerciseId);
+        BaseFragment fragment = WorkoutContainerFragment.newInstance(exerciseId, 0);
         return openAsRoot(fragment);
     }
 
     public boolean startWorkoutContainer(int exerciseId, boolean force) {
-        BaseFragment fragment = WorkoutContainerFragment.newInstance(exerciseId);
+        BaseFragment fragment = WorkoutContainerFragment.newInstance(exerciseId, 0);
         return openAsRoot(fragment, force);
+    }
+
+    public boolean startWorkoutContainer(int exerciseId, int timer) {
+        BaseFragment fragment = WorkoutContainerFragment.newInstance(exerciseId, timer);
+        return openAsRoot(fragment);
     }
 
 
