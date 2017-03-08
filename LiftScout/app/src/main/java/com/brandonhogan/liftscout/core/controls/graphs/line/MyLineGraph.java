@@ -16,8 +16,8 @@ import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
+import com.brandonhogan.liftscout.core.utils.AttrUtil;
 import com.brandonhogan.liftscout.core.utils.BhDate;
-import com.brandonhogan.liftscout.core.utils.ColorUtil;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.workout.graph.GraphDataSet;
 import com.etiennelawlor.discreteslider.library.ui.DiscreteSlider;
@@ -127,8 +127,8 @@ public class MyLineGraph extends FrameLayout {
 
     public void init(Resources.Theme theme) {
 
-        textColor = ColorUtil.getAttributeColor(theme, android.R.attr.textColor);
-        fillColor = ColorUtil.getAttributeColor(theme, android.R.attr.colorAccent);
+        textColor = AttrUtil.getAttributeRes(theme, android.R.attr.textColor);
+        fillColor = AttrUtil.getAttributeRes(theme, android.R.attr.colorAccent);
 
         lineChart.animate();
         lineChart.getDescription().setEnabled(false);

@@ -48,6 +48,21 @@
                 android:layout_height="match_parent"/>
         </RelativeLayout>
 
+        <com.luseen.spacenavigation.SpaceNavigationView
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:layout_behavior="com.luseen.spacenavigation.SpaceNavigationViewBehavior"
+            app:centre_button_color="?attr/android:windowBackground"
+            app:inactive_item_color="@color/white"
+            app:active_item_color="@color/white"
+            app:space_background_color="?attr/colorPrimary"
+            app:centre_button_icon="@drawable/ic_add_white_24dp"
+            app:space_item_icon_size="@dimen/space_item_icon_default_size"
+            app:space_item_icon_only_size="@dimen/space_item_icon_only_size"
+            app:space_item_text_size="@dimen/space_item_text_default_size" />
+
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView

@@ -86,6 +86,11 @@ public class TodayFragment extends BaseFragment implements TodayContact.View {
         presenter.viewCreate();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getNavigationManager().showSpace();
+    }
 
     // Public Functions
     //

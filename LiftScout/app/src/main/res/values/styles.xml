@@ -19,7 +19,7 @@
         <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_black</item>
         <item name="themedMenuGraphsDrawable">@drawable/ic_menu_bar_chart_black</item>
         <item name="themedMenuSettingsDrawable">@drawable/ic_menu_settings_black</item>
-        <item name="themedMenuAboutDrawable">@drawable/ic_menu_camera</item>
+        <item name="themedMenuAboutDrawable">@drawable/ic_menu_info_black</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

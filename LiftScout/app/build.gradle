@@ -123,6 +123,7 @@ dependencies {
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    compile 'com.github.armcha:SpaceNavigationView:1.6.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

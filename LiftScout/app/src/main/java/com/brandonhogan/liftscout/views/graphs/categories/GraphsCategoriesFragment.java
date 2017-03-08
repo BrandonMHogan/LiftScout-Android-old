@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.model.CategoryGraph;
-import com.brandonhogan.liftscout.core.utils.ColorUtil;
+import com.brandonhogan.liftscout.core.utils.AttrUtil;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -96,7 +96,7 @@ public class GraphsCategoriesFragment extends BaseFragment implements GraphsCate
         if (categories == null || categories.isEmpty())
             return;
 
-        int fontColor = ColorUtil.getAttributeColor(getActivity().getTheme(),android.R.attr.textColor);
+        int fontColor = AttrUtil.getAttributeRes(getActivity().getTheme(),android.R.attr.textColor);
 
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.view.View;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.about.AboutFragment;
@@ -18,6 +19,7 @@ import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment
 import com.brandonhogan.liftscout.views.settings.home.SettingsHomeFragment;
 import com.brandonhogan.liftscout.views.settings.profile.SettingsProfileFragment;
 import com.brandonhogan.liftscout.views.workout.WorkoutContainerFragment;
+import com.luseen.spacenavigation.SpaceNavigationView;
 
 public class NavigationManager {
 
@@ -38,6 +40,7 @@ public class NavigationManager {
     private FragmentManager.OnBackStackChangedListener backstackListener;
     private String currentFragmentName;
     private DrawerLayout drawer;
+    private SpaceNavigationView space;
 
 
     // Public Properties
@@ -109,6 +112,7 @@ public class NavigationManager {
         if (!verifyTransition(fragment, force))
             return false;
 
+        hideSpace();
         popToHomeFragment();
         return replaceWithTransitions(fragment, R.animator.root_in, R.animator.fade_out);
     }
@@ -117,6 +121,7 @@ public class NavigationManager {
         if (!verifyTransition(fragment, false))
             return false;
 
+        showSpace();
         popEveryFragment();
         return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
     }
@@ -125,6 +130,7 @@ public class NavigationManager {
         if (!verifyTransition(fragment, false))
             return false;
 
+        hideSpace();
         return replaceWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
     }
 
@@ -341,5 +347,23 @@ public class NavigationManager {
     public void unlockDrawer() {
         if (drawer != null)
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+    }
+
+    public void setSpace(SpaceNavigationView space) {
+        this.space = space;
+    }
+
+    public void clearSpace() {
+        this.space = null;
+    }
+
+    public void showSpace() {
+        if (space != null)
+            space.setVisibility(View.VISIBLE);
+    }
+
+    public void hideSpace() {
+        if (space != null)
+            space.setVisibility(View.GONE);
     }
 }

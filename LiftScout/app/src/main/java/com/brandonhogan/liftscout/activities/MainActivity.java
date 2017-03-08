@@ -6,6 +6,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -14,9 +15,13 @@ import com.brandonhogan.liftscout.core.constants.DefaultScreens;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.NotificationServiceManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.utils.AttrUtil;
 import com.brandonhogan.liftscout.core.utils.LogUtil;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
+import com.luseen.spacenavigation.SpaceItem;
+import com.luseen.spacenavigation.SpaceNavigationView;
+import com.luseen.spacenavigation.SpaceOnClickListener;
 
 import java.util.Date;
 
@@ -35,6 +40,9 @@ public class MainActivity extends BaseActivity
 
     @Bind(R.id.nav_view)
     NavigationView navigationView;
+
+    @Bind(R.id.space)
+    SpaceNavigationView space;
 
 
     // Private Static Properties
@@ -81,6 +89,8 @@ public class MainActivity extends BaseActivity
             navigationManager = new NavigationManager();
             navigationManager.init(getFragmentManager(), drawer);
             navigationManager.setNavigationListener(this);
+
+            setupSpace(savedInstanceState);
 
             //This is set when restoring from a previous state,
             //so we do not want to try and load a new fragment
@@ -130,6 +140,7 @@ public class MainActivity extends BaseActivity
         navigationManager.setNavigationListener(this);
         navigationManager.setDrawer(drawer);
         navigationManager.setmFragmentManager(getFragmentManager());
+        navigationManager.setSpace(space);
     }
 
     @Override
@@ -139,6 +150,7 @@ public class MainActivity extends BaseActivity
         navigationManager.setNavigationListener(null); // Prevent memory leak on recreate
         navigationManager.setDrawer(null);
         navigationManager.setmFragmentManager(null);
+        navigationManager.clearSpace();
     }
 
     @Override
@@ -240,6 +252,54 @@ public class MainActivity extends BaseActivity
 
     // Private Functions
     //
+
+    private void setupSpace(Bundle savedInstanceState) {
+        space.initWithSaveInstanceState(savedInstanceState);
+        space.addSpaceItem(new SpaceItem(getString(R.string.nav_about),  AttrUtil.getStyleAttributeRes(this, getTheme(), R.attr.themedMenuAboutDrawable)));
+        space.addSpaceItem(new SpaceItem(getString(R.string.nav_settings), AttrUtil.getStyleAttributeRes(this, getTheme(), R.attr.themedMenuSettingsDrawable)));
+        space.addSpaceItem(new SpaceItem(getString(R.string.nav_exercises), AttrUtil.getStyleAttributeRes(this, getTheme(), R.attr.themedMenuExerciseDrawable)));
+        space.addSpaceItem(new SpaceItem(getString(R.string.nav_graphs), AttrUtil.getStyleAttributeRes(this, getTheme(), R.attr.themedMenuGraphsDrawable)));
+
+        space.showIconOnly();
+        space.setCentreButtonSelectable(true);
+        space.setCentreButtonSelected();
+
+        space.setCentreButtonIconColorFilterEnabled(false);
+
+        space.setSpaceOnClickListener(new SpaceOnClickListener() {
+            @Override
+            public void onCentreButtonClick() {
+                getNavigationManager().startCategoryListAddSet();
+            }
+
+            @Override
+            public void onItemClick(int itemIndex, String itemName) {
+
+                switch (itemIndex) {
+                    case 0:
+                        getNavigationManager().startAbout();
+                        break;
+                    case 1:
+                        getNavigationManager().startSettings();
+                        break;
+                    case 2:
+                        getNavigationManager().startCategoryList();
+                        break;
+                    case 3:
+                        getNavigationManager().startGraphsContainer(false);
+                        break;
+                }
+            }
+
+            @Override
+            public void onItemReselected(int itemIndex, String itemName) {
+                Log.d(getTAG(),"what");
+            }
+        });
+
+        navigationManager.setSpace(space);
+    }
+
     private void updateUserData() {
 
         //TODO : Replace once userManager is fully DI
