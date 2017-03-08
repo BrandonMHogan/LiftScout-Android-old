@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -88,28 +91,33 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
         setHasOptionsMenu(true);
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        inflater.inflate(R.menu.main, menu);
-//    }
-//
-//    @Override
-//    public void onPrepareOptionsMenu(Menu menu) {
-//        super.onPrepareOptionsMenu(menu);
-//        MenuItem addMenu = menu.findItem(R.id.action_add);
-//        addMenu.setVisible(true);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_add:
-//                getNavigationManager().startCategoryListAddSet();
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem todayMenu = menu.findItem(R.id.action_today);
+        MenuItem addMenu = menu.findItem(R.id.action_add);
+        todayMenu.setVisible(true);
+        addMenu.setVisible(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_today:
+                getNavigationManager().startToday();
+                return true;
+            case R.id.action_add:
+                getNavigationManager().startCategoryListAddSet();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onStart() {
@@ -126,6 +134,7 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     @Override
     public void onResume() {
         super.onResume();
+        getNavigationManager().showBottomNav();
     }
 
     private void setupCalendar() {

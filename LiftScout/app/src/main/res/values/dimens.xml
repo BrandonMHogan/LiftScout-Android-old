@@ -53,9 +53,9 @@
 
     <!-- Card Views -->
     <dimen name="card_view_padding">1dp</dimen>
-    <dimen name="card_view_corner_radius">10dp</dimen>
+    <dimen name="card_view_corner_radius">3dp</dimen>
     <dimen name="card_view_elevation">5dp</dimen>
-    <dimen name="card_view_inner_content_padding">12dp</dimen>
+    <dimen name="card_view_inner_content_padding">3dp</dimen>
 
     <!-- Logos -->
     <dimen name="logo_scout_width">100dp</dimen>

@@ -11,6 +11,8 @@ import com.brandonhogan.liftscout.repository.UserSettingsRepo;
 import com.brandonhogan.liftscout.repository.impl.UserRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
 
+import java.util.Date;
+
 public class UserManager {
 
     // Private Static Properties
@@ -51,6 +53,11 @@ public class UserManager {
 
     public double getWeight() {
         return user.getWeight();
+    }
+
+    public void lastUsed(Date time) {
+        userRepo.setLastUsed(time);
+        user = userRepo.getUser();
     }
 
     public void setName(String name) {

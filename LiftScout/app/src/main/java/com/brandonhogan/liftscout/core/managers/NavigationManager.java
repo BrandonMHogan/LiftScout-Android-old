@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.core.managers;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 
@@ -38,7 +39,7 @@ public class NavigationManager {
     private boolean isInTransition = false;
     private FragmentManager.OnBackStackChangedListener backstackListener;
     private String currentFragmentName;
-    private DrawerLayout drawer;
+    private BottomNavigationView bottomNav;
 
 
     // Public Properties
@@ -68,9 +69,8 @@ public class NavigationManager {
      *
      * @param fragmentManager
      */
-    public void init(FragmentManager fragmentManager, DrawerLayout drawer) {
+    public void init(FragmentManager fragmentManager) {
         mFragmentManager = fragmentManager;
-        this.drawer = drawer;
 
         mFragmentManager.removeOnBackStackChangedListener(backstackListener);
         mFragmentManager.addOnBackStackChangedListener(backstackListener);
@@ -119,7 +119,6 @@ public class NavigationManager {
         if (!verifyTransition(fragment, false))
             return false;
 
-
         popEveryFragment();
         return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
     }
@@ -127,7 +126,6 @@ public class NavigationManager {
     private boolean open(BaseFragment fragment) {
         if (!verifyTransition(fragment, false))
             return false;
-
 
         return replaceWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
     }
@@ -151,6 +149,7 @@ public class NavigationManager {
 
 
 
+        hideBottomNav();
         return true;
     }
 
@@ -325,43 +324,22 @@ public class NavigationManager {
         this.mFragmentManager = mFragmentManager;
     }
 
-    public DrawerLayout getDrawer() {
-        return drawer;
-    }
-
-    public void setDrawer(DrawerLayout drawer) {
-        this.drawer = drawer;
-    }
-
     public String getCurrentFragmentName() {
         return currentFragmentName;
     }
 
-    public void lockDrawer() {
-        if (drawer != null)
-            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+    public void setBottomNav(BottomNavigationView bottomNav) {
+        this.bottomNav = bottomNav;
     }
 
-    public void unlockDrawer() {
-        if (drawer != null)
-            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+    public void showBottomNav() {
+        if (bottomNav != null)
+            bottomNav.setVisibility(View.VISIBLE);
     }
 
-//    public void setSpace(SpaceNavigationView space) {
-//        this.space = space;
-//    }
-//
-//    public void clearSpace() {
-//        this.space = null;
-//    }
-//
-//    public void showSpace() {
-//        if (space != null)
-//            space.setVisibility(View.VISIBLE);
-//    }
-//
-//    public void hideSpace() {
-//        if (space != null)
-//            space.setVisibility(View.GONE);
-//    }
+    public void hideBottomNav() {
+        if (bottomNav != null)
+            bottomNav.setVisibility(View.GONE);
+    }
 }

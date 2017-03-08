@@ -72,8 +72,6 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
     @Override
     public void onResume() {
         super.onResume();
-
-        getNavigationManager().unlockDrawer();
         presenter.onResume();
     }
 
@@ -87,7 +85,6 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
     void onClick() {
         graphManager.setInSearch(true);
         graphManager.setGraphName(getNavigationManager().getCurrentFragmentName());
-        getNavigationManager().lockDrawer();
         getNavigationManager().startCategoryListGraphSearch();
     }
 }

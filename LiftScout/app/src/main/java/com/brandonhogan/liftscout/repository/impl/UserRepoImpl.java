@@ -5,6 +5,8 @@ import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.UserRepo;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 
 public class UserRepoImpl implements UserRepo {
@@ -19,6 +21,16 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public User getUser() {
         return databaseRealm.getRealmInstance().where(User.class).findFirst();
+    }
+
+    @Override
+    public void setLastUsed(Date date) {
+
+        databaseRealm.getRealmInstance().beginTransaction();
+        User user = databaseRealm.getRealmInstance().where(User.class).findFirst();
+        user.setLastUsed(date);
+        databaseRealm.getRealmInstance().copyToRealmOrUpdate(user);
+        databaseRealm.getRealmInstance().commitTransaction();
     }
 
     @Override

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_about"
+        android:enabled="true"
+        android:icon="?attr/themedMenuAboutDrawable"
+        android:title="@string/nav_about"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:enabled="true"
+        android:icon="?attr/themedMenuSettingsDrawable"
+        android:title="@string/nav_settings"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/nav_exercises"
+        android:enabled="true"
+        android:icon="?attr/themedMenuExerciseDrawable"
+        android:title="@string/nav_exercises"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/nav_graphs"
+        android:enabled="true"
+        android:icon="?attr/themedMenuGraphsDrawable"
+        android:title="@string/nav_graphs"
+        app:showAsAction="always" />
+
+</menu>

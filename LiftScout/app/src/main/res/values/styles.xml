@@ -14,7 +14,7 @@
         <item name="android:fillColor">@color/fillColor</item>
 
         <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
-        <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_black</item>
+        <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
         <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_black</item>
         <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_black</item>
         <item name="themedMenuGraphsDrawable">@drawable/ic_menu_bar_chart_black</item>
@@ -42,7 +42,7 @@
         <item name="android:fillColor">@color/fillColorInverse</item>
 
         <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
-        <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_white</item>
+        <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
         <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
         <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_white</item>
         <item name="themedMenuGraphsDrawable">@drawable/ic_menu_bar_chart_white</item>
@@ -70,8 +70,8 @@
         <item name="android:windowBackground">@color/backgroundColor_ThemeGreen</item>
         <item name="android:fillColor">@color/fillColor_ThemeGreen</item>
 
-        <item name="themedMenuHomeDrawable">@drawable/ic_menu_home_white</item>
-        <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_white</item>
+        <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
+        <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
         <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
         <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_white</item>
         <item name="themedMenuGraphsDrawable">@drawable/ic_menu_bar_chart_white</item>
@@ -99,8 +99,8 @@
         <item name="android:windowBackground">@color/backgroundColor_ThemePurple</item>
         <item name="android:fillColor">@color/fillColor_ThemePurple</item>
 
-        <item name="themedMenuHomeDrawable">@drawable/ic_menu_home_white</item>
-        <item name="themedMenuCalendarDrawable">@drawable/ic_menu_calendar_white</item>
+        <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
+        <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
         <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
         <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_white</item>
         <item name="themedMenuGraphsDrawable">@drawable/ic_menu_bar_chart_white</item>

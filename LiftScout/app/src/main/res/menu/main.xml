@@ -2,6 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <item
+        android:id="@+id/action_today"
+        android:icon="?attr/themedMenuHomeDrawable"
+        android:title="@string/nav_today"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_calendar"
+        android:icon="?attr/themedMenuCalendarDrawable"
+        android:title="@string/nav_calendar"
+        android:visible="false"
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/action_save"
         android:title="@string/action_save"
