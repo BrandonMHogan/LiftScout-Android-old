@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="timer_message">
-        <item quantity="zero">Timer Complete</item>
-        <item quantity="one">%s Second Remaining</item>
         <item quantity="other">%s Seconds Remaining</item>
+        <item quantity="one">%s Second Remaining</item>
+        <item quantity="zero">Timer Complete</item>
     </plurals>
 </resources>

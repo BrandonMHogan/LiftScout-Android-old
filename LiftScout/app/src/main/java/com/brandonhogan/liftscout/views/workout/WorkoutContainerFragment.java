@@ -70,6 +70,8 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     private MaterialDialog settingsDialog;
     private SweetAlertDialog deleteDialog;
 
+    private boolean isDisplayed;
+
     // Binds
     //
     @Bind(R.id.workout_viewpager)
@@ -189,11 +191,16 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     @Override
     public void onPause() {
         super.onPause();
+        isDisplayed = false;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        isDisplayed = true;
+
+        if(presenter.getRemainingRestTime() <= 0)
+            notificationServiceManager.clearNotification();
     }
 
     @Override
@@ -213,7 +220,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     @Override
     public void onRestTimerTick(int time) {
 
-        notificationServiceManager.updateTimerText(getResources().getQuantityString(R.plurals.timer_message, time, time), time);
+       notificationServiceManager.updateTimerText(getResources().getQuantityString(R.plurals.timer_message, time, time), time);
 
         if (timerMenu != null) {
             timerMenu.setIcon(null);
@@ -223,6 +230,9 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
     @Override
     public void onRestTimerTerminate(boolean vibrate, boolean sound) {
+
+        notificationServiceManager.updateTimerText(getResources().getString(R.string.rest_timer_notification_finished), 0);
+
         if (vibrate) {
             Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
             vibrator.vibrate(1000);
@@ -238,7 +248,9 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
     private void resetRestTimer() {
 
-        notificationServiceManager.clearNotification();
+        // Boolean to keep track of if we are in the foreground or not. Only hide the notification if we are
+        if(isDisplayed)
+            notificationServiceManager.clearNotification();
 
         if (timerMenu != null) {
             timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_48dp, getActivity().getTheme()));

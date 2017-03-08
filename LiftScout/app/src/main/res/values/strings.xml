@@ -51,6 +51,7 @@
     <string name="rest_timer">Rest Timer</string>
     <string name="rest_timer_vibrate">Vibrate</string>
     <string name="rest_timer_sound">Sound</string>
+    <string name="rest_timer_notification_finished">Rest Time Complete</string>
 
 
     <!-- Constants -->

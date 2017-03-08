@@ -142,6 +142,9 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
 
     @Override
     public void onRestTimerStop() {
+
+        exerciseTimerTracked = 0;
+
         Schedulers.shutdown();
         if (disposable != null)
             disposable.dispose();
