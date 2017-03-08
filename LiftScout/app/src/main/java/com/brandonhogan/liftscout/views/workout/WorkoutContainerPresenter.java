@@ -164,8 +164,10 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
 
             @Override
             public void onNext(Long aLong) {
-                exerciseTimerTracked -= 1;
-                view.onRestTimerTick(exerciseTimerTracked);
+                if (view != null) {
+                    exerciseTimerTracked -= 1;
+                    view.onRestTimerTick(exerciseTimerTracked);
+                }
 
             }
 
@@ -176,7 +178,9 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
 
             @Override
             public void onComplete() {
-                view.onRestTimerTerminate(getExerciseRestVibrate(), getExerciseRestSound());
+                if (view != null) {
+                    view.onRestTimerTerminate(getExerciseRestVibrate(), getExerciseRestSound());
+                }
             }
         };
     }
