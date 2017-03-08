@@ -110,7 +110,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     public void onResume() {
         super.onResume();
         viewPager.addOnPageChangeListener(onPageChangeListener);
-        getNavigationManager().showBottomNav();
     }
 
     // Private Functions

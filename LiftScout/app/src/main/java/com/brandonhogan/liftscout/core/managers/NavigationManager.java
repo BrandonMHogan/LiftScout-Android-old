@@ -1,11 +1,10 @@
 package com.brandonhogan.liftscout.core.managers;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.view.View;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.about.AboutFragment;
@@ -40,6 +39,7 @@ public class NavigationManager {
     private FragmentManager.OnBackStackChangedListener backstackListener;
     private String currentFragmentName;
     private BottomNavigationView bottomNav;
+    private boolean bottomNavHidden;
 
 
     // Public Properties
@@ -111,6 +111,7 @@ public class NavigationManager {
             return false;
 
 
+        hideBottomNav();
         popToHomeFragment();
         return replaceWithTransitions(fragment, R.animator.root_in, R.animator.fade_out);
     }
@@ -119,6 +120,7 @@ public class NavigationManager {
         if (!verifyTransition(fragment, false))
             return false;
 
+        showBottomNav();
         popEveryFragment();
         return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
     }
@@ -127,6 +129,7 @@ public class NavigationManager {
         if (!verifyTransition(fragment, false))
             return false;
 
+        hideBottomNav();
         return replaceWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
     }
 
@@ -147,9 +150,6 @@ public class NavigationManager {
         if (isInTransition)
             return false;
 
-
-
-        hideBottomNav();
         return true;
     }
 
@@ -166,7 +166,6 @@ public class NavigationManager {
             int backStackId = mFragmentManager.getBackStackEntryAt(i).getId();
 
             mFragmentManager.popBackStack(backStackId, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
         }
     }
 
@@ -179,7 +178,6 @@ public class NavigationManager {
             int backStackId = mFragmentManager.getBackStackEntryAt(i).getId();
 
             mFragmentManager.popBackStack(backStackId, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
         }
     }
 
@@ -334,12 +332,20 @@ public class NavigationManager {
     }
 
     public void showBottomNav() {
-        if (bottomNav != null)
-            bottomNav.setVisibility(View.VISIBLE);
+        if (bottomNav != null && bottomNavHidden) {
+            ObjectAnimator animator = ObjectAnimator.ofFloat(bottomNav, "translationY", 0);
+            animator.setDuration(400);
+            animator.start();
+            bottomNavHidden = false;
+        }
     }
 
     public void hideBottomNav() {
-        if (bottomNav != null)
-            bottomNav.setVisibility(View.GONE);
+        if (bottomNav != null && !bottomNavHidden) {
+            ObjectAnimator animator = ObjectAnimator.ofFloat(bottomNav, "translationY", 250.0f);
+            animator.setDuration(650);
+            animator.start();
+            bottomNavHidden = true;
+        }
     }
 }

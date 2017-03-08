@@ -1,15 +1,12 @@
 package com.brandonhogan.liftscout.activities;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
+
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.DefaultScreens;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
@@ -18,6 +15,8 @@ import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.utils.LogUtil;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
+import com.brandonhogan.liftscout.views.calendar.CalendarFragment;
+import com.brandonhogan.liftscout.views.home.HomeFragment;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.Date;
@@ -28,8 +27,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class MainActivity extends BaseActivity
-        implements         NavigationManager.NavigationListener {
+public class MainActivity extends BaseActivity implements NavigationManager.NavigationListener {
 
     @Bind(R.id.bottom_navigation)
     BottomNavigationViewEx bottomNav;
@@ -42,10 +40,8 @@ public class MainActivity extends BaseActivity
     // Private Properties
     //
     private NavigationManager navigationManager;
-    private ActionBarDrawerToggle toggle;
     private SweetAlertDialog dialog;
     private Toolbar toolbar;
-    private int timerInterval;
 
     @Inject
     ProgressManager progressManager;
@@ -68,13 +64,6 @@ public class MainActivity extends BaseActivity
 
         if (findViewById(R.id.fragment_manager) != null) {
 
-//             toggle = new ActionBarDrawerToggle(
-//                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//            drawer.addDrawerListener(toggle);
-//            toggle.syncState();
-//
-//            navigationView.setNavigationItemSelectedListener(this);
-
             navigationManager = new NavigationManager();
             navigationManager.init(getFragmentManager());
             navigationManager.setNavigationListener(this);
@@ -86,19 +75,14 @@ public class MainActivity extends BaseActivity
             if (savedInstanceState != null) {
                 Date todayDate = (Date)savedInstanceState.getSerializable(SAVE_STATE_TODAY_PROGRESS_DATE);
                 progressManager.setTodayProgress(todayDate);
-                setDrawerIndicator();
                 return;
             }
-
-            // This needs to be hit first regardless of where a notification will go. Home must
-            // be the first item in the back stack
 
             Bundle bundle = getIntent().getExtras();
 
             if (bundle != null) {
 
                 LogUtil.printIntents(bundle, getTAG());
-
                 String notificationId = (String) bundle.get(NotificationServiceManager.NOTIFICATION_ID);
 
                 if (notificationId != null) {
@@ -111,7 +95,6 @@ public class MainActivity extends BaseActivity
                     return;
                 }
             }
-
 
             // If no notifications or any other kind of bundle was set, we will default to calendar or today
             if (userManager.getHomeDefaultValue().equals(DefaultScreens.CALENDAR)) {
@@ -128,7 +111,6 @@ public class MainActivity extends BaseActivity
         updateUserData();
         navigationManager.setNavigationListener(this);
         navigationManager.setmFragmentManager(getFragmentManager());
-
     }
 
     @Override
@@ -137,7 +119,6 @@ public class MainActivity extends BaseActivity
         updateUserData();
         navigationManager.setNavigationListener(null); // Prevent memory leak on recreate
         navigationManager.setmFragmentManager(null);
-
     }
 
     @Override
@@ -148,10 +129,8 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-
         outState.putSerializable(SAVE_STATE_TODAY_PROGRESS_DATE,
                 progressManager.getTodayProgress().getDate());
-
         super.onSaveInstanceState(outState);
     }
 
@@ -213,6 +192,16 @@ public class MainActivity extends BaseActivity
     @Override
     public void onBackstackChanged() {
 
+        Fragment f = getFragmentManager().findFragmentById(R.id.fragment_manager);
+
+        if (f instanceof CalendarFragment) {
+            getNavigationManager().showBottomNav();
+        }
+        else if (f instanceof HomeFragment) {
+            getNavigationManager().showBottomNav();
+        }
+        else
+            getNavigationManager().hideBottomNav();
     }
 
     private void updateUserData() {
@@ -243,23 +232,4 @@ public class MainActivity extends BaseActivity
 
         finish();
     }
-
-    private void setDrawerIndicator() {
-        boolean rootFragment = navigationManager.isRootFragmentVisible();
-
-        toggle.setDrawerIndicatorEnabled(rootFragment);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(!rootFragment);
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            });
-
-
-        toggle.syncState();
-    }
-
-
 }
