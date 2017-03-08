@@ -126,7 +126,6 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     @Override
     public void onResume() {
         super.onResume();
-        getNavigationManager().showSpace();
     }
 
     private void setupCalendar() {

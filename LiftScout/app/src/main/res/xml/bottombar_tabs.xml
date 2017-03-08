@@ -1,0 +1,22 @@
+<tabs>
+    <tab
+        id="@+id/tab_about"
+        icon="@drawable/ic_menu_info_white"
+        inActiveColor="@color/white"
+        activeColor="@color/white"/>
+    <tab
+        id="@+id/tab_settings"
+        icon="@drawable/ic_menu_settings_white"
+        inActiveColor="@color/white"
+        activeColor="@color/white"/>
+    <tab
+        id="@+id/tab_exercises"
+        icon="@drawable/ic_menu_dumbbell_white"
+        inActiveColor="@color/white"
+        activeColor="@color/white"/>
+    <tab
+        id="@+id/tab_graphs"
+        icon="@drawable/ic_menu_bar_chart_white"
+        inActiveColor="@color/white"
+        activeColor="@color/white"/>
+</tabs>
