@@ -14,6 +14,7 @@ public interface WorkoutContainerContract {
 
     interface Presenter {
         void viewCreated();
+        void onDestroyView();
         int getExerciseId();
         String getExerciseName();
         long getDateLong();
@@ -24,7 +25,7 @@ public interface WorkoutContainerContract {
         boolean getExerciseRestSound();
 
         void onTimerClicked();
-        void onTimerClicked(int time);
+        void restTimerNotification(int time);
         void onRestTimerStop();
         void onDeleteSet();
     }
