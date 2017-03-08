@@ -18,11 +18,12 @@ public interface WorkoutContainerContract {
         int getExerciseId();
         String getExerciseName();
         long getDateLong();
-        void onSettingsSave(int timerValue, boolean vibrate, boolean sound);
+        void onSettingsSave(int timerValue, boolean vibrate, boolean sound, boolean autoStart);
         int getExerciseRestTimer();
         int getRemainingRestTime();
         boolean getExerciseRestVibrate();
         boolean getExerciseRestSound();
+        boolean getExerciseRestAutoStart();
 
         void onTimerClicked();
         void restTimerNotification(int time);

@@ -147,6 +147,7 @@ public class TrackerFragment extends BaseFragment implements
     @OnClick(R.id.first_button)
     public void firstButtonOnClick() {
         presenter.onSave(repNumberPicker.getNumber(), weightNumberPicker.getNumber());
+        EventBus.getDefault().post(new TrackerEvent(false, true));
     }
 
     @OnClick(R.id.second_button)

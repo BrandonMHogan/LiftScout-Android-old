@@ -136,7 +136,8 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
     //
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTrackerEvent(TrackerEvent event) {
-        presenter.update();
+        if (event.isUpdated)
+            presenter.update();
     }
 
 

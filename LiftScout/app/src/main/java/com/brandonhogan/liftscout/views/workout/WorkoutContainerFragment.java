@@ -24,6 +24,10 @@ import com.brandonhogan.liftscout.core.controls.NumberPicker;
 import com.brandonhogan.liftscout.core.managers.NotificationServiceManager;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.Bind;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -189,9 +193,16 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         isDisplayed = false;
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -265,7 +276,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
                 getActivity(),
                 R.string.settings,
                 R.layout.dialog_tracker_settings,
-                false,
+                true,
                 new com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@android.support.annotation.NonNull
@@ -277,9 +288,10 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
                         NumberPicker picker = (NumberPicker)view.findViewById(R.id.number_picker);
                         SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.vibrate_switch);
                         SwitchCompat soundSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
+                        SwitchCompat autoStartSwitch = (SwitchCompat)view.findViewById(R.id.auto_start_switch);
 
 
-                        presenter.onSettingsSave(picker.getNumberAsInt(), vibrateSwitch.isChecked(), soundSwitch.isChecked());
+                        presenter.onSettingsSave(picker.getNumberAsInt(), vibrateSwitch.isChecked(), soundSwitch.isChecked(), autoStartSwitch.isChecked());
                     }
                 });
 
@@ -287,10 +299,12 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
         NumberPicker picker = (NumberPicker)view.findViewById(R.id.number_picker);
         SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.vibrate_switch);
         SwitchCompat soundSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
+        SwitchCompat autoStartSwitch = (SwitchCompat)view.findViewById(R.id.auto_start_switch);
 
         picker.setNumber(presenter.getExerciseRestTimer());
         vibrateSwitch.setChecked(presenter.getExerciseRestVibrate());
         soundSwitch.setChecked(presenter.getExerciseRestSound());
+        autoStartSwitch.setChecked(presenter.getExerciseRestAutoStart());
     }
 
     private void showSettings() {
@@ -317,5 +331,14 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
                 .showCancelButton(true);
 
         deleteDialog.show();
+    }
+
+    // Bus Subscriptions
+    //
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onTrackerEvent(TrackerEvent event) {
+        if (event.isNew && presenter.getExerciseRestAutoStart())
+            presenter.onTimerClicked();
+
     }
 }

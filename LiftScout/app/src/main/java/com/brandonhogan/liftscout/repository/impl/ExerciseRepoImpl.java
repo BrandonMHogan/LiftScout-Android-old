@@ -139,7 +139,6 @@ public class ExerciseRepoImpl implements ExerciseRepo {
     @Override
     public boolean getExerciseRestSound(int exerciseId) {
         Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst();
-
         return exercise!= null && exercise.isValid() && exercise.isRestSound();
     }
 
@@ -151,6 +150,32 @@ public class ExerciseRepoImpl implements ExerciseRepo {
             Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst();
             if (exercise != null && exercise.isValid()) {
                 exercise.setRestSound(sound);
+                databaseRealm.getRealmInstance().commitTransaction();
+            }
+            else {
+                databaseRealm.getRealmInstance().cancelTransaction();
+            }
+        }
+        catch (Exception ex) {
+            Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
+        }
+    }
+
+    @Override
+    public boolean getExerciseRestAutoStart(int exerciseId) {
+        Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst();
+        return exercise!= null && exercise.isValid() && exercise.isRestAutoStart();
+    }
+
+    @Override
+    public void setExerciseRestAutoStart(int exerciseId, boolean autoStart) {
+        try {
+            databaseRealm.getRealmInstance().beginTransaction();
+
+            Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst();
+            if (exercise != null && exercise.isValid()) {
+                exercise.setRestAutoStart(autoStart);
                 databaseRealm.getRealmInstance().commitTransaction();
             }
             else {

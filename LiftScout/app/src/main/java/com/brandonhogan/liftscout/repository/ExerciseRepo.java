@@ -14,6 +14,8 @@ public interface ExerciseRepo {
     int getExerciseRestTimer(int exerciseId);
     void setExerciseRestVibrate(int exerciseId, boolean vibrate);
     void setExerciseRestSound(int exerciseId, boolean sound);
+    void setExerciseRestAutoStart(int exerciseId, boolean autoStart);
     boolean getExerciseRestVibrate(int exerciseId);
     boolean getExerciseRestSound(int exerciseId);
+    boolean getExerciseRestAutoStart(int exerciseId);
 }

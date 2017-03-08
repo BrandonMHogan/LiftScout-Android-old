@@ -38,7 +38,6 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     private int exerciseId;
     private ExerciseRepo exerciseRepo;
     private int exerciseTimer, exerciseTimerTracked;
-    private boolean exerciseTrackVibrate;
 
     private Disposable disposable;
     private Observer<Long> restObserver;
@@ -92,10 +91,11 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     }
 
     @Override
-    public void onSettingsSave(int timerValue, boolean vibrate, boolean sound) {
+    public void onSettingsSave(int timerValue, boolean vibrate, boolean sound, boolean autoStart) {
         exerciseRepo.setExerciseRestTimer(exerciseId, timerValue);
         exerciseRepo.setExerciseRestVibrate(exerciseId, vibrate);
         exerciseRepo.setExerciseRestSound(exerciseId, sound);
+        exerciseRepo.setExerciseRestAutoStart(exerciseId, autoStart);
         exerciseTimer = timerValue;
     }
 
@@ -114,14 +114,17 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
 
     @Override
     public boolean getExerciseRestVibrate() {
-        exerciseTrackVibrate = exerciseRepo.getExerciseRestVibrate(exerciseId);
-        return exerciseTrackVibrate;
+        return exerciseRepo.getExerciseRestVibrate(exerciseId);
     }
 
     @Override
     public boolean getExerciseRestSound() {
-        exerciseTrackVibrate = exerciseRepo.getExerciseRestSound(exerciseId);
-        return exerciseTrackVibrate;
+        return exerciseRepo.getExerciseRestSound(exerciseId);
+    }
+
+    @Override
+    public boolean getExerciseRestAutoStart() {
+        return exerciseRepo.getExerciseRestAutoStart(exerciseId);
     }
 
     @Override

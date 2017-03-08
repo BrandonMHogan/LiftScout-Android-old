@@ -12,6 +12,7 @@ public class Exercise extends RealmObject {
     public static final String REST_TIMER = "restTimer";
     public static final String REST_VIBRATE = "restVibrate";
     public static final String REST_SOUND = "restSound";
+    public static final String REST_AUTO_START = "restAutoStart";
 
 
     @PrimaryKey
@@ -29,6 +30,8 @@ public class Exercise extends RealmObject {
     private boolean restSound = true;
 
     private boolean restVibrate = true;
+
+    private boolean restAutoStart = false;
 
     public int getId() {
         return id;
@@ -84,5 +87,13 @@ public class Exercise extends RealmObject {
 
     public void setRestSound(boolean restSound) {
         this.restSound = restSound;
+    }
+
+    public boolean isRestAutoStart() {
+        return restAutoStart;
+    }
+
+    public void setRestAutoStart(boolean restAutoStart) {
+        this.restAutoStart = restAutoStart;
     }
 }

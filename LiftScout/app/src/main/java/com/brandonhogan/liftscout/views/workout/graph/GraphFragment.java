@@ -89,6 +89,7 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTrackerEvent(TrackerEvent event) {
-        graph.update(true);
+        if (event.isUpdated)
+            graph.update(true);
     }
 }
