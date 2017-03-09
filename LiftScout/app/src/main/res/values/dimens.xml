@@ -174,4 +174,8 @@
     <dimen name="tracker_font_size">5sp</dimen>
     <dimen name="tracker_button_width">160dp</dimen>
     <dimen name="tracker_button_height">47dp</dimen>
+    <dimen name="tracker_section_header_padding_top_bottom">8dp</dimen>
+    <dimen name="tracker_section_header_padding_sides">1dp</dimen>
+    <dimen name="tracker_section_header_margin">1dp</dimen>
+
 </resources>

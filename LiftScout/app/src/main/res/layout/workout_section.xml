@@ -4,8 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:fillColor"
-    android:padding="@dimen/card_view_padding"
-    android:layout_margin="5dp">
+    android:paddingTop="@dimen/tracker_section_header_padding_top_bottom"
+    android:paddingBottom="@dimen/tracker_section_header_padding_top_bottom"
+    android:paddingStart="@dimen/tracker_section_header_padding_sides"
+    android:paddingEnd="@dimen/tracker_section_header_padding_sides"
+    android:layout_margin="@dimen/tracker_section_header_margin">
 
     <TextView android:id="@+id/workout_name"
         android:layout_width="wrap_content"
