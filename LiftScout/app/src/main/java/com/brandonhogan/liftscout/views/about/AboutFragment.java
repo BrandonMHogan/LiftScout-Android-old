@@ -9,9 +9,11 @@ import android.widget.TextView;
 
 import com.brandonhogan.liftscout.BuildConfig;
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.utils.IntentUtil;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class AboutFragment extends BaseFragment {
 
@@ -50,5 +52,10 @@ public class AboutFragment extends BaseFragment {
 
 
         versionNumber.setText(BuildConfig.VERSION_NAME);
+    }
+
+    @OnClick(R.id.contactRow)
+    void onFeedbackClicked() {
+        IntentUtil.sendEmailIntent(getActivity(), getString(R.string.app_feedback_subject));
     }
 }

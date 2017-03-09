@@ -232,7 +232,7 @@ public class NavigationManager {
     //
     public boolean startAbout() {
         BaseFragment fragment = AboutFragment.newInstance();
-        return openAsRoot(fragment);
+        return open(fragment);
     }
 
     // Graphs

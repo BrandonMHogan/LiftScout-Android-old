@@ -2,6 +2,7 @@
     <string name="app_name">Lift Scout</string>
     <string name="app_developer">Brandon Hogan</string>
     <string name="app_feedback">liftscout@gmail.com</string>
+    <string name="app_feedback_subject">Lift Scout - App Feedback</string>
     <string name="app_description">Lift Scout is an app designed to make your time in the gym easier to track your progress and keep you motivated. By tracking your workouts, you are able to visually see your growth</string>
     <string name="action_settings">Settings</string>
     <string name="action_save">Save</string>
@@ -150,6 +151,8 @@
     <string name="frag_today_empty_set_msg">Click here to add a repetition!</string>
 
     <!-- Settings -->
+    <string name="setting_about">About Lift Scout</string>
+    <string name="setting_about_description">Check out some information about the app and its developer</string>
     <string name="setting_profile">Profile</string>
     <string name="setting_profile_description">Change your profile name, age and unit of measurement</string>
     <string name="setting_display">Display</string>

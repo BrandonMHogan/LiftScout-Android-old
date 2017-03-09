@@ -18,16 +18,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/settings_table_layout_padding_top"
-                android:id="@+id/SettingsTableLayout"
-                android:layout_marginStart="@dimen/settings_table_row_horizontal_padding"
-                android:layout_marginEnd="@dimen/settings_table_row_horizontal_padding">
+                android:id="@+id/SettingsTableLayout">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
-                    android:src="@drawable/ic_scout_orange"/>
+                    android:src="@drawable/icon_grey_xxhdpi"/>
 
                 <TextView
                     android:layout_height="wrap_content"
@@ -42,6 +40,8 @@
                     android:layout_width="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="40dp"
+                    android:paddingStart="@dimen/settings_table_row_horizontal_padding"
+                    android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
                     android:text="@string/app_description"/>
 
                 <!-- Version Section -->
@@ -50,6 +50,8 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:gravity="center_vertical"
+                    android:paddingStart="@dimen/settings_table_row_horizontal_padding"
+                    android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
                     android:minHeight="@dimen/settings_table_row_min_height" >
 
                     <TextView
@@ -80,6 +82,8 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:gravity="center_vertical"
+                    android:paddingStart="@dimen/settings_table_row_horizontal_padding"
+                    android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
                     android:minHeight="@dimen/settings_table_row_min_height">
 
                     <TextView
@@ -109,8 +113,12 @@
                     android:id="@+id/contactRow"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:minHeight="@dimen/settings_table_row_min_height"
+                    android:paddingStart="@dimen/settings_table_row_horizontal_padding"
+                    android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
                     android:gravity="center_vertical"
-                    android:minHeight="@dimen/settings_table_row_min_height">
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true">
 
                     <TextView
                         android:text="@string/about_feedback"
@@ -127,10 +135,6 @@
                         android:text="@string/app_feedback"/>
 
                 </RelativeLayout>
-
-                <View android:layout_width="match_parent"
-                    android:background="@color/listview_border_color"
-                    android:layout_height="@dimen/settings_divider_view_hieght"/>
 
             </TableLayout>
         </ScrollView>
