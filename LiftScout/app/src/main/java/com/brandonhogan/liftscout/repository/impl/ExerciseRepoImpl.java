@@ -8,6 +8,8 @@ import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.ExerciseRepo;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import io.realm.RealmResults;
@@ -29,11 +31,20 @@ public class ExerciseRepoImpl implements ExerciseRepo {
     }
 
     @Override
-    public RealmResults<Exercise> getExercises(int categoryId) {
+    public RealmResults<Exercise> getExercises(int categoryId, boolean includeDeleted) {
+
+        if (includeDeleted) {
+            return databaseRealm.getRealmInstance()
+                    .where(Exercise.class)
+                    .equalTo(Exercise.CATEGORY_ID, categoryId)
+                    .findAll();
+        }
+
         return databaseRealm.getRealmInstance()
-            .where(Exercise.class)
-            .equalTo(Exercise.CATEGORY_ID, categoryId)
-            .findAll();
+                .where(Exercise.class)
+                .equalTo(Exercise.CATEGORY_ID, categoryId)
+                .notEqualTo(Exercise.IS_DELETED, true)
+                .findAll();
     }
 
     @Override
@@ -65,11 +76,31 @@ public class ExerciseRepoImpl implements ExerciseRepo {
         try {
             databaseRealm.getRealmInstance().beginTransaction();
 
-            databaseRealm.getRealmInstance()
+            Exercise exercise = databaseRealm.getRealmInstance()
                     .where(Exercise.class)
                     .equalTo(Exercise.ID, exerciseId)
-                    .findFirst()
-                    .deleteFromRealm();
+                    .findFirst();
+
+            exercise.setDeleted(true);
+            exercise.setDeleteDate(new Date());
+
+            databaseRealm.getRealmInstance().commitTransaction();
+        }
+        catch (Exception ex) {
+            Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
+        }
+    }
+
+    @Override
+    public void deleteAllExercisesForCategory(int categoryId) {
+        try {
+            databaseRealm.getRealmInstance().beginTransaction();
+
+                    databaseRealm.getRealmInstance()
+                            .where(Exercise.class)
+                            .equalTo(Exercise.CATEGORY_ID, categoryId)
+                            .findAll().deleteAllFromRealm();
 
             databaseRealm.getRealmInstance().commitTransaction();
         }

@@ -49,7 +49,7 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
 
         adapterData = new ArrayList<>();
 
-        RealmResults<Exercise> exercises = exerciseRepo.getExercises(categoryId);
+        RealmResults<Exercise> exercises = exerciseRepo.getExercises(categoryId, false);
 
         if (exercises == null)
             view.updateAdapter(adapterData);
@@ -114,6 +114,8 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     @Override
     public void deleteExercise(int position) {
         exerciseRepo.deleteExercise(adapterData.get(position).getId());
+        adapterData.remove(position);
+        view.removeItem(position);
         updateAdapter();
     }
 

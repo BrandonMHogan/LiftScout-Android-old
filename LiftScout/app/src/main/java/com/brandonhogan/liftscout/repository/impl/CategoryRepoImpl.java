@@ -75,6 +75,7 @@ public class CategoryRepoImpl implements CategoryRepo {
                     .findFirst()
                     .deleteFromRealm();
 
+
             databaseRealm.getRealmInstance().commitTransaction();
         }
         catch (Exception ex) {

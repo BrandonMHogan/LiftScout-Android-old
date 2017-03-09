@@ -40,7 +40,6 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
     private SpectrumPalette palette;
 
 
-
     // Constructor
     //
     public CategoryEditDialog(Activity activity, CategoryEditDialogListener listener, boolean isDarkTheme,
@@ -55,7 +54,6 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
             isNew = true;
             this.category = new CategoryListModel();
         }
-
     }
 
 
@@ -65,8 +63,6 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
         dismiss();
 
         category.setName(nameEditText.getText().toString());
-
-
         listener.onSaveCategoryEditDialog(category);
     }
 
@@ -114,6 +110,7 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
             if (!isNew) {
                 nameEditText.setText(category.getName());
                 palette.setSelectedColor(category.getColor());
+                category.setColor(R.color.category_bright_green);
             }
         }
 

@@ -1,5 +1,7 @@
 package com.brandonhogan.liftscout.core.model;
 
+import java.util.Date;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -9,6 +11,8 @@ public class Exercise extends RealmObject {
     public static final String ID = "id";
     public static final String CATEGORY_ID = "categoryId";
     public static final String NAME = "name";
+    public static final String IS_DELETED = "isDeleted";
+    public static final String DELETE_DATE = "deleteDate";
     public static final String REST_TIMER = "restTimer";
     public static final String REST_VIBRATE = "restVibrate";
     public static final String REST_SOUND = "restSound";
@@ -24,6 +28,10 @@ public class Exercise extends RealmObject {
     private String name;
 
     private int type;
+
+    private boolean isDeleted;
+
+    private Date deleteDate;
 
     private int restTimer = 60;
 
@@ -63,6 +71,22 @@ public class Exercise extends RealmObject {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Date getDeleteDate() {
+        return deleteDate;
+    }
+
+    public void setDeleteDate(Date deleteDate) {
+        this.deleteDate = deleteDate;
     }
 
     public int getRestTimer() {

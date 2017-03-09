@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.views.categories;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
@@ -19,7 +22,6 @@ import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 import java.util.List;
 
 import butterknife.Bind;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class CategoryListFragment extends BaseFragment implements
         CategoryListContract.View,
@@ -52,7 +54,7 @@ public class CategoryListFragment extends BaseFragment implements
     private CategoryListAdapter mAdapter;
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
-    private SweetAlertDialog dialog;
+    private MaterialDialog dialog;
 
 
     // Binds
@@ -165,19 +167,19 @@ public class CategoryListFragment extends BaseFragment implements
     private void removeCategoryAlert(final int position) {
         CategoryListModel model = presenter.getCategory(position);
 
-        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(String.format(getString(R.string.dialog_category_remove_title), model.getName()))
-                .setContentText(String.format(getString(R.string.dialog_category_remove_message), model.getName()))
-                .setConfirmText(getString(R.string.yes))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+        dialog = new MaterialDialog.Builder(getActivity())
+                .title(String.format(getString(R.string.dialog_category_remove_title), model.getName()))
+                .content(String.format(getString(R.string.dialog_category_remove_message), model.getName()))
+                .positiveText(R.string.delete)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         presenter.deleteCategory(position);
                         dialog.cancel();
                     }
                 })
-                .setCancelText(getString(R.string.cancel))
-                .showCancelButton(true);
+                .negativeText(R.string.cancel)
+                .build();
 
         dialog.show();
     }

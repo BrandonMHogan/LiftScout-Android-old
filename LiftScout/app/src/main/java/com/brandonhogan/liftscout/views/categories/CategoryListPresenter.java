@@ -88,6 +88,7 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
     @Override
     public void deleteCategory(int position) {
         categoryRepo.deleteCategory(adapterData.get(position).getId());
+
         updateAdapter();
     }
 

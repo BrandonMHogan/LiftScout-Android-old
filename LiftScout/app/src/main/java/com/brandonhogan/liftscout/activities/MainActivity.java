@@ -29,25 +29,35 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends BaseActivity implements NavigationManager.NavigationListener {
 
-    @Bind(R.id.bottom_navigation)
-    BottomNavigationViewEx bottomNav;
 
     // Private Static Properties
     //
     private static final String SAVE_STATE_TODAY_PROGRESS_DATE = "saveStateTodayProgressDate";
 
 
-    // Private Properties
+    // Bindings
     //
-    private NavigationManager navigationManager;
-    private SweetAlertDialog dialog;
-    private Toolbar toolbar;
+    @Bind(R.id.bottom_navigation)
+    BottomNavigationViewEx bottomNav;
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
+
+    // Injections
+    //
     @Inject
     ProgressManager progressManager;
 
     @Inject
     DatabaseRealm databaseRealm;
+
+
+    // Private Properties
+    //
+    private NavigationManager navigationManager;
+    private SweetAlertDialog dialog;
+
 
     // Overrides
     //
@@ -59,7 +69,6 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         ButterKnife.bind(this);
         Injector.getAppComponent().inject(this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (findViewById(R.id.fragment_manager) != null) {

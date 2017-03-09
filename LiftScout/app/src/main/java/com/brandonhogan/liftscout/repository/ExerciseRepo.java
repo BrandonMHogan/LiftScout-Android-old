@@ -6,10 +6,11 @@ import io.realm.RealmResults;
 
 public interface ExerciseRepo {
 
-    RealmResults<Exercise> getExercises(int categoryId);
+    RealmResults<Exercise> getExercises(int categoryId, boolean includeDeleted);
     Exercise getExercise(int exerciseId);
     void setExercise(Exercise exercise);
     void deleteExercise(int exercise);
+    void deleteAllExercisesForCategory(int categoryId);
     void setExerciseRestTimer(int exerciseId, int time);
     int getExerciseRestTimer(int exerciseId);
     void setExerciseRestVibrate(int exerciseId, boolean vibrate);

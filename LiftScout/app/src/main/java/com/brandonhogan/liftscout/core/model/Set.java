@@ -12,6 +12,7 @@ public class Set extends RealmObject {
     public static final String ID = "id";
     public static final String ORDER_ID = "orderId";
     public static final String EXERCISE = "exercise";
+    public static final String EXERCISE_ID = "exercise.id";
     public static final String REPS = "reps";
     public static final String DATE = "date";
 
