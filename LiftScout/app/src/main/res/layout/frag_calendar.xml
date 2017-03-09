@@ -37,7 +37,8 @@
                     app:compactCalendarTextSize="12sp"
                     app:compactCalendarTextColor="?android:textColor"
                     app:compactCalendarCurrentSelectedDayBackgroundColor="?android:colorAccent"
-                    app:compactCalendarCurrentDayBackgroundColor="?android:windowBackground"
+                    app:compactCalendarCurrentDayBackgroundColor="?android:colorAccent"
+                    app:compactCalendarCurrentDayIndicatorStyle="no_fill_large_indicator"
                     app:compactCalendarMultiEventIndicatorColor="?android:textColor"
                     />
 
