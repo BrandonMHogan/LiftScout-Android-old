@@ -119,7 +119,11 @@ public class NumberPicker extends RelativeLayout {
 
     private void changeValue(boolean isPositive) {
         String value = editText.getText().toString();
-        float floatValue = Float.parseFloat(value);
+
+        float floatValue = 0;
+
+        if (!value.isEmpty())
+            floatValue = Float.parseFloat(value);
 
         if (isPositive)
             floatValue += increment;
