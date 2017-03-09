@@ -81,18 +81,13 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem calMenu = menu.findItem(R.id.action_calendar);
         MenuItem addMenu = menu.findItem(R.id.action_add);
-        calMenu.setVisible(true);
         addMenu.setVisible(true);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_calendar:
-                getNavigationManager().startCalendar();
-                return true;
             case R.id.action_add:
                 getNavigationManager().startCategoryListAddSet();
                 return true;

@@ -1,6 +1,5 @@
 package com.brandonhogan.liftscout.activities;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,8 +14,6 @@ import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.utils.LogUtil;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
-import com.brandonhogan.liftscout.views.calendar.CalendarFragment;
-import com.brandonhogan.liftscout.views.home.HomeFragment;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.Date;
@@ -77,7 +74,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
             navigationManager.init(getFragmentManager());
             navigationManager.setNavigationListener(this);
 
-            setupBottomNavigation(savedInstanceState);
+            setupBottomNavigation();
 
             //This is set when restoring from a previous state,
             //so we do not want to try and load a new fragment
@@ -118,16 +115,18 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
     protected void onResume() {
         super.onResume();
         updateUserData();
-        navigationManager.setNavigationListener(this);
-        navigationManager.setmFragmentManager(getFragmentManager());
+        getNavigationManager().setNavigationListener(this);
+        getNavigationManager().setmFragmentManager(getFragmentManager());
+        getNavigationManager().setBottomNav(bottomNav);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         updateUserData();
-        navigationManager.setNavigationListener(null); // Prevent memory leak on recreate
-        navigationManager.setmFragmentManager(null);
+        getNavigationManager().setNavigationListener(null); // Prevent memory leak on recreate
+        getNavigationManager().setmFragmentManager(null);
+        getNavigationManager().setBottomNav(null);
     }
 
     @Override
@@ -164,13 +163,10 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         return navigationManager;
     }
 
-
     // Private Functions
     //
 
-    private void setupBottomNavigation(Bundle savedInstanceState) {
-        navigationManager.setBottomNav(bottomNav);
-
+    private void setupBottomNavigation() {
         bottomNav.enableAnimation(false);
         bottomNav.enableShiftingMode(false);
         bottomNav.enableItemShiftingMode(false);
@@ -179,8 +175,11 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.nav_about:
-                        getNavigationManager().startAbout();
+                    case R.id.nav_today:
+                        getNavigationManager().startToday();
+                        return true;
+                    case R.id.nav_calendar:
+                            getNavigationManager().startCalendar();
                         return true;
                     case R.id.nav_settings:
                         getNavigationManager().startSettings();
@@ -196,21 +195,30 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
                 return false;
             }
         });
+
+        getNavigationManager().setBottomNav(bottomNav);
     }
 
     @Override
     public void onBackstackChanged() {
 
-        Fragment f = getFragmentManager().findFragmentById(R.id.fragment_manager);
-
-        if (f instanceof CalendarFragment) {
-            getNavigationManager().showBottomNav();
-        }
-        else if (f instanceof HomeFragment) {
-            getNavigationManager().showBottomNav();
-        }
-        else
-            getNavigationManager().hideBottomNav();
+//        Fragment f = getFragmentManager().findFragmentById(R.id.fragment_manager);
+//
+//        if (f instanceof SettingsListFragment) {
+//            setBottomNavSelectedPos(0);
+//        }
+//        else if (f instanceof CategoryListFragment) {
+//            setBottomNavSelectedPos(1);
+//        }
+//        else if (f instanceof GraphsContainerFragment) {
+//            setBottomNavSelectedPos(2);
+//        }
+//        else if (f instanceof CalendarFragment) {
+//            setBottomNavSelectedPos(3);
+//        }
+//        else if (f instanceof HomeFragment) {
+//            setBottomNavSelectedPos(4);
+//        }
     }
 
     private void updateUserData() {

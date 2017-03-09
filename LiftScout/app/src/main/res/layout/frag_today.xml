@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -12,8 +13,8 @@
         app:cardCornerRadius="@dimen/card_view_corner_radius"
         app:cardElevation="@dimen/card_view_elevation"
         app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="true"
-        android:background="?android:windowBackground"
+        app:cardUseCompatPadding="false"
+        app:cardBackgroundColor="?android:windowBackground"
         android:padding="@dimen/card_view_padding">
 
         <RelativeLayout

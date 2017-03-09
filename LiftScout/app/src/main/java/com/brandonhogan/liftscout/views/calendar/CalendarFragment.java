@@ -100,18 +100,13 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem todayMenu = menu.findItem(R.id.action_today);
         MenuItem addMenu = menu.findItem(R.id.action_add);
-        todayMenu.setVisible(true);
         addMenu.setVisible(true);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_today:
-                getNavigationManager().startToday();
-                return true;
             case R.id.action_add:
                 getNavigationManager().startCategoryListAddSet();
                 return true;

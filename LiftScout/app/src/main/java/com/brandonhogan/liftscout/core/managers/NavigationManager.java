@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.support.design.widget.BottomNavigationView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.about.AboutFragment;
@@ -19,6 +18,7 @@ import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment
 import com.brandonhogan.liftscout.views.settings.home.SettingsHomeFragment;
 import com.brandonhogan.liftscout.views.settings.profile.SettingsProfileFragment;
 import com.brandonhogan.liftscout.views.workout.WorkoutContainerFragment;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class NavigationManager {
 
@@ -38,7 +38,7 @@ public class NavigationManager {
     private boolean isInTransition = false;
     private FragmentManager.OnBackStackChangedListener backstackListener;
     private String currentFragmentName;
-    private BottomNavigationView bottomNav;
+    private BottomNavigationViewEx bottomNav;
     private boolean bottomNavHidden;
 
 
@@ -79,7 +79,6 @@ public class NavigationManager {
     /**
      * Displays the next fragment
      *
-     * @param fragment
      */
     private boolean replaceWithTransitions(BaseFragment fragment, int in, int out) {
 
@@ -99,8 +98,6 @@ public class NavigationManager {
 
     /**
      * pops every fragment and starts the given fragment as a new one.
-     *
-     * @param fragment
      */
     private boolean openAsRoot(BaseFragment fragment) {
         return openAsRoot(fragment, false);
@@ -110,8 +107,6 @@ public class NavigationManager {
         if (!verifyTransition(fragment, force))
             return false;
 
-
-        hideBottomNav();
         popToHomeFragment();
         return replaceWithTransitions(fragment, R.animator.root_in, R.animator.fade_out);
     }
@@ -120,7 +115,6 @@ public class NavigationManager {
         if (!verifyTransition(fragment, false))
             return false;
 
-        showBottomNav();
         popEveryFragment();
         return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
     }
@@ -129,7 +123,6 @@ public class NavigationManager {
         if (!verifyTransition(fragment, false))
             return false;
 
-        hideBottomNav();
         return replaceWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
     }
 
@@ -191,8 +184,6 @@ public class NavigationManager {
 
     /**
      * Navigates back by popping teh back stack. If there is no more items left we finish the current activity.
-     *
-     * @param baseActivity
      */
     public void navigateBack(Activity baseActivity) {
         if (mFragmentManager.getBackStackEntryCount() == 0) {
@@ -327,7 +318,7 @@ public class NavigationManager {
     }
 
 
-    public void setBottomNav(BottomNavigationView bottomNav) {
+    public void setBottomNav(BottomNavigationViewEx bottomNav) {
         this.bottomNav = bottomNav;
     }
 
