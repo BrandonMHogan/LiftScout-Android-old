@@ -254,7 +254,7 @@ public class ExerciseListFragment extends BaseFragment implements
         if (isSearch)
             getNavigationManager().startGraphsContainer(true);
         else
-            getNavigationManager().startWorkoutContainer(exerciseId);
+            getNavigationManager().startWorkoutContainerAsOpen(exerciseId);
     }
 
     @Override

@@ -21,6 +21,8 @@ import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.home.today.TodayPageAdapter;
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 
+import java.util.Date;
+
 import butterknife.Bind;
 
 public class HomeFragment extends BaseFragment implements HomeContract.View {
@@ -60,6 +62,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         super.onViewCreated(view, savedInstanceState);
         presenter = new HomePresenter(this);
         presenter.viewCreated();
+        presenter.updateTodayProgress(new Date());
 
         setTitle(getString(R.string.app_name));
 

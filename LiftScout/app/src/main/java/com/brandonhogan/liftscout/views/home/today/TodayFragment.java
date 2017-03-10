@@ -145,7 +145,7 @@ public class TodayFragment extends BaseFragment implements TodayContact.View {
         mAdapter.withOnClickListener(new FastAdapter.OnClickListener<TodayListItem>() {
             @Override
             public boolean onClick(View v, IAdapter<TodayListItem> adapter, TodayListItem item, int position) {
-                getNavigationManager().startWorkoutContainer(item.exerciseId);
+                getNavigationManager().startWorkoutContainer(item.exerciseId, false);
                 return true;
             }
         });

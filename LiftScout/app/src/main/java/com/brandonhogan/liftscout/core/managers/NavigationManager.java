@@ -274,9 +274,9 @@ public class NavigationManager {
     }
 
     // Set Edit
-    public boolean startWorkoutContainer(int exerciseId) {
+    public boolean startWorkoutContainerAsOpen(int exerciseId) {
         BaseFragment fragment = WorkoutContainerFragment.newInstance(exerciseId, 0);
-        return openAsRoot(fragment);
+        return open(fragment);
     }
 
     public boolean startWorkoutContainer(int exerciseId, boolean force) {
