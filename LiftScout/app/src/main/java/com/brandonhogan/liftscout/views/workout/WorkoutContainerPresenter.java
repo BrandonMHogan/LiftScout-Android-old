@@ -13,7 +13,6 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import io.reactivex.Observer;

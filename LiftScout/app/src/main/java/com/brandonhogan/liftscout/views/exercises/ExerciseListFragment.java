@@ -144,6 +144,8 @@ public class ExerciseListFragment extends BaseFragment implements
     // Private Functions
     //
     private void editExercise(int position) {
+
+
         ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
             @Override
             public void onCancelExerciseEditDialog() {

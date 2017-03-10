@@ -107,6 +107,12 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
         newExercise.setCategoryId(categoryId);
         newExercise.setId(exerciseListModel.getId());
 
+        newExercise.setIncrement(exerciseListModel.getIncrement());
+        newExercise.setRestSound(exerciseListModel.isRestSound());
+        newExercise.setRestVibrate(exerciseListModel.isRestVibrate());
+        newExercise.setRestAutoStart(exerciseListModel.isRestAutoStart());
+        newExercise.setRestTimer(exerciseListModel.getRestTimer());
+
         exerciseRepo.setExercise(newExercise);
         updateAdapter();
     }
