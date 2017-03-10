@@ -153,6 +153,8 @@
 
     <string name="frag_today_weight">Weight</string>
     <string name="frag_today_empty_set_msg">Click here to add a repetition!</string>
+    <string name="frag_workout_no_data_message">You have not logged a workout yet</string>
+    <string name="frag_workout_no_data_button">Start Your Workout</string>
 
     <!-- Settings -->
     <string name="setting_about">About Lift Scout</string>

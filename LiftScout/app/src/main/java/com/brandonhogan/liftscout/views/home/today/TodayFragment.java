@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class TodayFragment extends BaseFragment implements TodayContact.View {
@@ -64,6 +65,9 @@ public class TodayFragment extends BaseFragment implements TodayContact.View {
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
+
+    @Bind(R.id.workout_no_data)
+    LinearLayout noDataLayout;
     
 
     //Overrides
@@ -169,15 +173,33 @@ public class TodayFragment extends BaseFragment implements TodayContact.View {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mAdapter.expand(expandPosition);
+
+        checkIfEmpty();
     }
 
     @Override
     public void onSetDeleted(int position, int count) {
         mAdapter.removeItemRange(position, count);
+        checkIfEmpty();
     }
 
     @Override
     public String getEmptySetMessage() {
         return getString(R.string.frag_today_empty_set_msg);
+    }
+
+    // Private Functions
+    //
+
+    private void checkIfEmpty() {
+        if (mAdapter.getAdapterItemCount() < 1 )
+            noDataLayout.setVisibility(View.VISIBLE);
+        else
+            noDataLayout.setVisibility(View.GONE);
+    }
+
+    @OnClick(R.id.start_workout)
+    void startWorkoutClicked() {
+        getNavigationManager().startCategoryListAddSet();
     }
 }

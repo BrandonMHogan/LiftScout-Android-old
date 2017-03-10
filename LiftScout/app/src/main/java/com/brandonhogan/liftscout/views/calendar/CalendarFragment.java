@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
@@ -33,6 +34,7 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class CalendarFragment extends BaseFragment implements CalendarContract.View {
@@ -62,6 +64,9 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
 
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @Bind(R.id.workout_no_data)
+    LinearLayout noDataLayout;
 
 
     //Overrides
@@ -184,6 +189,7 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     @Override
     public void onSetDeleted(int position, int count) {
         mAdapter.removeItemRange(position, count);
+        checkIfEmpty();
     }
 
     @Override
@@ -215,6 +221,7 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
 
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        checkIfEmpty();
     }
 
     @Override
@@ -226,6 +233,26 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     public void editTracker(int exerciseId) {
         getNavigationManager().startWorkoutContainer(exerciseId, true);
     }
+
+
+    // Private Functions
+    //
+
+    private void checkIfEmpty() {
+        if (mAdapter.getAdapterItemCount() < 1 )
+            noDataLayout.setVisibility(View.VISIBLE);
+        else
+            noDataLayout.setVisibility(View.GONE);
+    }
+
+    @OnClick(R.id.start_workout)
+    void startWorkoutClicked() {
+        getNavigationManager().startCategoryListAddSet();
+    }
+
+
+    // Bus Subscriptions
+    //
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTrackerEvent(HistoryTrackerEvent event) {

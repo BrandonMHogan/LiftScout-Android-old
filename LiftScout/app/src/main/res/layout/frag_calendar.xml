@@ -11,54 +11,80 @@
         android:layout_height="wrap_content">
 
 
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_margin="5dp"
+            style="@style/RobotoTitle"/>
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/calendar_container"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/date">
+
+            <com.github.sundeepk.compactcalendarview.CompactCalendarView
+                android:id="@+id/calendar_view"
+                android:layout_width="fill_parent"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_height="180dp"
+                app:compactCalendarTargetHeight="180dp"
+                app:compactCalendarBackgroundColor="?android:windowBackground"
+                app:compactCalendarTextSize="12sp"
+                app:compactCalendarTextColor="?android:textColor"
+                app:compactCalendarCurrentSelectedDayBackgroundColor="?android:colorAccent"
+                app:compactCalendarCurrentDayBackgroundColor="?android:colorAccent"
+                app:compactCalendarCurrentDayIndicatorStyle="no_fill_large_indicator"
+                app:compactCalendarMultiEventIndicatorColor="?android:textColor"
+                />
+
+        </android.support.design.widget.CoordinatorLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/divider"
+            android:layout_below="@id/calendar_container"
+            android:elevation="@dimen/tracker_divider_elevation"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/divider"/>
+
+        <LinearLayout
+            android:id="@+id/workout_no_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
             <TextView
-                android:id="@+id/date"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:layout_margin="5dp"
-                style="@style/RobotoTitle"/>
+                android:layout_gravity="center_horizontal"
+                android:text="@string/frag_workout_no_data_message"/>
 
-            <android.support.design.widget.CoordinatorLayout
-                android:id="@+id/calendar_container"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/start_workout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/date">
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/frag_workout_no_data_button"/>
 
-                <com.github.sundeepk.compactcalendarview.CompactCalendarView
-                    android:id="@+id/calendar_view"
-                    android:layout_width="fill_parent"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:layout_height="180dp"
-                    app:compactCalendarTargetHeight="180dp"
-                    app:compactCalendarBackgroundColor="?android:windowBackground"
-                    app:compactCalendarTextSize="12sp"
-                    app:compactCalendarTextColor="?android:textColor"
-                    app:compactCalendarCurrentSelectedDayBackgroundColor="?android:colorAccent"
-                    app:compactCalendarCurrentDayBackgroundColor="?android:colorAccent"
-                    app:compactCalendarCurrentDayIndicatorStyle="no_fill_large_indicator"
-                    app:compactCalendarMultiEventIndicatorColor="?android:textColor"
-                    />
-
-            </android.support.design.widget.CoordinatorLayout>
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@color/divider"
-                android:layout_below="@id/calendar_container"
-                android:elevation="@dimen/tracker_divider_elevation"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/divider"/>
+        </LinearLayout>
 
     </RelativeLayout>
 
