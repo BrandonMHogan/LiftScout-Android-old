@@ -1,5 +1,7 @@
 package com.brandonhogan.liftscout.views.workout;
 
+import java.util.ArrayList;
+
 /**
  * Created by Brandon on 3/6/2017.
  * Description :
@@ -18,12 +20,14 @@ public interface WorkoutContainerContract {
         int getExerciseId();
         String getExerciseName();
         long getDateLong();
-        void onSettingsSave(int timerValue, boolean vibrate, boolean sound, boolean autoStart);
+        void onSettingsSave(int timerValue, boolean vibrate, boolean sound, boolean autoStart, int autoIncrementIndex);
         int getExerciseRestTimer();
         int getRemainingRestTime();
         boolean getExerciseRestVibrate();
         boolean getExerciseRestSound();
         boolean getExerciseRestAutoStart();
+        int getExerciseIncrementIndex();
+        ArrayList<Double> getExerciseIncrementList();
 
         void onTimerClicked();
         void restTimerNotification(int time);

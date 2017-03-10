@@ -23,6 +23,7 @@ import com.brandonhogan.liftscout.core.controls.MaterialDialog;
 import com.brandonhogan.liftscout.core.controls.NumberPicker;
 import com.brandonhogan.liftscout.core.managers.NotificationServiceManager;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -289,9 +290,10 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
                         SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.vibrate_switch);
                         SwitchCompat soundSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
                         SwitchCompat autoStartSwitch = (SwitchCompat)view.findViewById(R.id.auto_start_switch);
+                        MaterialSpinner incrementSpinner = (MaterialSpinner)view.findViewById(R.id.increments_spinner);
 
 
-                        presenter.onSettingsSave(picker.getNumberAsInt(), vibrateSwitch.isChecked(), soundSwitch.isChecked(), autoStartSwitch.isChecked());
+                        presenter.onSettingsSave(picker.getNumberAsInt(), vibrateSwitch.isChecked(), soundSwitch.isChecked(), autoStartSwitch.isChecked(), incrementSpinner.getSelectedIndex());
                     }
                 });
 
@@ -300,11 +302,15 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
         SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.vibrate_switch);
         SwitchCompat soundSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
         SwitchCompat autoStartSwitch = (SwitchCompat)view.findViewById(R.id.auto_start_switch);
+        MaterialSpinner incrementSpinner = (MaterialSpinner)view.findViewById(R.id.increments_spinner);
 
         picker.setNumber(presenter.getExerciseRestTimer());
         vibrateSwitch.setChecked(presenter.getExerciseRestVibrate());
         soundSwitch.setChecked(presenter.getExerciseRestSound());
         autoStartSwitch.setChecked(presenter.getExerciseRestAutoStart());
+
+        incrementSpinner.setItems(presenter.getExerciseIncrementList());
+        incrementSpinner.setSelectedIndex(presenter.getExerciseIncrementIndex());
     }
 
     private void showSettings() {

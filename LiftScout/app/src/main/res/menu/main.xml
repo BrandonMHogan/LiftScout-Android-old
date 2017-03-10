@@ -41,7 +41,7 @@
         android:icon="@drawable/ic_settings_white_48dp"
         android:title="@string/settings"
         android:visible="false"
-        app:showAsAction="collapseActionView" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_delete"

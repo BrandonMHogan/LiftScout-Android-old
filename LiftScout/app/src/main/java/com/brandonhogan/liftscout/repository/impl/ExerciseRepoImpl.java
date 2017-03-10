@@ -218,4 +218,33 @@ public class ExerciseRepoImpl implements ExerciseRepo {
             databaseRealm.getRealmInstance().cancelTransaction();
         }
     }
+
+    @Override
+    public double getExerciseIncrement(int exerciseId) {
+        Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst();
+        if (exercise!= null && exercise.isValid())
+            return exercise.getIncrement();
+        else
+            return 0;
+    }
+
+    @Override
+    public void setExerciseIncrement(int exerciseId, double increment) {
+        try {
+            databaseRealm.getRealmInstance().beginTransaction();
+
+            Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst();
+            if (exercise != null && exercise.isValid()) {
+                exercise.setIncrement(increment);
+                databaseRealm.getRealmInstance().commitTransaction();
+            }
+            else {
+                databaseRealm.getRealmInstance().cancelTransaction();
+            }
+        }
+        catch (Exception ex) {
+            Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
+        }
+    }
 }

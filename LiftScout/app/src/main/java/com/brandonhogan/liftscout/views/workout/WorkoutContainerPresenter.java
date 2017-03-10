@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.views.workout;
 
+import com.brandonhogan.liftscout.core.constants.ConstantValues;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Set;
@@ -7,8 +8,12 @@ import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import io.reactivex.Observer;
@@ -38,6 +43,7 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     private int exerciseId;
     private ExerciseRepo exerciseRepo;
     private int exerciseTimer, exerciseTimerTracked;
+    private ArrayList<Double> increments;
 
     private Disposable disposable;
     private Observer<Long> restObserver;
@@ -52,6 +58,7 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
 
         this.view = view;
         this.exerciseId = exerciseId;
+        increments = ConstantValues.increments;
 
         setupObserver();
     }
@@ -91,12 +98,15 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     }
 
     @Override
-    public void onSettingsSave(int timerValue, boolean vibrate, boolean sound, boolean autoStart) {
+    public void onSettingsSave(int timerValue, boolean vibrate, boolean sound, boolean autoStart, int incrementIndex) {
         exerciseRepo.setExerciseRestTimer(exerciseId, timerValue);
         exerciseRepo.setExerciseRestVibrate(exerciseId, vibrate);
         exerciseRepo.setExerciseRestSound(exerciseId, sound);
         exerciseRepo.setExerciseRestAutoStart(exerciseId, autoStart);
+        exerciseRepo.setExerciseIncrement(exerciseId, increments.get(incrementIndex));
         exerciseTimer = timerValue;
+
+        EventBus.getDefault().post(new IncrementEvent());
     }
 
     @Override
@@ -125,6 +135,20 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     @Override
     public boolean getExerciseRestAutoStart() {
         return exerciseRepo.getExerciseRestAutoStart(exerciseId);
+    }
+
+    @Override
+    public int getExerciseIncrementIndex() {
+        if (!increments.contains(exerciseRepo.getExerciseIncrement(exerciseId))) {
+            exerciseRepo.setExerciseIncrement(exerciseId, ConstantValues.increments.get(ConstantValues.increments.indexOf(5.0)));
+        }
+
+        return increments.indexOf(exerciseRepo.getExerciseIncrement(exerciseId));
+    }
+
+    @Override
+    public ArrayList<Double> getExerciseIncrementList() {
+        return increments;
     }
 
     @Override

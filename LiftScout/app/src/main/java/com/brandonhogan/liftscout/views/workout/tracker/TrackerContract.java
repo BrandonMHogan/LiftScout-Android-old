@@ -15,6 +15,7 @@ public interface TrackerContract {
         void deleteSetSuccess();
         void clear(boolean clearValues);
         void onSelect(TrackerListModel rep);
+        void updateIncrements(double increment);
     }
 
     interface Presenter {
@@ -24,5 +25,6 @@ public interface TrackerContract {
         void onDeleteRep();
         void onSelect(int position);
         void onButtonTwoPressed();
+        void updateIncrement();
     }
 }

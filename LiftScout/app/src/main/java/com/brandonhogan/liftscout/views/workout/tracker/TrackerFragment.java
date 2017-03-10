@@ -16,11 +16,14 @@ import com.brandonhogan.liftscout.core.controls.NumberPicker;
 import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
+import com.brandonhogan.liftscout.views.workout.IncrementEvent;
 import com.brandonhogan.liftscout.views.workout.TrackerEvent;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Date;
 import java.util.List;
@@ -130,12 +133,14 @@ public class TrackerFragment extends BaseFragment implements
     public void onResume() {
         super.onResume();
         mRecyclerView.addOnItemTouchListener(onTouchListener);
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mRecyclerView.removeOnItemTouchListener(onTouchListener);
+        EventBus.getDefault().unregister(this);
        //presenter.onRestTimerStop();
     }
 
@@ -161,6 +166,11 @@ public class TrackerFragment extends BaseFragment implements
     private void resetButtons() {
         firstButton.setText(getString(R.string.save));
         secondButton.setText(getString(R.string.clear));
+    }
+
+    @Override
+    public void updateIncrements(double increment) {
+        weightNumberPicker.setIncrement(increment);
     }
 
     @Override
@@ -279,5 +289,14 @@ public class TrackerFragment extends BaseFragment implements
             repNumberPicker.setNumber(0);
             weightNumberPicker.setNumber(0);
         }
+    }
+
+
+    // Subscriptions
+    //
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onIncrementEvent(IncrementEvent event) {
+        presenter.updateIncrement();
     }
 }

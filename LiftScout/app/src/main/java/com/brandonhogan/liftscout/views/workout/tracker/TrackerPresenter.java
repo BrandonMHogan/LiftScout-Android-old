@@ -6,6 +6,8 @@ import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.repository.ExerciseRepo;
+import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 
 import java.util.ArrayList;
 
@@ -32,6 +34,8 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     private TrackerListModel editingRep;
     private String measurementType;
 
+    private ExerciseRepo exerciseRepo;
+
 
     // Constructor
     //
@@ -41,6 +45,8 @@ public class TrackerPresenter implements TrackerContract.Presenter {
         this.view = view;
         this.exerciseId = exerciseId;
         measurementType = userManager.getMeasurementValue();
+
+        exerciseRepo = new ExerciseRepoImpl();
     }
 
 
@@ -52,12 +58,14 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     }
 
 
+
     // Contract
     //
     @Override
     public void viewCreated() {
         updateAdapter();
         view.setDate(progressManager.getTodayProgress().getDate());
+        updateIncrement();
     }
 
     @Override
@@ -100,6 +108,11 @@ public class TrackerPresenter implements TrackerContract.Presenter {
             }
 
         }
+    }
+
+    @Override
+    public void updateIncrement() {
+        view.updateIncrements(exerciseRepo.getExerciseIncrement(exerciseId));
     }
 
     @Override
