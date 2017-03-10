@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.views.workout;
 
 import com.brandonhogan.liftscout.core.constants.ConstantValues;
+import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Set;
@@ -139,7 +140,7 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     @Override
     public int getExerciseIncrementIndex() {
         if (!increments.contains(exerciseRepo.getExerciseIncrement(exerciseId))) {
-            exerciseRepo.setExerciseIncrement(exerciseId, ConstantValues.increments.get(ConstantValues.increments.indexOf(5.0)));
+            exerciseRepo.setExerciseIncrement(exerciseId, ConstantValues.increments.get(ConstantValues.increments.indexOf(getDefaultIncrement())));
         }
 
         return increments.indexOf(exerciseRepo.getExerciseIncrement(exerciseId));
@@ -206,6 +207,13 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
                 }
             }
         };
+    }
+
+    private double getDefaultIncrement() {
+        if (userManager.getMeasurementValue().equals(Measurements.KILOGRAMS))
+            return ConstantValues.INCREMENT_KG_DEFAULT;
+        else
+            return ConstantValues.INCREMENT_LB_DEFAULT;
     }
 
     private void runTimer() {

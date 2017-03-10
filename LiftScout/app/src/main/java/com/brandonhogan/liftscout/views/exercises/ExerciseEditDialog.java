@@ -12,6 +12,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.ConstantValues;
 import com.brandonhogan.liftscout.core.controls.NumberPicker;
+import com.brandonhogan.liftscout.core.model.Exercise;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 public class ExerciseEditDialog {
@@ -24,16 +25,15 @@ public class ExerciseEditDialog {
     //
     public interface ExerciseEditDialogListener {
         void onCancelExerciseEditDialog();
-        void onSaveExerciseEditDialog(ExerciseListModel category);
+        void onSaveExerciseEditDialog(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer);
     }
 
 
     // Private Properties
     //
     private Activity activity;
-    private ExerciseListModel exercise;
+    private Exercise exercise;
     private boolean isNew;
-    private boolean isDarkTheme;
     private MaterialDialog dialog;
     private ExerciseEditDialogListener listener;
 
@@ -44,21 +44,23 @@ public class ExerciseEditDialog {
     private SwitchCompat soundSwitch;
     private SwitchCompat autoStartSwitch;
 
+    private double defaultIncrement;
+
 
 
     // Constructor
     //
-    public ExerciseEditDialog(Activity activity, ExerciseEditDialogListener listener, boolean isDarkTheme,
-                              ExerciseListModel exercise) {
+    public ExerciseEditDialog(Activity activity, ExerciseEditDialogListener listener,
+                              Exercise exercise, double defaultIncrement) {
         this.activity = activity;
         this.listener = listener;
-        this.isDarkTheme = isDarkTheme;
+        this.defaultIncrement = defaultIncrement;
 
         this.exercise = exercise;
 
         if (this.exercise == null) {
             isNew = true;
-            this.exercise = new ExerciseListModel();
+            this.exercise = new Exercise();
         }
 
     }
@@ -69,14 +71,14 @@ public class ExerciseEditDialog {
     private void onSave() {
         dismiss();
 
-        exercise.setName(nameEditText.getText().toString());
-        exercise.setIncrement(ConstantValues.increments.get(incrementSpinner.getSelectedIndex()));
-        exercise.setRestVibrate(vibrateSwitch.isChecked());
-        exercise.setRestSound(soundSwitch.isChecked());
-        exercise.setRestAutoStart(autoStartSwitch.isChecked());
-        exercise.setRestTimer(restTimerPicker.getNumberAsInt());
-
-        listener.onSaveExerciseEditDialog(exercise);
+        listener.onSaveExerciseEditDialog(
+                exercise.getId(),
+                nameEditText.getText().toString(),
+                ConstantValues.increments.get(incrementSpinner.getSelectedIndex()),
+                vibrateSwitch.isChecked(),
+                soundSwitch.isChecked(),
+                autoStartSwitch.isChecked(),
+                restTimerPicker.getNumberAsInt());
     }
 
     private void onCancel() {
@@ -132,7 +134,7 @@ public class ExerciseEditDialog {
             if (ConstantValues.increments.contains(exercise.getIncrement()))
                 incrementSpinner.setSelectedIndex(ConstantValues.increments.indexOf(exercise.getIncrement()));
             else
-                incrementSpinner.setSelectedIndex(ConstantValues.increments.indexOf(5.0));
+                incrementSpinner.setSelectedIndex(ConstantValues.increments.indexOf(defaultIncrement));
 
 
             if (!isNew) {

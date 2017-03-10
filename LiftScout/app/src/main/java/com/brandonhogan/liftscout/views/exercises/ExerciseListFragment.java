@@ -15,10 +15,12 @@ import android.view.ViewGroup;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -144,8 +146,6 @@ public class ExerciseListFragment extends BaseFragment implements
     // Private Functions
     //
     private void editExercise(int position) {
-
-
         ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
             @Override
             public void onCancelExerciseEditDialog() {
@@ -153,10 +153,10 @@ public class ExerciseListFragment extends BaseFragment implements
             }
 
             @Override
-            public void onSaveExerciseEditDialog(ExerciseListModel exercise) {
-                presenter.updateExercise(exercise);
+            public void onSaveExerciseEditDialog(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
+                presenter.updateExercise(id, name, increment, vibrate, sound, autoStart, restTimer);
             }
-        }, true, presenter.getExercise(position));
+        }, presenter.getExercise(position), presenter.getDefaultIncrement());
 
         dialog.show();
     }
@@ -169,21 +169,22 @@ public class ExerciseListFragment extends BaseFragment implements
             }
 
             @Override
-            public void onSaveExerciseEditDialog(ExerciseListModel exercise) {
-                presenter.createExercise(exercise);
+            public void onSaveExerciseEditDialog(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
+                presenter.createExercise(name, increment, vibrate, sound, autoStart, restTimer);
             }
-        }, true, null);
+
+        }, null, presenter.getDefaultIncrement());
 
         dialog.show();
     }
 
     private void removeExerciseAlert(final int position) {
 
-        ExerciseListModel model = presenter.getExercise(position);
+        Exercise exercise = presenter.getExercise(position);
 
         dialog = new MaterialDialog.Builder(getActivity())
-                .title(String.format(getString(R.string.dialog_exercise_remove_title), model.getName()))
-                .content(String.format(getString(R.string.dialog_exercise_remove_message), model.getName()))
+                .title(String.format(getString(R.string.dialog_exercise_remove_title), exercise.getName()))
+                .content(String.format(getString(R.string.dialog_exercise_remove_message), exercise.getName()))
                 .positiveText(R.string.delete)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
@@ -209,12 +210,13 @@ public class ExerciseListFragment extends BaseFragment implements
     }
 
     @Override
-    public void updateAdapter(List<ExerciseListModel> data) {
+    public void updateAdapter(ArrayList<Exercise> data) {
         mAdapter = new ExerciseListAdapter(getActivity(), data);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         onTouchListener = new RecyclerTouchListener(getActivity(), mRecyclerView);
+
 
         onTouchListener
                 .setClickable(new RecyclerTouchListener.OnRowClickListener() {
@@ -227,11 +229,6 @@ public class ExerciseListFragment extends BaseFragment implements
                     public void onIndependentViewClicked(int independentViewID, int position) {
                     }
                 })
-//                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
-//                    @Override
-//                    public void onRowLongClicked(int position) {
-//                    }
-//                })
                 .setSwipeOptionViews(R.id.delete, R.id.edit)
                 .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
                     @Override
@@ -262,6 +259,6 @@ public class ExerciseListFragment extends BaseFragment implements
 
     @Override
     public void swipeItem(int position) {
-        onTouchListener.openSwipeOptions(position);
+        //onTouchListener.openSwipeOptions(position);
     }
 }

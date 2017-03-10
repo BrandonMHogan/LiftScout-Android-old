@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.views.exercises;
 
+import com.brandonhogan.liftscout.core.constants.ConstantValues;
 import com.brandonhogan.liftscout.core.model.Exercise;
 
 public class ExerciseListModel {
@@ -14,7 +15,7 @@ public class ExerciseListModel {
     public ExerciseListModel(Exercise exercise) {
         this.id = exercise.getId();
         this.name = exercise.getName();
-        this.restTimer = exercise.getRestTimer();
+        this.restTimer = exercise.getRestTimer() == 0 ? ConstantValues.REST_TIME_DEFAULT : restTimer;
         this.restVibrate = exercise.isRestVibrate();
         this.restSound = exercise.isRestSound();
         this.restAutoStart = exercise.isRestAutoStart();

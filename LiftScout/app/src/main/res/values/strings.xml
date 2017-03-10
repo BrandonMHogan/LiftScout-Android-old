@@ -194,6 +194,7 @@
     <string name="workout_graphs_title">Graphs</string>
     <string name="workout_statistics_title">Statistics</string>
     <string name="workout_goals_title">Goals</string>
+    <string name="workout_error_one_rep_needed">You need at least one rep before saving</string>
 
     <!-- Workout - Sections -->
     <string name="frag_history_empty_set_msg">No sets have been added</string>

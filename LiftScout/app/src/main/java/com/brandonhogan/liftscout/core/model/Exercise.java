@@ -1,5 +1,7 @@
 package com.brandonhogan.liftscout.core.model;
 
+import com.brandonhogan.liftscout.core.constants.ConstantValues;
+
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -34,7 +36,7 @@ public class Exercise extends RealmObject {
 
     private Date deleteDate;
 
-    private int restTimer = 60;
+    private int restTimer = ConstantValues.REST_TIME_DEFAULT;
 
     private boolean restSound = true;
 

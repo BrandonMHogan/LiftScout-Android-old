@@ -8,15 +8,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.model.Exercise;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ExerciseViewHolder> {
     LayoutInflater inflater;
-    List<ExerciseListModel> modelList;
+    ArrayList<Exercise> modelList;
 
-    public ExerciseListAdapter(Context context, List<ExerciseListModel> list) {
+    public ExerciseListAdapter(Context context, ArrayList<Exercise> list) {
         super();
         inflater = LayoutInflater.from(context);
         modelList = new ArrayList<>(list);
@@ -47,12 +48,12 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
             name = (TextView) itemView.findViewById(R.id.name);
         }
 
-        public void bindData(ExerciseListModel rowModel) {
+        public void bindData(Exercise rowModel) {
             name.setText(rowModel.getName());
         }
     }
 
-    public void setList(List<ExerciseListModel> list) {
+    public void setList(ArrayList<Exercise> list) {
         modelList.clear();
         modelList.addAll(list);
         notifyDataSetChanged();

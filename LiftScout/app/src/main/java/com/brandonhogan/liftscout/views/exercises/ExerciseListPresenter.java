@@ -1,6 +1,9 @@
 package com.brandonhogan.liftscout.views.exercises;
 
+import com.brandonhogan.liftscout.core.constants.ConstantValues;
+import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.brandonhogan.liftscout.core.managers.GraphManager;
+import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Category;
 import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.injection.components.Injector;
@@ -20,13 +23,16 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     @Inject
     GraphManager graphManager;
 
+    @Inject
+    UserManager userManager;
+
     // Private Properties
     //
     private ExerciseListContract.View view;
     private int categoryId;
     private boolean isAddSet;
-    private ArrayList<ExerciseListModel> adapterData;
-    ExerciseRepo exerciseRepo;
+    private ArrayList<Exercise> adapterData;
+    private ExerciseRepo exerciseRepo;
 
 
     // Constructor
@@ -44,20 +50,12 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     // Private Functions
     //
     private void updateAdapter() {
-        if (adapterData != null)
-            view.updateAdapter(adapterData);
-
         adapterData = new ArrayList<>();
 
-        RealmResults<Exercise> exercises = exerciseRepo.getExercises(categoryId, false);
+        RealmResults<Exercise> exercises = exerciseRepo.getExercises(categoryId, false).sort(Exercise.NAME);
 
-        if (exercises == null)
-            view.updateAdapter(adapterData);
-
-
-        for (Exercise exercise : exercises.sort(Category.NAME)) {
-            adapterData.add(new ExerciseListModel(exercise));
-        }
+        if (exercises != null)
+            adapterData.addAll(exercises);
 
         view.updateAdapter(adapterData);
     }
@@ -91,9 +89,14 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     }
 
     @Override
-    public void createExercise(ExerciseListModel exerciseListModel) {
+    public void createExercise(String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
         Exercise newExercise = new Exercise();
-        newExercise.setName(exerciseListModel.getName());
+        newExercise.setName(name);
+        newExercise.setIncrement(increment);
+        newExercise.setRestVibrate(vibrate);
+        newExercise.setRestSound(sound);
+        newExercise.setRestAutoStart(autoStart);
+        newExercise.setRestTimer(restTimer);
         newExercise.setCategoryId(categoryId);
 
         exerciseRepo.setExercise(newExercise);
@@ -101,19 +104,8 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     }
 
     @Override
-    public void updateExercise(ExerciseListModel exerciseListModel) {
-        Exercise newExercise = new Exercise();
-        newExercise.setName(exerciseListModel.getName());
-        newExercise.setCategoryId(categoryId);
-        newExercise.setId(exerciseListModel.getId());
-
-        newExercise.setIncrement(exerciseListModel.getIncrement());
-        newExercise.setRestSound(exerciseListModel.isRestSound());
-        newExercise.setRestVibrate(exerciseListModel.isRestVibrate());
-        newExercise.setRestAutoStart(exerciseListModel.isRestAutoStart());
-        newExercise.setRestTimer(exerciseListModel.getRestTimer());
-
-        exerciseRepo.setExercise(newExercise);
+    public void updateExercise(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
+        exerciseRepo.updateExercise(id, name, increment, vibrate, sound, autoStart, restTimer);
         updateAdapter();
     }
 
@@ -126,7 +118,15 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     }
 
     @Override
-    public ExerciseListModel getExercise(int position) {
+    public Exercise getExercise(int position) {
         return adapterData.get(position);
+    }
+
+    @Override
+    public double getDefaultIncrement() {
+        if (userManager.getMeasurementValue().equals(Measurements.KILOGRAMS))
+            return ConstantValues.INCREMENT_KG_DEFAULT;
+        else
+            return ConstantValues.INCREMENT_LB_DEFAULT;
     }
 }

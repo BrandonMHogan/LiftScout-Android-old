@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
@@ -151,6 +152,12 @@ public class TrackerFragment extends BaseFragment implements
 
     @OnClick(R.id.first_button)
     public void firstButtonOnClick() {
+
+        if(repNumberPicker.getNumberAsInt() < 1) {
+            Toast.makeText(getActivity(), R.string.workout_error_one_rep_needed, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         presenter.onSave(repNumberPicker.getNumber(), weightNumberPicker.getNumber());
         EventBus.getDefault().post(new TrackerEvent(false, true));
     }

@@ -18,4 +18,8 @@ public class ConstantValues {
         add(10.0);
     }};
 
+    public static final double INCREMENT_KG_DEFAULT = 2.5;
+    public static final double INCREMENT_LB_DEFAULT = 5.0;
+    public static final int REST_TIME_DEFAULT = 60;
+
 }

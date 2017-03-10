@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.repository.impl;
 import android.util.Log;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.constants.ConstantValues;
 import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
@@ -72,6 +73,29 @@ public class ExerciseRepoImpl implements ExerciseRepo {
     }
 
     @Override
+    public void updateExercise(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
+        try {
+
+            databaseRealm.getRealmInstance().beginTransaction();
+
+            Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, id).findFirst();
+
+            exercise.setName(name);
+            exercise.setIncrement(increment);
+            exercise.setRestVibrate(vibrate);
+            exercise.setRestSound(sound);
+            exercise.setRestAutoStart(autoStart);
+            exercise.setRestTimer(restTimer);
+
+            databaseRealm.getRealmInstance().commitTransaction();
+        }
+        catch (Exception ex) {
+            Log.e(TAG, ex.getMessage());
+            databaseRealm.getRealmInstance().cancelTransaction();
+        }
+    }
+
+    @Override
     public void deleteExercise(int exerciseId) {
         try {
             databaseRealm.getRealmInstance().beginTransaction();
@@ -117,7 +141,7 @@ public class ExerciseRepoImpl implements ExerciseRepo {
         if (exercise!= null && exercise.isValid())
             return exercise.getRestTimer();
         else
-            return R.integer.default_rest_timer;
+            return ConstantValues.REST_TIME_DEFAULT;
     }
 
     @Override

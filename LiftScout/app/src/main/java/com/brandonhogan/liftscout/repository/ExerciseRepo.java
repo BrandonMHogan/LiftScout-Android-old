@@ -9,6 +9,7 @@ public interface ExerciseRepo {
     RealmResults<Exercise> getExercises(int categoryId, boolean includeDeleted);
     Exercise getExercise(int exerciseId);
     void setExercise(Exercise exercise);
+    void updateExercise(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer);
     void deleteExercise(int exercise);
     void deleteAllExercisesForCategory(int categoryId);
     void setExerciseRestTimer(int exerciseId, int time);
