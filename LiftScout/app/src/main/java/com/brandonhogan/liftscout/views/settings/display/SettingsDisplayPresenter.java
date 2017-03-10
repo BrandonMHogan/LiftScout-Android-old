@@ -39,16 +39,6 @@ public class SettingsDisplayPresenter implements SettingsDisplayContract.Present
         originalThemeValue = userManager.getThemeValue();
     }
 
-
-    // Private Functions
-    //
-    private void saveSettings(boolean restartNeeded) {
-        userManager.setTheme(currentSelectedTheme);
-
-        view.saveSuccess(restartNeeded);
-    }
-
-
     // Contract
     //
     @Override
@@ -65,18 +55,24 @@ public class SettingsDisplayPresenter implements SettingsDisplayContract.Present
     }
 
     @Override
-    public void onSave(boolean validated) {
-
-        boolean valueChanged = !originalThemeValue.equals(currentSelectedTheme);
-
-        if (!validated && valueChanged)
-            view.showAlert();
-        else
-            saveSettings(valueChanged);
+    public void changeTheme() {
+        userManager.setTheme(currentSelectedTheme);
+        view.saveSuccess(true);
     }
 
     @Override
     public void onThemeSelected(int position) {
         currentSelectedTheme = themes.get(position);
+
+        boolean valueChanged = !originalThemeValue.equals(currentSelectedTheme);
+
+        if (valueChanged)
+            view.showAlert();
+    }
+
+    @Override
+    public int getOriginalThemeIndex() {
+        currentSelectedTheme = originalThemeValue;
+        return themes.indexOf(originalThemeValue);
     }
 }

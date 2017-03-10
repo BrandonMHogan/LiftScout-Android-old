@@ -13,7 +13,8 @@ public interface SettingsDisplayContract {
     interface Presenter {
         void viewCreated();
         void onThemeSelected(int position);
-        void onSave(boolean validated);
+        void changeTheme();
+        int getOriginalThemeIndex();
     }
 
 }

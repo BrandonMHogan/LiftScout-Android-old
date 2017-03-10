@@ -4,7 +4,6 @@ import com.brandonhogan.liftscout.core.constants.ConstantValues;
 import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.brandonhogan.liftscout.core.managers.GraphManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
-import com.brandonhogan.liftscout.core.model.Category;
 import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.CategoryRepo;

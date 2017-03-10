@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.views.settings.profile;
 
+import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
@@ -38,15 +39,6 @@ public class SettingsProfilePresenter implements SettingsProfileContract.Present
         originalMeasurementValue = userManager.getMeasurementValue();
     }
 
-
-    // Private Functions
-    //
-    private void saveSettings() {
-
-        view.saveSuccess();
-    }
-
-
     // Contract
     //
     @Override
@@ -62,11 +54,7 @@ public class SettingsProfilePresenter implements SettingsProfileContract.Present
     @Override
     public void onMeasurementSelected(int position) {
         currentSelectedMeasurement = measurements.get(position);
-    }
-
-    @Override
-    public void onSave() {
         userManager.setMeasurement(currentSelectedMeasurement);
-        view.saveSuccess();
+        view.saveSuccess(R.string.setting_profile_measurement_saved);
     }
 }

@@ -21,7 +21,6 @@ import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 

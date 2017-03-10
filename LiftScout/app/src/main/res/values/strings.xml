@@ -161,6 +161,7 @@
     <string name="setting_about_description">Check out some information about the app and its developer</string>
     <string name="setting_profile">Profile</string>
     <string name="setting_profile_description">Change your profile name, age and unit of measurement</string>
+    <string name="setting_profile_measurement_saved">Unit of Measurement has been updated</string>
     <string name="setting_display">Display</string>
     <string name="setting_display_description">Adjust display settings including themes and colours</string>
     <string name="setting_notifications">Notifications</string>
@@ -169,11 +170,14 @@
     <string name="setting_home_description">Tailor the home screen to fit your needs</string>
     <string name="setting_home_default_spinner_title">Home Screen</string>
     <string name="setting_home_default_spinner_description">Would you prefer to see a calendar or the current day only when the app first starts</string>
+    <string name="setting_home_transform_saved">Transition Type has been updated</string>
+    <string name="setting_home_screen_saved">Home Screen has been updated</string>
     <string name="setting_today_transformer_spinner_title">Transition Type</string>
     <string name="setting_today_transformer_spinner_description">Change the transition type when swiping from day to day</string>
     <string name="setting_today_weight_title">Enable Weight Tracking</string>
     <string name="setting_today_photo_title">Enable Photo Tracking</string>
     <string name="setting_today_routine_title">Enable Routine Tracking</string>
+
 
     <string name="setting_display_theme_spinner_title">Theme</string>
     <string name="setting_display_theme_spinner_description">Choose a theme that better fits your taste</string>

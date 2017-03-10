@@ -10,12 +10,11 @@ import java.util.ArrayList;
 public class SettingsProfileContract {
     interface View {
         void populateMeasurements(ArrayList<String> measurements, int position);
-        void saveSuccess();
+        void saveSuccess(int msg);
     }
 
     interface Presenter {
         void viewCreated();
         void onMeasurementSelected(int position);
-        void onSave();
     }
 }

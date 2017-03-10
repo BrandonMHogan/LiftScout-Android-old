@@ -67,35 +67,6 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.action_save).setVisible(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_save:
-                presenter.onSave(false);
-
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void populateThemes(ArrayList<String> themes, int selected) {
         themeSpinner.setItems(themes);
         themeSpinner.setSelectedIndex(selected);
@@ -110,12 +81,10 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
 
     @Override
     public void saveSuccess(boolean restart) {
-
         if (restart)
             restartActivity();
         else
             getNavigationManager().navigateBack(getActivity());
-
     }
 
     @Override
@@ -131,6 +100,12 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
                     }
                 })
                 .setCancelText(getString(R.string.cancel))
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        dialogCancel();
+                    }
+                })
                 .showCancelButton(true);
 
         dialog.show();
@@ -138,7 +113,12 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
 
     private void dialogAccepted() {
         dialog.cancel();
-        presenter.onSave(true);
+        presenter.changeTheme();
+    }
+
+    private void dialogCancel() {
+        dialog.cancel();
+        themeSpinner.setSelectedIndex(presenter.getOriginalThemeIndex());
     }
 
     private void restartActivity() {

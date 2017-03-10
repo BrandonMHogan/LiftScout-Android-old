@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.views.settings.home;
 
+import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.DefaultScreens;
 import com.brandonhogan.liftscout.core.constants.TodayTransforms;
 import com.brandonhogan.liftscout.core.managers.UserManager;
@@ -23,8 +24,6 @@ public class SettingsHomePresenter implements SettingsHomeContract.Presenter {
     private SettingsHomeContract.View view;
     private ArrayList<String> transforms;
     private ArrayList<String> homeDefaults;
-    private String currentTransformValue;
-    private String currentHomeDefaultValue;
 
     public SettingsHomePresenter(SettingsHomeContract.View view) {
         Injector.getAppComponent().inject(this);
@@ -42,21 +41,16 @@ public class SettingsHomePresenter implements SettingsHomeContract.Presenter {
 
     @Override
     public void onTransformSelected(int position) {
-        currentTransformValue = transforms.get(position);
+        userManager.setTransform(transforms.get(position));
+        view.saveSuccess(R.string.setting_home_transform_saved);
     }
 
     @Override
     public void onHomeDefaultSelected(int position) {
-        currentHomeDefaultValue = homeDefaults.get(position);
+        userManager.setHomeDefault(homeDefaults.get(position));
+        view.saveSuccess(R.string.setting_home_screen_saved);
     }
 
-    @Override
-    public void onSave() {
-        userManager.setTransform(currentTransformValue);
-        userManager.setHomeDefault(currentHomeDefaultValue);
-
-        view.saveSuccess();
-    }
 
     // Private Functions
     //

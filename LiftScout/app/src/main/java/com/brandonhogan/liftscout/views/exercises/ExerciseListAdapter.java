@@ -11,7 +11,6 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.model.Exercise;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ExerciseViewHolder> {
     LayoutInflater inflater;
