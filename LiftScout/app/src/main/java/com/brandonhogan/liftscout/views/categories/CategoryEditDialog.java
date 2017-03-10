@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -60,6 +61,12 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
     // Private Functions
     //
     private void onSave() {
+
+        if (category.getColor() == 0) {
+            Toast.makeText(activity, "Please Select a color", Toast.LENGTH_SHORT).show();
+            return ;
+        }
+
         dismiss();
 
         category.setName(nameEditText.getText().toString());
@@ -84,6 +91,7 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
                     .title(isNew ? R.string.dialog_add_category_title : R.string.dialog_edit_category_title)
                     .customView(customTheme, false)
                     .positiveText(R.string.save)
+                    .autoDismiss(false)
                     .onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -110,7 +118,6 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
             if (!isNew) {
                 nameEditText.setText(category.getName());
                 palette.setSelectedColor(category.getColor());
-                category.setColor(R.color.category_bright_green);
             }
         }
 
