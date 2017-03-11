@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface TodayContact {
     interface View {
-        void setupTitle(String date, String year);
+        void setupTitle(int titleRes, String titleDate);
         void setupWeight(String weight);
         void setupAdapter(List<TodayListSection> data, int expandPosition);
         String getEmptySetMessage();

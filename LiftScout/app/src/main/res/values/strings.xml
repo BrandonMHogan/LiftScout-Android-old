@@ -46,6 +46,9 @@
     <string name="resume">Resume</string>
     <string name="stop">Stop</string>
     <string name="timer">Timer</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="yesterday">Yesterday</string>
 
 
     <!-- Tracker Settings -->

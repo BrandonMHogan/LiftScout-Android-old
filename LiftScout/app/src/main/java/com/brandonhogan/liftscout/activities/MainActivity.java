@@ -11,6 +11,7 @@ import com.brandonhogan.liftscout.core.constants.DefaultScreens;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.NotificationServiceManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.core.utils.LogUtil;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
@@ -107,7 +108,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
                 navigationManager.startCalendar();
                 return;
             }
-            navigationManager.startToday();
+            navigationManager.startToday(false);
         }
     }
 
@@ -176,7 +177,10 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_today:
-                        getNavigationManager().startToday();
+                        if (!progressManager.getCurrentDate().equals(BhDate.trimTimeFromDate(new Date())))
+                            getNavigationManager().startToday(true);
+                        else
+                            getNavigationManager().startToday(false);
                         return true;
                     case R.id.nav_calendar:
                             getNavigationManager().startCalendar();

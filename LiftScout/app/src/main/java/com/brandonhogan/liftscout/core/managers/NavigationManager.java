@@ -119,6 +119,14 @@ public class NavigationManager {
         return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
     }
 
+    private boolean openAsHome(BaseFragment fragment, boolean force) {
+        if (!verifyTransition(fragment, force))
+            return false;
+
+        popEveryFragment();
+        return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
+    }
+
     private boolean open(BaseFragment fragment) {
         if (!verifyTransition(fragment, false))
             return false;
@@ -194,9 +202,9 @@ public class NavigationManager {
         }
     }
 
-    public boolean startToday() {
+    public boolean startToday(boolean force) {
         BaseFragment fragment = HomeFragment.newInstance();
-        return openAsHome(fragment);
+        return openAsHome(fragment, force);
     }
 
     public boolean startCalendar() {

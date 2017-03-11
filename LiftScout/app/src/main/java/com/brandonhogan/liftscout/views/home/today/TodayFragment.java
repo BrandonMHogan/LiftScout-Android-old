@@ -57,11 +57,8 @@ public class TodayFragment extends BaseFragment implements TodayContact.View {
 
     // Binds
     //
-    @Bind(R.id.date)
-    TextView dateView;
-
-    @Bind(R.id.date_year)
-    TextView dateYearView;
+    @Bind(R.id.title)
+    TextView titleView;
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -122,10 +119,14 @@ public class TodayFragment extends BaseFragment implements TodayContact.View {
 
     // Contracts
     //
+
+
     @Override
-    public void setupTitle(String date, String year) {
-        dateView.setText(date);
-        dateYearView.setText(year);
+    public void setupTitle(int titleRes, String titleDate) {
+        if (titleRes != 0)
+            titleView.setText(getString(titleRes));
+        else
+            titleView.setText(titleDate);
     }
 
     @Override

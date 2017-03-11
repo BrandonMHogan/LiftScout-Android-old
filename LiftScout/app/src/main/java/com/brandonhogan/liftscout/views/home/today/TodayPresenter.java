@@ -1,15 +1,18 @@
 package com.brandonhogan.liftscout.views.home.today;
 
+import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.core.utils.Constants;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.mikepenz.fastadapter.IItem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,8 +36,6 @@ public class TodayPresenter implements TodayContact.Presenter {
     //
     private TodayContact.View view;
     private Date date;
-    private String dateString;
-    private String dateYear;
     private ArrayList<TodayListSection> adapterData;
 
 
@@ -44,9 +45,6 @@ public class TodayPresenter implements TodayContact.Presenter {
         Injector.getAppComponent().inject(this);
         this.view = view;
         this.date = new Date(dateLong);
-
-        dateString = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT, Locale.getDefault()).format(date);
-        dateYear = new SimpleDateFormat(Constants.SIMPLE_DATE_YEAR_FORMAT, Locale.getDefault()).format(date);
     }
 
 
@@ -111,9 +109,30 @@ public class TodayPresenter implements TodayContact.Presenter {
         updateAdapter();
 
         double weight = progressManager.getTodayProgress().getWeight();
-
-        view.setupTitle(dateString, dateYear);
         view.setupWeight(weight == 0 ? null : Double.toString(weight));
+
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(BhDate.trimTimeFromDate(new Date()));
+
+        if (date.equals(cal.getTime())) {
+            view.setupTitle(R.string.today, null);
+            return;
+        }
+
+        cal.add(Calendar.DATE, -1);
+        if (date.equals(cal.getTime())) {
+            view.setupTitle(R.string.yesterday, null);
+            return;
+        }
+
+        cal.add(Calendar.DATE, 2);
+        if (date.equals(cal.getTime())) {
+            view.setupTitle(R.string.tomorrow, null);
+            return;
+        }
+
+        view.setupTitle(0, new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT, Locale.getDefault()).format(date));
     }
 
     @Override
