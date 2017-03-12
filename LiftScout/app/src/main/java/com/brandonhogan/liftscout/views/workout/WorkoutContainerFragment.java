@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.brandonhogan.liftscout.R;
@@ -84,6 +85,9 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
     @Bind(R.id.workout_tab_layout)
     TabLayout tabLayout;
+
+    @Bind(R.id.force_focus_layout)
+    LinearLayout forceFocusLayout;
 
 
     //Overrides
@@ -213,6 +217,8 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
         if(presenter.getRemainingRestTime() <= 0)
             notificationServiceManager.clearNotification();
+
+        forceFocusLayout.requestFocus();
     }
 
     @Override
