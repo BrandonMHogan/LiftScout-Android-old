@@ -103,7 +103,7 @@ public class IntroExercisesSlidePresenter implements IntroExercisesSlideContract
         CategoryRepo categoryRepo = new CategoryRepoImpl();
         ExerciseRepo exerciseRepo = new ExerciseRepoImpl();
 
-        Category abs = categoryRepo.setCategory(createCategory(view.getStringValue(R.string.category_abs), R.color.category_red));
+        Category abs = categoryRepo.setCategory(createCategory(view.getStringValue(R.string.category_abs), R.color.category_light_red));
 
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_cable_crunch), abs));
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_crunch), abs));
@@ -178,7 +178,7 @@ public class IntroExercisesSlidePresenter implements IntroExercisesSlideContract
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_cable_rear_delt_fly), shoulders));
 
 
-        Category biceps = categoryRepo.setCategory(createCategory(view.getStringValue(R.string.category_biceps), R.color.category_bright_green));
+        Category biceps = categoryRepo.setCategory(createCategory(view.getStringValue(R.string.category_biceps), R.color.category_light_green));
 
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_barbell_curl), biceps));
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_barbell_drag_curl), biceps));
@@ -191,7 +191,7 @@ public class IntroExercisesSlidePresenter implements IntroExercisesSlideContract
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_cable_curl), biceps));
 
 
-        Category triceps = categoryRepo.setCategory(createCategory(view.getStringValue(R.string.category_triceps), R.color.category_dark_pink));
+        Category triceps = categoryRepo.setCategory(createCategory(view.getStringValue(R.string.category_triceps), R.color.category_pink));
 
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_rope_push_down), triceps));
         exerciseRepo.setExercise(createExercise(view.getStringValue(R.string.exercise_ez_bar_skullcrusher), triceps));

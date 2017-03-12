@@ -89,7 +89,7 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
 
             dialog = new MaterialDialog.Builder(activity)
                     .title(isNew ? R.string.dialog_add_category_title : R.string.dialog_edit_category_title)
-                    .customView(customTheme, false)
+                    .customView(customTheme, true)
                     .positiveText(R.string.save)
                     .autoDismiss(false)
                     .onPositive(new MaterialDialog.SingleButtonCallback() {

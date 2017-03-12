@@ -71,32 +71,46 @@
 
 
     <!-- Category Colors -->
-    <color name="category_light_red">#80f44336</color>
-    <color name="category_red">#80ff1744</color>
-    <color name="category_blue">#803693D0</color>
-    <color name="category_green">#8036CF8E</color>
-    <color name="category_light_green">#808bc34a</color>
-    <color name="category_orange">#80FF9800</color>
-    <color name="category_bright_green">#8076ee00</color>
-    <color name="category_purple">#80512da8</color>
-    <color name="category_dark_purple">#80ea80fc</color>
-    <color name="category_pink">#80f06292</color>
-    <color name="category_dark_pink">#80e91e63</color>
-    <color name="category_yellow">#80ffd600</color>
+    <color name="category_light_red">#CCF44336</color>
+    <color name="category_pink">#CCE91E63</color>
+    <color name="category_purple">#CC9C27B0</color>
+    <color name="category_deep_purple">#CC673AB7</color>
+    <color name="category_indigo">#CC3F51B5</color>
+    <color name="category_blue">#CC2196F3</color>
+    <color name="category_light_blue">#CC03A9F4</color>
+    <color name="category_cyan">#CC00BCD4</color>
+    <color name="category_teal">#CC009688</color>
+    <color name="category_green">#CC4CAF50</color>
+    <color name="category_light_green">#CC8BC34A</color>
+    <color name="category_lime">#CCCDDC39</color>
+    <color name="category_yellow">#CCFFEB3B</color>
+    <color name="category_amber">#CCFFC107</color>
+    <color name="category_orange">#CCFF9800</color>
+    <color name="category_deep_orange">#CCFF5722</color>
+    <color name="category_brown">#CC795548</color>
+    <color name="category_gray">#CC9E9E9E</color>
+    <color name="category_blue_gray">#CC607D8B</color>
 
     <array name="category_colors">
         <item>@color/category_light_red</item>
-        <item>@color/category_red</item>
+        <item>@color/category_pink</item>
+        <item>@color/category_purple</item>
+        <item>@color/category_deep_purple</item>
+        <item>@color/category_indigo</item>
         <item>@color/category_blue</item>
+        <item>@color/category_light_blue</item>
+        <item>@color/category_cyan</item>
+        <item>@color/category_teal</item>
         <item>@color/category_green</item>
         <item>@color/category_light_green</item>
-        <item>@color/category_orange</item>
-        <item>@color/category_bright_green</item>
-        <item>@color/category_dark_purple</item>
-        <item>@color/category_purple</item>
-        <item>@color/category_pink</item>
-        <item>@color/category_dark_pink</item>
+        <item>@color/category_lime</item>
         <item>@color/category_yellow</item>
+        <item>@color/category_amber</item>
+        <item>@color/category_orange</item>
+        <item>@color/category_deep_orange</item>
+        <item>@color/category_brown</item>
+        <item>@color/category_gray</item>
+        <item>@color/category_blue_gray</item>
     </array>
 
     <!-- Border -->
