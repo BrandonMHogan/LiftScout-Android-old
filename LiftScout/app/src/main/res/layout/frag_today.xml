@@ -80,7 +80,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="40dp"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -92,11 +91,15 @@
 
                 <Button
                     android:id="@+id/start_workout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_width="@dimen/today_start_workout_button_width"
+                    android:layout_height="@dimen/today_start_workout_button_height"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/frag_workout_no_data_button"/>
+                    android:background="@drawable/background_round_corner_ripple"
+                    android:backgroundTint="?android:colorAccent"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="40dp"
+                    android:text="@string/frag_workout_no_data_button" />
 
             </LinearLayout>
 
