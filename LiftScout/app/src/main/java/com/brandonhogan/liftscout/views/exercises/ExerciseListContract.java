@@ -23,5 +23,6 @@ public interface ExerciseListContract {
         void deleteExercise(int position);
         Exercise getExercise(int position);
         double getDefaultIncrement();
+        boolean isInSearch();
     }
 }

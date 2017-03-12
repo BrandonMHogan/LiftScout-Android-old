@@ -20,8 +20,9 @@
 
     <!-- This is the base of all light themes. All light base themes need to be a child of this -->
     <style name="AppTheme.Light.Base" parent="Theme.AppCompat.Light">
-        <item name="android:fillColor">@color/light_theme_fill</item>
+        <item name="android:fillColor">@color/theme_dark_black_accent</item>
         <item name="android:textColor">@color/light_theme_text_primary</item>
+        <item name="android:textColorPrimary">@color/light_theme_text_primary</item>
         <item name="android:textColorSecondary">@color/light_theme_text_secondary</item>
         <item name="android:textColorPrimaryDisableOnly">@color/light_theme_text_disabled</item>
 

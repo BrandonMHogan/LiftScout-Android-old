@@ -4,22 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/exercise_selector"
-        android:layout_width="@dimen/tracker_button_width"
-        android:layout_height="@dimen/tracker_button_height"
-        android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/background_round_corner_ripple"
-        android:backgroundTint="?android:colorAccent"
-        android:textColor="@color/white"
-        android:layout_marginTop="7dp"
-        android:text="@string/charts_select_exercise" />
-
     <com.brandonhogan.liftscout.core.controls.graphs.line.MyLineGraph
         android:id="@+id/my_line_graph"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/exercise_selector"/>
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

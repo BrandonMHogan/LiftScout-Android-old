@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.views.categories;
 
+import com.brandonhogan.liftscout.core.managers.GraphManager;
 import com.brandonhogan.liftscout.core.model.Category;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.CategoryRepo;
@@ -7,9 +8,15 @@ import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import io.realm.RealmResults;
 
 public class CategoryListPresenter implements CategoryListContract.Presenter {
+
+
+    @Inject
+    GraphManager graphManager;
 
     // Private Properties
     //
@@ -57,6 +64,11 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
     @Override
     public void viewCreated() {
         updateAdapter();
+    }
+
+    @Override
+    public boolean isInSearch() {
+        return graphManager.isInSearch();
     }
 
     @Override

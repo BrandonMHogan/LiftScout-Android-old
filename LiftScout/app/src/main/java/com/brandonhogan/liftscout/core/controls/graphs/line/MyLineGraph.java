@@ -7,11 +7,14 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Charts;
+import com.brandonhogan.liftscout.core.managers.GraphManager;
+import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
@@ -47,6 +50,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.realm.RealmResults;
 
 /**
@@ -62,10 +66,16 @@ public class MyLineGraph extends FrameLayout {
     ProgressManager progressManager;
 
     @Inject
+    GraphManager graphManager;
+
+    @Inject
     UserManager userManager;
 
     @Inject
     Application application;
+
+    @Inject
+    NavigationManager navigationManager;
 
     // Bindings
     //
@@ -86,6 +96,9 @@ public class MyLineGraph extends FrameLayout {
 
     @Bind(R.id.graph_type)
     MaterialSpinner graphType;
+
+    @Bind(R.id.exercise_selector)
+    Button exerciseSelector;
 
     private static final int GRAPH_MAX_VALUE_DEFAULT = 30;
 
@@ -125,9 +138,11 @@ public class MyLineGraph extends FrameLayout {
         setupRangeSlider();
     }
 
-    public void init(Resources.Theme theme) {
+    public void init(Resources.Theme theme, boolean showExerciseSelector) {
 
-        textColor = AttrUtil.getAttributeRes(theme, android.R.attr.textColor);
+        exerciseSelector.setVisibility(showExerciseSelector ? VISIBLE : GONE);
+
+        textColor = AttrUtil.getAttributeRes(theme, android.R.attr.textColorPrimary);
         fillColor = AttrUtil.getAttributeRes(theme, android.R.attr.colorAccent);
 
         lineChart.animate();
@@ -501,6 +516,9 @@ public class MyLineGraph extends FrameLayout {
     //
 
     public void setExercise(int exerciseId, String exerciseName) {
+        if (exerciseSelector.getVisibility() == VISIBLE)
+            exerciseSelector.setText(exerciseName);
+
         this.exerciseId = exerciseId;
         this.exerciseName = exerciseName;
         exerciseIsSet = true;
@@ -567,6 +585,14 @@ public class MyLineGraph extends FrameLayout {
 
         setSelected("", "");
         lineChart.invalidate();
+    }
+
+
+    @OnClick(R.id.exercise_selector)
+    void onClick() {
+        graphManager.setInSearch(true);
+        graphManager.setGraphName(navigationManager.getCurrentFragmentName());
+        navigationManager.startCategoryListGraphSearch();
     }
 
 }

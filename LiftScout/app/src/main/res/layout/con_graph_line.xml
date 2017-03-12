@@ -11,19 +11,41 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/fragment_default_margin">
 
-        <com.jaredrummler.materialspinner.MaterialSpinner
-            android:id="@+id/graph_type"
+        <LinearLayout
+            android:id="@+id/selectors"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            app:ms_background_color="?attr/android:fillColor"/>
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/exercise_selector"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/tracker_button_height"
+                android:layout_gravity="center"
+                android:background="@drawable/background_round_corner_ripple"
+                android:backgroundTint="?android:colorAccent"
+                android:textColor="@color/white"
+                android:layout_marginEnd="2dp"
+                android:text="@string/charts_select_exercise" />
+
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/graph_type"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                app:ms_background_color="?attr/android:fillColor"
+                />
+
+        </LinearLayout>
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="@dimen/graph_height"
-            android:layout_below="@id/graph_type"
+            android:layout_below="@id/selectors"
             android:layout_marginBottom="20dp" />
 
         <TextView

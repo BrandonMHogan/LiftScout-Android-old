@@ -55,6 +55,7 @@ public class CategoryListFragment extends BaseFragment implements
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
     private MaterialDialog dialog;
+    private MenuItem addMenu;
 
 
     // Binds
@@ -98,8 +99,8 @@ public class CategoryListFragment extends BaseFragment implements
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem addMenu = menu.findItem(R.id.action_add);
-        addMenu.setVisible(true);
+        addMenu = menu.findItem(R.id.action_add);
+        addMenu.setVisible(!presenter.isInSearch());
     }
 
     @Override

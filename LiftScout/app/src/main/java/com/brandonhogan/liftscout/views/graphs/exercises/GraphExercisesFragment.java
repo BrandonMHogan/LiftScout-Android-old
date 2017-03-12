@@ -5,18 +5,13 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.controls.graphs.line.MyLineGraph;
-import com.brandonhogan.liftscout.core.managers.GraphManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
-import javax.inject.Inject;
-
 import butterknife.Bind;
-import butterknife.OnClick;
 
 /**
  * Created by Brandon on 2/16/2017.
@@ -24,12 +19,6 @@ import butterknife.OnClick;
  */
 
 public class GraphExercisesFragment extends BaseFragment implements GraphExercisesContract.View {
-
-    @Inject
-    GraphManager graphManager;
-
-    @Bind(R.id.exercise_selector)
-    Button exerciseSelectorButton;
 
     @Bind(R.id.my_line_graph)
     MyLineGraph lineGraph;
@@ -66,7 +55,7 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
         presenter = new GraphExercisesPresenter(this);
         presenter.viewCreated();
 
-        lineGraph.init(getActivity().getTheme());
+        lineGraph.init(getActivity().getTheme(), true);
     }
 
     @Override
@@ -77,14 +66,6 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
 
     @Override
     public void setSelectedExercise(int id, String name) {
-        exerciseSelectorButton.setText(name);
         lineGraph.setExercise(id, name);
-    }
-
-    @OnClick(R.id.exercise_selector)
-    void onClick() {
-        graphManager.setInSearch(true);
-        graphManager.setGraphName(getNavigationManager().getCurrentFragmentName());
-        getNavigationManager().startCategoryListGraphSearch();
     }
 }

@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.util.Log;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.about.AboutFragment;
@@ -128,8 +129,10 @@ public class NavigationManager {
     }
 
     private boolean open(BaseFragment fragment) {
-        if (!verifyTransition(fragment, false))
+        if (!verifyTransition(fragment, false)) {
+            Log.d(TAG, "Transition has failed");
             return false;
+        }
 
         return replaceWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
     }

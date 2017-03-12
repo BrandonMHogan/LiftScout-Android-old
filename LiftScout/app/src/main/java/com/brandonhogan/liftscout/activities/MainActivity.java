@@ -48,12 +48,14 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
     ProgressManager progressManager;
 
     @Inject
+    NavigationManager navigationManager;
+
+    @Inject
     DatabaseRealm databaseRealm;
 
 
     // Private Properties
     //
-    private NavigationManager navigationManager;
     private SweetAlertDialog dialog;
 
 
@@ -71,7 +73,6 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
 
         if (findViewById(R.id.fragment_manager) != null) {
 
-            navigationManager = new NavigationManager();
             navigationManager.init(getFragmentManager());
             navigationManager.setNavigationListener(this);
 
@@ -116,18 +117,18 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
     protected void onResume() {
         super.onResume();
         updateUserData();
-        getNavigationManager().setNavigationListener(this);
-        getNavigationManager().setmFragmentManager(getFragmentManager());
-        getNavigationManager().setBottomNav(bottomNav);
+        navigationManager.setNavigationListener(this);
+        navigationManager.setmFragmentManager(getFragmentManager());
+        navigationManager.setBottomNav(bottomNav);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         updateUserData();
-        getNavigationManager().setNavigationListener(null); // Prevent memory leak on recreate
-        getNavigationManager().setmFragmentManager(null);
-        getNavigationManager().setBottomNav(null);
+        navigationManager.setNavigationListener(null); // Prevent memory leak on recreate
+        navigationManager.setmFragmentManager(null);
+        navigationManager.setBottomNav(null);
     }
 
     @Override

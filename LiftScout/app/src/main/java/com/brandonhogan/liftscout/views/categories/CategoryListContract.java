@@ -16,6 +16,7 @@ public interface CategoryListContract {
         void createCategory(CategoryListModel categoryListModel);
         void deleteCategory(int position);
         CategoryListModel getCategory(int position);
+        boolean isInSearch();
     }
 
 }

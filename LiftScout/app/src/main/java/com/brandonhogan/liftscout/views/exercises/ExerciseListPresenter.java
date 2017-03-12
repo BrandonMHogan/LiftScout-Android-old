@@ -72,6 +72,11 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     }
 
     @Override
+    public boolean isInSearch() {
+        return graphManager.isInSearch();
+    }
+
+    @Override
     public void rowClicked(int position) {
 
         // Since we are searching for the id, store it now into the manager

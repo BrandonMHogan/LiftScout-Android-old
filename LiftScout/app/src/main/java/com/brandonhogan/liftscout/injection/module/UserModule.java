@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.injection.module;
 
 import com.brandonhogan.liftscout.core.managers.CalendarManager;
 import com.brandonhogan.liftscout.core.managers.GraphManager;
+import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 
@@ -17,6 +18,12 @@ public class UserModule {
     @Singleton
     UserManager userManager() {
         return new UserManager();
+    }
+
+    @Provides
+    @Singleton
+    NavigationManager navigationManager() {
+        return new NavigationManager();
     }
 
     @Provides

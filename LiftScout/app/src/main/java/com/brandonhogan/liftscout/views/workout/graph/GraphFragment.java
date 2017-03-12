@@ -62,7 +62,7 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        graph.init(getActivity().getTheme());
+        graph.init(getActivity().getTheme(), false);
         presenter.viewCreated();
     }
 

@@ -111,7 +111,7 @@ public class ExerciseListFragment extends BaseFragment implements
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         MenuItem addMenu = menu.findItem(R.id.action_add);
-        addMenu.setVisible(true);
+        addMenu.setVisible(!presenter.isInSearch());
     }
 
     @Override
