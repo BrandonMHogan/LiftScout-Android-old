@@ -65,7 +65,7 @@ public class IntroSettingsSlideFragment extends SlideFragment implements IntroSe
 
     @Override
     public int buttonsColor() {
-        return R.color.green_transparent_10;
+        return R.color.theme_original_accent;
     }
 
     @Override

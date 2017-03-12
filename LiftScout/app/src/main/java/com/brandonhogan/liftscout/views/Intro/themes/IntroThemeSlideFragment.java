@@ -39,9 +39,6 @@ public class IntroThemeSlideFragment  extends SlideFragment implements IntroThem
     @Bind(R.id.accent_color)
     View accentColor;
 
-    @Bind(R.id.background_color)
-    View backgroundColor;
-
 
     // Private Properties
     //
@@ -74,7 +71,7 @@ public class IntroThemeSlideFragment  extends SlideFragment implements IntroThem
 
     @Override
     public int buttonsColor() {
-        return R.color.green_transparent_70;
+        return R.color.theme_original_accent;
     }
 
     @Override
@@ -109,7 +106,6 @@ public class IntroThemeSlideFragment  extends SlideFragment implements IntroThem
         primaryColor.setBackgroundColor(getResources().getColor(setColor(theme, R.attr.colorPrimary)));
         primaryDarkColor.setBackgroundColor(getResources().getColor(setColor(theme, R.attr.colorPrimaryDark)));
         accentColor.setBackgroundColor(getResources().getColor(setColor(theme, R.attr.colorAccent)));
-        backgroundColor.setBackgroundColor(getResources().getColor(setColor(theme, android.R.attr.windowBackground)));
     }
 
     private int setColor(int theme, int attr) {

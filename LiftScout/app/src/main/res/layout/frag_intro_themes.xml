@@ -41,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+        app:ms_background_color="@color/dark_theme_fill"
         app:layout_parallaxFactor="0.6"
         android:layout_marginStart="@dimen/intro_margin_left"
         android:layout_marginEnd="@dimen/intro_margin_right"
@@ -76,14 +77,6 @@
         android:layout_marginEnd="@dimen/intro_margin_right"
         android:background="@color/theme_dark_accent"/>
 
-    <View
-        android:id="@+id/background_color"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/intro_color_palette_height"
-        app:layout_parallaxFactor="0.6"
-        android:layout_marginStart="@dimen/intro_margin_left"
-        android:layout_marginEnd="@dimen/intro_margin_right"
-        android:background="@color/theme_dark_accent"/>
 
 
 </agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

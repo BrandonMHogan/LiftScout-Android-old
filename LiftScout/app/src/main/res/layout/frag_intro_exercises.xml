@@ -40,9 +40,10 @@
         android:id="@+id/create_button"
         android:layout_width="@dimen/intro_button_width"
         android:layout_height="@dimen/intro_button_height"
-        android:textAlignment="center"
         android:layout_margin="@dimen/intro_margin"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/background_round_corner_ripple"
+        android:backgroundTint="?android:colorAccent"
         android:text="@string/intro_slide_three_button"
         android:contentDescription="@string/intro_slide_three_button"
         app:layout_parallaxFactor="0.6"/>
