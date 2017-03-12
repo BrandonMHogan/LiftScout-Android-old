@@ -168,8 +168,8 @@ public class CategoryListFragment extends BaseFragment implements
         CategoryListModel model = presenter.getCategory(position);
 
         dialog = new MaterialDialog.Builder(getActivity())
-                .title(String.format(getString(R.string.dialog_category_remove_title), model.getName()))
-                .content(String.format(getString(R.string.dialog_category_remove_message), model.getName()))
+                .title(getString(R.string.dialog_category_remove_title, model.getName()))
+                .content(getString(R.string.dialog_category_remove_message, model.getName()))
                 .positiveText(R.string.delete)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override

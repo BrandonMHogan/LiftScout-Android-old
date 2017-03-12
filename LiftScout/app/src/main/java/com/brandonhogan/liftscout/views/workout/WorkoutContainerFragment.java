@@ -138,7 +138,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
         setupSettings();
         notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
         notificationServiceManager = new NotificationServiceManager();
-        notificationServiceManager.RestTimerNotification(getActivity().getApplicationContext(), REST_TIMER_NOTIFICATION_ID, true, getString(R.string.rest_timer), presenter.getExerciseId(), presenter.getDateLong(), 0, notificationManager);
+        notificationServiceManager.RestTimerNotification(getActivity().getApplicationContext(), REST_TIMER_NOTIFICATION_ID, true, getString(R.string.rest_timer_with_name, presenter.getExerciseName()), presenter.getExerciseId(), presenter.getDateLong(), 0, notificationManager);
 
         presenter.restTimerNotification(getArguments().getInt(BUNDLE_REST_TIMER));
     }
@@ -318,9 +318,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     }
 
     private void showDeleteAlert() {
-        String message =
-                String.format(getString(R.string.dialog_tracker_delete_set_message)
-                        , presenter.getExerciseName());
+        String message = getString(R.string.dialog_tracker_delete_set_message, presenter.getExerciseName());
 
         deleteDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(getString(R.string.dialog_tracker_delete_set_title))

@@ -416,7 +416,7 @@ public class MyLineGraph extends FrameLayout {
     private void setGraph(List<GraphDataSet> data, int uniqueDateCount) {
 
         if (data.isEmpty()) {
-            lineChart.setNoDataText(String.format(getResources().getString(R.string.charts_empty_exercise_no_data), exerciseName));
+            lineChart.setNoDataText(getResources().getString(R.string.charts_empty_exercise_no_data, exerciseName));
             return;
         }
         else if (data.size() < 2) {

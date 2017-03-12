@@ -57,6 +57,7 @@
     <string name="increments_settings">Increments</string>
     <string name="rest_timer_settings">Rest Timer</string>
     <string name="rest_timer">Rest Timer</string>
+    <string name="rest_timer_with_name">%s - Rest Timer</string>
     <string name="rest_timer_vibrate">Vibrate</string>
     <string name="rest_timer_sound">Sound</string>
     <string name="rest_timer_auto_start">Auto Start</string>

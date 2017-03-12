@@ -182,8 +182,8 @@ public class ExerciseListFragment extends BaseFragment implements
         Exercise exercise = presenter.getExercise(position);
 
         dialog = new MaterialDialog.Builder(getActivity())
-                .title(String.format(getString(R.string.dialog_exercise_remove_title), exercise.getName()))
-                .content(String.format(getString(R.string.dialog_exercise_remove_message), exercise.getName()))
+                .title(getString(R.string.dialog_exercise_remove_title, exercise.getName()))
+                .content(getString(R.string.dialog_exercise_remove_message, exercise.getName()))
                 .positiveText(R.string.delete)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
