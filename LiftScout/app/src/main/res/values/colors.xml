@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Normal Theme -->
-    <color name="colorPrimary">#FF9800</color>
-    <color name="colorPrimaryDark">#F57C00</color>
-    <color name="colorPrimaryLight">#FFE0B2</color>
-    <color name="colorAccent">#FF5252</color>
-    <color name="textColorPrimary">#3f3f3f</color>
-    <color name="textColorSecondary">#9E9E9E</color>
-    <color name="activity_background_light">#e5e5e5</color>
-    <color name="fillColor">#9b9b9b</color>
+
+    <!-- Light Theme Colors -->
+    <color name="light_theme_text_primary">#DE000000</color>
+    <color name="light_theme_text_secondary">#8A000000</color>
+    <color name="light_theme_text_disabled">#61000000</color>
+    <color name="light_theme_fill">#61000000</color>
+
+    <!-- Dark Theme Colors -->
+    <color name="dark_theme_text_primary">#FFFFFF</color>
+    <color name="dark_theme_text_secondary">#B2FFFFFF</color>
+    <color name="dark_theme_text_disabled">#4CFFFFFF</color>
+    <color name="dark_theme_fill">#2f2a2f</color>
+
+    <!-- Original Theme -->
+    <color name="theme_original_primary">#FF9800</color>
+    <color name="theme_original_primary_dark">#F57C00</color>
+    <color name="theme_original_accent">#30659C</color>
 
     <!-- Dark Theme -->
-    <color name="colorPrimaryInverse">#FF9800</color>
-    <color name="colorPrimaryDarkInverse">#F57C00</color>
-    <color name="colorPrimaryLightInverse">#FFE0B2</color>
-    <color name="colorAccentInverse">#FF5252</color>
-    <color name="textColorPrimaryInverse">#9E9E9E</color>
-    <color name="textColorSecondaryInverse">#6b6b6b</color>
-    <color name="activity_background_dark">#ff433d43</color>
-    <color name="fillColorInverse">#2f2a2f</color>
+    <color name="theme_dark_primary">#FF9800</color>
+    <color name="theme_dark_primary_dark">#F57C00</color>
+    <color name="theme_dark_accent">#2C86E3</color>
 
-    <!-- Green Theme -->
-    <color name="colorPrimary_ThemeGreen">#277554</color>
-    <color name="colorPrimaryDark_ThemeGreen">#003A21</color>
-    <color name="colorPrimaryLight_ThemeGreen">#75AF96</color>
-    <color name="colorAccent_ThemeGreen">#294F6D</color>
-    <color name="textColorPrimary_ThemeGreen">#B1B1B1</color>
-    <color name="textColorSecondary_ThemeGreen">#6b6b6b</color>
-    <color name="backgroundColor_ThemeGreen">#ff433d43</color>
-    <color name="fillColor_ThemeGreen">#3c363c</color>
+    <!-- Dark Blue Gray Theme -->
+    <color name="theme_dark_blue_gray_primary">#607D8B</color>
+    <color name="theme_dark_blue_gray_primary_dark">#607D8B</color>
+    <color name="theme_dark_blue_gray_accent">#BAA388</color>
 
-    <!-- Purple Theme -->
-    <color name="colorPrimary_ThemePurple">#562A72</color>
-    <color name="colorPrimaryDark_ThemePurple">#240339</color>
-    <color name="colorPrimaryLight_ThemePurple">#9675AB</color>
-    <color name="colorAccent_ThemePurple">#862D63</color>
-    <color name="textColorPrimary_ThemePurple">#B1B1B1</color>
-    <color name="textColorSecondary_ThemePurple">#6b6b6b</color>
-    <color name="backgroundColor_ThemePurple">#ff433d43</color>
-    <color name="fillColor_ThemePurple">#3c363c</color>
+    <!-- Dark Green Theme -->
+    <color name="theme_dark_green_primary">#4CAF50</color>
+    <color name="theme_dark_green_primary_dark">#388E3C</color>
+    <color name="theme_dark_green_accent">#FF716D</color>
+
+    <!-- Dark Teal Theme -->
+    <color name="theme_dark_teal_primary">#009688</color>
+    <color name="theme_dark_teal_primary_dark">#00796B</color>
+    <color name="theme_dark_teal_accent">#F16600</color>
+
+    <!-- Dark Purple Theme -->
+    <color name="theme_dark_purple_primary">#673AB7</color>
+    <color name="theme_dark_purple_primary_dark">#512DA8</color>
+    <color name="theme_dark_purple_accent">#4DD0E1</color>
+
+
+
+
 
     <!-- Generic -->
     <color name="black">#000000</color>

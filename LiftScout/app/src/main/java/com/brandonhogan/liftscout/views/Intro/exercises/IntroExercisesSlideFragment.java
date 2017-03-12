@@ -73,7 +73,7 @@ public class IntroExercisesSlideFragment extends SlideFragment implements IntroE
 
     @Override
     public int buttonsColor() {
-        return R.color.colorAccent_ThemeGreen;
+        return R.color.green_transparent_05;
     }
 
     @Override

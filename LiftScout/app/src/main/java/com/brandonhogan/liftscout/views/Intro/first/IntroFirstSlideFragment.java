@@ -37,7 +37,7 @@ public class IntroFirstSlideFragment extends SlideFragment {
 
     @Override
     public int buttonsColor() {
-        return R.color.colorAccent_ThemeGreen;
+        return R.color.green_transparent_05;
     }
 
     @Override

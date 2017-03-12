@@ -48,8 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="?android:windowBackground"
-            app:itemIconTint="?android:textColor"
-            app:itemTextColor="?android:textColor"
+            app:itemIconTint="?android:textColorSecondary"
+            app:itemTextColor="?android:textColorSecondary"
             android:elevation="5dp"
             app:menu="@menu/bottom_nav" />
 

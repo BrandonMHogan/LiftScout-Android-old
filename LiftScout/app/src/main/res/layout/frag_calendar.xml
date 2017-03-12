@@ -35,11 +35,11 @@
                 app:compactCalendarTargetHeight="180dp"
                 app:compactCalendarBackgroundColor="?android:windowBackground"
                 app:compactCalendarTextSize="12sp"
-                app:compactCalendarTextColor="?android:textColor"
+                app:compactCalendarTextColor="?android:textColorPrimary"
                 app:compactCalendarCurrentSelectedDayBackgroundColor="?android:colorAccent"
                 app:compactCalendarCurrentDayBackgroundColor="?android:colorAccent"
                 app:compactCalendarCurrentDayIndicatorStyle="no_fill_large_indicator"
-                app:compactCalendarMultiEventIndicatorColor="?android:textColor"
+                app:compactCalendarMultiEventIndicatorColor="?android:textColorPrimary"
                 />
 
         </android.support.design.widget.CoordinatorLayout>

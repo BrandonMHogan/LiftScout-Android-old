@@ -6,17 +6,13 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.controls.MaterialProgressBar;
 import com.brandonhogan.liftscout.core.model.User;
 
 public class SplashActivity extends BaseActivity {
 
     private ImageView logo;
-    private TextView progressBarTitle;
-    private MaterialProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +20,6 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
 
         logo = (ImageView)findViewById(R.id.logo_icon);
-        progressBarTitle = (TextView) findViewById(R.id.progress_title);
-        progressBar = (MaterialProgressBar)findViewById(R.id.progress);
 
         startUpAnimation();
     }

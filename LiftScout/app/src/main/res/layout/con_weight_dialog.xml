@@ -25,7 +25,6 @@
             app:npDefaultValue="200"
             app:npWrapValue="true"
             app:npBackgroundColor="@color/float_transparent"
-            app:npTextColor="@color/colorPrimary"
             app:npTextSize="@dimen/material_text_size_medium"/>
 
         <TextView
@@ -49,7 +48,6 @@
             app:npDefaultValue="0"
             app:npWrapValue="true"
             app:npBackgroundColor="@color/float_transparent"
-            app:npTextColor="@color/colorPrimary"
             app:npTextSize="@dimen/material_text_size_medium"/>
 
         <TextView

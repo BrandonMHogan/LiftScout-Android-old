@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.core.utils.AttrUtil;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class IntroThemeSlideFragment  extends SlideFragment implements IntroThem
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        themeSpinner.setBackgroundColor(getResources().getColor(R.color.fillColor_ThemeGreen));
+        themeSpinner.setBackgroundResource(AttrUtil.getAttributeRes(getActivity().getTheme(), android.R.attr.fillColor));
 
         presenter = new IntroThemeSlidePresenter(this);
         presenter.viewCreated();
@@ -73,7 +74,7 @@ public class IntroThemeSlideFragment  extends SlideFragment implements IntroThem
 
     @Override
     public int buttonsColor() {
-        return R.color.colorAccent_ThemeGreen;
+        return R.color.green_transparent_70;
     }
 
     @Override

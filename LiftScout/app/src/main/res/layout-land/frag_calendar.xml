@@ -90,10 +90,10 @@
                     app:compactCalendarTargetHeight="180dp"
                     app:compactCalendarBackgroundColor="?android:windowBackground"
                     app:compactCalendarTextSize="12sp"
-                    app:compactCalendarTextColor="?android:textColor"
+                    app:compactCalendarTextColor="?android:textColorPrimary"
                     app:compactCalendarCurrentSelectedDayBackgroundColor="?android:colorAccent"
                     app:compactCalendarCurrentDayBackgroundColor="?android:windowBackground"
-                    app:compactCalendarMultiEventIndicatorColor="?android:textColor"
+                    app:compactCalendarMultiEventIndicatorColor="?android:textColorPrimary"
                     />
 
             </LinearLayout>

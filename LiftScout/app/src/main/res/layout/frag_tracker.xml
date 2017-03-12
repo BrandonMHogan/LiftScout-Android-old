@@ -96,7 +96,7 @@
                 android:layout_height="@dimen/tracker_button_height"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/background_round_corner_ripple"
-                android:backgroundTint="@color/blue"
+                android:backgroundTint="?android:colorAccent"
                 android:textColor="@color/white"
                 android:layout_marginEnd="@dimen/tracker_inner_margin" />
 

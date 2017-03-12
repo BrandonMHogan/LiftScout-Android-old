@@ -28,8 +28,8 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
     @Inject
     GraphManager graphManager;
 
-    @Bind(R.id.my_button)
-    Button myButton;
+    @Bind(R.id.exercise_selector)
+    Button exerciseSelectorButton;
 
     @Bind(R.id.my_line_graph)
     MyLineGraph lineGraph;
@@ -77,11 +77,11 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
 
     @Override
     public void setSelectedExercise(int id, String name) {
-        myButton.setText(name);
+        exerciseSelectorButton.setText(name);
         lineGraph.setExercise(id, name);
     }
 
-    @OnClick(R.id.my_button)
+    @OnClick(R.id.exercise_selector)
     void onClick() {
         graphManager.setInSearch(true);
         graphManager.setGraphName(getNavigationManager().getCurrentFragmentName());

@@ -1,17 +1,15 @@
 <resources>
 
-    <!-- Light Theme Base-->
+    <!-- Original Light Theme Base-->
     <style name="AppTheme.Light.Base" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColor">@color/textColorPrimary</item>
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>
-        <item name="android:textColorSecondary">@color/textColorSecondary</item>
-        <item name="android:textColorPrimaryInverse">@color/textColorPrimaryInverse</item>
-        <item name="android:textColorSecondaryInverse">@color/textColorSecondaryInverse</item>
-        <item name="android:windowBackground">@color/activity_background_light</item>
-        <item name="android:fillColor">@color/fillColor</item>
+        <item name="colorPrimary">@color/theme_original_primary</item>
+        <item name="colorPrimaryDark">@color/theme_original_primary_dark</item>
+        <item name="colorAccent">@color/theme_original_accent</item>
+        <item name="android:fillColor">@color/light_theme_fill</item>
+
+        <item name="android:textColor">@color/light_theme_text_primary</item>
+        <item name="android:textColorSecondary">@color/light_theme_text_secondary</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/light_theme_text_disabled</item>
 
         <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
         <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
@@ -27,19 +25,18 @@
 
     <!-- Light Theme -->
     <style name="AppTheme.Light" parent="AppTheme.Light.Base">
+
     </style>
 
     <style name="AppTheme.Dark.Base" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/colorPrimaryInverse</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkInverse</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColor">@color/textColorPrimaryInverse</item>
-        <item name="android:textColorPrimary">@color/textColorPrimaryInverse</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryInverse</item>
-        <item name="android:textColorPrimaryInverse">@color/textColorPrimary</item>
-        <item name="android:textColorSecondaryInverse">@color/textColorSecondary</item>
-        <item name="android:windowBackground">@color/activity_background_dark</item>
-        <item name="android:fillColor">@color/fillColorInverse</item>
+        <item name="colorPrimary">@color/theme_dark_primary</item>
+        <item name="colorPrimaryDark">@color/theme_dark_primary_dark</item>
+        <item name="colorAccent">@color/theme_dark_accent</item>
+        <item name="android:fillColor">@color/dark_theme_fill</item>
+
+        <item name="android:textColor">@color/dark_theme_text_primary</item>
+        <item name="android:textColorSecondary">@color/dark_theme_text_secondary</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/dark_theme_text_disabled</item>
 
         <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
         <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
@@ -59,16 +56,13 @@
 
     <!-- Green Theme -->
     <style name="AppTheme.Green.Dark.Base" parent="Theme.AppCompat" >
-        <item name="colorPrimary">@color/colorPrimary_ThemeGreen</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark_ThemeGreen</item>
-        <item name="colorAccent">@color/colorAccent_ThemeGreen</item>
-        <item name="android:textColor">@color/textColorPrimary_ThemeGreen</item>
-        <item name="android:textColorPrimary">@color/textColorPrimary_ThemeGreen</item>
-        <item name="android:textColorSecondary">@color/textColorSecondary_ThemeGreen</item>
-        <item name="android:textColorPrimaryInverse">@color/textColorPrimary_ThemeGreen</item>
-        <item name="android:textColorSecondaryInverse">@color/textColorSecondary</item>
-        <item name="android:windowBackground">@color/backgroundColor_ThemeGreen</item>
-        <item name="android:fillColor">@color/fillColor_ThemeGreen</item>
+        <item name="colorPrimary">@color/theme_dark_green_primary</item>
+        <item name="colorPrimaryDark">@color/theme_dark_green_primary_dark</item>
+        <item name="colorAccent">@color/theme_dark_green_accent</item>
+        <item name="android:fillColor">@color/dark_theme_fill</item>
+
+        <item name="android:textColorPrimary">@color/dark_theme_text_primary</item>
+        <item name="android:textColorSecondary">@color/dark_theme_text_secondary</item>
 
         <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
         <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
@@ -88,16 +82,13 @@
 
     <!-- Purple Theme -->
     <style name="AppTheme.Purple.Dark.Base" parent="Theme.AppCompat" >
-        <item name="colorPrimary">@color/colorPrimary_ThemePurple</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark_ThemePurple</item>
-        <item name="colorAccent">@color/colorAccent_ThemePurple</item>
-        <item name="android:textColor">@color/textColorPrimary_ThemePurple</item>
-        <item name="android:textColorPrimary">@color/textColorPrimary_ThemePurple</item>
-        <item name="android:textColorSecondary">@color/textColorSecondary_ThemePurple</item>
-        <item name="android:textColorPrimaryInverse">@color/textColorPrimary_ThemePurple</item>
-        <item name="android:textColorSecondaryInverse">@color/textColorSecondary</item>
-        <item name="android:windowBackground">@color/backgroundColor_ThemePurple</item>
-        <item name="android:fillColor">@color/fillColor_ThemePurple</item>
+        <item name="colorPrimary">@color/theme_dark_purple_primary</item>
+        <item name="colorPrimaryDark">@color/theme_dark_purple_primary_dark</item>
+        <item name="colorAccent">@color/theme_dark_purple_accent</item>
+        <item name="android:fillColor">@color/dark_theme_fill</item>
+
+        <item name="android:textColorPrimary">@color/dark_theme_text_primary</item>
+        <item name="android:textColorSecondary">@color/dark_theme_text_secondary</item>
 
         <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
         <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
@@ -115,36 +106,13 @@
     </style>
 
     <style name="Theme.Intro.Mine" parent="Theme.Intro">
-        <item name="ms_background_color">@color/fillColor</item>
+        <item name="ms_background_color">@color/dark_theme_fill</item>
     </style>
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-
-    <style name="SupportButton" parent="Base.TextAppearance.AppCompat.Button">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:background">?attr/colorAccent</item>
-    </style>
-
-    <style name="RobotoButton" parent="SupportButton">
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textSize">@dimen/material_text_size_button</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:background">?attr/colorAccent</item>
-        <item name="android:height">@dimen/btn_height</item>
-        <item name="android:paddingLeft">@dimen/btn_padding_left</item>
-        <item name="android:paddingRight">@dimen/btn_padding_right</item>
-        <item name="android:gravity">center</item>
-        <item name="android:minWidth">64dp</item>
-        <item name="android:minHeight">36dp</item>
-        <item name="android:includeFontPadding">false</item>
-        <item name="android:layout_margin">3dp</item>
-    </style>
 
     <!-- Logos -->
     <style name="Logo_Scout">

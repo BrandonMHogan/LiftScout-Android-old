@@ -49,7 +49,7 @@
 
                         <TextView
                             style="@style/RobotoBody01"
-                            android:textColor="@color/textColorSecondaryInverse"
+                            android:textColor="?android:textColorSecondary"
                             android:text="@string/setting_profile_description"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
@@ -91,7 +91,7 @@
 
                         <TextView
                             style="@style/RobotoBody01"
-                            android:textColor="@color/textColorSecondaryInverse"
+                            android:textColor="?android:textColorSecondary"
                             android:text="@string/setting_display_description"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
@@ -133,7 +133,7 @@
 
                         <TextView
                             style="@style/RobotoBody01"
-                            android:textColor="@color/textColorSecondaryInverse"
+                            android:textColor="?android:textColorSecondary"
                             android:text="@string/setting_home_description"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
@@ -175,7 +175,7 @@
 
                         <TextView
                             style="@style/RobotoBody01"
-                            android:textColor="@color/textColorSecondaryInverse"
+                            android:textColor="?android:textColorSecondary"
                             android:text="@string/setting_about_description"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"

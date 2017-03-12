@@ -55,7 +55,7 @@
         android:layout_marginTop="@dimen/intro_margin_top"
         android:layout_marginStart="@dimen/intro_margin_left"
         android:layout_marginEnd="@dimen/intro_margin_right"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/theme_dark_primary"/>
 
     <View
         android:id="@+id/primary_dark_color"
@@ -64,7 +64,7 @@
         app:layout_parallaxFactor="0.6"
         android:layout_marginStart="@dimen/intro_margin_left"
         android:layout_marginEnd="@dimen/intro_margin_right"
-        android:background="@color/colorPrimaryDark"/>
+        android:background="@color/theme_dark_primary_dark"/>
 
 
     <View
@@ -74,7 +74,7 @@
         app:layout_parallaxFactor="0.6"
         android:layout_marginStart="@dimen/intro_margin_left"
         android:layout_marginEnd="@dimen/intro_margin_right"
-        android:background="@color/colorAccent"/>
+        android:background="@color/theme_dark_accent"/>
 
     <View
         android:id="@+id/background_color"
@@ -83,7 +83,7 @@
         app:layout_parallaxFactor="0.6"
         android:layout_marginStart="@dimen/intro_margin_left"
         android:layout_marginEnd="@dimen/intro_margin_right"
-        android:background="@color/activity_background_dark"/>
+        android:background="@color/theme_dark_accent"/>
 
 
 </agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

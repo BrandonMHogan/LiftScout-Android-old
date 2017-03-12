@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.controls.filters.DecimalDigitsInputFilter;
+import com.brandonhogan.liftscout.core.utils.AttrUtil;
 
 public class NumberPicker extends RelativeLayout {
 
@@ -76,7 +77,8 @@ public class NumberPicker extends RelativeLayout {
             allowDecimal = typedArray.getBoolean(R.styleable.NumberPicker_allowDecimal, false);
 
             backgroundColor = typedArray.getColor(
-                    R.styleable.NumberPicker_backGroundColor, getResources().getColor(R.color.colorPrimary));
+                    R.styleable.NumberPicker_backGroundColor, getResources().getColor(R.color.black_transparent_05));
+
             textColor = typedArray.getColor(
                     R.styleable.NumberPicker_textColor, getResources().getColor(R.color.text_color));
         }
