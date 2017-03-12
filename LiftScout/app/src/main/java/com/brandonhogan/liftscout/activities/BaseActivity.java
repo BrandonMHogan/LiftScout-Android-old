@@ -40,14 +40,28 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Injector.getAppComponent().inject(this);
 
-        if (userManager.getThemeValue().equals(Themes.LIGHT))
-            setTheme(R.style.AppTheme_Light);
+        if (userManager.getThemeValue().equals(Themes.ORIGINAL_LIGHT))
+            setTheme(R.style.AppTheme_Original_Light);
+        else if(userManager.getThemeValue().equals(Themes.GREEN_LIGHT))
+            setTheme(R.style.AppTheme_Green_Light);
+        else if(userManager.getThemeValue().equals(Themes.PURPLE_LIGHT))
+            setTheme(R.style.AppTheme_Purple_Light);
+
+
         else if(userManager.getThemeValue().equals(Themes.GREEN_DARK))
             setTheme(R.style.AppTheme_Green_Dark);
         else if(userManager.getThemeValue().equals(Themes.PURPLE_DARK))
             setTheme(R.style.AppTheme_Purple_Dark);
+        else if(userManager.getThemeValue().equals(Themes.TEAL_DARK))
+            setTheme(R.style.AppTheme_Teal_Dark);
+        else if(userManager.getThemeValue().equals(Themes.BLUE_GRAY_DARK))
+            setTheme(R.style.AppTheme_Blue_Gray_Dark);
+        else if(userManager.getThemeValue().equals(Themes.BLUE_GRAY_DARK))
+            setTheme(R.style.AppTheme_Blue_Gray_Dark);
+        else if(userManager.getThemeValue().equals(Themes.BLACK_DARK))
+            setTheme(R.style.AppTheme_Black_Dark);
         else
-            setTheme(R.style.AppTheme_Dark);
+            setTheme(R.style.AppTheme_Original_Dark);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);

@@ -48,8 +48,8 @@ public class IntroThemeSlidePresenter implements IntroThemesSlideContract.Presen
         userManager.setTheme(currentTheme);
 
         switch (currentTheme) {
-            case Themes.DARK:
-                view.themeSelected(R.style.AppTheme_Dark);
+            case Themes.ORIGINAL_DARK:
+                view.themeSelected(R.style.AppTheme_Original_Dark);
                 return;
             case Themes.GREEN_DARK:
                 view.themeSelected(R.style.AppTheme_Green_Dark);
@@ -57,8 +57,24 @@ public class IntroThemeSlidePresenter implements IntroThemesSlideContract.Presen
             case Themes.PURPLE_DARK:
                 view.themeSelected(R.style.AppTheme_Purple_Dark);
                 return;
-            case Themes.LIGHT:
-                view.themeSelected(R.style.AppTheme_Light);
+            case Themes.TEAL_DARK:
+                view.themeSelected(R.style.AppTheme_Teal_Dark);
+                return;
+            case Themes.BLUE_GRAY_DARK:
+                view.themeSelected(R.style.AppTheme_Blue_Gray_Dark);
+                return;
+            case Themes.BLACK_DARK:
+                view.themeSelected(R.style.AppTheme_Black_Dark);
+                return;
+
+            case Themes.ORIGINAL_LIGHT:
+                view.themeSelected(R.style.AppTheme_Original_Light);
+                return;
+            case Themes.GREEN_LIGHT:
+                view.themeSelected(R.style.AppTheme_Green_Light);
+                return;
+            case Themes.PURPLE_LIGHT:
+                view.themeSelected(R.style.AppTheme_Purple_Light);
         }
     }
 
@@ -67,13 +83,7 @@ public class IntroThemeSlidePresenter implements IntroThemesSlideContract.Presen
     //
 
     private void setupThemes() {
-        themes = new ArrayList<>();
-
-        themes.add(Themes.DARK);
-        themes.add(Themes.LIGHT);
-        themes.add(Themes.GREEN_DARK);
-        themes.add(Themes.PURPLE_DARK);
-
+        themes = Themes.THEMES;
         view.populateThemes(themes, themes.indexOf(userManager.getThemeValue()));
     }
 }

@@ -43,13 +43,7 @@ public class SettingsDisplayPresenter implements SettingsDisplayContract.Present
     //
     @Override
     public void viewCreated() {
-
-        themes = new ArrayList<>();
-        themes.add(Themes.DARK);
-        themes.add(Themes.LIGHT);
-        themes.add(Themes.GREEN_DARK);
-        themes.add(Themes.PURPLE_DARK);
-
+        themes = Themes.THEMES;
         currentSelectedTheme = originalThemeValue;
         view.populateThemes(themes, themes.indexOf(originalThemeValue));
     }

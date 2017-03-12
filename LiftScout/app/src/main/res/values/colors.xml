@@ -25,8 +25,8 @@
 
     <!-- Dark Blue Gray Theme -->
     <color name="theme_dark_blue_gray_primary">#607D8B</color>
-    <color name="theme_dark_blue_gray_primary_dark">#607D8B</color>
-    <color name="theme_dark_blue_gray_accent">#BAA388</color>
+    <color name="theme_dark_blue_gray_primary_dark">#455A64</color>
+    <color name="theme_dark_blue_gray_accent">#A1887F</color>
 
     <!-- Dark Green Theme -->
     <color name="theme_dark_green_primary">#4CAF50</color>
@@ -36,12 +36,15 @@
     <!-- Dark Teal Theme -->
     <color name="theme_dark_teal_primary">#009688</color>
     <color name="theme_dark_teal_primary_dark">#00796B</color>
-    <color name="theme_dark_teal_accent">#F16600</color>
+    <color name="theme_dark_teal_accent">#FFA726</color>
 
     <!-- Dark Purple Theme -->
     <color name="theme_dark_purple_primary">#673AB7</color>
     <color name="theme_dark_purple_primary_dark">#512DA8</color>
     <color name="theme_dark_purple_accent">#4DD0E1</color>
+
+    <!-- Dark Black Theme -->
+    <color name="theme_dark_black_accent">#BDBDBD</color>
 
 
 

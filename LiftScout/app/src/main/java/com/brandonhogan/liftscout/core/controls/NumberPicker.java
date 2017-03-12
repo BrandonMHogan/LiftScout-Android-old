@@ -21,7 +21,6 @@ import android.widget.RelativeLayout;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.controls.filters.DecimalDigitsInputFilter;
-import com.brandonhogan.liftscout.core.utils.AttrUtil;
 
 public class NumberPicker extends RelativeLayout {
 

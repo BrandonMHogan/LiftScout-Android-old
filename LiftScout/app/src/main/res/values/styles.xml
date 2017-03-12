@@ -1,12 +1,26 @@
 <resources>
 
-    <!-- Original Light Theme Base-->
-    <style name="AppTheme.Light.Base" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/theme_original_primary</item>
-        <item name="colorPrimaryDark">@color/theme_original_primary_dark</item>
-        <item name="colorAccent">@color/theme_original_accent</item>
-        <item name="android:fillColor">@color/light_theme_fill</item>
+    <!-- This is the base of all dark themes. All dark base themes need to be a child of this -->
+    <style name="AppTheme.Dark.Base" parent="Theme.AppCompat">
+        <item name="android:fillColor">@color/dark_theme_fill</item>
+        <item name="android:textColorPrimary">@color/dark_theme_text_primary</item>
+        <item name="android:textColorSecondary">@color/dark_theme_text_secondary</item>
 
+        <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
+        <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
+        <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
+        <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_white</item>
+        <item name="themedMenuGraphsDrawable">@drawable/ic_menu_bar_chart_white</item>
+        <item name="themedMenuSettingsDrawable">@drawable/ic_menu_settings_white</item>
+        <item name="themedMenuAboutDrawable">@drawable/ic_menu_info_white</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- This is the base of all light themes. All light base themes need to be a child of this -->
+    <style name="AppTheme.Light.Base" parent="Theme.AppCompat.Light">
+        <item name="android:fillColor">@color/light_theme_fill</item>
         <item name="android:textColor">@color/light_theme_text_primary</item>
         <item name="android:textColorSecondary">@color/light_theme_text_secondary</item>
         <item name="android:textColorPrimaryDisableOnly">@color/light_theme_text_disabled</item>
@@ -23,92 +37,102 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!-- Light Theme -->
-    <style name="AppTheme.Light" parent="AppTheme.Light.Base">
 
+
+
+    <!-- Theme Bases -->
+
+
+    <!-- Light Themes -->
+
+    <!-- Original Light Theme Base-->
+    <style name="AppTheme.Original.Light.Base" parent="AppTheme.Light.Base">
+        <item name="colorPrimary">@color/theme_original_primary</item>
+        <item name="colorPrimaryDark">@color/theme_original_primary_dark</item>
+        <item name="colorAccent">@color/theme_original_accent</item>
     </style>
 
-    <style name="AppTheme.Dark.Base" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/theme_dark_primary</item>
-        <item name="colorPrimaryDark">@color/theme_dark_primary_dark</item>
-        <item name="colorAccent">@color/theme_dark_accent</item>
-        <item name="android:fillColor">@color/dark_theme_fill</item>
-
-        <item name="android:textColor">@color/dark_theme_text_primary</item>
-        <item name="android:textColorSecondary">@color/dark_theme_text_secondary</item>
-        <item name="android:textColorPrimaryDisableOnly">@color/dark_theme_text_disabled</item>
-
-        <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
-        <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
-        <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
-        <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_white</item>
-        <item name="themedMenuGraphsDrawable">@drawable/ic_menu_bar_chart_white</item>
-        <item name="themedMenuSettingsDrawable">@drawable/ic_menu_settings_white</item>
-        <item name="themedMenuAboutDrawable">@drawable/ic_menu_info_white</item>
-
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <!-- Dark Theme -->
-    <style name="AppTheme.Dark" parent="AppTheme.Dark.Base">
-    </style>
-
-    <!-- Green Theme -->
-    <style name="AppTheme.Green.Dark.Base" parent="Theme.AppCompat" >
+    <!-- Light Green Theme -->
+    <style name="AppTheme.Green.Light.Base" parent="AppTheme.Light.Base" >
         <item name="colorPrimary">@color/theme_dark_green_primary</item>
         <item name="colorPrimaryDark">@color/theme_dark_green_primary_dark</item>
         <item name="colorAccent">@color/theme_dark_green_accent</item>
-        <item name="android:fillColor">@color/dark_theme_fill</item>
-
-        <item name="android:textColorPrimary">@color/dark_theme_text_primary</item>
-        <item name="android:textColorSecondary">@color/dark_theme_text_secondary</item>
-
-        <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
-        <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
-        <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
-        <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_white</item>
-        <item name="themedMenuGraphsDrawable">@drawable/ic_menu_bar_chart_white</item>
-        <item name="themedMenuSettingsDrawable">@drawable/ic_menu_settings_white</item>
-        <item name="themedMenuAboutDrawable">@drawable/ic_menu_info_white</item>
-
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.Green.Dark" parent="AppTheme.Green.Dark.Base" >
-    </style>
-
-
-    <!-- Purple Theme -->
-    <style name="AppTheme.Purple.Dark.Base" parent="Theme.AppCompat" >
+    <!-- Dark Purple Theme -->
+    <style name="AppTheme.Purple.Light.Base" parent="AppTheme.Light.Base" >
         <item name="colorPrimary">@color/theme_dark_purple_primary</item>
         <item name="colorPrimaryDark">@color/theme_dark_purple_primary_dark</item>
         <item name="colorAccent">@color/theme_dark_purple_accent</item>
-        <item name="android:fillColor">@color/dark_theme_fill</item>
-
-        <item name="android:textColorPrimary">@color/dark_theme_text_primary</item>
-        <item name="android:textColorSecondary">@color/dark_theme_text_secondary</item>
-
-        <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
-        <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
-        <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
-        <item name="themedMenuRoutineDrawable">@drawable/ic_menu_routine_white</item>
-        <item name="themedMenuGraphsDrawable">@drawable/ic_menu_bar_chart_white</item>
-        <item name="themedMenuSettingsDrawable">@drawable/ic_menu_settings_white</item>
-        <item name="themedMenuAboutDrawable">@drawable/ic_menu_info_white</item>
-
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.Purple.Dark" parent="AppTheme.Purple.Dark.Base" >
+
+    <!-- Dark Themes -->
+
+    <!-- Original Dark Theme Base-->
+    <style name="AppTheme.Original.Dark.Base" parent="AppTheme.Dark.Base">
+        <item name="colorPrimary">@color/theme_dark_primary</item>
+        <item name="colorPrimaryDark">@color/theme_dark_primary_dark</item>
+        <item name="colorAccent">@color/theme_dark_accent</item>
     </style>
+
+    <!-- Dark Black Theme -->
+    <style name="AppTheme.Black.Dark.Base" parent="AppTheme.Dark.Base" >
+        <!--<item name="colorPrimary">@color/theme_dark_blue_gray_primary</item>-->
+        <!--<item name="colorPrimaryDark">@color/theme_dark_blue_gray_primary_dark</item>-->
+        <item name="colorAccent">@color/theme_dark_black_accent</item>
+    </style>
+
+    <!-- Dark Green Theme -->
+    <style name="AppTheme.Green.Dark.Base" parent="AppTheme.Dark.Base" >
+        <item name="colorPrimary">@color/theme_dark_green_primary</item>
+        <item name="colorPrimaryDark">@color/theme_dark_green_primary_dark</item>
+        <item name="colorAccent">@color/theme_dark_green_accent</item>
+    </style>
+
+    <!-- Dark Purple Theme -->
+    <style name="AppTheme.Purple.Dark.Base" parent="AppTheme.Dark.Base" >
+        <item name="colorPrimary">@color/theme_dark_purple_primary</item>
+        <item name="colorPrimaryDark">@color/theme_dark_purple_primary_dark</item>
+        <item name="colorAccent">@color/theme_dark_purple_accent</item>
+    </style>
+
+    <!-- Dark Teal Theme -->
+    <style name="AppTheme.Teal.Dark.Base" parent="AppTheme.Dark.Base" >
+        <item name="colorPrimary">@color/theme_dark_teal_primary</item>
+        <item name="colorPrimaryDark">@color/theme_dark_teal_primary_dark</item>
+        <item name="colorAccent">@color/theme_dark_teal_accent</item>
+    </style>
+
+    <!-- Dark Blue Gray Theme -->
+    <style name="AppTheme.Blue.Gray.Dark.Base" parent="AppTheme.Dark.Base" >
+        <item name="colorPrimary">@color/theme_dark_blue_gray_primary</item>
+        <item name="colorPrimaryDark">@color/theme_dark_blue_gray_primary_dark</item>
+        <item name="colorAccent">@color/theme_dark_blue_gray_accent</item>
+    </style>
+
+
+
+
+
+    <!-- Theme Stubs. (What is referenced in the Base Activity) -->
+    <style name="AppTheme.Original.Light" parent="AppTheme.Light.Base"/>
+    <style name="AppTheme.Green.Light" parent="AppTheme.Green.Light.Base" />
+    <style name="AppTheme.Purple.Light" parent="AppTheme.Purple.Light.Base" />
+
+    <style name="AppTheme.Original.Dark" parent="AppTheme.Dark.Base"/>
+    <style name="AppTheme.Green.Dark" parent="AppTheme.Green.Dark.Base" />
+    <style name="AppTheme.Purple.Dark" parent="AppTheme.Purple.Dark.Base" />
+    <style name="AppTheme.Teal.Dark" parent="AppTheme.Teal.Dark.Base" />
+    <style name="AppTheme.Blue.Gray.Dark" parent="AppTheme.Blue.Gray.Dark.Base" />
+    <style name="AppTheme.Black.Dark" parent="AppTheme.Black.Dark.Base" />
+
+
+
 
     <style name="Theme.Intro.Mine" parent="Theme.Intro">
         <item name="ms_background_color">@color/dark_theme_fill</item>
     </style>
-
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
