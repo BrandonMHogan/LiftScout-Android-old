@@ -228,6 +228,12 @@ public class ExerciseListFragment extends BaseFragment implements
                     public void onIndependentViewClicked(int independentViewID, int position) {
                     }
                 })
+                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
+                    @Override
+                    public void onRowLongClicked(int position) {
+                        removeExerciseAlert(position);
+                    }
+                })
                 .setSwipeOptionViews(R.id.delete, R.id.edit)
                 .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
                     @Override
@@ -258,6 +264,7 @@ public class ExerciseListFragment extends BaseFragment implements
 
     @Override
     public void swipeItem(int position) {
+        editExercise(position);
         //onTouchListener.openSwipeOptions(position);
     }
 }

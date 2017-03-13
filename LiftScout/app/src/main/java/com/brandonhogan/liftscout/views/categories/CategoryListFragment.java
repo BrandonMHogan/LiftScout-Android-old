@@ -208,11 +208,12 @@ public class CategoryListFragment extends BaseFragment implements
                     public void onIndependentViewClicked(int independentViewID, int position) {
                     }
                 })
-//                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
-//                    @Override
-//                    public void onRowLongClicked(int position) {
-//                    }
-//                })
+                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
+                    @Override
+                    public void onRowLongClicked(int position) {
+                        removeCategoryAlert(position);
+                    }
+                })
                 .setSwipeOptionViews(R.id.delete, R.id.edit)
                 .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
                     @Override
