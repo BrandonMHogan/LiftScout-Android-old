@@ -74,6 +74,9 @@
     <string name="charts_empty_exercise_no_data">No data for %s.</string>
     <string name="charts_empty_exercise_not_enough_data">Not enough data for given date range</string>
     <string name="charts_select_exercise">Choose Exercise</string>
+    <string name="charts_total">Collective Total</string>
+    <string name="charts_total_date_range">Date Range</string>
+    <string name="charts_category_no_data">No data available. You need to enter in at least one workout.</string>
 
 
 

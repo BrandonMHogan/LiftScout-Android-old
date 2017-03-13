@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public interface GraphsCategoriesContract {
 
     interface View {
-        void setPieChart(ArrayList<CategoryGraph> categories, int title);
+        void setPieChart(ArrayList<CategoryGraph> categories, int total, long startDate, long endDate);
         void populateGraphType(ArrayList<Integer> types, int position);
     }
 

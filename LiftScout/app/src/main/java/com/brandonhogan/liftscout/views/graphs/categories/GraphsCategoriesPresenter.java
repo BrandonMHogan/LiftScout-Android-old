@@ -12,6 +12,7 @@ import com.brandonhogan.liftscout.repository.CategoryRepo;
 import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -73,6 +74,8 @@ public class GraphsCategoriesPresenter implements GraphsCategoriesContract.Prese
     private void setupPieChart() {
         RealmResults<Set> sets = progressManager.getAllSets();
         ArrayList<CategoryGraph> categoryGraphs = new ArrayList<>();
+        int total = 0;
+        long start = 0, end = 0;
 
         for (Category category : categories) {
             int count = 0;
@@ -96,11 +99,18 @@ public class GraphsCategoriesPresenter implements GraphsCategoriesContract.Prese
             }
 
             // Only add categories that have at least one entry
-            if (count > 0)
+            if (count > 0) {
                 categoryGraphs.add(new CategoryGraph(category.getName(), count, category.getColor()));
+                total += count;
+            }
         }
 
-        view.setPieChart(categoryGraphs, graphTypes.get(currentGraphTypePosition));
+        if (sets != null && sets.size() > 0) {
+            start = sets.where().minimumDate(Set.DATE).getTime();
+            end = sets.where().maximumDate(Set.DATE).getTime();
+        }
+
+        view.setPieChart(categoryGraphs, total, start, end);
     }
 
     @Override

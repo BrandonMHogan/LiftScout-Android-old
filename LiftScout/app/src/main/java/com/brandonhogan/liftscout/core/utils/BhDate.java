@@ -39,6 +39,18 @@ public class BhDate {
         return new SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(date);
     }
 
+
+    public static String toSimpleDateRange(long start, long end) {
+        return toSimpleDateRange(new Date(start), new Date(end));
+    }
+
+    public static String toSimpleDateRange(Date start, Date end) {
+        String startDate = new SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(start);
+        String endDate = new SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(end);
+
+        return startDate + " - " + endDate;
+    }
+
     public static String toMonthYearStringDate(Date date) {
         return new SimpleDateFormat(MONTH_YEAR_DATE_FORMAT, Locale.getDefault()).format(date);
     }
