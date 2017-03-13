@@ -2,23 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/exercises_list_item_height"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:layout_marginStart="@dimen/fragment_default_margin"
+    android:layout_marginEnd="@dimen/fragment_default_margin">
 
     <LinearLayout
         android:id="@+id/display_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/selectableItemBackground"
-        android:orientation="horizontal"
-        android:paddingBottom="16dp"
-        android:paddingLeft="16dp"
-        android:paddingTop="16dp">
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <ImageView
@@ -26,29 +23,25 @@
                 android:layout_width="27dp"
                 android:layout_height="27dp"
                 android:layout_marginEnd="10dp"
-                android:gravity="center_vertical"
                 android:background="@drawable/ic_category_list_circle"/>
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:maxLines="1"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-
                 android:maxLines="1"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="5dp"
+            android:textSize="@dimen/material_text_size_body_1" />
 
     </LinearLayout>
 

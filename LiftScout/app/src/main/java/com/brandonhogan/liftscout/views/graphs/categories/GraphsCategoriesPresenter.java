@@ -12,7 +12,8 @@ import com.brandonhogan.liftscout.repository.CategoryRepo;
 import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.inject.Inject;
 
@@ -77,7 +78,7 @@ public class GraphsCategoriesPresenter implements GraphsCategoriesContract.Prese
         int total = 0;
         long start = 0, end = 0;
 
-        for (Category category : categories) {
+        for (final Category category : categories) {
             int count = 0;
 
             switch (graphTypes.get(currentGraphTypePosition)) {
@@ -103,6 +104,13 @@ public class GraphsCategoriesPresenter implements GraphsCategoriesContract.Prese
                 categoryGraphs.add(new CategoryGraph(category.getName(), count, category.getColor()));
                 total += count;
             }
+
+            Collections.sort(categoryGraphs, new Comparator<CategoryGraph>() {
+                @Override
+                public int compare(CategoryGraph categoryGraph, CategoryGraph t1) {
+                    return categoryGraph.getValue() > t1.getValue() ? -1 : (categoryGraph.getValue() < t1.getValue()) ? 1 : 0;
+                }
+            });
         }
 
         if (sets != null && sets.size() > 0) {
