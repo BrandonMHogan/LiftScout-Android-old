@@ -86,6 +86,13 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
                 return;
             }
 
+            // If no notifications or any other kind of bundle was set, we will default to calendar or today
+            if (userManager.getHomeDefaultValue().equals(DefaultScreens.CALENDAR))
+                navigationManager.startCalendar();
+            else
+                navigationManager.startToday(false);
+
+
             Bundle bundle = getIntent().getExtras();
 
             if (bundle != null) {
@@ -103,13 +110,6 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
                     return;
                 }
             }
-
-            // If no notifications or any other kind of bundle was set, we will default to calendar or today
-            if (userManager.getHomeDefaultValue().equals(DefaultScreens.CALENDAR)) {
-                navigationManager.startCalendar();
-                return;
-            }
-            navigationManager.startToday(false);
         }
     }
 
@@ -148,7 +148,8 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
     public void onBackPressed() {
         if (getFragmentManager().getBackStackEntryCount() == 1) {
             // we have only one fragment left so we would close the application with this back
-            showExitDialog();
+            endActivity();
+
         } else {
             navigationManager.navigateBack(this);
         }
