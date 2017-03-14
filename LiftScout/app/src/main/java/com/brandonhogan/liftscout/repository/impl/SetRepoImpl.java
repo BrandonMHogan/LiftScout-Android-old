@@ -14,6 +14,9 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -200,5 +203,28 @@ public class SetRepoImpl implements SetRepo {
             Log.e(TAG, ex.getMessage());
             databaseRealm.getRealmInstance().cancelTransaction();
         }
+    }
+
+    @Override
+    public Observable<Rep> getRep(final int repId) {
+        return Observable.create(new ObservableOnSubscribe<Rep>() {
+            @Override
+            public void subscribe(ObservableEmitter<Rep> e) throws Exception {
+                try {
+                    Rep rep = databaseRealm.getRealmInstance()
+                            .where(Rep.class)
+                            .equalTo(Rep.ID, repId)
+                            .findFirst();
+
+                    e.onNext(rep);
+                    e.onComplete();
+                }
+                catch (Exception ex) {
+                    Log.e(TAG, ex.getMessage());
+                    databaseRealm.getRealmInstance().cancelTransaction();
+                    e.onError(ex);
+                }
+            }
+        });
     }
 }

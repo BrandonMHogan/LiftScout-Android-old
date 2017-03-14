@@ -33,7 +33,7 @@ public class AppController extends Application {
     }
 
     private void initDagger() {
-        Injector.initAppComponent(this);
+        Injector.initComponents(this);
     }
 
     private void initRealmConfiguration() {

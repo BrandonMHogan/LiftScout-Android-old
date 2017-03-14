@@ -6,6 +6,7 @@ import android.support.v13.app.FragmentStatePagerAdapter;
 
 import com.brandonhogan.liftscout.views.workout.graph.GraphFragment;
 import com.brandonhogan.liftscout.views.workout.history.HistoryFragment;
+import com.brandonhogan.liftscout.views.workout.records.RecordsFragment;
 import com.brandonhogan.liftscout.views.workout.tracker.TrackerFragment;
 
 
@@ -28,7 +29,7 @@ public class WorkoutContainerAdapter extends FragmentStatePagerAdapter {
             case 2:
                 return GraphFragment.newInstance(exerciseId);
             case 3:
-                return HistoryFragment.newInstance(exerciseId);
+                return RecordsFragment.newInstance(exerciseId);
             case 4:
                 return HistoryFragment.newInstance(exerciseId);
 
@@ -39,6 +40,6 @@ public class WorkoutContainerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

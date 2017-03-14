@@ -205,6 +205,7 @@
     <string name="workout_tracker_title">Tracker</string>
     <string name="workout_history_title">History</string>
     <string name="workout_graphs_title">Graphs</string>
+    <string name="workout_personal_records_title">Personal Records</string>
     <string name="workout_statistics_title">Statistics</string>
     <string name="workout_goals_title">Goals</string>
     <string name="workout_error_one_rep_needed">You need at least one rep before saving</string>

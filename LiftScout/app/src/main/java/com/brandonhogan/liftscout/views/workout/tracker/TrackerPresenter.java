@@ -1,7 +1,10 @@
 package com.brandonhogan.liftscout.views.workout.tracker;
 
+import android.util.Log;
+
 import com.brandonhogan.liftscout.core.constants.Measurements;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.managers.RecordsManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
@@ -13,8 +16,10 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-public class TrackerPresenter implements TrackerContract.Presenter {
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
+public class TrackerPresenter implements TrackerContract.Presenter {
 
     // Injections
     //
@@ -23,6 +28,9 @@ public class TrackerPresenter implements TrackerContract.Presenter {
 
     @Inject
     UserManager userManager;
+
+    @Inject
+    RecordsManager recordsManager;
 
     // Private Properties
     //
@@ -126,12 +134,23 @@ public class TrackerPresenter implements TrackerContract.Presenter {
         double weight = Double.valueOf(weightValue);
         rep.setWeight(weight);
 
+        // If its an edit or create
         if(editingRep != null) {
             rep.setId(editingRep.getId());
             progressManager.updateRep(rep);
         }
         else {
             progressManager.addRepToTodayProgress(set, rep);
+
+            //If create, then we need to check the recordsManager
+            recordsManager.repCreated(rep.getId(), exerciseId)
+                    .subscribe(new Consumer<Boolean>() {
+                        @Override
+                        public void accept(@NonNull Boolean aBoolean) throws Exception {
+                            Log.d("", "accept: ");
+                        }
+                    });
+
         }
 
         progressManager.updateSet(set);

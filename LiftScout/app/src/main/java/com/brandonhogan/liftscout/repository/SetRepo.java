@@ -6,6 +6,7 @@ import com.brandonhogan.liftscout.core.model.Set;
 
 import java.util.Date;
 
+import io.reactivex.Observable;
 import io.realm.RealmResults;
 
 public interface SetRepo {
@@ -17,6 +18,7 @@ public interface SetRepo {
     void updateSetOrder(Set set, int order);
     Set getPreviousSet(Date date, int exerciseId);
 
+    Observable<Rep> getRep(int repId);
     void addRep(Set set, Rep rep);
     void updateRep(Rep rep);
     void deleteRep(int repId);

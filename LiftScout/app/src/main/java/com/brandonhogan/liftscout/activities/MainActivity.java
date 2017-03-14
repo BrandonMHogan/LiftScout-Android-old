@@ -53,7 +53,6 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
     @Inject
     DatabaseRealm databaseRealm;
 
-
     // Private Properties
     //
     private SweetAlertDialog dialog;

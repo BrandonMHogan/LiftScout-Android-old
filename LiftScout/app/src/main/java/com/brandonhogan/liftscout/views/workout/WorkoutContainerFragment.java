@@ -111,6 +111,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_tracker_title)));
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_history_title)));
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_graphs_title)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.workout_personal_records_title)));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
@@ -119,7 +120,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
                 (getChildFragmentManager(), presenter.getExerciseId());
 
         viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(4);
+        viewPager.setOffscreenPageLimit(1);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

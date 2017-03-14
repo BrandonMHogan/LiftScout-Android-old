@@ -2,7 +2,9 @@ package com.brandonhogan.liftscout.core.model;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
+@RealmClass
 public class Rep extends RealmObject {
 
     public static final String ID = "id";

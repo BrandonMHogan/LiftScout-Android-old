@@ -4,6 +4,7 @@ import com.brandonhogan.liftscout.core.managers.CalendarManager;
 import com.brandonhogan.liftscout.core.managers.GraphManager;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.managers.RecordsManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 
 import javax.inject.Singleton;
@@ -42,5 +43,11 @@ public class UserModule {
     @Singleton
     GraphManager graphManager() {
         return new GraphManager();
+    }
+
+    @Provides
+    @Singleton
+    RecordsManager recordsManager() {
+        return new RecordsManager();
     }
 }
