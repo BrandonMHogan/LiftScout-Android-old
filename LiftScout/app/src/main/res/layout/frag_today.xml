@@ -20,28 +20,18 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/card_view_inner_content_padding">
+            android:layout_marginStart="@dimen/workout_list_margin"
+            android:layout_marginEnd="@dimen/workout_list_margin"
+            android:layout_marginBottom="0dp">
 
-            <LinearLayout
-                android:id="@+id/date_layout"
-                android:orientation="vertical"
+            <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    style="@style/RobotoTitle"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:background="@color/listview_border_color"
-                    android:layout_height="@dimen/settings_divider_view_hieght"
-                    android:layout_marginTop="@dimen/today_divider_top_margin"/>
-
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_today_title_top_margin"
+                android:gravity="center_horizontal"
+                android:textColor="?attr/colorAccent"
+                style="@style/RobotoSubheading"/>
 
             <LinearLayout
                 android:id="@+id/weight_layout"
@@ -49,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_below="@+id/date_layout">
+                android:layout_below="@+id/title">
 
                 <TextView
                     android:layout_width="wrap_content"

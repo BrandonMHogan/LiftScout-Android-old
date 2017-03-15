@@ -2,10 +2,13 @@
 
     <!-- This is the base of all dark themes. All dark base themes need to be a child of this -->
     <style name="AppTheme.Dark.Base" parent="Theme.AppCompat">
+        <item name="android:windowBackground">@color/dark_theme_background</item>
+
         <item name="android:fillColor">@color/dark_theme_fill</item>
+        <item name="android:fillAfter">@color/dark_theme_fill_secondary</item>
+
         <item name="android:textColorPrimary">@color/dark_theme_text_primary</item>
         <item name="android:textColorSecondary">@color/dark_theme_text_secondary</item>
-
         <item name="themedMenuHomeDrawable">@drawable/ic_view_carousel_white_36dp</item>
         <item name="themedMenuCalendarDrawable">@drawable/ic_date_range_white_48dp</item>
         <item name="themedMenuExerciseDrawable">@drawable/ic_menu_dumbbell_white</item>
@@ -20,7 +23,11 @@
 
     <!-- This is the base of all light themes. All light base themes need to be a child of this -->
     <style name="AppTheme.Light.Base" parent="Theme.AppCompat.Light">
-        <item name="android:fillColor">@color/theme_dark_black_accent</item>
+        <item name="android:windowBackground">@color/light_theme_background</item>
+
+        <item name="android:fillColor">@color/light_theme_fill</item>
+        <item name="android:fillAfter">@color/light_theme_fill_secondary</item>
+
         <item name="android:textColor">@color/light_theme_text_primary</item>
         <item name="android:textColorPrimary">@color/light_theme_text_primary</item>
         <item name="android:textColorSecondary">@color/light_theme_text_secondary</item>
@@ -180,7 +187,8 @@
 
     <style name="RobotoSubheading">
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textSize">@dimen/material_text_size_subhead</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/material_text_size_small</item>
     </style>
 
     <style name="RobotoSubheadingBold">

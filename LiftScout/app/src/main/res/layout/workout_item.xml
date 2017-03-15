@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/today_workout_item_height"
+    android:layout_height="@dimen/workout_header_height"
     android:orientation="horizontal"
-    android:padding="@dimen/card_view_padding"
+    android:layout_marginBottom="1dp"
+    android:background="?attr/android:fillAfter"
     android:gravity="center">
 
     <ImageView
@@ -15,7 +16,8 @@
         android:layout_marginEnd="5dp"
         android:layout_marginStart="10dp"
         android:layout_alignParentStart="true"
-        android:src="@drawable/ic_trophy_white_36dp"/>
+        android:src="@drawable/ic_trophy_white_36dp"
+        android:tint="?attr/android:textColorSecondary"/>
 
     <LinearLayout
         android:id="@+id/rep_layout"
@@ -34,13 +36,15 @@
             <TextView android:id="@+id/item_reps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/material_text_size_menu"/>
+                android:textColor="?attr/android:textColorSecondary"
+                android:textSize="@dimen/material_text_size_small"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:textSize="@dimen/material_text_size_caption"
+                android:textColor="?attr/android:textColorSecondary"
+                android:textSize="@dimen/material_text_size_small"
                 android:text="@string/reps"/>
 
         </LinearLayout>
@@ -48,14 +52,16 @@
         <TextView android:id="@+id/item_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/material_text_size_menu"/>
+            android:textColor="?attr/android:textColorSecondary"
+            android:textSize="@dimen/material_text_size_small"/>
 
         <TextView
             android:id="@+id/item_measurement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:textSize="@dimen/material_text_size_caption"
+            android:textColor="?attr/android:textColorSecondary"
+            android:textSize="@dimen/material_text_size_small"
             android:text="@string/lbs"/>
 
 
@@ -65,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:textSize="@dimen/material_text_size_menu"/>
+        android:textSize="@dimen/material_text_size_small"/>
+
 
 </RelativeLayout>

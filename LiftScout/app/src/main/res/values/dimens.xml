@@ -5,8 +5,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="fab_margin_bottom">24dp</dimen>
-    <dimen name="fab_margin_right">16dp</dimen>
+    <dimen name="fab_margin_bottom">17dp</dimen>
+    <dimen name="fab_margin_end">17dp</dimen>
     <dimen name="dialog_margin">25dp</dimen>
     <dimen name="dialog_margin_medium">15dp</dimen>
     <dimen name="dialog_margin_small">6dp</dimen>
@@ -125,18 +125,14 @@
     <dimen name="material_text_size_menu">16sp</dimen>
     <dimen name="material_text_size_small">14sp</dimen>
     <dimen name="material_text_size_xsmall">10sp</dimen>
-    <dimen name="material_text_size_subhead">16sp</dimen>
+    <dimen name="material_text_size_subhead">15sp</dimen>
     <dimen name="material_text_size_subtitle_toolbar">16dp</dimen>
     <dimen name="material_text_size_title">20sp</dimen>
     <dimen name="material_text_size_title_toolbar">20dp</dimen>
 
 
     <!-- Home / Today -->
-    <dimen name="home_fab_horizontal_margin">30dp</dimen>
-    <dimen name="home_fab_item_container_height">70dp</dimen>
-    <dimen name="home_fab_item_icon_height">23dp</dimen>
-    <dimen name="home_fab_item_icon_end_margin">5dp</dimen>
-
+    <dimen name="home_today_title_top_margin">15dp</dimen>
     <dimen name="today_divider_top_margin">5dp</dimen>
     <dimen name="today_section_padding">7dp</dimen>
     <dimen name="today_section_text_size">20sp</dimen>
@@ -144,7 +140,6 @@
     <dimen name="today_item_margin">2dp</dimen>
 
     <dimen name="today_section_text_padding_left">15dp</dimen>
-    <dimen name="today_workout_item_height">30dp</dimen>
     <dimen name="workout_item_record_image_size">20dp</dimen>
 
     <dimen name="today_start_workout_button_width">200dp</dimen>
@@ -171,6 +166,7 @@
     <dimen name="exercises_list_item_icon_size">28dp</dimen>
 
     <!-- Workout Section -->
+    <dimen name="workout_list_margin">17dp</dimen>
     <dimen name="tracker_top_margin">15dp</dimen>
     <dimen name="tracker_inner_margin">10dp</dimen>
     <dimen name="tracker_outer_margin">12dp</dimen>
@@ -181,9 +177,11 @@
     <dimen name="tracker_button_height">46dp</dimen>
     <dimen name="tracker_record_image_size">45dp</dimen>
     <dimen name="tracker_item_font_size">15dp</dimen>
-    <dimen name="tracker_section_header_padding_top_bottom">8dp</dimen>
+    <dimen name="workout_header_height">35dp</dimen>
+    <dimen name="tracker_section_header_padding_top_bottom">9dp</dimen>
     <dimen name="tracker_section_header_padding_sides">1dp</dimen>
     <dimen name="tracker_section_header_margin">1dp</dimen>
+    <dimen name="tracker_section_header_margin_bottom">8dp</dimen>
     <dimen name="tracker_item_height">50dp</dimen>
 
 </resources>

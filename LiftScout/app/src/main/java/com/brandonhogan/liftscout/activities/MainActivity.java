@@ -186,9 +186,6 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
                     case R.id.nav_calendar:
                             getNavigationManager().startCalendar();
                         return true;
-                    case R.id.nav_settings:
-                        getNavigationManager().startSettings();
-                        return true;
                     case R.id.nav_exercises:
                         getNavigationManager().startCategoryList();
                         return true;

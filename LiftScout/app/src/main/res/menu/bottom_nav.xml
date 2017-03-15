@@ -3,11 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/nav_settings"
+        android:id="@+id/nav_today"
         android:enabled="true"
-        android:icon="?attr/themedMenuSettingsDrawable"
-        android:title="@string/nav_settings"
-        app:showAsAction="ifRoom" />
+        android:icon="?attr/themedMenuHomeDrawable"
+        android:title="@string/nav_today"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/nav_calendar"
+        android:enabled="true"
+        android:icon="?attr/themedMenuCalendarDrawable"
+        android:title="@string/nav_calendar"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/nav_exercises"
@@ -22,19 +29,5 @@
         android:icon="?attr/themedMenuGraphsDrawable"
         android:title="@string/nav_graphs"
         app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/nav_calendar"
-        android:enabled="true"
-        android:icon="?attr/themedMenuCalendarDrawable"
-        android:title="@string/nav_calendar"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/nav_today"
-        android:enabled="true"
-        android:icon="?attr/themedMenuHomeDrawable"
-        android:title="@string/nav_today"
-        app:showAsAction="always" />
 
 </menu>
