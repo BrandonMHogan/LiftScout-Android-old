@@ -4,11 +4,9 @@ import android.util.Log;
 
 import com.brandonhogan.liftscout.core.model.Record;
 import com.brandonhogan.liftscout.core.model.Rep;
-import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.RecordsRepo;
 import com.brandonhogan.liftscout.repository.SetRepo;
-import com.brandonhogan.liftscout.repository.impl.RecordRepoImpl;
 import com.brandonhogan.liftscout.repository.model.CombinedRecordResult;
 
 import java.util.List;
@@ -18,11 +16,8 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Single;
-import io.reactivex.SingleOnSubscribe;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
-import io.realm.RealmResults;
 
 /**
  * Created by Brandon on 3/14/2017.
@@ -141,6 +136,13 @@ public class RecordsManager {
                             @Override
                             public void accept(@NonNull CombinedRecordResult result) throws Exception {
                                 try {
+
+                                    if(result.getRep().getWeight() <= 0) {
+                                        e.onNext(false);
+                                        e.onComplete();
+                                        return;
+                                    }
+
                                     boolean isRecord = true;
 
                                     if (result.getRecords() != null && !result.getRecords().isEmpty()) {
@@ -208,6 +210,9 @@ public class RecordsManager {
         });
     }
 
+    public boolean isRecord(int repId) {
+        return recordsRepo.isRecord(repId);
+    }
 
     // Private helpers
 

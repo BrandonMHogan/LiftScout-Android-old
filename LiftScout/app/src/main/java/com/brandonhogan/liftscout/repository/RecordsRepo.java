@@ -1,9 +1,7 @@
 package com.brandonhogan.liftscout.repository;
 
-import com.brandonhogan.liftscout.core.model.Category;
 import com.brandonhogan.liftscout.core.model.Record;
 import com.brandonhogan.liftscout.core.model.Rep;
-
 
 import java.util.List;
 
@@ -23,4 +21,5 @@ public interface RecordsRepo {
     Observable<Boolean> updateRecord(Record record, double weight, int range, boolean isRecord);
     Observable<Boolean> updateRecordRepRange(int exerciseId, int repRange);
     Observable<Boolean> updateRecord(Record record, boolean isRecord);
+    boolean isRecord(int repId);
 }

@@ -2,16 +2,12 @@ package com.brandonhogan.liftscout.repository.impl;
 
 import android.util.Log;
 
-import com.brandonhogan.liftscout.core.model.Category;
 import com.brandonhogan.liftscout.core.model.Record;
 import com.brandonhogan.liftscout.core.model.Rep;
-import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.RecordsRepo;
-import com.brandonhogan.liftscout.repository.SetRepo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -252,5 +248,17 @@ public class RecordRepoImpl implements RecordsRepo {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean isRecord(int repId) {
+        try {
+            return databaseRealm.getRealmInstance().where(Record.class)
+                    .equalTo(Record.REP_ID, repId).findFirst().isRecord();
+        }
+        catch (Exception ex) {
+            Log.e(TAG, "isRecord: ", ex);
+            return false;
+        }
     }
 }

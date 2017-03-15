@@ -3,7 +3,6 @@ package com.brandonhogan.liftscout.core.model;
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.RealmClass;
 
 /**
  * Created by Brandon on 3/13/2017.

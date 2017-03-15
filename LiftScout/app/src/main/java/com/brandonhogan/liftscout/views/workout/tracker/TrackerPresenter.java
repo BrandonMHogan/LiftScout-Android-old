@@ -32,6 +32,7 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     @Inject
     RecordsManager recordsManager;
 
+
     // Private Properties
     //
     private TrackerContract.View view;
@@ -89,11 +90,13 @@ public class TrackerPresenter implements TrackerContract.Presenter {
             int rowNum = 1;
             for (Rep rep : set.getReps()) {
 
+                boolean isRecord = recordsManager.isRecord(rep.getId());
+
                 adapterData.add(new TrackerListModel(
                         rowNum,
                         rep,
                         view.getRepsLabel(rep.getCount() > 1),
-                        Measurements.getCompressedType(measurementType, rep.getWeight() > 1)));
+                        Measurements.getCompressedType(measurementType, rep.getWeight() > 1), isRecord));
                 rowNum += 1;
             }
         }

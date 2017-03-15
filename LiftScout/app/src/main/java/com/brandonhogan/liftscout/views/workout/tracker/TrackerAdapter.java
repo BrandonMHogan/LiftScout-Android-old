@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -56,24 +57,30 @@ public class TrackerAdapter extends RecyclerView.Adapter<TrackerAdapter.TrackerV
         TextView weightMetric;
         TextView count;
         TextView countMetric;
+        ImageView trophyImage;
+        int id;
 
         public TrackerViewHolder(View itemView) {
             super(itemView);
+
             displayLayout = (RelativeLayout) itemView.findViewById(R.id.display_layout);
             rowNum = (TextView) itemView.findViewById(R.id.row_num);
             weight = (TextView) itemView.findViewById(R.id.weight);
             weightMetric = (TextView) itemView.findViewById(R.id.weight_metric);
             count = (TextView) itemView.findViewById(R.id.count);
             countMetric = (TextView) itemView.findViewById(R.id.count_metric);
+            trophyImage = (ImageView) itemView.findViewById(R.id.record_image);
         }
 
         public void bindData(TrackerListModel rowModel) {
+            id = rowModel.getId();
             rowNum.setText(Integer.toString(rowModel.getRowNum()));
             weight.setText(Double.toString(rowModel.getWeight()));
             weightMetric.setText(rowModel.getWeightMetric());
             count.setText(Integer.toString(rowModel.getCount()));
             countMetric.setText(rowModel.getCountMetric());
 
+            trophyImage.setVisibility(rowModel.isRecord() ? View.VISIBLE : View.GONE);
         }
     }
 

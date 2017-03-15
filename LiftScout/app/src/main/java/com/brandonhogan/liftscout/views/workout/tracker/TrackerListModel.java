@@ -8,17 +8,19 @@ public class TrackerListModel {
     private int rowNum;
     private int count;
     private double weight;
+    private boolean isRecord = false;
 
     private String countMetric;
     private String weightMetric;
 
-    public TrackerListModel(int rowNum, Rep rep, String countMetric, String weightMetric) {
+    public TrackerListModel(int rowNum, Rep rep, String countMetric, String weightMetric, boolean isRecord) {
         this.rowNum = rowNum;
         this.id = rep.getId();
         this.count = rep.getCount();
         this.weight = rep.getWeight();
         this.countMetric = countMetric;
         this.weightMetric = weightMetric;
+        this.isRecord = isRecord;
     }
 
     public TrackerListModel() {
@@ -71,5 +73,13 @@ public class TrackerListModel {
 
     public void setWeightMetric(String weightMetric) {
         this.weightMetric = weightMetric;
+    }
+
+    public boolean isRecord() {
+        return isRecord;
+    }
+
+    public void setRecord(boolean record) {
+        isRecord = record;
     }
 }
