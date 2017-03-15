@@ -138,6 +138,14 @@ public class TrackerPresenter implements TrackerContract.Presenter {
         if(editingRep != null) {
             rep.setId(editingRep.getId());
             progressManager.updateRep(rep);
+
+            recordsManager.repUpdated(rep.getId(), exerciseId)
+                    .subscribe(new Consumer<Boolean>() {
+                        @Override
+                        public void accept(@NonNull Boolean aBoolean) throws Exception {
+                            Log.d("", "accept: ");
+                        }
+                    });
         }
         else {
             progressManager.addRepToTodayProgress(set, rep);

@@ -17,6 +17,9 @@ import io.reactivex.Observable;
 
 public interface RecordsRepo {
     Observable<Record> createRecord(int exerciseId, Rep rep, boolean isRecord);
+    Observable<Record> getRecord(int repId);
     Observable<List<Record>> getRecords(int exerciseId, int repRange);
     Observable<Boolean> updateRecord(Record record, double weight, int range, boolean isRecord);
+    Observable<Boolean> updateRecordRepRange(int exerciseId, int repRange);
+    Observable<Boolean> updateRecord(Record record, boolean isRecord);
 }
