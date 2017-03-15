@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -77,6 +78,7 @@
         android:elevation="4dp"
         android:focusable="true"
         android:orientation="horizontal"
+        android:layout_centerVertical="true"
         android:visibility="visible">
 
         <LinearLayout
@@ -92,6 +94,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
                 android:layout_weight="6"
                 android:orientation="horizontal">
 

@@ -41,6 +41,10 @@ import butterknife.Bind;
 public class GraphsCategoriesFragment extends BaseFragment implements GraphsCategoriesContract.View,
         RecyclerTouchListener.RecyclerTouchListenerHelper {
 
+    // Static Properties
+    //
+    private static final String BUNDLE_SELECTED_GRAPH_TYPE = "graphTypeBundle";
+
 
     // Bindings
     //
@@ -85,6 +89,7 @@ public class GraphsCategoriesFragment extends BaseFragment implements GraphsCate
     private OnActivityTouchListener touchListener;
     private int currentSelected = 999;
     private OnChartValueSelectedListener pieChartListener;
+    private int currentGraphType = 0;
 
     //Overrides
     //
@@ -106,9 +111,27 @@ public class GraphsCategoriesFragment extends BaseFragment implements GraphsCate
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        if(saveState != null) {
+            graphType.setSelectedIndex(saveState.getInt(BUNDLE_SELECTED_GRAPH_TYPE));
+            presenter.onGraphTypeSelected(saveState.getInt(BUNDLE_SELECTED_GRAPH_TYPE));
+            saveState = null;
+        }
+    }
+
+    @Override
+    protected Bundle saveState() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(BUNDLE_SELECTED_GRAPH_TYPE, graphType.getSelectedIndex());
+        return bundle;
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         recyclerView.removeOnItemTouchListener(onTouchListener);
+        mAdapter = null;
     }
 
     @Override
@@ -260,9 +283,11 @@ public class GraphsCategoriesFragment extends BaseFragment implements GraphsCate
 
         graphType.setItems(types);
         graphType.setSelectedIndex(position);
+
         graphType.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                currentGraphType = position;
                 presenter.onGraphTypeSelected(position);
             }
         });

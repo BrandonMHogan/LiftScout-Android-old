@@ -516,15 +516,31 @@ public class MyLineGraph extends FrameLayout {
     //
 
     public void setExercise(int exerciseId, String exerciseName) {
+        setExercise(exerciseId, exerciseName, 0);
+    }
+
+    public void setExercise(int exerciseId, String exerciseName, int dateRange) {
         if (exerciseSelector.getVisibility() == VISIBLE)
             exerciseSelector.setText(exerciseName);
 
         this.exerciseId = exerciseId;
         this.exerciseName = exerciseName;
         exerciseIsSet = true;
-        currentRangePosition = newRangePosition = 0;
+        currentRangePosition = newRangePosition = dateRange;
         slider.setPosition(currentRangePosition);
         update(true);
+    }
+
+    public int getExerciseId() {
+        return exerciseId;
+    }
+
+    public String getExerciseName() {
+        return exerciseName;
+    }
+
+    public int getCurrentRangePosition() {
+        return currentRangePosition;
     }
 
     public void update(boolean force) {

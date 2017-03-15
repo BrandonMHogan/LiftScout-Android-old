@@ -20,6 +20,16 @@ import butterknife.Bind;
 
 public class GraphExercisesFragment extends BaseFragment implements GraphExercisesContract.View {
 
+
+    // Static Properties
+    //
+    private static final String BUNDLE_SELECTED_EXERCISE_ID = "selectedExerciseIdBundle";
+    private static final String BUNDLE_SELECTED_EXERCISE_NAME = "selectedExerciseNameBundle";
+    private static final String BUNDLE_SELECTED_DATE_RANGE = "selectedDateRangeBundle";
+
+
+    // Bindings
+    //
     @Bind(R.id.my_line_graph)
     MyLineGraph lineGraph;
 
@@ -56,6 +66,27 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
         presenter.viewCreated();
 
         lineGraph.init(getActivity().getTheme(), true);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(saveState != null) {
+            lineGraph.setExercise(
+                    saveState.getInt(BUNDLE_SELECTED_EXERCISE_ID),
+                    saveState.getString(BUNDLE_SELECTED_EXERCISE_NAME),
+                    saveState.getInt(BUNDLE_SELECTED_DATE_RANGE));
+            saveState = null;
+        }
+    }
+
+    @Override
+    protected Bundle saveState() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(BUNDLE_SELECTED_EXERCISE_ID, lineGraph.getExerciseId());
+        bundle.putString(BUNDLE_SELECTED_EXERCISE_NAME, lineGraph.getExerciseName());
+        bundle.putInt(BUNDLE_SELECTED_DATE_RANGE, lineGraph.getCurrentRangePosition());
+        return bundle;
     }
 
     @Override
