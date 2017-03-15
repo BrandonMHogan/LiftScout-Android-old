@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.views.calendar;
 
 import com.brandonhogan.liftscout.core.managers.CalendarManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.managers.RecordsManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.CalendarEvent;
 import com.brandonhogan.liftscout.core.model.Rep;
@@ -44,6 +45,9 @@ public class CalendarPresenter implements CalendarContract.Presenter {
 
     @Inject
     UserManager userManager;
+
+    @Inject
+    RecordsManager recordsManager;
 
 
     // Private Properties
@@ -145,7 +149,7 @@ public class CalendarPresenter implements CalendarContract.Presenter {
                 int setCount = 0;
 
                 for (Rep rep : set.getReps()) {
-                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), set.getDate(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue()));
+                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), set.getDate(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue(), recordsManager.isRecord(rep.getId())));
                     volume += rep.getWeight();
                     isEmpty = false;
                 }

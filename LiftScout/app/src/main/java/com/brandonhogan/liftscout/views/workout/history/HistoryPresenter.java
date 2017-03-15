@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.views.workout.history;
 
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.managers.RecordsManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
@@ -27,6 +28,9 @@ public class HistoryPresenter implements HistoryContract.Presenter {
 
     @Inject
     UserManager userManager;
+
+    @Inject
+    RecordsManager recordsManager;
 
     // Private Properties
     //
@@ -60,7 +64,7 @@ public class HistoryPresenter implements HistoryContract.Presenter {
                 int setCount = 0;
 
                 for (Rep rep : set.getReps()) {
-                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), set.getDate(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue()));
+                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), set.getDate(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue(), recordsManager.isRecord(rep.getId())));
                     volume += rep.getWeight();
                     isEmpty = false;
                 }

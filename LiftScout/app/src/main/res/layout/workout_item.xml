@@ -4,14 +4,26 @@
     android:layout_height="@dimen/today_workout_item_height"
     android:orientation="horizontal"
     android:padding="@dimen/card_view_padding"
-    android:gravity="center"
-    android:layout_marginStart="30dp"
-    android:layout_marginEnd="10dp">
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/record_image"
+        android:layout_width="@dimen/workout_item_record_image_size"
+        android:layout_height="@dimen/workout_item_record_image_size"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_trophy_white_36dp"/>
 
     <LinearLayout
         android:id="@+id/rep_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="10dp">
 
         <LinearLayout
             android:layout_width="wrap_content"

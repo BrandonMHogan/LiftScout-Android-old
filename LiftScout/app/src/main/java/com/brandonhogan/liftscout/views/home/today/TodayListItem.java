@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.views.home.today;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,13 +22,15 @@ public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.Vie
     private boolean mIsDraggable = false;
     private boolean isEmpty = false;
     private String emptyMsg;
+    private boolean isRecord;
 
-    public TodayListItem(int setId, int exerciseId, int reps, double weight, String measurement) {
+    public TodayListItem(int setId, int exerciseId, int reps, double weight, String measurement, boolean isRecord) {
         this.setId = setId;
         this.exerciseId = exerciseId;
         this.reps = reps;
         this.weight = weight;
         this.measurement = measurement;
+        this.isRecord = isRecord;
     }
 
     public TodayListItem(int setId, int exerciseId, boolean isEmpty, String emptyMessage) {
@@ -35,6 +38,7 @@ public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.Vie
         this.exerciseId = exerciseId;
         this.isEmpty = isEmpty;
         this.emptyMsg = emptyMessage;
+        this.isRecord = false;
     }
 
     @Override
@@ -81,6 +85,8 @@ public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.Vie
             //set the text for the description or hide
             viewHolder.weight.setText(Double.toString(weight));
             viewHolder.measurement.setText(Measurements.getCompressedType(measurement, weight > 1));
+
+            viewHolder.recordImage.setVisibility(isRecord ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -91,6 +97,7 @@ public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.Vie
         protected TextView weight;
         protected TextView noRep;
         protected TextView measurement;
+        protected ImageView recordImage;
 
         public ViewHolder(View view) {
             super(view);
@@ -99,6 +106,7 @@ public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.Vie
             this.weight = (TextView) view.findViewById(R.id.item_weight);
             this.measurement = (TextView) view.findViewById(R.id.item_measurement);
             this.noRep = (TextView) view.findViewById(R.id.no_rep);
+            this.recordImage = (ImageView) view.findViewById(R.id.record_image);
         }
     }
 }

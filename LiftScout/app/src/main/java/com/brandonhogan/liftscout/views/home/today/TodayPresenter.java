@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.views.home.today;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.core.managers.RecordsManager;
 import com.brandonhogan.liftscout.core.managers.UserManager;
 import com.brandonhogan.liftscout.core.model.Rep;
 import com.brandonhogan.liftscout.core.model.Set;
@@ -31,6 +32,9 @@ public class TodayPresenter implements TodayContact.Presenter {
 
     @Inject
     UserManager userManager;
+
+    @Inject
+    RecordsManager recordsManager;
 
     // Private Properties
     //
@@ -64,7 +68,7 @@ public class TodayPresenter implements TodayContact.Presenter {
                 int setCount = 0;
 
                 for (Rep rep : set.getReps()) {
-                    items.add(new TodayListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue()));
+                    items.add(new TodayListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue(), recordsManager.isRecord(rep.getId())));
                     volume += (rep.getWeight() * rep.getCount());
                     isEmpty = false;
                 }

@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.views.workout.history;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,14 +23,16 @@ public class HistoryListItem extends AbstractItem<HistoryListItem, HistoryListIt
     private boolean mIsDraggable = false;
     private boolean isEmpty = false;
     private String emptyMsg;
+    private boolean isRecord;
 
-    public HistoryListItem(int setId, int exerciseId, Date date, int reps, double weight, String measurement) {
+    public HistoryListItem(int setId, int exerciseId, Date date, int reps, double weight, String measurement, boolean isRecord) {
         this.setId = setId;
         this.exerciseId = exerciseId;
         this.date = date;
         this.reps = reps;
         this.weight = weight;
         this.measurement = measurement;
+        this.isRecord = isRecord;
     }
 
     public HistoryListItem(int setId, int exerciseId, Date date, boolean isEmpty, String emptyMessage) {
@@ -38,6 +41,7 @@ public class HistoryListItem extends AbstractItem<HistoryListItem, HistoryListIt
         this.date = date;
         this.isEmpty = isEmpty;
         this.emptyMsg = emptyMessage;
+        this.isRecord = false;
     }
 
     //The unique ID for this type of item
@@ -73,6 +77,8 @@ public class HistoryListItem extends AbstractItem<HistoryListItem, HistoryListIt
             //set the text for the description or hide
             viewHolder.weight.setText(Double.toString(weight));
             viewHolder.measurement.setText(Measurements.getCompressedType(measurement, weight > 1));
+
+            viewHolder.recordImage.setVisibility(isRecord ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -83,6 +89,7 @@ public class HistoryListItem extends AbstractItem<HistoryListItem, HistoryListIt
         protected TextView weight;
         protected TextView noRep;
         protected TextView measurement;
+        protected ImageView recordImage;
 
         public ViewHolder(View view) {
             super(view);
@@ -91,6 +98,7 @@ public class HistoryListItem extends AbstractItem<HistoryListItem, HistoryListIt
             this.weight = (TextView) view.findViewById(R.id.item_weight);
             this.measurement = (TextView) view.findViewById(R.id.item_measurement);
             this.noRep = (TextView) view.findViewById(R.id.no_rep);
+            this.recordImage = (ImageView) view.findViewById(R.id.record_image);
         }
     }
 }
