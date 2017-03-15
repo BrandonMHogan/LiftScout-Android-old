@@ -42,8 +42,8 @@ android {
         versionName "$branchName $versionMajor.$versionMinor.$versionPatch($versionBuild)"
 
         // Turn the version name into a version code
-        versionCode versionMajor.toInteger() * 10000 +
-                versionMinor.toInteger() * 1000 +
+        versionCode versionMajor.toInteger() * 100000 +
+                versionMinor.toInteger() * 10000 +
                 versionPatch.toInteger() * 100 +
                 versionBuild.toInteger()
 
