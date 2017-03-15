@@ -8,6 +8,7 @@ import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.RecordsRepo;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -72,6 +73,7 @@ public class RecordRepoImpl implements RecordsRepo {
                     newRecord.setRepWeight(rep.getWeight());
                     newRecord.setExerciseId(exerciseId);
                     newRecord.setRecord(isRecord);
+                    newRecord.setDate(new Date());
 
                     databaseRealm.getRealmInstance().beginTransaction();
                     databaseRealm.getRealmInstance().copyToRealmOrUpdate(newRecord);

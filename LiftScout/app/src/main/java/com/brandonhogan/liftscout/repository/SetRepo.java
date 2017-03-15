@@ -19,10 +19,11 @@ public interface SetRepo {
     Set getPreviousSet(Date date, int exerciseId);
 
     Observable<Rep> getRep(int repId);
+    Observable<Set> getSet(int setId);
+
     void addRep(Set set, Rep rep);
     void updateRep(Rep rep);
     void deleteRep(int repId);
-    Set getSet(int setId);
     RealmResults<Set> getSets(int exerciseId);
     RealmResults<Set> getSets();
 }

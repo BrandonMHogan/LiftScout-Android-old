@@ -146,9 +146,4 @@ public class TodayPresenter implements TodayContact.Presenter {
         progressManager.clearUpdatedSet();
         view.onSetDeleted(position, count);
     }
-
-    @Override
-    public void itemTouchOnMove(int oldId, int newId) {
-        progressManager.swapSetOrders(oldId, newId);
-    }
 }

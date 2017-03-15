@@ -15,7 +15,6 @@ public interface TodayContact {
     interface Presenter {
         void viewCreate();
         void update();
-        void itemTouchOnMove(int oldId, int newId);
         void onDeleteSection(TodayListSection section, int position);
     }
 }

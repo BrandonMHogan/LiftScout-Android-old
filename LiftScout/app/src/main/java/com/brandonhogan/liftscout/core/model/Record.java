@@ -1,7 +1,10 @@
 package com.brandonhogan.liftscout.core.model;
 
+import java.util.Date;
+
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
+import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
 
 /**
@@ -21,14 +24,19 @@ public class Record extends RealmObject {
     public static final String EXERCISE_ID = "exerciseId";
     @Ignore
     public static final String IS_RECORD = "isRecord";
+    @Ignore
+    public static final String DATE = "date";
 
     @PrimaryKey
     private int repId;
 
+    @Index
     private int repRange;
     private double repWeight;
+    @Index
     private int exerciseId;
     private boolean isRecord;
+    private Date date;
 
     public int getRepId() {
         return repId;
@@ -68,5 +76,13 @@ public class Record extends RealmObject {
 
     public void setRecord(boolean record) {
         isRecord = record;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

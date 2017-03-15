@@ -1,9 +1,8 @@
 package com.brandonhogan.liftscout.core.managers;
 
-import android.util.Log;
-
 import com.brandonhogan.liftscout.core.model.Record;
 import com.brandonhogan.liftscout.core.model.Rep;
+import com.brandonhogan.liftscout.core.model.Set;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.RecordsRepo;
 import com.brandonhogan.liftscout.repository.SetRepo;
@@ -41,19 +40,32 @@ public class RecordsManager {
         Injector.getRepoComponent().inject(this);
     }
 
-    public Observable<Boolean> repDeleted(final int repId) {
+    // Gets the rep, then deletes the record, then updates the records old rep range
+    public Observable<Boolean> repDeleted(final int repId, final int exerciseId) {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
             public void subscribe(final ObservableEmitter<Boolean> e) throws Exception {
-                recordsRepo.deleteRecord(repId)
-                        .subscribe(new Consumer<Boolean>() {
+                getRep(repId)
+                        .subscribe(new Consumer<Rep>() {
                             @Override
-                            public void accept(@NonNull Boolean aBoolean) throws Exception {
+                            public void accept(@NonNull Rep rep) throws Exception {
+                                final int repRange = rep.getCount();
 
+                                recordsRepo.deleteRecord(repId)
+                                        .subscribe(new Consumer<Boolean>() {
+                                            @Override
+                                            public void accept(@NonNull Boolean aBoolean) throws Exception {
 
-
-                                e.onNext(aBoolean);
-                                e.onComplete();
+                                                updateRepRange(exerciseId, repRange)
+                                                        .subscribe(new Consumer<Boolean>() {
+                                                            @Override
+                                                            public void accept(@NonNull Boolean aBoolean) throws Exception {
+                                                                e.onNext(aBoolean);
+                                                                e.onComplete();
+                                                            }
+                                                        });
+                                            }
+                                        });
                             }
                         });
             }
@@ -131,63 +143,24 @@ public class RecordsManager {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
             public void subscribe(final ObservableEmitter<Boolean> e) throws Exception {
-                getRecordsForExerciseAndRange(repId, exerciseId)
-                        .subscribe(new Consumer<CombinedRecordResult>() {
+                getRep(repId)
+                        .subscribe(new Consumer<Rep>() {
                             @Override
-                            public void accept(@NonNull CombinedRecordResult result) throws Exception {
-                                try {
-
-                                    if(result.getRep().getWeight() <= 0) {
-                                        e.onNext(false);
-                                        e.onComplete();
-                                        return;
-                                    }
-
-                                    boolean isRecord = true;
-
-                                    if (result.getRecords() != null && !result.getRecords().isEmpty()) {
-                                        Record topRecord = result.getRecords().get(result.getRecords().size() -1);
-
-                                        if (topRecord.getRepWeight() >= result.getRep().getWeight())
-                                            isRecord = false;
-                                        else {
-                                            // topRecord is no longer the top record. Update it.
-                                            recordsRepo.updateRecord(topRecord, topRecord.getRepWeight(), topRecord.getRepRange(), false)
-                                                    .subscribe(new Consumer<Boolean>() {
-                                                        @Override
-                                                        public void accept(@NonNull Boolean aBoolean) throws Exception {
-                                                            try {
-                                                                Log.d(TAG, "accept: updated old record successfully");
+                            public void accept(final @NonNull Rep rep) throws Exception {
+                                recordsRepo.createRecord(exerciseId, rep, false)
+                                        .subscribe(new Consumer<Record>() {
+                                            @Override
+                                            public void accept(@NonNull Record record) throws Exception {
+                                                updateRepRange(exerciseId, rep.getCount())
+                                                        .subscribe(new Consumer<Boolean>() {
+                                                            @Override
+                                                            public void accept(@NonNull Boolean aBoolean) throws Exception {
+                                                                e.onNext(aBoolean);
+                                                                e.onComplete();
                                                             }
-                                                            catch (Exception ex) {
-                                                                Log.e(TAG, "accept: ", ex);
-                                                                e.onError(ex);
-                                                            }
-                                                        }
-                                                    });
-                                        }
-
-                                    }
-
-                                    recordsRepo.createRecord(exerciseId, result.getRep(), isRecord)
-                                            .subscribe(new Consumer<Record>() {
-                                                @Override
-                                                public void accept(@NonNull Record record) throws Exception {
-                                                    try {
-                                                        e.onNext(record.isRecord());
-                                                        e.onComplete();
-                                                    }
-                                                    catch (Exception ex) {
-                                                        Log.e(TAG, "accept: ", ex);
-                                                        e.onError(ex);
-                                                    }
-                                                }
-                                            });
-                                }
-                                catch (Exception ex) {
-                                    Log.e(TAG, "getRecords accept: ", ex);
-                                    e.onError(ex);
-                                }
+                                                        });
+                                            }
+                                        });
                             }
                         });
             }
@@ -212,6 +185,34 @@ public class RecordsManager {
 
     public boolean isRecord(int repId) {
         return recordsRepo.isRecord(repId);
+    }
+
+    // Set deleted functions
+
+    public Observable<Boolean> setDeleted(final int setId) {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(final ObservableEmitter<Boolean> e) throws Exception {
+                setRepo.getSet(setId)
+                        .subscribe(new Consumer<Set>() {
+                            @Override
+                            public void accept(@NonNull Set set) throws Exception {
+
+                                for (Rep rep : set.getReps()) {
+                                    repDeleted(rep.getId(), set.getExercise().getId())
+                                            .subscribe(new Consumer<Boolean>() {
+                                                @Override
+                                                public void accept(@NonNull Boolean aBoolean) throws Exception {
+                                                }
+                                            });
+                                }
+
+                                e.onNext(true);
+                                e.onComplete();
+                            }
+                        });
+            }
+        });
     }
 
     // Private helpers

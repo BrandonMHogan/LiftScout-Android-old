@@ -19,6 +19,8 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
@@ -29,6 +31,9 @@ public class ProgressManager {
     //
     @Inject
     DatabaseRealm databaseRealm;
+
+    @Inject
+    RecordsManager recordsManager;
 
 
     // Private Static Properties
@@ -132,21 +137,6 @@ public class ProgressManager {
         setRepo.updateSet(set);
     }
 
-    public void swapSetOrders(int setAId, int setBId) {
-        Set setA = setRepo.getSet(setAId);
-        Set setB = setRepo.getSet(setBId);
-
-        int setAOrderId = setA.getOrderId();
-        int setBOrderId = setB.getOrderId();
-
-        setRepo.updateSetOrder(setA, setBOrderId);
-        setRepo.updateSetOrder(setB, setAOrderId);
-    }
-
-    public void updateSetOrder(int setId, int orderId) {
-        setRepo.updateSetOrder(setRepo.getSet(setId), orderId);
-    }
-
     public RealmList<Set> getSetsByDate(Date date) {
         Progress progress = progressRepo.getProgress(date);
 
@@ -164,12 +154,24 @@ public class ProgressManager {
         return setRepo.getSets();
     }
 
-    public void deleteSet(Set set) {
-        setRepo.deleteSet(set);
+    public void deleteSet(final Set set) {
+        recordsManager.setDeleted(set.getId())
+        .subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(@NonNull Boolean aBoolean) throws Exception {
+                setRepo.deleteSet(set);
+            }
+        });
     }
 
-    public void deleteSet(int setId) {
-        setRepo.deleteSet(setId);
+    public void deleteSet(final int setId) {
+        recordsManager.setDeleted(setId)
+        .subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(@NonNull Boolean aBoolean) throws Exception {
+                setRepo.deleteSet(setId);
+            }
+        });
     }
 
     public Set getPreviousSet(int exerciseId) {
@@ -181,14 +183,37 @@ public class ProgressManager {
 
     public void addRepToTodayProgress(Set set, Rep rep) {
         setRepo.addRep(set, rep);
+
+        recordsManager.repCreated(rep.getId(), set.getExercise().getId())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(@NonNull Boolean aBoolean) throws Exception {
+
+                    }
+                });
     }
 
-    public void updateRep(Rep rep) {
+    public void updateRep(Rep rep, int exerciseId) {
         setRepo.updateRep(rep);
+
+        recordsManager.repUpdated(rep.getId(), exerciseId)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(@NonNull Boolean aBoolean) throws Exception {
+
+                    }
+                });
     }
 
-    public void deleteRep(int repId) {
-        setRepo.deleteRep(repId);
+    public void deleteRep(final int repId, final int exerciseId) {
+
+        recordsManager.repDeleted(repId, exerciseId)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(@NonNull Boolean aBoolean) throws Exception {
+                        setRepo.deleteRep(repId);
+                    }
+                });
     }
 
 

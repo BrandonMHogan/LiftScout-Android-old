@@ -49,14 +49,6 @@ public class SetRepoImpl implements SetRepo {
     }
 
     @Override
-    public Set getSet(int setId) {
-        return databaseRealm.getRealmInstance()
-                .where(Set.class)
-                .equalTo(Set.ID, setId)
-                .findFirst();
-    }
-
-    @Override
     public RealmResults<Set> getSets(int exerciseId) {
         return databaseRealm.getRealmInstance()
                 .where(Set.class)
@@ -222,6 +214,28 @@ public class SetRepoImpl implements SetRepo {
                 catch (Exception ex) {
                     Log.e(TAG, ex.getMessage());
                     databaseRealm.getRealmInstance().cancelTransaction();
+                    e.onError(ex);
+                }
+            }
+        });
+    }
+
+    @Override
+    public Observable<Set> getSet(final int setId) {
+        return Observable.create(new ObservableOnSubscribe<Set>() {
+            @Override
+            public void subscribe(ObservableEmitter<Set> e) throws Exception {
+                try {
+                    Set set = databaseRealm.getRealmInstance()
+                            .where(Set.class)
+                            .equalTo(Set.ID, setId)
+                            .findFirst();
+
+                    e.onNext(set);
+                    e.onComplete();
+                }
+                catch (Exception ex) {
+                    Log.e(TAG, "subscribe: getSet", ex);
                     e.onError(ex);
                 }
             }
