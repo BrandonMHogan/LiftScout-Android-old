@@ -229,7 +229,7 @@ public class TrackerFragment extends BaseFragment implements
                 public void onRowLongClicked(int position) {
                     presenter.onSelect(position);
                     mAdapter.selected(position);
-                    showDeleteRepAlert();
+                    showDeleteRepAlert(position);
                 }
             });
 
@@ -248,10 +248,20 @@ public class TrackerFragment extends BaseFragment implements
     }
 
     @Override
-    public void saveSuccess(int position) {
+    public void saveSuccess(int position, boolean isNew) {
         mAdapter.clearSelected();
         layoutManager.scrollToPosition(position);
         resetButtons();
+
+        if (isNew)
+            Toast.makeText(getActivity(), R.string.workout_set_created_toast, Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(getActivity(), getString(R.string.workout_set_updated_toast, Integer.toString(position + 1)), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDelete(int position) {
+        Toast.makeText(getActivity(), getString(R.string.workout_set_deleted_toast, Integer.toString(position + 1)), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -267,8 +277,7 @@ public class TrackerFragment extends BaseFragment implements
         secondButton.setText(getString(R.string.cancel));
     }
 
-    @Override
-    public void showDeleteRepAlert() {
+    public void showDeleteRepAlert(final int position) {
 
         dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(getString(R.string.dialog_tracker_delete_rep_title))
@@ -278,7 +287,7 @@ public class TrackerFragment extends BaseFragment implements
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         dialog.cancel();
-                        presenter.onDeleteRep();
+                        presenter.onDeleteRep(position);
                     }
                 })
                 .setCancelText(getString(R.string.cancel))

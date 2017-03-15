@@ -10,8 +10,8 @@ public interface TrackerContract {
         void setDate(Date date);
         void updateValues(float weight, int reps);
         String getRepsLabel(boolean isMultiple);
-        void saveSuccess(int position);
-        void showDeleteRepAlert();
+        void saveSuccess(int position, boolean isNew);
+        void onDelete(int position);
         void deleteSetSuccess();
         void clear(boolean clearValues);
         void onSelect(TrackerListModel rep);
@@ -22,7 +22,7 @@ public interface TrackerContract {
         void viewCreated();
         void updateAdapter();
         void onSave(String reps, String weight);
-        void onDeleteRep();
+        void onDeleteRep(int position);
         void onSelect(int position);
         void onButtonTwoPressed();
         void updateIncrement();

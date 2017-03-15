@@ -144,18 +144,23 @@ public class TrackerPresenter implements TrackerContract.Presenter {
         progressManager.updateSet(set);
         resetAdapter();
 
-        view.saveSuccess(editingRep == null ? adapterData.size() - 1 : selectedPosition);
+        if (editingRep == null)
+            view.saveSuccess(adapterData.size() - 1, true);
+        else
+            view.saveSuccess(selectedPosition, false);
+
         editingRep = null;
     }
 
     @Override
-    public void onDeleteRep() {
+    public void onDeleteRep(int position) {
         if (editingRep != null) {
 
             progressManager.deleteRep(editingRep.getId(), exerciseId);
             editingRep = null;
             resetAdapter();
             view.clear(false);
+            view.onDelete(position);
         }
     }
 

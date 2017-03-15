@@ -209,6 +209,10 @@
     <string name="workout_statistics_title">Statistics</string>
     <string name="workout_goals_title">Goals</string>
     <string name="workout_error_one_rep_needed">You need at least one rep before saving</string>
+    <string name="workout_set_created_toast">Set Created</string>
+    <string name="workout_set_updated_toast">Set %s Updated</string>
+    <string name="workout_set_deleted_toast">Set %s Deleted</string>
+
 
     <!-- Workout - Sections -->
     <string name="frag_history_empty_set_msg">No sets have been added</string>
