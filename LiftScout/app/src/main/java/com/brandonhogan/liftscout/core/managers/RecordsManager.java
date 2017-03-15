@@ -46,6 +46,24 @@ public class RecordsManager {
         Injector.getRepoComponent().inject(this);
     }
 
+    public Observable<Boolean> repDeleted(final int repId) {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(final ObservableEmitter<Boolean> e) throws Exception {
+                recordsRepo.deleteRecord(repId)
+                        .subscribe(new Consumer<Boolean>() {
+                            @Override
+                            public void accept(@NonNull Boolean aBoolean) throws Exception {
+
+
+
+                                e.onNext(aBoolean);
+                                e.onComplete();
+                            }
+                        });
+            }
+        });
+    }
 
     public Observable<Boolean> repUpdated(final int repId, final int exerciseId) {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
@@ -114,7 +132,6 @@ public class RecordsManager {
         });
     }
 
-
     public Observable<Boolean> repCreated(final int repId, final int exerciseId) {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
@@ -175,12 +192,7 @@ public class RecordsManager {
         });
     }
 
-
-
-
-    // Private helpers
-
-    private Observable<Boolean> updateRepRange(final int exerciseId, final int repRange) {
+    public Observable<Boolean> updateRepRange(final int exerciseId, final int repRange) {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
             public void subscribe(final ObservableEmitter<Boolean> e) throws Exception {
@@ -195,6 +207,9 @@ public class RecordsManager {
             }
         });
     }
+
+
+    // Private helpers
 
     private Observable<Rep> getRep(final int repId) {
         return Observable.create(new ObservableOnSubscribe<Rep>() {

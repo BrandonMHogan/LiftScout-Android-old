@@ -39,6 +39,30 @@ public class RecordRepoImpl implements RecordsRepo {
     }
 
     @Override
+    public Observable<Boolean> deleteRecord(final int repId) {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> e) throws Exception {
+                try {
+                    databaseRealm.getRealmInstance().beginTransaction();
+                    databaseRealm.getRealmInstance().where(Record.class)
+                            .equalTo(Record.REP_ID, repId)
+                            .findAll().deleteAllFromRealm();
+                    databaseRealm.getRealmInstance().commitTransaction();
+
+                    e.onNext(true);
+                    e.onComplete();
+                }
+                catch (Exception ex) {
+                    Log.e(TAG, "subscribe: deleteRecord()", ex);
+                    databaseRealm.getRealmInstance().cancelTransaction();
+                    e.onError(ex);
+                }
+            }
+        });
+    }
+
+    @Override
     public Observable<Record> createRecord(final int exerciseId, final Rep rep, final boolean isRecord) {
         return Observable.create(new ObservableOnSubscribe<Record>() {
             @Override
@@ -188,18 +212,32 @@ public class RecordRepoImpl implements RecordsRepo {
                             .equalTo(Record.IS_RECORD, true)
                             .findAll();
 
+                    if (records == null) {
+                        databaseRealm.getRealmInstance().cancelTransaction();
+                        e.onNext(false);
+                        e.onComplete();
+                        return;
+                    }
+
                     for (Record record : records) {
                         record.setRecord(false);
                     }
 
-
-                    Record firstRecord = databaseRealm.getRealmInstance()
+                    records = databaseRealm.getRealmInstance()
                             .where(Record.class)
                             .equalTo(Record.EXERCISE_ID, exerciseId)
                             .equalTo(Record.REP_RANGE, repRange)
-                            .findAllSorted(Record.REP_WEIGHT, Sort.DESCENDING)
-                            .first();
+                            .findAll();
 
+                    if (records == null || records.isEmpty()) {
+                        databaseRealm.getRealmInstance().cancelTransaction();
+                        e.onNext(false);
+                        e.onComplete();
+                        return;
+                    }
+
+
+                    Record firstRecord = records.sort(Record.REP_WEIGHT, Sort.DESCENDING).first();
                     firstRecord.setRecord(true);
 
                     databaseRealm.getRealmInstance().commitTransaction();

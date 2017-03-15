@@ -17,6 +17,7 @@ public class Rep extends RealmObject {
 
     private int count;
     private double weight;
+    private String note;
 
     public int getId() {
         return id;
@@ -40,5 +41,13 @@ public class Rep extends RealmObject {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

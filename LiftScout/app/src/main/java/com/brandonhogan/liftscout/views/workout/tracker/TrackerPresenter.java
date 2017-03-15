@@ -171,10 +171,26 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     @Override
     public void onDeleteRep() {
         if (editingRep != null) {
-            progressManager.deleteRep(editingRep.getId());
-            editingRep = null;
-            resetAdapter();
-            view.clear(false);
+
+            //Deletes the rep from records
+            recordsManager.repDeleted(editingRep.getId())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(@NonNull Boolean aBoolean) throws Exception {
+
+                        // Updates the rest of the reps in that rep range
+                        recordsManager.updateRepRange(exerciseId, editingRep.getCount())
+                                .subscribe(new Consumer<Boolean>() {
+                                    @Override
+                                    public void accept(@NonNull Boolean aBoolean) throws Exception {
+                                        progressManager.deleteRep(editingRep.getId());
+                                        editingRep = null;
+                                        resetAdapter();
+                                        view.clear(false);
+                                    }
+                                });
+                    }
+                });
         }
     }
 
