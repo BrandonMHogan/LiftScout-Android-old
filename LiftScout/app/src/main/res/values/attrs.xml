@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="bottomNavFillColor" format="reference" />
+
     <attr name="themeMenuBackgroundColorDrawable" format="reference" />
     <attr name="themedMenuHomeDrawable" format="reference" />
     <attr name="themedMenuCalendarDrawable" format="reference" />

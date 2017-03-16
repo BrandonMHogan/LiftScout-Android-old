@@ -8,7 +8,7 @@
         android:id="@+id/display_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/workout_header_height"
-        android:background="?attr/android:fillAfter">
+        android:background="@drawable/workout_item_background">
 
         <LinearLayout
             android:id="@+id/rep_layout"

@@ -8,6 +8,7 @@
 
         <item name="android:fillColor">@color/dark_theme_fill</item>
         <item name="android:fillAfter">@color/dark_theme_fill_secondary</item>
+        <item name="bottomNavFillColor">@color/light_theme_text_secondary</item>
 
         <item name="android:textColorPrimary">@color/dark_theme_text_primary</item>
         <item name="android:textColorSecondary">@color/dark_theme_text_secondary</item>
@@ -31,6 +32,7 @@
 
         <item name="android:fillColor">@color/light_theme_fill</item>
         <item name="android:fillAfter">@color/light_theme_fill_secondary</item>
+        <item name="bottomNavFillColor">@color/light_theme_background</item>
 
         <item name="android:textColor">@color/light_theme_text_primary</item>
         <item name="android:textColorPrimary">@color/light_theme_text_primary</item>

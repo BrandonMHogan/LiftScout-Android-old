@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/workout_header_height"
         android:layout_below="@id/padding_view"
-        android:background="?android:fillColor"
+        android:background="@drawable/workout_section_background"
         android:paddingStart="@dimen/tracker_section_header_padding_sides"
         android:paddingEnd="@dimen/tracker_section_header_padding_sides" >
 
