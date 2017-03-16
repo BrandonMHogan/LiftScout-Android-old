@@ -3,8 +3,6 @@ package com.brandonhogan.liftscout.views.home.today;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;

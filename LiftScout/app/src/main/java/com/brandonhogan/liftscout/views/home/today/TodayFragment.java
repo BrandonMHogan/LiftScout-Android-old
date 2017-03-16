@@ -21,7 +21,6 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class TodayFragment extends BaseFragment implements TodayContact.View {
