@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.brandonhogan.liftscout"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 25
 
         // Fetch the version according to git latest tag
@@ -107,7 +107,6 @@ dependencies {
     compile 'biz.kasual:materialnumberpicker:1.2.1'
     compile 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0'
     compile 'com.thebluealliance:spectrum:0.7.1'
-    compile 'com.brandonhogan.accordionview:accordionview:0.1.1'
     compile 'com.mikepenz:fastadapter-extensions:1.7.0@aar'
     compile 'com.github.devlight:infinitecycleviewpager:1.0.2'
     compile 'agency.tango.android:material-intro-screen:0.0.5'

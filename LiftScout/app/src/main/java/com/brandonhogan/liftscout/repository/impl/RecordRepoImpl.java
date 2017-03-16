@@ -235,7 +235,7 @@ public class RecordRepoImpl implements RecordsRepo {
                     }
 
 
-                    Record firstRecord = records.sort(Record.REP_WEIGHT, Sort.DESCENDING).first();
+                    Record firstRecord = records.sort(Record.REP_WEIGHT, Sort.DESCENDING).sort(Record.DATE).first();
                     firstRecord.setRecord(true);
 
                     databaseRealm.getRealmInstance().commitTransaction();
