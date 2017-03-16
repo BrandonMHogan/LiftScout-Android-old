@@ -232,6 +232,11 @@
     <string name="graphs_categories">Categories</string>
     <string name="graphs_exercises">Exercises</string>
 
+
+    <!-- Category / Exercise Lists -->
+    <string name="category_list_no_data">You have not created any categories yet</string>
+    <string name="exercise_list_no_data">You have not created any exercises for %s yet</string>
+
     <!-- Default Categories / Exercises -->
     <string name="category_abs">Abs</string>
     <string name="category_chest">Chest</string>

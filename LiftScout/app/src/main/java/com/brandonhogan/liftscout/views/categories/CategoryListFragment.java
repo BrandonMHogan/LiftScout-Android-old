@@ -7,11 +7,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -67,6 +66,9 @@ public class CategoryListFragment extends BaseFragment implements
 
     @Bind(R.id.fab)
     FloatingActionButton fab;
+
+    @Bind(R.id.no_data_label)
+    TextView noDataLabel;
 
 
     //Overrides
@@ -168,6 +170,9 @@ public class CategoryListFragment extends BaseFragment implements
 
     @Override
     public void updateAdapter(List<CategoryListModel> data) {
+
+        noDataLabel.setVisibility((data == null || data.isEmpty()) ? View.VISIBLE : View.GONE);
+
         mAdapter = new CategoryListAdapter(getActivity(), data);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

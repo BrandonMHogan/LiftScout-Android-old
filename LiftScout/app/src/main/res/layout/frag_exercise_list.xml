@@ -17,6 +17,16 @@
         android:layout_marginEnd="@dimen/fab_margin_end"
         android:layout_gravity="bottom|end" />
 
+    <TextView
+        android:id="@+id/no_data_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/no_data_top_margin_lists"
+        android:textAlignment="center"
+        android:textColor="?attr/android:textColorPrimary"
+        android:visibility="gone"
+        android:text="@string/exercise_list_no_data"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
