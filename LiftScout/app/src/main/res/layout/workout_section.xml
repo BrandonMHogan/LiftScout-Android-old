@@ -22,13 +22,14 @@
         android:paddingEnd="@dimen/tracker_section_header_padding_sides" >
 
         <TextView android:id="@+id/workout_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:textSize="@dimen/material_text_size_small"
             android:ellipsize="end"
             android:maxLines="1"
             android:layout_toStartOf="@+id/volume_layout"
+
             android:layout_marginStart="9dp" />
 
         <LinearLayout
