@@ -28,8 +28,8 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/home_today_title_top_margin"
-                android:layout_marginBottom="@dimen/home_today_title_top_margin"
+                android:layout_marginTop="@dimen/home_title_top_margin"
+                android:layout_marginBottom="@dimen/home_title_bottom_margin"
                 android:gravity="center_horizontal"
                 android:textColor="?attr/android:textColorPrimary"
                 style="@style/RobotoSubheading"/>

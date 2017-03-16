@@ -106,6 +106,8 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
 
     private void setupCalendar() {
 
+        // This will set the first day to Sunday, instead of Monday
+        calendar.setFirstDayOfWeek(1);
         calendar.shouldDrawIndicatorsBelowSelectedDays(true);
         calendar.canScrollHorizontally(1);
         calendar.setUseThreeLetterAbbreviation(true);

@@ -6,9 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:windowBackground">
 
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
 
         <android.support.design.widget.FloatingActionButton
@@ -77,7 +77,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@id/divider"
-                android:layout_marginTop="@dimen/workout_list_margin"
                 android:layout_marginStart="@dimen/workout_list_margin"
                 android:layout_marginEnd="@dimen/workout_list_margin"
                 android:layout_marginBottom="@dimen/workout_list_margin"
@@ -88,9 +87,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:layout_margin="5dp"
-                    style="@style/RobotoTitle"/>
-
+                    android:layout_marginTop="@dimen/home_title_top_margin"
+                    android:layout_marginBottom="@dimen/home_title_bottom_margin"
+                    android:textColor="?attr/android:textColorPrimary"
+                    style="@style/RobotoSubheading"/>
 
                 <com.github.sundeepk.compactcalendarview.CompactCalendarView
                     android:id="@+id/calendar_view"

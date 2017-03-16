@@ -132,20 +132,10 @@
     <dimen name="material_text_size_title_toolbar">20dp</dimen>
 
 
-    <!-- Home / Today -->
-    <dimen name="home_today_title_top_margin">15dp</dimen>
-    <dimen name="home_today_title_bottom_margin">2dp</dimen>
+    <!-- Home / Today / Calendar -->
+    <dimen name="home_title_top_margin">15dp</dimen>
+    <dimen name="home_title_bottom_margin">15dp</dimen>
     <dimen name="today_divider_top_margin">5dp</dimen>
-    <dimen name="today_section_padding">7dp</dimen>
-    <dimen name="today_section_text_size">20sp</dimen>
-    <dimen name="today_item_height">35dp</dimen>
-    <dimen name="today_item_margin">2dp</dimen>
-
-    <dimen name="today_section_text_padding_left">15dp</dimen>
-    <dimen name="workout_item_record_image_size">20dp</dimen>
-
-    <dimen name="today_start_workout_button_width">200dp</dimen>
-    <dimen name="today_start_workout_button_height">45dp</dimen>
 
 
     <!-- Settings Layout -->
@@ -168,6 +158,7 @@
     <dimen name="exercises_list_item_icon_size">28dp</dimen>
 
     <!-- Workout Section -->
+    <dimen name="workout_item_record_image_size">20dp</dimen>
     <dimen name="workout_list_margin">18dp</dimen>
     <dimen name="tracker_top_margin">15dp</dimen>
     <dimen name="tracker_inner_margin">10dp</dimen>

@@ -30,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:layout_margin="5dp"
+            android:layout_marginTop="@dimen/home_title_top_margin"
+            android:layout_marginBottom="@dimen/home_title_bottom_margin"
             android:textColor="?attr/android:textColorPrimary"
             style="@style/RobotoSubheading"/>
 
