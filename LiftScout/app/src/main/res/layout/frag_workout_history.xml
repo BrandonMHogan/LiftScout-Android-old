@@ -8,6 +8,10 @@
         android:id="@+id/recycler_view"
         android:overScrollMode="never"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/workout_list_margin"
+        android:layout_marginStart="@dimen/workout_list_margin"
+        android:layout_marginEnd="@dimen/workout_list_margin"
+        android:layout_marginBottom="@dimen/workout_list_margin"/>
 
 </com.brandonhogan.liftscout.core.controls.BaseFrameLayout>

@@ -34,10 +34,11 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
     private List<IItem> mSubItems;
     private boolean mExpanded = false;
     private boolean isEmpty;
+    private boolean isFirst;
 
     private FastAdapter.OnClickListener<HistoryListSection> mOnClickListener;
 
-    public HistoryListSection(int setId, Date date, String name, int exerciseId, double volume, int setCount, String measurement, boolean isEmpty) {
+    public HistoryListSection(int setId, Date date, String name, int exerciseId, double volume, int setCount, String measurement, boolean isEmpty, boolean isFirst) {
         this.setId = setId;
         this.name = name;
         this.date = date;
@@ -45,6 +46,7 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
         this.volume = volume;
         this.setCount = setCount;
         this.measurement = measurement;
+        this.isFirst = isFirst;
     }
 
     @Override
@@ -154,7 +156,7 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
         count += " " + (setCount == 1 ? ctx.getResources().getString(R.string.set) : ctx.getResources().getString(R.string.sets));
 
         viewHolder.setCount.setText(count);
-
+        viewHolder.paddingView.setVisibility(isFirst ? View.GONE : View.VISIBLE);
     }
 
 
@@ -185,6 +187,9 @@ public class HistoryListSection extends AbstractItem<HistoryListSection, History
      */
     protected static class ViewHolder extends RecyclerView.ViewHolder {
         protected final View view;
+
+        @Bind(R.id.padding_view)
+        View paddingView;
 
         @Bind(R.id.workout_name)
         TextView name;

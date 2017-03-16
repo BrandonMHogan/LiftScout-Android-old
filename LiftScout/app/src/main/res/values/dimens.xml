@@ -167,7 +167,7 @@
     <dimen name="exercises_list_item_icon_size">28dp</dimen>
 
     <!-- Workout Section -->
-    <dimen name="workout_list_margin">17dp</dimen>
+    <dimen name="workout_list_margin">18dp</dimen>
     <dimen name="tracker_top_margin">15dp</dimen>
     <dimen name="tracker_inner_margin">10dp</dimen>
     <dimen name="tracker_outer_margin">12dp</dimen>

@@ -8,7 +8,10 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/workout_list_margin"
+        android:layout_marginEnd="@dimen/workout_list_margin"
+        android:layout_marginBottom="@dimen/workout_list_margin">
 
 
         <TextView
@@ -17,7 +20,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_margin="5dp"
-            style="@style/RobotoTitle"/>
+            android:textColor="?attr/android:textColorPrimary"
+            style="@style/RobotoSubheading"/>
 
         <android.support.design.widget.CoordinatorLayout
             android:id="@+id/calendar_container"
@@ -49,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="0dp"
             android:background="@color/divider"
             android:layout_below="@id/calendar_container"
             android:elevation="@dimen/tracker_divider_elevation"/>

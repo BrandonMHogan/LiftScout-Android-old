@@ -10,25 +10,12 @@
         android:layout_height="@dimen/workout_header_height"
         android:background="?attr/android:fillAfter">
 
-        <ImageView
-            android:id="@+id/record_image"
-            android:layout_width="@dimen/workout_item_record_image_size"
-            android:layout_height="@dimen/workout_item_record_image_size"
-            android:visibility="gone"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
-            android:layout_marginStart="10dp"
-            android:layout_alignParentStart="true"
-            android:src="@drawable/ic_trophy_white_36dp"
-            android:tint="?attr/android:textColorSecondary"
-            android:contentDescription="@string/workout_personal_records_title"/>
-
         <LinearLayout
             android:id="@+id/rep_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
 
             <LinearLayout
@@ -70,6 +57,18 @@
 
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/record_image"
+            android:layout_width="@dimen/workout_item_record_image_size"
+            android:layout_height="@dimen/workout_item_record_image_size"
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="85dp"
+            android:src="@drawable/ic_trophy_white_36dp"
+            android:tint="?attr/android:textColorSecondary"
+            android:contentDescription="@string/workout_personal_records_title"/>
 
         <TextView android:id="@+id/no_rep"
             android:layout_width="wrap_content"

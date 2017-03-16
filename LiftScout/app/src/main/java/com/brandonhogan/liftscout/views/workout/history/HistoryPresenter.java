@@ -56,6 +56,7 @@ public class HistoryPresenter implements HistoryContract.Presenter {
         RealmResults<Set> sets = progressManager.getSetsByExercise(exerciseId);
 
         if (sets != null) {
+            int setCounter = 0;
             for (Set set : sets) {
 
                 List<IItem> items = new LinkedList<>();
@@ -63,10 +64,13 @@ public class HistoryPresenter implements HistoryContract.Presenter {
                 boolean isEmpty = true;
                 int setCount = 0;
 
+                int repCounter = 0;
                 for (Rep rep : set.getReps()) {
-                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), set.getDate(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue(), recordsManager.isRecord(rep.getId())));
+                    items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), set.getDate(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue(),
+                            recordsManager.isRecord(rep.getId()) ,set.getReps().size() - 1 == repCounter));
                     volume += rep.getWeight();
                     isEmpty = false;
+                    repCounter ++;
                 }
 
                 if (isEmpty)
@@ -74,10 +78,11 @@ public class HistoryPresenter implements HistoryContract.Presenter {
                 else
                     setCount = set.getReps().size();
 
-                HistoryListSection expandableItem = new HistoryListSection(set.getId(), set.getDate(), BhDate.toSimpleStringDate(set.getDate()), set.getExercise().getId(), volume, setCount, userManager.getMeasurementValue(), isEmpty);
+                HistoryListSection expandableItem = new HistoryListSection(set.getId(), set.getDate(), BhDate.toSimpleStringDate(set.getDate()), set.getExercise().getId(), volume, setCount, userManager.getMeasurementValue(), isEmpty, setCounter == 0);
                 expandableItem.withIsExpanded(true);
                 expandableItem.withSubItems(items);
                 adapterData.add(expandableItem);
+                setCounter ++;
             }
         }
 
