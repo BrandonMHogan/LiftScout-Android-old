@@ -80,7 +80,6 @@
     <string name="charts_category_no_data">No data available. You need to have had at least one workout.</string>
 
 
-
     <!-- Drawer Navigations -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -110,7 +109,6 @@
     <string name="intro_slide_one_title">Welcome to Lift Scout!</string>
     <string name="intro_slide_one_description">Thank you for using Lift Scout, an imperative tool both in and outside of the gym!</string>
     <string name="intro_slide_one_description_two">Before you begin, we need to setup a few things to make sure the application is best tailored for your needs.</string>
-
     <string name="intro_slide_two_title">Settings</string>
     <string name="intro_slide_two_description">\n\r You can change these settings anytime later from the settings menu</string>
     <string name="intro_slide_three_title">Default Exercises</string>
@@ -185,14 +183,10 @@
     <string name="setting_today_weight_title">Enable Weight Tracking</string>
     <string name="setting_today_photo_title">Enable Photo Tracking</string>
     <string name="setting_today_routine_title">Enable Routine Tracking</string>
-
-
     <string name="setting_display_theme_spinner_title">Theme</string>
     <string name="setting_display_theme_spinner_description">Choose a theme that better fits your taste</string>
-
     <string name="setting_profile_name_title">Full Name</string>
     <string name="setting_profile_name_description">Change your name</string>
-
     <string name="setting_profile_measurement_spinner_title">Unit of Measurement</string>
     <string name="setting_profile_measurement_spinner_description">Choose the unit of measurement you want to use for your weight</string>
 
@@ -218,6 +212,7 @@
     <!-- Workout - Sections -->
     <string name="frag_history_empty_set_msg">No sets have been added</string>
 
+
     <!-- Errors -->
     <string name="error_title">Uh oh!</string>
     <string name="error_name">Name is required</string>
@@ -236,6 +231,9 @@
     <!-- Category / Exercise Lists -->
     <string name="category_list_no_data">You have not created any categories yet</string>
     <string name="exercise_list_no_data">You have not created any exercises for %s yet</string>
+    <string name="category_edit_no_color">Please select a color before saving</string>
+    <string name="category_edit_no_name">Please enter a name before saving</string>
+    <string name="exercise_edit_no_name">Please enter a name before saving</string>
 
     <!-- Default Categories / Exercises -->
     <string name="category_abs">Abs</string>

@@ -6,6 +6,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -69,11 +70,19 @@ public class ExerciseEditDialog {
     // Private Functions
     //
     private void onSave() {
+
+        String name = nameEditText.getText().toString().trim();
+
+        if (name.isEmpty()) {
+            Toast.makeText(activity, R.string.exercise_edit_no_name, Toast.LENGTH_SHORT).show();
+            return ;
+        }
+
         dismiss();
 
         listener.onSaveExerciseEditDialog(
                 exercise.getId(),
-                nameEditText.getText().toString(),
+                name,
                 ConstantValues.increments.get(incrementSpinner.getSelectedIndex()),
                 vibrateSwitch.isChecked(),
                 soundSwitch.isChecked(),
@@ -100,6 +109,7 @@ public class ExerciseEditDialog {
 
                     .customView(customTheme, true)
                     .positiveText(R.string.save)
+                    .autoDismiss(false)
                     .onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

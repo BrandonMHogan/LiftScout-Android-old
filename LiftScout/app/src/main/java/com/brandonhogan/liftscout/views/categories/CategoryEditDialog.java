@@ -62,14 +62,22 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
     //
     private void onSave() {
 
-        if (category.getColor() == 0) {
-            Toast.makeText(activity, "Please Select a color", Toast.LENGTH_SHORT).show();
+        String name = nameEditText.getText().toString().trim();
+
+        if (name.isEmpty()) {
+            Toast.makeText(activity, R.string.category_edit_no_name, Toast.LENGTH_SHORT).show();
             return ;
         }
 
+        if (category.getColor() == 0) {
+            Toast.makeText(activity, R.string.category_edit_no_color, Toast.LENGTH_SHORT).show();
+            return ;
+        }
+
+
         dismiss();
 
-        category.setName(nameEditText.getText().toString());
+        category.setName(name);
         listener.onSaveCategoryEditDialog(category);
     }
 
