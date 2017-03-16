@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/workout_header_height"
-    android:background="?android:fillColor"
-    android:paddingStart="@dimen/tracker_section_header_padding_sides"
-    android:paddingEnd="@dimen/tracker_section_header_padding_sides"
-    android:layout_marginTop="@dimen/tracker_section_header_margin_bottom">
+    android:layout_height="wrap_content" >
 
-    <TextView android:id="@+id/workout_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:textSize="@dimen/material_text_size_small"
-        android:layout_marginStart="9dp" />
+    <View
+        android:id="@+id/padding_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tracker_section_header_margin_top"
+        android:background="@color/transparent"
+        android:clickable="true"/>
 
-    <LinearLayout
-        android:id="@+id/volume_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginEnd="9dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true">
+    <RelativeLayout
+        android:id="@+id/display_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/workout_header_height"
+        android:layout_below="@id/padding_view"
+        android:background="?android:fillColor"
+        android:paddingStart="@dimen/tracker_section_header_padding_sides"
+        android:paddingEnd="@dimen/tracker_section_header_padding_sides" >
 
-
-        <TextView
-            android:id="@+id/workout_set_count"
+        <TextView android:id="@+id/workout_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/material_text_size_small" />
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/material_text_size_small"
+            android:layout_marginStart="9dp" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/volume_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="9dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true">
+
+            <TextView
+                android:id="@+id/workout_set_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/material_text_size_small" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </RelativeLayout>

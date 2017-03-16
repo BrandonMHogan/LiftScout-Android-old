@@ -60,6 +60,7 @@ public class TodayPresenter implements TodayContact.Presenter {
         RealmList<Set> sets = progressManager.getSetsByDate(date);
 
         if (sets != null) {
+            int setCounter = 0;
             for (Set set : sets.sort(Set.ORDER_ID)) {
 
                 List<IItem> items = new LinkedList<>();
@@ -67,21 +68,26 @@ public class TodayPresenter implements TodayContact.Presenter {
                 boolean isEmpty = true;
                 int setCount = 0;
 
+                int repCounter = 0;
                 for (Rep rep : set.getReps()) {
-                    items.add(new TodayListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue(), recordsManager.isRecord(rep.getId())));
+
+                    items.add(new TodayListItem(set.getId(), set.getExercise().getId(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue(),
+                            recordsManager.isRecord(rep.getId()),set.getReps().size() - 1 == repCounter));
                     volume += (rep.getWeight() * rep.getCount());
                     isEmpty = false;
+                    repCounter ++;
                 }
 
                 if (isEmpty)
-                    items.add(new TodayListItem(set.getId(), set.getExercise().getId(), true, view.getEmptySetMessage()));
+                    items.add(new TodayListItem(set.getId(), set.getExercise().getId(), true, view.getEmptySetMessage(), true));
                 else
                     setCount = set.getReps().size();
 
 
-                TodayListSection expandableItem = new TodayListSection(set.getId(), set.getExercise().getName(), volume, setCount, userManager.getMeasurementValue(), isEmpty);
+                TodayListSection expandableItem = new TodayListSection(set.getId(), set.getExercise().getName(), volume, setCount, userManager.getMeasurementValue(), isEmpty, setCounter == 0);
                 expandableItem.withSubItems(items);
                 adapterData.add(expandableItem);
+                setCounter ++;
             }
         }
 

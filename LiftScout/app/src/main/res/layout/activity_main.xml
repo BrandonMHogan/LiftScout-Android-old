@@ -50,7 +50,7 @@
             android:background="?android:windowBackground"
             app:itemIconTint="?android:textColorSecondary"
             app:itemTextColor="?android:textColorSecondary"
-            android:elevation="5dp"
+            android:elevation="15dp"
             app:menu="@menu/bottom_nav" />
 
     </RelativeLayout>

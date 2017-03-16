@@ -22,16 +22,35 @@
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/workout_list_margin"
             android:layout_marginEnd="@dimen/workout_list_margin"
-            android:layout_marginBottom="0dp">
+            android:layout_marginBottom="@dimen/workout_list_margin">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/home_today_title_top_margin"
+                android:layout_marginBottom="@dimen/home_today_title_top_margin"
                 android:gravity="center_horizontal"
-                android:textColor="?attr/colorAccent"
+                android:textColor="?attr/android:textColorPrimary"
                 style="@style/RobotoSubheading"/>
+
+            <LinearLayout
+                android:id="@+id/workout_no_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/workout_no_data_margin_top"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/title"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/frag_workout_no_data_message"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/weight_layout"
@@ -62,36 +81,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/weight_layout"/>
-
-
-            <LinearLayout
-                android:id="@+id/workout_no_data"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/frag_workout_no_data_message"/>
-
-                <Button
-                    android:id="@+id/start_workout"
-                    android:layout_width="@dimen/today_start_workout_button_width"
-                    android:layout_height="@dimen/today_start_workout_button_height"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/background_round_corner_ripple"
-                    android:backgroundTint="?android:colorAccent"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="40dp"
-                    android:text="@string/frag_workout_no_data_button" />
-
-            </LinearLayout>
 
         </RelativeLayout>
 

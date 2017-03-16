@@ -198,9 +198,4 @@ public class TodayFragment extends BaseFragment implements TodayContact.View {
         else
             noDataLayout.setVisibility(View.GONE);
     }
-
-    @OnClick(R.id.start_workout)
-    void startWorkoutClicked() {
-        getNavigationManager().startCategoryListAddSet();
-    }
 }

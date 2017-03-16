@@ -3,6 +3,8 @@ package com.brandonhogan.liftscout.views.home.today;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
@@ -31,15 +33,17 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
     private List<IItem> mSubItems;
     private boolean mExpanded = false;
     private boolean isEmpty;
+    private boolean isFirst;
 
     private FastAdapter.OnClickListener<TodayListSection> mOnClickListener;
 
-    public TodayListSection(int setId, String name, double volume, int setCount, String measurement, boolean isEmpty) {
+    public TodayListSection(int setId, String name, double volume, int setCount, String measurement, boolean isEmpty, boolean isFirst) {
         this.setId = setId;
         this.name = name;
         this.volume = volume;
         this.setCount = setCount;
         this.measurement = measurement;
+        this.isFirst = isFirst;
     }
 
     @Override
@@ -147,6 +151,7 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
 
         viewHolder.setCount.setText(count);
 
+        viewHolder.paddingView.setVisibility(isFirst ? View.GONE : View.VISIBLE);
     }
 
 
@@ -177,6 +182,9 @@ public class TodayListSection extends AbstractItem<TodayListSection, TodayListSe
      */
     protected static class ViewHolder extends RecyclerView.ViewHolder {
         protected final View view;
+
+        @Bind(R.id.padding_view)
+        View paddingView;
 
         @Bind(R.id.workout_name)
         TextView name;

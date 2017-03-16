@@ -23,22 +23,25 @@ public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.Vie
     private boolean isEmpty = false;
     private String emptyMsg;
     private boolean isRecord;
+    private boolean isLastItem;
 
-    public TodayListItem(int setId, int exerciseId, int reps, double weight, String measurement, boolean isRecord) {
+    public TodayListItem(int setId, int exerciseId, int reps, double weight, String measurement, boolean isRecord, boolean isLastItem) {
         this.setId = setId;
         this.exerciseId = exerciseId;
         this.reps = reps;
         this.weight = weight;
         this.measurement = measurement;
         this.isRecord = isRecord;
+        this.isLastItem = isLastItem;
     }
 
-    public TodayListItem(int setId, int exerciseId, boolean isEmpty, String emptyMessage) {
+    public TodayListItem(int setId, int exerciseId, boolean isEmpty, String emptyMessage, boolean isLastItem) {
         this.setId = setId;
         this.exerciseId = exerciseId;
         this.isEmpty = isEmpty;
         this.emptyMsg = emptyMessage;
         this.isRecord = false;
+        this.isLastItem = isLastItem;
     }
 
     @Override
@@ -87,17 +90,20 @@ public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.Vie
             viewHolder.measurement.setText(Measurements.getCompressedType(measurement, weight > 1));
 
             viewHolder.recordImage.setVisibility(isRecord ? View.VISIBLE : View.GONE);
+
+            viewHolder.divider.setVisibility(isLastItem ? View.GONE : View.VISIBLE);
         }
     }
 
     //The viewHolder used for this item. This viewHolder is always reused by the RecyclerView so scrolling is blazing fast
     protected static class ViewHolder extends RecyclerView.ViewHolder {
-        protected LinearLayout repLayout;
-        protected TextView reps;
-        protected TextView weight;
-        protected TextView noRep;
-        protected TextView measurement;
-        protected ImageView recordImage;
+        private LinearLayout repLayout;
+        private TextView reps;
+        private TextView weight;
+        private TextView noRep;
+        private TextView measurement;
+        private ImageView recordImage;
+        private View divider;
 
         public ViewHolder(View view) {
             super(view);
@@ -107,6 +113,7 @@ public class TodayListItem extends AbstractItem<TodayListItem, TodayListItem.Vie
             this.measurement = (TextView) view.findViewById(R.id.item_measurement);
             this.noRep = (TextView) view.findViewById(R.id.no_rep);
             this.recordImage = (ImageView) view.findViewById(R.id.record_image);
+            this.divider = (View) view.findViewById(R.id.divider);
         }
     }
 }
