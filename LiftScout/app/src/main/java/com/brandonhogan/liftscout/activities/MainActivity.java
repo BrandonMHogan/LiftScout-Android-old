@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.brandonhogan.liftscout.R;
@@ -112,6 +114,19 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         }
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_main_settings).setVisible(true);
+        menu.findItem(R.id.action_about).setVisible(true);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -141,6 +156,19 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         outState.putSerializable(SAVE_STATE_TODAY_PROGRESS_DATE,
                 progressManager.getTodayProgress().getDate());
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_main_settings:
+                navigationManager.startSettings();
+                break;
+            case R.id.action_about:
+                navigationManager.startAbout();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

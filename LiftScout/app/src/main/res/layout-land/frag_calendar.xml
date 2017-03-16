@@ -11,6 +11,18 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" >
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="normal"
+            android:src="@drawable/ic_add_white_48dp"
+            android:elevation="5dp"
+            app:pressedTranslationZ="12dp"
+            android:layout_marginBottom="@dimen/fab_margin_bottom"
+            android:layout_marginEnd="@dimen/fab_margin_end"
+            android:layout_gravity="bottom|end" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -31,6 +43,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toStartOf="@id/divider"
+                android:layout_marginTop="@dimen/workout_list_margin"
+                android:layout_marginStart="@dimen/workout_list_margin"
+                android:layout_marginEnd="@dimen/workout_list_margin"
+                android:layout_marginBottom="@dimen/workout_list_margin"
                 android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
@@ -43,8 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="40dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:visibility="gone">
 
@@ -54,18 +69,6 @@
                         android:layout_gravity="center_horizontal"
                         android:text="@string/frag_workout_no_data_message"/>
 
-                    <Button
-                        android:id="@+id/start_workout"
-                        android:layout_width="@dimen/today_start_workout_button_width"
-                        android:layout_height="@dimen/today_start_workout_button_height"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/background_round_corner_ripple"
-                        android:backgroundTint="?android:colorAccent"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="5dp"
-                        android:text="@string/frag_workout_no_data_button" />
-
                 </LinearLayout>
 
             </RelativeLayout>
@@ -74,6 +77,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@id/divider"
+                android:layout_marginTop="@dimen/workout_list_margin"
+                android:layout_marginStart="@dimen/workout_list_margin"
+                android:layout_marginEnd="@dimen/workout_list_margin"
+                android:layout_marginBottom="@dimen/workout_list_margin"
                 android:orientation="vertical">
 
                 <TextView

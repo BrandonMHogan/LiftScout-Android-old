@@ -162,6 +162,9 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.action_main_settings).setVisible(false);
+        menu.findItem(R.id.action_about).setVisible(false);
+
         deleteMenu = menu.findItem(R.id.action_delete);
         deleteMenu.setVisible(true);
 

@@ -91,35 +91,6 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        MenuItem addMenu = menu.findItem(R.id.action_add);
-        addMenu.setVisible(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_add:
-                getNavigationManager().startCategoryListAddSet();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
@@ -245,17 +216,16 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
             noDataLayout.setVisibility(View.GONE);
     }
 
-    @OnClick(R.id.start_workout)
-    void startWorkoutClicked() {
-        getNavigationManager().startCategoryListAddSet();
-    }
-
-
     // Bus Subscriptions
     //
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTrackerEvent(HistoryTrackerEvent event) {
         presenter.editEvent(event);
+    }
+
+    @OnClick(R.id.fab)
+    public void onFabClicked() {
+        getNavigationManager().startCategoryListAddSet();
     }
 }

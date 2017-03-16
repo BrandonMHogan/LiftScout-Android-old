@@ -54,6 +54,7 @@
     <!-- Tracker Settings -->
     <string name="rest_timer_seconds">Rest Time (in seconds)</string>
     <string name="settings">Settings</string>
+    <string name="main_settings">Main Settings</string>
     <string name="increments_settings">Increments</string>
     <string name="rest_timer_settings">Rest Timer</string>
     <string name="rest_timer">Rest Timer</string>
