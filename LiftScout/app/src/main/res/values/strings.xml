@@ -77,7 +77,7 @@
     <string name="charts_select_exercise">Choose Exercise</string>
     <string name="charts_total">Collective Total</string>
     <string name="charts_total_date_range">Date Range</string>
-    <string name="charts_category_no_data">No data available. You need to enter in at least one workout.</string>
+    <string name="charts_category_no_data">No data available. You need to have had at least one workout.</string>
 
 
 
