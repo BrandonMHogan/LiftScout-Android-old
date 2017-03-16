@@ -30,6 +30,10 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:scrollbarThumbVertical="?attr/colorAccent"
+        android:scrollbarSize="1dp"
+        android:scrollbarStyle="insideOverlay"/>
 
 </com.brandonhogan.liftscout.core.controls.BaseFrameLayout>

@@ -78,9 +78,12 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
-                android:overScrollMode="never"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                android:scrollbarThumbVertical="?attr/colorAccent"
+                android:scrollbarSize="1dp"
+                android:scrollbarStyle="insideOverlay"
                 android:layout_below="@+id/weight_layout"/>
 
         </RelativeLayout>
