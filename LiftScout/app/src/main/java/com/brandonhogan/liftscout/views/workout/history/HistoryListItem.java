@@ -44,7 +44,6 @@ public class HistoryListItem extends AbstractItem<HistoryListItem, HistoryListIt
         this.isEmpty = isEmpty;
         this.emptyMsg = emptyMessage;
         this.isRecord = false;
-        this.isLastItem = isLastItem;
     }
 
     //The unique ID for this type of item

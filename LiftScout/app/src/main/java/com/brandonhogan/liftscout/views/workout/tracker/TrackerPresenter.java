@@ -91,7 +91,8 @@ public class TrackerPresenter implements TrackerContract.Presenter {
                         rowNum,
                         rep,
                         view.getRepsLabel(rep.getCount() > 1),
-                        Measurements.getCompressedType(measurementType, rep.getWeight() > 1), isRecord));
+                        Measurements.getCompressedType(measurementType, rep.getWeight() > 1), isRecord
+                        ,set.getReps().size() == rowNum));
                 rowNum += 1;
             }
         }

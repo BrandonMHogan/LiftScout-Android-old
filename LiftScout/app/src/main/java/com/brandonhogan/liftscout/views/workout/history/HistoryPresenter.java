@@ -67,7 +67,7 @@ public class HistoryPresenter implements HistoryContract.Presenter {
                 int repCounter = 0;
                 for (Rep rep : set.getReps()) {
                     items.add(new HistoryListItem(set.getId(), set.getExercise().getId(), set.getDate(), rep.getCount(), rep.getWeight(), userManager.getMeasurementValue(),
-                            recordsManager.isRecord(rep.getId()) ,set.getReps().size() - 1 == repCounter));
+                            recordsManager.isRecord(rep.getId()), set.getReps().size() - 1 == repCounter));
                     volume += rep.getWeight();
                     isEmpty = false;
                     repCounter ++;

@@ -1,112 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/tracker_item_height"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:gravity="center">
 
-    <LinearLayout
-        android:id="@+id/rowFG"
+    <RelativeLayout
+        android:id="@+id/display_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/android:windowBackground"
-        android:layout_centerVertical="true"
-        android:clickable="true"
-        android:elevation="4dp"
-        android:focusable="true"
-        android:orientation="horizontal"
-        android:visibility="visible">
+        android:layout_height="@dimen/workout_header_height"
+        android:background="@drawable/workout_item_background">
 
         <LinearLayout
+            android:id="@+id/rep_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?attr/selectableItemBackground"
-            android:orientation="horizontal"
-            android:paddingBottom="16dp"
-            android:paddingLeft="16dp"
-            android:paddingTop="16dp">
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
 
-            <RelativeLayout
-                android:id="@+id/display_layout"
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="6">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView android:id="@+id/item_reps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="@dimen/material_text_size_small"/>
 
                 <TextView
-                    android:id="@+id/row_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:maxLines="1"
+                    android:layout_marginStart="4dp"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="@dimen/material_text_size_small"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="25dp"/>
+                    android:text="@string/reps"/>
 
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:maxLines="1"
-                    android:textSize="@dimen/material_text_size_small"
-                    android:textStyle="bold"
-                    android:layout_marginStart="50dp"/>
+            <TextView android:id="@+id/item_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/android:textColorSecondary"
+                android:textSize="@dimen/material_text_size_small"/>
 
-                <TextView
-                    android:id="@+id/count_metric"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:maxLines="1"
-                    android:textSize="@dimen/material_text_size_small"
-                    android:textStyle="bold"
-                    android:layout_marginStart="2dp"
-                    android:layout_toEndOf="@id/count"/>
+            <TextView
+                android:id="@+id/item_measurement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="?attr/android:textColorSecondary"
+                android:textSize="@dimen/material_text_size_small"
+                android:text="@string/lbs"/>
 
-
-                <TextView
-                    android:id="@+id/weight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:maxLines="1"
-                    android:textSize="@dimen/material_text_size_small"
-                    android:textStyle="bold"
-                    android:layout_toStartOf="@+id/weight_metric"/>
-
-                <TextView
-                    android:id="@+id/weight_metric"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:maxLines="1"
-                    android:textSize="@dimen/material_text_size_small"
-                    android:textStyle="bold"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_alignParentEnd="true" />
-
-                <ImageView
-                    android:id="@+id/record_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="95dp"
-                    android:tint="?android:textColorPrimary"
-                    android:src="@drawable/ic_trophy_white_36dp"/>
-
-            </RelativeLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/record_image"
+            android:layout_width="@dimen/workout_item_record_image_size"
+            android:layout_height="@dimen/workout_item_record_image_size"
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="85dp"
+            android:src="@drawable/ic_trophy_white_36dp"
+            android:tint="?attr/android:textColorSecondary"
+            android:contentDescription="@string/workout_personal_records_title"/>
+
+        <TextView android:id="@+id/no_rep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:textSize="@dimen/material_text_size_small"/>
+
+    </RelativeLayout>
 
     <View
+        android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:background="?attr/android:fillColor"
-        android:elevation="5dp"/>
+        android:visibility="gone"
+        android:layout_below="@id/display_layout"
+        android:background="?attr/android:fillColor"/>
+
 </RelativeLayout>

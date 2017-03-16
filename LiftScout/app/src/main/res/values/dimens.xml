@@ -160,16 +160,19 @@
     <!-- Workout Section -->
     <dimen name="workout_item_record_image_size">20dp</dimen>
     <dimen name="workout_list_margin">18dp</dimen>
+    <dimen name="tracker_list_margin_side">18dp</dimen>
+    <dimen name="tracker_list_margin_top_bottom">8dp</dimen>
     <dimen name="tracker_top_margin">15dp</dimen>
     <dimen name="tracker_inner_margin">10dp</dimen>
     <dimen name="tracker_outer_margin">12dp</dimen>
     <dimen name="tracker_outer_bottom_margin">20dp</dimen>
     <dimen name="tracker_divider_elevation">5dp</dimen>
     <dimen name="tracker_font_size">6sp</dimen>
-    <dimen name="tracker_button_width">160dp</dimen>
-    <dimen name="tracker_button_height">46dp</dimen>
+    <dimen name="tracker_button_width">157dp</dimen>
+    <dimen name="tracker_button_height">44dp</dimen>
     <dimen name="tracker_record_image_size">45dp</dimen>
     <dimen name="tracker_item_font_size">15dp</dimen>
+    <dimen name="tracker_button_margin_top">10dp</dimen>
     <dimen name="workout_header_height">42dp</dimen>
     <dimen name="tracker_section_header_padding_top_bottom">9dp</dimen>
     <dimen name="tracker_section_header_padding_sides">1dp</dimen>

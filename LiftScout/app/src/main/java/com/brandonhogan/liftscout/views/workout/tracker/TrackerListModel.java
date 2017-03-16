@@ -9,11 +9,12 @@ public class TrackerListModel {
     private int count;
     private double weight;
     private boolean isRecord = false;
+    private boolean isLastItem = false;
 
     private String countMetric;
     private String weightMetric;
 
-    public TrackerListModel(int rowNum, Rep rep, String countMetric, String weightMetric, boolean isRecord) {
+    public TrackerListModel(int rowNum, Rep rep, String countMetric, String weightMetric, boolean isRecord, boolean isLastItem) {
         this.rowNum = rowNum;
         this.id = rep.getId();
         this.count = rep.getCount();
@@ -21,6 +22,7 @@ public class TrackerListModel {
         this.countMetric = countMetric;
         this.weightMetric = weightMetric;
         this.isRecord = isRecord;
+        this.isLastItem = isLastItem;
     }
 
     public TrackerListModel() {
@@ -81,5 +83,13 @@ public class TrackerListModel {
 
     public void setRecord(boolean record) {
         isRecord = record;
+    }
+
+    public boolean isLastItem() {
+        return isLastItem;
+    }
+
+    public void setLastItem(boolean lastItem) {
+        isLastItem = lastItem;
     }
 }
