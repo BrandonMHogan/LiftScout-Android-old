@@ -134,6 +134,8 @@ public class MyLineGraph extends FrameLayout {
         View root = inflate(getContext(), R.layout.con_graph_line, this);
         ButterKnife.bind(this, root);
 
+        exerciseSelector.setText(R.string.charts_select_exercise);
+
         setupTypes();
         setupRangeSlider();
     }
@@ -520,7 +522,7 @@ public class MyLineGraph extends FrameLayout {
     }
 
     public void setExercise(int exerciseId, String exerciseName, int dateRange) {
-        if (exerciseSelector.getVisibility() == VISIBLE)
+        if (exerciseSelector.getVisibility() == VISIBLE && exerciseName != null && !exerciseName.isEmpty())
             exerciseSelector.setText(exerciseName);
 
         this.exerciseId = exerciseId;

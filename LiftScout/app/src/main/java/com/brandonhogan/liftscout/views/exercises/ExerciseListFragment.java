@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.views.exercises;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class ExerciseListFragment extends BaseFragment implements
         ExerciseListContract.View,
@@ -75,6 +77,9 @@ public class ExerciseListFragment extends BaseFragment implements
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
+
 
     //Overrides
     //
@@ -93,35 +98,7 @@ public class ExerciseListFragment extends BaseFragment implements
                 this.getArguments().getBoolean(BUNDLE_ADD_SET));
 
         presenter.viewCreated();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        MenuItem addMenu = menu.findItem(R.id.action_add);
-        addMenu.setVisible(!presenter.isInSearch());
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_add:
-                createExercise();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+        fab.setVisibility(presenter.isInSearch() ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -266,5 +243,10 @@ public class ExerciseListFragment extends BaseFragment implements
     public void swipeItem(int position) {
         editExercise(position);
         //onTouchListener.openSwipeOptions(position);
+    }
+
+    @OnClick(R.id.fab)
+    public void onFabClicked() {
+        createExercise();
     }
 }
