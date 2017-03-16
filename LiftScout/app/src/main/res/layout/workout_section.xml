@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <View
         android:id="@+id/padding_view"
@@ -26,6 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:textSize="@dimen/material_text_size_small"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_toStartOf="@+id/volume_layout"
             android:layout_marginStart="9dp" />
 
         <LinearLayout
@@ -34,6 +37,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginEnd="9dp"
+            android:layout_marginStart="9dp"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true">
 
