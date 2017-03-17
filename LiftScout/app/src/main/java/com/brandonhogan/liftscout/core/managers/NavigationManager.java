@@ -134,7 +134,7 @@ public class NavigationManager {
             return false;
         }
 
-        return replaceWithTransitions(fragment, R.animator.slide_in_right, R.animator.slide_out_left);
+        return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
     }
 
     private boolean verifyTransition(BaseFragment fragment, boolean force) {
