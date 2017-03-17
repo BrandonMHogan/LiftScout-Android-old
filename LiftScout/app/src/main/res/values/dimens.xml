@@ -162,7 +162,7 @@
     <dimen name="workout_item_record_image_size">20dp</dimen>
     <dimen name="workout_list_margin">18dp</dimen>
     <dimen name="tracker_list_margin_side">18dp</dimen>
-    <dimen name="tracker_list_margin_top_bottom">8dp</dimen>
+    <dimen name="tracker_list_margin_top_bottom">18dp</dimen>
     <dimen name="tracker_top_margin">15dp</dimen>
     <dimen name="tracker_inner_margin">10dp</dimen>
     <dimen name="tracker_outer_margin">12dp</dimen>
