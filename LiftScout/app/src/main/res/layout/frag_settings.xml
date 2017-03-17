@@ -5,236 +5,162 @@
     android:layout_height="match_parent"
     android:background="?android:windowBackground">
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" >
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" >
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TableLayout
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/profileRow"
+                android:clickable="true"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/settings_table_layout_padding_top"
-                android:id="@+id/SettingsTableLayout" >
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="@dimen/settings_table_row_horizontal_padding"
+                android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
+                android:minHeight="@dimen/settings_table_row_min_height">
 
-                <!-- Profile Section -->
-                <TableRow
-                    android:id="@+id/profileRow"
+                <TextView
+                    android:text="@string/setting_profile"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:clickable="true"
-                    android:minHeight="@dimen/settings_table_row_min_height"
-                    android:showDividers="end"
-                    android:divider="?attr/android:fillColor"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:paddingTop="@dimen/settings_table_body_text_padding_top"
+                    android:textColor="?attr/android:textColorPrimary"
+                    style="@style/RobotoSubheading"/>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center_vertical"
-                        android:paddingTop="@dimen/setting_layout_top_padding"
-                        android:paddingLeft="@dimen/settings_table_row_horizontal_padding"
-                        android:paddingRight="@dimen/settings_table_row_horizontal_padding">
-
-                        <TextView
-                            android:text="@string/setting_profile"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:paddingTop="@dimen/settings_table_body_text_padding_top"
-                            android:textColor="?attr/android:textColorPrimary"
-                            style="@style/RobotoSubheading"/>
-
-                        <TextView
-                            style="@style/RobotoBody01"
-                            android:textColor="?android:textColorSecondary"
-                            android:text="@string/setting_profile_description"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:textSize="@dimen/material_text_size_small"
-                            android:maxLines="4" />
-
-                    </LinearLayout>
-                </TableRow>
-
-                <View android:layout_width="match_parent"
-                    android:background="?attr/android:fillColor"
-                    android:layout_height="@dimen/settings_divider_view_hieght"/>
-
-                <!-- Display Section -->
-                <TableRow
-                    android:id="@+id/displayRow"
+                <TextView
+                    style="@style/RobotoBody01"
+                    android:textColor="?android:textColorSecondary"
+                    android:text="@string/setting_profile_description"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:clickable="true"
-                    android:minHeight="@dimen/settings_table_row_min_height"
-                    android:showDividers="end"
-                    android:divider="?attr/android:fillColor"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:textSize="@dimen/material_text_size_small"
+                    android:maxLines="4" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center_vertical"
-                        android:paddingTop="@dimen/setting_layout_top_padding"
-                        android:paddingLeft="@dimen/settings_table_row_horizontal_padding"
-                        android:paddingRight="@dimen/settings_table_row_horizontal_padding">
+            </LinearLayout>
 
-                        <TextView
-                            android:text="@string/setting_display"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:paddingTop="@dimen/settings_table_body_text_padding_top"
-                            android:textColor="?attr/android:textColorPrimary"
-                            style="@style/RobotoSubheading"/>
+            <View android:layout_width="match_parent"
+                android:background="?attr/android:fillColor"
+                android:layout_height="@dimen/settings_divider_view_hieght"/>
 
-                        <TextView
-                            style="@style/RobotoBody01"
-                            android:textColor="?android:textColorSecondary"
-                            android:text="@string/setting_display_description"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:textSize="@dimen/material_text_size_small"
-                            android:maxLines="4" />
 
-                    </LinearLayout>
-                </TableRow>
+            <LinearLayout
+                android:id="@+id/displayRow"
+                android:clickable="true"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="@dimen/settings_table_row_horizontal_padding"
+                android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
+                android:minHeight="@dimen/settings_table_row_min_height">
 
-                <View android:layout_width="match_parent"
-                    android:background="?attr/android:fillColor"
-                    android:layout_height="@dimen/settings_divider_view_hieght"/>
 
-                <!-- Today Section -->
-                <TableRow
-                    android:id="@+id/todayRow"
+                    <TextView
+                        android:text="@string/setting_display"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:paddingTop="@dimen/settings_table_body_text_padding_top"
+                        android:textColor="?attr/android:textColorPrimary"
+                        style="@style/RobotoSubheading"/>
+
+                    <TextView
+                        style="@style/RobotoBody01"
+                        android:textColor="?android:textColorSecondary"
+                        android:text="@string/setting_display_description"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/material_text_size_small"
+                        android:maxLines="4" />
+
+
+            </LinearLayout>
+
+            <View android:layout_width="match_parent"
+                android:background="?attr/android:fillColor"
+                android:layout_height="@dimen/settings_divider_view_hieght"/>
+
+
+            <LinearLayout
+                android:id="@+id/todayRow"
+                android:clickable="true"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="@dimen/settings_table_row_horizontal_padding"
+                android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
+                android:minHeight="@dimen/settings_table_row_min_height">
+
+
+                <TextView
+                    android:text="@string/setting_home"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:clickable="true"
-                    android:minHeight="@dimen/settings_table_row_min_height"
-                    android:showDividers="end"
-                    android:divider="?attr/android:fillColor"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:paddingTop="@dimen/settings_table_body_text_padding_top"
+                    android:textColor="?attr/android:textColorPrimary"
+                    style="@style/RobotoSubheading"/>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center_vertical"
-                        android:paddingTop="@dimen/setting_layout_top_padding"
-                        android:paddingLeft="@dimen/settings_table_row_horizontal_padding"
-                        android:paddingRight="@dimen/settings_table_row_horizontal_padding">
-
-                        <TextView
-                            android:text="@string/setting_home"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:paddingTop="@dimen/settings_table_body_text_padding_top"
-                            android:textColor="?attr/android:textColorPrimary"
-                            style="@style/RobotoSubheading"/>
-
-                        <TextView
-                            style="@style/RobotoBody01"
-                            android:textColor="?android:textColorSecondary"
-                            android:text="@string/setting_home_description"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:textSize="@dimen/material_text_size_small"
-                            android:maxLines="4" />
-
-                    </LinearLayout>
-                </TableRow>
-
-                <View android:layout_width="match_parent"
-                    android:background="?attr/android:fillColor"
-                    android:layout_height="@dimen/settings_divider_view_hieght"/>
-
-                <!-- About Section -->
-                <TableRow
-                    android:id="@+id/aboutRow"
+                <TextView
+                    style="@style/RobotoBody01"
+                    android:textColor="?android:textColorSecondary"
+                    android:text="@string/setting_home_description"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:clickable="true"
-                    android:minHeight="@dimen/settings_table_row_min_height"
-                    android:showDividers="end"
-                    android:divider="?attr/android:fillColor"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:textSize="@dimen/material_text_size_small"
+                    android:maxLines="4" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center_vertical"
-                        android:paddingTop="@dimen/setting_layout_top_padding"
-                        android:paddingLeft="@dimen/settings_table_row_horizontal_padding"
-                        android:paddingRight="@dimen/settings_table_row_horizontal_padding">
 
-                        <TextView
-                            android:text="@string/setting_about"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:paddingTop="@dimen/settings_table_body_text_padding_top"
-                            android:textColor="?attr/android:textColorPrimary"
-                            style="@style/RobotoSubheading"/>
+            </LinearLayout>
 
-                        <TextView
-                            style="@style/RobotoBody01"
-                            android:textColor="?android:textColorSecondary"
-                            android:text="@string/setting_about_description"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:textSize="@dimen/material_text_size_small"
-                            android:maxLines="4" />
+            <View android:layout_width="match_parent"
+                android:background="?attr/android:fillColor"
+                android:layout_height="@dimen/settings_divider_view_hieght"/>
 
-                    </LinearLayout>
-                </TableRow>
+            <LinearLayout
+                android:id="@+id/aboutRow"
+                android:clickable="true"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="@dimen/settings_table_row_horizontal_padding"
+                android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
+                android:minHeight="@dimen/settings_table_row_min_height">
 
-                <View android:layout_width="match_parent"
-                    android:background="?attr/android:fillColor"
-                    android:layout_height="@dimen/settings_divider_view_hieght"/>
 
-                <!--&lt;!&ndash; Notification Section &ndash;&gt;-->
-                <!--<TableRow-->
-                    <!--android:id="@+id/notificationRow"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:clickable="true"-->
-                    <!--android:minHeight="@dimen/settings_table_row_min_height"-->
-                    <!--android:showDividers="end"-->
-                    <!--android:divider="@color/listview_border_color"-->
-                    <!--android:background="?android:attr/selectableItemBackground">-->
+                <TextView
+                    android:text="@string/setting_about"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:paddingTop="@dimen/settings_table_body_text_padding_top"
+                    android:textColor="?attr/android:textColorPrimary"
+                    style="@style/RobotoSubheading"/>
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:gravity="center_vertical"-->
-                        <!--android:paddingTop="@dimen/setting_layout_top_padding"-->
-                        <!--android:paddingLeft="@dimen/settings_table_row_horizontal_padding"-->
-                        <!--android:paddingRight="@dimen/settings_table_row_horizontal_padding">-->
+                <TextView
+                    style="@style/RobotoBody01"
+                    android:textColor="?android:textColorSecondary"
+                    android:text="@string/setting_about_description"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/material_text_size_small"
+                    android:maxLines="4" />
 
-                        <!--<TextView-->
-                            <!--android:text="@string/setting_notifications"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:paddingTop="@dimen/settings_table_body_text_padding_top"-->
-                            <!--android:textSize="@dimen/settings_table_body_text_size"/>-->
 
-                        <!--<TextView-->
-                            <!--style="@style/RobotoBody01"-->
-                            <!--android:textColor="@color/textColorSecondaryInverse"-->
-                            <!--android:text="@string/setting_notifications_description"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:maxLines="4" />-->
+            </LinearLayout>
 
-                    <!--</LinearLayout>-->
-                <!--</TableRow>-->
 
-            </TableLayout>
-        </ScrollView>
-    </FrameLayout>
+        </LinearLayout>
+
+    </ScrollView>
 </com.brandonhogan.liftscout.core.controls.BaseFrameLayout>
