@@ -68,6 +68,7 @@ public class TrackerFragment extends BaseFragment implements
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
     private SweetAlertDialog dialog;
+    private Toast toast;
 
 
     // Binds
@@ -109,6 +110,8 @@ public class TrackerFragment extends BaseFragment implements
         presenter = new TrackerPresenter(this, getArguments().getInt(BUNDLE_EXERCISE_ID, Bundles.SHIT_ID));
         presenter.viewCreated();
 
+
+        toast = Toast.makeText(getActivity(), null, Toast.LENGTH_SHORT);
         resetButtons();
     }
 
@@ -154,7 +157,8 @@ public class TrackerFragment extends BaseFragment implements
     public void firstButtonOnClick() {
 
         if(repNumberPicker.getNumberAsInt() < 1) {
-            Toast.makeText(getActivity(), R.string.workout_error_one_rep_needed, Toast.LENGTH_SHORT).show();
+            toast.setText(R.string.workout_error_one_rep_needed);
+            toast.show();
             return;
         }
 
@@ -254,14 +258,17 @@ public class TrackerFragment extends BaseFragment implements
         resetButtons();
 
         if (isNew)
-            Toast.makeText(getActivity(), R.string.workout_set_created_toast, Toast.LENGTH_SHORT).show();
+            toast.setText(R.string.workout_set_created_toast);
         else
-            Toast.makeText(getActivity(), getString(R.string.workout_set_updated_toast, Integer.toString(position + 1)), Toast.LENGTH_SHORT).show();
+            toast.setText(getString(R.string.workout_set_updated_toast, Integer.toString(position + 1)));
+
+        toast.show();
     }
 
     @Override
     public void onDelete(int position) {
-        Toast.makeText(getActivity(), getString(R.string.workout_set_deleted_toast, Integer.toString(position + 1)), Toast.LENGTH_SHORT).show();
+        toast.setText(getString(R.string.workout_set_deleted_toast, Integer.toString(position + 1)));
+        toast.show();
     }
 
     @Override
