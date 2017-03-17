@@ -59,10 +59,4 @@ public class SettingsListFragment extends BaseFragment {
     public void todayClicked() {
         getNavigationManager().startSettingsHome();
     }
-
-    @OnClick(R.id.aboutRow)
-    public void aboutClicked() {
-        getNavigationManager().startAbout();
-    }
-
 }

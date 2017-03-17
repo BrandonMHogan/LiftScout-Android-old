@@ -122,44 +122,6 @@
 
             </LinearLayout>
 
-            <View android:layout_width="match_parent"
-                android:background="?attr/android:fillColor"
-                android:layout_height="@dimen/settings_divider_view_hieght"/>
-
-            <LinearLayout
-                android:id="@+id/aboutRow"
-                android:clickable="true"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackground"
-                android:paddingStart="@dimen/settings_table_row_horizontal_padding"
-                android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
-                android:minHeight="@dimen/settings_table_row_min_height">
-
-
-                <TextView
-                    android:text="@string/setting_about"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:paddingTop="@dimen/settings_table_body_text_padding_top"
-                    android:textColor="?attr/android:textColorPrimary"
-                    style="@style/RobotoSubheading"/>
-
-                <TextView
-                    style="@style/RobotoBody01"
-                    android:textColor="?android:textColorSecondary"
-                    android:text="@string/setting_about_description"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:textSize="@dimen/material_text_size_small"
-                    android:maxLines="4" />
-
-
-            </LinearLayout>
-
-
         </LinearLayout>
 
     </ScrollView>
