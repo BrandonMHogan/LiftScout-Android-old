@@ -2,7 +2,6 @@ package com.brandonhogan.liftscout.views.workout;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
@@ -33,7 +32,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.Bind;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 

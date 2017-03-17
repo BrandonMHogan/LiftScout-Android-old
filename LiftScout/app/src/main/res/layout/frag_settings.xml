@@ -16,7 +16,7 @@
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingTop="@dimen/settings_table_layout_padding_top"
                 android:id="@+id/SettingsTableLayout" >
 
@@ -28,7 +28,7 @@
                     android:clickable="true"
                     android:minHeight="@dimen/settings_table_row_min_height"
                     android:showDividers="end"
-                    android:divider="@color/listview_border_color"
+                    android:divider="?attr/android:fillColor"
                     android:background="?android:attr/selectableItemBackground">
 
                     <LinearLayout
@@ -45,7 +45,8 @@
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
                             android:paddingTop="@dimen/settings_table_body_text_padding_top"
-                            android:textSize="@dimen/settings_table_body_text_size"/>
+                            android:textColor="?attr/android:textColorPrimary"
+                            style="@style/RobotoSubheading"/>
 
                         <TextView
                             style="@style/RobotoBody01"
@@ -53,13 +54,14 @@
                             android:text="@string/setting_profile_description"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
+                            android:textSize="@dimen/material_text_size_small"
                             android:maxLines="4" />
 
                     </LinearLayout>
                 </TableRow>
 
                 <View android:layout_width="match_parent"
-                    android:background="@color/listview_border_color"
+                    android:background="?attr/android:fillColor"
                     android:layout_height="@dimen/settings_divider_view_hieght"/>
 
                 <!-- Display Section -->
@@ -70,7 +72,7 @@
                     android:clickable="true"
                     android:minHeight="@dimen/settings_table_row_min_height"
                     android:showDividers="end"
-                    android:divider="@color/listview_border_color"
+                    android:divider="?attr/android:fillColor"
                     android:background="?android:attr/selectableItemBackground">
 
                     <LinearLayout
@@ -87,7 +89,8 @@
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
                             android:paddingTop="@dimen/settings_table_body_text_padding_top"
-                            android:textSize="@dimen/settings_table_body_text_size"/>
+                            android:textColor="?attr/android:textColorPrimary"
+                            style="@style/RobotoSubheading"/>
 
                         <TextView
                             style="@style/RobotoBody01"
@@ -95,13 +98,14 @@
                             android:text="@string/setting_display_description"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
+                            android:textSize="@dimen/material_text_size_small"
                             android:maxLines="4" />
 
                     </LinearLayout>
                 </TableRow>
 
                 <View android:layout_width="match_parent"
-                    android:background="@color/listview_border_color"
+                    android:background="?attr/android:fillColor"
                     android:layout_height="@dimen/settings_divider_view_hieght"/>
 
                 <!-- Today Section -->
@@ -112,7 +116,7 @@
                     android:clickable="true"
                     android:minHeight="@dimen/settings_table_row_min_height"
                     android:showDividers="end"
-                    android:divider="@color/listview_border_color"
+                    android:divider="?attr/android:fillColor"
                     android:background="?android:attr/selectableItemBackground">
 
                     <LinearLayout
@@ -129,7 +133,8 @@
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
                             android:paddingTop="@dimen/settings_table_body_text_padding_top"
-                            android:textSize="@dimen/settings_table_body_text_size"/>
+                            android:textColor="?attr/android:textColorPrimary"
+                            style="@style/RobotoSubheading"/>
 
                         <TextView
                             style="@style/RobotoBody01"
@@ -137,16 +142,17 @@
                             android:text="@string/setting_home_description"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
+                            android:textSize="@dimen/material_text_size_small"
                             android:maxLines="4" />
 
                     </LinearLayout>
                 </TableRow>
 
                 <View android:layout_width="match_parent"
-                    android:background="@color/listview_border_color"
+                    android:background="?attr/android:fillColor"
                     android:layout_height="@dimen/settings_divider_view_hieght"/>
 
-                <!-- Profile Section -->
+                <!-- About Section -->
                 <TableRow
                     android:id="@+id/aboutRow"
                     android:layout_height="wrap_content"
@@ -154,7 +160,7 @@
                     android:clickable="true"
                     android:minHeight="@dimen/settings_table_row_min_height"
                     android:showDividers="end"
-                    android:divider="@color/listview_border_color"
+                    android:divider="?attr/android:fillColor"
                     android:background="?android:attr/selectableItemBackground">
 
                     <LinearLayout
@@ -171,7 +177,8 @@
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
                             android:paddingTop="@dimen/settings_table_body_text_padding_top"
-                            android:textSize="@dimen/settings_table_body_text_size"/>
+                            android:textColor="?attr/android:textColorPrimary"
+                            style="@style/RobotoSubheading"/>
 
                         <TextView
                             style="@style/RobotoBody01"
@@ -179,13 +186,14 @@
                             android:text="@string/setting_about_description"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
+                            android:textSize="@dimen/material_text_size_small"
                             android:maxLines="4" />
 
                     </LinearLayout>
                 </TableRow>
 
                 <View android:layout_width="match_parent"
-                    android:background="@color/listview_border_color"
+                    android:background="?attr/android:fillColor"
                     android:layout_height="@dimen/settings_divider_view_hieght"/>
 
                 <!--&lt;!&ndash; Notification Section &ndash;&gt;-->

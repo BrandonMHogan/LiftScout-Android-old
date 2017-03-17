@@ -27,25 +27,28 @@
                     android:layout_height="wrap_content"
                     android:text="@string/setting_home_default_spinner_title"
                     android:layout_marginBottom="@dimen/fragment_default_xsmall_margin"
-                    style="@style/RobotoSubheadingBold" />
+                    android:textColor="?attr/android:textColorPrimary"
+                    style="@style/RobotoSubheading" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_home_default_spinner_description"
                     android:layout_marginBottom="@dimen/fragment_default_small_margin"
-                    style="@style/RobotoCaption" />
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/material_text_size_small" />
 
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/homeDefaultSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:ms_text_color="?android:textColorSecondary"
                     app:ms_background_color="?attr/android:fillColor"/>
 
             </LinearLayout>
 
             <View android:layout_width="match_parent"
-                android:background="@color/listview_border_color"
+                android:background="?attr/android:fillColor"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_height="@dimen/settings_divider_view_hieght"/>
@@ -61,19 +64,22 @@
                     android:layout_height="wrap_content"
                     android:text="@string/setting_today_transformer_spinner_title"
                     android:layout_marginBottom="@dimen/fragment_default_xsmall_margin"
-                    style="@style/RobotoSubheadingBold" />
+                    android:textColor="?attr/android:textColorPrimary"
+                    style="@style/RobotoSubheading" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_today_transformer_spinner_description"
                     android:layout_marginBottom="@dimen/fragment_default_small_margin"
-                    style="@style/RobotoCaption" />
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/material_text_size_small" />
 
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/todayTransformSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:ms_text_color="?android:textColorSecondary"
                     app:ms_background_color="?attr/android:fillColor"/>
 
             </LinearLayout>

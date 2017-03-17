@@ -122,7 +122,7 @@
     </array>
 
     <!-- Border -->
-    <color name="listview_border_color">#1F000000</color>
+    <!--<color name="listview_border_color">#1F000000</color>-->
 
     <!-- Font Opacity - Black -->
     <color name="material_text_opacity_black_body_1">#DE000000</color>

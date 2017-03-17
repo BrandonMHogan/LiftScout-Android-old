@@ -42,7 +42,8 @@
                     android:layout_marginBottom="40dp"
                     android:paddingStart="@dimen/settings_table_row_horizontal_padding"
                     android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
-                    android:text="@string/app_description"/>
+                    android:text="@string/app_description"
+                    android:textSize="@dimen/material_text_size_small"/>
 
                 <!-- Version Section -->
                 <RelativeLayout
@@ -58,7 +59,7 @@
                         android:text="@string/about_version"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:textSize="@dimen/settings_table_body_text_size"/>
+                        android:textSize="@dimen/material_text_size_small"/>
 
                     <TextView
                         android:id="@+id/version_number"
@@ -66,12 +67,13 @@
                         android:layout_width="wrap_content"
                         android:layout_gravity="end"
                         android:gravity="end"
-                        android:layout_alignParentEnd="true" />
+                        android:layout_alignParentEnd="true"
+                        android:textSize="@dimen/material_text_size_small"/>
 
                 </RelativeLayout>
 
                 <View android:layout_width="match_parent"
-                    android:background="@color/listview_border_color"
+                    android:background="?attr/android:fillColor"
                     android:layout_height="@dimen/settings_divider_view_hieght"/>
 
 
@@ -90,7 +92,7 @@
                         android:text="@string/about_developer"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:textSize="@dimen/settings_table_body_text_size"/>
+                        android:textSize="@dimen/material_text_size_small"/>
 
                     <TextView
                         android:layout_height="wrap_content"
@@ -98,12 +100,13 @@
                         android:layout_gravity="end"
                         android:gravity="end"
                         android:layout_alignParentEnd="true"
-                        android:text="@string/app_developer"/>
+                        android:text="@string/app_developer"
+                        android:textSize="@dimen/material_text_size_small"/>
 
                 </RelativeLayout>
 
                 <View android:layout_width="match_parent"
-                    android:background="@color/listview_border_color"
+                    android:background="?attr/android:fillColor"
                     android:layout_height="@dimen/settings_divider_view_hieght"/>
 
 
@@ -124,7 +127,7 @@
                         android:text="@string/about_feedback"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:textSize="@dimen/settings_table_body_text_size"/>
+                        android:textSize="@dimen/material_text_size_small"/>
 
                     <TextView
                         android:layout_height="wrap_content"
@@ -132,7 +135,8 @@
                         android:layout_gravity="end"
                         android:gravity="end"
                         android:layout_alignParentEnd="true"
-                        android:text="@string/app_feedback"/>
+                        android:text="@string/app_feedback"
+                        android:textSize="@dimen/material_text_size_small"/>
 
                 </RelativeLayout>
 
