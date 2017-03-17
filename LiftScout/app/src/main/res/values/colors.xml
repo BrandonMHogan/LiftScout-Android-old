@@ -8,6 +8,7 @@
     <color name="light_theme_background">#F9F9F9</color>
     <color name="light_theme_fill">#EAEAEA</color>
     <color name="light_theme_fill_secondary">#FFFFFF</color>
+    <color name="light_theme_bottom_nav_fill">#FFFFFF</color>
 
     <!-- Dark Theme Colors -->
     <color name="dark_theme_text_primary">#FFFFFF</color>
@@ -16,6 +17,7 @@
     <color name="dark_theme_background">#303030</color>
     <color name="dark_theme_fill">#4C4C4C</color>
     <color name="dark_theme_fill_secondary">#5A5A5A</color>
+    <color name="dark_theme_bottom_nav_fill">#171717</color>
 
     <!-- Original Theme -->
     <color name="theme_original_primary">#FF9800</color>

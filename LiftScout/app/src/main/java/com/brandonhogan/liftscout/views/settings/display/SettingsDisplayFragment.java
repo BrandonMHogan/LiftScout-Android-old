@@ -1,13 +1,17 @@
 package com.brandonhogan.liftscout.views.settings.display;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.IntentCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
@@ -16,7 +20,6 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import java.util.ArrayList;
 
 import butterknife.Bind;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class SettingsDisplayFragment extends BaseFragment implements SettingsDisplayContract.View {
 
@@ -32,7 +35,7 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
     //
     private SettingsDisplayContract.Presenter presenter;
     private View rootView;
-    private SweetAlertDialog dialog;
+    private MaterialDialog dialog;
 
 
     // Bindings
@@ -86,35 +89,43 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
 
     @Override
     public void showAlert() {
-        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getString(R.string.dialog_restarting_app_theme_title))
-                .setContentText(getString(R.string.dialog_restarting_app_theme_message))
-                .setConfirmText(getString(R.string.restart))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+
+        dialog = new com.afollestad.materialdialogs.MaterialDialog.Builder(getActivity())
+                .title(R.string.dialog_restarting_app_theme_title)
+                .content(R.string.dialog_restarting_app_theme_message)
+                .positiveText(R.string.restart)
+                .autoDismiss(false)
+                .onPositive(new com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    public void onClick(@NonNull com.afollestad.materialdialogs.MaterialDialog dialog, @NonNull DialogAction which) {
                         dialogAccepted();
                     }
                 })
-                .setCancelText(getString(R.string.cancel))
-                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                .negativeText(R.string.cancel)
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialogCancel();
                     }
                 })
-                .showCancelButton(true);
+                .cancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        dialogCancel();
+                    }
+                })
+                .build();
 
         dialog.show();
     }
 
     private void dialogAccepted() {
-        dialog.cancel();
+        dialog.dismiss();
         presenter.changeTheme();
     }
 
     private void dialogCancel() {
-        dialog.cancel();
+        dialog.dismiss();
         themeSpinner.setSelectedIndex(presenter.getOriginalThemeIndex());
     }
 

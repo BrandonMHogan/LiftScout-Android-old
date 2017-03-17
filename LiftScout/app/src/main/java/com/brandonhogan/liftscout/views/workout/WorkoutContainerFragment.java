@@ -2,10 +2,12 @@ package com.brandonhogan.liftscout.views.workout;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -74,7 +76,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     private NotificationServiceManager notificationServiceManager;
 
     private MaterialDialog settingsDialog;
-    private SweetAlertDialog deleteDialog;
+    private com.afollestad.materialdialogs.MaterialDialog deleteDialog;
 
     private boolean isDisplayed;
 
@@ -327,21 +329,20 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     }
 
     private void showDeleteAlert() {
-        String message = getString(R.string.dialog_tracker_delete_set_message, presenter.getExerciseName());
 
-        deleteDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getString(R.string.dialog_tracker_delete_set_title))
-                .setContentText(message)
-                .setConfirmText(getString(R.string.delete))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+        deleteDialog = new com.afollestad.materialdialogs.MaterialDialog.Builder(getActivity())
+                .title(R.string.dialog_tracker_delete_set_title)
+                .content(getString(R.string.dialog_tracker_delete_set_message, presenter.getExerciseName()))
+                .positiveText(R.string.delete)
+                .onPositive(new com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    public void onClick(@NonNull com.afollestad.materialdialogs.MaterialDialog dialog, @NonNull DialogAction which) {
                         deleteDialog.cancel();
                         presenter.onDeleteSet();
                     }
                 })
-                .setCancelText(getString(R.string.cancel))
-                .showCancelButton(true);
+                .negativeText(R.string.cancel)
+                .build();
 
         deleteDialog.show();
     }
