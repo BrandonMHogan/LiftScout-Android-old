@@ -19,12 +19,19 @@ import butterknife.Bind;
 
 public class GraphFragment extends BaseFragment implements GraphContract.View {
 
-    @Bind(R.id.my_line_graph)
-    MyLineGraph graph;
-
     // Static Properties
     //
+    private static final String BUNDLE_SELECTED_EXERCISE_ID = "selectedExerciseIdBundle";
+    private static final String BUNDLE_SELECTED_EXERCISE_NAME = "selectedExerciseNameBundle";
+    private static final String BUNDLE_SELECTED_DATE_RANGE = "selectedDateRangeBundle";
+    private static final String BUNDLE_SELECTED_GRAPH_TYPE = "selectedGraphTypeBundle";
     private static final String BUNDLE_EXERCISE_ID = "exerciseIdBundle";
+
+
+    // Bindings
+    //
+    @Bind(R.id.my_line_graph)
+    MyLineGraph graph;
 
 
     // Instance
@@ -70,6 +77,24 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+        if(saveState != null) {
+            graph.setExercise(
+                    saveState.getInt(BUNDLE_SELECTED_EXERCISE_ID),
+                    saveState.getString(BUNDLE_SELECTED_EXERCISE_NAME),
+                    saveState.getInt(BUNDLE_SELECTED_DATE_RANGE),
+                    saveState.getInt(BUNDLE_SELECTED_GRAPH_TYPE));
+            saveState = null;
+        }
+    }
+
+    @Override
+    protected Bundle saveState() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(BUNDLE_SELECTED_EXERCISE_ID, graph.getExerciseId());
+        bundle.putString(BUNDLE_SELECTED_EXERCISE_NAME, graph.getExerciseName());
+        bundle.putInt(BUNDLE_SELECTED_DATE_RANGE, graph.getCurrentRangePosition());
+        bundle.putInt(BUNDLE_SELECTED_GRAPH_TYPE, graph.getCurrentGraphType());
+        return bundle;
     }
 
     @Override

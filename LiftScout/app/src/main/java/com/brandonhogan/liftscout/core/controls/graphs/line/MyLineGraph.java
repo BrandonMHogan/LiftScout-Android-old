@@ -518,10 +518,10 @@ public class MyLineGraph extends FrameLayout {
     //
 
     public void setExercise(int exerciseId, String exerciseName) {
-        setExercise(exerciseId, exerciseName, 0);
+        setExercise(exerciseId, exerciseName, 0, 0);
     }
 
-    public void setExercise(int exerciseId, String exerciseName, int dateRange) {
+    public void setExercise(int exerciseId, String exerciseName, int dateRange, int graphType) {
         if (exerciseSelector.getVisibility() == VISIBLE && exerciseName != null && !exerciseName.isEmpty())
             exerciseSelector.setText(exerciseName);
 
@@ -530,6 +530,7 @@ public class MyLineGraph extends FrameLayout {
         exerciseIsSet = true;
         currentRangePosition = newRangePosition = dateRange;
         slider.setPosition(currentRangePosition);
+        currentGraphType = graphType;
         update(true);
     }
 
@@ -543,6 +544,10 @@ public class MyLineGraph extends FrameLayout {
 
     public int getCurrentRangePosition() {
         return currentRangePosition;
+    }
+
+    public int getCurrentGraphType() {
+        return currentGraphType;
     }
 
     public void update(boolean force) {

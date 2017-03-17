@@ -44,6 +44,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     //
     private static final String BUNDLE_EXERCISE_ID = "exerciseIdBundle";
     private static final String BUNDLE_REST_TIMER = "restTimerBundle";
+    private static final String SAVE_STATE_TIMER = "saveStateTimer";
 
 
     // Instance
@@ -148,6 +149,50 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+        if(saveState != null) {
+            presenter.restTimerNotification(saveState.getInt(SAVE_STATE_TIMER));
+            saveState = null;
+        }
+    }
+
+    @Override
+    protected Bundle saveState() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(SAVE_STATE_TIMER, presenter.getRemainingRestTime());
+        return bundle;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isDisplayed = false;
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isDisplayed = true;
+
+        if(presenter.getRemainingRestTime() <= 0)
+            notificationServiceManager.clearNotification();
+
+        forceFocusLayout.requestFocus();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.onDestroyView();
+        notificationServiceManager.clearNotification();
+        notificationServiceManager = null;
+        //resetRestTimer();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
@@ -198,39 +243,6 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        isDisplayed = false;
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        isDisplayed = true;
-
-        if(presenter.getRemainingRestTime() <= 0)
-            notificationServiceManager.clearNotification();
-
-        forceFocusLayout.requestFocus();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        presenter.onDestroyView();
-        notificationServiceManager.clearNotification();
-        notificationServiceManager = null;
-        //resetRestTimer();
     }
 
     @Override

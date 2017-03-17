@@ -26,6 +26,7 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
     private static final String BUNDLE_SELECTED_EXERCISE_ID = "selectedExerciseIdBundle";
     private static final String BUNDLE_SELECTED_EXERCISE_NAME = "selectedExerciseNameBundle";
     private static final String BUNDLE_SELECTED_DATE_RANGE = "selectedDateRangeBundle";
+    private static final String BUNDLE_SELECTED_GRAPH_TYPE = "selectedGraphTypeBundle";
 
 
     // Bindings
@@ -75,7 +76,8 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
             lineGraph.setExercise(
                     saveState.getInt(BUNDLE_SELECTED_EXERCISE_ID),
                     saveState.getString(BUNDLE_SELECTED_EXERCISE_NAME),
-                    saveState.getInt(BUNDLE_SELECTED_DATE_RANGE));
+                    saveState.getInt(BUNDLE_SELECTED_DATE_RANGE),
+                    saveState.getInt(BUNDLE_SELECTED_GRAPH_TYPE));
             saveState = null;
         }
     }
@@ -86,6 +88,7 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
         bundle.putInt(BUNDLE_SELECTED_EXERCISE_ID, lineGraph.getExerciseId());
         bundle.putString(BUNDLE_SELECTED_EXERCISE_NAME, lineGraph.getExerciseName());
         bundle.putInt(BUNDLE_SELECTED_DATE_RANGE, lineGraph.getCurrentRangePosition());
+        bundle.putInt(BUNDLE_SELECTED_GRAPH_TYPE, lineGraph.getCurrentGraphType());
         return bundle;
     }
 
