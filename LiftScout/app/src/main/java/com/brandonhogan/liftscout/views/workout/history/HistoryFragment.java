@@ -127,8 +127,12 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
 
     @Override
     public void setupTitle(long start, long end) {
-        if (start > 0 && end > 0)
-            title.setText(BhDate.toSimpleDateRange(start, end));
+        if (start > 0 && end > 0) {
+            if (start == end)
+                title.setText(BhDate.toSimpleStringDate(start));
+            else
+                title.setText(BhDate.toSimpleDateRange(start, end));
+        }
     }
 
     @Override

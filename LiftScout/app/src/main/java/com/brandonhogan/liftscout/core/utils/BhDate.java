@@ -39,6 +39,9 @@ public class BhDate {
         return new SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(date);
     }
 
+    public static String toSimpleStringDate(long date) {
+        return new SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(date);
+    }
 
     public static String toSimpleDateRange(long start, long end) {
         return toSimpleDateRange(new Date(start), new Date(end));

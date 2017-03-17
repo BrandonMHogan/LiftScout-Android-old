@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/home_title_top_margin"
             android:layout_marginBottom="@dimen/home_title_bottom_margin"
-            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             android:textColor="?attr/android:textColorPrimary"
             style="@style/RobotoSubheading"/>
 
