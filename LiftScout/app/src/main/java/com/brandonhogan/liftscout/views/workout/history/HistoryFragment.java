@@ -7,9 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
+import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.workout.TrackerEvent;
 import com.mikepenz.fastadapter.FastAdapter;
@@ -21,6 +23,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -58,6 +61,9 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
     //
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
+
+    @Bind(R.id.title)
+    TextView title;
 
 
     //Overrides
@@ -117,8 +123,12 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
 
-
+    @Override
+    public void setupTitle(long start, long end) {
+        if (start > 0 && end > 0)
+            title.setText(BhDate.toSimpleDateRange(start, end));
     }
 
     @Override

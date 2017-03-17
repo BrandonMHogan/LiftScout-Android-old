@@ -86,6 +86,9 @@ public class HistoryPresenter implements HistoryContract.Presenter {
             }
         }
 
+        if (sets != null && sets.size() > 0)
+            view.setupTitle(sets.where().minimumDate(Set.DATE).getTime(), sets.where().maximumDate(Set.DATE).getTime());
+
         view.setupAdapter(adapterData);
     }
 

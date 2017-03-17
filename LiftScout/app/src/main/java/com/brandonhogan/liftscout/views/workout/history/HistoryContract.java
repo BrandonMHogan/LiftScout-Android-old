@@ -7,6 +7,7 @@ public interface HistoryContract {
 
     interface View {
         void setupAdapter(List<HistoryListSection> data);
+        void setupTitle(long start, long end);
         String getEmptySetMessage();
         void editTracker(int exerciseId);
     }
