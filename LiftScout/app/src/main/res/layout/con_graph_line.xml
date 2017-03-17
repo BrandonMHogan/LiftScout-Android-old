@@ -29,12 +29,12 @@
                 android:id="@+id/exercise_selector"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="@dimen/tracker_button_height"
+                android:layout_height="@dimen/graph_exercise_button_height"
                 android:layout_gravity="center"
                 android:background="@drawable/background_round_corner_ripple"
                 android:backgroundTint="?android:colorAccent"
                 android:textColor="@color/white"
-                android:layout_marginEnd="2dp"
+                android:layout_marginStart="2dp"
                 android:text="@string/charts_select_exercise" />
 
 

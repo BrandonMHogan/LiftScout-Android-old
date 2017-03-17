@@ -28,6 +28,7 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -262,7 +263,8 @@ public class GraphsCategoriesFragment extends BaseFragment implements GraphsCate
     }
 
     private void updateTotalLabels(int total, long startDate, long endDate) {
-        totalTextView.setText(Integer.toString(total));
+        String formattedValue = NumberFormat.getIntegerInstance().format(total);
+        totalTextView.setText(formattedValue);
 
         if (startDate > 0 && endDate > 0)
             totalDateRangeTextView.setText(BhDate.toSimpleDateRange(startDate, endDate));

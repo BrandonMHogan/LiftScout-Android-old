@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.model.CategoryGraph;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -20,14 +21,16 @@ import java.util.ArrayList;
  * Description :
  */
 
+@SuppressWarnings("WeakerAccess")
 public class GraphsCategoryAdapter extends RecyclerView.Adapter<GraphsCategoryAdapter.ViewHolder> {
 
         private static final int NO_POSITION_DEFAULT = 9999;
 
-        LayoutInflater inflater;
-        ArrayList<CategoryGraph> modelList;
+        private LayoutInflater inflater;
+        private ArrayList<CategoryGraph> modelList;
         private int selected_position = NO_POSITION_DEFAULT;
 
+        @SuppressWarnings("WeakerAccess")
         public GraphsCategoryAdapter(Context context, ArrayList<CategoryGraph> list) {
             inflater = LayoutInflater.from(context);
             modelList = new ArrayList<>(list);
@@ -70,9 +73,12 @@ public class GraphsCategoryAdapter extends RecyclerView.Adapter<GraphsCategoryAd
                 value = (TextView) itemView.findViewById(R.id.value);
             }
 
-            public void bindData(CategoryGraph rowModel) {
+            private void bindData(CategoryGraph rowModel) {
                 name.setText(rowModel.getName());
-                value.setText(Integer.toString(rowModel.getValue()));
+
+                String formattedValue = NumberFormat.getIntegerInstance().format(rowModel.getValue());
+                value.setText(formattedValue);
+
                 ((GradientDrawable)color.getBackground()).setColor(rowModel.getColor());
 
             }
@@ -84,12 +90,14 @@ public class GraphsCategoryAdapter extends RecyclerView.Adapter<GraphsCategoryAd
             notifyDataSetChanged();
         }
 
+        @SuppressWarnings("WeakerAccess")
         public void selected(int position) {
             notifyItemChanged(selected_position);
             selected_position = position;
             notifyItemChanged(selected_position);
         }
 
+        @SuppressWarnings("WeakerAccess")
         public void clearSelected() {
             notifyItemChanged(selected_position);
             selected_position = NO_POSITION_DEFAULT;

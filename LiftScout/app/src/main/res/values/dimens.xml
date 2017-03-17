@@ -109,6 +109,7 @@
     <!-- Graphs -->
     <dimen name="graph_height">190dp</dimen>
     <dimen name="graph_pie_size">190dp</dimen>
+    <dimen name="graph_exercise_button_height">48dp</dimen>
 
     <!-- Material Font sizes -->
     <dimen name="material_text_size_body_1">14sp</dimen>
