@@ -46,7 +46,7 @@ public class RecordsPresenter implements RecordsContract.Presenter {
     @Override
     public void viewCreated() {
 
-//        recordsRepo = new RecordRepoImpl();
+//        recordsRepo = new RecordsRepoImpl();
 //        recordsRepo.createRecord();
 //
 //        Record pr = recordsRepo.getPersonalRecord();

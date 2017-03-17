@@ -11,7 +11,7 @@ import com.brandonhogan.liftscout.injection.module.UserModule;
 import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ProgressRepoImpl;
-import com.brandonhogan.liftscout.repository.impl.RecordRepoImpl;
+import com.brandonhogan.liftscout.repository.impl.RecordsRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.SetRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
@@ -97,6 +97,6 @@ public interface AppComponent {
     void inject(SetRepoImpl repoImpl);
     void inject(CategoryRepoImpl repoImpl);
     void inject(ExerciseRepoImpl repoImpl);
-    void inject(RecordRepoImpl repoImpl);
+    void inject(RecordsRepoImpl repoImpl);
 
 }

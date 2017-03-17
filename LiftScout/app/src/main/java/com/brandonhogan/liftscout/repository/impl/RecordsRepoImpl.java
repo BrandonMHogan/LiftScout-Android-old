@@ -24,14 +24,14 @@ import io.realm.Sort;
  * Description :
  */
 
-public class RecordRepoImpl implements RecordsRepo {
+public class RecordsRepoImpl implements RecordsRepo {
 
-    private static final String TAG = "RecordRepoImpl";
+    private static final String TAG = "RecordsRepoImpl";
 
     @Inject
     DatabaseRealm databaseRealm;
 
-    public RecordRepoImpl() {
+    public RecordsRepoImpl() {
         Injector.getAppComponent().inject(this);
     }
 
@@ -234,8 +234,10 @@ public class RecordRepoImpl implements RecordsRepo {
                         return;
                     }
 
+                    String[] fieldNames = {Record.REP_WEIGHT, Record.DATE};
+                    Sort sort[] = {Sort.DESCENDING, Sort.ASCENDING};
 
-                    Record firstRecord = records.sort(Record.REP_WEIGHT, Sort.DESCENDING).sort(Record.DATE).first();
+                    Record firstRecord = records.sort(fieldNames, sort).first();
                     firstRecord.setRecord(true);
 
                     databaseRealm.getRealmInstance().commitTransaction();

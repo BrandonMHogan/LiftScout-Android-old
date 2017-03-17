@@ -3,7 +3,7 @@ package com.brandonhogan.liftscout.injection.module;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.RecordsRepo;
 import com.brandonhogan.liftscout.repository.SetRepo;
-import com.brandonhogan.liftscout.repository.impl.RecordRepoImpl;
+import com.brandonhogan.liftscout.repository.impl.RecordsRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.SetRepoImpl;
 
 import javax.inject.Singleton;
@@ -23,7 +23,7 @@ public class DatabaseModule {
     @Provides
     @Singleton
     RecordsRepo recordRepo() {
-        return new RecordRepoImpl();
+        return new RecordsRepoImpl();
     }
 
     @Provides
