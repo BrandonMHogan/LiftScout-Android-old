@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:textColor="?attr/android:textColorSecondary"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:textSize="@dimen/material_text_size_small"
                     tools:text="Row 1"/>
 

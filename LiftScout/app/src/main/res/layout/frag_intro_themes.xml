@@ -41,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+        app:ms_text_color="?attr/android:textColorSecondary"
         app:ms_background_color="@color/dark_theme_fill"
         app:layout_parallaxFactor="0.6"
         android:layout_marginStart="@dimen/intro_margin_left"

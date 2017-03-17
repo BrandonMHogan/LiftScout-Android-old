@@ -24,6 +24,7 @@
         android:layout_marginStart="@dimen/dialog_section_outer_margin"
         android:layout_marginEnd="@dimen/dialog_section_outer_margin"
         android:layout_marginBottom="@dimen/dialog_margin_medium"
+        app:ms_text_color="?attr/android:textColorSecondary"
         app:ms_background_color="?attr/android:fillColor"/>
 
     <TextView
@@ -122,7 +123,7 @@
             android:layout_height="wrap_content"
             app:backGroundColor="?attr/android:fillColor"
             app:textSize="@dimen/tracker_font_size"
-            app:textColor="@color/white"
+            app:textColor="?attr/android:textColorSecondary"
             app:maxValue="999"
             app:increment="1"
             app:allowDecimal="false"/>

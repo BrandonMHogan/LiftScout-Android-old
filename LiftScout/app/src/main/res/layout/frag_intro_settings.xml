@@ -65,6 +65,7 @@
                 android:id="@+id/homeDefaultSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:ms_text_color="?attr/android:textColorSecondary"
                 app:ms_background_color="@color/dark_theme_fill"
                 android:layout_marginBottom="@dimen/fragment_default_margin"/>
 
@@ -87,6 +88,7 @@
                 android:id="@+id/measurementSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:ms_text_color="?attr/android:textColorSecondary"
                 app:ms_background_color="@color/dark_theme_fill"
                 android:layout_marginBottom="@dimen/fragment_default_margin"/>
 
