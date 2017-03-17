@@ -119,7 +119,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
                 (getChildFragmentManager(), presenter.getExerciseId());
 
         viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(1);
+        viewPager.setOffscreenPageLimit(5);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
