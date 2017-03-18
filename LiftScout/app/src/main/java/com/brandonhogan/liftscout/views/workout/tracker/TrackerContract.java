@@ -13,7 +13,7 @@ public interface TrackerContract {
         void saveSuccess(int position, boolean isNew);
         void onDelete(int position);
         void deleteSetSuccess();
-        void clear(boolean clearValues);
+        void clear(boolean clearValues, TrackerListModel model);
         void onSelect(TrackerListModel rep);
         void updateIncrements(double increment);
     }

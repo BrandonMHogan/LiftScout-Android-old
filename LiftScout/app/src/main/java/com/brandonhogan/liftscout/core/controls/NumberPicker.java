@@ -258,6 +258,12 @@ public class NumberPicker extends RelativeLayout {
         editText.setText(String.valueOf(number));
     }
 
+    public void setNumber(double number)
+    {
+        editText.setText(String.valueOf(number));
+    }
+
+
     public void setIncrement(float increment) {
         this.increment = increment;
     }

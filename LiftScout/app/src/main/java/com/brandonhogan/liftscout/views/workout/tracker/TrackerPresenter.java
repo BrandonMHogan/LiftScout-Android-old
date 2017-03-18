@@ -160,7 +160,7 @@ public class TrackerPresenter implements TrackerContract.Presenter {
             progressManager.deleteRep(editingRep.getId(), exerciseId);
             editingRep = null;
             resetAdapter();
-            view.clear(false);
+            view.clear(false, null);
             view.onDelete(position);
         }
     }
@@ -176,11 +176,12 @@ public class TrackerPresenter implements TrackerContract.Presenter {
     public void onButtonTwoPressed() {
 
         if (editingRep == null) {
-            view.clear(true);
+            view.clear(true, null);
         }
         else {
             editingRep = null;
-            view.clear(false);
+            TrackerListModel model = adapterData.get(adapterData.size() - 1);
+            view.clear(false, model);
         }
     }
 }

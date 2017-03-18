@@ -304,13 +304,19 @@ public class TrackerFragment extends BaseFragment implements
     }
 
     @Override
-    public void clear(boolean clearValues) {
+    public void clear(boolean clearValues, TrackerListModel model) {
         mAdapter.clearSelected();
         resetButtons();
 
         if (clearValues) {
             repNumberPicker.setNumber(0);
             weightNumberPicker.setNumber(0);
+        }
+        else {
+            if (model != null) {
+                repNumberPicker.setNumber(model.getCount());
+                weightNumberPicker.setNumber(model.getWeight());
+            }
         }
     }
 
