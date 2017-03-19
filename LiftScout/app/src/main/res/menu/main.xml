@@ -51,9 +51,9 @@
         app:showAsAction="collapseActionView" />
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_settings_tracker"
         android:icon="@drawable/ic_settings_white_48dp"
-        android:title="@string/settings"
+        android:title="@string/exercise_settings"
         android:visible="false"
         app:showAsAction="collapseActionView" />
 

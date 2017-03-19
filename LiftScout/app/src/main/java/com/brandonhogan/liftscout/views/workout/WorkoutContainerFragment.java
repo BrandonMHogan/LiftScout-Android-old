@@ -221,7 +221,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
         timerMenu.setVisible(true);
 
-        settingsMenu = menu.findItem(R.id.action_settings);
+        settingsMenu = menu.findItem(R.id.action_settings_tracker);
         settingsMenu.setVisible(true);
     }
 
@@ -238,7 +238,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
                 }
                 presenter.onTimerClicked();
                 return true;
-            case R.id.action_settings:
+            case R.id.action_settings_tracker:
                 showSettings();
                 return true;
         }
