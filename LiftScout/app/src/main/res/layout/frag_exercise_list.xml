@@ -5,18 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:windowBackground">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:fabSize="normal"
-        android:src="@drawable/ic_add_white_48dp"
-        android:elevation="5dp"
-        app:pressedTranslationZ="12dp"
-        android:layout_marginBottom="@dimen/fab_margin_bottom"
-        android:layout_marginEnd="@dimen/fab_margin_end"
-        android:layout_gravity="bottom|end" />
-
     <TextView
         android:id="@+id/no_data_label"
         android:layout_width="match_parent"
@@ -35,5 +23,17 @@
         android:scrollbarThumbVertical="?attr/colorAccent"
         android:scrollbarSize="1dp"
         android:scrollbarStyle="insideOverlay"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        android:src="@drawable/ic_add_white_48dp"
+        android:elevation="5dp"
+        app:pressedTranslationZ="12dp"
+        android:layout_marginBottom="@dimen/fab_margin_bottom"
+        android:layout_marginEnd="@dimen/fab_margin_end"
+        android:layout_gravity="bottom|end" />
 
 </com.brandonhogan.liftscout.core.controls.BaseFrameLayout>
