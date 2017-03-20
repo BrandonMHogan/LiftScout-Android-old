@@ -26,12 +26,14 @@
                 app:ms_text_color="?attr/android:textColorSecondary"
                 app:ms_background_color="?attr/colorFill" />
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/exercise_selector"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="@dimen/graph_exercise_button_height"
                 android:layout_gravity="center"
+                android:background="?primaryButtonBackground"
+                android:backgroundTint="?android:colorAccent"
                 android:textColor="@color/white"
                 android:layout_marginStart="2dp"
                 android:text="@string/charts_select_exercise" />
@@ -93,11 +95,11 @@
                 android:paddingRight="10dp"
                 android:layout_gravity="bottom"
                 app:backdropFillColor="@color/gray_btn_bg_pressed_color"
-                app:backdropStrokeColor="@color/gray_dark"
-                app:backdropStrokeWidth="1dp"
-                app:horizontalBarThickness="2dp"
+                app:backdropStrokeColor="?attr/colorFill"
+                app:backdropStrokeWidth="7dp"
+                app:horizontalBarThickness="1dp"
                 app:tickMarkCount="6"
-                app:tickMarkRadius="7dp"
+                app:tickMarkRadius="6dp"
                 app:position="0" />
 
         </LinearLayout>

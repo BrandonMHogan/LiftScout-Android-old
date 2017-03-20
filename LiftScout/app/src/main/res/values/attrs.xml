@@ -6,6 +6,7 @@
 
     <attr name="sectionBackground" format="reference" />
     <attr name="itemBackground" format="reference" />
+    <attr name="primaryButtonBackground" format="reference" />
 
     <attr name="themeMenuBackgroundColorDrawable" format="reference" />
     <attr name="themedMenuHomeDrawable" format="reference" />

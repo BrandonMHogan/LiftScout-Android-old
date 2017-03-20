@@ -30,12 +30,12 @@ public class Injector {
     }
 
     public static AppComponent getAppComponent() {
-        Objects.requireNonNull(appComponent, "appComponent is null");
+       // Objects.requireNonNull(appComponent, "appComponent is null");
         return appComponent;
     }
 
     public static RepoComponent getRepoComponent() {
-        Objects.requireNonNull(repoComponent, "repoComponent is null");
+       // Objects.requireNonNull(repoComponent, "repoComponent is null");
         return repoComponent;
     }
 }

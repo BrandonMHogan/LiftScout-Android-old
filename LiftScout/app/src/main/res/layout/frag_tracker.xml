@@ -96,6 +96,8 @@
                 android:layout_width="@dimen/tracker_button_width"
                 android:layout_height="@dimen/tracker_button_height"
                 android:layout_gravity="center_horizontal"
+                android:background="?primaryButtonBackground"
+                android:backgroundTint="?android:colorAccent"
                 android:textColor="@color/white"
                 android:layout_marginEnd="@dimen/tracker_inner_margin" />
 
@@ -104,6 +106,8 @@
                 android:layout_width="@dimen/tracker_button_width"
                 android:layout_height="@dimen/tracker_button_height"
                 android:layout_gravity="center_horizontal"
+                android:background="?primaryButtonBackground"
+                android:backgroundTint="@color/black_transparent_30"
                 android:textColor="@color/white"
                 android:layout_marginStart="@dimen/tracker_inner_margin"
                 android:text="@string/clear"/>

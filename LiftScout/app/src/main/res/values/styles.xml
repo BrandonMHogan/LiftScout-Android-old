@@ -10,8 +10,13 @@
         <item name="colorFill">@color/dark_theme_fill</item>
         <item name="colorFillSecondary">@color/dark_theme_fill_secondary</item>
         <item name="bottomNavFillColor">@color/dark_theme_bottom_nav_fill</item>
+
+        <!-- Used for the workout section and items -->
         <item name="sectionBackground">@drawable/section_background_dark</item>
         <item name="itemBackground">@drawable/section_item_background_dark</item>
+
+        <!-- Used for buttons, so that we can apply ripple on v21+ -->
+        <item name="primaryButtonBackground">@drawable/primary_button_background_dark</item>
 
 
         <item name="android:textColorPrimary">@color/dark_theme_text_primary</item>
@@ -38,8 +43,13 @@
         <item name="colorFill">@color/light_theme_fill</item>
         <item name="colorFillSecondary">@color/light_theme_fill_secondary</item>
         <item name="bottomNavFillColor">@color/light_theme_bottom_nav_fill</item>
+
+        <!-- Used for the workout section and items -->
         <item name="sectionBackground">@drawable/section_background_light</item>
         <item name="itemBackground">@drawable/section_item_background_light</item>
+
+        <!-- Used for buttons, so that we can apply ripple on v21+ -->
+        <item name="primaryButtonBackground">@drawable/primary_button_background_light</item>
 
         <item name="android:textColor">@color/light_theme_text_primary</item>
         <item name="android:textColorPrimary">@color/light_theme_text_primary</item>
@@ -57,8 +67,6 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-
 
 
     <!-- Theme Bases -->
@@ -149,11 +157,18 @@
     <style name="AppTheme.Black.Dark" parent="AppTheme.Black.Dark.Base" />
 
 
-
-
+    <!-- The intro library uses its own theme. I needed to override some custom properties. -->
     <style name="Theme.Intro.Mine" parent="Theme.Intro">
         <item name="ms_background_color">@color/dark_theme_fill</item>
+
+        <!-- Used for the workout section and items -->
+        <item name="sectionBackground">@drawable/section_background_dark</item>
+        <item name="itemBackground">@drawable/section_item_background_dark</item>
+
+        <!-- Used for buttons, so that we can apply ripple on v21+ -->
+        <item name="primaryButtonBackground">@drawable/primary_button_background_dark</item>
     </style>
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

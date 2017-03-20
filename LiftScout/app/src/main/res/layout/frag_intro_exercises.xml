@@ -43,6 +43,8 @@
         android:layout_margin="@dimen/intro_margin"
         android:layout_gravity="center_horizontal"
         android:text="@string/intro_slide_three_button"
+        android:background="?primaryButtonBackground"
+        android:backgroundTint="?android:colorAccent"
         android:contentDescription="@string/intro_slide_three_button"
         app:layout_parallaxFactor="0.6"/>
 
