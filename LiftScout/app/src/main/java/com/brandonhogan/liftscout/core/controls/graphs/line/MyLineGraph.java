@@ -145,7 +145,7 @@ public class MyLineGraph extends FrameLayout {
         exerciseSelector.setVisibility(showExerciseSelector ? VISIBLE : GONE);
 
         textColor = AttrUtil.getAttributeRes(theme, android.R.attr.textColorPrimary);
-        fillColor = AttrUtil.getAttributeRes(theme, android.R.attr.colorAccent);
+        fillColor = AttrUtil.getAttributeRes(theme, R.attr.colorAccent);
 
         lineChart.animate();
         lineChart.getDescription().setEnabled(false);

@@ -51,8 +51,8 @@ public class IntroSettingsSlideFragment extends SlideFragment implements IntroSe
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        homeDefaultSpinner.setBackgroundResource(AttrUtil.getAttributeRes(getActivity().getTheme(), android.R.attr.fillColor));
-        measurementSpinner.setBackgroundResource(AttrUtil.getAttributeRes(getActivity().getTheme(), android.R.attr.fillColor));
+        homeDefaultSpinner.setBackgroundResource(AttrUtil.getAttributeRes(getActivity().getTheme(), R.attr.colorFill));
+        measurementSpinner.setBackgroundResource(AttrUtil.getAttributeRes(getActivity().getTheme(), R.attr.colorFill));
 
         presenter = new IntroSettingsSlidePresenter(this);
         presenter.viewCreated();

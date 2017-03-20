@@ -36,14 +36,12 @@
         app:layout_parallaxFactor="0.4"
         style="@style/RobotoCaption" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/create_button"
         android:layout_width="@dimen/intro_button_width"
         android:layout_height="@dimen/intro_button_height"
         android:layout_margin="@dimen/intro_margin"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/background_round_corner_ripple"
-        android:backgroundTint="?android:colorAccent"
         android:text="@string/intro_slide_three_button"
         android:contentDescription="@string/intro_slide_three_button"
         app:layout_parallaxFactor="0.6"/>
@@ -77,8 +75,6 @@
 
     </RelativeLayout>
 
-
-
     <TextView
         android:id="@+id/image_button_desc"
         android:layout_width="match_parent"
@@ -90,6 +86,5 @@
         android:text="@string/intro_slide_three_added_description"
         app:layout_parallaxFactor="0.6"
         style="@style/RobotoCaption" />
-
 
 </agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

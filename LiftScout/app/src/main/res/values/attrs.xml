@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="bottomNavFillColor" format="reference" />
+    <attr name="colorFill" format="reference" />
+    <attr name="colorFillSecondary" format="reference" />
+
+    <attr name="sectionBackground" format="reference" />
+    <attr name="itemBackground" format="reference" />
 
     <attr name="themeMenuBackgroundColorDrawable" format="reference" />
     <attr name="themedMenuHomeDrawable" format="reference" />

@@ -7,6 +7,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
+import android.support.v7.widget.AppCompatButton;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -84,8 +85,8 @@ public class NumberPicker extends RelativeLayout {
 
         inflate(getContext(), R.layout.con_number_picker, this);
 
-        subButton = (Button) findViewById(R.id.subtract_btn);
-        addButton = (Button) findViewById(R.id.add_btn);
+        subButton = (AppCompatButton) findViewById(R.id.subtract_btn);
+        addButton = (AppCompatButton) findViewById(R.id.add_btn);
         editText = (EditText) findViewById(R.id.number_counter);
         LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
 
@@ -109,10 +110,7 @@ public class NumberPicker extends RelativeLayout {
 
         Drawable drawable = getResources().getDrawable(R.drawable.background_round_corner);
         drawable.setColorFilter(new PorterDuffColorFilter(backgroundColor, PorterDuff.Mode.SRC));
-        if(Build.VERSION.SDK_INT > 16)
-            layout.setBackground(drawable);
-        else
-            layout.setBackgroundDrawable(drawable);
+        layout.setBackgroundDrawable(drawable);
 
         setOnClick();
         typedArray.recycle();

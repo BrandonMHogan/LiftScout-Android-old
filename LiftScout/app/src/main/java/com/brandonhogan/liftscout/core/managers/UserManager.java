@@ -136,7 +136,7 @@ public class UserManager {
         return setting.getValue().equals("true");
     }
 
-    public boolean setLoadedDefaultExercises(boolean value) {
-        return userSettingsRepo.setUserSetting(UserSetting.LOADED_DEFAULT_EXERCISES, value ? "true" : "false");
+    public void setLoadedDefaultExercises(boolean value) {
+        userSettingsRepo.createUserSetting(UserSetting.LOADED_DEFAULT_EXERCISES, value ? "true" : "false");
     }
 }

@@ -9,6 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:icvp_center_page_scale_offset="1dp"
+            app:icvp_max_page_scale="1"
+            app:icvp_medium_scaled="false"
+            app:icvp_min_page_scale="0.5"
+            app:icvp_min_page_scale_offset="1dp"
+            app:icvp_scroll_duration="250"/>
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
@@ -20,17 +31,6 @@
             android:layout_marginBottom="@dimen/fab_margin_bottom"
             android:layout_marginEnd="@dimen/fab_margin_end"
             android:layout_gravity="bottom|end" />
-
-        <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:icvp_center_page_scale_offset="1dp"
-            app:icvp_max_page_scale="1"
-            app:icvp_medium_scaled="false"
-            app:icvp_min_page_scale="0.5"
-            app:icvp_min_page_scale_offset="1dp"
-            app:icvp_scroll_duration="250"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 app:ms_text_color="?attr/android:textColorSecondary"
-                app:ms_background_color="?attr/android:fillColor" />
+                app:ms_background_color="?attr/colorFill" />
 
             <Button
                 android:id="@+id/exercise_selector"
@@ -32,8 +32,6 @@
                 android:layout_weight="1"
                 android:layout_height="@dimen/graph_exercise_button_height"
                 android:layout_gravity="center"
-                android:background="@drawable/background_round_corner_ripple"
-                android:backgroundTint="?android:colorAccent"
                 android:textColor="@color/white"
                 android:layout_marginStart="2dp"
                 android:text="@string/charts_select_exercise" />
@@ -73,7 +71,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:background="?attr/android:fillColor"
+                android:background="?attr/colorFill"
                 android:layout_height="@dimen/settings_divider_view_hieght"
                 android:layout_marginTop="@dimen/today_divider_top_margin"/>
 
@@ -100,9 +98,7 @@
                 app:horizontalBarThickness="2dp"
                 app:tickMarkCount="6"
                 app:tickMarkRadius="7dp"
-                app:position="0"
-                app:thumb="@drawable/graph_thumb"
-                app:progressDrawable="@drawable/graph_progress"/>
+                app:position="0" />
 
         </LinearLayout>
 

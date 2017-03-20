@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.views.workout.tracker;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -80,10 +81,10 @@ public class TrackerFragment extends BaseFragment implements
     RecyclerView mRecyclerView;
 
     @Bind(R.id.first_button)
-    Button firstButton;
+    AppCompatButton firstButton;
 
     @Bind(R.id.second_button)
-    Button secondButton;
+    AppCompatButton secondButton;
 
     @Bind(R.id.rep_number_picker)
     NumberPicker repNumberPicker;

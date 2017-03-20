@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.views.Intro.exercises;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ public class IntroExercisesSlideFragment extends SlideFragment implements IntroE
     // Bindings
     //
     @Bind(R.id.create_button)
-    Button createButton;
+    AppCompatButton createButton;
 
     @Bind(R.id.image_button)
     ImageButton imageButton;

@@ -73,7 +73,7 @@
                 </RelativeLayout>
 
                 <View android:layout_width="match_parent"
-                    android:background="?attr/android:fillColor"
+                    android:background="?attr/colorFill"
                     android:layout_height="@dimen/settings_divider_view_hieght"/>
 
 
@@ -106,7 +106,7 @@
                 </RelativeLayout>
 
                 <View android:layout_width="match_parent"
-                    android:background="?attr/android:fillColor"
+                    android:background="?attr/colorFill"
                     android:layout_height="@dimen/settings_divider_view_hieght"/>
 
 

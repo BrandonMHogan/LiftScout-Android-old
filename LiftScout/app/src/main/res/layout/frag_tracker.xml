@@ -23,6 +23,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:weightSum="2"
             android:orientation="horizontal"
             android:layout_marginStart="@dimen/tracker_outer_margin"
@@ -55,7 +56,6 @@
                     app:allowDecimal="true"/>
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_height="wrap_content"
@@ -91,23 +91,19 @@
             android:layout_marginTop="@dimen/tracker_button_margin_top"
             android:orientation="horizontal">
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/first_button"
                 android:layout_width="@dimen/tracker_button_width"
                 android:layout_height="@dimen/tracker_button_height"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/background_round_corner_ripple"
-                android:backgroundTint="?android:colorAccent"
                 android:textColor="@color/white"
                 android:layout_marginEnd="@dimen/tracker_inner_margin" />
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/second_button"
                 android:layout_width="@dimen/tracker_button_width"
                 android:layout_height="@dimen/tracker_button_height"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/background_round_corner_ripple"
-                android:backgroundTint="@color/black_transparent_30"
                 android:textColor="@color/white"
                 android:layout_marginStart="@dimen/tracker_inner_margin"
                 android:text="@string/clear"/>
@@ -120,7 +116,6 @@
             android:layout_marginTop="@dimen/tracker_outer_bottom_margin"
             android:background="@color/divider"
             android:elevation="@dimen/tracker_divider_elevation"/>
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -136,5 +131,4 @@
             android:scrollbarStyle="insideOverlay"/>
 
     </LinearLayout>
-
 </com.brandonhogan.liftscout.core.controls.BaseFrameLayout>

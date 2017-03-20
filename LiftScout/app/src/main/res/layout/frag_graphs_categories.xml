@@ -27,7 +27,7 @@
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         app:ms_text_color="?attr/android:textColorSecondary"
-                        app:ms_background_color="?attr/android:fillColor"/>
+                        app:ms_background_color="?attr/colorFill"/>
 
                     <TextView
                         android:layout_width="wrap_content"

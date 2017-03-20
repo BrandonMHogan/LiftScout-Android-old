@@ -5,7 +5,7 @@
     tools:targetApi="lollipop"> <!-- ripple effect color -->
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
-            <solid android:color="?android:fillColor" /> <!-- background color -->
+            <solid android:color="?attr/colorFillSecondary" /> <!-- background color -->
         </shape>
     </item>
 </ripple>

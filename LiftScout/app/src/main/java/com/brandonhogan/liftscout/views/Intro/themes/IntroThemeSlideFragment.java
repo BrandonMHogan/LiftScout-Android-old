@@ -58,7 +58,7 @@ public class IntroThemeSlideFragment  extends SlideFragment implements IntroThem
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        themeSpinner.setBackgroundResource(AttrUtil.getAttributeRes(getActivity().getTheme(), android.R.attr.fillColor));
+        themeSpinner.setBackgroundResource(AttrUtil.getAttributeRes(getActivity().getTheme(), R.attr.colorFill));
 
         presenter = new IntroThemeSlidePresenter(this);
         presenter.viewCreated();

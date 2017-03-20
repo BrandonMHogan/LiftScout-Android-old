@@ -6,9 +6,13 @@
         <item name="android:popupBackground">@color/dark_theme_background</item>
         <item name="android:itemBackground">@color/dark_theme_background</item>
 
-        <item name="android:fillColor">@color/dark_theme_fill</item>
-        <item name="android:fillAfter">@color/dark_theme_fill_secondary</item>
+        <!-- Custom Attributes -->
+        <item name="colorFill">@color/dark_theme_fill</item>
+        <item name="colorFillSecondary">@color/dark_theme_fill_secondary</item>
         <item name="bottomNavFillColor">@color/dark_theme_bottom_nav_fill</item>
+        <item name="sectionBackground">@drawable/section_background_dark</item>
+        <item name="itemBackground">@drawable/section_item_background_dark</item>
+
 
         <item name="android:textColorPrimary">@color/dark_theme_text_primary</item>
         <item name="android:textColorSecondary">@color/dark_theme_text_secondary</item>
@@ -30,9 +34,12 @@
         <item name="android:popupBackground">@color/light_theme_background</item>
         <item name="android:itemBackground">@color/light_theme_background</item>
 
-        <item name="android:fillColor">@color/light_theme_fill</item>
-        <item name="android:fillAfter">@color/light_theme_fill_secondary</item>
+        <!-- Custom Attributes -->
+        <item name="colorFill">@color/light_theme_fill</item>
+        <item name="colorFillSecondary">@color/light_theme_fill_secondary</item>
         <item name="bottomNavFillColor">@color/light_theme_bottom_nav_fill</item>
+        <item name="sectionBackground">@drawable/section_background_light</item>
+        <item name="itemBackground">@drawable/section_item_background_light</item>
 
         <item name="android:textColor">@color/light_theme_text_primary</item>
         <item name="android:textColorPrimary">@color/light_theme_text_primary</item>
