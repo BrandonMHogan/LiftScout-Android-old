@@ -66,7 +66,7 @@ public class IntroThemeSlideFragment  extends SlideFragment implements IntroThem
 
     @Override
     public int backgroundColor() {
-        return R.color.intro_slide_four;
+        return R.color.light_theme_background;
     }
 
     @Override

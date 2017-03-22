@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<agency.tango.materialintroscreen.parallax.ParallaxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<agency.tango.materialintroscreen.parallax.ParallaxLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,29 +12,39 @@
     <ImageView
         android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_settings_white_48dp"
+        android:tint="@color/light_theme_text_secondary"
         android:layout_height="@dimen/intro_icon_size"
         android:layout_width="@dimen/intro_icon_size"
         tools:layout_margin="@dimen/intro_margin"
-        android:layout_marginTop="@dimen/intro_margin_top"/>
+        android:layout_marginTop="@dimen/intro_margin_top_first"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
+        android:contentDescription="@null"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/intro_margin_top"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
         android:gravity="center_horizontal"
-        style="@style/RobotoDisplay01"
         app:layout_parallaxFactor="0.2"
         android:text="@string/intro_slide_two_title"
-        />
+        style="@style/RobotoHeadline"
+        android:textColor="@color/theme_original_accent" />
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_marginStart="@dimen/intro_margin_left"
-        android:layout_marginEnd="@dimen/intro_margin_right"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
         android:text="@string/intro_slide_two_description"
         app:layout_parallaxFactor="0.4"
-        style="@style/RobotoCaption" />
+        android:textColor="@color/light_theme_text_secondary"
+        android:textSize="@dimen/material_text_size_small" />
 
 
     <ScrollView
@@ -52,22 +63,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/setting_home_default_spinner_title"
                 android:layout_marginBottom="@dimen/fragment_default_xsmall_margin"
-                style="@style/RobotoSubheadingBold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/setting_home_default_spinner_description"
-                android:layout_marginBottom="@dimen/fragment_default_small_margin"
-                style="@style/RobotoCaption" />
+                android:textColor="@color/light_theme_text_secondary"
+                android:textSize="@dimen/material_text_size_menu" />
 
             <com.jaredrummler.materialspinner.MaterialSpinner
                 android:id="@+id/homeDefaultSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:ms_text_color="?attr/android:textColorSecondary"
-                app:ms_background_color="@color/dark_theme_fill"
+                app:ms_text_color="@color/light_theme_text_secondary"
+                app:ms_background_color="@color/light_theme_background"
                 android:layout_marginBottom="@dimen/fragment_default_margin"/>
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -75,21 +81,15 @@
                 android:text="@string/setting_profile_measurement_spinner_title"
                 android:layout_marginBottom="@dimen/fragment_default_xsmall_margin"
                 app:layout_parallaxFactor="0.4"
-                style="@style/RobotoSubheadingBold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/setting_profile_measurement_spinner_description"
-                android:layout_marginBottom="@dimen/fragment_default_small_margin"
-                style="@style/RobotoCaption" />
+                android:textColor="@color/light_theme_text_secondary"
+                android:textSize="@dimen/material_text_size_menu" />
 
             <com.jaredrummler.materialspinner.MaterialSpinner
                 android:id="@+id/measurementSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:ms_text_color="?attr/android:textColorSecondary"
-                app:ms_background_color="@color/dark_theme_fill"
+                app:ms_text_color="@color/light_theme_text_secondary"
+                app:ms_background_color="@color/light_theme_background"
                 android:layout_marginBottom="@dimen/fragment_default_margin"/>
 
         </LinearLayout>

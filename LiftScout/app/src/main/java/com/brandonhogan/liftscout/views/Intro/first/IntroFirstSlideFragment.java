@@ -32,7 +32,7 @@ public class IntroFirstSlideFragment extends SlideFragment {
 
     @Override
     public int backgroundColor() {
-        return R.color.intro_slide_one;
+        return R.color.light_theme_background;
     }
 
     @Override

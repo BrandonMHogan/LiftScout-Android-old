@@ -12,29 +12,38 @@
     <ImageView
         android:layout_gravity="center_horizontal"
         android:src="@drawable/dumbbell_96"
+        android:tint="@color/light_theme_text_secondary"
         android:layout_height="@dimen/intro_icon_size"
         android:layout_width="@dimen/intro_icon_size"
         tools:layout_margin="@dimen/intro_margin"
-        android:layout_marginTop="@dimen/intro_margin_top"/>
+        android:layout_marginTop="@dimen/intro_margin_top_first"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
+        android:contentDescription="@null"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/intro_margin_top"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
         android:gravity="center_horizontal"
-        style="@style/RobotoDisplay01"
         app:layout_parallaxFactor="0.2"
         android:text="@string/intro_slide_three_title"
-        />
+        style="@style/RobotoHeadline"
+        android:textColor="@color/theme_original_accent" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_marginStart="@dimen/intro_margin_left"
-        android:layout_marginEnd="@dimen/intro_margin_right"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
         android:text="@string/intro_slide_three_description"
         app:layout_parallaxFactor="0.4"
-        style="@style/RobotoCaption" />
+        android:textColor="@color/light_theme_text_secondary"
+        android:textSize="@dimen/material_text_size_small" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/create_button"
@@ -44,7 +53,7 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/intro_slide_three_button"
         android:background="?primaryButtonBackground"
-        android:backgroundTint="?android:colorAccent"
+        android:backgroundTint="@color/theme_original_accent"
         android:contentDescription="@string/intro_slide_three_button"
         app:layout_parallaxFactor="0.6"/>
 
@@ -73,6 +82,7 @@
             android:visibility="gone"
             android:textAlignment="center"
             android:src="@drawable/ic_check_white_48dp"
+            android:tint="@color/theme_original_accent"
             android:contentDescription="@string/intro_slide_three_button" />
 
     </RelativeLayout>
@@ -83,8 +93,8 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:gravity="center_horizontal"
-        android:layout_marginStart="@dimen/intro_margin_left"
-        android:layout_marginEnd="@dimen/intro_margin_right"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
         android:text="@string/intro_slide_three_added_description"
         app:layout_parallaxFactor="0.6"
         style="@style/RobotoCaption" />

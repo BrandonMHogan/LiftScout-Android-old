@@ -11,40 +11,50 @@
 
     <ImageView
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_check_white_48dp"
+        android:src="@drawable/ic_check_circle_white_36dp"
+        android:tint="@color/light_theme_text_secondary"
         android:layout_height="@dimen/intro_icon_size"
         android:layout_width="@dimen/intro_icon_size"
         tools:layout_margin="@dimen/intro_margin"
-        android:layout_marginTop="@dimen/intro_margin_top"/>
+        android:layout_marginTop="@dimen/intro_margin_top_first"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
+        android:contentDescription="@null"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/intro_margin_top"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
         android:gravity="center_horizontal"
-        style="@style/RobotoDisplay01"
         app:layout_parallaxFactor="0.2"
         android:text="@string/intro_slide_five_title"
-        />
+        style="@style/RobotoHeadline"
+        android:textColor="@color/theme_original_accent" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_marginStart="@dimen/intro_margin_left"
-        android:layout_marginEnd="@dimen/intro_margin_right"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
         android:text="@string/intro_slide_five_description"
         app:layout_parallaxFactor="0.4"
-        style="@style/RobotoCaption" />
+        android:textColor="@color/light_theme_text_secondary"
+        android:textSize="@dimen/material_text_size_small" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_marginStart="@dimen/intro_margin_left"
-        android:layout_marginEnd="@dimen/intro_margin_right"
-        android:layout_marginTop="@dimen/intro_margin_top"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
         android:text="@string/intro_slide_five_description_two"
-        app:layout_parallaxFactor="0.6"
-        style="@style/RobotoCaption" />
+        app:layout_parallaxFactor="0.4"
+        android:textColor="@color/light_theme_text_primary"
+        android:textSize="@dimen/material_text_size_small" />
 
 </agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

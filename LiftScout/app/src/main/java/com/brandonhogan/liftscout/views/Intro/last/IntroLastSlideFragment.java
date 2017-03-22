@@ -32,7 +32,7 @@ public class IntroLastSlideFragment extends SlideFragment {
 
     @Override
     public int backgroundColor() {
-        return R.color.intro_slide_five;
+        return R.color.light_theme_background;
     }
 
     @Override

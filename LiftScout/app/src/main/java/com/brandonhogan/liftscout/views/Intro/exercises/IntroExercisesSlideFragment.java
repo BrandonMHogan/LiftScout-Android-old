@@ -68,7 +68,7 @@ public class IntroExercisesSlideFragment extends SlideFragment implements IntroE
 
     @Override
     public int backgroundColor() {
-        return R.color.intro_slide_three;
+        return R.color.light_theme_background;
     }
 
     @Override

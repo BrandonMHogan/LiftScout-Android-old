@@ -102,7 +102,7 @@ public class UserManager {
         UserSetting setting = userSettingsRepo.getUserSetting(UserSetting.THEME);
 
         if (setting == null) {
-            setting = userSettingsRepo.createUserSetting(UserSetting.THEME, Themes.ORIGINAL_DARK);
+            setting = userSettingsRepo.createUserSetting(UserSetting.THEME, Themes.ORIGINAL_LIGHT);
         }
 
         return setting.getValue();

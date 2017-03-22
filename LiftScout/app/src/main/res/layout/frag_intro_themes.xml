@@ -10,73 +10,85 @@
 
     <ImageView
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_invert_colors_white_48dp"
+        android:src="@drawable/ic_color_lens_white_36dp"
+        android:tint="@color/light_theme_text_secondary"
         android:layout_height="@dimen/intro_icon_size"
         android:layout_width="@dimen/intro_icon_size"
         tools:layout_margin="@dimen/intro_margin"
-        android:layout_marginTop="@dimen/intro_margin_top"/>
+        android:layout_marginTop="@dimen/intro_margin_top_first"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
+        android:contentDescription="@null"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/intro_margin_top"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
         android:gravity="center_horizontal"
-        style="@style/RobotoDisplay01"
         app:layout_parallaxFactor="0.2"
         android:text="@string/intro_slide_four_title"
-        />
+        style="@style/RobotoHeadline"
+        android:textColor="@color/theme_original_accent" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_marginStart="@dimen/intro_margin_left"
-        android:layout_marginEnd="@dimen/intro_margin_right"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
         android:text="@string/intro_slide_four_description"
         app:layout_parallaxFactor="0.4"
-        style="@style/RobotoCaption" />
+        android:textColor="@color/light_theme_text_secondary"
+        android:textSize="@dimen/material_text_size_small" />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        app:layout_parallaxFactor="0.6"
+        android:layout_marginTop="@dimen/intro_margin_top"
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"
+        android:weightSum="3">
+
+        <View
+            android:id="@+id/primary_color"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/theme_dark_primary"/>
+
+        <View
+            android:id="@+id/primary_dark_color"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/theme_dark_primary_dark"/>
+
+
+        <View
+            android:id="@+id/accent_color"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/theme_dark_accent"/>
+
+    </LinearLayout>
 
     <com.jaredrummler.materialspinner.MaterialSpinner
         android:id="@+id/theme_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        app:ms_text_color="?attr/android:textColorSecondary"
-        app:ms_background_color="@color/dark_theme_fill"
+        app:ms_text_color="@color/light_theme_text_secondary"
+        app:ms_background_color="@color/light_theme_background"
         app:layout_parallaxFactor="0.6"
-        android:layout_marginStart="@dimen/intro_margin_left"
-        android:layout_marginEnd="@dimen/intro_margin_right"
-        android:layout_marginTop="@dimen/fragment_default_margin"/>
-
-
-    <View
-        android:id="@+id/primary_color"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/intro_color_palette_height"
-        app:layout_parallaxFactor="0.6"
-        android:layout_marginTop="@dimen/intro_margin_top"
-        android:layout_marginStart="@dimen/intro_margin_left"
-        android:layout_marginEnd="@dimen/intro_margin_right"
-        android:background="@color/theme_dark_primary"/>
-
-    <View
-        android:id="@+id/primary_dark_color"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/intro_color_palette_height"
-        app:layout_parallaxFactor="0.6"
-        android:layout_marginStart="@dimen/intro_margin_left"
-        android:layout_marginEnd="@dimen/intro_margin_right"
-        android:background="@color/theme_dark_primary_dark"/>
-
-
-    <View
-        android:id="@+id/accent_color"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/intro_color_palette_height"
-        app:layout_parallaxFactor="0.6"
-        android:layout_marginStart="@dimen/intro_margin_left"
-        android:layout_marginEnd="@dimen/intro_margin_right"
-        android:background="@color/theme_dark_accent"/>
+        android:layout_marginStart="@dimen/intro_margin_start"
+        android:layout_marginEnd="@dimen/intro_margin_end"/>
 
 
 
