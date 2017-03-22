@@ -76,7 +76,6 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
         if(saveState != null) {
             graph.setExercise(
                     saveState.getInt(BUNDLE_SELECTED_EXERCISE_ID),
@@ -99,7 +98,6 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
 
     @Override
     public void onStop() {
-        EventBus.getDefault().unregister(this);
         super.onStop();
     }
 

@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -88,6 +90,7 @@ public class CategoryListFragment extends BaseFragment implements
 
         setTitle(getResources().getString(R.string.title_frag_category_list));
         fab.setVisibility(presenter.isInSearch() ? View.GONE : View.VISIBLE);
+
     }
 
     @Override

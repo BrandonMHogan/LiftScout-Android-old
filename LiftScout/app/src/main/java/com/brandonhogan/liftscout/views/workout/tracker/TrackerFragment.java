@@ -138,14 +138,12 @@ public class TrackerFragment extends BaseFragment implements
     public void onResume() {
         super.onResume();
         mRecyclerView.addOnItemTouchListener(onTouchListener);
-        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mRecyclerView.removeOnItemTouchListener(onTouchListener);
-        EventBus.getDefault().unregister(this);
        //presenter.onRestTimerStop();
     }
 

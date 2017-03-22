@@ -60,7 +60,7 @@ public class NotificationServiceManager {
 //                0, startIntent, 0);
 //
 //
-//        Intent intent = new Intent(context, MainActivity.class)
+//        Intent intent = new Intent(context, SearchViewActions.class)
 //                    .putExtra(REST_TIMER_TRIGGER_TIME, 555)
 //                    .putExtra(NOTIFICATION_ID, REST_TIMER_TRIGGER_NOTIFICATION)
 //                    .putExtra(REST_TIMER_TRIGGER_EXERCISE_ID, exerciseId)

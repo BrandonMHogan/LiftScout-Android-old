@@ -6,14 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.DefaultScreens;
@@ -22,9 +20,14 @@ import com.brandonhogan.liftscout.core.managers.NotificationServiceManager;
 import com.brandonhogan.liftscout.core.managers.ProgressManager;
 import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.core.utils.LogUtil;
+import com.brandonhogan.liftscout.events.SearchViewEvent;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
+import com.brandonhogan.liftscout.views.workout.TrackerEvent;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Date;
 
@@ -140,10 +143,6 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        searchItem.setVisible(true);
-
-
         // Associate searchable configuration with the SearchView
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -161,6 +160,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
             {
                 //Search view is expanded
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                EventBus.getDefault().post(new SearchViewEvent(true, null));
             }
         });
         searchView.setOnCloseListener(new SearchView.OnCloseListener()
@@ -170,6 +170,28 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
             {
                 //Search View is collapsed
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                EventBus.getDefault().post(new SearchViewEvent(false, null));
+                return false;
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        {
+            @Override
+            public boolean onQueryTextSubmit(String query)
+            {
+                // use this method when query submitted
+                //Log.d(getTAG(), "onQueryTextSubmit: " + query);
+                EventBus.getDefault().post(new SearchViewEvent(true, query));
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText)
+            {
+                // use this method for auto complete search process
+                //Log.d(getTAG(), "onQueryTextChange: " + newText);
+                EventBus.getDefault().post(new SearchViewEvent(true, newText));
                 return false;
             }
         });
@@ -220,8 +242,11 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-               if (!searchView.isIconified())
+               if (!searchView.isIconified()) {
                    searchView.setIconified(true);
+                   searchView.setIconified(true);
+
+               }
 
                 break;
             case R.id.action_main_settings:
@@ -259,6 +284,10 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
 
     public NavigationManager getNavigationManager() {
         return navigationManager;
+    }
+
+    public SearchView getSearchView() {
+        return searchView;
     }
 
     // Private Functions

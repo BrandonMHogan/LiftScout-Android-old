@@ -7,18 +7,25 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.core.managers.NavigationManager;
+import com.brandonhogan.liftscout.events.SearchViewEvent;
 import com.google.firebase.analytics.FirebaseAnalytics;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import io.realm.Realm;
 
 public class BaseFragment extends Fragment {
+
 
     // Private Properties
     //
@@ -56,37 +63,9 @@ public class BaseFragment extends Fragment {
         return ((MainActivity)getActivity()).getNavigationManager();
     }
 
-    public Realm getRealm() {
-        if (realm == null || realm.isClosed()) {
-            synchronized (realmLock) {
-                if (realm == null || realm.isClosed()) {
-                    realm = Realm.getDefaultInstance();
-                }
-            }
-        }
-        return realm;
-    }
-
 
     // Private Functions
     //
-    private void closeRealm() {
-        if (realm != null && !realm.isClosed()) {
-            synchronized (realmLock) {
-                if (realm != null && !realm.isClosed()) {
-                    try {
-                        realm.close();
-                    }
-                    catch (Exception ex) {
-                        Log.e(getTAG(), "closeRealm() : Failed to close realm");
-                    }
-                    finally {
-                        realm = null;
-                    }
-                }
-            }
-        }
-    }
 
     public static void hideKeyboard(Context ctx) {
         InputMethodManager inputManager = (InputMethodManager) ctx
@@ -127,15 +106,23 @@ public class BaseFragment extends Fragment {
         );
     }
 
+
     @Override
     public void onPause() {
+        EventBus.getDefault().unregister(this);
         super.onPause();
         hideKeyboard(getActivity());
     }
 
     @Override
+    public void onResume() {
+        EventBus.getDefault().register(this);
+        super.onResume();
+    }
+
+    @Override
     public void onDestroyView() {
-        super.onDestroy();
+        super.onDestroyView();
         saveState = saveState();
     }
 
@@ -152,8 +139,6 @@ public class BaseFragment extends Fragment {
 
             Animator animator = AnimatorInflater.loadAnimator(getActivity(), nextAnim);
             animator.addListener(new Animator.AnimatorListener() {
-
-
 
                 @Override
                 public void onAnimationStart(Animator animator) {
@@ -191,5 +176,31 @@ public class BaseFragment extends Fragment {
         }
 
         return super.onCreateAnimator(transit, enter, nextAnim);
+    }
+
+
+    // Bus Subscriptions
+    //
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSearchEvent(SearchViewEvent event) {
+
+        if(!event.isActive())
+            searchViewOnClose();
+        else if (event.isActive() && event.getNewText() != null)
+            searchViewOnQueryTextChange(event.getNewText());
+        else
+            searchViewOnOpen();
+    }
+
+    public void searchViewOnQueryTextChange(String newText) {
+        // Override in child fragment if you want to be notified of changes
+    }
+
+    public void searchViewOnClose() {
+        // Override in child fragment if you want to be notified of changes
+    }
+
+    public void searchViewOnOpen() {
+        // Override in child fragment if you want to be notified of changes
     }
 }

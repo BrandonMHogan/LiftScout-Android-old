@@ -151,7 +151,6 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
         if(saveState != null) {
             presenter.restTimerNotification(saveState.getInt(SAVE_STATE_TIMER));
             saveState = null;
@@ -169,7 +168,6 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     public void onPause() {
         super.onPause();
         isDisplayed = false;
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
