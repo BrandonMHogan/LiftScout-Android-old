@@ -9,27 +9,34 @@ import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.model.Exercise;
+import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ExerciseViewHolder> {
-    LayoutInflater inflater;
-    ArrayList<Exercise> modelList;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
-    public ExerciseListAdapter(Context context, ArrayList<Exercise> list) {
-        super();
+public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ViewHolder> {
+    private LayoutInflater inflater;
+    private List<Exercise> modelList;
+    private RecyclerViewClickListener listener;
+
+
+    public ExerciseListAdapter(Context context, List<Exercise> list, RecyclerViewClickListener listener) {
         inflater = LayoutInflater.from(context);
         modelList = new ArrayList<>(list);
+        this.listener = listener;
     }
 
     @Override
-    public ExerciseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.frag_exercise_list_item, parent, false);
-        return new ExerciseViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ExerciseViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.bindData(modelList.get(position));
     }
 
@@ -38,13 +45,27 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
         return modelList.size();
     }
 
-    class ExerciseViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
+        @Bind(R.id.name)
         TextView name;
 
-        public ExerciseViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.name);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            listener.onClick(view, this.getLayoutPosition());
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            listener.onLongClick(view, this.getLayoutPosition());
+            return false;
         }
 
         public void bindData(Exercise rowModel) {
@@ -52,7 +73,7 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
         }
     }
 
-    public void setList(ArrayList<Exercise> list) {
+    public void setList(List<Exercise> list) {
         modelList.clear();
         modelList.addAll(list);
         notifyDataSetChanged();

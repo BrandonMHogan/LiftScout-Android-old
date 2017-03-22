@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/color"
-            android:layout_width="27dp"
-            android:layout_height="27dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/ic_category_list_circle"
             android:contentDescription="@null"/>

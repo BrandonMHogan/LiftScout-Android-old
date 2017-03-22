@@ -15,6 +15,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.model.Exercise;
+import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
@@ -26,7 +27,7 @@ import butterknife.OnClick;
 
 public class ExerciseListFragment extends BaseFragment implements
         ExerciseListContract.View,
-        RecyclerTouchListener.RecyclerTouchListenerHelper {
+        RecyclerViewClickListener {
 
 
     // Private Static Properties
@@ -65,8 +66,6 @@ public class ExerciseListFragment extends BaseFragment implements
     private View rootView;
     private ExerciseListContract.Presenter presenter;
     private ExerciseListAdapter mAdapter;
-    private RecyclerTouchListener onTouchListener;
-    private OnActivityTouchListener touchListener;
     private MaterialDialog dialog;
 
 
@@ -102,22 +101,14 @@ public class ExerciseListFragment extends BaseFragment implements
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mRecyclerView.addOnItemTouchListener(onTouchListener);
+    public void onClick(View v, int position) {
+        presenter.rowClicked(position);
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        mRecyclerView.removeOnItemTouchListener(onTouchListener);
+    public void onLongClick(View v, int position) {
+        itemSelectedDialog(position);
     }
-
-    @Override
-    public void setOnActivityTouchListener(OnActivityTouchListener listener) {
-        this.touchListener = listener;
-    }
-
 
     // Private Functions
     //
@@ -154,22 +145,29 @@ public class ExerciseListFragment extends BaseFragment implements
         dialog.show();
     }
 
-    private void removeExerciseAlert(final int position) {
+    private void itemSelectedDialog(final int position) {
 
         Exercise exercise = presenter.getExercise(position);
 
         dialog = new MaterialDialog.Builder(getActivity())
-                .title(getString(R.string.dialog_exercise_remove_title, exercise.getName()))
-                .content(getString(R.string.dialog_exercise_remove_message, exercise.getName()))
-                .positiveText(R.string.delete)
+                .title(exercise.getName())
+                .content(getString(R.string.dialog_category_long_selected, exercise.getName()))
+                .positiveText(R.string.edit)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        editExercise(position);
+                        dialog.cancel();
+                    }
+                })
+                .neutralText(R.string.delete)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         presenter.deleteExercise(position);
                         dialog.cancel();
                     }
                 })
-                .negativeText(R.string.cancel)
                 .build();
 
         dialog.show();
@@ -191,42 +189,9 @@ public class ExerciseListFragment extends BaseFragment implements
 
         noDataLabel.setVisibility((data == null || data.isEmpty()) ? View.VISIBLE : View.GONE);
 
-        mAdapter = new ExerciseListAdapter(getActivity(), data);
+        mAdapter = new ExerciseListAdapter(getActivity(), data, this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        onTouchListener = new RecyclerTouchListener(getActivity(), mRecyclerView);
-
-
-        onTouchListener
-                .setClickable(new RecyclerTouchListener.OnRowClickListener() {
-                    @Override
-                    public void onRowClicked(int position) {
-                        presenter.rowClicked(position);
-                    }
-
-                    @Override
-                    public void onIndependentViewClicked(int independentViewID, int position) {
-                    }
-                })
-                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
-                    @Override
-                    public void onRowLongClicked(int position) {
-                        removeExerciseAlert(position);
-                    }
-                })
-                .setSwipeOptionViews(R.id.delete, R.id.edit)
-                .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
-                    @Override
-                    public void onSwipeOptionClicked(int viewID, int position) {
-
-                        if (viewID == R.id.delete) {
-                            removeExerciseAlert(position);
-                        } else if (viewID == R.id.edit) {
-                            editExercise(position);
-                        }
-                    }
-                });
     }
 
     @Override

@@ -106,16 +106,6 @@ public class CategoryListFragment extends BaseFragment implements
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
     public void onClick(View v, int position) {
         presenter.rowClicked(position);
     }
