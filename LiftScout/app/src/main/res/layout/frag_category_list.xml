@@ -5,6 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:windowBackground">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:scrollbarThumbVertical="?attr/colorAccent"
+        android:scrollbarSize="1dp"
+        android:scrollbarStyle="insideOverlay"/>
+
     <TextView
         android:id="@+id/no_data_label"
         android:layout_width="match_parent"
@@ -15,14 +24,7 @@
         android:visibility="gone"
         android:text="@string/category_list_no_data"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:scrollbarThumbVertical="?attr/colorAccent"
-        android:scrollbarSize="1dp"
-        android:scrollbarStyle="insideOverlay"/>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -35,5 +37,10 @@
         android:layout_marginBottom="@dimen/fab_margin_bottom"
         android:layout_marginEnd="@dimen/fab_margin_end"
         android:layout_gravity="bottom|end" />
+
+    <com.miguelcatalan.materialsearchview.MaterialSearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </com.brandonhogan.liftscout.core.controls.BaseFrameLayout>

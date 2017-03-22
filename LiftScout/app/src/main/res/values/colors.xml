@@ -22,7 +22,7 @@
     <!-- Original Theme -->
     <color name="theme_original_primary">#FF9800</color>
     <color name="theme_original_primary_dark">#F57C00</color>
-    <color name="theme_original_accent">#30659C</color>
+    <color name="theme_original_accent">#3A60D2</color>
 
     <!-- Dark Theme -->
     <color name="theme_dark_primary">#FF9800</color>

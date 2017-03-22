@@ -14,9 +14,12 @@ import com.brandonhogan.liftscout.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.CategoryViewHolder> {
-    LayoutInflater inflater;
-    List<CategoryListModel> modelList;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.ViewHolder> {
+    private LayoutInflater inflater;
+    private List<CategoryListModel> modelList;
 
     public CategoryListAdapter(Context context, List<CategoryListModel> list) {
         inflater = LayoutInflater.from(context);
@@ -24,13 +27,13 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     }
 
     @Override
-    public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.frag_category_list_item, parent, false);
-        return new CategoryViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(CategoryViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.bindData(modelList.get(position));
     }
 
@@ -39,15 +42,17 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         return modelList.size();
     }
 
-    class CategoryViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView name;
+        @Bind(R.id.color)
         ImageView color;
 
-        public CategoryViewHolder(View itemView) {
+        @Bind(R.id.name)
+        TextView name;
+
+        public ViewHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.name);
-            color = (ImageView) itemView.findViewById(R.id.color);
+            ButterKnife.bind(this, itemView);
         }
 
         public void bindData(CategoryListModel rowModel) {

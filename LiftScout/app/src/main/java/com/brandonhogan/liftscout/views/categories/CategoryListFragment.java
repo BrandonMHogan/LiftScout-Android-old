@@ -7,6 +7,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +18,11 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.Bind;
@@ -62,13 +66,16 @@ public class CategoryListFragment extends BaseFragment implements
     // Binds
     //
     @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
+    RecyclerView recyclerView;
 
     @Bind(R.id.fab)
     FloatingActionButton fab;
 
     @Bind(R.id.no_data_label)
     TextView noDataLabel;
+
+    @Bind(R.id.search_view)
+    MaterialSearchView searchView;
 
 
     //Overrides
@@ -90,25 +97,69 @@ public class CategoryListFragment extends BaseFragment implements
 
         setTitle(getResources().getString(R.string.title_frag_category_list));
         fab.setVisibility(presenter.isInSearch() ? View.GONE : View.VISIBLE);
+
+        searchView.setVoiceSearch(true);
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+                //Do some magic
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+                //Do some magic
+            }
+        });
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.action_search).setVisible(true);
+        searchView.setMenuItem(searchItem);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mRecyclerView.addOnItemTouchListener(onTouchListener);
+        recyclerView.addOnItemTouchListener(onTouchListener);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mRecyclerView.removeOnItemTouchListener(onTouchListener);
+        recyclerView.removeOnItemTouchListener(onTouchListener);
     }
 
     @Override
     public void setOnActivityTouchListener(OnActivityTouchListener listener) {
         this.touchListener = listener;
     }
-
 
     // Private Functions
     //
@@ -169,15 +220,15 @@ public class CategoryListFragment extends BaseFragment implements
     //
 
     @Override
-    public void updateAdapter(List<CategoryListModel> data) {
+    public void updateAdapter(List<CategoryListModel> data, Comparator<CategoryListModel> comparator) {
 
         noDataLabel.setVisibility((data == null || data.isEmpty()) ? View.VISIBLE : View.GONE);
 
         mAdapter = new CategoryListAdapter(getActivity(), data);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        onTouchListener = new RecyclerTouchListener(getActivity(), mRecyclerView);
+        onTouchListener = new RecyclerTouchListener(getActivity(), recyclerView);
 
         onTouchListener
                 .setClickable(new RecyclerTouchListener.OnRowClickListener() {
@@ -194,18 +245,6 @@ public class CategoryListFragment extends BaseFragment implements
                     @Override
                     public void onRowLongClicked(int position) {
                         removeCategoryAlert(position);
-                    }
-                })
-                .setSwipeOptionViews(R.id.delete, R.id.edit)
-                .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
-                    @Override
-                    public void onSwipeOptionClicked(int viewID, int position) {
-
-                        if (viewID == R.id.delete) {
-                            removeCategoryAlert(position);
-                        } else if (viewID == R.id.edit) {
-                            editCategory(position);
-                        }
                     }
                 });
     }

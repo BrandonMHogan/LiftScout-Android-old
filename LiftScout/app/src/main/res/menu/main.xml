@@ -2,32 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/action_today"
-        android:icon="?attr/themedMenuHomeDrawable"
-        android:title="@string/nav_today"
+    <item android:id="@+id/action_search"
+        android:title="@string/action_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
         android:visible="false"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/action_calendar"
-        android:icon="?attr/themedMenuCalendarDrawable"
-        android:title="@string/nav_calendar"
-        android:visible="false"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/action_save"
-        android:title="@string/action_save"
-        android:visible="false"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/action_add"
-        android:icon="@drawable/ic_add_white_48dp"
-        android:title="@string/add"
-        android:visible="false"
-        app:showAsAction="always" />
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_timer"
