@@ -6,8 +6,6 @@ import com.brandonhogan.liftscout.injection.module.AppModule;
 import com.brandonhogan.liftscout.injection.module.DatabaseModule;
 import com.brandonhogan.liftscout.injection.module.UserModule;
 
-import java.util.Objects;
-
 public class Injector {
 
     private static AppComponent appComponent;

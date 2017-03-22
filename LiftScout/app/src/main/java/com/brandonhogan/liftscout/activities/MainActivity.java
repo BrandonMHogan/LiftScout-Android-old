@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,9 +22,7 @@ import com.brandonhogan.liftscout.core.utils.LogUtil;
 import com.brandonhogan.liftscout.events.SearchViewEvent;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
-import com.brandonhogan.liftscout.views.workout.TrackerEvent;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
-
 
 import org.greenrobot.eventbus.EventBus;
 

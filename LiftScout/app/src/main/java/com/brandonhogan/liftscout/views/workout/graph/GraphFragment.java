@@ -11,7 +11,6 @@ import com.brandonhogan.liftscout.core.controls.graphs.line.MyLineGraph;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.workout.TrackerEvent;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
