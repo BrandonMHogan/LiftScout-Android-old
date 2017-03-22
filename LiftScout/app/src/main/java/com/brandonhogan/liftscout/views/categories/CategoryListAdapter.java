@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +21,14 @@ import butterknife.ButterKnife;
 public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.ViewHolder> {
     private LayoutInflater inflater;
     private List<CategoryListModel> modelList;
+    private RecyclerViewClickListener listener;
 
-    public CategoryListAdapter(Context context, List<CategoryListModel> list) {
+
+
+    public CategoryListAdapter(Context context, List<CategoryListModel> list, RecyclerViewClickListener listener) {
         inflater = LayoutInflater.from(context);
         modelList = new ArrayList<>(list);
+        this.listener = listener;
     }
 
     @Override
@@ -42,7 +47,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         return modelList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         @Bind(R.id.color)
         ImageView color;
@@ -53,6 +58,19 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            listener.onClick(view, this.getLayoutPosition());
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            listener.onLongClick(view, this.getLayoutPosition());
+            return false;
         }
 
         public void bindData(CategoryListModel rowModel) {

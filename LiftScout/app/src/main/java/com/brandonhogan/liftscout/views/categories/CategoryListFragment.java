@@ -16,9 +16,8 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
-import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
-import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.List;
 
@@ -26,8 +25,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 public class CategoryListFragment extends BaseFragment implements
-        CategoryListContract.View,
-        RecyclerTouchListener.RecyclerTouchListenerHelper {
+        CategoryListContract.View, RecyclerViewClickListener {
 
 
     // Private Static Properties
@@ -54,8 +52,6 @@ public class CategoryListFragment extends BaseFragment implements
     private View rootView;
     private CategoryListContract.Presenter presenter;
     private CategoryListAdapter mAdapter;
-    private RecyclerTouchListener onTouchListener;
-    private OnActivityTouchListener touchListener;
     private MaterialDialog dialog;
 
     // Binds
@@ -84,11 +80,11 @@ public class CategoryListFragment extends BaseFragment implements
         presenter = new CategoryListPresenter(this,
                 getArguments().getBoolean(BUNDLE_ADD_SET));
 
+
         presenter.viewCreated();
 
         setTitle(getResources().getString(R.string.title_frag_category_list));
         fab.setVisibility(presenter.isInSearch() ? View.GONE : View.VISIBLE);
-
     }
 
     @Override
@@ -112,22 +108,26 @@ public class CategoryListFragment extends BaseFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        recyclerView.addOnItemTouchListener(onTouchListener);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        recyclerView.removeOnItemTouchListener(onTouchListener);
     }
 
     @Override
-    public void setOnActivityTouchListener(OnActivityTouchListener listener) {
-        this.touchListener = listener;
+    public void onClick(View v, int position) {
+        presenter.rowClicked(position);
+    }
+
+    @Override
+    public void onLongClick(View v, int position) {
+        itemSelectedDialog(position);
     }
 
     // Private Functions
     //
+
     private void editCategory(int position) {
         CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
             @Override
@@ -160,21 +160,28 @@ public class CategoryListFragment extends BaseFragment implements
     }
 
 
-    private void removeCategoryAlert(final int position) {
+    private void itemSelectedDialog(final int position) {
         CategoryListModel model = presenter.getCategory(position);
 
         dialog = new MaterialDialog.Builder(getActivity())
-                .title(getString(R.string.dialog_category_remove_title, model.getName()))
-                .content(getString(R.string.dialog_category_remove_message, model.getName()))
-                .positiveText(R.string.delete)
+                .title(model.getName())
+                .content(getString(R.string.dialog_category_long_selected, model.getName()))
+                .positiveText(R.string.edit)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        editCategory(position);
+                        dialog.cancel();
+                    }
+                })
+                .neutralText(R.string.delete)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         presenter.deleteCategory(position);
                         dialog.cancel();
                     }
                 })
-                .negativeText(R.string.cancel)
                 .build();
 
         dialog.show();
@@ -189,29 +196,9 @@ public class CategoryListFragment extends BaseFragment implements
 
         noDataLabel.setVisibility((data == null || data.isEmpty()) ? View.VISIBLE : View.GONE);
 
-        mAdapter = new CategoryListAdapter(getActivity(), data);
+        mAdapter = new CategoryListAdapter(getActivity(), data, this);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        onTouchListener = new RecyclerTouchListener(getActivity(), recyclerView);
-
-        onTouchListener
-                .setClickable(new RecyclerTouchListener.OnRowClickListener() {
-                    @Override
-                    public void onRowClicked(int position) {
-                        presenter.rowClicked(position);
-                    }
-
-                    @Override
-                    public void onIndependentViewClicked(int independentViewID, int position) {
-                    }
-                })
-                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
-                    @Override
-                    public void onRowLongClicked(int position) {
-                        removeCategoryAlert(position);
-                    }
-                });
     }
 
     @Override
