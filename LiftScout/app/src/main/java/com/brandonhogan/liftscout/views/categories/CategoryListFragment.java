@@ -18,11 +18,8 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
-
-import java.util.Comparator;
 import java.util.List;
 
 import butterknife.Bind;
@@ -60,8 +57,6 @@ public class CategoryListFragment extends BaseFragment implements
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
     private MaterialDialog dialog;
-    private MenuItem addMenu;
-
 
     // Binds
     //
@@ -73,10 +68,6 @@ public class CategoryListFragment extends BaseFragment implements
 
     @Bind(R.id.no_data_label)
     TextView noDataLabel;
-
-    @Bind(R.id.search_view)
-    MaterialSearchView searchView;
-
 
     //Overrides
     //
@@ -97,31 +88,6 @@ public class CategoryListFragment extends BaseFragment implements
 
         setTitle(getResources().getString(R.string.title_frag_category_list));
         fab.setVisibility(presenter.isInSearch() ? View.GONE : View.VISIBLE);
-
-        searchView.setVoiceSearch(true);
-        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
-        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
-            @Override
-            public void onSearchViewShown() {
-                //Do some magic
-            }
-
-            @Override
-            public void onSearchViewClosed() {
-                //Do some magic
-            }
-        });
     }
 
     @Override
@@ -139,9 +105,7 @@ public class CategoryListFragment extends BaseFragment implements
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-
-        final MenuItem searchItem = menu.findItem(R.id.action_search).setVisible(true);
-        searchView.setMenuItem(searchItem);
+        menu.findItem(R.id.action_search).setVisible(true);
     }
 
     @Override
@@ -220,7 +184,7 @@ public class CategoryListFragment extends BaseFragment implements
     //
 
     @Override
-    public void updateAdapter(List<CategoryListModel> data, Comparator<CategoryListModel> comparator) {
+    public void updateAdapter(List<CategoryListModel> data) {
 
         noDataLabel.setVisibility((data == null || data.isEmpty()) ? View.VISIBLE : View.GONE);
 

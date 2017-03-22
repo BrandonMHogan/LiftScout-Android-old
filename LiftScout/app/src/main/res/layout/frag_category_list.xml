@@ -38,9 +38,6 @@
         android:layout_marginEnd="@dimen/fab_margin_end"
         android:layout_gravity="bottom|end" />
 
-    <com.miguelcatalan.materialsearchview.MaterialSearchView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 
 </com.brandonhogan.liftscout.core.controls.BaseFrameLayout>

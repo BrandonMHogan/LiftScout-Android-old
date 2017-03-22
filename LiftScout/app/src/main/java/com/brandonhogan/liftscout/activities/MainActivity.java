@@ -1,12 +1,19 @@
 package com.brandonhogan.liftscout.activities;
 
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.DefaultScreens;
@@ -58,6 +65,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
     // Private Properties
     //
     private SweetAlertDialog dialog;
+    private SearchView searchView;
 
 
     // Overrides
@@ -71,6 +79,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         Injector.getAppComponent().inject(this);
 
         setSupportActionBar(toolbar);
+        handleIntent(getIntent());
 
         if (findViewById(R.id.fragment_manager) != null) {
 
@@ -114,9 +123,57 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         }
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            //use the query to search your data somehow
+        }
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchItem.setVisible(true);
+
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView =
+                (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+
+
+        searchView.setOnSearchClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Search view is expanded
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener()
+        {
+            @Override
+            public boolean onClose()
+            {
+                //Search View is collapsed
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                return false;
+            }
+        });
+
         return true;
     }
 
@@ -124,6 +181,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_main_settings).setVisible(true);
         menu.findItem(R.id.action_about).setVisible(true);
+
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -161,6 +219,11 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+               if (!searchView.isIconified())
+                   searchView.setIconified(true);
+
+                break;
             case R.id.action_main_settings:
                 navigationManager.startSettings();
                 break;
@@ -173,12 +236,17 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
 
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() == 1) {
-            // we have only one fragment left so we would close the application with this back
-            endActivity();
+        if (!searchView.isIconified()) {
+            searchView.setIconified(true);
+        }
+        else {
+            if (getFragmentManager().getBackStackEntryCount() == 1) {
+                // we have only one fragment left so we would close the application with this back
+                endActivity();
 
-        } else {
-            navigationManager.navigateBack(this);
+            } else {
+                navigationManager.navigateBack(this);
+            }
         }
     }
 

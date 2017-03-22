@@ -22,7 +22,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MainActivity"
-            android:theme="@style/AppTheme.Dark.Base"/>
+            android:theme="@style/AppTheme.Dark.Base">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
         <activity
             android:name=".activities.IntroActivity"
             android:theme="@style/Theme.Intro.Mine" />
