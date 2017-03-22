@@ -17,8 +17,6 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.model.Exercise;
 import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
-import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
-import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 
