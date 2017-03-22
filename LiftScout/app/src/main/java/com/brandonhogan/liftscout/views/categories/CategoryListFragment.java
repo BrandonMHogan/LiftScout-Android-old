@@ -102,7 +102,7 @@ public class CategoryListFragment extends BaseFragment implements
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.action_search).setVisible(true);
+        //menu.findItem(R.id.action_search).setVisible(true);
     }
 
     @Override
