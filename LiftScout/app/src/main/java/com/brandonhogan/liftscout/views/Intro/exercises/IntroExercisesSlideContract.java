@@ -7,7 +7,7 @@ package com.brandonhogan.liftscout.views.Intro.exercises;
 
 public class IntroExercisesSlideContract {
     interface View {
-        void exercisesCreated(String value);
+        void exercisesCreated(boolean isSet, String value);
         String getStringValue(int value);
         int getColor(int color);
     }

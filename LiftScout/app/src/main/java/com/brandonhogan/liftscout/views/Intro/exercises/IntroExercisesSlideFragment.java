@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
@@ -31,12 +32,6 @@ public class IntroExercisesSlideFragment extends SlideFragment implements IntroE
     //
     @Bind(R.id.create_button)
     AppCompatButton createButton;
-
-    @Bind(R.id.image_button)
-    ImageButton imageButton;
-
-    @Bind(R.id.progress_bar)
-    ProgressBar progressBar;
 
     @Bind(R.id.image_button_desc)
     TextView imageButtonDescription;
@@ -83,22 +78,31 @@ public class IntroExercisesSlideFragment extends SlideFragment implements IntroE
 
     @OnClick(R.id.create_button)
     public void onCreateClick() {
-        progressBar.setVisibility(View.VISIBLE);
         createButton.setEnabled(false);
         presenter.onButtonPressed();
     }
 
     @Override
-    public void exercisesCreated(String value) {
-        progressBar.setVisibility(View.GONE);
+    public void exercisesCreated(boolean isSet, String value) {
+        createButton.setEnabled(true);
 
-        Snackbar snackbar = Snackbar
-                .make(layout, value, Snackbar.LENGTH_LONG);
-        snackbar.show();
+        if(isSet) {
 
-        createButton.setVisibility(View.GONE);
-        imageButton.setVisibility(View.VISIBLE);
-        imageButtonDescription.setVisibility(View.VISIBLE);
+            Snackbar snackbar = Snackbar
+                    .make(layout, value, Snackbar.LENGTH_LONG);
+            snackbar.show();
+
+            imageButtonDescription.setVisibility(View.VISIBLE);
+            createButton.setText(getString(R.string.intro_slide_three_button));
+        }
+        else {
+            createButton.setVisibility(View.VISIBLE);
+            createButton.setText(getString(R.string.intro_slide_three_button_undo));
+
+            Snackbar snackbar = Snackbar
+                    .make(layout, value, Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.repository;
 
 import com.brandonhogan.liftscout.core.model.Category;
 
+import io.reactivex.Observable;
 import io.realm.RealmResults;
 
 public interface CategoryRepo {
@@ -9,4 +10,5 @@ public interface CategoryRepo {
     RealmResults<Category> getCategories();
     Category setCategory(Category category);
     void deleteCategory(int categoryId);
+    Observable<Boolean> deleteAllCategories();
 }

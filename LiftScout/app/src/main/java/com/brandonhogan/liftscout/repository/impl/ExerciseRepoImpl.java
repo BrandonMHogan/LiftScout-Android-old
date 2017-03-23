@@ -12,6 +12,9 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.realm.RealmResults;
 
 public class ExerciseRepoImpl implements ExerciseRepo {
@@ -131,6 +134,32 @@ public class ExerciseRepoImpl implements ExerciseRepo {
             Log.e(TAG, ex.getMessage());
             databaseRealm.getRealmInstance().cancelTransaction();
         }
+    }
+
+    @Override
+    public Observable<Boolean> deleteAllExercises() {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> e) throws Exception {
+                try {
+                    databaseRealm.getRealmInstance().beginTransaction();
+
+                    databaseRealm.getRealmInstance()
+                            .where(Exercise.class)
+                            .findAll().deleteAllFromRealm();
+
+                    databaseRealm.getRealmInstance().commitTransaction();
+
+                    e.onNext(true);
+                    e.onComplete();
+                }
+                catch (Exception ex) {
+                    Log.e(TAG, ex.getMessage());
+                    databaseRealm.getRealmInstance().cancelTransaction();
+                    e.onError(ex);
+                }
+            }
+        });
     }
 
     @Override

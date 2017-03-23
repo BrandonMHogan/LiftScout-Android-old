@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.repository;
 
 import com.brandonhogan.liftscout.core.model.Exercise;
 
+import io.reactivex.Observable;
 import io.realm.RealmResults;
 
 public interface ExerciseRepo {
@@ -11,6 +12,7 @@ public interface ExerciseRepo {
     void setExercise(Exercise exercise);
     void updateExercise(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer);
     void deleteExercise(int exercise);
+    Observable<Boolean> deleteAllExercises();
     void deleteAllExercisesForCategory(int categoryId);
     void setExerciseRestTimer(int exerciseId, int time);
     int getExerciseRestTimer(int exerciseId);

@@ -115,8 +115,9 @@
     <string name="intro_slide_two_description">You can change these settings anytime later from the settings menu</string>
     <string name="intro_slide_three_title">Default Exercises</string>
     <string name="intro_slide_three_added_description">Exercises have been added</string>
-    <string name="intro_slide_three_description">To make things easier for you, we can add many of the most common exercises or add your own later</string>
-    <string name="intro_slide_three_button">Add Exercises</string>
+    <string name="intro_slide_three_description">To make things easier for you, we have added many of the most common exercises. You can also add your own later</string>
+    <string name="intro_slide_three_button">Remove Exercises</string>
+    <string name="intro_slide_three_button_undo">Undo</string>
     <string name="intro_slide_four_title">Themes</string>
     <string name="intro_slide_four_description">Choose from a number of themes to find what best suits your preference</string>
     <string name="intro_slide_five_title">Welcome!</string>

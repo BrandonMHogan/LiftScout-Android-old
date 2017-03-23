@@ -57,36 +57,6 @@
         android:contentDescription="@string/intro_slide_three_button"
         app:layout_parallaxFactor="0.6"/>
 
-
-    <RelativeLayout
-        android:layout_width="@dimen/intro_button_width"
-        android:layout_height="@dimen/intro_button_height"
-        android:textAlignment="center"
-        android:layout_margin="@dimen/intro_margin"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/transparent"
-        app:layout_parallaxFactor="0.6">
-
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            />
-
-        <ImageButton
-            android:id="@+id/image_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/transparent"
-            android:visibility="gone"
-            android:textAlignment="center"
-            android:src="@drawable/ic_check_white_48dp"
-            android:tint="@color/theme_original_accent"
-            android:contentDescription="@string/intro_slide_three_button" />
-
-    </RelativeLayout>
-
     <TextView
         android:id="@+id/image_button_desc"
         android:layout_width="match_parent"

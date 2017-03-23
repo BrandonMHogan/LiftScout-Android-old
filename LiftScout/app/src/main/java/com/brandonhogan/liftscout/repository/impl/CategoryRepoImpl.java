@@ -9,6 +9,9 @@ import com.brandonhogan.liftscout.repository.DatabaseRealm;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.realm.RealmResults;
 
 public class CategoryRepoImpl implements CategoryRepo {
@@ -82,5 +85,31 @@ public class CategoryRepoImpl implements CategoryRepo {
             Log.e(TAG, ex.getMessage());
             databaseRealm.getRealmInstance().cancelTransaction();
         }
+    }
+
+    @Override
+    public Observable<Boolean> deleteAllCategories() {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> e) throws Exception {
+                try {
+                    databaseRealm.getRealmInstance().beginTransaction();
+
+                    databaseRealm.getRealmInstance()
+                            .where(Category.class)
+                            .findAll().deleteAllFromRealm();
+
+                    databaseRealm.getRealmInstance().commitTransaction();
+
+                    e.onNext(true);
+                    e.onComplete();
+                }
+                catch (Exception ex) {
+                    Log.e(TAG, ex.getMessage());
+                    databaseRealm.getRealmInstance().cancelTransaction();
+                    e.onError(ex);
+                }
+            }
+        });
     }
 }

@@ -28,6 +28,7 @@ import io.reactivex.functions.Consumer;
 public class IntroExercisesSlidePresenter implements IntroExercisesSlideContract.Presenter {
 
     private static String TAG = "IExercisesSlideP";
+    private boolean isSet = true;
 
 
     // Injections
@@ -50,18 +51,75 @@ public class IntroExercisesSlidePresenter implements IntroExercisesSlideContract
     //
     @Override
     public void viewCreated() {
-    }
-
-    @Override
-    public void onButtonPressed() {
         setupDefaults().subscribe(new Consumer<Boolean>() {
             @Override
             public void accept(@NonNull Boolean aBoolean) throws Exception {
                 try {
-                    view.exercisesCreated("Exercises Created!");
+                    Log.d(TAG, "accept: ");
+                } catch (Exception ex) {
+                    Log.e(TAG, "accept: ", ex);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onButtonPressed() {
+        if (!isSet) {
+            setupDefaults().subscribe(new Consumer<Boolean>() {
+                @Override
+                public void accept(@NonNull Boolean aBoolean) throws Exception {
+                    try {
+                        view.exercisesCreated(isSet = true, "Exercises Created!");
+                    } catch (Exception ex) {
+                        Log.e(TAG, "accept: ", ex);
+                    }
+                }
+            });
+        }
+        else {
+            removeDefaults().subscribe(new Consumer<Boolean>() {
+                @Override
+                public void accept(@NonNull Boolean aBoolean) throws Exception {
+                    try {
+                        view.exercisesCreated(isSet = false, "Exercises Removed");
+                    } catch (Exception ex) {
+                        Log.e(TAG, "accept: ", ex);
+                    }
+                }
+            });
+        }
+    }
+
+    private Observable<Boolean> removeDefaults() {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(final ObservableEmitter<Boolean> e) throws Exception {
+                try {
+
+                    ExerciseRepo exerciseRepo = new ExerciseRepoImpl();
+
+                    exerciseRepo.deleteAllExercises()
+                    .subscribe(new Consumer<Boolean>() {
+                        @Override
+                        public void accept(@NonNull Boolean aBoolean) throws Exception {
+
+                            CategoryRepo categoryRepo = new CategoryRepoImpl();
+                            categoryRepo.deleteAllCategories()
+                                    .subscribe(new Consumer<Boolean>() {
+                                @Override
+                                public void accept(@NonNull Boolean aBoolean) throws Exception {
+                                    e.onNext(aBoolean);
+                                    e.onComplete();
+                                }
+                            });
+
+                        }
+                    });
                 }
                 catch (Exception ex) {
-                    Log.e(TAG, "accept: ", ex);
+                    Log.e(TAG, "subscribe: removeDefaults ", ex);
+                    e.onError(ex);
                 }
             }
         });
