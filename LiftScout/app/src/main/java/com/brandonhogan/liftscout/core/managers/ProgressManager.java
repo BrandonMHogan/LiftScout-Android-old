@@ -181,14 +181,18 @@ public class ProgressManager {
 
     // Reps
 
-    public void addRepToTodayProgress(Set set, Rep rep) {
-        setRepo.addRep(set, rep);
-
-        recordsManager.repCreated(rep.getId(), set.getExercise().getId())
+    public void addRepToTodayProgress(final Set set, final Rep rep) {
+        setRepo.addRep(set, rep)
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(@NonNull Boolean aBoolean) throws Exception {
+                        recordsManager.repCreated(rep.getId(), set.getExercise().getId())
+                                .subscribe(new Consumer<Boolean>() {
+                                    @Override
+                                    public void accept(@NonNull Boolean aBoolean) throws Exception {
 
+                                    }
+                                });
                     }
                 });
     }

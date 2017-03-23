@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.internal.operators.observable.ObservableSingleSingle;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -150,21 +151,30 @@ public class SetRepoImpl implements SetRepo {
     }
 
     @Override
-    public void addRep(Set set, Rep rep) {
-        try {
-            databaseRealm.getRealmInstance().beginTransaction();
+    public Observable<Boolean> addRep(final Set set, final Rep rep) {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> e) throws Exception {
+                try {
+                    databaseRealm.getRealmInstance().beginTransaction();
 
-            if (rep.getId() == 0)
-                rep.setId(getNextRepKey());
+                    if (rep.getId() == 0)
+                        rep.setId(getNextRepKey());
 
-            set.getReps().add(rep);
-            databaseRealm.getRealmInstance().copyToRealmOrUpdate(set);
-            databaseRealm.getRealmInstance().commitTransaction();
-        }
-        catch (Exception ex) {
-            Log.e(TAG, ex.getMessage());
-            databaseRealm.getRealmInstance().cancelTransaction();
-        }
+                    set.getReps().add(rep);
+                    databaseRealm.getRealmInstance().copyToRealmOrUpdate(set);
+                    databaseRealm.getRealmInstance().commitTransaction();
+
+                    e.onNext(true);
+                    e.onComplete();
+                }
+                catch (Exception ex) {
+                    Log.e(TAG, ex.getMessage());
+                    databaseRealm.getRealmInstance().cancelTransaction();
+                    e.onError(ex);
+                }
+            }
+        });
     }
 
     @Override

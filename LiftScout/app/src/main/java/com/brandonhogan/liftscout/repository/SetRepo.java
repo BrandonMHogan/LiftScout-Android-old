@@ -21,7 +21,7 @@ public interface SetRepo {
     Observable<Rep> getRep(int repId);
     Observable<Set> getSet(int setId);
 
-    void addRep(Set set, Rep rep);
+    Observable<Boolean> addRep(Set set, Rep rep);
     void updateRep(Rep rep);
     void deleteRep(int repId);
     RealmResults<Set> getSets(int exerciseId);

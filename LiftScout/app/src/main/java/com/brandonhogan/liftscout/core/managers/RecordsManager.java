@@ -152,7 +152,7 @@ public class RecordsManager {
 
                                 // Don't set Records for entries with no weight.
                                 if (rep.getWeight() == 0) {
-                                    e.onNext(true);
+                                    e.onNext(false);
                                     e.onComplete();
                                     return;
                                 }
