@@ -76,7 +76,14 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
         public void bindData(CategoryListModel rowModel) {
             name.setText(rowModel.getName());
-            ((GradientDrawable)color.getBackground()).setColor(rowModel.getColor());
+
+            if(rowModel.getColor() == 0) {
+                color.setVisibility(View.GONE);
+            }
+            else {
+                color.setVisibility(View.VISIBLE);
+                ((GradientDrawable) color.getBackground()).setColor(rowModel.getColor());
+            }
         }
     }
 

@@ -2,8 +2,6 @@ package com.brandonhogan.liftscout.views.exercises;
 
 import android.widget.Filter;
 
-import com.brandonhogan.liftscout.core.model.Exercise;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +41,6 @@ public class ExerciseFilter extends Filter {
 
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
-        adapter.setList(filteredExerciseList);
-        adapter.notifyDataSetChanged();
+        adapter.setAdapterList(filteredExerciseList);
     }
 }

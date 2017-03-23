@@ -1,6 +1,5 @@
 package com.brandonhogan.liftscout.views.exercises;
 
-import com.brandonhogan.liftscout.core.constants.ConstantValues;
 import com.brandonhogan.liftscout.core.model.Exercise;
 
 public class ExerciseListModel{
