@@ -33,7 +33,6 @@ public class RecordsManager {
     @Inject
     SetRepo setRepo;
 
-
     // Constructor
     //
     public RecordsManager() {
@@ -41,6 +40,7 @@ public class RecordsManager {
     }
 
     // Gets the rep, then deletes the record, then updates the records old rep range
+    @SuppressWarnings("WeakerAccess")
     public Observable<Boolean> repDeleted(final int repId, final int exerciseId) {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
@@ -72,6 +72,7 @@ public class RecordsManager {
         });
     }
 
+    @SuppressWarnings("WeakerAccess")
     public Observable<Boolean> repUpdated(final int repId, final int exerciseId) {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
 
@@ -139,6 +140,7 @@ public class RecordsManager {
         });
     }
 
+    @SuppressWarnings("WeakerAccess")
     public Observable<Boolean> repCreated(final int repId, final int exerciseId) {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
@@ -147,10 +149,19 @@ public class RecordsManager {
                         .subscribe(new Consumer<Rep>() {
                             @Override
                             public void accept(final @NonNull Rep rep) throws Exception {
+
+                                // Don't set Records for entries with no weight.
+                                if (rep.getWeight() == 0) {
+                                    e.onNext(true);
+                                    e.onComplete();
+                                    return;
+                                }
+
                                 recordsRepo.createRecord(exerciseId, rep, false)
                                         .subscribe(new Consumer<Record>() {
                                             @Override
                                             public void accept(@NonNull Record record) throws Exception {
+
                                                 updateRepRange(exerciseId, rep.getCount())
                                                         .subscribe(new Consumer<Boolean>() {
                                                             @Override
@@ -167,6 +178,7 @@ public class RecordsManager {
         });
     }
 
+    @SuppressWarnings("WeakerAccess")
     public Observable<Boolean> updateRepRange(final int exerciseId, final int repRange) {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
@@ -189,6 +201,7 @@ public class RecordsManager {
 
     // Set deleted functions
 
+    @SuppressWarnings("WeakerAccess")
     public Observable<Boolean> setDeleted(final int setId) {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
