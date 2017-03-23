@@ -136,8 +136,11 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         }
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+
+        final MenuItem settingsItem = menu.findItem(R.id.action_main_settings);
+        final MenuItem aboutItem = menu.findItem(R.id.action_about);
 
         // Associate searchable configuration with the SearchView
         SearchManager searchManager =
@@ -157,6 +160,9 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
                 //Search view is expanded
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 EventBus.getDefault().post(new SearchViewEvent(true, null));
+
+                settingsItem.setVisible(false);
+                aboutItem.setVisible(false);
             }
         });
         searchView.setOnCloseListener(new SearchView.OnCloseListener()
@@ -167,6 +173,9 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
                 //Search View is collapsed
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                 EventBus.getDefault().post(new SearchViewEvent(false, null));
+
+                settingsItem.setVisible(true);
+                aboutItem.setVisible(true);
                 return false;
             }
         });
