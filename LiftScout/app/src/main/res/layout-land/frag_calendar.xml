@@ -40,7 +40,11 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    android:scrollbarThumbVertical="?attr/colorAccent"
+                    android:scrollbarSize="1dp"
+                    android:scrollbarStyle="insideOverlay"/>
 
                 <LinearLayout
                     android:id="@+id/workout_no_data"
@@ -109,7 +113,8 @@
             app:pressedTranslationZ="12dp"
             android:layout_marginBottom="@dimen/fab_margin_bottom"
             android:layout_marginEnd="@dimen/fab_margin_end"
-            android:layout_gravity="bottom|end" />
+            android:layout_gravity="bottom|end"
+            />
 
     </android.support.design.widget.CoordinatorLayout>
 

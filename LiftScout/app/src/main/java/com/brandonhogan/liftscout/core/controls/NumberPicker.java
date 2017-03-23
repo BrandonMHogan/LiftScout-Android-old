@@ -79,7 +79,7 @@ public class NumberPicker extends RelativeLayout {
                     R.styleable.NumberPicker_backGroundColor, getResources().getColor(R.color.black_transparent_05));
 
             textColor = typedArray.getColor(
-                    R.styleable.NumberPicker_textColor, getResources().getColor(R.color.text_color));
+                    R.styleable.NumberPicker_textColor, getResources().getColor(R.color.white));
         }
 
         inflate(getContext(), R.layout.con_number_picker, this);

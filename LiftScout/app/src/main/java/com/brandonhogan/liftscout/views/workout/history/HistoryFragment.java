@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.views.workout.history;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.utils.BhDate;
@@ -25,7 +28,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 import butterknife.Bind;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class HistoryFragment extends BaseFragment implements HistoryContract.View {
 
@@ -52,7 +54,6 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
     private View rootView;
     private HistoryContract.Presenter presenter;
     private FastItemAdapter mAdapter;
-    private SweetAlertDialog dialog;
 
 
     //Bindings
@@ -155,20 +156,16 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
     //
 
     private void showEditDialog(final HistoryListItem item) {
-        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.NORMAL_TYPE)
-                .setTitleText(getString(R.string.dialog_edit_history_title))
-                .setContentText(getString(R.string.dialog_edit_history_message))
-                .setConfirmText(getString(R.string.edit))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+        new MaterialDialog.Builder(getActivity())
+                .title(R.string.dialog_edit_history_title)
+                .content(R.string.dialog_edit_history_message)
+                .neutralText(R.string.edit)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        dialog.cancel();
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         presenter.setClicked(item.exerciseId, item.date);
                     }
                 })
-                .setCancelText(getString(R.string.cancel))
-                .showCancelButton(true);
-
-        dialog.show();
+                .positiveText(R.string.cancel).show();
     }
 }

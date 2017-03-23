@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.views.workout.tracker;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.controls.NumberPicker;
@@ -30,7 +33,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class TrackerFragment extends BaseFragment implements
         TrackerContract.View, RecyclerViewClickListener {
@@ -64,7 +66,6 @@ public class TrackerFragment extends BaseFragment implements
 
     private TrackerAdapter mAdapter;
     private LinearLayoutManager layoutManager;
-    private SweetAlertDialog dialog;
     private Toast toast;
 
 
@@ -249,21 +250,17 @@ public class TrackerFragment extends BaseFragment implements
 
     public void showDeleteRepAlert(final int position) {
 
-        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getString(R.string.dialog_tracker_delete_rep_title))
-                .setContentText(getString(R.string.dialog_tracker_delete_rep_message))
-                .setConfirmText(getString(R.string.delete))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+        new MaterialDialog.Builder(getActivity())
+                .title(R.string.dialog_tracker_delete_rep_title)
+                .content(R.string.dialog_tracker_delete_rep_message)
+                .neutralText(R.string.delete)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        dialog.cancel();
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         presenter.onDeleteRep(position);
                     }
                 })
-                .setCancelText(getString(R.string.cancel))
-                .showCancelButton(true);
-
-        dialog.show();
+                .positiveText(R.string.cancel).show();
     }
 
     @Override

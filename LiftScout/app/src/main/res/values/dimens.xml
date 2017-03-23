@@ -154,7 +154,7 @@
 
     <!-- Categories / Exercises -->
     <dimen name="exercises_swipe_width">85dp</dimen>
-    <dimen name="exercises_list_item_height">56dp</dimen>
+    <dimen name="exercises_list_item_height">60dp</dimen>
     <dimen name="exercises_list_item_icon_size">28dp</dimen>
 
     <!-- Workout Section -->

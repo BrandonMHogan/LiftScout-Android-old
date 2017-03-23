@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.views.calendar;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.workout.history.HistoryListItem;
@@ -31,7 +34,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class CalendarFragment extends BaseFragment implements CalendarContract.View {
 
@@ -47,7 +49,6 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     private View rootView;
     private CalendarContract.Presenter presenter;
     private FastItemAdapter mAdapter;
-    private SweetAlertDialog dialog;
 
 
     // Binds
@@ -112,7 +113,6 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
         calendar.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                List<Event> events = calendar.getEvents(dateClicked);
                 presenter.dateSelected(dateClicked);
             }
 
@@ -126,21 +126,17 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
 
     public void showDeleteRepAlert(final HistoryListSection section, final int position) {
 
-        dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getString(R.string.dialog_tracker_delete_rep_title))
-                .setContentText(getString(R.string.dialog_tracker_delete_rep_message))
-                .setConfirmText(getString(R.string.delete))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+        new MaterialDialog.Builder(getActivity())
+                .title(R.string.dialog_tracker_delete_rep_title)
+                .content(R.string.dialog_tracker_delete_rep_message)
+                .neutralText(R.string.delete)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        dialog.cancel();
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         presenter.onDeleteSection(section, position);
                     }
                 })
-                .setCancelText(getString(R.string.cancel))
-                .showCancelButton(true);
-
-        dialog.show();
+                .positiveText(R.string.cancel).show();
     }
 
     @Override

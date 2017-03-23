@@ -9,8 +9,6 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/workout_list_margin"
-        android:layout_marginEnd="@dimen/workout_list_margin"
         android:layout_marginBottom="@dimen/workout_list_margin">
 
         <TextView
@@ -28,6 +26,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/workout_list_margin"
+            android:layout_marginEnd="@dimen/workout_list_margin"
             android:layout_below="@id/date">
 
             <com.github.sundeepk.compactcalendarview.CompactCalendarView
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="15dp"
             android:background="@color/divider"
             android:layout_below="@id/calendar_container"
             android:elevation="@dimen/tracker_divider_elevation"/>
@@ -62,6 +62,8 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/workout_list_margin"
+            android:layout_marginEnd="@dimen/workout_list_margin"
             android:scrollbars="vertical"
             android:scrollbarThumbVertical="?attr/colorAccent"
             android:scrollbarSize="1dp"
@@ -72,6 +74,8 @@
             android:id="@+id/workout_no_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/workout_list_margin"
+            android:layout_marginEnd="@dimen/workout_list_margin"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/divider"
             android:layout_marginTop="20dp"

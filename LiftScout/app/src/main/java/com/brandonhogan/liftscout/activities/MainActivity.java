@@ -32,7 +32,6 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends BaseActivity implements NavigationManager.NavigationListener {
 
@@ -64,7 +63,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
 
     // Private Properties
     //
-    private SweetAlertDialog dialog;
+
     private SearchView searchView;
 
 
@@ -349,28 +348,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         userManager.lastUsed(new Date());
     }
 
-    private void showExitDialog() {
-
-        dialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(getString(R.string.dialog_close_app_title))
-                .setContentText(getString(R.string.dialog_close_app_message))
-                .setConfirmText(getString(R.string.yes))
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        endActivity();
-                    }
-                })
-                .setCancelText(getString(R.string.cancel))
-                .showCancelButton(true);
-
-        dialog.show();
-    }
-
     private void endActivity() {
-        if (dialog != null)
-            dialog.dismiss();
-
         finish();
     }
 }

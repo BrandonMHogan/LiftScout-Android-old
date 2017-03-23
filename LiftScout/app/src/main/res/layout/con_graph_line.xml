@@ -94,7 +94,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:layout_gravity="bottom"
-                app:backdropFillColor="@color/gray_btn_bg_pressed_color"
+                app:backdropFillColor="@color/gray_transparent_20"
                 app:backdropStrokeColor="?attr/colorFill"
                 app:backdropStrokeWidth="7dp"
                 app:horizontalBarThickness="1dp"

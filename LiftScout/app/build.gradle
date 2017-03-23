@@ -99,7 +99,6 @@ dependencies {
     compile 'com.prolificinteractive:material-calendarview:1.2.0'
     compile 'com.github.sundeepk:compact-calendar-view:2.0.0'
 
-    compile 'cn.pedant.sweetalert:library:1.3'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.github.lawloretienne:discreteslider:0.0.9'
     compile 'com.jaredrummler:material-spinner:1.1.0'
