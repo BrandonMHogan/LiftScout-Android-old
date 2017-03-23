@@ -145,11 +145,11 @@
 
 
     <!-- Theme Stubs. (What is referenced in the Base Activity) -->
-    <style name="AppTheme.Original.Light" parent="AppTheme.Light.Base"/>
+    <style name="AppTheme.Original.Light" parent="AppTheme.Original.Light.Base"/>
     <style name="AppTheme.Green.Light" parent="AppTheme.Green.Light.Base" />
     <style name="AppTheme.Purple.Light" parent="AppTheme.Purple.Light.Base" />
 
-    <style name="AppTheme.Original.Dark" parent="AppTheme.Dark.Base"/>
+    <style name="AppTheme.Original.Dark" parent="AppTheme.Original.Dark.Base"/>
     <style name="AppTheme.Green.Dark" parent="AppTheme.Green.Dark.Base" />
     <style name="AppTheme.Purple.Dark" parent="AppTheme.Purple.Dark.Base" />
     <style name="AppTheme.Teal.Dark" parent="AppTheme.Teal.Dark.Base" />
