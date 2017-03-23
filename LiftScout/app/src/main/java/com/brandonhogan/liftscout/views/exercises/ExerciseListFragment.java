@@ -7,6 +7,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -99,6 +101,39 @@ public class ExerciseListFragment extends BaseFragment implements
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.action_search).setVisible(true);
+    }
+
+    @Override
+    public void searchViewOnQueryTextChange(String newText) {
+        mAdapter.filterList(newText);
+    }
+
+    @Override
+    public void searchViewOnOpen() {
+        super.searchViewOnOpen();
+    }
+
+    @Override
+    public void searchViewOnClose() {
+        super.searchViewOnClose();
+    }
+
+    @Override
     public void onClick(View v, int position) {
         presenter.rowClicked(position);
     }
@@ -183,7 +218,7 @@ public class ExerciseListFragment extends BaseFragment implements
     }
 
     @Override
-    public void updateAdapter(ArrayList<Exercise> data) {
+    public void updateAdapter(ArrayList<ExerciseListModel> data) {
 
         noDataLabel.setVisibility((data == null || data.isEmpty()) ? View.VISIBLE : View.GONE);
 

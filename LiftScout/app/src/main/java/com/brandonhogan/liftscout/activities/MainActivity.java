@@ -241,7 +241,6 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
                if (!searchView.isIconified()) {
                    searchView.setIconified(true);
                    searchView.setIconified(true);
-
                }
 
                 break;

@@ -56,7 +56,12 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
         if (exercises != null)
             adapterData.addAll(exercises);
 
-        view.updateAdapter(adapterData);
+
+        ArrayList<ExerciseListModel> items = new ArrayList<>();
+        for (Exercise exercise : exercises) {
+            items.add(new ExerciseListModel(exercise));
+        }
+        view.updateAdapter(items);
     }
 
 

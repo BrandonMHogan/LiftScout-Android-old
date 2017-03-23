@@ -8,7 +8,7 @@ public interface ExerciseListContract {
 
     interface View {
         void applyTitle(String title);
-        void updateAdapter(ArrayList<Exercise> data);
+        void updateAdapter(ArrayList<ExerciseListModel> data);
         void removeItem(int position);
         void itemSelected(int id, boolean isSearch);
         void swipeItem(int position);

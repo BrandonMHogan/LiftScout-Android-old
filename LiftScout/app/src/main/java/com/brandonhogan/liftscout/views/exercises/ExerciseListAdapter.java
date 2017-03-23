@@ -19,13 +19,19 @@ import butterknife.ButterKnife;
 
 public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ViewHolder> {
     private LayoutInflater inflater;
-    private List<Exercise> modelList;
+    private List<ExerciseListModel> modelList;
+    private List<ExerciseListModel> filteredList;
+    private ExerciseFilter filter;
+
     private RecyclerViewClickListener listener;
 
 
-    public ExerciseListAdapter(Context context, List<Exercise> list, RecyclerViewClickListener listener) {
+    public ExerciseListAdapter(Context context, List<ExerciseListModel> list, RecyclerViewClickListener listener) {
         inflater = LayoutInflater.from(context);
         modelList = new ArrayList<>(list);
+        filteredList = modelList;
+        filter = new ExerciseFilter(modelList,this);
+
         this.listener = listener;
     }
 
@@ -38,6 +44,16 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.bindData(modelList.get(position));
+    }
+
+    public void setList(List<ExerciseListModel> list) {
+        this.modelList = list;
+        notifyDataSetChanged();
+    }
+
+    //call when you want to filter
+    public void filterList(String text) {
+        filter.filter(text);
     }
 
     @Override
@@ -68,14 +84,14 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
             return false;
         }
 
-        public void bindData(Exercise rowModel) {
+        public void bindData(ExerciseListModel rowModel) {
             name.setText(rowModel.getName());
         }
     }
 
-    public void setList(List<Exercise> list) {
-        modelList.clear();
-        modelList.addAll(list);
-        notifyDataSetChanged();
-    }
+//    public void setList(List<Exercise> list) {
+//        modelList.clear();
+//        modelList.addAll(list);
+//        notifyDataSetChanged();
+//    }
 }
