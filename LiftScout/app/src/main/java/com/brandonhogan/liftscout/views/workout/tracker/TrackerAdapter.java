@@ -12,31 +12,37 @@ import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.constants.Measurements;
+import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackerAdapter extends RecyclerView.Adapter<TrackerAdapter.TrackerViewHolder> {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class TrackerAdapter extends RecyclerView.Adapter<TrackerAdapter.ViewHolder> {
 
     private static final int NO_POSITION_DEFAULT = 9999;
 
-    LayoutInflater inflater;
-    List<TrackerListModel> modelList;
+    private LayoutInflater inflater;
+    private List<TrackerListModel> modelList;
     private int selected_position = NO_POSITION_DEFAULT;
+    private RecyclerViewClickListener listener;
 
-    public TrackerAdapter(Context context, List<TrackerListModel> list) {
+    public TrackerAdapter(Context context, List<TrackerListModel> list, RecyclerViewClickListener listener) {
         inflater = LayoutInflater.from(context);
         modelList = new ArrayList<>(list);
+        this.listener = listener;
     }
 
     @Override
-    public TrackerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.frag_tracker_list_item, parent, false);
-        return new TrackerViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(TrackerViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.bindData(modelList.get(position));
 
         if(selected_position == position){
@@ -51,29 +57,51 @@ public class TrackerAdapter extends RecyclerView.Adapter<TrackerAdapter.TrackerV
         return modelList.size();
     }
 
-    class TrackerViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        private RelativeLayout displayLayout;
-        private LinearLayout repLayout;
-        private TextView reps;
-        private TextView weight;
-        private TextView noRep;
-        private TextView measurement;
-        private ImageView recordImage;
-        private View divider;
-        int id;
+        @Bind(R.id.display_layout)
+        RelativeLayout displayLayout;
 
-        public TrackerViewHolder(View itemView) {
+        @Bind(R.id.rep_layout)
+        LinearLayout repLayout;
+
+        @Bind(R.id.item_reps)
+        TextView reps;
+
+        @Bind(R.id.item_weight)
+        TextView weight;
+
+
+        @Bind(R.id.no_rep)
+        TextView noRep;
+
+        @Bind(R.id.item_measurement)
+        TextView measurement;
+
+
+        @Bind(R.id.record_image)
+        ImageView recordImage;
+
+        @Bind(R.id.divider)
+        View divider;
+
+
+        public ViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
 
-            this.displayLayout = (RelativeLayout) itemView.findViewById(R.id.display_layout);
-            this.repLayout = (LinearLayout) itemView.findViewById(R.id.rep_layout);
-            this.reps = (TextView) itemView.findViewById(R.id.item_reps);
-            this.weight = (TextView) itemView.findViewById(R.id.item_weight);
-            this.measurement = (TextView) itemView.findViewById(R.id.item_measurement);
-            this.noRep = (TextView) itemView.findViewById(R.id.no_rep);
-            this.recordImage = (ImageView) itemView.findViewById(R.id.record_image);
-            this.divider = (View) itemView.findViewById(R.id.divider);
+        @Override
+        public void onClick(View view) {
+            listener.onClick(view, this.getLayoutPosition());
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            listener.onLongClick(view, this.getLayoutPosition());
+            return false;
         }
 
         public void bindData(TrackerListModel rowModel) {

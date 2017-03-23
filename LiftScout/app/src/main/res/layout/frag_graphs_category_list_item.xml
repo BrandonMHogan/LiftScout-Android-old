@@ -4,13 +4,18 @@
     android:layout_height="@dimen/exercises_list_item_height"
     android:orientation="horizontal"
     android:layout_marginStart="@dimen/fragment_default_margin"
-    android:layout_marginEnd="@dimen/fragment_default_margin">
+    android:layout_marginEnd="@dimen/fragment_default_margin"
+    android:background="?itemBackground"
+    android:clickable="true"
+    android:focusable="true">
 
     <LinearLayout
         android:id="@+id/display_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
 
         <LinearLayout
             android:layout_width="0dp"

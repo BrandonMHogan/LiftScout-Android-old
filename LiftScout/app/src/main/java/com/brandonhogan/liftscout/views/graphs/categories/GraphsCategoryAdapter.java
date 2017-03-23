@@ -12,9 +12,13 @@ import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.model.CategoryGraph;
+import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Brandon on 3/13/2017.
@@ -24,84 +28,103 @@ import java.util.ArrayList;
 @SuppressWarnings("WeakerAccess")
 public class GraphsCategoryAdapter extends RecyclerView.Adapter<GraphsCategoryAdapter.ViewHolder> {
 
-        private static final int NO_POSITION_DEFAULT = 9999;
+    private static final int NO_POSITION_DEFAULT = 9999;
 
-        private LayoutInflater inflater;
-        private ArrayList<CategoryGraph> modelList;
-        private int selected_position = NO_POSITION_DEFAULT;
+    private LayoutInflater inflater;
+    private ArrayList<CategoryGraph> modelList;
+    private int selected_position = NO_POSITION_DEFAULT;
+    private RecyclerViewClickListener listener;
 
-        @SuppressWarnings("WeakerAccess")
-        public GraphsCategoryAdapter(Context context, ArrayList<CategoryGraph> list) {
-            inflater = LayoutInflater.from(context);
-            modelList = new ArrayList<>(list);
+    @SuppressWarnings("WeakerAccess")
+    public GraphsCategoryAdapter(Context context, ArrayList<CategoryGraph> list, RecyclerViewClickListener listener) {
+        inflater = LayoutInflater.from(context);
+        modelList = new ArrayList<>(list);
+        this.listener = listener;
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.frag_graphs_category_list_item, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.bindData(modelList.get(position));
+
+        if(selected_position == position){
+            holder.displayLayout.setAlpha(0.5f);
+        }else{
+            holder.displayLayout.setAlpha(1f);
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return modelList.size();
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+
+        @Bind(R.id.display_layout)
+        LinearLayout displayLayout;
+
+        @Bind(R.id.color)
+        ImageView color;
+
+        @Bind(R.id.name)
+        TextView name;
+
+        @Bind(R.id.value)
+        TextView value;
+
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = inflater.inflate(R.layout.frag_graphs_category_list_item, parent, false);
-            return new ViewHolder(view);
+        public void onClick(View view) {
+            listener.onClick(view, this.getLayoutPosition());
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.bindData(modelList.get(position));
-
-            if(selected_position == position){
-                holder.displayLayout.setAlpha(0.5f);
-            }else{
-                holder.displayLayout.setAlpha(1f);
-            }
+        public boolean onLongClick(View view) {
+            listener.onLongClick(view, this.getLayoutPosition());
+            return false;
         }
 
-        @Override
-        public int getItemCount() {
-            return modelList.size();
+        private void bindData(CategoryGraph rowModel) {
+            name.setText(rowModel.getName());
+
+            String formattedValue = NumberFormat.getIntegerInstance().format(rowModel.getValue());
+            value.setText(formattedValue);
+
+            ((GradientDrawable)color.getBackground()).setColor(rowModel.getColor());
+
         }
+    }
 
-        class ViewHolder extends RecyclerView.ViewHolder {
+    public void setList(ArrayList<CategoryGraph> list) {
+        modelList.clear();
+        modelList.addAll(list);
+        notifyDataSetChanged();
+    }
 
-            LinearLayout displayLayout;
-            ImageView color;
-            TextView name;
-            TextView value;
+    @SuppressWarnings("WeakerAccess")
+    public void selected(int position) {
+        notifyItemChanged(selected_position);
+        selected_position = position;
+        notifyItemChanged(selected_position);
+    }
 
-            public ViewHolder(View itemView) {
-                super(itemView);
-                displayLayout = (LinearLayout) itemView.findViewById(R.id.display_layout);
-                color = (ImageView) itemView.findViewById(R.id.color);
-                name = (TextView) itemView.findViewById(R.id.name);
-                value = (TextView) itemView.findViewById(R.id.value);
-            }
-
-            private void bindData(CategoryGraph rowModel) {
-                name.setText(rowModel.getName());
-
-                String formattedValue = NumberFormat.getIntegerInstance().format(rowModel.getValue());
-                value.setText(formattedValue);
-
-                ((GradientDrawable)color.getBackground()).setColor(rowModel.getColor());
-
-            }
-        }
-
-        public void setList(ArrayList<CategoryGraph> list) {
-            modelList.clear();
-            modelList.addAll(list);
-            notifyDataSetChanged();
-        }
-
-        @SuppressWarnings("WeakerAccess")
-        public void selected(int position) {
-            notifyItemChanged(selected_position);
-            selected_position = position;
-            notifyItemChanged(selected_position);
-        }
-
-        @SuppressWarnings("WeakerAccess")
-        public void clearSelected() {
-            notifyItemChanged(selected_position);
-            selected_position = NO_POSITION_DEFAULT;
-            notifyItemChanged(selected_position);
-        }
-
+    @SuppressWarnings("WeakerAccess")
+    public void clearSelected() {
+        notifyItemChanged(selected_position);
+        selected_position = NO_POSITION_DEFAULT;
+        notifyItemChanged(selected_position);
+    }
 }

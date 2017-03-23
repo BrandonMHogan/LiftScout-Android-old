@@ -15,6 +15,7 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.core.model.CategoryGraph;
 import com.brandonhogan.liftscout.core.utils.AttrUtil;
 import com.brandonhogan.liftscout.core.utils.BhDate;
+import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -25,8 +26,6 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.jaredrummler.materialspinner.MaterialSpinner;
-import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
-import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -39,8 +38,8 @@ import butterknife.Bind;
  * Description :
  */
 
-public class GraphsCategoriesFragment extends BaseFragment implements GraphsCategoriesContract.View,
-        RecyclerTouchListener.RecyclerTouchListenerHelper {
+public class GraphsCategoriesFragment extends BaseFragment
+        implements GraphsCategoriesContract.View, RecyclerViewClickListener {
 
     // Static Properties
     //
@@ -86,11 +85,8 @@ public class GraphsCategoriesFragment extends BaseFragment implements GraphsCate
     private GraphsCategoriesContract.Presenter presenter;
     private GraphsCategoryAdapter mAdapter;
     private LinearLayoutManager linearLayoutManager;
-    private RecyclerTouchListener onTouchListener;
-    private OnActivityTouchListener touchListener;
     private int currentSelected = 999;
     private OnChartValueSelectedListener pieChartListener;
-    private int currentGraphType = 0;
 
     //Overrides
     //
@@ -131,19 +127,23 @@ public class GraphsCategoriesFragment extends BaseFragment implements GraphsCate
     @Override
     public void onPause() {
         super.onPause();
-        recyclerView.removeOnItemTouchListener(onTouchListener);
         mAdapter = null;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        recyclerView.addOnItemTouchListener(onTouchListener);
     }
 
     @Override
-    public void setOnActivityTouchListener(OnActivityTouchListener listener) {
-        this.touchListener = listener;
+    public void onClick(View v, int position) {
+        itemSelected(position);
+    }
+
+    @Override
+    public void onLongClick(View v, int position) {
+        mAdapter.selected(position);
+        itemSelected(position);
     }
 
     private void setupGraph() {
@@ -202,38 +202,11 @@ public class GraphsCategoriesFragment extends BaseFragment implements GraphsCate
     private void updateAdapter(ArrayList<CategoryGraph> data) {
 
         if (mAdapter == null) {
-
-            mAdapter = new GraphsCategoryAdapter(getActivity(), data);
+            mAdapter = new GraphsCategoryAdapter(getActivity(), data, this);
             recyclerView.setAdapter(mAdapter);
 
             linearLayoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(linearLayoutManager);
-
-            onTouchListener = new RecyclerTouchListener(getActivity(), recyclerView);
-
-            onTouchListener
-                    .setClickable(new RecyclerTouchListener.OnRowClickListener() {
-                        @Override
-                        public void onRowClicked(int position) {
-                            itemSelected(position);
-                        }
-
-                        @Override
-                        public void onIndependentViewClicked(int independentViewID, int position) {
-                        }
-                    });
-
-            onTouchListener.setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
-                @Override
-                public void onRowLongClicked(int position) {
-                   // presenter.onSelect(position);
-                    mAdapter.selected(position);
-                    itemSelected(position);
-
-                }
-            });
-
-
         }
         else {
             mAdapter.setList(data);
@@ -289,7 +262,6 @@ public class GraphsCategoriesFragment extends BaseFragment implements GraphsCate
         graphType.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-                currentGraphType = position;
                 presenter.onGraphTypeSelected(position);
             }
         });

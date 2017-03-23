@@ -16,11 +16,10 @@ import com.brandonhogan.liftscout.core.constants.Bundles;
 import com.brandonhogan.liftscout.core.controls.NumberPicker;
 import com.brandonhogan.liftscout.core.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.workout.IncrementEvent;
 import com.brandonhogan.liftscout.views.workout.TrackerEvent;
-import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
-import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -34,7 +33,7 @@ import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class TrackerFragment extends BaseFragment implements
-        TrackerContract.View, RecyclerTouchListener.RecyclerTouchListenerHelper {
+        TrackerContract.View, RecyclerViewClickListener {
 
 
     // Static Properties
@@ -65,8 +64,6 @@ public class TrackerFragment extends BaseFragment implements
 
     private TrackerAdapter mAdapter;
     private LinearLayoutManager layoutManager;
-    private RecyclerTouchListener onTouchListener;
-    private OnActivityTouchListener touchListener;
     private SweetAlertDialog dialog;
     private Toast toast;
 
@@ -133,24 +130,6 @@ public class TrackerFragment extends BaseFragment implements
         return bundle;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mRecyclerView.addOnItemTouchListener(onTouchListener);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mRecyclerView.removeOnItemTouchListener(onTouchListener);
-       //presenter.onRestTimerStop();
-    }
-
-    @Override
-    public void setOnActivityTouchListener(OnActivityTouchListener listener) {
-        this.touchListener = listener;
-    }
-
     @OnClick(R.id.first_button)
     public void firstButtonOnClick() {
 
@@ -188,6 +167,19 @@ public class TrackerFragment extends BaseFragment implements
         repNumberPicker.setNumber(reps);
     }
 
+    @Override
+    public void onClick(View v, int position) {
+        presenter.onSelect(position);
+        mAdapter.selected(position);
+    }
+
+    @Override
+    public void onLongClick(View v, int position) {
+        presenter.onSelect(position);
+        mAdapter.selected(position);
+        showDeleteRepAlert(position);
+    }
+
     private void updateValues(TrackerListModel model) {
         weightNumberPicker.setNumber((float)model.getWeight());
         repNumberPicker.setNumber(model.getCount());
@@ -205,37 +197,10 @@ public class TrackerFragment extends BaseFragment implements
 
         if (mAdapter == null) {
 
-            mAdapter = new TrackerAdapter(getActivity(), data);
+            mAdapter = new TrackerAdapter(getActivity(), data, this);
             mRecyclerView.setAdapter(mAdapter);
-
             layoutManager = new LinearLayoutManager(getActivity());
             mRecyclerView.setLayoutManager(layoutManager);
-
-            onTouchListener = new RecyclerTouchListener(getActivity(), mRecyclerView);
-
-            onTouchListener
-                    .setClickable(new RecyclerTouchListener.OnRowClickListener() {
-                        @Override
-                        public void onRowClicked(int position) {
-                            presenter.onSelect(position);
-                            mAdapter.selected(position);
-                        }
-
-                        @Override
-                        public void onIndependentViewClicked(int independentViewID, int position) {
-                        }
-                    });
-
-            onTouchListener.setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
-                @Override
-                public void onRowLongClicked(int position) {
-                    presenter.onSelect(position);
-                    mAdapter.selected(position);
-                    showDeleteRepAlert(position);
-                }
-            });
-
-
         }
         else {
             mAdapter.setList(data);

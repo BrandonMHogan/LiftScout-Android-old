@@ -104,7 +104,6 @@ dependencies {
     compile 'com.github.lawloretienne:discreteslider:0.0.9'
     compile 'com.jaredrummler:material-spinner:1.1.0'
     compile 'com.afollestad.material-dialogs:core:0.9.3.0'
-    compile 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0'
     compile 'com.thebluealliance:spectrum:0.7.1'
     compile 'com.mikepenz:fastadapter-extensions:1.7.0@aar'
     compile 'com.github.devlight:infinitecycleviewpager:1.0.2'

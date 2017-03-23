@@ -18,13 +18,14 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+@SuppressWarnings("WeakerAccess")
 public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.ViewHolder> {
     private LayoutInflater inflater;
     private List<CategoryListModel> modelList;
     private RecyclerViewClickListener listener;
 
 
-
+    @SuppressWarnings("WeakerAccess")
     public CategoryListAdapter(Context context, List<CategoryListModel> list, RecyclerViewClickListener listener) {
         inflater = LayoutInflater.from(context);
         modelList = new ArrayList<>(list);
