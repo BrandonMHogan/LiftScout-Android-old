@@ -15,7 +15,7 @@ android {
         def longVersionName = "git -C ${rootDir} describe --tags --long".execute().text.trim()
         // No tag found
         if (longVersionName.isEmpty())
-            throw new GradleException("\n--------" + "GRADLE ERROR--------"
+            throw new FileNotFoundException("\n--------" + "GRADLE ERROR--------"
                     + "\n"
                     + " - Could not find a valid tag associated to this build. Tag versioning " +
                     "must be in the Major.Minor.Patch format."
@@ -25,7 +25,7 @@ android {
         def (fullVersionTag, versionBuild, gitSha) = longVersionName.tokenize('-')
         def (versionMajor, versionMinor, versionPatch) = fullVersionTag.tokenize('.')
         if (versionMajor == null || versionMinor == null || versionPatch == null) {
-            throw new GradleException("\n--------" + "GRADLE ERROR--------"
+            throw new FileNotFoundException("\n--------" + "GRADLE ERROR--------"
                     + "\n"
                     + " - Could not find a valid tag associated to this build. Tag versioning " +
                     "must be in the Major.Minor.Patch format."
@@ -33,11 +33,11 @@ android {
                     + "Example : 1.2.3")
         }
         if (!versionMajor.isNumber())
-            throw new GradleException("Tag version major is not numeric. " + versionMajor)
+            throw new FileNotFoundException("Tag version major is not numeric. " + versionMajor)
         if (!versionMinor.isNumber())
-            throw new GradleException("Tag version minor is not numeric. " + versionMinor)
+            throw new FileNotFoundException("Tag version minor is not numeric. " + versionMinor)
         if (!versionPatch.isNumber())
-            throw new GradleException("Tag version patch is not numeric. " + versionPatch)
+            throw new FileNotFoundException("Tag version patch is not numeric. " + versionPatch)
         // Set the version name
         versionName "$branchName $versionMajor.$versionMinor.$versionPatch($versionBuild)"
 
