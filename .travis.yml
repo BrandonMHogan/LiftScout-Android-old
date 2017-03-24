@@ -1,4 +1,5 @@
 language: android
+sudo: required
 android:
   components:
     # Uncomment the lines below if you want to
@@ -16,7 +17,7 @@ android:
 
     # Additional components
     #- extra-google-google_play_services
-    #- extra-google-m2repository
+    - extra-google-m2repository
     - extra-android-m2repository
     #- addon-google_apis-google-19
 
@@ -26,3 +27,5 @@ android:
   
 
 script: ./LiftScout/gradlew build connectedCheck
+
+after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
