@@ -25,4 +25,4 @@ android:
     - sys-img-armeabi-v7a-android-22
   
 
-script: ./LiftScout/gradlew connectedAndroidTest
+script: ./LiftScout/gradlew build connectedCheck
