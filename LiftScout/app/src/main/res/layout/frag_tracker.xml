@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.brandonhogan.liftscout.core.controls.BaseFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.brandonhogan.liftscout.utils.controls.BaseFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -44,7 +44,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/weight"/>
 
-                <com.brandonhogan.liftscout.core.controls.NumberPicker
+                <com.brandonhogan.liftscout.utils.controls.NumberPicker
                     android:id="@+id/weight_number_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/reps"/>
 
-                <com.brandonhogan.liftscout.core.controls.NumberPicker
+                <com.brandonhogan.liftscout.utils.controls.NumberPicker
                     android:id="@+id/rep_number_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -135,4 +135,4 @@
             android:scrollbarStyle="insideOverlay"/>
 
     </LinearLayout>
-</com.brandonhogan.liftscout.core.controls.BaseFrameLayout>
+</com.brandonhogan.liftscout.utils.controls.BaseFrameLayout>

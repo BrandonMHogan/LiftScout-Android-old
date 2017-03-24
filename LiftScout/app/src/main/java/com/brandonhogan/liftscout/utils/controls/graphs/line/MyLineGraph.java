@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.core.controls.graphs.line;
+package com.brandonhogan.liftscout.utils.controls.graphs.line;
 
 import android.app.Application;
 import android.content.Context;

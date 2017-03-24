@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.interfaces.contracts.GraphContract;
-import com.brandonhogan.liftscout.core.controls.graphs.line.MyLineGraph;
+import com.brandonhogan.liftscout.utils.controls.graphs.line.MyLineGraph;
 import com.brandonhogan.liftscout.presenters.WorkoutGraphPresenter;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.events.TrackerEvent;

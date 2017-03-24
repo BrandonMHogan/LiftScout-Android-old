@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.core.controls.filters;
+package com.brandonhogan.liftscout.utils.controls.filters;
 
 import android.text.InputFilter;
 import android.text.Spanned;

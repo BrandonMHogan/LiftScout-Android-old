@@ -3,7 +3,7 @@ package com.brandonhogan.liftscout.injection.components;
 import com.brandonhogan.liftscout.activities.BaseActivity;
 import com.brandonhogan.liftscout.activities.IntroActivity;
 import com.brandonhogan.liftscout.activities.MainActivity;
-import com.brandonhogan.liftscout.core.controls.graphs.line.MyLineGraph;
+import com.brandonhogan.liftscout.utils.controls.graphs.line.MyLineGraph;
 import com.brandonhogan.liftscout.managers.ProgressManager;
 import com.brandonhogan.liftscout.injection.module.AppModule;
 import com.brandonhogan.liftscout.injection.module.DatabaseModule;

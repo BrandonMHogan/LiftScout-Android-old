@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.core.controls;
+package com.brandonhogan.liftscout.utils.controls;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -20,7 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.controls.filters.DecimalDigitsInputFilter;
+import com.brandonhogan.liftscout.utils.controls.filters.DecimalDigitsInputFilter;
 
 public class NumberPicker extends RelativeLayout {
 

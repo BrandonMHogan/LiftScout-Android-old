@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.core.controls;
+package com.brandonhogan.liftscout.utils.controls;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;

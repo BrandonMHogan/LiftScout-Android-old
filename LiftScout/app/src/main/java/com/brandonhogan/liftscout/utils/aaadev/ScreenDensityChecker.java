@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.core.aaadev;
+package com.brandonhogan.liftscout.utils.aaadev;
 
 import android.app.Activity;
 import android.content.res.Configuration;
