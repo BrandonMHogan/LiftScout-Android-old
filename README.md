@@ -1,4 +1,4 @@
-# LiftScout-Android
+# LiftScout-Android   [![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=58a3b5b0628a4d0100e8f517&branch=releaseCandidate&build=latest)](https://dashboard.buddybuild.com/apps/58a3b5b0628a4d0100e8f517/build/latest?branch=releaseCandidate)
 
  <a href='https://play.google.com/store/apps/details?id=com.brandonhogan.liftscout&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width='200' alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 
