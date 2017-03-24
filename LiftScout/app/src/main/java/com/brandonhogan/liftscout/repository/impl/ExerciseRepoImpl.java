@@ -2,8 +2,8 @@ package com.brandonhogan.liftscout.repository.impl;
 
 import android.util.Log;
 
-import com.brandonhogan.liftscout.core.constants.ConstantValues;
-import com.brandonhogan.liftscout.core.model.Exercise;
+import com.brandonhogan.liftscout.utils.constants.ConstantValues;
+import com.brandonhogan.liftscout.repository.model.Exercise;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.ExerciseRepo;

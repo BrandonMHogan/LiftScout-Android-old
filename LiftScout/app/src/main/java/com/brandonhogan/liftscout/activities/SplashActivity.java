@@ -8,7 +8,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.model.User;
+import com.brandonhogan.liftscout.repository.model.User;
 
 public class SplashActivity extends BaseActivity {
 

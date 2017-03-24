@@ -1,6 +1,6 @@
 package com.brandonhogan.liftscout.model;
 
-import com.brandonhogan.liftscout.core.model.User;
+import com.brandonhogan.liftscout.repository.model.User;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.brandonhogan.liftscout.activities.MainActivity;
-import com.brandonhogan.liftscout.core.managers.NavigationManager;
+import com.brandonhogan.liftscout.managers.NavigationManager;
 import com.brandonhogan.liftscout.events.SearchViewEvent;
 import com.google.firebase.analytics.FirebaseAnalytics;
 

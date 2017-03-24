@@ -1,6 +1,6 @@
 package com.brandonhogan.liftscout.repository.impl;
 
-import com.brandonhogan.liftscout.core.model.User;
+import com.brandonhogan.liftscout.repository.model.User;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.UserRepo;

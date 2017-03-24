@@ -1,11 +1,11 @@
 package com.brandonhogan.liftscout.injection.module;
 
-import com.brandonhogan.liftscout.core.managers.CalendarManager;
-import com.brandonhogan.liftscout.core.managers.GraphManager;
-import com.brandonhogan.liftscout.core.managers.NavigationManager;
-import com.brandonhogan.liftscout.core.managers.ProgressManager;
-import com.brandonhogan.liftscout.core.managers.RecordsManager;
-import com.brandonhogan.liftscout.core.managers.UserManager;
+import com.brandonhogan.liftscout.managers.CalendarManager;
+import com.brandonhogan.liftscout.managers.GraphManager;
+import com.brandonhogan.liftscout.managers.NavigationManager;
+import com.brandonhogan.liftscout.managers.ProgressManager;
+import com.brandonhogan.liftscout.managers.RecordsManager;
+import com.brandonhogan.liftscout.managers.UserManager;
 
 import javax.inject.Singleton;
 

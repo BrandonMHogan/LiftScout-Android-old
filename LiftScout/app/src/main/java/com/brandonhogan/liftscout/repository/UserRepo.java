@@ -1,6 +1,6 @@
 package com.brandonhogan.liftscout.repository;
 
-import com.brandonhogan.liftscout.core.model.User;
+import com.brandonhogan.liftscout.repository.model.User;
 
 import java.util.Date;
 

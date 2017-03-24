@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 
 import com.brandonhogan.liftscout.AppController;
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.utils.BhDate;
+import com.brandonhogan.liftscout.utils.BhDate;
 
 import java.util.Calendar;
 import java.util.Date;

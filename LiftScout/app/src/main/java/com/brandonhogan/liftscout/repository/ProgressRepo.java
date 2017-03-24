@@ -1,6 +1,6 @@
 package com.brandonhogan.liftscout.repository;
 
-import com.brandonhogan.liftscout.core.model.Progress;
+import com.brandonhogan.liftscout.repository.model.Progress;
 
 import java.util.Date;
 

@@ -1,8 +1,8 @@
 package com.brandonhogan.liftscout.repository;
 
-import com.brandonhogan.liftscout.core.model.Progress;
-import com.brandonhogan.liftscout.core.model.Rep;
-import com.brandonhogan.liftscout.core.model.Set;
+import com.brandonhogan.liftscout.repository.model.Progress;
+import com.brandonhogan.liftscout.repository.model.Rep;
+import com.brandonhogan.liftscout.repository.model.Set;
 
 import java.util.Date;
 

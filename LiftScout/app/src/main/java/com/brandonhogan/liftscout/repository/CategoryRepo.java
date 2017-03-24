@@ -1,6 +1,6 @@
 package com.brandonhogan.liftscout.repository;
 
-import com.brandonhogan.liftscout.core.model.Category;
+import com.brandonhogan.liftscout.repository.model.Category;
 
 import io.reactivex.Observable;
 import io.realm.RealmResults;

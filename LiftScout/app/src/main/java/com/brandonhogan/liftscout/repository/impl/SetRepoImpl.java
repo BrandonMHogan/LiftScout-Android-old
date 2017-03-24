@@ -2,10 +2,10 @@ package com.brandonhogan.liftscout.repository.impl;
 
 import android.util.Log;
 
-import com.brandonhogan.liftscout.core.model.Category;
-import com.brandonhogan.liftscout.core.model.Progress;
-import com.brandonhogan.liftscout.core.model.Rep;
-import com.brandonhogan.liftscout.core.model.Set;
+import com.brandonhogan.liftscout.repository.model.Category;
+import com.brandonhogan.liftscout.repository.model.Progress;
+import com.brandonhogan.liftscout.repository.model.Rep;
+import com.brandonhogan.liftscout.repository.model.Set;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.SetRepo;
@@ -17,7 +17,6 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.internal.operators.observable.ObservableSingleSingle;
 import io.realm.RealmResults;
 import io.realm.Sort;
 

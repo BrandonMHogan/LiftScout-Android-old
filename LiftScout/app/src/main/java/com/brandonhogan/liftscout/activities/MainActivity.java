@@ -13,12 +13,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.constants.DefaultScreens;
-import com.brandonhogan.liftscout.core.managers.NavigationManager;
-import com.brandonhogan.liftscout.core.managers.NotificationServiceManager;
-import com.brandonhogan.liftscout.core.managers.ProgressManager;
-import com.brandonhogan.liftscout.core.utils.BhDate;
-import com.brandonhogan.liftscout.core.utils.LogUtil;
+import com.brandonhogan.liftscout.utils.constants.DefaultScreens;
+import com.brandonhogan.liftscout.managers.NavigationManager;
+import com.brandonhogan.liftscout.managers.NotificationServiceManager;
+import com.brandonhogan.liftscout.managers.ProgressManager;
+import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.LogUtil;
 import com.brandonhogan.liftscout.events.SearchViewEvent;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
@@ -341,13 +341,13 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
 //        else if (f instanceof CategoryListFragment) {
 //            setBottomNavSelectedPos(1);
 //        }
-//        else if (f instanceof GraphsContainerFragment) {
+//        else if (f instanceof AnalyticsContainerFragment) {
 //            setBottomNavSelectedPos(2);
 //        }
 //        else if (f instanceof CalendarFragment) {
 //            setBottomNavSelectedPos(3);
 //        }
-//        else if (f instanceof HomeFragment) {
+//        else if (f instanceof TodayContainerFragment) {
 //            setBottomNavSelectedPos(4);
 //        }
     }

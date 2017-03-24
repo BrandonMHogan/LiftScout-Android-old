@@ -1,6 +1,6 @@
 package com.brandonhogan.liftscout.repository;
 
-import com.brandonhogan.liftscout.core.model.UserSetting;
+import com.brandonhogan.liftscout.repository.model.UserSetting;
 
 public interface UserSettingsRepo {
 

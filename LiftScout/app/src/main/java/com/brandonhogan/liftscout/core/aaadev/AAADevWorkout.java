@@ -1,9 +1,9 @@
 package com.brandonhogan.liftscout.core.aaadev;
 
-import com.brandonhogan.liftscout.core.model.Exercise;
-import com.brandonhogan.liftscout.core.model.Progress;
-import com.brandonhogan.liftscout.core.model.Rep;
-import com.brandonhogan.liftscout.core.model.Set;
+import com.brandonhogan.liftscout.repository.model.Exercise;
+import com.brandonhogan.liftscout.repository.model.Progress;
+import com.brandonhogan.liftscout.repository.model.Rep;
+import com.brandonhogan.liftscout.repository.model.Set;
 
 import io.realm.Realm;
 import io.realm.RealmList;

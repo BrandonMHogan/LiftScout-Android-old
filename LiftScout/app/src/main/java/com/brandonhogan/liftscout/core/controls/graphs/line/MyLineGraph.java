@@ -12,17 +12,17 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.core.constants.Charts;
-import com.brandonhogan.liftscout.core.managers.GraphManager;
-import com.brandonhogan.liftscout.core.managers.NavigationManager;
-import com.brandonhogan.liftscout.core.managers.ProgressManager;
-import com.brandonhogan.liftscout.core.managers.UserManager;
-import com.brandonhogan.liftscout.core.model.Rep;
-import com.brandonhogan.liftscout.core.model.Set;
-import com.brandonhogan.liftscout.core.utils.AttrUtil;
-import com.brandonhogan.liftscout.core.utils.BhDate;
+import com.brandonhogan.liftscout.utils.constants.Charts;
+import com.brandonhogan.liftscout.managers.GraphManager;
+import com.brandonhogan.liftscout.managers.NavigationManager;
+import com.brandonhogan.liftscout.managers.ProgressManager;
+import com.brandonhogan.liftscout.managers.UserManager;
+import com.brandonhogan.liftscout.repository.model.Rep;
+import com.brandonhogan.liftscout.repository.model.Set;
+import com.brandonhogan.liftscout.utils.AttrUtil;
+import com.brandonhogan.liftscout.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.views.workout.graph.GraphDataSet;
+import com.brandonhogan.liftscout.models.LineGraphModel;
 import com.etiennelawlor.discreteslider.library.ui.DiscreteSlider;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -108,7 +108,7 @@ public class MyLineGraph extends FrameLayout {
     private int currentGraphType;
     private int exerciseId;
     private String exerciseName;
-    private List<GraphDataSet> items;
+    private List<LineGraphModel> items;
     private boolean exerciseIsSet = false;
     private int newRangePosition;
     private int currentRangePosition;
@@ -277,7 +277,7 @@ public class MyLineGraph extends FrameLayout {
     private Date getDateByFloat(float value) {
         Calendar calendar = Calendar.getInstance();
 
-        for(GraphDataSet item : items) {
+        for(LineGraphModel item : items) {
             if ((float)item.getId() == value) {
                 calendar.setTimeInMillis(item.getId());
                 break;
@@ -309,7 +309,7 @@ public class MyLineGraph extends FrameLayout {
                         dates.add(date);
                     }
 
-                    GraphDataSet item = new GraphDataSet(date.getTime(), volume);
+                    LineGraphModel item = new LineGraphModel(date.getTime(), volume);
                     items.add(item);
                 }
 
@@ -349,7 +349,7 @@ public class MyLineGraph extends FrameLayout {
                         dates.add(date);
                     }
 
-                    GraphDataSet item = new GraphDataSet(date.getTime(), max, weight, reps);
+                    LineGraphModel item = new LineGraphModel(date.getTime(), max, weight, reps);
                     items.add(item);
                 }
 
@@ -389,7 +389,7 @@ public class MyLineGraph extends FrameLayout {
                         dates.add(date);
                     }
 
-                    GraphDataSet item = new GraphDataSet(date.getTime(), max, weight, reps);
+                    LineGraphModel item = new LineGraphModel(date.getTime(), max, weight, reps);
                     items.add(item);
                 }
 
@@ -421,7 +421,7 @@ public class MyLineGraph extends FrameLayout {
                         dates.add(date);
                     }
 
-                    GraphDataSet item = new GraphDataSet(date.getTime(), value);
+                    LineGraphModel item = new LineGraphModel(date.getTime(), value);
                     items.add(item);
                 }
 
@@ -430,7 +430,7 @@ public class MyLineGraph extends FrameLayout {
         setGraph(items, uniqueDateCount);
     }
 
-    private void setGraph(List<GraphDataSet> data, int uniqueDateCount) {
+    private void setGraph(List<LineGraphModel> data, int uniqueDateCount) {
 
         if (data.isEmpty()) {
             lineChart.setNoDataText(getResources().getString(R.string.charts_empty_exercise_no_data, exerciseName));

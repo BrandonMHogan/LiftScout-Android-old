@@ -1,8 +1,5 @@
 package com.brandonhogan.liftscout.repository.model;
 
-import com.brandonhogan.liftscout.core.model.Record;
-import com.brandonhogan.liftscout.core.model.Rep;
-
 import java.util.List;
 
 /**

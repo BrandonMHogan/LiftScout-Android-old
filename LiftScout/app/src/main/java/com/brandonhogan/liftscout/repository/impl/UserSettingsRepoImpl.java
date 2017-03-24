@@ -2,7 +2,7 @@ package com.brandonhogan.liftscout.repository.impl;
 
 import android.util.Log;
 
-import com.brandonhogan.liftscout.core.model.UserSetting;
+import com.brandonhogan.liftscout.repository.model.UserSetting;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.UserSettingsRepo;

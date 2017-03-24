@@ -6,13 +6,13 @@ import android.support.annotation.FloatRange;
 import android.view.View;
 import android.widget.Toast;
 
-import com.brandonhogan.liftscout.core.managers.UserManager;
+import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.views.Intro.exercises.IntroExercisesSlideFragment;
-import com.brandonhogan.liftscout.views.Intro.first.IntroFirstSlideFragment;
-import com.brandonhogan.liftscout.views.Intro.last.IntroLastSlideFragment;
-import com.brandonhogan.liftscout.views.Intro.settings.IntroSettingsSlideFragment;
-import com.brandonhogan.liftscout.views.Intro.themes.IntroThemeSlideFragment;
+import com.brandonhogan.liftscout.views.IntroExerciseFragment;
+import com.brandonhogan.liftscout.views.IntroFirstFragment;
+import com.brandonhogan.liftscout.views.IntroLastFragment;
+import com.brandonhogan.liftscout.views.IntroSettingsFragment;
+import com.brandonhogan.liftscout.views.IntroThemeFragment;
 
 import javax.inject.Inject;
 
@@ -41,11 +41,11 @@ public class IntroActivity extends MaterialIntroActivity {
                     }
                 });
 
-        addSlide(new IntroFirstSlideFragment());
-        addSlide(new IntroSettingsSlideFragment());
-        addSlide(new IntroExercisesSlideFragment());
-        addSlide(new IntroThemeSlideFragment());
-        addSlide(new IntroLastSlideFragment());
+        addSlide(new IntroFirstFragment());
+        addSlide(new IntroSettingsFragment());
+        addSlide(new IntroExerciseFragment());
+        addSlide(new IntroThemeFragment());
+        addSlide(new IntroLastFragment());
     }
 
     @Override

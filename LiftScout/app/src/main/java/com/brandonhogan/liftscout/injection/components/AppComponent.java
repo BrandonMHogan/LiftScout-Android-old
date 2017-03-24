@@ -4,10 +4,11 @@ import com.brandonhogan.liftscout.activities.BaseActivity;
 import com.brandonhogan.liftscout.activities.IntroActivity;
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.core.controls.graphs.line.MyLineGraph;
-import com.brandonhogan.liftscout.core.managers.ProgressManager;
+import com.brandonhogan.liftscout.managers.ProgressManager;
 import com.brandonhogan.liftscout.injection.module.AppModule;
 import com.brandonhogan.liftscout.injection.module.DatabaseModule;
 import com.brandonhogan.liftscout.injection.module.UserModule;
+import com.brandonhogan.liftscout.presenters.WorkoutTrackerPresenter;
 import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ProgressRepoImpl;
@@ -15,27 +16,26 @@ import com.brandonhogan.liftscout.repository.impl.RecordsRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.SetRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
-import com.brandonhogan.liftscout.views.Intro.exercises.IntroExercisesSlidePresenter;
-import com.brandonhogan.liftscout.views.Intro.settings.IntroSettingsSlidePresenter;
-import com.brandonhogan.liftscout.views.Intro.themes.IntroThemeSlidePresenter;
-import com.brandonhogan.liftscout.views.calendar.CalendarPresenter;
-import com.brandonhogan.liftscout.views.categories.CategoryListPresenter;
-import com.brandonhogan.liftscout.views.exercises.ExerciseListPresenter;
-import com.brandonhogan.liftscout.views.graphs.categories.GraphsCategoriesPresenter;
-import com.brandonhogan.liftscout.views.graphs.exercises.GraphExercisesFragment;
-import com.brandonhogan.liftscout.views.graphs.exercises.GraphExercisesPresenter;
-import com.brandonhogan.liftscout.views.home.HomePresenter;
-import com.brandonhogan.liftscout.views.home.today.TodayPresenter;
-import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayFragment;
-import com.brandonhogan.liftscout.views.settings.display.SettingsDisplayPresenter;
-import com.brandonhogan.liftscout.views.settings.home.SettingsHomePresenter;
-import com.brandonhogan.liftscout.views.settings.profile.SettingsProfilePresenter;
-import com.brandonhogan.liftscout.views.workout.WorkoutContainerPresenter;
-import com.brandonhogan.liftscout.views.workout.graph.GraphPresenter;
-import com.brandonhogan.liftscout.views.workout.history.HistoryPresenter;
-import com.brandonhogan.liftscout.views.workout.records.RecordsPresenter;
-import com.brandonhogan.liftscout.views.workout.tracker.TrackerFragment;
-import com.brandonhogan.liftscout.views.workout.tracker.TrackerPresenter;
+import com.brandonhogan.liftscout.presenters.IntroExercisePresenter;
+import com.brandonhogan.liftscout.presenters.IntroSettingsPresenter;
+import com.brandonhogan.liftscout.presenters.IntroThemePresenter;
+import com.brandonhogan.liftscout.presenters.CalendarPresenter;
+import com.brandonhogan.liftscout.presenters.CategoryListPresenter;
+import com.brandonhogan.liftscout.presenters.ExerciseListPresenter;
+import com.brandonhogan.liftscout.presenters.GraphsCategoriesPresenter;
+import com.brandonhogan.liftscout.views.GraphExercisesFragment;
+import com.brandonhogan.liftscout.presenters.GraphExercisesPresenter;
+import com.brandonhogan.liftscout.presenters.TodayContainerPresenter;
+import com.brandonhogan.liftscout.presenters.TodayPresenter;
+import com.brandonhogan.liftscout.views.SettingsDisplayFragment;
+import com.brandonhogan.liftscout.presenters.SettingsDisplayPresenter;
+import com.brandonhogan.liftscout.presenters.SettingsHomePresenter;
+import com.brandonhogan.liftscout.presenters.SettingsProfilePresenter;
+import com.brandonhogan.liftscout.presenters.WorkoutContainerPresenter;
+import com.brandonhogan.liftscout.presenters.WorkoutGraphPresenter;
+import com.brandonhogan.liftscout.presenters.WorkoutHistoryPresenter;
+import com.brandonhogan.liftscout.presenters.RecordsPresenter;
+import com.brandonhogan.liftscout.views.TrackerFragment;
 
 import javax.inject.Singleton;
 
@@ -54,13 +54,13 @@ public interface AppComponent {
     void inject(MainActivity activity);
 
     // Fragments
-    void inject(HomePresenter presenter);
+    void inject(TodayContainerPresenter presenter);
     void inject(TodayPresenter presenter);
 
     // Intro
-    void inject(IntroSettingsSlidePresenter presenter);
-    void inject(IntroExercisesSlidePresenter presenter);
-    void inject(IntroThemeSlidePresenter presenter);
+    void inject(IntroSettingsPresenter presenter);
+    void inject(IntroExercisePresenter presenter);
+    void inject(IntroThemePresenter presenter);
 
     // Calendar
     void inject(CalendarPresenter presenter);
@@ -78,9 +78,9 @@ public interface AppComponent {
     // Workout
     void inject(WorkoutContainerPresenter presenter);
     void inject(TrackerFragment fragment);
-    void inject(TrackerPresenter presenter);
-    void inject(HistoryPresenter presenter);
-    void inject(GraphPresenter presenter);
+    void inject(WorkoutTrackerPresenter presenter);
+    void inject(WorkoutHistoryPresenter presenter);
+    void inject(WorkoutGraphPresenter presenter);
     void inject(RecordsPresenter presenter);
 
     // Settings
