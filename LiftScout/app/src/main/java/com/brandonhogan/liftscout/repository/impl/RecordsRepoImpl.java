@@ -257,8 +257,10 @@ public class RecordsRepoImpl implements RecordsRepo {
     @Override
     public boolean isRecord(int repId) {
         try {
-            return databaseRealm.getRealmInstance().where(Record.class)
-                    .equalTo(Record.REP_ID, repId).findFirst().isRecord();
+            Record record = databaseRealm.getRealmInstance().where(Record.class)
+                    .equalTo(Record.REP_ID, repId).findFirst();
+
+            return (record != null && record.isRecord());
         }
         catch (Exception ex) {
             Log.e(TAG, "isRecord: ", ex);

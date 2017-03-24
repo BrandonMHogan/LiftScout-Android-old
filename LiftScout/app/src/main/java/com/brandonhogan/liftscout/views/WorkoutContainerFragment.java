@@ -20,10 +20,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.adapters.WorkoutContainerAdapter;
 import com.brandonhogan.liftscout.interfaces.contracts.WorkoutContainerContract;
-import com.brandonhogan.liftscout.core.controls.MaterialDialog;
 import com.brandonhogan.liftscout.core.controls.NumberPicker;
 import com.brandonhogan.liftscout.managers.NotificationServiceManager;
 import com.brandonhogan.liftscout.events.TrackerEvent;
@@ -287,7 +287,13 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
             notificationServiceManager.clearNotification();
 
         if (timerMenu != null) {
-            timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_48dp, getActivity().getTheme()));
+
+            if(android.os.Build.VERSION.SDK_INT >= 21){
+                timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_48dp, getActivity().getTheme()));
+            } else {
+                timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_48dp));
+            }
+
             timerMenu.setTitle(getString(R.string.timer));
         }
         presenter.onRestTimerStop();
@@ -295,18 +301,15 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
     private void setupSettings() {
 
-        settingsDialog = new MaterialDialog(
-                getActivity(),
-                R.string.settings,
-                R.layout.dialog_tracker_settings,
-                true,
-                new com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@android.support.annotation.NonNull
-                                                com.afollestad.materialdialogs.MaterialDialog dialog,
-                                        @android.support.annotation.NonNull
-                                                DialogAction which) {
+        View customView = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_tracker_settings, null);
 
+        settingsDialog = new com.afollestad.materialdialogs.MaterialDialog.Builder(getActivity())
+                .title(R.string.settings)
+                .customView(customView, true)
+                .positiveText(R.string.save)
+                .onPositive(new com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull com.afollestad.materialdialogs.MaterialDialog dialog, @NonNull DialogAction which) {
                         View view = dialog.getView();
                         NumberPicker picker = (NumberPicker)view.findViewById(R.id.number_picker);
                         SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.vibrate_switch);
@@ -317,7 +320,9 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
                         presenter.onSettingsSave(picker.getNumberAsInt(), vibrateSwitch.isChecked(), soundSwitch.isChecked(), autoStartSwitch.isChecked(), incrementSpinner.getSelectedIndex());
                     }
-                });
+                })
+                .negativeText(R.string.close)
+                .build();
 
         View view = settingsDialog.getView();
         NumberPicker picker = (NumberPicker)view.findViewById(R.id.number_picker);
