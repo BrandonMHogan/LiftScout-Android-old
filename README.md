@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/BrandonMHogan/LiftScout-Android.svg?branch=releaseCandidate)](https://travis-ci.org/BrandonMHogan/LiftScout-Android)
+[![Build Status](https://travis-ci.org/BrandonMHogan/LiftScout-Android.svg?branch=develop)](https://travis-ci.org/BrandonMHogan/LiftScout-Android) [![Coverage Status](https://coveralls.io/repos/github/BrandonMHogan/LiftScout-Android/badge.svg?branch=develop)](https://coveralls.io/github/BrandonMHogan/LiftScout-Android?branch=develop)
 
 # LiftScout-Android   
  <a href='https://play.google.com/store/apps/details?id=com.brandonhogan.liftscout&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width='200' alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
