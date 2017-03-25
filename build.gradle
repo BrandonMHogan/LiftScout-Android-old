@@ -18,7 +18,7 @@ buildscript {
 
 allprojects {
 
-    apply plugin: 'jacoco'
+    //apply plugin: 'jacoco'
 
     repositories {
         mavenCentral()
@@ -33,25 +33,25 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-def coverageSourceDirs = [
-        'src/main/java',
-]
-
-task jacocoTestReport(type: JacocoReport, dependsOn: "testDebug") {
-    group = "Reporting"
-    description = "Generate Jacoco coverage reports after running tests."
-    reports {
-        xml.enabled = true
-        html.enabled = true
-    }
-    classDirectories = fileTree(
-            dir: './build/classes/debug',
-            excludes: ['**/R.class',
-                       '**/R$*.class',
-                       '**/*$InjectAdapter.class',
-                       '**/*$ModuleAdapter.class',
-                       '**/*$ViewInjector*.class'
-            ])
-    sourceDirectories = files(coverageSourceDirs)
-    executionData = files('build/jacoco/testDebug.exec')
-}
+//def coverageSourceDirs = [
+//        'src/main/java',
+//]
+//
+//task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
+//    group = "Reporting"
+//    description = "Generate Jacoco coverage reports after running tests."
+//    reports {
+//        xml.enabled = true
+//        html.enabled = true
+//    }
+//    classDirectories = fileTree(
+//            dir: './build/classes/debug',
+//            excludes: ['**/R.class',
+//                       '**/R$*.class',
+//                       '**/*$InjectAdapter.class',
+//                       '**/*$ModuleAdapter.class',
+//                       '**/*$ViewInjector*.class'
+//            ])
+//    sourceDirectories = files(coverageSourceDirs)
+//    executionData = files('build/jacoco/testDebug.exec')
+//}
