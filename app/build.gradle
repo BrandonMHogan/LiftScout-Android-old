@@ -1,9 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
-//script plugins
-apply from: rootProject.file('gradle/jacoco.gradle')
-
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
