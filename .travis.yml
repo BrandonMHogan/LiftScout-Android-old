@@ -1,5 +1,15 @@
 language: android
 sudo: required
+jdk: oraclejdk8
+
+env:
+  matrix:
+    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
+
+notifications:
+  email:
+    - brandon.michael.hogan@gmail.com
+
 android:
   components:
     # Uncomment the lines below if you want to
@@ -43,7 +53,9 @@ before_script:
   - adb shell input keyevent 82 &
 
 script: 
-- android list target
-- ./gradlew build testDebug coveralls -PdisablePreDex
+  - echo "Travis branch is $TRAVIS_BRANCH"
+  - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
+  - ./gradlew test
+
 
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"

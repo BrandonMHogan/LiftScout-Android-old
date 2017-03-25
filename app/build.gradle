@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
-apply plugin: 'com.github.kt3k.coveralls'
 
 android {
     compileSdkVersion 25
@@ -131,15 +130,6 @@ dependencies {
     // Debug
     debugCompile 'com.facebook.stetho:stetho:1.4.1'
     debugCompile 'com.uphyca:stetho_realm:2.0.0'
-}
-
-coveralls {
-    jacocoReportPath = "${buildDir}/reports/coverage/debug/report.xml"
-}
-
-tasks.coveralls {
-    dependsOn 'testDebug'
-    onlyIf { System.env.'CI' }
 }
 
 apply plugin: 'com.google.gms.google-services'
