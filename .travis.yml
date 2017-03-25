@@ -25,6 +25,12 @@ android:
     - sys-img-armeabi-v7a-android-22
     - sys-img-armeabi-v7a-android-25
   
+# safelist
+branches:
+  only:
+  - master
+  - develop
+  - release
 
 before_install:
  - chmod +x gradlew
@@ -38,6 +44,6 @@ before_script:
 
 script: 
 - android list target
-- ./gradlew build testDebug -PdisablePreDex
+- ./gradlew build testDebug coveralls -PdisablePreDex
 
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
