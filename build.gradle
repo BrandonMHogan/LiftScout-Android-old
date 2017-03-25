@@ -19,15 +19,44 @@ buildscript {
 }
 
 allprojects {
+    apply plugin: 'jacoco'
+
     repositories {
+        mavenLocal()
+        mavenCentral()
         jcenter()
+
         maven { url "https://jitpack.io" }
-        maven {
-            url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
-        }
+        maven { url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo' }
+    }
+}
+
+subprojects {
+    dependencies {
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+task codeCoverageReport(type: JacocoReport) {
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    reports {
+        xml.enabled true
+        xml.destination "${buildDir}/reports/jacoco/report.xml"
+        html.enabled false
+        csv.enabled false
+    }
+
+    classDirectories = fileTree(dir: 'build/classes/main', include: 'com/brandonhoga/liftscout/**')
+    sourceDirectories = fileTree(dir: 'scr/main/java', include: 'com/brandonhoga/liftscout/**')
+
+
+}
+
+
+codeCoverageReport.dependsOn {
+    subprojects*.test
 }
