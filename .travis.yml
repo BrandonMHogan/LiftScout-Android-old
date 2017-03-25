@@ -11,6 +11,7 @@ android:
     - build-tools-25.0.2
 
     # The SDK version used to compile your project
+    - android-22
     - android-25
 
     # Additional components
@@ -22,6 +23,7 @@ android:
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
     - sys-img-armeabi-v7a-android-22
+    - sys-img-armeabi-v7a-android-25
   
 
 before_install:
@@ -36,6 +38,6 @@ before_script:
 
 script: 
 - android list target
-- ./gradlew build connectedAndroidTest -PdisablePreDex
+- ./gradlew build testDebug -PdisablePreDex
 
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"

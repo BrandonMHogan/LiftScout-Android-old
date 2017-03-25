@@ -80,55 +80,55 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.0.6'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-
-    compile('com.mikepenz:fastadapter:1.6.0@aar') {
-        transitive = true
-    }
-
+    // Support
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support:preference-v7:25.3.0'
     compile 'com.android.support:design:25.3.0'
     compile 'com.android.support:support-v13:25.3.0'
     compile 'com.android.support:cardview-v7:25.3.0'
+
+    // Important
+    compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.0.6'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'javax.annotation:jsr250-api:1.0'
-
-
     compile 'com.google.dagger:dagger:2.0.1'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.0.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'org.greenrobot:eventbus:3.0.0'
 
+    // Random
     compile 'com.github.sundeepk:compact-calendar-view:2.0.0'
-
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.github.lawloretienne:discreteslider:0.0.9'
-
     compile 'com.jaredrummler:material-spinner:1.1.0'
     compile 'com.afollestad.material-dialogs:core:0.9.4.2'
     compile 'com.thebluealliance:spectrum:0.7.1'
-    compile 'com.mikepenz:fastadapter-extensions:1.7.0@aar'
     compile 'com.github.devlight:infinitecycleviewpager:1.0.2'
     compile 'agency.tango.android:material-intro-screen:0.0.5'
+    compile('com.mikepenz:fastadapter:1.6.0@aar') {
+        transitive = true
+    }
+    compile 'com.mikepenz:fastadapter-extensions:1.7.0@aar'
 
+    // Firebase
     compile 'com.google.firebase:firebase-core:10.0.1'
     compile 'com.google.firebase:firebase-crash:10.0.1'
     compile 'com.google.android.gms:play-services-tagmanager:10.0.1'
     compile 'com.google.firebase:firebase-messaging:10.0.1'
 
+    // Testing
     testCompile 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-core:2.0.57-beta"
+    testCompile 'org.mockito:mockito-core:1.10.19'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 
+    // Leak Canary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.1.3'
 
+    // Debug
     debugCompile 'com.facebook.stetho:stetho:1.4.1'
     debugCompile 'com.uphyca:stetho_realm:2.0.0'
-
-
 }
 
 apply plugin: 'com.google.gms.google-services'
