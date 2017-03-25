@@ -24,6 +24,9 @@ android:
     - sys-img-armeabi-v7a-android-22
   
 
+before_install:
+ - chmod +x gradlew
+
 script: ./gradlew build connectedCheck
 
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
