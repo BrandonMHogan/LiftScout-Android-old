@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.AboutFragment;
+import com.brandonhogan.liftscout.views.ExerciseDetailFragment;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.views.CalendarFragment;
 import com.brandonhogan.liftscout.views.CategoryListFragment;
@@ -281,6 +282,16 @@ public class NavigationManager {
 
     public boolean startExerciseListAddSet(int categoryId) {
         BaseFragment fragment = ExerciseListFragment.newInstance(categoryId, true);
+        return open(fragment);
+    }
+
+    public boolean startExerciseDetail(int exerciseId) {
+        BaseFragment fragment = ExerciseDetailFragment.newInstance(exerciseId);
+        return open(fragment);
+    }
+
+    public boolean startExerciseDetail() {
+        BaseFragment fragment = ExerciseDetailFragment.newInstance();
         return open(fragment);
     }
 

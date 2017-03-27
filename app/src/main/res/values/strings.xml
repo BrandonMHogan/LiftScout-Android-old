@@ -237,6 +237,7 @@
     <string name="category_edit_no_color">Please select a color before saving</string>
     <string name="category_edit_no_name">Please enter a name before saving</string>
     <string name="exercise_edit_no_name">Please enter a name before saving</string>
+    <string name="exercise_new">New Exercise</string>
 
     <!-- Default Categories / Exercises -->
     <string name="category_abs">Abs</string>

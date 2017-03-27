@@ -151,36 +151,43 @@ public class ExerciseListFragment extends BaseFragment implements
     // Private Functions
     //
     private void editExercise(int position) {
-        ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
-            @Override
-            public void onCancelExerciseEditDialog() {
 
-            }
+        getNavigationManager().startExerciseDetail(presenter.getExercise(position).getId());
 
-            @Override
-            public void onSaveExerciseEditDialog(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
-                presenter.updateExercise(id, name, increment, vibrate, sound, autoStart, restTimer);
-            }
-        }, presenter.getExercise(position), presenter.getDefaultIncrement());
 
-        dialog.show();
+//        ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
+//            @Override
+//            public void onCancelExerciseEditDialog() {
+//
+//            }
+//
+//            @Override
+//            public void onSaveExerciseEditDialog(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
+//                presenter.updateExercise(id, name, increment, vibrate, sound, autoStart, restTimer);
+//            }
+//        }, presenter.getExercise(position), presenter.getDefaultIncrement());
+//
+//        dialog.show();
     }
 
     private void createExercise() {
-        ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
-            @Override
-            public void onCancelExerciseEditDialog() {
 
-            }
+        getNavigationManager().startExerciseDetail();
 
-            @Override
-            public void onSaveExerciseEditDialog(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
-                presenter.createExercise(name, increment, vibrate, sound, autoStart, restTimer);
-            }
-
-        }, null, presenter.getDefaultIncrement());
-
-        dialog.show();
+//        ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
+//            @Override
+//            public void onCancelExerciseEditDialog() {
+//
+//            }
+//
+//            @Override
+//            public void onSaveExerciseEditDialog(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
+//                presenter.createExercise(name, increment, vibrate, sound, autoStart, restTimer);
+//            }
+//
+//        }, null, presenter.getDefaultIncrement());
+//
+//        dialog.show();
     }
 
     private void itemSelectedDialog(final int position) {
