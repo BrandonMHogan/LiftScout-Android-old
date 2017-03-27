@@ -7,6 +7,7 @@ import com.brandonhogan.liftscout.repository.model.Exercise;
 
 import javax.inject.Inject;
 
+
 /**
  * Created by Brandon on 3/27/2017.
  * Description :
@@ -16,6 +17,7 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
 
     @Inject
     ExerciseRepo exerciseRepo;
+
 
     // Private Properties
     //

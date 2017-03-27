@@ -6,22 +6,173 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="16dp">
+    <TextView
+        android:id="@+id/auto_start_label"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:text="@string/rest_timer_auto_start"
+        android:textColor="?attr/android:textColorPrimary"
+        android:textSize="@dimen/material_text_size_small"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/sound_switch"
+        app:layout_constraintTop_toBottomOf="@+id/sound_label"
+        tools:text="@string/rest_timer_auto_start" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/exercise" />
-    </android.support.design.widget.TextInputLayout>
+    <Switch
+        android:id="@+id/auto_switch"
+        android:layout_width="141dp"
+        android:layout_height="42dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sound_switch" />
+
+    <TextView
+        android:id="@+id/rest_timer_label"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:text="@string/rest_timer"
+        android:textColor="?attr/android:textColorPrimary"
+        android:textSize="@dimen/material_text_size_small"
+        app:layout_constraintTop_toBottomOf="@+id/increments_label"
+        tools:text="@string/rest_timer"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/rest_timer"
+        android:layout_marginRight="8dp" />
+
+    <TextView
+        android:id="@+id/sound_label"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:text="@string/rest_timer_sound"
+        android:textColor="?attr/android:textColorPrimary"
+        android:textSize="@dimen/material_text_size_small"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/sound_switch"
+        app:layout_constraintTop_toBottomOf="@+id/vibrate_label"
+        tools:text="@string/rest_timer_sound" />
+
+    <TextView
+        android:id="@+id/vibrate_label"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:text="@string/rest_timer_vibrate"
+        android:textColor="?attr/android:textColorPrimary"
+        android:textSize="@dimen/material_text_size_small"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/sound_switch"
+        app:layout_constraintTop_toBottomOf="@+id/rest_timer_label"
+        tools:text="@string/rest_timer_vibrate" />
+
+    <Switch
+        android:id="@+id/vibrate_switch"
+        android:layout_width="55dp"
+        android:layout_height="42dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:splitTrack="false"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rest_timer" />
+
+    <EditText
+        android:id="@+id/name_text"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/exercise"
+        android:inputType="textPersonName"
+        android:singleLine="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/increments_label"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:text="@string/increments_settings"
+        android:textColor="?attr/android:textColorPrimary"
+        android:textSize="@dimen/material_text_size_small"
+        app:layout_constraintBottom_toBottomOf="@+id/increment_spinner"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/increment_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/name_text"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@string/increments_settings"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <Spinner
-        android:id="@+id/type_spinner"
-        android:layout_width="265dp"
-        android:layout_height="32dp"
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="83dp" />
+        android:id="@+id/increment_spinner"
+        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+        android:layout_width="150dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="12dp"
+        android:spinnerMode="dialog"
+        android:textSize="53sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_text" />
+
+    <com.brandonhogan.liftscout.utils.controls.NumberPicker
+        android:id="@+id/rest_timer"
+        android:layout_width="149dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:visibility="visible"
+        app:allowDecimal="false"
+        app:backGroundColor="?attr/colorFill"
+        app:increment="1"
+        app:layout_constraintTop_toBottomOf="@+id/increment_spinner"
+        app:maxValue="999"
+        app:textColor="?attr/android:textColorSecondary"
+        app:textSize="@dimen/tracker_font_size"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Switch
+        android:id="@+id/sound_switch"
+        android:layout_width="141dp"
+        android:layout_height="42dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vibrate_switch" />
+
 </android.support.constraint.ConstraintLayout>

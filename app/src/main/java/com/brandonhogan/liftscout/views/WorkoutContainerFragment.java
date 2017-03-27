@@ -312,7 +312,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
                     public void onClick(@NonNull com.afollestad.materialdialogs.MaterialDialog dialog, @NonNull DialogAction which) {
                         View view = dialog.getView();
                         NumberPicker picker = (NumberPicker)view.findViewById(R.id.number_picker);
-                        SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.vibrate_switch);
+                        SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
                         SwitchCompat soundSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
                         SwitchCompat autoStartSwitch = (SwitchCompat)view.findViewById(R.id.auto_start_switch);
                         MaterialSpinner incrementSpinner = (MaterialSpinner)view.findViewById(R.id.increments_spinner);
@@ -326,7 +326,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
         View view = settingsDialog.getView();
         NumberPicker picker = (NumberPicker)view.findViewById(R.id.number_picker);
-        SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.vibrate_switch);
+        SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
         SwitchCompat soundSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
         SwitchCompat autoStartSwitch = (SwitchCompat)view.findViewById(R.id.auto_start_switch);
         MaterialSpinner incrementSpinner = (MaterialSpinner)view.findViewById(R.id.increments_spinner);

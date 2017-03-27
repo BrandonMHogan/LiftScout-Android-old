@@ -152,22 +152,22 @@ public class ExerciseListFragment extends BaseFragment implements
     //
     private void editExercise(int position) {
 
-        getNavigationManager().startExerciseDetail(presenter.getExercise(position).getId());
+  //      getNavigationManager().startExerciseDetail(presenter.getExercise(position).getId());
 
 
-//        ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
-//            @Override
-//            public void onCancelExerciseEditDialog() {
-//
-//            }
-//
-//            @Override
-//            public void onSaveExerciseEditDialog(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
-//                presenter.updateExercise(id, name, increment, vibrate, sound, autoStart, restTimer);
-//            }
-//        }, presenter.getExercise(position), presenter.getDefaultIncrement());
-//
-//        dialog.show();
+        ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
+            @Override
+            public void onCancelExerciseEditDialog() {
+
+            }
+
+            @Override
+            public void onSaveExerciseEditDialog(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
+                presenter.updateExercise(id, name, increment, vibrate, sound, autoStart, restTimer);
+            }
+        }, presenter.getExercise(position), presenter.getDefaultIncrement());
+
+        dialog.show();
     }
 
     private void createExercise() {
