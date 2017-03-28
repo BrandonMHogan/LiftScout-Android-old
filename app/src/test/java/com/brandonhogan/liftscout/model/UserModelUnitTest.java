@@ -1,12 +1,14 @@
 package com.brandonhogan.liftscout.model;
 
-import com.brandonhogan.liftscout.repository.model.User;
+import android.content.Context;
 
+import com.brandonhogan.liftscout.repository.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * To work on unit tests, switch the Test Artifact in the Build Variants view.
@@ -14,25 +16,33 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class UserModelUnitTest {
 
-    private static final double DELTA = 1e-15;
+    private static final String FAKE_STRING = "Fake Category Name";
+    private static final int FAKE_INT = 123456;
+    private static final double FAKE_DOUBLE = 1231.23;
+
+    @Mock
+    Context mMockContext;
+
 
     @Test
-    public void weight_isCorrect() throws Exception {
-        double weight = 200;
-
+    public void UserModel_CorrectProperties_assertTrue() {
         User user = new User();
-        user.setWeight(weight);
 
-        assertEquals(user.getWeight(), weight, DELTA);
-    }
+        java.util.Date date = new java.util.Date();
 
-    @Test
-    public void weight_massive_isCorrect() throws Exception {
-        float weight = 20000000000000f;
+        user.setId(FAKE_INT);
+        user.setName(FAKE_STRING);
+        user.setBirthDate(date);
+        user.setLastUsed(date);
+        user.setStartDate(date);
+        user.setWeight(FAKE_DOUBLE);
 
-        User user = new User();
-        user.setWeight(weight);
-
-        assertEquals(user.getWeight(), weight, DELTA);
+        // ...then the result should be the expected one.
+        assertThat(user.getId(), is(FAKE_INT));
+        assertThat(user.getName(), is(FAKE_STRING));
+        assertThat(user.getBirthDate().toString(), is(date.toString()));
+        assertThat(user.getLastUsed().toString(), is(date.toString()));
+        assertThat(user.getStartDate().toString(), is(date.toString()));
+        assertThat(user.getWeight(), is(FAKE_DOUBLE));
     }
 }
