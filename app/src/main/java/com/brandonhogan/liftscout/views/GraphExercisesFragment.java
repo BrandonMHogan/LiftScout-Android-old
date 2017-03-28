@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.interfaces.contracts.GraphExercisesContract;
-import com.brandonhogan.liftscout.utils.controls.graphs.line.MyLineGraph;
 import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.views.base.BaseFragment;
+import com.brandonhogan.liftscout.interfaces.contracts.GraphExercisesContract;
 import com.brandonhogan.liftscout.presenters.GraphExercisesPresenter;
+import com.brandonhogan.liftscout.utils.controls.graphs.line.MyLineGraph;
+import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import butterknife.Bind;
 

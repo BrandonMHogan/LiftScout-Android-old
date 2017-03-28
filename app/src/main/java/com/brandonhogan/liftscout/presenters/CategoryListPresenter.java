@@ -1,12 +1,12 @@
 package com.brandonhogan.liftscout.presenters;
 
-import com.brandonhogan.liftscout.managers.GraphManager;
-import com.brandonhogan.liftscout.repository.model.Category;
 import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.interfaces.contracts.CategoryListContract;
+import com.brandonhogan.liftscout.managers.GraphManager;
+import com.brandonhogan.liftscout.models.CategoryListModel;
 import com.brandonhogan.liftscout.repository.CategoryRepo;
 import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
-import com.brandonhogan.liftscout.interfaces.contracts.CategoryListContract;
-import com.brandonhogan.liftscout.models.CategoryListModel;
+import com.brandonhogan.liftscout.repository.model.Category;
 
 import java.util.ArrayList;
 

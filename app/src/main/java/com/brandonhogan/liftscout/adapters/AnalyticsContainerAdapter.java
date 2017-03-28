@@ -4,8 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
 
-import com.brandonhogan.liftscout.views.GraphsCategoriesFragment;
 import com.brandonhogan.liftscout.views.GraphExercisesFragment;
+import com.brandonhogan.liftscout.views.GraphsCategoriesFragment;
 
 /**
  * Created by Brandon on 2/16/2017.

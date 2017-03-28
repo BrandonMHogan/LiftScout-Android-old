@@ -1,17 +1,17 @@
 package com.brandonhogan.liftscout.presenters;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.TodayContract;
 import com.brandonhogan.liftscout.managers.ProgressManager;
 import com.brandonhogan.liftscout.managers.RecordsManager;
 import com.brandonhogan.liftscout.managers.UserManager;
+import com.brandonhogan.liftscout.models.TodayListItemModel;
+import com.brandonhogan.liftscout.models.TodayListSectionModel;
 import com.brandonhogan.liftscout.repository.model.Rep;
 import com.brandonhogan.liftscout.repository.model.Set;
 import com.brandonhogan.liftscout.utils.BhDate;
 import com.brandonhogan.liftscout.utils.Constants;
-import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.models.TodayListItemModel;
-import com.brandonhogan.liftscout.models.TodayListSectionModel;
 import com.mikepenz.fastadapter.IItem;
 
 import java.text.SimpleDateFormat;

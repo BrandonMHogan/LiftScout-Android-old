@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,16 +19,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.adapters.WorkoutContainerAdapter;
-import com.brandonhogan.liftscout.interfaces.contracts.WorkoutContainerContract;
-import com.brandonhogan.liftscout.utils.controls.NumberPicker;
-import com.brandonhogan.liftscout.managers.NotificationServiceManager;
 import com.brandonhogan.liftscout.events.TrackerEvent;
+import com.brandonhogan.liftscout.interfaces.contracts.WorkoutContainerContract;
+import com.brandonhogan.liftscout.managers.NotificationServiceManager;
 import com.brandonhogan.liftscout.presenters.WorkoutContainerPresenter;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
-import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;

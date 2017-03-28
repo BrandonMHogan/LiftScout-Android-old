@@ -13,11 +13,11 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.interfaces.contracts.TodayContainerContract;
-import com.brandonhogan.liftscout.utils.constants.TodayTransforms;
-import com.brandonhogan.liftscout.presenters.TodayContainerPresenter;
-import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.adapters.TodayPageAdapter;
+import com.brandonhogan.liftscout.interfaces.contracts.TodayContainerContract;
+import com.brandonhogan.liftscout.presenters.TodayContainerPresenter;
+import com.brandonhogan.liftscout.utils.constants.TodayTransforms;
+import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 
 import java.util.Date;

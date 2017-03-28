@@ -17,12 +17,12 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.adapters.ExerciseListAdapter;
-import com.brandonhogan.liftscout.interfaces.contracts.ExerciseListContract;
-import com.brandonhogan.liftscout.repository.model.Exercise;
 import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
-import com.brandonhogan.liftscout.views.base.BaseFragment;
+import com.brandonhogan.liftscout.interfaces.contracts.ExerciseListContract;
 import com.brandonhogan.liftscout.models.ExerciseListModel;
 import com.brandonhogan.liftscout.presenters.ExerciseListPresenter;
+import com.brandonhogan.liftscout.repository.model.Exercise;
+import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import java.util.ArrayList;
 

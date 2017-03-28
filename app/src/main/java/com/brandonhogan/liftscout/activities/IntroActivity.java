@@ -6,8 +6,8 @@ import android.support.annotation.FloatRange;
 import android.view.View;
 import android.widget.Toast;
 
-import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.views.IntroExerciseFragment;
 import com.brandonhogan.liftscout.views.IntroFirstFragment;
 import com.brandonhogan.liftscout.views.IntroLastFragment;

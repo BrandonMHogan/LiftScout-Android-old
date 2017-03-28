@@ -12,14 +12,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.adapters.GraphsCategoriesAdapter;
+import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 import com.brandonhogan.liftscout.interfaces.contracts.GraphsCategoriesContract;
+import com.brandonhogan.liftscout.presenters.GraphsCategoriesPresenter;
 import com.brandonhogan.liftscout.repository.model.CategoryGraph;
 import com.brandonhogan.liftscout.utils.AttrUtil;
 import com.brandonhogan.liftscout.utils.BhDate;
-import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
-import com.brandonhogan.liftscout.presenters.GraphsCategoriesPresenter;
-import com.brandonhogan.liftscout.adapters.GraphsCategoriesAdapter;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;

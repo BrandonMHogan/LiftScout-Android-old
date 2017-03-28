@@ -13,15 +13,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.utils.constants.DefaultScreens;
+import com.brandonhogan.liftscout.events.SearchViewEvent;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.managers.NavigationManager;
 import com.brandonhogan.liftscout.managers.NotificationServiceManager;
 import com.brandonhogan.liftscout.managers.ProgressManager;
+import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.utils.BhDate;
 import com.brandonhogan.liftscout.utils.LogUtil;
-import com.brandonhogan.liftscout.events.SearchViewEvent;
-import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.repository.DatabaseRealm;
+import com.brandonhogan.liftscout.utils.constants.DefaultScreens;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import org.greenrobot.eventbus.EventBus;

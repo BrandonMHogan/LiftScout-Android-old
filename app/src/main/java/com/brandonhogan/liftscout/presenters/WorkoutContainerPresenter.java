@@ -1,16 +1,15 @@
 package com.brandonhogan.liftscout.presenters;
 
-import com.brandonhogan.liftscout.repository.model.Exercise;
-import com.brandonhogan.liftscout.utils.constants.ConstantValues;
-import com.brandonhogan.liftscout.utils.constants.Measurements;
-import com.brandonhogan.liftscout.managers.ProgressManager;
-import com.brandonhogan.liftscout.managers.UserManager;
-import com.brandonhogan.liftscout.repository.model.Set;
 import com.brandonhogan.liftscout.events.IncrementEvent;
 import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.repository.ExerciseRepo;
-import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.interfaces.contracts.WorkoutContainerContract;
+import com.brandonhogan.liftscout.managers.ProgressManager;
+import com.brandonhogan.liftscout.managers.UserManager;
+import com.brandonhogan.liftscout.repository.ExerciseRepo;
+import com.brandonhogan.liftscout.repository.model.Exercise;
+import com.brandonhogan.liftscout.repository.model.Set;
+import com.brandonhogan.liftscout.utils.constants.ConstantValues;
+import com.brandonhogan.liftscout.utils.constants.Measurements;
 
 import org.greenrobot.eventbus.EventBus;
 

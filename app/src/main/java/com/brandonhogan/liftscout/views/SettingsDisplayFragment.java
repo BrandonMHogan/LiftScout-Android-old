@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.interfaces.contracts.SettingsDisplayContract;
 import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.views.base.BaseFragment;
+import com.brandonhogan.liftscout.interfaces.contracts.SettingsDisplayContract;
 import com.brandonhogan.liftscout.presenters.SettingsDisplayPresenter;
+import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;

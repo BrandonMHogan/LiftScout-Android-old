@@ -1,7 +1,7 @@
 package com.brandonhogan.liftscout.interfaces.contracts;
 
-import com.brandonhogan.liftscout.models.HistoryListSectionModel;
 import com.brandonhogan.liftscout.events.HistoryTrackerEvent;
+import com.brandonhogan.liftscout.models.HistoryListSectionModel;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
 import java.util.ArrayList;

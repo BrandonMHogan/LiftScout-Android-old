@@ -1,16 +1,16 @@
 package com.brandonhogan.liftscout.presenters;
 
-import com.brandonhogan.liftscout.utils.constants.Measurements;
+import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.interfaces.contracts.TrackerContract;
 import com.brandonhogan.liftscout.managers.ProgressManager;
 import com.brandonhogan.liftscout.managers.RecordsManager;
 import com.brandonhogan.liftscout.managers.UserManager;
-import com.brandonhogan.liftscout.repository.model.Rep;
-import com.brandonhogan.liftscout.repository.model.Set;
-import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.models.TrackerListModel;
 import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
-import com.brandonhogan.liftscout.interfaces.contracts.TrackerContract;
-import com.brandonhogan.liftscout.models.TrackerListModel;
+import com.brandonhogan.liftscout.repository.model.Rep;
+import com.brandonhogan.liftscout.repository.model.Set;
+import com.brandonhogan.liftscout.utils.constants.Measurements;
 
 import java.util.ArrayList;
 
@@ -101,7 +101,7 @@ public class WorkoutTrackerPresenter implements TrackerContract.Presenter {
             }
 
             view.updateAdapter(adapterData);
-        
+
 
         if (adapterData != null && adapterData.size() > 0) {
             TrackerListModel model = adapterData.get(adapterData.size() -1);

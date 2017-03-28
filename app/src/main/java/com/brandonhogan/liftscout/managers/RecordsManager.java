@@ -1,12 +1,12 @@
 package com.brandonhogan.liftscout.managers;
 
-import com.brandonhogan.liftscout.repository.model.Record;
-import com.brandonhogan.liftscout.repository.model.Rep;
-import com.brandonhogan.liftscout.repository.model.Set;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.RecordsRepo;
 import com.brandonhogan.liftscout.repository.SetRepo;
 import com.brandonhogan.liftscout.repository.model.CombinedRecordResult;
+import com.brandonhogan.liftscout.repository.model.Record;
+import com.brandonhogan.liftscout.repository.model.Rep;
+import com.brandonhogan.liftscout.repository.model.Set;
 
 import java.util.List;
 

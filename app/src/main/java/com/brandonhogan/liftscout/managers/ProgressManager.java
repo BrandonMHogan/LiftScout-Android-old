@@ -1,9 +1,5 @@
 package com.brandonhogan.liftscout.managers;
 
-import com.brandonhogan.liftscout.repository.model.Progress;
-import com.brandonhogan.liftscout.repository.model.Rep;
-import com.brandonhogan.liftscout.repository.model.Set;
-import com.brandonhogan.liftscout.utils.BhDate;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.CategoryRepo;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
@@ -14,6 +10,10 @@ import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ProgressRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.SetRepoImpl;
+import com.brandonhogan.liftscout.repository.model.Progress;
+import com.brandonhogan.liftscout.repository.model.Rep;
+import com.brandonhogan.liftscout.repository.model.Set;
+import com.brandonhogan.liftscout.utils.BhDate;
 
 import java.util.Date;
 

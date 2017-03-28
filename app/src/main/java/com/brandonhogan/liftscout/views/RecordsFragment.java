@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.interfaces.contracts.RecordsContract;
-import com.brandonhogan.liftscout.utils.constants.Bundles;
 import com.brandonhogan.liftscout.presenters.RecordsPresenter;
+import com.brandonhogan.liftscout.utils.constants.Bundles;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 /**

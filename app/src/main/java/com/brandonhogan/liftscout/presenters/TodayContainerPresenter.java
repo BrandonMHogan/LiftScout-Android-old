@@ -1,9 +1,9 @@
 package com.brandonhogan.liftscout.presenters;
 
-import com.brandonhogan.liftscout.managers.ProgressManager;
-import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.TodayContainerContract;
+import com.brandonhogan.liftscout.managers.ProgressManager;
+import com.brandonhogan.liftscout.managers.UserManager;
 
 import java.util.Date;
 

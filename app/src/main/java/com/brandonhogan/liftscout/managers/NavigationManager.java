@@ -8,18 +8,18 @@ import android.util.Log;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.views.AboutFragment;
-import com.brandonhogan.liftscout.views.ExerciseDetailFragment;
-import com.brandonhogan.liftscout.views.base.BaseFragment;
+import com.brandonhogan.liftscout.views.AnalyticsContainerFragment;
 import com.brandonhogan.liftscout.views.CalendarFragment;
 import com.brandonhogan.liftscout.views.CategoryListFragment;
+import com.brandonhogan.liftscout.views.ExerciseDetailFragment;
 import com.brandonhogan.liftscout.views.ExerciseListFragment;
-import com.brandonhogan.liftscout.views.AnalyticsContainerFragment;
-import com.brandonhogan.liftscout.views.TodayContainerFragment;
-import com.brandonhogan.liftscout.views.SettingsListFragment;
 import com.brandonhogan.liftscout.views.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.views.SettingsHomeFragment;
+import com.brandonhogan.liftscout.views.SettingsListFragment;
 import com.brandonhogan.liftscout.views.SettingsProfileFragment;
+import com.brandonhogan.liftscout.views.TodayContainerFragment;
 import com.brandonhogan.liftscout.views.WorkoutContainerFragment;
+import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class NavigationManager {

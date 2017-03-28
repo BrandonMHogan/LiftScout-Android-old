@@ -1,17 +1,17 @@
 package com.brandonhogan.liftscout.presenters;
 
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.ExerciseListContract;
-import com.brandonhogan.liftscout.utils.constants.ConstantValues;
-import com.brandonhogan.liftscout.utils.constants.Measurements;
 import com.brandonhogan.liftscout.managers.GraphManager;
 import com.brandonhogan.liftscout.managers.UserManager;
-import com.brandonhogan.liftscout.repository.model.Exercise;
-import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.models.ExerciseListModel;
 import com.brandonhogan.liftscout.repository.CategoryRepo;
 import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
+import com.brandonhogan.liftscout.repository.model.Exercise;
+import com.brandonhogan.liftscout.utils.constants.ConstantValues;
+import com.brandonhogan.liftscout.utils.constants.Measurements;
 
 import java.util.ArrayList;
 

@@ -2,10 +2,10 @@ package com.brandonhogan.liftscout.presenters;
 
 import android.content.Context;
 
-import com.brandonhogan.liftscout.interfaces.contracts.SettingsDisplayContract;
-import com.brandonhogan.liftscout.utils.constants.Themes;
-import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.interfaces.contracts.SettingsDisplayContract;
+import com.brandonhogan.liftscout.managers.UserManager;
+import com.brandonhogan.liftscout.utils.constants.Themes;
 
 import java.util.ArrayList;
 

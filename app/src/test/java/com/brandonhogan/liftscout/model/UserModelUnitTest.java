@@ -2,8 +2,6 @@ package com.brandonhogan.liftscout.model;
 
 import com.brandonhogan.liftscout.repository.model.User;
 
-import junit.framework.TestCase;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;

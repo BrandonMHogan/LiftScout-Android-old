@@ -1,15 +1,15 @@
 package com.brandonhogan.liftscout.managers;
 
-import com.brandonhogan.liftscout.utils.constants.DefaultScreens;
-import com.brandonhogan.liftscout.utils.constants.Measurements;
-import com.brandonhogan.liftscout.utils.constants.Themes;
-import com.brandonhogan.liftscout.utils.constants.TodayTransforms;
-import com.brandonhogan.liftscout.repository.model.User;
-import com.brandonhogan.liftscout.repository.model.UserSetting;
 import com.brandonhogan.liftscout.repository.UserRepo;
 import com.brandonhogan.liftscout.repository.UserSettingsRepo;
 import com.brandonhogan.liftscout.repository.impl.UserRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
+import com.brandonhogan.liftscout.repository.model.User;
+import com.brandonhogan.liftscout.repository.model.UserSetting;
+import com.brandonhogan.liftscout.utils.constants.DefaultScreens;
+import com.brandonhogan.liftscout.utils.constants.Measurements;
+import com.brandonhogan.liftscout.utils.constants.Themes;
+import com.brandonhogan.liftscout.utils.constants.TodayTransforms;
 
 import java.util.Date;
 

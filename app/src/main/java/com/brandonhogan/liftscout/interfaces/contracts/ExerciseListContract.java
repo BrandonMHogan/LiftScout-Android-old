@@ -1,7 +1,7 @@
 package com.brandonhogan.liftscout.interfaces.contracts;
 
-import com.brandonhogan.liftscout.repository.model.Exercise;
 import com.brandonhogan.liftscout.models.ExerciseListModel;
+import com.brandonhogan.liftscout.repository.model.Exercise;
 
 import java.util.ArrayList;
 

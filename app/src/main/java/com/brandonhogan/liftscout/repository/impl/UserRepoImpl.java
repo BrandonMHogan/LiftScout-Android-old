@@ -1,9 +1,9 @@
 package com.brandonhogan.liftscout.repository.impl;
 
-import com.brandonhogan.liftscout.repository.model.User;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.UserRepo;
+import com.brandonhogan.liftscout.repository.model.User;
 
 import java.util.Date;
 

@@ -1,13 +1,13 @@
 package com.brandonhogan.liftscout.managers;
 
-import com.brandonhogan.liftscout.repository.model.CalendarEvent;
-import com.brandonhogan.liftscout.repository.model.Category;
-import com.brandonhogan.liftscout.repository.model.Progress;
-import com.brandonhogan.liftscout.repository.model.Set;
 import com.brandonhogan.liftscout.repository.CategoryRepo;
 import com.brandonhogan.liftscout.repository.ProgressRepo;
 import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ProgressRepoImpl;
+import com.brandonhogan.liftscout.repository.model.CalendarEvent;
+import com.brandonhogan.liftscout.repository.model.Category;
+import com.brandonhogan.liftscout.repository.model.Progress;
+import com.brandonhogan.liftscout.repository.model.Set;
 
 import java.util.ArrayList;
 

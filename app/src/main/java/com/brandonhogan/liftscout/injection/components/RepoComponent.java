@@ -1,7 +1,7 @@
 package com.brandonhogan.liftscout.injection.components;
 
-import com.brandonhogan.liftscout.managers.RecordsManager;
 import com.brandonhogan.liftscout.injection.module.DatabaseModule;
+import com.brandonhogan.liftscout.managers.RecordsManager;
 
 import javax.inject.Singleton;
 

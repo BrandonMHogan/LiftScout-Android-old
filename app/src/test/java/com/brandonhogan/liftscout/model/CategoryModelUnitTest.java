@@ -1,19 +1,18 @@
 package com.brandonhogan.liftscout.model;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.CoreMatchers.*;
-import static org.mockito.Mockito.*;
+import android.content.Context;
+
+import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.repository.model.Category;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
-import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.repository.model.Category;
-import com.brandonhogan.liftscout.repository.model.User;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Brandon on 3/24/2017.

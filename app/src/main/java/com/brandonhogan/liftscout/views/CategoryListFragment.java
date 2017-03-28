@@ -16,13 +16,13 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
-import com.brandonhogan.liftscout.views.base.BaseFragment;
-import com.brandonhogan.liftscout.dialogs.CategoryEditDialog;
 import com.brandonhogan.liftscout.adapters.CategoryListAdapter;
+import com.brandonhogan.liftscout.dialogs.CategoryEditDialog;
+import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 import com.brandonhogan.liftscout.interfaces.contracts.CategoryListContract;
 import com.brandonhogan.liftscout.models.CategoryListModel;
 import com.brandonhogan.liftscout.presenters.CategoryListPresenter;
+import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import java.util.List;
 

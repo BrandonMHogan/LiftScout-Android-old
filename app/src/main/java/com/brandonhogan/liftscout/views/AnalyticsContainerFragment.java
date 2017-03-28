@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.adapters.AnalyticsContainerAdapter;
+import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import butterknife.Bind;
 

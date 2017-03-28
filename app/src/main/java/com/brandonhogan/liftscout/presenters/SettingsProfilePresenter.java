@@ -1,10 +1,10 @@
 package com.brandonhogan.liftscout.presenters;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.interfaces.contracts.SettingsProfileContract;
-import com.brandonhogan.liftscout.utils.constants.Measurements;
-import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.interfaces.contracts.SettingsProfileContract;
+import com.brandonhogan.liftscout.managers.UserManager;
+import com.brandonhogan.liftscout.utils.constants.Measurements;
 
 import java.util.ArrayList;
 

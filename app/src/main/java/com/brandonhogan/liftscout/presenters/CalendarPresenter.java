@@ -1,22 +1,22 @@
 package com.brandonhogan.liftscout.presenters;
 
+import com.brandonhogan.liftscout.events.HistoryTrackerEvent;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.CalendarContract;
 import com.brandonhogan.liftscout.managers.CalendarManager;
 import com.brandonhogan.liftscout.managers.ProgressManager;
 import com.brandonhogan.liftscout.managers.RecordsManager;
 import com.brandonhogan.liftscout.managers.UserManager;
-import com.brandonhogan.liftscout.repository.model.CalendarEvent;
-import com.brandonhogan.liftscout.repository.model.Rep;
-import com.brandonhogan.liftscout.repository.model.Set;
-import com.brandonhogan.liftscout.utils.BhDate;
-import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.models.HistoryListItemModel;
+import com.brandonhogan.liftscout.models.HistoryListSectionModel;
 import com.brandonhogan.liftscout.repository.CategoryRepo;
 import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
-import com.brandonhogan.liftscout.models.HistoryListItemModel;
-import com.brandonhogan.liftscout.models.HistoryListSectionModel;
-import com.brandonhogan.liftscout.events.HistoryTrackerEvent;
+import com.brandonhogan.liftscout.repository.model.CalendarEvent;
+import com.brandonhogan.liftscout.repository.model.Rep;
+import com.brandonhogan.liftscout.repository.model.Set;
+import com.brandonhogan.liftscout.utils.BhDate;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.mikepenz.fastadapter.IItem;
 

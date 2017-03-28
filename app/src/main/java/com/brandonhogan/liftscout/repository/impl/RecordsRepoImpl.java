@@ -2,11 +2,11 @@ package com.brandonhogan.liftscout.repository.impl;
 
 import android.util.Log;
 
-import com.brandonhogan.liftscout.repository.model.Record;
-import com.brandonhogan.liftscout.repository.model.Rep;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.RecordsRepo;
+import com.brandonhogan.liftscout.repository.model.Record;
+import com.brandonhogan.liftscout.repository.model.Rep;
 
 import java.util.Date;
 import java.util.List;

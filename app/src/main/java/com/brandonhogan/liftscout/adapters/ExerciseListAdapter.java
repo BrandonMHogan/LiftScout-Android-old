@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
-import com.brandonhogan.liftscout.utils.DiffUtil.ExerciseDiffCallback;
 import com.brandonhogan.liftscout.models.ExerciseListModel;
+import com.brandonhogan.liftscout.utils.DiffUtil.ExerciseDiffCallback;
 
 import java.util.ArrayList;
 import java.util.List;

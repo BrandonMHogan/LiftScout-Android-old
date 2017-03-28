@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsProfileContract;
 import com.brandonhogan.liftscout.presenters.SettingsProfilePresenter;
+import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;

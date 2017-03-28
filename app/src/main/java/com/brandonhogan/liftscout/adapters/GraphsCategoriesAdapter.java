@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.repository.model.CategoryGraph;
 import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
+import com.brandonhogan.liftscout.repository.model.CategoryGraph;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;

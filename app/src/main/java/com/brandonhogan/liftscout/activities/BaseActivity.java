@@ -7,9 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.inputmethod.InputMethodManager;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.utils.constants.Themes;
-import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.managers.UserManager;
+import com.brandonhogan.liftscout.utils.constants.Themes;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import javax.inject.Inject;

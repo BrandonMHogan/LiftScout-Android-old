@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.utils.AttrUtil;
 import com.brandonhogan.liftscout.interfaces.contracts.IntroSettingsContract;
 import com.brandonhogan.liftscout.presenters.IntroSettingsPresenter;
+import com.brandonhogan.liftscout.utils.AttrUtil;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;

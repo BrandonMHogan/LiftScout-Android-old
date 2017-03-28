@@ -11,9 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.utils.constants.Measurements;
 import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 import com.brandonhogan.liftscout.models.TrackerListModel;
+import com.brandonhogan.liftscout.utils.constants.Measurements;
 
 import java.util.ArrayList;
 import java.util.List;

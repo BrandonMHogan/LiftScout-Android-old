@@ -11,9 +11,9 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.repository.model.Exercise;
 import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 import com.brandonhogan.liftscout.utils.controls.NumberPicker;
-import com.brandonhogan.liftscout.repository.model.Exercise;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 public class ExerciseEditDialog {
