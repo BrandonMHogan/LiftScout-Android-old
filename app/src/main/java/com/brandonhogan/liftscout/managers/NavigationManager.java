@@ -221,7 +221,7 @@ public class NavigationManager {
     //
     public boolean startSettings() {
         BaseFragment fragment = SettingsListFragment.newInstance();
-        return openAsRoot(fragment);
+        return open(fragment);
     }
 
     public boolean startSettingsProfile() {
