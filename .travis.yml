@@ -49,7 +49,7 @@ licenses:
 
 before_install:
  - chmod +x gradlew
- #- echo y | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1"
+ - echo y | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1"
 
 # Emulator Management: Create, Start and Wait
 # No point running an emulator if I am only making unit tests (mocked)
