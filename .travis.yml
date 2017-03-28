@@ -42,8 +42,14 @@ branches:
   - develop
   - release
 
+licenses:
+  - 'android-sdk-preview-license-.+'
+  - 'android-sdk-license-.+'
+  - 'google-gdk-license-.+'
+
 before_install:
  - chmod +x gradlew
+ #- echo y | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1"
 
 # Emulator Management: Create, Start and Wait
 # No point running an emulator if I am only making unit tests (mocked)
@@ -56,6 +62,7 @@ before_install:
 script: 
   - echo "Travis branch is $TRAVIS_BRANCH"
   - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
+  - ./gradlew clean build
   - ./gradlew testDebug
   #- ./gradlew testDebugUnitTestCoverage
 
