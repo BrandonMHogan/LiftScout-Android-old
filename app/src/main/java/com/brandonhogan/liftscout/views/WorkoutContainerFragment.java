@@ -77,7 +77,6 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     private NotificationManager notificationManager;
     private NotificationServiceManager notificationServiceManager;
 
-    private MaterialDialog settingsDialog;
     private com.afollestad.materialdialogs.MaterialDialog deleteDialog;
 
     private boolean isDisplayed;
@@ -142,8 +141,6 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
             }
         });
 
-
-        setupSettings();
         notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
         notificationServiceManager = new NotificationServiceManager();
         notificationServiceManager.RestTimerNotification(getActivity().getApplicationContext(), REST_TIMER_NOTIFICATION_ID, true, getString(R.string.rest_timer_with_name, presenter.getExerciseName()), presenter.getExerciseId(), presenter.getDateLong(), 0, notificationManager);
@@ -299,49 +296,8 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
         presenter.onRestTimerStop();
     }
 
-    private void setupSettings() {
-
-        View customView = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_tracker_settings, null);
-
-        settingsDialog = new com.afollestad.materialdialogs.MaterialDialog.Builder(getActivity())
-                .title(R.string.settings)
-                .customView(customView, true)
-                .positiveText(R.string.save)
-                .onPositive(new com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull com.afollestad.materialdialogs.MaterialDialog dialog, @NonNull DialogAction which) {
-                        View view = dialog.getView();
-                        NumberPicker picker = (NumberPicker)view.findViewById(R.id.number_picker);
-                        SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
-                        SwitchCompat soundSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
-                        SwitchCompat autoStartSwitch = (SwitchCompat)view.findViewById(R.id.auto_start_switch);
-                        MaterialSpinner incrementSpinner = (MaterialSpinner)view.findViewById(R.id.increments_spinner);
-
-
-                        presenter.onSettingsSave(picker.getNumberAsInt(), vibrateSwitch.isChecked(), soundSwitch.isChecked(), autoStartSwitch.isChecked(), incrementSpinner.getSelectedIndex());
-                    }
-                })
-                .negativeText(R.string.close)
-                .build();
-
-        View view = settingsDialog.getView();
-        NumberPicker picker = (NumberPicker)view.findViewById(R.id.number_picker);
-        SwitchCompat vibrateSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
-        SwitchCompat soundSwitch = (SwitchCompat)view.findViewById(R.id.sound_switch);
-        SwitchCompat autoStartSwitch = (SwitchCompat)view.findViewById(R.id.auto_start_switch);
-        MaterialSpinner incrementSpinner = (MaterialSpinner)view.findViewById(R.id.increments_spinner);
-
-        picker.setNumber(presenter.getExerciseRestTimer());
-        vibrateSwitch.setChecked(presenter.getExerciseRestVibrate());
-        soundSwitch.setChecked(presenter.getExerciseRestSound());
-        autoStartSwitch.setChecked(presenter.getExerciseRestAutoStart());
-
-        incrementSpinner.setItems(presenter.getExerciseIncrementList());
-        incrementSpinner.setSelectedIndex(presenter.getExerciseIncrementIndex());
-    }
-
     private void showSettings() {
-        settingsDialog.show();
+        getNavigationManager().startExerciseDetail(presenter.getExerciseId(), presenter.getCategoryId());
     }
 
     private void showDeleteAlert() {

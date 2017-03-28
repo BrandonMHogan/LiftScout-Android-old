@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/action_save"
+        android:title="@string/action_save"
+        android:visible="false"
+        app:showAsAction="always"/>
+
     <item android:id="@+id/action_search"
         android:title="@string/action_search"
         app:actionViewClass="android.support.v7.widget.SearchView"

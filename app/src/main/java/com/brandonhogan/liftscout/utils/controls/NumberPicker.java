@@ -245,6 +245,10 @@ public class NumberPicker extends RelativeLayout {
         return Integer.valueOf(editText.getText().toString());
     }
 
+    public double getNumberAsDouble() {
+        return Double.valueOf(editText.getText().toString());
+    }
+
     public void setNumber(int number)
     {
         editText.setText(String.valueOf(number));

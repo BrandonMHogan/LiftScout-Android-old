@@ -19,7 +19,6 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.adapters.ExerciseListAdapter;
 import com.brandonhogan.liftscout.interfaces.contracts.ExerciseListContract;
 import com.brandonhogan.liftscout.repository.model.Exercise;
-import com.brandonhogan.liftscout.dialogs.ExerciseEditDialog;
 import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.brandonhogan.liftscout.models.ExerciseListModel;
@@ -151,43 +150,11 @@ public class ExerciseListFragment extends BaseFragment implements
     // Private Functions
     //
     private void editExercise(int position) {
-
-  //      getNavigationManager().startExerciseDetail(presenter.getExercise(position).getId());
-
-
-        ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
-            @Override
-            public void onCancelExerciseEditDialog() {
-
-            }
-
-            @Override
-            public void onSaveExerciseEditDialog(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
-                presenter.updateExercise(id, name, increment, vibrate, sound, autoStart, restTimer);
-            }
-        }, presenter.getExercise(position), presenter.getDefaultIncrement());
-
-        dialog.show();
+        getNavigationManager().startExerciseDetail(presenter.getExercise(position).getId(), presenter.getCategoryId());
     }
 
     private void createExercise() {
-
-        getNavigationManager().startExerciseDetail();
-
-//        ExerciseEditDialog dialog = new ExerciseEditDialog(getActivity(), new ExerciseEditDialog.ExerciseEditDialogListener() {
-//            @Override
-//            public void onCancelExerciseEditDialog() {
-//
-//            }
-//
-//            @Override
-//            public void onSaveExerciseEditDialog(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
-//                presenter.createExercise(name, increment, vibrate, sound, autoStart, restTimer);
-//            }
-//
-//        }, null, presenter.getDefaultIncrement());
-//
-//        dialog.show();
+        getNavigationManager().startExerciseDetail(presenter.getCategoryId());
     }
 
     private void itemSelectedDialog(final int position) {

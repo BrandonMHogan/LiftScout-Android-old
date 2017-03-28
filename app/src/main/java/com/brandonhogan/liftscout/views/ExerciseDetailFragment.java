@@ -3,19 +3,24 @@ package com.brandonhogan.liftscout.views;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.Toast;
 
-import com.brandonhogan.liftscout.BuildConfig;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.interfaces.contracts.ExerciseDetailContract;
 import com.brandonhogan.liftscout.presenters.ExerciseDetailPresenter;
+import com.brandonhogan.liftscout.repository.model.Exercise;
+import com.brandonhogan.liftscout.utils.constants.ConstantValues;
+import com.brandonhogan.liftscout.utils.controls.NumberPicker;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,14 +36,16 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
     // Private Static Properties
     //
     private final static String BUNDLE_EXERCISE_ID = "exerciseIdBundle";
+    private final static String BUNDLE_CATEGORY_ID = "categoryIdBundle";
     private final static String BUNDLE_NEW_EXERCISE = "newExerciseBundle";
 
 
     // Instance
     //
-    public static ExerciseDetailFragment newInstance(int exerciseId) {
+    public static ExerciseDetailFragment newInstance(int exerciseId, int categoryId) {
         Bundle args = new Bundle();
         args.putInt(BUNDLE_EXERCISE_ID, exerciseId);
+        args.putInt(BUNDLE_CATEGORY_ID, categoryId);
         args.putBoolean(BUNDLE_NEW_EXERCISE, false);
 
         ExerciseDetailFragment fragment = new ExerciseDetailFragment();
@@ -47,9 +54,10 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
         return fragment;
     }
 
-    public static ExerciseDetailFragment newInstance() {
+    public static ExerciseDetailFragment newInstance(int categoryId) {
         Bundle args = new Bundle();
         args.putInt(BUNDLE_EXERCISE_ID, 0);
+        args.putInt(BUNDLE_CATEGORY_ID, categoryId);
         args.putBoolean(BUNDLE_NEW_EXERCISE, true);
 
         ExerciseDetailFragment fragment = new ExerciseDetailFragment();
@@ -64,9 +72,23 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
     private View rootView;
     private ExerciseDetailContract.Presenter presenter;
 
+    @Bind(R.id.name_text)
+    EditText nameText;
+
     @Bind(R.id.increment_spinner)
     Spinner incrementSpinner;
 
+    @Bind(R.id.rest_timer)
+    NumberPicker restTimerPicker;
+
+    @Bind(R.id.auto_switch)
+    Switch autoSwitch;
+
+    @Bind(R.id.sound_switch)
+    Switch soundSwitch;
+
+    @Bind(R.id.vibrate_switch)
+    Switch vibrateSwitch;
 
     //Overrides
     //
@@ -80,26 +102,66 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        presenter = new ExerciseDetailPresenter(this, this.getArguments().getBoolean(BUNDLE_NEW_EXERCISE), this.getArguments().getInt(BUNDLE_EXERCISE_ID));
+        presenter = new ExerciseDetailPresenter(this, this.getArguments().getBoolean(BUNDLE_NEW_EXERCISE), this.getArguments().getInt(BUNDLE_EXERCISE_ID), this.getArguments().getInt(BUNDLE_CATEGORY_ID));
 
         setTitle(getString(R.string.exercise_new));
+        setupControls();
+
         presenter.viewCreated();
+    }
 
-        List<String> categories = new ArrayList<String>();
-        categories.add("Automobile");
-        categories.add("Business Services");
-        categories.add("Computers");
-        categories.add("Education");
-        categories.add("Personal");
-        categories.add("Travel");
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item_view, categories);
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
+    }
 
-        // Drop down layout style - list view with radio button
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.action_save).setVisible(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save:
+                presenter.onSave(nameText.getText().toString(), incrementSpinner.getSelectedItemPosition(), restTimerPicker.getNumberAsInt(), autoSwitch.isChecked(), soundSwitch.isChecked(), vibrateSwitch.isChecked());
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setupControls() {
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item_view, ConstantValues.increments_string);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
         incrementSpinner.setAdapter(dataAdapter);
+    }
+
+    @Override
+    public void setupControlValues(Exercise exercise) {
+        nameText.setText(exercise.getName());
+        restTimerPicker.setNumber(exercise.getRestTimer());
+        vibrateSwitch.setChecked(exercise.isRestVibrate());
+        soundSwitch.setChecked(exercise.isRestSound());
+        autoSwitch.setChecked(exercise.isRestAutoStart());
+
+        if (ConstantValues.increments.contains(exercise.getIncrement()))
+            incrementSpinner.setSelection(ConstantValues.increments.indexOf(exercise.getIncrement()), true);
+        else
+            incrementSpinner.setSelection(ConstantValues.increments.indexOf(presenter.getDefaultIncrement()), true);
+
+    }
+
+    @Override
+    public void onSaveSuccess() {
+        Toast.makeText(getActivity(), R.string.exercise_setting_saved, Toast.LENGTH_SHORT).show();
+        getNavigationManager().navigateBack(getActivity());
     }
 }

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,8 +122,8 @@ public class TrackerFragment extends BaseFragment implements
     public void onStart() {
         super.onStart();
         if(saveState != null) {
-            weightNumberPicker.setNumber(Float.valueOf(saveState.getString(SAVE_STATE_WEIGHT)));
-            repNumberPicker.setNumber(Integer.valueOf(saveState.getString(SAVE_STATE_REPS)));
+            weightNumberPicker.setNumber(saveState.getDouble(SAVE_STATE_WEIGHT));
+            repNumberPicker.setNumber(saveState.getInt(SAVE_STATE_REPS));
             saveState = null;
         }
     }
@@ -130,8 +131,8 @@ public class TrackerFragment extends BaseFragment implements
     @Override
     protected Bundle saveState() {
         Bundle bundle = new Bundle();
-        bundle.putString(SAVE_STATE_WEIGHT, weightNumberPicker.getNumber());
-        bundle.putString(SAVE_STATE_REPS, repNumberPicker.getNumber());
+        bundle.putDouble(SAVE_STATE_WEIGHT, weightNumberPicker.getNumberAsDouble());
+        bundle.putInt(SAVE_STATE_REPS, repNumberPicker.getNumberAsInt());
         return bundle;
     }
 

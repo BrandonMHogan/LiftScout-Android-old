@@ -7,6 +7,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
+    <string name="action_save">Save</string>
 
     <!-- Generics -->
     <string name="date">Date</string>
@@ -237,6 +238,12 @@
     <string name="category_edit_no_color">Please select a color before saving</string>
     <string name="category_edit_no_name">Please enter a name before saving</string>
     <string name="exercise_edit_no_name">Please enter a name before saving</string>
+    <string name="exercise_setting_saved">Settings Saved</string>
+    <string name="exercise_setting_timer">Rest timer</string>
+    <string name="exercise_setting_vibrate">Rest timer vibrate</string>
+    <string name="exercise_setting_sound">Rest timer sound</string>
+    <string name="exercise_setting_auto_start">Rest timer auto start</string>
+
     <string name="exercise_new">New Exercise</string>
 
     <!-- Default Categories / Exercises -->

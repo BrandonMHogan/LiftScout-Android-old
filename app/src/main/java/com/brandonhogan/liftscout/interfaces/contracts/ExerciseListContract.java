@@ -23,6 +23,7 @@ public interface ExerciseListContract {
         void createExercise(String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer);
         void deleteExercise(int position);
         Exercise getExercise(int position);
+        int getCategoryId();
         double getDefaultIncrement();
         boolean isInSearch();
     }

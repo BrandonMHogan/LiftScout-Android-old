@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.presenters;
 
+import com.brandonhogan.liftscout.repository.model.Exercise;
 import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 import com.brandonhogan.liftscout.utils.constants.Measurements;
 import com.brandonhogan.liftscout.managers.ProgressManager;
@@ -39,11 +40,14 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     @Inject
     UserManager userManager;
 
+    @Inject
+    ExerciseRepo exerciseRepo;
+
     // Private Properties
     //
     private WorkoutContainerContract.View view;
     private int exerciseId;
-    private ExerciseRepo exerciseRepo;
+    private Exercise exercise;
     private int exerciseTimer, exerciseTimerTracked;
     private ArrayList<Double> increments;
 
@@ -56,10 +60,9 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     public WorkoutContainerPresenter(WorkoutContainerContract.View view, int exerciseId) {
         Injector.getAppComponent().inject(this);
 
-        exerciseRepo = new ExerciseRepoImpl();
-
         this.view = view;
         this.exerciseId = exerciseId;
+        this.exercise = exerciseRepo.getExercise(exerciseId);
         increments = ConstantValues.increments;
 
         setupObserver();
@@ -78,6 +81,11 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
     @Override
     public int getExerciseId() {
         return exerciseId;
+    }
+
+    @Override
+    public int getCategoryId() {
+        return exercise.getCategoryId();
     }
 
     @Override

@@ -134,6 +134,11 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     }
 
     @Override
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    @Override
     public double getDefaultIncrement() {
         if (userManager.getMeasurementValue().equals(Measurements.KILOGRAMS))
             return ConstantValues.INCREMENT_KG_DEFAULT;

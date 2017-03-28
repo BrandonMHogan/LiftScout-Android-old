@@ -18,6 +18,7 @@ public interface WorkoutContainerContract {
         void viewCreated();
         void onDestroyView();
         int getExerciseId();
+        int getCategoryId();
         String getExerciseName();
         long getDateLong();
         void onSettingsSave(int timerValue, boolean vibrate, boolean sound, boolean autoStart, int autoIncrementIndex);

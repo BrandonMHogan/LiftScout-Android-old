@@ -76,31 +76,32 @@ public class WorkoutTrackerPresenter implements TrackerContract.Presenter {
 
     @Override
     public void updateAdapter() {
-        if (adapterData != null)
+        if (adapterData != null) {
             view.updateAdapter(adapterData);
-
-        adapterData = new ArrayList<>();
-
-        set = progressManager.getTodayProgressSet(exerciseId);
-
-        if (set != null) {
-            int rowNum = 1;
-            for (Rep rep : set.getReps()) {
-
-                boolean isRecord = recordsManager.isRecord(rep.getId());
-
-                adapterData.add(new TrackerListModel(
-                        rowNum,
-                        rep,
-                        view.getRepsLabel(rep.getCount() > 1),
-                        Measurements.getCompressedType(measurementType, rep.getWeight() > 1), isRecord
-                        ,set.getReps().size() == rowNum));
-                rowNum += 1;
-            }
         }
 
-        view.updateAdapter(adapterData);
+            adapterData = new ArrayList<>();
 
+            set = progressManager.getTodayProgressSet(exerciseId);
+
+            if (set != null) {
+                int rowNum = 1;
+                for (Rep rep : set.getReps()) {
+
+                    boolean isRecord = recordsManager.isRecord(rep.getId());
+
+                    adapterData.add(new TrackerListModel(
+                            rowNum,
+                            rep,
+                            view.getRepsLabel(rep.getCount() > 1),
+                            Measurements.getCompressedType(measurementType, rep.getWeight() > 1), isRecord
+                            , set.getReps().size() == rowNum));
+                    rowNum += 1;
+                }
+            }
+
+            view.updateAdapter(adapterData);
+        
 
         if (adapterData != null && adapterData.size() > 0) {
             TrackerListModel model = adapterData.get(adapterData.size() -1);
