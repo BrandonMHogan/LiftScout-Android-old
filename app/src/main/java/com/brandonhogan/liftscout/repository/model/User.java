@@ -80,12 +80,6 @@ public class User extends RealmObject {
 
         dob.setTime(birthDate);
 
-        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
-
-        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
-            age--;
-        }
-
-        return age;
+        return today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
     }
 }

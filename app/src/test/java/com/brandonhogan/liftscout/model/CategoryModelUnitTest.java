@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.brandonhogan.liftscout.Utils.constants.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
@@ -21,8 +22,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class CategoryModelUnitTest {
 
-    private static final String FAKE_STRING = "Fake Category Name";
-    private static final int FAKE_INT = 123456;
 
     @Mock
     Context mMockContext;

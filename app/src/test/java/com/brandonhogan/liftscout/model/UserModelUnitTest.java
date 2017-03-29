@@ -7,6 +7,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.Calendar;
+
+import static com.brandonhogan.liftscout.Utils.constants.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -16,9 +20,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(MockitoJUnitRunner.class)
 public class UserModelUnitTest {
 
-    private static final String FAKE_STRING = "Fake Category Name";
-    private static final int FAKE_INT = 123456;
-    private static final double FAKE_DOUBLE = 1231.23;
 
     @Mock
     Context mMockContext;
@@ -44,5 +45,23 @@ public class UserModelUnitTest {
         assertThat(user.getLastUsed().toString(), is(date.toString()));
         assertThat(user.getStartDate().toString(), is(date.toString()));
         assertThat(user.getWeight(), is(FAKE_DOUBLE));
+
+        assertThat(user.getAge(), is(0));
+    }
+
+    @Test
+    public void UserModel_CorrectAge_assertTrue() {
+
+        final int AGE = 12;
+
+        User user = new User();
+        Calendar now = Calendar.getInstance();
+
+        // Subtract age from current date.
+        now.add(Calendar.YEAR, -AGE);
+        user.setBirthDate(now.getTime());
+
+        // Age should return AGE
+        assertThat(user.getAge(), is(AGE));
     }
 }
