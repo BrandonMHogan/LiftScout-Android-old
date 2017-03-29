@@ -18,7 +18,7 @@ public class IntentUtil {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto",activity.getString(R.string.app_feedback), null));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        activity.startActivity(Intent.createChooser(emailIntent, "Send feedback email from..."));
+        activity.startActivity(emailIntent);
     }
 
     public static void sendURLIntent(Activity activity, String url) {

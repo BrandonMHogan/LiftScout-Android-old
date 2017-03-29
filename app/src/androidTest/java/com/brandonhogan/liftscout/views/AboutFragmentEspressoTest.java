@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
@@ -13,6 +14,7 @@ import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.repository.model.User;
 
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,12 +25,15 @@ import javax.inject.Inject;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.hasImeAction;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.core.Is.is;
 
 /**
  * Created by Brandon on 3/29/2017.
@@ -44,23 +49,16 @@ public class AboutFragmentEspressoTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule(MainActivity.class);
 
-    @Test
+    @Before
     public void goToAbout() {
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
 
         onView(withText("About"))
                 .perform(click());
-
     }
-
 
     @Test
     public void checkLabelValues() {
-        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-
-        onView(withText("About"))
-                .perform(click());
-
         onView(ViewMatchers.withId(R.id.version_number))
                 .check(matches(ViewMatchers.withText(BuildConfig.VERSION_NAME)));
 
@@ -72,6 +70,26 @@ public class AboutFragmentEspressoTest {
 
         onView(withId(R.id.designer_name))
                 .check(matches(withText(R.string.app_designer)));
+    }
+
+//    @Test
+//    public void testEmailIntent() {
+//        onView(ViewMatchers.withId(R.id.contact_container))
+//                .perform(click());
+//
+//        pressBack();
+//
+//        onView(ViewMatchers.withId(R.id.version_number))
+//                .check(matches(ViewMatchers.withText(BuildConfig.VERSION_NAME)));
+//
+//    }
+
+    @Test
+    public void testDeveloperIntent() {
+        onView(ViewMatchers.withId(R.id.developer_container))
+                .perform(click());
+
+
     }
 
 }
