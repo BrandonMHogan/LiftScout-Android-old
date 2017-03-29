@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Lift Scout</string>
     <string name="app_developer">Brandon Hogan</string>
-    <string name="app_developer_website">www.brandonhogan.com</string>
+    <string name="app_developer_website">http://www.brandonhogan.com</string>
     <string name="app_designer">Ben Venema</string>
-    <string name="app_designer_website">www.benvenema.com</string>
+    <string name="app_designer_website">http://www.benvenema.com</string>
     <string name="app_feedback">liftscout@gmail.com</string>
     <string name="app_feedback_subject">Lift Scout - App Feedback</string>
     <string name="app_description">Lift Scout is an app designed to make your time in the gym easier to track your progress and keep you motivated. By tracking your workouts, you are able to visually see your growth</string>

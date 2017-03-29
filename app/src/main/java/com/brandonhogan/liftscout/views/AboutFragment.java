@@ -58,4 +58,14 @@ public class AboutFragment extends BaseFragment {
     void onFeedbackClicked() {
         IntentUtil.sendEmailIntent(getActivity(), getString(R.string.app_feedback_subject));
     }
+
+    @OnClick(R.id.developer_container)
+    void onDeveloperClicked() {
+        IntentUtil.sendURLIntent(getActivity(), getString(R.string.app_developer_website));
+    }
+
+    @OnClick(R.id.designer_container)
+    void onDesignerClicked() {
+        IntentUtil.sendURLIntent(getActivity(), getString(R.string.app_designer_website));
+    }
 }

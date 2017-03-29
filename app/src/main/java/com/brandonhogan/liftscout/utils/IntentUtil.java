@@ -21,4 +21,9 @@ public class IntentUtil {
         activity.startActivity(Intent.createChooser(emailIntent, "Send feedback email from..."));
     }
 
+    public static void sendURLIntent(Activity activity, String url) {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        activity.startActivity(Intent.createChooser(i, "Open url from..."));
+    }
 }
