@@ -22,8 +22,12 @@ public class IntentUtil {
     }
 
     public static void sendURLIntent(Activity activity, String url) {
+
+        if (url == null ||url.isEmpty())
+            throw new NullPointerException("URL cannot be null or empty");
+
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
-        activity.startActivity(Intent.createChooser(i, "Open url from..."));
+        activity.startActivity(i);
     }
 }

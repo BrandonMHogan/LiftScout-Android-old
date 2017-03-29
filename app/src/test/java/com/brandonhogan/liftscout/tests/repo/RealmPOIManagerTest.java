@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.repo;
+package com.brandonhogan.liftscout.tests.repo;
 
 import com.brandonhogan.liftscout.BuildConfig;
 import com.brandonhogan.liftscout.repository.model.Exercise;

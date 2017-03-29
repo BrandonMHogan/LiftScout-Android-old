@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.Utils;
+package com.brandonhogan.liftscout.utils;
 
 /**
  * Created by Brandon on 3/28/2017.

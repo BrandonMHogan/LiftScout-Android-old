@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.model;
+package com.brandonhogan.liftscout.tests.model;
 
 import com.brandonhogan.liftscout.repository.model.CombinedRecordResult;
 import com.brandonhogan.liftscout.repository.model.Record;

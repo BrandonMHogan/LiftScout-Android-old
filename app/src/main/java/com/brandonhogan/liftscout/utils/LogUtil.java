@@ -10,13 +10,15 @@ import android.util.Log;
 
 public class LogUtil {
 
-    public static void printIntents(Bundle bundle, String tag) {
+    public static boolean printIntents(Bundle bundle, String tag) {
         if (bundle != null) {
             for (String key : bundle.keySet()) {
                 Object value = bundle.get(key);
                 Log.d(tag, String.format("%s %s (%s)", key,
                         value.toString(), value.getClass().getName()));
             }
+            return true;
         }
+        return false;
     }
 }

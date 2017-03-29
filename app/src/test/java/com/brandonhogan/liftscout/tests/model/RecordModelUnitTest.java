@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.model;
+package com.brandonhogan.liftscout.tests.model;
 
 import com.brandonhogan.liftscout.repository.model.Record;
 
@@ -6,9 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static com.brandonhogan.liftscout.Utils.constants.FAKE_BOOLEAN_TRUE;
-import static com.brandonhogan.liftscout.Utils.constants.FAKE_DOUBLE;
-import static com.brandonhogan.liftscout.Utils.constants.FAKE_INT;
+import static com.brandonhogan.liftscout.utils.constants.FAKE_BOOLEAN_TRUE;
+import static com.brandonhogan.liftscout.utils.constants.FAKE_DOUBLE;
+import static com.brandonhogan.liftscout.utils.constants.FAKE_INT;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
