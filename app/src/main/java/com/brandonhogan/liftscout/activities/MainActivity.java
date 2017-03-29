@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.activities;
 
+import android.animation.ObjectAnimator;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -158,6 +159,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
             public void onClick(View v)
             {
                 //Search view is expanded
+                hideBottomNav();
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 EventBus.getDefault().post(new SearchViewEvent(true, null));
 
@@ -171,6 +173,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
             public boolean onClose()
             {
                 //Search View is collapsed
+                showBottomNav();
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                 EventBus.getDefault().post(new SearchViewEvent(false, null));
 
@@ -203,6 +206,25 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
 
         return true;
     }
+
+    public void showBottomNav() {
+        if (bottomNav != null) {
+            bottomNav.setVisibility(View.VISIBLE);
+            ObjectAnimator animator = ObjectAnimator.ofFloat(bottomNav, "translationY", 0);
+            animator.setDuration(400);
+            animator.start();
+        }
+    }
+
+    public void hideBottomNav() {
+        if (bottomNav != null) {
+            bottomNav.setVisibility(View.GONE);
+            ObjectAnimator animator = ObjectAnimator.ofFloat(bottomNav, "translationY", 250.0f);
+            animator.setDuration(650);
+            animator.start();
+        }
+    }
+
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
