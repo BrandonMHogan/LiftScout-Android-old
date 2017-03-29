@@ -2,7 +2,6 @@ package com.brandonhogan.liftscout.tests.utils;
 
 import android.os.Bundle;
 
-import com.brandonhogan.liftscout.repository.model.CalendarEvent;
 import com.brandonhogan.liftscout.utils.LogUtil;
 
 import org.junit.Test;
@@ -10,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static com.brandonhogan.liftscout.utils.constants.FAKE_INT;
 import static com.brandonhogan.liftscout.utils.constants.FAKE_STRING;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

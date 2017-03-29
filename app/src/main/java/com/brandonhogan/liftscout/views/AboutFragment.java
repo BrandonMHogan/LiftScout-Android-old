@@ -2,7 +2,6 @@ package com.brandonhogan.liftscout.views;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,8 +49,6 @@ public class AboutFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         setTitle(getResources().getString(R.string.title_frag_about));
-
-
         versionNumber.setText(BuildConfig.VERSION_NAME);
     }
 
@@ -62,27 +59,11 @@ public class AboutFragment extends BaseFragment {
 
     @OnClick(R.id.developer_container)
     void onDeveloperClicked() {
-       // IntentUtil.sendURLIntent(getActivity(), getString(R.string.app_developer_website));
-        doNothingOfValue();
+        IntentUtil.sendURLIntent(getActivity(), getString(R.string.app_developer_website));
     }
 
     @OnClick(R.id.designer_container)
     void onDesignerClicked() {
         IntentUtil.sendURLIntent(getActivity(), getString(R.string.app_designer_website));
-    }
-
-    public void doNothingOfValue() {
-        Log.d(getTAG(), "doNothingOfValue: ");
-        Log.d(getTAG(), "doNothingOfValue: ");
-        Log.d(getTAG(), "doNothingOfValue: ");
-        Log.d(getTAG(), "doNothingOfValue: ");
-        Log.d(getTAG(), "doNothingOfValue: ");
-        Log.d(getTAG(), "doNothingOfValue: ");
-        Log.d(getTAG(), "doNothingOfValue: ");
-        Log.d(getTAG(), "doNothingOfValue: ");
-        Log.d(getTAG(), "doNothingOfValue: ");
-        Log.d(getTAG(), "doNothingOfValue: ");
-        Log.d(getTAG(), "doNothingOfValue: ");
-
     }
 }
