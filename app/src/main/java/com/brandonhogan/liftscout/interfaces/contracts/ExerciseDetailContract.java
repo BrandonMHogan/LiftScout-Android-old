@@ -12,6 +12,7 @@ public interface ExerciseDetailContract {
         void setTitle(String name);
         void setupControlValues(Exercise exercise);
         void onSaveSuccess();
+        void onSaveFailure(int errorMsg);
     }
 
     interface Presenter {

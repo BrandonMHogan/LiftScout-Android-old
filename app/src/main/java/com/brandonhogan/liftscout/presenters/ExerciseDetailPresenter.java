@@ -1,5 +1,6 @@
 package com.brandonhogan.liftscout.presenters;
 
+import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.ExerciseDetailContract;
 import com.brandonhogan.liftscout.managers.UserManager;
@@ -47,6 +48,30 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
             exercise = exerciseRepo.getExercise(exerciseId);
     }
 
+    public boolean validation(int id, String name, double increment, int restTimer, boolean isAuto, boolean isSound, boolean isVibrate) {
+        Exercise exercise = new Exercise();
+        exercise.setId(id);
+        exercise.setName(name);
+        exercise.setIncrement(increment);
+        exercise.setRestTimer(restTimer);
+        exercise.setRestAutoStart(isAuto);
+        exercise.setRestSound(isSound);
+        exercise.setRestVibrate(isVibrate);
+
+        return validation(exercise);
+    }
+
+    public boolean validation(Exercise exercise) {
+        if (exercise.getName().trim().isEmpty())
+            view.onSaveFailure(R.string.exercise_edit_no_name);
+        else if (exercise.getIncrement() == 0)
+            view.onSaveFailure(R.string.exercise_edit_increment);
+        else
+            return true;
+
+        return false;
+    }
+
     @Override
     public void viewCreated() {
         if (!isNew) {
@@ -60,7 +85,7 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
 
         if(isNew) {
             Exercise newExercise = new Exercise();
-            newExercise.setName(name);
+            newExercise.setName(name.trim());
             newExercise.setIncrement(ConstantValues.increments.get(increment));
             newExercise.setRestVibrate(isVibrate);
             newExercise.setRestSound(isSound);
@@ -68,13 +93,15 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
             newExercise.setRestTimer(restTimer);
             newExercise.setCategoryId(categoryId);
 
-            exerciseRepo.setExercise(newExercise);
+            if (validation(newExercise)) {
+                exerciseRepo.setExercise(newExercise);
+                view.onSaveSuccess();
+            }
         }
-        else {
-            exerciseRepo.updateExercise(exerciseId, name, ConstantValues.increments.get(increment), isVibrate, isSound, isAuto, restTimer);
+        else if(validation(exerciseId, name, ConstantValues.increments.get(increment), restTimer, isAuto, isSound, isVibrate)) {
+            exerciseRepo.updateExercise(exerciseId, name.trim(), ConstantValues.increments.get(increment), isVibrate, isSound, isAuto, restTimer);
+            view.onSaveSuccess();
         }
-
-        view.onSaveSuccess();
     }
 
     @Override

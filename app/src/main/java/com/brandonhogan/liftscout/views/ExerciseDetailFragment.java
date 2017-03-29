@@ -71,6 +71,7 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
     //
     private View rootView;
     private ExerciseDetailContract.Presenter presenter;
+    private Toast toast;
 
     @Bind(R.id.name_text)
     EditText nameText;
@@ -102,6 +103,8 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        toast = Toast.makeText(getActivity(), null, Toast.LENGTH_SHORT);
+
         presenter = new ExerciseDetailPresenter(this, this.getArguments().getBoolean(BUNDLE_NEW_EXERCISE), this.getArguments().getInt(BUNDLE_EXERCISE_ID), this.getArguments().getInt(BUNDLE_CATEGORY_ID));
 
         setTitle(getString(R.string.exercise_new));
@@ -142,6 +145,7 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item_view, ConstantValues.increments_string);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         incrementSpinner.setAdapter(dataAdapter);
+        restTimerPicker.setNumber(60);
     }
 
     @Override
@@ -161,7 +165,14 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
 
     @Override
     public void onSaveSuccess() {
-        Toast.makeText(getActivity(), R.string.exercise_setting_saved, Toast.LENGTH_SHORT).show();
+        toast.setText(R.string.exercise_setting_saved);
+        toast.show();
         getNavigationManager().navigateBack(getActivity());
+    }
+
+    @Override
+    public void onSaveFailure(int errorMsg) {
+        toast.setText(errorMsg);
+        toast.show();
     }
 }
