@@ -28,6 +28,7 @@ public class NumberPicker extends RelativeLayout {
     private static final int AUTO_DELAY_TIME_DEFAULT = 200;
     private static final int AUTO_DELAY_TIME_HOLD_CHANGE_DEFAULT = 8;
     private static final int AUTO_DELAY_TIME_MIN = 10;
+    private static final int DEFAULT_INCREMENT = 1;
 
     // Private Properties
 
@@ -111,6 +112,8 @@ public class NumberPicker extends RelativeLayout {
         drawable.setColorFilter(new PorterDuffColorFilter(backgroundColor, PorterDuff.Mode.SRC));
         layout.setBackgroundDrawable(drawable);
 
+
+        increment = DEFAULT_INCREMENT;
         setOnClick();
         typedArray.recycle();
     }
@@ -266,11 +269,13 @@ public class NumberPicker extends RelativeLayout {
 
 
     public void setIncrement(float increment) {
-        this.increment = increment;
+        if (increment > 0)
+            this.increment = increment;
     }
 
     public void setIncrement(double increment) {
-        this.increment = (float)increment;
+        if (increment > 0)
+            this.increment = (float)increment;
     }
 
 

@@ -10,6 +10,7 @@ import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.repository.model.Rep;
 import com.brandonhogan.liftscout.repository.model.Set;
+import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 import com.brandonhogan.liftscout.utils.constants.Measurements;
 
 import java.util.ArrayList;
@@ -63,6 +64,12 @@ public class WorkoutTrackerPresenter implements TrackerContract.Presenter {
         updateAdapter();
     }
 
+    private double getDefaultIncrement() {
+        if (userManager.getMeasurementValue().equals(Measurements.KILOGRAMS))
+            return ConstantValues.INCREMENT_KG_DEFAULT;
+        else
+            return ConstantValues.INCREMENT_LB_DEFAULT;
+    }
 
 
     // Contract
@@ -122,7 +129,12 @@ public class WorkoutTrackerPresenter implements TrackerContract.Presenter {
 
     @Override
     public void updateIncrement() {
-        view.updateIncrements(exerciseRepo.getExerciseIncrement(exerciseId));
+        double increment = exerciseRepo.getExerciseIncrement(exerciseId);
+
+        if(increment == 0)
+            increment = getDefaultIncrement();
+
+        view.updateIncrements(increment);
     }
 
     @Override
