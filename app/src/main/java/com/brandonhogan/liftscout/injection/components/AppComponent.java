@@ -100,5 +100,4 @@ public interface AppComponent {
     void inject(CategoryRepoImpl repoImpl);
     void inject(ExerciseRepoImpl repoImpl);
     void inject(RecordsRepoImpl repoImpl);
-
 }

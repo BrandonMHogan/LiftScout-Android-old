@@ -45,6 +45,7 @@
                 android:visibility="gone">
 
                 <TextView
+                    android:id="@+id/workout_no_data_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

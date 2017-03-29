@@ -26,11 +26,17 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public void setLastUsed(Date date) {
 
+        User user2 = databaseRealm.getRealmInstance().where(User.class).findFirst();
+
+        if (user2 == null)
+            setUser(new User());
+
         databaseRealm.getRealmInstance().beginTransaction();
         User user = databaseRealm.getRealmInstance().where(User.class).findFirst();
         user.setLastUsed(date);
         databaseRealm.getRealmInstance().copyToRealmOrUpdate(user);
         databaseRealm.getRealmInstance().commitTransaction();
+
     }
 
     @Override
