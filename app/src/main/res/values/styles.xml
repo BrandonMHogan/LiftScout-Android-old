@@ -213,7 +213,7 @@
     <style name="RobotoSubheading">
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/material_text_size_small</item>
+        <item name="android:textSize">@dimen/material_text_size_menu</item>
     </style>
 
     <style name="RobotoSubheadingBold">

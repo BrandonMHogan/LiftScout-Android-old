@@ -134,7 +134,7 @@
 
     <!-- Home / Today / Calendar -->
     <dimen name="home_title_top_margin">15dp</dimen>
-    <dimen name="home_title_bottom_margin">15dp</dimen>
+    <dimen name="home_title_bottom_margin">10dp</dimen>
     <dimen name="today_divider_top_margin">5dp</dimen>
 
 
