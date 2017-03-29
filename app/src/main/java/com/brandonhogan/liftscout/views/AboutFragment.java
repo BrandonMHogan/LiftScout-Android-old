@@ -54,7 +54,7 @@ public class AboutFragment extends BaseFragment {
         versionNumber.setText(BuildConfig.VERSION_NAME);
     }
 
-    @OnClick(R.id.contactRow)
+    @OnClick(R.id.contact_container)
     void onFeedbackClicked() {
         IntentUtil.sendEmailIntent(getActivity(), getString(R.string.app_feedback_subject));
     }

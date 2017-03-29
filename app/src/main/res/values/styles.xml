@@ -206,7 +206,7 @@
     </style>
 
     <style name="RobotoTitle">
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">@dimen/material_text_size_title</item>
     </style>
 

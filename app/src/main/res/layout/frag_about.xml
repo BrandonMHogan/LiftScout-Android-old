@@ -1,146 +1,326 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.brandonhogan.liftscout.utils.controls.BaseFrameLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:windowBackground">
 
-    <FrameLayout
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <ScrollView
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/icon_grey_xxhdpi"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@null"/>
+
+        <TextView
+            android:id="@+id/title_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:layout_marginTop="8dp"
+            android:textColor="?attr/android:textColorPrimary"
+            style="@style/RobotoTitle"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/description_label"
+            android:layout_width="334dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
+            android:paddingStart="@dimen/settings_table_row_horizontal_padding"
+            android:text="@string/app_description"
+            android:textAlignment="center"
+            android:textColor="?attr/android:textColorSecondary"
+            android:textSize="@dimen/material_text_size_small"
+            app:layout_constraintHorizontal_bias="0.58"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_label" />
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/version_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" >
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="38dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_label">
 
-            <TableLayout
-                android:layout_width="match_parent"
+            <View
+                android:id="@+id/version_top_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginStart="0dp"
+                android:background="?attr/colorFill"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/version_label"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/settings_table_layout_padding_top"
-                android:id="@+id/SettingsTableLayout">
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/about_version"
+                android:textColor="?attr/android:textColorPrimary"
+                android:textSize="@dimen/material_text_size_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/version_top_divider" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/icon_grey_xxhdpi"/>
+            <TextView
+                android:id="@+id/version_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:text="@string/about_version"
+                android:textColor="?attr/android:textColorSecondary"
+                android:textSize="@dimen/material_text_size_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/version_label" />
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="@string/app_name"
-                    android:textAlignment="center"
-                    android:layout_gravity="center_horizontal"
-                    style="@style/RobotoDisplay01"/>
+            <View
+                android:id="@+id/version_bottom_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:background="?attr/colorFill"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/version_number" />
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="40dp"
-                    android:paddingStart="@dimen/settings_table_row_horizontal_padding"
-                    android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
-                    android:text="@string/app_description"
-                    android:textSize="@dimen/material_text_size_small"/>
+        </android.support.constraint.ConstraintLayout>
 
-                <!-- Version Section -->
-                <RelativeLayout
-                    android:id="@+id/versionRow"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingStart="@dimen/settings_table_row_horizontal_padding"
-                    android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
-                    android:minHeight="@dimen/settings_table_row_min_height" >
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/contact_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginStart="0dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/version_container">
 
-                    <TextView
-                        android:text="@string/about_version"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:textSize="@dimen/material_text_size_small"/>
+            <TextView
+                android:id="@+id/contact_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/about_feedback"
+                android:textColor="?attr/android:textColorPrimary"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/version_number"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="end"
-                        android:gravity="end"
-                        android:layout_alignParentEnd="true"
-                        android:textSize="@dimen/material_text_size_small"/>
+            <TextView
+                android:id="@+id/contact_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:text="@string/app_feedback"
+                android:textColor="?attr/android:textColorSecondary"
+                android:textSize="@dimen/material_text_size_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contact_label" />
 
-                </RelativeLayout>
+            <View
+                android:id="@+id/contact_bottom_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:background="?attr/colorFill"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contact_email" />
 
-                <View android:layout_width="match_parent"
-                    android:background="?attr/colorFill"
-                    android:layout_height="@dimen/settings_divider_view_hieght"/>
-
-
-
-                <!-- Version Section -->
-                <RelativeLayout
-                    android:id="@+id/developerRow"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingStart="@dimen/settings_table_row_horizontal_padding"
-                    android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
-                    android:minHeight="@dimen/settings_table_row_min_height">
-
-                    <TextView
-                        android:text="@string/about_developer"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:textSize="@dimen/material_text_size_small"/>
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="end"
-                        android:gravity="end"
-                        android:layout_alignParentEnd="true"
-                        android:text="@string/app_developer"
-                        android:textSize="@dimen/material_text_size_small"/>
-
-                </RelativeLayout>
-
-                <View android:layout_width="match_parent"
-                    android:background="?attr/colorFill"
-                    android:layout_height="@dimen/settings_divider_view_hieght"/>
+        </android.support.constraint.ConstraintLayout>
 
 
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/developer_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginStart="0dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contact_container">
 
-                <!-- Version Section -->
-                <RelativeLayout
-                    android:id="@+id/contactRow"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:minHeight="@dimen/settings_table_row_min_height"
-                    android:paddingStart="@dimen/settings_table_row_horizontal_padding"
-                    android:paddingEnd="@dimen/settings_table_row_horizontal_padding"
-                    android:gravity="center_vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true">
+            <TextView
+                android:id="@+id/developer_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/about_developed_by"
+                android:textColor="?attr/android:textColorPrimary"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:text="@string/about_feedback"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:textSize="@dimen/material_text_size_small"/>
+            <TextView
+                android:id="@+id/developer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:text="@string/app_developer"
+                android:textColor="?attr/android:textColorSecondary"
+                android:textSize="@dimen/material_text_size_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/developer_label" />
 
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="end"
-                        android:gravity="end"
-                        android:layout_alignParentEnd="true"
-                        android:text="@string/app_feedback"
-                        android:textSize="@dimen/material_text_size_small"/>
+            <ImageView
+                android:id="@+id/developer_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@null"
+                android:tint="?attr/android:textColorSecondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_earth_white_36dp" />
 
-                </RelativeLayout>
+            <View
+                android:id="@+id/developer_bottom_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:background="?attr/colorFill"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/developer_name" />
 
-            </TableLayout>
-        </ScrollView>
-    </FrameLayout>
-</com.brandonhogan.liftscout.utils.controls.BaseFrameLayout>
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/designer_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginStart="0dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/developer_container">
+
+            <TextView
+                android:id="@+id/designer_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/about_designed_by"
+                android:textColor="?attr/android:textColorPrimary"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/designer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:text="@string/app_designer"
+                android:textColor="?attr/android:textColorSecondary"
+                android:textSize="@dimen/material_text_size_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/designer_label" />
+
+            <ImageView
+                android:id="@+id/designer_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@null"
+                android:tint="?attr/android:textColorSecondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_earth_white_36dp" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
