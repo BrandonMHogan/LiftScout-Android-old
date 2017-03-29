@@ -3,7 +3,6 @@
     <!-- This is the base of all dark themes. All dark base themes need to be a child of this -->
     <style name="AppTheme.Dark.Base" parent="Theme.AppCompat">
         <item name="android:windowBackground">@color/dark_theme_background</item>
-        <item name="android:popupBackground">@color/dark_theme_background</item>
         <item name="android:itemBackground">@color/dark_theme_background</item>
 
         <!-- Custom Attributes -->
@@ -17,7 +16,6 @@
 
         <!-- Used for buttons, so that we can apply ripple on v21+ -->
         <item name="primaryButtonBackground">@drawable/primary_button_background_dark</item>
-
 
         <item name="android:textColorPrimary">@color/dark_theme_text_primary</item>
         <item name="android:textColorSecondary">@color/dark_theme_text_secondary</item>
@@ -36,7 +34,6 @@
     <!-- This is the base of all light themes. All light base themes need to be a child of this -->
     <style name="AppTheme.Light.Base" parent="Theme.AppCompat.Light">
         <item name="android:windowBackground">@color/light_theme_background</item>
-        <item name="android:popupBackground">@color/light_theme_background</item>
         <item name="android:itemBackground">@color/light_theme_background</item>
 
         <!-- Custom Attributes -->

@@ -31,6 +31,6 @@ public class UserSettingModelUnitTest {
         assertThat(userSetting.getValue(), is(FAKE_STRING_OTHER));
 
         userSetting.setValue(FAKE_BOOLEAN_TRUE);
-        assertThat(userSetting.getValue(), is("1"));
+        assertThat(userSetting.getValueBoolean(), is(FAKE_BOOLEAN_TRUE));
     }
 }
