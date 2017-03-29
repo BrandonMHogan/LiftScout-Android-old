@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.dialogs;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
     private boolean isDarkTheme;
     private MaterialDialog dialog;
     private CategoryEditDialogListener listener;
+    private Toast toast;
 
     private EditText nameEditText;
     private SpectrumPalette palette;
@@ -49,6 +51,7 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
         this.activity = activity;
         this.listener = listener;
         this.isDarkTheme = isDarkTheme;
+        toast = Toast.makeText(this.activity, null, Toast.LENGTH_SHORT);
 
         this.category = category;
 
@@ -66,12 +69,14 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
         String name = nameEditText.getText().toString().trim();
 
         if (name.isEmpty()) {
-            Toast.makeText(activity, R.string.category_edit_no_name, Toast.LENGTH_SHORT).show();
+            toast.setText(R.string.category_edit_no_name);
+            toast.show();
             return ;
         }
 
         if (category.getColor() == 0) {
-            Toast.makeText(activity, R.string.category_edit_no_color, Toast.LENGTH_SHORT).show();
+            toast.setText(R.string.category_edit_no_color);
+            toast.show();
             return ;
         }
 
@@ -82,7 +87,7 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
         listener.onSaveCategoryEditDialog(category);
     }
 
-    private void onCancel() {
+    public void onDismiss() {
         dismiss();
         listener.onCancelCategoryEditDialog();
     }
@@ -111,7 +116,13 @@ public class CategoryEditDialog implements SpectrumPalette.OnColorSelectedListen
                     .onNegative(new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            onCancel();
+                            onDismiss();
+                        }
+                    })
+                    .cancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            onDismiss();
                         }
                     })
                     .build();

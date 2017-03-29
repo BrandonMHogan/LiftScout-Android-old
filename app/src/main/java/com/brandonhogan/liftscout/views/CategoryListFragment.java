@@ -58,6 +58,7 @@ public class CategoryListFragment extends BaseFragment implements
     private CategoryListContract.Presenter presenter;
     private CategoryListAdapter mAdapter;
     private MaterialDialog dialog;
+    private CategoryEditDialog editDialog;
 
     // Binds
     //
@@ -124,34 +125,40 @@ public class CategoryListFragment extends BaseFragment implements
     //
 
     private void editCategory(int position) {
-        CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
+        fab.setEnabled(false);
+        editDialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
             @Override
             public void onCancelCategoryEditDialog() {
+                fab.setEnabled(true);
             }
 
             @Override
             public void onSaveCategoryEditDialog(CategoryListModel category) {
+                fab.setEnabled(true);
                 presenter.updateCategory(category);
             }
         }, true, presenter.getCategory(position));
 
-        dialog.show();
+
+        editDialog.show();
     }
 
     private void createCategory() {
-        CategoryEditDialog dialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
+        fab.setEnabled(false);
+        editDialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
             @Override
             public void onCancelCategoryEditDialog() {
-
+                fab.setEnabled(true);
             }
 
             @Override
             public void onSaveCategoryEditDialog(CategoryListModel category) {
+                fab.setEnabled(true);
                 presenter.createCategory(category);
             }
         }, true, null);
 
-        dialog.show();
+        editDialog.show();
     }
 
 
