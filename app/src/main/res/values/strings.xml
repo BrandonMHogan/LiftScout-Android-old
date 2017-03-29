@@ -237,6 +237,9 @@
 
 
     <!-- Category / Exercise Lists -->
+    <string name="exercises_all">All</string>
+    <string name="exercises_categories">Categories</string>
+    <string name="exercises_favourites">Favourites</string>
     <string name="category_list_no_data">You have not created any categories yet</string>
     <string name="exercise_list_no_data">You have not created any exercises for %s yet</string>
     <string name="category_edit_no_color">Please select a color before saving</string>

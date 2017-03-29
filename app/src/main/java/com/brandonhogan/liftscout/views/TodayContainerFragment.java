@@ -145,6 +145,6 @@ public class TodayContainerFragment extends BaseFragment implements TodayContain
 
     @OnClick(R.id.fab)
     public void onFabClicked() {
-        getNavigationManager().startCategoryListAddSet();
+        getNavigationManager().startExerciseContainerAddSet();
     }
 }

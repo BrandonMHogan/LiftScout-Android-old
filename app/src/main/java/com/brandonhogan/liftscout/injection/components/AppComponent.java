@@ -10,6 +10,7 @@ import com.brandonhogan.liftscout.managers.ProgressManager;
 import com.brandonhogan.liftscout.presenters.CalendarPresenter;
 import com.brandonhogan.liftscout.presenters.CategoryListPresenter;
 import com.brandonhogan.liftscout.presenters.ExerciseDetailPresenter;
+import com.brandonhogan.liftscout.presenters.ExerciseListContainerPresenter;
 import com.brandonhogan.liftscout.presenters.ExerciseListPresenter;
 import com.brandonhogan.liftscout.presenters.GraphExercisesPresenter;
 import com.brandonhogan.liftscout.presenters.GraphsCategoriesPresenter;
@@ -73,6 +74,7 @@ public interface AppComponent {
     void inject(MyLineGraph view);
 
     // Category / Exercise
+    void inject(ExerciseListContainerPresenter presenter);
     void inject(ExerciseListPresenter presenter);
     void inject(CategoryListPresenter presenter);
     void inject(ExerciseDetailPresenter presenter);

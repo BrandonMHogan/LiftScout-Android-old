@@ -338,7 +338,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
                             getNavigationManager().startCalendar();
                         return true;
                     case R.id.nav_exercises:
-                        getNavigationManager().startCategoryList();
+                        getNavigationManager().startExerciseContainer();
                         return true;
                     case R.id.nav_graphs:
                         getNavigationManager().startGraphsContainer(false);

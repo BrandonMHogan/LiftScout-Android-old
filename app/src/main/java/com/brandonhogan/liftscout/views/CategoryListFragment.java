@@ -88,8 +88,6 @@ public class CategoryListFragment extends BaseFragment implements
 
 
         presenter.viewCreated();
-
-        setTitle(getResources().getString(R.string.title_frag_category_list));
         fab.setVisibility(presenter.isInSearch() ? View.GONE : View.VISIBLE);
     }
 

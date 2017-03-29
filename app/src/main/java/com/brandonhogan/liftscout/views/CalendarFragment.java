@@ -220,6 +220,6 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
 
     @OnClick(R.id.fab)
     public void onFabClicked() {
-        getNavigationManager().startCategoryListAddSet();
+        getNavigationManager().startExerciseContainerAddSet();
     }
 }

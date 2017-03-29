@@ -12,6 +12,7 @@ import com.brandonhogan.liftscout.views.AnalyticsContainerFragment;
 import com.brandonhogan.liftscout.views.CalendarFragment;
 import com.brandonhogan.liftscout.views.CategoryListFragment;
 import com.brandonhogan.liftscout.views.ExerciseDetailFragment;
+import com.brandonhogan.liftscout.views.ExerciseListContainerFragment;
 import com.brandonhogan.liftscout.views.ExerciseListFragment;
 import com.brandonhogan.liftscout.views.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.views.SettingsHomeFragment;
@@ -260,6 +261,16 @@ public class NavigationManager {
 
     // Categories / Exercises
     //
+    public boolean startExerciseContainer() {
+        BaseFragment fragment = ExerciseListContainerFragment.newInstance(false);
+        return openAsRoot(fragment);
+    }
+
+    public boolean startExerciseContainerAddSet() {
+        BaseFragment fragment = ExerciseListContainerFragment.newInstance(true);
+        return openAsRoot(fragment);
+    }
+
     public boolean startCategoryList() {
         BaseFragment fragment = CategoryListFragment.newInstance(false);
         return openAsRoot(fragment);
