@@ -9,7 +9,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static com.brandonhogan.liftscout.Utils.constants.*;
+import static com.brandonhogan.liftscout.Utils.constants.FAKE_BOOLEAN_FALSE;
+import static com.brandonhogan.liftscout.Utils.constants.FAKE_BOOLEAN_TRUE;
+import static com.brandonhogan.liftscout.Utils.constants.FAKE_DOUBLE;
+import static com.brandonhogan.liftscout.Utils.constants.FAKE_INT;
+import static com.brandonhogan.liftscout.Utils.constants.FAKE_STRING;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
