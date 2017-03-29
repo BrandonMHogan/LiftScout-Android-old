@@ -78,47 +78,83 @@
 
     <!-- Category Colors -->
     <color name="category_light_red">#E6F44336</color>
+    <color name="category_dark_red">#E6B71C1C</color>
     <color name="category_pink">#E6E91E63</color>
+    <color name="category_dark_pink">#E6880E4F</color>
     <color name="category_purple">#E69C27B0</color>
+    <color name="category_dark_purple">#E64A148C</color>
     <color name="category_deep_purple">#E6673AB7</color>
+    <color name="category_dark_deep_purple">#E6311B92</color>
     <color name="category_indigo">#E63F51B5</color>
+    <color name="category_dark_indigo">#E61A237E</color>
     <color name="category_blue">#E62196F3</color>
+    <color name="category_dark_blue">#E60D47A1</color>
     <color name="category_light_blue">#E603A9F4</color>
+    <color name="category_dark_light_blue">#E601579B</color>
     <color name="category_cyan">#E600BCD4</color>
+    <color name="category_dark_cyan">#E6006064</color>
     <color name="category_teal">#E6009688</color>
+    <color name="category_dark_teal">#E6004D40</color>
     <color name="category_green">#E64CAF50</color>
-    <color name="category_dark_green">#E62E7D32</color>
+    <color name="category_dark_green">#E61B5E20</color>
     <color name="category_light_green">#E68BC34A</color>
+    <color name="category_dark_light_green">#E633691E</color>
     <color name="category_lime">#E6CDDC39</color>
+    <color name="category_dark_lime">#E6827717</color>
     <color name="category_yellow">#E6FFEB3B</color>
+    <color name="category_dark_yellow">#E6F57F17</color>
     <color name="category_amber">#E6FFC107</color>
+    <color name="category_dark_amber">#E6FF6F00</color>
     <color name="category_orange">#E6FF9800</color>
+    <color name="category_dark_orange">#E6E65100</color>
     <color name="category_deep_orange">#E6FF5722</color>
+    <color name="category_dark_deep_orange">#E6BF360C</color>
     <color name="category_brown">#E6795548</color>
+    <color name="category_dark_brown">#E63E2723</color>
     <color name="category_gray">#E69E9E9E</color>
+    <color name="category_dark_gray">#E6212121</color>
     <color name="category_blue_gray">#E6607D8B</color>
+    <color name="category_dark_blue_gray">#E6263238</color>
 
     <array name="category_colors">
         <item>@color/category_light_red</item>
+        <item>@color/category_dark_red</item>
         <item>@color/category_pink</item>
+        <item>@color/category_dark_pink</item>
         <item>@color/category_purple</item>
+        <item>@color/category_dark_purple</item>
+        <item>@color/category_dark_deep_purple</item>
         <item>@color/category_deep_purple</item>
         <item>@color/category_indigo</item>
+        <item>@color/category_dark_indigo</item>
         <item>@color/category_blue</item>
+        <item>@color/category_dark_blue</item>
         <item>@color/category_light_blue</item>
+        <item>@color/category_dark_light_blue</item>
         <item>@color/category_cyan</item>
+        <item>@color/category_dark_cyan</item>
         <item>@color/category_teal</item>
+        <item>@color/category_dark_teal</item>
         <item>@color/category_green</item>
         <item>@color/category_dark_green</item>
         <item>@color/category_light_green</item>
+        <item>@color/category_dark_light_green</item>
         <item>@color/category_lime</item>
+        <item>@color/category_dark_lime</item>
         <item>@color/category_yellow</item>
+        <item>@color/category_dark_yellow</item>
         <item>@color/category_amber</item>
+        <item>@color/category_dark_amber</item>
         <item>@color/category_orange</item>
+        <item>@color/category_dark_orange</item>
         <item>@color/category_deep_orange</item>
+        <item>@color/category_dark_deep_orange</item>
         <item>@color/category_brown</item>
+        <item>@color/category_dark_brown</item>
         <item>@color/category_gray</item>
+        <item>@color/category_dark_gray</item>
         <item>@color/category_blue_gray</item>
+        <item>@color/category_dark_blue_gray</item>
     </array>
 
     <!-- Border -->
