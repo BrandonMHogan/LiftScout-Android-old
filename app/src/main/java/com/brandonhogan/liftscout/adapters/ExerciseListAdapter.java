@@ -98,11 +98,7 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
 
         @Override
         public void onClick(View view) {
-
-            String name = filteredList.get(this.getLayoutPosition()).getName();
             int id = filteredList.get(this.getLayoutPosition()).getId();
-
-            Log.e("ExerciseListAdapter", "onClick: " + name);
 
             for (ExerciseListModel exercise : fullList) {
                 if (exercise.getId() == id)
