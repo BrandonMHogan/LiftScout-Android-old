@@ -3,7 +3,6 @@ package com.brandonhogan.liftscout.views;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,7 +26,6 @@ import com.brandonhogan.liftscout.views.base.BaseFragment;
 import java.util.ArrayList;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 
 public class ExerciseListFragment extends BaseFragment implements
         ExerciseListContract.View,
@@ -100,9 +98,6 @@ public class ExerciseListFragment extends BaseFragment implements
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
-
     @Bind(R.id.no_data_label)
     TextView noDataLabel;
 
@@ -126,7 +121,7 @@ public class ExerciseListFragment extends BaseFragment implements
                 this.getArguments().getBoolean(BUNDLE_ADD_SET));
 
         presenter.viewCreated();
-        fab.setVisibility(presenter.isInSearch() ? View.GONE : View.VISIBLE);
+        //fab.setVisibility(presenter.isInSearch() ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -179,18 +174,11 @@ public class ExerciseListFragment extends BaseFragment implements
         itemSelectedDialog(position);
     }
 
+
     // Private Functions
     //
     private void editExercise(int position) {
         getNavigationManager().startExerciseDetail(presenter.getExercise(position).getId(), presenter.getCategoryId());
-    }
-
-    private void createExercise() {
-
-        if(presenter.isShowAll() || presenter.isFavOnly())
-            getNavigationManager().startExerciseDetail(false, presenter.getCategoryId());
-        else
-            getNavigationManager().startExerciseDetail(true, presenter.getCategoryId());
     }
 
     private void itemSelectedDialog(final int position) {
@@ -268,10 +256,5 @@ public class ExerciseListFragment extends BaseFragment implements
     public void swipeItem(int position) {
         editExercise(position);
         //onTouchListener.openSwipeOptions(position);
-    }
-
-    @OnClick(R.id.fab)
-    public void onFabClicked() {
-        createExercise();
     }
 }

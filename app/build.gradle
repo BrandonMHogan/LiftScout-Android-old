@@ -75,7 +75,7 @@ android {
             debuggable true
             minifyEnabled false
             applicationIdSuffix '.debug'
-            testCoverageEnabled true
+            testCoverageEnabled false
         }
     }
     productFlavors {

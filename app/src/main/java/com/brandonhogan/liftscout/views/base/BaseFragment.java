@@ -112,10 +112,20 @@ public class BaseFragment extends Fragment {
         );
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     public void onPause() {
-        EventBus.getDefault().unregister(this);
         searchClosed();
         hideKeyboard(getActivity());
         super.onPause();
@@ -123,7 +133,6 @@ public class BaseFragment extends Fragment {
 
     @Override
     public void onResume() {
-        EventBus.getDefault().register(this);
         super.onResume();
     }
 

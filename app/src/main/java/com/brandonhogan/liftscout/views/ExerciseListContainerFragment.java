@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.views;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.brandonhogan.liftscout.presenters.ExerciseListContainerPresenter;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 
 /**
@@ -46,6 +48,7 @@ public class ExerciseListContainerFragment extends BaseFragment implements Exerc
     //
     private View rootView;
     private ExerciseListContainerContract.Presenter presenter;
+    private ExerciseListContainerAdapter adapter;
 
 
     // Binds
@@ -55,6 +58,9 @@ public class ExerciseListContainerFragment extends BaseFragment implements Exerc
 
     @Bind(R.id.workout_tab_layout)
     TabLayout tabLayout;
+
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
 
 
     //Overrides
@@ -84,7 +90,7 @@ public class ExerciseListContainerFragment extends BaseFragment implements Exerc
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
-        final ExerciseListContainerAdapter adapter = new ExerciseListContainerAdapter
+        adapter = new ExerciseListContainerAdapter
                 (getChildFragmentManager(), presenter.isAddSet());
 
         viewPager.setAdapter(adapter);
@@ -96,6 +102,11 @@ public class ExerciseListContainerFragment extends BaseFragment implements Exerc
                 viewPager.setCurrentItem(tab.getPosition());
                 searchClosed();
                 hideKeyboard(getActivity());
+
+                if(tab.getPosition() == 2)
+                    fab.hide();
+                else
+                    fab.show();
             }
 
             @Override
@@ -108,6 +119,19 @@ public class ExerciseListContainerFragment extends BaseFragment implements Exerc
 
             }
         });
+    }
+
+    @OnClick(R.id.fab)
+    public void onFabClicked() {
+
+        switch (viewPager.getCurrentItem()) {
+            case 0:
+                getNavigationManager().startExerciseDetail(false, 0);
+                break;
+            case 1:
+                getNavigationManager().startCategoryDetail();
+                break;
+        }
     }
 
 }

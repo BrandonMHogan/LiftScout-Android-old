@@ -3,7 +3,6 @@ package com.brandonhogan.liftscout.views;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +16,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.adapters.CategoryListAdapter;
-import com.brandonhogan.liftscout.dialogs.CategoryEditDialog;
 import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
 import com.brandonhogan.liftscout.interfaces.contracts.CategoryListContract;
 import com.brandonhogan.liftscout.models.CategoryListModel;
@@ -27,7 +25,6 @@ import com.brandonhogan.liftscout.views.base.BaseFragment;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 
 public class CategoryListFragment extends BaseFragment implements
         CategoryListContract.View, RecyclerViewClickListener {
@@ -58,15 +55,11 @@ public class CategoryListFragment extends BaseFragment implements
     private CategoryListContract.Presenter presenter;
     private CategoryListAdapter mAdapter;
     private MaterialDialog dialog;
-    private CategoryEditDialog editDialog;
 
     // Binds
     //
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
-
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
 
     @Bind(R.id.no_data_label)
     TextView noDataLabel;
@@ -88,7 +81,7 @@ public class CategoryListFragment extends BaseFragment implements
 
 
         presenter.viewCreated();
-        fab.setVisibility(presenter.isInSearch() ? View.GONE : View.VISIBLE);
+        //fab.setVisibility(presenter.isInSearch() ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -123,42 +116,8 @@ public class CategoryListFragment extends BaseFragment implements
     //
 
     private void editCategory(int position) {
-        fab.setEnabled(false);
-        editDialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
-            @Override
-            public void onCancelCategoryEditDialog() {
-                fab.setEnabled(true);
-            }
-
-            @Override
-            public void onSaveCategoryEditDialog(CategoryListModel category) {
-                fab.setEnabled(true);
-                presenter.updateCategory(category);
-            }
-        }, true, presenter.getCategory(position));
-
-
-        editDialog.show();
+        getNavigationManager().startCategoryDetail(presenter.getCategory(position).getId());
     }
-
-    private void createCategory() {
-        fab.setEnabled(false);
-        editDialog = new CategoryEditDialog(getActivity(), new CategoryEditDialog.CategoryEditDialogListener() {
-            @Override
-            public void onCancelCategoryEditDialog() {
-                fab.setEnabled(true);
-            }
-
-            @Override
-            public void onSaveCategoryEditDialog(CategoryListModel category) {
-                fab.setEnabled(true);
-                presenter.createCategory(category);
-            }
-        }, true, null);
-
-        editDialog.show();
-    }
-
 
     private void itemSelectedDialog(final int position) {
         CategoryListModel model = presenter.getCategory(position);
@@ -207,10 +166,5 @@ public class CategoryListFragment extends BaseFragment implements
             getNavigationManager().startExerciseListAddSet(id);
         else
             getNavigationManager().startExerciseList(id);
-    }
-
-    @OnClick(R.id.fab)
-    public void onFabClicked() {
-        createCategory();
     }
 }

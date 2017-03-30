@@ -8,6 +8,7 @@ import com.brandonhogan.liftscout.injection.module.DatabaseModule;
 import com.brandonhogan.liftscout.injection.module.UserModule;
 import com.brandonhogan.liftscout.managers.ProgressManager;
 import com.brandonhogan.liftscout.presenters.CalendarPresenter;
+import com.brandonhogan.liftscout.presenters.CategoryDetailPresenter;
 import com.brandonhogan.liftscout.presenters.CategoryListPresenter;
 import com.brandonhogan.liftscout.presenters.ExerciseDetailPresenter;
 import com.brandonhogan.liftscout.presenters.ExerciseListContainerPresenter;
@@ -78,6 +79,7 @@ public interface AppComponent {
     void inject(ExerciseListPresenter presenter);
     void inject(CategoryListPresenter presenter);
     void inject(ExerciseDetailPresenter presenter);
+    void inject(CategoryDetailPresenter presenter);
 
     // Workout
     void inject(WorkoutContainerPresenter presenter);

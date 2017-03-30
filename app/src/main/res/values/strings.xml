@@ -255,6 +255,7 @@
     <string name="exercise_setting_auto_start">Rest timer auto start</string>
 
     <string name="exercise_new">New Exercise</string>
+    <string name="category_new">New Category</string>
 
     <!-- Default Categories / Exercises -->
     <string name="category_abs">Abs</string>

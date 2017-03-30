@@ -15,6 +15,7 @@ import com.brandonhogan.liftscout.views.ExerciseListFragment;
 public class ExerciseListContainerAdapter extends FragmentStatePagerAdapter {
 
     boolean isAddSet;
+    private int position;
 
     public ExerciseListContainerAdapter(FragmentManager fm, boolean isAddSet) {
         super(fm);
@@ -42,4 +43,5 @@ public class ExerciseListContainerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return 3;
     }
+
 }
