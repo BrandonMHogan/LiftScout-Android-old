@@ -66,6 +66,8 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
     //
 
     private SearchView searchView;
+    private MenuItem settingsItem, aboutItem;
+    private boolean isBottomNavVisable = true;
 
 
     // Overrides
@@ -140,8 +142,8 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
 
-        final MenuItem settingsItem = menu.findItem(R.id.action_main_settings);
-        final MenuItem aboutItem = menu.findItem(R.id.action_about);
+        settingsItem = menu.findItem(R.id.action_main_settings);
+        aboutItem = menu.findItem(R.id.action_about);
 
         // Associate searchable configuration with the SearchView
         SearchManager searchManager =
@@ -159,12 +161,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
             public void onClick(View v)
             {
                 //Search view is expanded
-                hideBottomNav();
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                EventBus.getDefault().post(new SearchViewEvent(true, null));
-
-                settingsItem.setVisible(false);
-                aboutItem.setVisible(false);
+                searchOpened();
             }
         });
         searchView.setOnCloseListener(new SearchView.OnCloseListener()
@@ -173,12 +170,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
             public boolean onClose()
             {
                 //Search View is collapsed
-                showBottomNav();
-                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                EventBus.getDefault().post(new SearchViewEvent(false, null));
-
-                settingsItem.setVisible(true);
-                aboutItem.setVisible(true);
+                searchClosed();
                 return false;
             }
         });
@@ -207,21 +199,41 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         return true;
     }
 
+    public void searchClosed() {
+        showBottomNav();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        EventBus.getDefault().post(new SearchViewEvent(false, null));
+
+        settingsItem.setVisible(true);
+        aboutItem.setVisible(true);
+    }
+
+    public void searchOpened() {
+        hideBottomNav();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        EventBus.getDefault().post(new SearchViewEvent(true, null));
+
+        settingsItem.setVisible(false);
+        aboutItem.setVisible(false);
+    }
+
     public void showBottomNav() {
-        if (bottomNav != null) {
+        if (bottomNav != null && !isBottomNavVisable) {
             bottomNav.setVisibility(View.VISIBLE);
             ObjectAnimator animator = ObjectAnimator.ofFloat(bottomNav, "translationY", 0);
             animator.setDuration(400);
             animator.start();
+            isBottomNavVisable = !isBottomNavVisable;
         }
     }
 
     public void hideBottomNav() {
-        if (bottomNav != null) {
+        if (bottomNav != null && isBottomNavVisable) {
             bottomNav.setVisibility(View.GONE);
             ObjectAnimator animator = ObjectAnimator.ofFloat(bottomNav, "translationY", 250.0f);
             animator.setDuration(650);
             animator.start();
+            isBottomNavVisable = !isBottomNavVisable;
         }
     }
 
