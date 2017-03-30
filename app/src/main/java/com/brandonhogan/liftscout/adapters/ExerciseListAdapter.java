@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.adapters;
 import android.content.Context;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
         for (ExerciseListModel model : list) {
             fullList.add(model);
             modelList.add(model);
+            filteredList.add(model);
         }
 
         this.listener = listener;
@@ -96,12 +98,21 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
 
         @Override
         public void onClick(View view) {
-            listener.onClick(view, this.getLayoutPosition());
+
+            String name = filteredList.get(this.getLayoutPosition()).getName();
+            int id = filteredList.get(this.getLayoutPosition()).getId();
+
+            Log.e("ExerciseListAdapter", "onClick: " + name);
+
+            for (ExerciseListModel exercise : fullList) {
+                if (exercise.getId() == id)
+                    listener.onClick(view,fullList.indexOf(exercise));
+            }
         }
 
         @Override
         public boolean onLongClick(View view) {
-            listener.onLongClick(view, this.getLayoutPosition());
+            listener.onLongClick(view, filteredList.get(this.getLayoutPosition()).getId());
             return false;
         }
 
