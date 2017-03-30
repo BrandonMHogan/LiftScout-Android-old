@@ -90,17 +90,6 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
         presenter.viewCreated();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventBus.getDefault().register(this);
-    }
 
     private void setupCalendar() {
 
