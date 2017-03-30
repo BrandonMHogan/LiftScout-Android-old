@@ -4,12 +4,19 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.ExerciseDetailContract;
 import com.brandonhogan.liftscout.managers.UserManager;
+import com.brandonhogan.liftscout.repository.CategoryRepo;
 import com.brandonhogan.liftscout.repository.ExerciseRepo;
+import com.brandonhogan.liftscout.repository.model.Category;
 import com.brandonhogan.liftscout.repository.model.Exercise;
 import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 import com.brandonhogan.liftscout.utils.constants.Measurements;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
+
+import io.realm.RealmResults;
 
 
 /**
@@ -25,27 +32,42 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
     @Inject
     UserManager userManager;
 
+    @Inject
+    CategoryRepo categoryRepo;
+
 
     // Private Properties
     //
     private ExerciseDetailContract.View view;
     private int exerciseId;
     private int categoryId;
-    private boolean isNew;
+    private boolean isNew, validCategoryId;
     private Exercise exercise;
+    private RealmResults<Category> categories;
+    private Category category;
 
 
     // Constructor
     //
-    public ExerciseDetailPresenter(ExerciseDetailContract.View view, boolean isNew, int exerciseId, int categoryId) {
+    public ExerciseDetailPresenter(ExerciseDetailContract.View view, boolean isNew, int exerciseId, int categoryId, boolean validCategoryId) {
         Injector.getAppComponent().inject(this);
         this.view = view;
         this.exerciseId = exerciseId;
         this.categoryId = categoryId;
         this.isNew = isNew;
+        this.validCategoryId = validCategoryId;
 
-        if (!isNew)
+        categories = categoryRepo.getCategories();
+
+        if (!isNew) {
             exercise = exerciseRepo.getExercise(exerciseId);
+            category = categories.where().equalTo(Category.ID, exercise.getCategoryId()).findFirst();
+        }
+        else {
+            category = categories.where().equalTo(Category.ID, categoryId).findFirst();
+        }
+
+
     }
 
     public boolean validation(int id, String name, double increment, int restTimer, boolean isAuto, boolean isSound, boolean isVibrate) {
@@ -78,12 +100,16 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
             view.setTitle(exercise.getName());
             view.setupControlValues(exercise);
         }
+
+        view.setupControlCategory(category);
     }
 
     @Override
-    public void onSave(String name, int increment, int restTimer, boolean isAuto, boolean isSound, boolean isVibrate) {
+    public void onSave(int categoryPosition, String name, int increment, int restTimer, boolean isAuto, boolean isSound, boolean isVibrate) {
 
         if(isNew) {
+            categoryId = categories.get(categoryPosition).getId();
+
             Exercise newExercise = new Exercise();
             newExercise.setName(name.trim());
             newExercise.setIncrement(ConstantValues.increments.get(increment));
@@ -102,6 +128,16 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
             exerciseRepo.updateExercise(exerciseId, name.trim(), ConstantValues.increments.get(increment), isVibrate, isSound, isAuto, restTimer);
             view.onSaveSuccess();
         }
+    }
+
+    @Override
+    public ArrayList<String> getCategories() {
+        ArrayList<String> stringCategories = new ArrayList<>();
+        for (Category category : categories) {
+            stringCategories.add(category.getName());
+        }
+
+        return stringCategories;
     }
 
     @Override

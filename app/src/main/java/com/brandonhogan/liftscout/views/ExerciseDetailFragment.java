@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.interfaces.contracts.ExerciseDetailContract;
 import com.brandonhogan.liftscout.presenters.ExerciseDetailPresenter;
+import com.brandonhogan.liftscout.repository.model.Category;
 import com.brandonhogan.liftscout.repository.model.Exercise;
 import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 import com.brandonhogan.liftscout.utils.controls.NumberPicker;
@@ -37,6 +38,7 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
     //
     private final static String BUNDLE_EXERCISE_ID = "exerciseIdBundle";
     private final static String BUNDLE_CATEGORY_ID = "categoryIdBundle";
+    private final static String BUNDLE_VALID_CATEGORY_ID = "validCategoryIdBundle";
     private final static String BUNDLE_NEW_EXERCISE = "newExerciseBundle";
 
 
@@ -46,6 +48,7 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
         Bundle args = new Bundle();
         args.putInt(BUNDLE_EXERCISE_ID, exerciseId);
         args.putInt(BUNDLE_CATEGORY_ID, categoryId);
+        args.putBoolean(BUNDLE_VALID_CATEGORY_ID, true);
         args.putBoolean(BUNDLE_NEW_EXERCISE, false);
 
         ExerciseDetailFragment fragment = new ExerciseDetailFragment();
@@ -54,10 +57,11 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
         return fragment;
     }
 
-    public static ExerciseDetailFragment newInstance(int categoryId) {
+    public static ExerciseDetailFragment newInstance(boolean validCategoryId, int categoryId) {
         Bundle args = new Bundle();
         args.putInt(BUNDLE_EXERCISE_ID, 0);
         args.putInt(BUNDLE_CATEGORY_ID, categoryId);
+        args.putBoolean(BUNDLE_VALID_CATEGORY_ID, validCategoryId);
         args.putBoolean(BUNDLE_NEW_EXERCISE, true);
 
         ExerciseDetailFragment fragment = new ExerciseDetailFragment();
@@ -75,6 +79,9 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
 
     @Bind(R.id.name_text)
     EditText nameText;
+
+    @Bind(R.id.category_spinner)
+    Spinner categorySpinner;
 
     @Bind(R.id.increment_spinner)
     Spinner incrementSpinner;
@@ -105,7 +112,11 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
         ButterKnife.bind(this, view);
         toast = Toast.makeText(getActivity(), null, Toast.LENGTH_SHORT);
 
-        presenter = new ExerciseDetailPresenter(this, this.getArguments().getBoolean(BUNDLE_NEW_EXERCISE), this.getArguments().getInt(BUNDLE_EXERCISE_ID), this.getArguments().getInt(BUNDLE_CATEGORY_ID));
+        presenter = new ExerciseDetailPresenter(this,
+                this.getArguments().getBoolean(BUNDLE_NEW_EXERCISE),
+                this.getArguments().getInt(BUNDLE_EXERCISE_ID),
+                this.getArguments().getInt(BUNDLE_CATEGORY_ID),
+                this.getArguments().getBoolean(BUNDLE_VALID_CATEGORY_ID));
 
         setTitle(getString(R.string.exercise_new));
         setupControls();
@@ -135,7 +146,7 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-                presenter.onSave(nameText.getText().toString(), incrementSpinner.getSelectedItemPosition(), restTimerPicker.getNumberAsInt(), autoSwitch.isChecked(), soundSwitch.isChecked(), vibrateSwitch.isChecked());
+                presenter.onSave(categorySpinner.getSelectedItemPosition(), nameText.getText().toString(), incrementSpinner.getSelectedItemPosition(), restTimerPicker.getNumberAsInt(), autoSwitch.isChecked(), soundSwitch.isChecked(), vibrateSwitch.isChecked());
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -145,6 +156,12 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item_view, ConstantValues.increments_string);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         incrementSpinner.setAdapter(dataAdapter);
+
+
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item_view, presenter.getCategories());
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(categoryAdapter);
+
         restTimerPicker.setNumber(60);
     }
 
@@ -160,7 +177,13 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
             incrementSpinner.setSelection(ConstantValues.increments.indexOf(exercise.getIncrement()), true);
         else
             incrementSpinner.setSelection(ConstantValues.increments.indexOf(presenter.getDefaultIncrement()), true);
+    }
 
+    @Override
+    public void setupControlCategory(Category category) {
+        if (category != null) {
+            categorySpinner.setSelection(presenter.getCategories().indexOf(category.getName()));
+        }
     }
 
     @Override

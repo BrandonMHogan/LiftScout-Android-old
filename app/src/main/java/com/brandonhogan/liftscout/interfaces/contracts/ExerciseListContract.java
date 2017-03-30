@@ -26,5 +26,7 @@ public interface ExerciseListContract {
         int getCategoryId();
         double getDefaultIncrement();
         boolean isInSearch();
+        boolean isShowAll();
+        boolean isFavOnly();
     }
 }

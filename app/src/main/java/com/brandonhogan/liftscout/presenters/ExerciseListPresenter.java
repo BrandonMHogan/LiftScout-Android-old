@@ -154,6 +154,16 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     }
 
     @Override
+    public boolean isShowAll() {
+        return showAll;
+    }
+
+    @Override
+    public boolean isFavOnly() {
+        return favOnly;
+    }
+
+    @Override
     public double getDefaultIncrement() {
         if (userManager.getMeasurementValue().equals(Measurements.KILOGRAMS))
             return ConstantValues.INCREMENT_KG_DEFAULT;

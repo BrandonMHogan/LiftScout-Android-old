@@ -301,8 +301,8 @@ public class NavigationManager {
         return open(fragment);
     }
 
-    public boolean startExerciseDetail(int categoryId) {
-        BaseFragment fragment = ExerciseDetailFragment.newInstance(categoryId);
+    public boolean startExerciseDetail(boolean validCategoryId, int categoryId) {
+        BaseFragment fragment = ExerciseDetailFragment.newInstance(validCategoryId, categoryId);
         return open(fragment);
     }
 

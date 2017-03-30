@@ -186,7 +186,11 @@ public class ExerciseListFragment extends BaseFragment implements
     }
 
     private void createExercise() {
-        getNavigationManager().startExerciseDetail(presenter.getCategoryId());
+
+        if(presenter.isShowAll() || presenter.isFavOnly())
+            getNavigationManager().startExerciseDetail(false, presenter.getCategoryId());
+        else
+            getNavigationManager().startExerciseDetail(true, presenter.getCategoryId());
     }
 
     private void itemSelectedDialog(final int position) {
