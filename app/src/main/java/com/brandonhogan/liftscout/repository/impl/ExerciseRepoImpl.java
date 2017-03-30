@@ -9,6 +9,7 @@ import com.brandonhogan.liftscout.repository.model.Exercise;
 import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -34,20 +35,22 @@ public class ExerciseRepoImpl implements ExerciseRepo {
     }
 
     @Override
-    public RealmResults<Exercise> getExercises(int categoryId, boolean includeDeleted) {
+    public List<Exercise> getExercises(int categoryId, boolean includeDeleted) {
 
         if (includeDeleted) {
             return databaseRealm.getRealmInstance()
                     .where(Exercise.class)
                     .equalTo(Exercise.CATEGORY_ID, categoryId)
-                    .findAll();
+                    .findAll()
+                    .sort(Exercise.NAME);
         }
 
         return databaseRealm.getRealmInstance()
                 .where(Exercise.class)
                 .equalTo(Exercise.CATEGORY_ID, categoryId)
                 .notEqualTo(Exercise.IS_DELETED, true)
-                .findAll();
+                .findAll()
+                .sort(Exercise.NAME);
     }
 
     @Override
@@ -56,6 +59,25 @@ public class ExerciseRepoImpl implements ExerciseRepo {
                 .where(Exercise.class)
                 .equalTo(Exercise.ID, exerciseId)
                 .findFirst();
+    }
+
+    @Override
+    public List<Exercise> getAllExercises() {
+        return databaseRealm.getRealmInstance()
+                .where(Exercise.class)
+                .notEqualTo(Exercise.IS_DELETED, true)
+                .findAll()
+                .sort(Exercise.NAME);
+    }
+
+    @Override
+    public List<Exercise> getAllFavouriteExercises() {
+        return databaseRealm.getRealmInstance()
+                .where(Exercise.class)
+                .notEqualTo(Exercise.IS_DELETED, true)
+                .equalTo(Exercise.FAVOURITE, true)
+                .findAll()
+                .sort(Exercise.NAME);
     }
 
     @Override

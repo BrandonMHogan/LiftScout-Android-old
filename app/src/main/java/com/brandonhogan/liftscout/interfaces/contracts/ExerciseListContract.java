@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public interface ExerciseListContract {
 
     interface View {
-        void applyTitle(String title);
+        void applyTitle(String title, boolean favOnly, boolean showAll);
         void updateAdapter(ArrayList<ExerciseListModel> data);
         void removeItem(int position);
         void itemSelected(int id, boolean isSearch);

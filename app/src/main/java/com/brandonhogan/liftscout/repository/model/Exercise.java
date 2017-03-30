@@ -20,6 +20,7 @@ public class Exercise extends RealmObject {
     public static final String REST_SOUND = "restSound";
     public static final String REST_AUTO_START = "restAutoStart";
     public static final String INCREMENT = "increment";
+    public static final String FAVOURITE = "favourite";
 
 
     @PrimaryKey
@@ -45,6 +46,8 @@ public class Exercise extends RealmObject {
     private boolean restAutoStart = false;
 
     private double increment;
+
+    private boolean favourite = false;
 
     public int getId() {
         return id;
@@ -132,5 +135,13 @@ public class Exercise extends RealmObject {
 
     public void setIncrement(double increment) {
         this.increment = increment;
+    }
+
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
     }
 }

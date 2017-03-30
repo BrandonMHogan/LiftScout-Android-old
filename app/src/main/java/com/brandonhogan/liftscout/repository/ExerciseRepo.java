@@ -2,12 +2,16 @@ package com.brandonhogan.liftscout.repository;
 
 import com.brandonhogan.liftscout.repository.model.Exercise;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.realm.RealmResults;
 
 public interface ExerciseRepo {
 
-    RealmResults<Exercise> getExercises(int categoryId, boolean includeDeleted);
+    List<Exercise> getExercises(int categoryId, boolean includeDeleted);
+    List<Exercise> getAllExercises();
+    List<Exercise> getAllFavouriteExercises();
     Exercise getExercise(int exerciseId);
     void setExercise(Exercise exercise);
     void updateExercise(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer);

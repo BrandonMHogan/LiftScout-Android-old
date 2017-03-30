@@ -37,6 +37,8 @@ public class ExerciseListFragment extends BaseFragment implements
     // Private Static Properties
     //
     private final static String BUNDLE_CATEGORY_ID = "categoryIdBundle";
+    private final static String BUNDLE_FAV_ONLY = "favOnlyBundle";
+    private final static String BUNDLE_SHOW_ALL = "favShowAll";
     private final static String BUNDLE_ADD_SET = "addSetBundle";
 
 
@@ -46,6 +48,23 @@ public class ExerciseListFragment extends BaseFragment implements
 
         Bundle args = new Bundle();
         args.putInt(BUNDLE_CATEGORY_ID, categoryId);
+        args.putBoolean(BUNDLE_FAV_ONLY, false);
+        args.putBoolean(BUNDLE_SHOW_ALL, false);
+        args.putBoolean(BUNDLE_ADD_SET, addSet);
+
+        ExerciseListFragment fragment = new ExerciseListFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+    // favOnly will show only favourites. If false, will show all exercises
+    public static ExerciseListFragment newInstance(boolean favOnly, boolean addSet) {
+
+        Bundle args = new Bundle();
+        args.putInt(BUNDLE_CATEGORY_ID, 0);
+        args.putBoolean(BUNDLE_FAV_ONLY, favOnly);
+        args.putBoolean(BUNDLE_SHOW_ALL, true);
         args.putBoolean(BUNDLE_ADD_SET, addSet);
 
         ExerciseListFragment fragment = new ExerciseListFragment();
@@ -57,6 +76,9 @@ public class ExerciseListFragment extends BaseFragment implements
     public static ExerciseListFragment newInstance(int categoryId) {
         Bundle args = new Bundle();
         args.putInt(BUNDLE_CATEGORY_ID, categoryId);
+        args.putBoolean(BUNDLE_FAV_ONLY, false);
+        args.putBoolean(BUNDLE_SHOW_ALL, false);
+        args.putBoolean(BUNDLE_ADD_SET, false);
 
         ExerciseListFragment fragment = new ExerciseListFragment();
         fragment.setArguments(args);
@@ -96,8 +118,11 @@ public class ExerciseListFragment extends BaseFragment implements
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         presenter = new ExerciseListPresenter(this,
                 this.getArguments().getInt(BUNDLE_CATEGORY_ID),
+                this.getArguments().getBoolean(BUNDLE_FAV_ONLY),
+                this.getArguments().getBoolean(BUNDLE_SHOW_ALL),
                 this.getArguments().getBoolean(BUNDLE_ADD_SET));
 
         presenter.viewCreated();
@@ -123,8 +148,15 @@ public class ExerciseListFragment extends BaseFragment implements
     }
 
     @Override
+    public void setMenuVisibility(boolean menuVisible) {
+        super.setMenuVisibility(menuVisible);
+        searchViewOnQueryTextChange("");
+    }
+
+    @Override
     public void searchViewOnQueryTextChange(String newText) {
-        mAdapter.filterList(newText);
+        if (mAdapter != null)
+            mAdapter.filterList(newText);
     }
 
     @Override
@@ -191,9 +223,17 @@ public class ExerciseListFragment extends BaseFragment implements
     //
 
     @Override
-    public void applyTitle(String title) {
-        setTitle(title);
-        noDataLabel.setText(String.format(getString(R.string.exercise_list_no_data), title));
+    public void applyTitle(String title, boolean favOnly, boolean showAll) {
+
+        if (title != null) {
+            setTitle(title);
+            noDataLabel.setText(String.format(getString(R.string.exercise_list_no_data), title));
+        }
+        else if(favOnly) {
+            noDataLabel.setText(getString(R.string.exercise_list_no_fav));
+        }
+        else
+            noDataLabel.setText(getString(R.string.exercise_list_no_all));
     }
 
     @Override

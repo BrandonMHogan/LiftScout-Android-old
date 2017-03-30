@@ -14,6 +14,7 @@ import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 import com.brandonhogan.liftscout.utils.constants.Measurements;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -31,18 +32,20 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     //
     private ExerciseListContract.View view;
     private int categoryId;
-    private boolean isAddSet;
+    private boolean isAddSet, favOnly, showAll;
     private ArrayList<Exercise> adapterData;
     private ExerciseRepo exerciseRepo;
 
 
     // Constructor
     //
-    public ExerciseListPresenter(ExerciseListContract.View view, int categoryId, boolean isAddSet) {
+    public ExerciseListPresenter(ExerciseListContract.View view, int categoryId, boolean favOnly, boolean showAll, boolean isAddSet) {
         Injector.getAppComponent().inject(this);
         this.view = view;
         this.categoryId = categoryId;
         this.isAddSet = isAddSet;
+        this.favOnly = favOnly;
+        this.showAll = showAll;
 
         exerciseRepo = new ExerciseRepoImpl();
     }
@@ -53,7 +56,15 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     private void updateAdapter() {
         adapterData = new ArrayList<>();
 
-        RealmResults<Exercise> exercises = exerciseRepo.getExercises(categoryId, false).sort(Exercise.NAME);
+        List<Exercise> exercises;
+
+        if (showAll && favOnly)
+            exercises = exerciseRepo.getAllFavouriteExercises();
+        else if(showAll)
+            exercises = exerciseRepo.getAllExercises();
+        else
+            exercises = exerciseRepo.getExercises(categoryId, false);
+
 
         if (exercises != null)
             adapterData.addAll(exercises);
@@ -75,7 +86,11 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
         updateAdapter();
 
         CategoryRepo categoryRepo = new CategoryRepoImpl();
-        view.applyTitle(categoryRepo.getCategory(categoryId).getName());
+
+        if (favOnly || showAll)
+            view.applyTitle(null, favOnly, showAll);
+        else
+            view.applyTitle(categoryRepo.getCategory(categoryId).getName(), favOnly, showAll);
     }
 
     @Override

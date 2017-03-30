@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
 
 import com.brandonhogan.liftscout.views.CategoryListFragment;
+import com.brandonhogan.liftscout.views.ExerciseListFragment;
 
 /**
  * Created by Brandon on 3/29/2017.
@@ -26,11 +27,11 @@ public class ExerciseListContainerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                return CategoryListFragment.newInstance(isAddSet);
+                return ExerciseListFragment.newInstance(false, isAddSet);
             case 1:
                 return CategoryListFragment.newInstance(isAddSet);
             case 2:
-                return CategoryListFragment.newInstance(isAddSet);
+                return ExerciseListFragment.newInstance(true, isAddSet);
 
             default:
                 return null;
