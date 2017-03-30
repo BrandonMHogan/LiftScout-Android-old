@@ -248,7 +248,7 @@
     <string name="category_edit_no_name">Please enter a name before saving</string>
     <string name="exercise_edit_no_name">Please enter a name before saving</string>
     <string name="exercise_edit_increment">Increment should be at least 1</string>
-    <string name="exercise_setting_saved">Settings Saved</string>
+    <string name="exercise_setting_saved">Exercise Saved</string>
     <string name="exercise_setting_timer">Rest timer</string>
     <string name="exercise_setting_vibrate">Rest timer vibrate</string>
     <string name="exercise_setting_sound">Rest timer sound</string>
