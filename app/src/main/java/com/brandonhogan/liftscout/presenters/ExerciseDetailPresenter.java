@@ -12,7 +12,6 @@ import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 import com.brandonhogan.liftscout.utils.constants.Measurements;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -45,6 +44,7 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
     private Exercise exercise;
     private RealmResults<Category> categories;
     private Category category;
+    private boolean isFav = false;
 
 
     // Constructor
@@ -64,10 +64,16 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
             category = categories.where().equalTo(Category.ID, exercise.getCategoryId()).findFirst();
         }
         else {
+            exercise = new Exercise();
             category = categories.where().equalTo(Category.ID, categoryId).findFirst();
         }
 
+        isFav = exercise.isFavourite();
+    }
 
+    private void setFav() {
+        isFav = !isFav;
+        view.setFav(isFav);
     }
 
     public boolean validation(int id, String name, double increment, int restTimer, boolean isAuto, boolean isSound, boolean isVibrate) {
@@ -102,6 +108,7 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
         }
 
         view.setupControlCategory(category);
+        view.setFav(isFav);
     }
 
     @Override
@@ -112,6 +119,7 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
 
             Exercise newExercise = new Exercise();
             newExercise.setName(name.trim());
+            newExercise.setFavourite(isFav);
             newExercise.setIncrement(ConstantValues.increments.get(increment));
             newExercise.setRestVibrate(isVibrate);
             newExercise.setRestSound(isSound);
@@ -125,7 +133,7 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
             }
         }
         else if(validation(exerciseId, name, ConstantValues.increments.get(increment), restTimer, isAuto, isSound, isVibrate)) {
-            exerciseRepo.updateExercise(exerciseId, name.trim(), ConstantValues.increments.get(increment), isVibrate, isSound, isAuto, restTimer);
+            exerciseRepo.updateExercise(exerciseId, name.trim(), isFav, ConstantValues.increments.get(increment), isVibrate, isSound, isAuto, restTimer);
             view.onSaveSuccess();
         }
     }
@@ -138,6 +146,11 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
         }
 
         return stringCategories;
+    }
+
+    @Override
+    public void onFavClicked() {
+        setFav();
     }
 
     @Override

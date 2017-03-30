@@ -1,6 +1,5 @@
 package com.brandonhogan.liftscout.views;
 
-import android.app.NotificationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;

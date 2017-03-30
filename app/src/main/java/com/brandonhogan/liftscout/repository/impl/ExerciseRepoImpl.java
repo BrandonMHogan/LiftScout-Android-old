@@ -16,7 +16,6 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.realm.RealmResults;
 
 public class ExerciseRepoImpl implements ExerciseRepo {
 
@@ -97,7 +96,7 @@ public class ExerciseRepoImpl implements ExerciseRepo {
     }
 
     @Override
-    public void updateExercise(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
+    public void updateExercise(int id, String name, boolean isFav, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
         try {
 
             databaseRealm.getRealmInstance().beginTransaction();
@@ -105,6 +104,7 @@ public class ExerciseRepoImpl implements ExerciseRepo {
             Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, id).findFirst();
 
             exercise.setName(name);
+            exercise.setFavourite(isFav);
             exercise.setIncrement(increment);
             exercise.setRestVibrate(vibrate);
             exercise.setRestSound(sound);

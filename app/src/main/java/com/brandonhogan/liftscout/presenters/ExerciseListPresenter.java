@@ -10,15 +10,11 @@ import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.repository.model.Exercise;
-import com.brandonhogan.liftscout.utils.constants.ConstantValues;
-import com.brandonhogan.liftscout.utils.constants.Measurements;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import io.realm.RealmResults;
 
 public class ExerciseListPresenter implements ExerciseListContract.Presenter {
 
@@ -115,27 +111,6 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     }
 
     @Override
-    public void createExercise(String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
-        Exercise newExercise = new Exercise();
-        newExercise.setName(name);
-        newExercise.setIncrement(increment);
-        newExercise.setRestVibrate(vibrate);
-        newExercise.setRestSound(sound);
-        newExercise.setRestAutoStart(autoStart);
-        newExercise.setRestTimer(restTimer);
-        newExercise.setCategoryId(categoryId);
-
-        exerciseRepo.setExercise(newExercise);
-        updateAdapter();
-    }
-
-    @Override
-    public void updateExercise(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer) {
-        exerciseRepo.updateExercise(id, name, increment, vibrate, sound, autoStart, restTimer);
-        updateAdapter();
-    }
-
-    @Override
     public void deleteExercise(int position) {
         exerciseRepo.deleteExercise(adapterData.get(position).getId());
         adapterData.remove(position);
@@ -161,13 +136,5 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     @Override
     public boolean isFavOnly() {
         return favOnly;
-    }
-
-    @Override
-    public double getDefaultIncrement() {
-        if (userManager.getMeasurementValue().equals(Measurements.KILOGRAMS))
-            return ConstantValues.INCREMENT_KG_DEFAULT;
-        else
-            return ConstantValues.INCREMENT_LB_DEFAULT;
     }
 }

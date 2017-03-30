@@ -19,12 +19,9 @@ public interface ExerciseListContract {
     interface Presenter {
         void viewCreated();
         void rowClicked(int position);
-        void updateExercise(int id, String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer);
-        void createExercise(String name, double increment, boolean vibrate, boolean sound, boolean autoStart, int restTimer);
         void deleteExercise(int position);
         Exercise getExercise(int position);
         int getCategoryId();
-        double getDefaultIncrement();
         boolean isInSearch();
         boolean isShowAll();
         boolean isFavOnly();
