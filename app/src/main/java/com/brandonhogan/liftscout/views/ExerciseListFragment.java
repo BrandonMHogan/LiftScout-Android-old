@@ -121,13 +121,19 @@ public class ExerciseListFragment extends BaseFragment implements
                 this.getArguments().getBoolean(BUNDLE_ADD_SET));
 
         presenter.viewCreated();
-        //fab.setVisibility(presenter.isInSearch() ? View.GONE : View.VISIBLE);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdapter != null)
+            presenter.updateAdapter();
     }
 
     @Override
@@ -233,9 +239,11 @@ public class ExerciseListFragment extends BaseFragment implements
 
         noDataLabel.setVisibility((data == null || data.isEmpty()) ? View.VISIBLE : View.GONE);
 
-        mAdapter = new ExerciseListAdapter(getActivity(), data, this);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        if (getActivity() != null) {
+            mAdapter = new ExerciseListAdapter(getActivity(), data, this);
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
     }
 
     @Override

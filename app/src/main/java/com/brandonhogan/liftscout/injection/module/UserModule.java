@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.injection.module;
 
 import com.brandonhogan.liftscout.managers.CalendarManager;
+import com.brandonhogan.liftscout.managers.ExerciseListManager;
 import com.brandonhogan.liftscout.managers.GraphManager;
 import com.brandonhogan.liftscout.managers.NavigationManager;
 import com.brandonhogan.liftscout.managers.ProgressManager;
@@ -49,5 +50,11 @@ public class UserModule {
     @Singleton
     RecordsManager recordsManager() {
         return new RecordsManager();
+    }
+
+    @Provides
+    @Singleton
+    ExerciseListManager exerciseListManager() {
+        return new ExerciseListManager();
     }
 }

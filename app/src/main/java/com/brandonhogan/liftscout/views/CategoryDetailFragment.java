@@ -143,7 +143,7 @@ public class CategoryDetailFragment extends BaseFragment implements CategoryDeta
 
     @Override
     public void onSaveSuccess() {
-        toast.setText(R.string.exercise_setting_saved);
+        toast.setText(R.string.category_setting_saved);
         toast.show();
         getNavigationManager().navigateBack(getActivity());
     }

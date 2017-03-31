@@ -18,6 +18,8 @@ public interface ExerciseListContract {
 
     interface Presenter {
         void viewCreated();
+        void onDestroy();
+        void updateAdapter();
         void rowClicked(int position);
         void deleteExercise(int position);
         Exercise getExercise(int position);

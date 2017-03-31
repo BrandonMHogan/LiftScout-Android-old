@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.presenters;
 
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.ExerciseListContract;
+import com.brandonhogan.liftscout.managers.ExerciseListManager;
 import com.brandonhogan.liftscout.managers.GraphManager;
 import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.models.ExerciseListModel;
@@ -16,6 +17,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+
 public class ExerciseListPresenter implements ExerciseListContract.Presenter {
 
     @Inject
@@ -24,6 +28,9 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     @Inject
     UserManager userManager;
 
+    @Inject
+    ExerciseListManager exerciseListManager;
+
     // Private Properties
     //
     private ExerciseListContract.View view;
@@ -31,6 +38,7 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     private boolean isAddSet, favOnly, showAll;
     private ArrayList<Exercise> adapterData;
     private ExerciseRepo exerciseRepo;
+    private Consumer<Boolean> consumer;
 
 
     // Constructor
@@ -44,12 +52,26 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
         this.showAll = showAll;
 
         exerciseRepo = new ExerciseRepoImpl();
+
+        consumer = new Consumer<Boolean>() {
+            @Override
+            public void accept(@NonNull Boolean aBoolean) throws Exception {
+                updateAdapter();
+            }
+        };
+        exerciseListManager.updateExercises().subscribe(consumer);
     }
 
 
+    @Override
+    public void onDestroy() {
+        consumer = null;
+    }
+
     // Private Functions
     //
-    private void updateAdapter() {
+    @Override
+    public void updateAdapter() {
         adapterData = new ArrayList<>();
 
         List<Exercise> exercises;
@@ -72,6 +94,7 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
         }
         view.updateAdapter(items);
     }
+
 
 
     // Contracts

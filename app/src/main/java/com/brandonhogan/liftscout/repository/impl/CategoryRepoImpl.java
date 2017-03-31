@@ -5,8 +5,10 @@ import android.util.Log;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.CategoryRepo;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
+import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.model.Category;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,6 +23,9 @@ public class CategoryRepoImpl implements CategoryRepo {
 
     @Inject
     DatabaseRealm databaseRealm;
+
+    @Inject
+    ExerciseRepo exerciseRepo;
 
     public CategoryRepoImpl() {
         Injector.getAppComponent().inject(this);
@@ -43,6 +48,7 @@ public class CategoryRepoImpl implements CategoryRepo {
     public List<Category> getCategories() {
         return databaseRealm.getRealmInstance()
                 .where(Category.class)
+                .equalTo(Category.IS_DELETED, false)
                 .findAll().sort(Category.NAME);
     }
 
@@ -71,14 +77,18 @@ public class CategoryRepoImpl implements CategoryRepo {
     @Override
     public void deleteCategory(int categoryId) {
         try {
+
+            exerciseRepo.deleteAllExercisesForCategory(categoryId);
+
             databaseRealm.getRealmInstance().beginTransaction();
 
-            databaseRealm.getRealmInstance()
+            Category category = databaseRealm.getRealmInstance()
                     .where(Category.class)
                     .equalTo(Category.ID, categoryId)
-                    .findFirst()
-                    .deleteFromRealm();
+                    .findFirst();
 
+            category.setDeleted(true);
+            category.setDeleteDate(new Date());
 
             databaseRealm.getRealmInstance().commitTransaction();
         }

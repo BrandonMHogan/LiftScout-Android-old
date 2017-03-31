@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.realm.RealmResults;
 
 public class ExerciseRepoImpl implements ExerciseRepo {
 
@@ -64,7 +65,7 @@ public class ExerciseRepoImpl implements ExerciseRepo {
     public List<Exercise> getAllExercises() {
         return databaseRealm.getRealmInstance()
                 .where(Exercise.class)
-                .notEqualTo(Exercise.IS_DELETED, true)
+                .equalTo(Exercise.IS_DELETED, false)
                 .findAll()
                 .sort(Exercise.NAME);
     }
@@ -73,7 +74,7 @@ public class ExerciseRepoImpl implements ExerciseRepo {
     public List<Exercise> getAllFavouriteExercises() {
         return databaseRealm.getRealmInstance()
                 .where(Exercise.class)
-                .notEqualTo(Exercise.IS_DELETED, true)
+                .equalTo(Exercise.IS_DELETED, false)
                 .equalTo(Exercise.FAVOURITE, true)
                 .findAll()
                 .sort(Exercise.NAME);
@@ -145,10 +146,15 @@ public class ExerciseRepoImpl implements ExerciseRepo {
         try {
             databaseRealm.getRealmInstance().beginTransaction();
 
-                    databaseRealm.getRealmInstance()
+                    RealmResults<Exercise> exercises = databaseRealm.getRealmInstance()
                             .where(Exercise.class)
                             .equalTo(Exercise.CATEGORY_ID, categoryId)
-                            .findAll().deleteAllFromRealm();
+                            .findAll();
+
+            for(Exercise exercise :exercises) {
+                exercise.setDeleted(true);
+                exercise.setDeleteDate(new Date());
+            }
 
             databaseRealm.getRealmInstance().commitTransaction();
         }

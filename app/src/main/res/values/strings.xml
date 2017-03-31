@@ -148,7 +148,7 @@
     <string name="dialog_add_exercise_title">New Exercise</string>
     <string name="dialog_edit_exercise_title">Edit Exercise</string>
     <string name="dialog_category_remove_title">Deleting %s</string>
-    <string name="dialog_category_long_selected">Do you want to edit, or delete %s. Note that deleting will not remove old set data.</string>
+    <string name="dialog_category_long_selected">Do you want to edit, or delete %s.  \n\nNote that deleting will not remove existing set data, but will delete all exercises associated to this category.</string>
     <string name="dialog_exercise_remove_title">Deleting %s</string>
     <string name="dialog_exercise_remove_message">Are you sure you wish to delete %s? \n\nNote that this will not remove existing set data.</string>
     <string name="dialog_rep_remove_title">Deleting Rep</string>
@@ -250,6 +250,7 @@
     <string name="exercise_edit_no_name">Please enter a name before saving</string>
     <string name="exercise_edit_increment">Increment should be at least 1</string>
     <string name="exercise_setting_saved">Exercise Saved</string>
+    <string name="category_setting_saved">Category Saved</string>
     <string name="exercise_setting_timer">Rest timer</string>
     <string name="exercise_setting_vibrate">Rest timer vibrate</string>
     <string name="exercise_setting_sound">Rest timer sound</string>

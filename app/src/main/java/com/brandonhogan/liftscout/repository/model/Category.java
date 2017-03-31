@@ -1,5 +1,7 @@
 package com.brandonhogan.liftscout.repository.model;
 
+import java.util.Date;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -10,6 +12,8 @@ public class Category extends RealmObject {
     public static final String ID = "id";
     public static final String NAME = "name";
     public static final String COLOR = "color";
+    public static final String IS_DELETED = "isDeleted";
+    public static final String DELETE_DATE = "deleteDate";
 
 
     @PrimaryKey
@@ -17,6 +21,8 @@ public class Category extends RealmObject {
     @Required
     private String name;
     private int color;
+    private boolean isDeleted;
+    private Date deleteDate;
 
     public int getId() {
         return id;
@@ -40,5 +46,21 @@ public class Category extends RealmObject {
 
     public void setColor(int color) {
         this.color = color;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Date getDeleteDate() {
+        return deleteDate;
+    }
+
+    public void setDeleteDate(Date deleteDate) {
+        this.deleteDate = deleteDate;
     }
 }

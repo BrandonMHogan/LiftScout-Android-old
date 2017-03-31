@@ -107,7 +107,12 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
 
         @Override
         public boolean onLongClick(View view) {
-            listener.onLongClick(view, filteredList.get(this.getLayoutPosition()).getId());
+            int id = filteredList.get(this.getLayoutPosition()).getId();
+
+            for (ExerciseListModel exercise : fullList) {
+                if (exercise.getId() == id)
+                    listener.onLongClick(view,fullList.indexOf(exercise));
+            }
             return false;
         }
 

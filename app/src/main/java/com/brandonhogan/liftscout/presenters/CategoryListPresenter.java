@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.presenters;
 
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.CategoryListContract;
+import com.brandonhogan.liftscout.managers.ExerciseListManager;
 import com.brandonhogan.liftscout.managers.GraphManager;
 import com.brandonhogan.liftscout.models.CategoryListModel;
 import com.brandonhogan.liftscout.repository.CategoryRepo;
@@ -18,6 +19,9 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
 
     @Inject
     GraphManager graphManager;
+
+    @Inject
+    ExerciseListManager exerciseListManager;
 
     // Private Properties
     //
@@ -103,6 +107,7 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
         categoryRepo.deleteCategory(adapterData.get(position).getId());
 
         updateAdapter();
+        exerciseListManager.categoryUpdated(true);
     }
 
     @Override
