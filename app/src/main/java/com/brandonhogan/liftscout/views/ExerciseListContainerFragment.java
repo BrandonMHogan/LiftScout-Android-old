@@ -80,12 +80,19 @@ public class ExerciseListContainerFragment extends BaseFragment implements Exerc
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter = new ExerciseListContainerPresenter(this,
-                getArguments().getBoolean(BUNDLE_ADD_SET));
-
-        presenter.viewCreated();
-
         setTitle(getString(R.string.nav_exercises));
+
+        if (presenter == null) {
+            presenter = new ExerciseListContainerPresenter(this,
+                    getArguments().getBoolean(BUNDLE_ADD_SET));
+            presenter.viewCreated();
+        }
+
+        if (adapter == null) {
+            adapter = new ExerciseListContainerAdapter
+                    (getChildFragmentManager(), presenter.isAddSet());
+        }
+
 
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.exercises_all)));
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.exercises_categories)));
@@ -93,9 +100,6 @@ public class ExerciseListContainerFragment extends BaseFragment implements Exerc
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
-
-        adapter = new ExerciseListContainerAdapter
-                (getChildFragmentManager(), presenter.isAddSet());
 
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
@@ -107,7 +111,7 @@ public class ExerciseListContainerFragment extends BaseFragment implements Exerc
                 searchClosed();
                 hideKeyboard(getActivity());
 
-                if(tab.getPosition() == 2)
+                if (tab.getPosition() == 2)
                     fab.hide();
                 else
                     fab.show();
@@ -123,6 +127,7 @@ public class ExerciseListContainerFragment extends BaseFragment implements Exerc
 
             }
         });
+
     }
 
     @Override

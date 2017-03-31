@@ -320,10 +320,6 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
             getSupportActionBar().setTitle(title);
     }
 
-    public NavigationManager getNavigationManager() {
-        return navigationManager;
-    }
-
     public SearchView getSearchView() {
         return searchView;
     }
@@ -342,18 +338,18 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
                 switch (item.getItemId()) {
                     case R.id.nav_today:
                         if (!progressManager.getCurrentDate().equals(BhDate.trimTimeFromDate(new Date())))
-                            getNavigationManager().startToday(true);
+                            navigationManager.startToday(true);
                         else
-                            getNavigationManager().startToday(false);
+                            navigationManager.startToday(false);
                         return true;
                     case R.id.nav_calendar:
-                            getNavigationManager().startCalendar();
+                        navigationManager.startCalendar();
                         return true;
                     case R.id.nav_exercises:
-                        getNavigationManager().startExerciseContainer();
+                        navigationManager.startExerciseContainer();
                         return true;
                     case R.id.nav_graphs:
-                        getNavigationManager().startGraphsContainer(false);
+                        navigationManager.startGraphsContainer(false);
                         return true;
                 }
 
@@ -361,7 +357,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
             }
         });
 
-        getNavigationManager().setBottomNav(bottomNav);
+        navigationManager.setBottomNav(bottomNav);
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.events.SearchViewEvent;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.managers.NavigationManager;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -20,11 +21,15 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import io.realm.Realm;
 
 public class BaseFragment extends Fragment {
 
+    @Inject
+    NavigationManager navigationManager;
 
     // Private Properties
     //
@@ -59,7 +64,7 @@ public class BaseFragment extends Fragment {
     }
 
     public NavigationManager getNavigationManager() {
-        return ((MainActivity)getActivity()).getNavigationManager();
+        return navigationManager;
     }
 
     public void searchClosed() {
@@ -92,6 +97,7 @@ public class BaseFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        Injector.getAppComponent().inject(this);
 
         if (savedInstanceState != null && saveState == null) {
             saveState = savedInstanceState.getBundle(STATE_BUNDLE);

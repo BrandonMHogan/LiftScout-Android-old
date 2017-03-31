@@ -39,6 +39,7 @@ import com.brandonhogan.liftscout.utils.controls.graphs.line.MyLineGraph;
 import com.brandonhogan.liftscout.views.GraphExercisesFragment;
 import com.brandonhogan.liftscout.views.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.views.TrackerFragment;
+import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import javax.inject.Singleton;
 
@@ -57,6 +58,7 @@ public interface AppComponent {
     void inject(MainActivity activity);
 
     // Fragments
+    void inject(BaseFragment fragment);
     void inject(TodayContainerPresenter presenter);
     void inject(TodayPresenter presenter);
 

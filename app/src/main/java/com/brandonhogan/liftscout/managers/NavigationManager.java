@@ -204,7 +204,7 @@ public class NavigationManager {
             // we can finish the base activity since we have no other fragments
             baseActivity.finish();
         } else {
-            mFragmentManager.popBackStackImmediate();
+            mFragmentManager.popBackStack();
         }
     }
 
