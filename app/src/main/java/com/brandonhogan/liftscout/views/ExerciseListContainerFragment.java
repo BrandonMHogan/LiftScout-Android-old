@@ -1,6 +1,8 @@
 package com.brandonhogan.liftscout.views;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -9,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.adapters.ExerciseListContainerAdapter;
 import com.brandonhogan.liftscout.interfaces.contracts.ExerciseListContainerContract;
@@ -121,17 +125,48 @@ public class ExerciseListContainerFragment extends BaseFragment implements Exerc
         });
     }
 
+    @Override
+    public void onCreateCategory() {
+        getNavigationManager().startCategoryDetail();
+    }
+
+    @Override
+    public void onNoCategoryFound() {
+        fab.hide();
+        new MaterialDialog.Builder(getActivity())
+                .title(R.string.exercise_no_categories_found_title)
+                .content(R.string.exercise_no_categories_found_message)
+                .neutralText(R.string.create)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        onCreateCategory();
+                    }
+                })
+                .positiveText(R.string.cancel)
+                .canceledOnTouchOutside(true)
+                .cancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        fab.show();
+                    }
+                })
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        fab.show();
+                    }
+                }).show();
+    }
+
+    @Override
+    public void onCreateExercise() {
+        getNavigationManager().startExerciseDetail(false, 0);
+    }
+
     @OnClick(R.id.fab)
     public void onFabClicked() {
-
-        switch (viewPager.getCurrentItem()) {
-            case 0:
-                getNavigationManager().startExerciseDetail(false, 0);
-                break;
-            case 1:
-                getNavigationManager().startCategoryDetail();
-                break;
-        }
+        presenter.onFabClicked(viewPager.getCurrentItem());
     }
 
 }

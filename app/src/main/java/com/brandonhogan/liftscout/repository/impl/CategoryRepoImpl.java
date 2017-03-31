@@ -7,12 +7,13 @@ import com.brandonhogan.liftscout.repository.CategoryRepo;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.model.Category;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.realm.RealmResults;
 
 public class CategoryRepoImpl implements CategoryRepo {
 
@@ -39,10 +40,10 @@ public class CategoryRepoImpl implements CategoryRepo {
     }
 
     @Override
-    public RealmResults<Category> getCategories() {
+    public List<Category> getCategories() {
         return databaseRealm.getRealmInstance()
                 .where(Category.class)
-                .findAll();
+                .findAll().sort(Category.NAME);
     }
 
     @Override

@@ -9,10 +9,9 @@ import com.brandonhogan.liftscout.repository.impl.CategoryRepoImpl;
 import com.brandonhogan.liftscout.repository.model.Category;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
-
-import io.realm.RealmResults;
 
 public class CategoryListPresenter implements CategoryListContract.Presenter {
 
@@ -47,13 +46,13 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
 
         adapterData = new ArrayList<>();
 
-        RealmResults<Category> categories = categoryRepo.getCategories();
+        List<Category> categories = categoryRepo.getCategories();
 
         if (categories == null)
             view.updateAdapter(adapterData);
 
 
-        for (Category category : categories.sort(Category.NAME)) {
+        for (Category category : categories) {
             adapterData.add(new CategoryListModel(category));
         }
 

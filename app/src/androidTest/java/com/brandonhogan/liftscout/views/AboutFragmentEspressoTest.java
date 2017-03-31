@@ -13,7 +13,6 @@ import android.view.WindowManager;
 import com.brandonhogan.liftscout.BuildConfig;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.activities.MainActivity;
-import com.brandonhogan.liftscout.managers.UserManager;
 
 import org.junit.Before;
 import org.junit.Rule;

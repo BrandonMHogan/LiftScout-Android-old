@@ -12,10 +12,9 @@ import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 import com.brandonhogan.liftscout.utils.constants.Measurements;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
-
-import io.realm.RealmResults;
 
 
 /**
@@ -42,7 +41,7 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
     private int categoryId;
     private boolean isNew, validCategoryId;
     private Exercise exercise;
-    private RealmResults<Category> categories;
+    private List<Category> categories;
     private Category category;
     private boolean isFav = false;
 
@@ -61,11 +60,11 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
 
         if (!isNew) {
             exercise = exerciseRepo.getExercise(exerciseId);
-            category = categories.where().equalTo(Category.ID, exercise.getCategoryId()).findFirst();
+            category = categoryRepo.getCategory(exercise.getCategoryId());
         }
         else {
             exercise = new Exercise();
-            category = categories.where().equalTo(Category.ID, categoryId).findFirst();
+            category = categoryRepo.getCategory(categoryId);
         }
 
         isFav = exercise.isFavourite();

@@ -15,6 +15,7 @@ import com.brandonhogan.liftscout.utils.constants.Charts;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -39,7 +40,7 @@ public class GraphsCategoriesPresenter implements GraphsCategoriesContract.Prese
     //
     private GraphsCategoriesContract.View view;
     private CategoryRepo categoryRepo;
-    private RealmResults<Category> categories;
+    private List<Category> categories;
     private ArrayList<Integer> graphTypes;
     private int currentGraphTypePosition;
 

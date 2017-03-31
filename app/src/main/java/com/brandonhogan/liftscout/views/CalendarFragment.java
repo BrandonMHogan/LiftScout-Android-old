@@ -27,7 +27,6 @@ import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 

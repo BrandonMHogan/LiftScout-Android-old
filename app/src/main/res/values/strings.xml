@@ -54,6 +54,7 @@
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="yesterday">Yesterday</string>
+    <string name="create">Create</string>
 
 
     <!-- Tracker Settings -->
@@ -253,6 +254,9 @@
     <string name="exercise_setting_vibrate">Rest timer vibrate</string>
     <string name="exercise_setting_sound">Rest timer sound</string>
     <string name="exercise_setting_auto_start">Rest timer auto start</string>
+    <string name="exercise_no_categories_found_title">No Categories Found</string>
+    <string name="exercise_no_categories_found_message">Every exercise needs a category, and you currently have none. \n\n Do you want to create a category now?</string>
+
 
     <string name="exercise_new">New Exercise</string>
     <string name="category_new">New Category</string>
