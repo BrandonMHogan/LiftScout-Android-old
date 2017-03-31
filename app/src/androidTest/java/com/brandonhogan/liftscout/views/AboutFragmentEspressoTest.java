@@ -8,6 +8,7 @@ import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.WindowManager;
 
 import com.brandonhogan.liftscout.BuildConfig;
 import com.brandonhogan.liftscout.R;
@@ -39,18 +40,23 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @LargeTest
 public class AboutFragmentEspressoTest {
 
-    UserManager userManager;
-
-//    @Rule
-//    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule(MainActivity.class);
-
     @Rule
     public IntentsTestRule<MainActivity> mActivity = new IntentsTestRule<MainActivity>(MainActivity.class, true, true);
 
-
-
     @Before
     public void goToAbout() {
+
+        final MainActivity activity = mActivity.getActivity();
+        Runnable wakeUpDevice = new Runnable() {
+            public void run() {
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        };
+        activity.runOnUiThread(wakeUpDevice);
+
+
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
 
         onView(withText("About"))
@@ -63,12 +69,15 @@ public class AboutFragmentEspressoTest {
                 .check(matches(ViewMatchers.withText(BuildConfig.VERSION_NAME)));
 
         onView(withId(R.id.contact_email))
+                .perform(scrollTo())
                 .check(matches(withText(R.string.app_feedback)));
 
         onView(withId(R.id.developer_name))
+                .perform(scrollTo())
                 .check(matches(withText(R.string.app_developer)));
 
         onView(withId(R.id.designer_name))
+                .perform(scrollTo())
                 .check(matches(withText(R.string.app_designer)));
     }
 
@@ -83,8 +92,8 @@ public class AboutFragmentEspressoTest {
         onView(withId(R.id.developer_container))
                 .perform(scrollTo());
 
-        onView(ViewMatchers.withId(R.id.developer_container))
-                .perform(click());
+//        onView(ViewMatchers.withId(R.id.developer_container))
+//                .perform(click());
 
         onView(withId(R.id.title_icon))
                 .perform(scrollTo(), click());
@@ -101,8 +110,8 @@ public class AboutFragmentEspressoTest {
         onView(withId(R.id.designer_container))
                 .perform(scrollTo());
 
-        onView(ViewMatchers.withId(R.id.designer_container))
-                .perform(click());
+//        onView(ViewMatchers.withId(R.id.designer_container))
+//                .perform(click());
 
         onView(withId(R.id.title_icon))
                 .perform(scrollTo(), click());

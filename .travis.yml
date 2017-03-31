@@ -1,10 +1,14 @@
+sudo: false
+
 language: android
-sudo: required
+
 jdk: oraclejdk8
 
 env:
-  matrix:
-    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
+  global:
+    - ANDROID_TARGET=android-25
+    - ANDROID_BUILD_TOOLS_VERSION=25.0.0
+    - ANDROID_ABI=armeabi-v7a
 
 notifications:
   email:
@@ -12,27 +16,12 @@ notifications:
 
 android:
   components:
-    # Uncomment the lines below if you want to
-    # use the latest revision of Android SDK Tools
-    - platform-tools
     - tools
-
-    # The SDK version used to compile your project
-    - android-25
-
-    # The BuildTools version used by your project
-    - build-tools-25.0.2
-
-    # Additional components
-    #- extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
-    #- addon-google_apis-google-19
-
-    # Specify at least one system image,
-    # if you need to run emulator(s) during your tests
-    - sys-img-armeabi-v7a-android-22
-    - sys-img-armeabi-v7a-android-25
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - $ANDROID_TARGET
+    - extra-google-google_play_services
+    - extra-android-support
+    - extra
   
 # safelist
 branches:
@@ -50,17 +39,17 @@ before_install:
  - mkdir "$ANDROID_HOME/licenses" || true
  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
- - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
+ - echo yes | android update sdk --all --filter build-tools-$ANDROID_BUILD_TOOLS_VERSION --no-ui --force
 
 # Emulator Management: Create, Start and Wait
 before_script:
-  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
+  - echo no | android create avd --force -n test -t android-19 --abi $ANDROID_ABI
+  - emulator -avd test -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 
 script: 
-  - ./gradlew testDebug connectedDebugAndroidTest
+  - ./gradlew clean check connectedDebugAndroidTest
   #- ./gradlew check
   #- ./gradlew testDebugUnitTestCoverage
 
