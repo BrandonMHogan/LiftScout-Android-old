@@ -60,7 +60,8 @@ before_script:
   - adb shell input keyevent 82 &
 
 script: 
-  - ./gradlew check
+  - ./gradlew testDebug connectedDebugAndroidTest
+  #- ./gradlew check
   #- ./gradlew testDebugUnitTestCoverage
 
 after_success:
