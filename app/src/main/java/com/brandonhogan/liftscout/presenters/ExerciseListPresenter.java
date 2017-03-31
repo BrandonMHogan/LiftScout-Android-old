@@ -18,6 +18,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class ExerciseListPresenter implements ExerciseListContract.Presenter {
@@ -38,34 +39,35 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     private boolean isAddSet, favOnly, showAll;
     private ArrayList<Exercise> adapterData;
     private ExerciseRepo exerciseRepo;
-    private Consumer<Boolean> consumer;
-
+    private Disposable disposable;
 
     // Constructor
     //
-    public ExerciseListPresenter(ExerciseListContract.View view, int categoryId, boolean favOnly, boolean showAll, boolean isAddSet) {
+    public ExerciseListPresenter(ExerciseListContract.View view) {
         Injector.getAppComponent().inject(this);
         this.view = view;
-        this.categoryId = categoryId;
-        this.isAddSet = isAddSet;
-        this.favOnly = favOnly;
-        this.showAll = showAll;
 
         exerciseRepo = new ExerciseRepoImpl();
 
-        consumer = new Consumer<Boolean>() {
-            @Override
-            public void accept(@NonNull Boolean aBoolean) throws Exception {
-                updateAdapter();
-            }
-        };
-        exerciseListManager.updateExercises().subscribe(consumer);
+
+        if(disposable == null)
+            disposable = exerciseListManager.updateExercises().subscribe(new Consumer<Boolean>() {
+                @Override
+                public void accept(@NonNull Boolean aBoolean) throws Exception {
+                    updateAdapter();
+                }
+            });
     }
 
+    @Override
+    public void onResume(ExerciseListContract.View view) {
+        this.view = view;
+    }
 
     @Override
     public void onDestroy() {
-        consumer = null;
+        this.view = null;
+        this.disposable.dispose();
     }
 
     // Private Functions
@@ -100,9 +102,11 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     // Contracts
     //
     @Override
-    public void viewCreated() {
-
-        updateAdapter();
+    public void viewCreated(int categoryId, boolean favOnly, boolean showAll, boolean isAddSet) {
+        this.categoryId = categoryId;
+        this.isAddSet = isAddSet;
+        this.favOnly = favOnly;
+        this.showAll = showAll;
 
         CategoryRepo categoryRepo = new CategoryRepoImpl();
 
@@ -110,6 +114,8 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
             view.applyTitle(null, favOnly, showAll);
         else
             view.applyTitle(categoryRepo.getCategory(categoryId).getName(), favOnly, showAll);
+
+        updateAdapter();
     }
 
     @Override

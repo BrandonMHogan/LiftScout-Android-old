@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.interfaces.contracts;
 import com.brandonhogan.liftscout.models.ExerciseListModel;
 import com.brandonhogan.liftscout.repository.model.Exercise;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public interface ExerciseListContract {
@@ -17,8 +18,9 @@ public interface ExerciseListContract {
     }
 
     interface Presenter {
-        void viewCreated();
+        void viewCreated(int categoryId, boolean favOnly, boolean showAll, boolean isAddSet);
         void onDestroy();
+        void onResume(ExerciseListContract.View view);
         void updateAdapter();
         void rowClicked(int position);
         void deleteExercise(int position);

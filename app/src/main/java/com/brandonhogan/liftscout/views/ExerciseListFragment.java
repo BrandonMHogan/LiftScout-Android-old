@@ -23,6 +23,7 @@ import com.brandonhogan.liftscout.presenters.ExerciseListPresenter;
 import com.brandonhogan.liftscout.repository.model.Exercise;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -114,13 +115,14 @@ public class ExerciseListFragment extends BaseFragment implements
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter = new ExerciseListPresenter(this,
-                this.getArguments().getInt(BUNDLE_CATEGORY_ID),
-                this.getArguments().getBoolean(BUNDLE_FAV_ONLY),
-                this.getArguments().getBoolean(BUNDLE_SHOW_ALL),
-                this.getArguments().getBoolean(BUNDLE_ADD_SET));
+        if (presenter == null) {
+            presenter = new ExerciseListPresenter(this);
 
-        presenter.viewCreated();
+            presenter.viewCreated(this.getArguments().getInt(BUNDLE_CATEGORY_ID),
+                    this.getArguments().getBoolean(BUNDLE_FAV_ONLY),
+                    this.getArguments().getBoolean(BUNDLE_SHOW_ALL),
+                    this.getArguments().getBoolean(BUNDLE_ADD_SET));
+        }
     }
 
     @Override
@@ -132,8 +134,15 @@ public class ExerciseListFragment extends BaseFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        if (mAdapter != null)
-            presenter.updateAdapter();
+        presenter.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.onDestroy();
+        mRecyclerView.setAdapter(null);
+        mAdapter = null;
     }
 
     @Override
