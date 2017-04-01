@@ -159,4 +159,9 @@ public class ExerciseDetailPresenter implements ExerciseDetailContract.Presenter
         else
             return ConstantValues.INCREMENT_LB_DEFAULT;
     }
+
+    @Override
+    public boolean isFavourite() {
+        return isFav;
+    }
 }

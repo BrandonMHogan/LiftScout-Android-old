@@ -145,6 +145,9 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.action_save).setVisible(true);
+
+        menu.findItem(R.id.action_favourite_true).setVisible(presenter.isFavourite());
+        menu.findItem(R.id.action_favourite_false).setVisible(!presenter.isFavourite());
     }
 
     @Override
@@ -152,6 +155,13 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
         switch (item.getItemId()) {
             case R.id.action_save:
                 presenter.onSave(categorySpinner.getSelectedItemPosition(), nameText.getText().toString(), incrementSpinner.getSelectedItemPosition(), restTimerPicker.getNumberAsInt(), autoSwitch.isChecked(), soundSwitch.isChecked(), vibrateSwitch.isChecked());
+                return true;
+            case R.id.action_favourite_true:
+                presenter.onFavClicked();
+
+                return true;
+            case R.id.action_favourite_false:
+                presenter.onFavClicked();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -211,6 +221,8 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
         }
         else
             favButton.setImageResource(R.drawable.ic_star_border_white_24dp);
+
+        getActivity().invalidateOptionsMenu();
     }
 
     @OnClick(R.id.fav_button)

@@ -66,7 +66,6 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
 
     @Override
     public void onDestroy() {
-        this.view = null;
         this.disposable.dispose();
     }
 

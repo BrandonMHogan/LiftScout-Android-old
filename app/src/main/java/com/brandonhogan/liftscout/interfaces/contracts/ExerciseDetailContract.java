@@ -26,5 +26,6 @@ public interface ExerciseDetailContract {
         ArrayList<String> getCategories();
         void onSave(int categoryPosition, String name, int increment, int restTimer, boolean isAuto, boolean isSound, boolean isVibrate);
         void onFavClicked();
+        boolean isFavourite();
     }
 }
