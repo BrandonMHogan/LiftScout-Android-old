@@ -12,6 +12,7 @@ public interface WorkoutContainerContract {
         void onRestTimerTick(int time);
         void onRestTimerTerminate(boolean vibrate, boolean sound);
         void deleteSetSuccess();
+        void favouriteUpdated();
     }
 
     interface Presenter {
@@ -34,5 +35,7 @@ public interface WorkoutContainerContract {
         void restTimerNotification(int time);
         void onRestTimerStop();
         void onDeleteSet();
+        void onFavClicked();
+        boolean isFavourite();
     }
 }

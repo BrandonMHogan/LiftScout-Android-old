@@ -204,8 +204,10 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         EventBus.getDefault().post(new SearchViewEvent(false, null));
 
-        settingsItem.setVisible(true);
-        aboutItem.setVisible(true);
+        if (settingsItem != null)
+            settingsItem.setVisible(true);
+        if (aboutItem != null)
+            aboutItem.setVisible(true);
     }
 
     public void searchOpened() {
@@ -213,8 +215,10 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         EventBus.getDefault().post(new SearchViewEvent(true, null));
 
-        settingsItem.setVisible(false);
-        aboutItem.setVisible(false);
+        if (settingsItem != null)
+            settingsItem.setVisible(false);
+        if (aboutItem != null)
+            aboutItem.setVisible(false);
     }
 
     public void showBottomNav() {

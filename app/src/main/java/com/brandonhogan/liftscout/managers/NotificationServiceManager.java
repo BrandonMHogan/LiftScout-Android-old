@@ -70,7 +70,7 @@ public class NotificationServiceManager {
         builder = new NotificationCompat.Builder(context)
                 .setContentText(context.getString(R.string.app_name))
                 .setContentTitle(title)
-                .setSmallIcon(R.drawable.ic_timer_white_48dp)
+                .setSmallIcon(R.drawable.ic_timer_white_24dp)
                 .setAutoCancel(false)
                 .setOngoing(running)
                 .setOnlyAlertOnce(true);

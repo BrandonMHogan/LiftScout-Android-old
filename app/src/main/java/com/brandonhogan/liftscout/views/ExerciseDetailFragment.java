@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -26,7 +25,6 @@ import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by Brandon on 3/27/2017.
@@ -99,9 +97,6 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
 
     @Bind(R.id.vibrate_switch)
     Switch vibrateSwitch;
-
-    @Bind(R.id.fav_button)
-    ImageButton favButton;
 
     //Overrides
     //
@@ -216,17 +211,6 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
 
     @Override
     public void setFav(boolean isSet) {
-        if (isSet) {
-            favButton.setImageResource(R.drawable.ic_star_white_24dp);
-        }
-        else
-            favButton.setImageResource(R.drawable.ic_star_border_white_24dp);
-
         getActivity().invalidateOptionsMenu();
-    }
-
-    @OnClick(R.id.fav_button)
-    void onFavClicked() {
-        presenter.onFavClicked();
     }
 }

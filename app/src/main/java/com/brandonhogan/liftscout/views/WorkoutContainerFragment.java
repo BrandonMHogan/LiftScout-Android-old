@@ -204,6 +204,9 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
         menu.findItem(R.id.action_main_settings).setVisible(false);
         menu.findItem(R.id.action_about).setVisible(false);
 
+        menu.findItem(R.id.action_favourite_true).setVisible(presenter.isFavourite());
+        menu.findItem(R.id.action_favourite_false).setVisible(!presenter.isFavourite());
+
         deleteMenu = menu.findItem(R.id.action_delete);
         deleteMenu.setVisible(true);
 
@@ -234,6 +237,13 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
                 return true;
             case R.id.action_settings_tracker:
                 showSettings();
+                return true;
+            case R.id.action_favourite_true:
+                presenter.onFavClicked();
+
+                return true;
+            case R.id.action_favourite_false:
+                presenter.onFavClicked();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -273,6 +283,11 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
         resetRestTimer();
     }
 
+    @Override
+    public void favouriteUpdated() {
+        getActivity().invalidateOptionsMenu();
+    }
+
     private void resetRestTimer() {
 
         // Boolean to keep track of if we are in the foreground or not. Only hide the notification if we are
@@ -282,9 +297,9 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
         if (timerMenu != null) {
 
             if(android.os.Build.VERSION.SDK_INT >= 21){
-                timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_48dp, getActivity().getTheme()));
+                timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_24dp, getActivity().getTheme()));
             } else {
-                timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_48dp));
+                timerMenu.setIcon(getResources().getDrawable(R.drawable.ic_timer_white_24dp));
             }
 
             timerMenu.setTitle(getString(R.string.timer));

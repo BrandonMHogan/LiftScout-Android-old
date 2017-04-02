@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
 import io.realm.RealmResults;
 
 public class ExerciseRepoImpl implements ExerciseRepo {
@@ -326,5 +327,34 @@ public class ExerciseRepoImpl implements ExerciseRepo {
             Log.e(TAG, ex.getMessage());
             databaseRealm.getRealmInstance().cancelTransaction();
         }
+    }
+
+    @Override
+    public Observable<Boolean> setExerciseFavourite(final int exerciseId, final boolean isFav) {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Boolean> e) throws Exception {
+                try {
+                    databaseRealm.getRealmInstance().beginTransaction();
+
+                    Exercise exercise = databaseRealm.getRealmInstance().where(Exercise.class).equalTo(Exercise.ID, exerciseId).findFirst();
+                    if (exercise != null && exercise.isValid()) {
+                        exercise.setFavourite(isFav);
+                        databaseRealm.getRealmInstance().commitTransaction();
+                    }
+                    else {
+                        databaseRealm.getRealmInstance().cancelTransaction();
+                    }
+
+                    e.onNext(true);
+                    e.onComplete();
+                }
+                catch (Exception ex) {
+                    Log.e(TAG, ex.getMessage());
+                    databaseRealm.getRealmInstance().cancelTransaction();
+                    e.onError(ex);
+                }
+            }
+        });
     }
 }

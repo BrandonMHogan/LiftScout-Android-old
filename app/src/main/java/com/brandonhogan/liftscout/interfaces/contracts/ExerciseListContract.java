@@ -3,7 +3,6 @@ package com.brandonhogan.liftscout.interfaces.contracts;
 import com.brandonhogan.liftscout.models.ExerciseListModel;
 import com.brandonhogan.liftscout.repository.model.Exercise;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public interface ExerciseListContract {

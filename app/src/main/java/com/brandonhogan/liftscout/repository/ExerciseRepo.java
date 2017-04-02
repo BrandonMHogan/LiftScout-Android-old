@@ -23,6 +23,7 @@ public interface ExerciseRepo {
     void setExerciseRestSound(int exerciseId, boolean sound);
     void setExerciseRestAutoStart(int exerciseId, boolean autoStart);
     void setExerciseIncrement(int exerciseId, double increment);
+    Observable<Boolean> setExerciseFavourite(int exerciseId, boolean isFav);
     boolean getExerciseRestVibrate(int exerciseId);
     boolean getExerciseRestSound(int exerciseId);
     boolean getExerciseRestAutoStart(int exerciseId);

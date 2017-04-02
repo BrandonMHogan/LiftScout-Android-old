@@ -11,7 +11,7 @@
 
     <ImageView
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_settings_white_48dp"
+        android:src="@drawable/ic_settings_white_24dp"
         android:tint="@color/light_theme_text_secondary"
         android:layout_height="@dimen/intro_icon_size"
         android:layout_width="@dimen/intro_icon_size"

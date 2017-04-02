@@ -23,7 +23,6 @@ import com.brandonhogan.liftscout.presenters.ExerciseListPresenter;
 import com.brandonhogan.liftscout.repository.model.Exercise;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import butterknife.Bind;

@@ -20,7 +20,9 @@ import javax.inject.Inject;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -185,6 +187,22 @@ public class WorkoutContainerPresenter implements WorkoutContainerContract.Prese
         if (disposable != null)
             disposable.dispose();
         Schedulers.start();
+    }
+
+    @Override
+    public boolean isFavourite() {
+        return exercise.isFavourite();
+    }
+
+    @Override
+    public void onFavClicked() {
+        exerciseRepo.setExerciseFavourite(exerciseId, !exercise.isFavourite())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(@NonNull Boolean aBoolean) throws Exception {
+                        view.favouriteUpdated();
+                    }
+                });
     }
 
     private void setupObserver() {
