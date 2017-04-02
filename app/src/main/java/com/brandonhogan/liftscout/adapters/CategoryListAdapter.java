@@ -57,7 +57,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         holder.bindData(modelList.get(position));
     }
 
-    public void setAdapterList(List<CategoryListModel> list) {
+    public void setAdapterList(List<CategoryListModel> list, String text) {
 
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new CategoryDiffCallback(modelList, list));
         diffResult.dispatchUpdatesTo(this);
@@ -65,6 +65,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         modelList.clear();
         for(CategoryListModel model : list)
             modelList.add(model);
+
+        listener.onListUpdated(modelList.isEmpty(), text.equals(""));
     }
 
     //call when you want to filter
@@ -77,7 +79,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
                 filteredList.add(item);
             }
         }
-        setAdapterList(filteredList);
+        setAdapterList(filteredList, text);
     }
 
     @Override

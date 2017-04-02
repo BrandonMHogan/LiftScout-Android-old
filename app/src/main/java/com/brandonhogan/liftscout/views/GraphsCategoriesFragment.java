@@ -149,6 +149,10 @@ public class GraphsCategoriesFragment extends BaseFragment
         itemSelected(position);
     }
 
+    @Override
+    public void onListUpdated(boolean isEmpty, boolean isClear) {
+    }
+
     private void setupGraph() {
         int fontColor = AttrUtil.getAttributeRes(getActivity().getTheme(),android.R.attr.textColorPrimary);
 

@@ -110,8 +110,6 @@ public class ExerciseListContainerFragment extends BaseFragment implements Exerc
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                searchClosed();
-                hideKeyboard(getActivity());
 
                 if (tab.getPosition() == 2)
                     fab.hide();

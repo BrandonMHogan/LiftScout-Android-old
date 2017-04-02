@@ -185,6 +185,10 @@ public class TrackerFragment extends BaseFragment implements
         showDeleteRepAlert(position);
     }
 
+    @Override
+    public void onListUpdated(boolean isEmpty, boolean isClear) {
+    }
+
     private void updateValues(TrackerListModel model) {
         weightNumberPicker.setNumber((float)model.getWeight());
         repNumberPicker.setNumber(model.getCount());

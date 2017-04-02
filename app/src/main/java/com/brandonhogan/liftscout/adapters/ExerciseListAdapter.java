@@ -55,7 +55,7 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
         holder.bindData(modelList.get(position));
     }
 
-    private void setAdapterList(List<ExerciseListModel> list) {
+    private void setAdapterList(List<ExerciseListModel> list, String text) {
 
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ExerciseDiffCallback(modelList, list));
         diffResult.dispatchUpdatesTo(this);
@@ -63,6 +63,9 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
         modelList.clear();
         for(ExerciseListModel model : list)
             modelList.add(model);
+
+
+        listener.onListUpdated(modelList.isEmpty(), text.equals(""));
     }
 
     //call when you want to filter
@@ -75,7 +78,8 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
                 filteredList.add(item);
             }
         }
-        setAdapterList(filteredList);
+
+        setAdapterList(filteredList, text);
     }
 
     @Override

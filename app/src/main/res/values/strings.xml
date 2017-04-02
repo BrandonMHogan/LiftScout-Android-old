@@ -244,8 +244,10 @@
     <string name="exercises_categories">Categories</string>
     <string name="exercises_favourites">Favourites</string>
     <string name="category_list_no_data">You have not created any categories yet</string>
-    <string name="exercise_list_no_data">You have not created any exercises for %s yet</string>
-    <string name="exercise_list_no_fav">You have not set any favourites yet. You can do this from the exercise edit screen</string>
+    <string name="category_list_search_no_data">No category found</string>
+    <string name="exercise_list_no_data">You have not created any exercises yet</string>
+    <string name="exercise_list_search_no_data">No exercise found</string>
+    <string name="exercise_list_no_fav">You have not set any favourites yet. You can do this from the exercise edit screen or the tracker</string>
     <string name="exercise_list_no_all">You have not created any exercises yet</string>
     <string name="category_edit_no_color">Please select a color before saving</string>
     <string name="category_edit_no_name">Please enter a name before saving</string>

@@ -83,12 +83,6 @@ public class CategoryListFragment extends BaseFragment implements
     }
 
     @Override
-    public void setMenuVisibility(boolean menuVisible) {
-        super.setMenuVisibility(menuVisible);
-        searchViewOnQueryTextChange("");
-    }
-
-    @Override
     public void searchViewOnQueryTextChange(String newText) {
         if (mAdapter != null)
             mAdapter.filterList(newText);
@@ -102,6 +96,11 @@ public class CategoryListFragment extends BaseFragment implements
     @Override
     public void onLongClick(View v, int position) {
         itemSelectedDialog(position);
+    }
+
+    @Override
+    public void onListUpdated(boolean isEmpty, boolean isClear) {
+        setNoData(R.string.category_list_search_no_data, isEmpty);
     }
 
     // Private Functions
@@ -138,14 +137,17 @@ public class CategoryListFragment extends BaseFragment implements
         dialog.show();
     }
 
+    private void setNoData(int msgResId, boolean show) {
+        noDataLabel.setVisibility(show ? View.VISIBLE : View.GONE);
+        noDataLabel.setText(msgResId);
+    }
 
     // Contracts
     //
 
     @Override
     public void updateAdapter(List<CategoryListModel> data) {
-
-        noDataLabel.setVisibility((data == null || data.isEmpty()) ? View.VISIBLE : View.GONE);
+        setNoData(R.string.category_list_no_data, data == null || data.isEmpty());
 
         mAdapter = new CategoryListAdapter(getActivity(), data, this);
         recyclerView.setAdapter(mAdapter);

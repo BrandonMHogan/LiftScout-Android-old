@@ -137,12 +137,6 @@ public class ExerciseListFragment extends BaseFragment implements
     }
 
     @Override
-    public void setMenuVisibility(boolean menuVisible) {
-        super.setMenuVisibility(menuVisible);
-        searchViewOnQueryTextChange("");
-    }
-
-    @Override
     public void searchViewOnQueryTextChange(String newText) {
         if (mAdapter != null)
             mAdapter.filterList(newText);
@@ -158,6 +152,13 @@ public class ExerciseListFragment extends BaseFragment implements
         itemSelectedDialog(position);
     }
 
+    @Override
+    public void onListUpdated(boolean isEmpty, boolean isClear) {
+        if(isClear && presenter.isFavOnly())
+            setNoData(R.string.exercise_list_no_fav, isEmpty);
+        else
+            setNoData(R.string.exercise_list_search_no_data, isEmpty);
+    }
 
     // Private Functions
     //
@@ -193,6 +194,10 @@ public class ExerciseListFragment extends BaseFragment implements
         dialog.show();
     }
 
+    private void setNoData(int msgResId, boolean show) {
+        noDataLabel.setVisibility(show ? View.VISIBLE : View.GONE);
+        noDataLabel.setText(msgResId);
+    }
 
 
     // Contracts
@@ -215,7 +220,10 @@ public class ExerciseListFragment extends BaseFragment implements
     @Override
     public void updateAdapter(ArrayList<ExerciseListModel> data) {
 
-        noDataLabel.setVisibility((data == null || data.isEmpty()) ? View.VISIBLE : View.GONE);
+        if (presenter.isFavOnly())
+            setNoData(R.string.exercise_list_no_fav, data == null || data.isEmpty());
+        else
+            setNoData(R.string.exercise_list_no_data, data == null || data.isEmpty());
 
         if (getActivity() != null) {
             mAdapter = new ExerciseListAdapter(getActivity(), data, this);
