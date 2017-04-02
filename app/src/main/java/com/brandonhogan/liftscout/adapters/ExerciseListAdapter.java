@@ -19,7 +19,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ExerciseViewHolder> {
+public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ViewHolder> {
     private LayoutInflater inflater;
     private List<ExerciseListModel> fullList;
     private List<ExerciseListModel> modelList;
@@ -27,7 +27,7 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
 
     private RecyclerViewClickListener listener;
 
-
+    @SuppressWarnings("WeakerAccess")
     public ExerciseListAdapter(Context context, List<ExerciseListModel> list, RecyclerViewClickListener listener) {
         inflater = LayoutInflater.from(context);
 
@@ -45,17 +45,17 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
     }
 
     @Override
-    public ExerciseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.frag_exercise_list_item, parent, false);
-        return new ExerciseViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ExerciseViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.bindData(modelList.get(position));
     }
 
-    public void setAdapterList(List<ExerciseListModel> list) {
+    private void setAdapterList(List<ExerciseListModel> list) {
 
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ExerciseDiffCallback(modelList, list));
         diffResult.dispatchUpdatesTo(this);
@@ -83,12 +83,13 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
         return modelList.size();
     }
 
-    public class ExerciseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+
+    protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         @Bind(R.id.name)
         TextView name;
 
-        public ExerciseViewHolder(View itemView) {
+        protected ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
@@ -116,6 +117,7 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
             return false;
         }
 
+        @SuppressWarnings("WeakerAccess")
         public void bindData(ExerciseListModel rowModel) {
             name.setText(rowModel.getName());
         }

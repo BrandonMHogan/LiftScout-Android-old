@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -124,15 +122,10 @@ public class ExerciseListFragment extends BaseFragment implements
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         presenter.onResume(this);
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override
@@ -141,18 +134,6 @@ public class ExerciseListFragment extends BaseFragment implements
         presenter.onDestroy();
         mRecyclerView.setAdapter(null);
         mAdapter = null;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.action_search).setVisible(true);
     }
 
     @Override
@@ -165,16 +146,6 @@ public class ExerciseListFragment extends BaseFragment implements
     public void searchViewOnQueryTextChange(String newText) {
         if (mAdapter != null)
             mAdapter.filterList(newText);
-    }
-
-    @Override
-    public void searchViewOnOpen() {
-        super.searchViewOnOpen();
-    }
-
-    @Override
-    public void searchViewOnClose() {
-        super.searchViewOnClose();
     }
 
     @Override
