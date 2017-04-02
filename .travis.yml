@@ -13,6 +13,8 @@ env:
 notifications:
   email:
     - brandon.michael.hogan@gmail.com
+  slack: 
+    - liftscout:Y8AEaVOpBBcCJWwR2HY9FcnF
 
 android:
   components:
