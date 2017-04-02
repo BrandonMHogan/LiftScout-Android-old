@@ -63,14 +63,9 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
     // Private Properties
     //
-    private View rootView;
     private WorkoutContainerContract.Presenter presenter;
-
-    private MenuItem deleteMenu;
-    private MenuItem settingsMenu;
     private MenuItem timerMenu;
 
-    private NotificationManager notificationManager;
     private NotificationServiceManager notificationServiceManager;
 
     private com.afollestad.materialdialogs.MaterialDialog deleteDialog;
@@ -94,8 +89,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_workout_container, container, false);
-        return rootView;
+        return inflater.inflate(R.layout.frag_workout_container, container, false);
     }
 
     @Override
@@ -120,7 +114,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(5);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
@@ -137,7 +131,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
             }
         });
 
-        notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
         notificationServiceManager = new NotificationServiceManager();
         notificationServiceManager.RestTimerNotification(getActivity().getApplicationContext(), REST_TIMER_NOTIFICATION_ID, true, getString(R.string.rest_timer_with_name, presenter.getExerciseName()), presenter.getExerciseId(), presenter.getDateLong(), 0, notificationManager);
 
@@ -207,7 +201,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
         menu.findItem(R.id.action_favourite_true).setVisible(presenter.isFavourite());
         menu.findItem(R.id.action_favourite_false).setVisible(!presenter.isFavourite());
 
-        deleteMenu = menu.findItem(R.id.action_delete);
+        MenuItem deleteMenu = menu.findItem(R.id.action_delete);
         deleteMenu.setVisible(true);
 
         timerMenu = menu.findItem(R.id.action_timer);
@@ -218,7 +212,7 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
         timerMenu.setVisible(true);
 
-        settingsMenu = menu.findItem(R.id.action_settings_tracker);
+        MenuItem settingsMenu = menu.findItem(R.id.action_settings_tracker);
         settingsMenu.setVisible(true);
     }
 

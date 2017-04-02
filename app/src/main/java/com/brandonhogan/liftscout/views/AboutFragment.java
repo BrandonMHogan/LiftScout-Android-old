@@ -24,11 +24,6 @@ public class AboutFragment extends BaseFragment {
     }
 
 
-    // Private Properties
-    //
-    private View rootView;
-
-
     // Bindings
     //
     @Bind(R.id.version_number)
@@ -40,8 +35,7 @@ public class AboutFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_about, null);
-        return rootView;
+        return inflater.inflate(R.layout.frag_about, container, false);
     }
 
     @Override

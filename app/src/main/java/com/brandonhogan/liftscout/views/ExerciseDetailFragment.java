@@ -73,7 +73,6 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
 
     // Private Properties
     //
-    private View rootView;
     private ExerciseDetailContract.Presenter presenter;
     private Toast toast;
 
@@ -103,13 +102,14 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_exercise_detail, null);
+        return inflater.inflate(R.layout.frag_exercise_detail, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
         toast = Toast.makeText(getActivity(), null, Toast.LENGTH_SHORT);
 
         presenter = new ExerciseDetailPresenter(this,
@@ -163,12 +163,12 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
     }
 
     private void setupControls() {
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item_view, ConstantValues.increments_string);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item_view, ConstantValues.increments_string);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         incrementSpinner.setAdapter(dataAdapter);
 
 
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item_view, presenter.getCategories());
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item_view, presenter.getCategories());
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
 
