@@ -126,14 +126,15 @@ public class ExerciseListFragment extends BaseFragment implements
         super.onResume();
         presenter.onResume(this);
         getActivity().invalidateOptionsMenu();
+
+        if(mAdapter == null)
+            presenter.updateAdapter();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         presenter.onDestroy();
-        mRecyclerView.setAdapter(null);
-        mAdapter = null;
     }
 
     @Override
@@ -208,7 +209,7 @@ public class ExerciseListFragment extends BaseFragment implements
 
         if (title != null) {
             setTitle(title);
-            noDataLabel.setText(String.format(getString(R.string.exercise_list_no_data), title));
+            noDataLabel.setText(getString(R.string.exercise_list_no_data));
         }
         else if(favOnly) {
             noDataLabel.setText(getString(R.string.exercise_list_no_fav));
