@@ -71,6 +71,12 @@
 
     <!-- Light Themes -->
 
+    <style name="AppTheme.ActionBarTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/theme_original_primary</item>
+        <item name="colorPrimaryDark">@color/theme_original_primary_dark</item>
+        <item name="colorAccent">@color/theme_original_accent</item>
+    </style>
+
     <!-- Original Light Theme Base-->
     <style name="AppTheme.Original.Light.Base" parent="AppTheme.Light.Base">
         <item name="colorPrimary">@color/theme_original_primary</item>
