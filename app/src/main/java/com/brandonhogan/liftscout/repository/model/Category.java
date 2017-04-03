@@ -14,6 +14,7 @@ public class Category extends RealmObject {
     public static final String COLOR = "color";
     public static final String IS_DELETED = "isDeleted";
     public static final String DELETE_DATE = "deleteDate";
+    public static final String DELETABLE = "deletable";
 
 
     @PrimaryKey
@@ -22,6 +23,7 @@ public class Category extends RealmObject {
     private String name;
     private int color;
     private boolean isDeleted;
+    private boolean deletable;
     private Date deleteDate;
 
     public int getId() {
@@ -62,5 +64,13 @@ public class Category extends RealmObject {
 
     public void setDeleteDate(Date deleteDate) {
         this.deleteDate = deleteDate;
+    }
+
+    public boolean isDeletable() {
+        return deletable;
+    }
+
+    public void setDeletable(boolean deletable) {
+        this.deletable = deletable;
     }
 }
