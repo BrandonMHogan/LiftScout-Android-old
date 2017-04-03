@@ -12,7 +12,7 @@
 
     <ImageView
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/icon_grey_xxhdpi"
+        android:src="@drawable/app_icon24"
         android:layout_height="@dimen/intro_icon_size"
         android:layout_width="@dimen/intro_icon_size"
         tools:layout_margin="@dimen/intro_margin"

@@ -40,7 +40,7 @@ public class AppController extends Application {
         Realm.init(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
                 .name("myRealm.realm")
-                //.schemaVersion(0)
+                .schemaVersion(0)
                 //.migration(new Migration())
                 .deleteRealmIfMigrationNeeded()
                 .build();

@@ -182,7 +182,7 @@
         <item name="android:alpha">1.0</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:adjustViewBounds">true</item>
-        <item name="android:src">@drawable/ic_icon_grey</item>
+        <item name="android:src">@mipmap/ic_launcher</item>
     </style>
 
 
