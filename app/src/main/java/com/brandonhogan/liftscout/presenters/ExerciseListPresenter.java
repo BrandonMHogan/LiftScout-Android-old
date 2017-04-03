@@ -2,7 +2,7 @@ package com.brandonhogan.liftscout.presenters;
 
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.ExerciseListContract;
-import com.brandonhogan.liftscout.managers.ExerciseListManager;
+import com.brandonhogan.liftscout.managers.ExerciseManager;
 import com.brandonhogan.liftscout.managers.GraphManager;
 import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.models.ExerciseListModel;
@@ -30,7 +30,7 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     UserManager userManager;
 
     @Inject
-    ExerciseListManager exerciseListManager;
+    ExerciseManager exerciseManager;
 
     // Private Properties
     //
@@ -48,20 +48,13 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
         this.view = view;
 
         exerciseRepo = new ExerciseRepoImpl();
-
-
-        if(disposable == null)
-            disposable = exerciseListManager.updateExercises().subscribe(new Consumer<Boolean>() {
-                @Override
-                public void accept(@NonNull Boolean aBoolean) throws Exception {
-                    updateAdapter();
-                }
-            });
     }
 
     @Override
     public void onResume(ExerciseListContract.View view) {
         this.view = view;
+        updateAdapter();
+        setupExerciseListener();
     }
 
     @Override
@@ -71,6 +64,17 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
 
     // Private Functions
     //
+
+    private void setupExerciseListener() {
+        disposable = exerciseManager.updateExercises().subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(@NonNull Boolean aBoolean) throws Exception {
+                updateAdapter();
+            }
+        });
+    }
+
+
     @Override
     public void updateAdapter() {
         adapterData = new ArrayList<>();
@@ -144,6 +148,7 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
         adapterData.remove(position);
         view.removeItem(position);
         updateAdapter();
+        exerciseManager.exerciseUpdated(true);
     }
 
     @Override

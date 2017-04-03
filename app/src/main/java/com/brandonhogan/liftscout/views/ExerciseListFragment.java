@@ -112,13 +112,14 @@ public class ExerciseListFragment extends BaseFragment implements
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(presenter == null)
+        if(presenter == null) {
             presenter = new ExerciseListPresenter(this);
 
-        presenter.viewCreated(this.getArguments().getInt(BUNDLE_CATEGORY_ID),
-                this.getArguments().getBoolean(BUNDLE_FAV_ONLY),
-                this.getArguments().getBoolean(BUNDLE_SHOW_ALL),
-                this.getArguments().getBoolean(BUNDLE_ADD_SET));
+            presenter.viewCreated(this.getArguments().getInt(BUNDLE_CATEGORY_ID),
+                    this.getArguments().getBoolean(BUNDLE_FAV_ONLY),
+                    this.getArguments().getBoolean(BUNDLE_SHOW_ALL),
+                    this.getArguments().getBoolean(BUNDLE_ADD_SET));
+        }
     }
 
     @Override

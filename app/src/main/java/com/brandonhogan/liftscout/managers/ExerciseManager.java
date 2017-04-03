@@ -8,11 +8,14 @@ import io.reactivex.subjects.PublishSubject;
  * Description :
  */
 
-public class ExerciseListManager {
+public class ExerciseManager {
 
     private final PublishSubject<Boolean> bus = PublishSubject.create();
 
     public void categoryUpdated(final Boolean event) {
+        bus.onNext(event);
+    }
+    public void exerciseUpdated(final Boolean event) {
         bus.onNext(event);
     }
 
