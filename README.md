@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/BrandonMHogan/LiftScout-Android.svg?branch=develop)](https://travis-ci.org/BrandonMHogan/LiftScout-Android) [![API](https://img.shields.io/badge/API-18%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=18) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://travis-ci.org/BrandonMHogan/LiftScout-Android.svg?branch=develop)](https://travis-ci.org/BrandonMHogan/LiftScout-Android) [![API](https://img.shields.io/badge/API-18%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=18) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 <img src="https://github.com/BrandonMHogan/LiftScout-Android/blob/develop/store/app_icon_512_arrow.png" align="left" height="48" width="48" >
 
