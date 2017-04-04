@@ -2,6 +2,7 @@
 <com.brandonhogan.liftscout.utils.controls.BaseFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:windowBackground">
 
     <TextView
@@ -22,5 +23,18 @@
         android:scrollbarThumbVertical="?attr/colorAccent"
         android:scrollbarSize="1dp"
         android:scrollbarStyle="insideOverlay"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_exercise_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:fabSize="normal"
+        android:src="@drawable/ic_add_white_48dp"
+        android:elevation="5dp"
+        app:pressedTranslationZ="12dp"
+        android:layout_marginBottom="@dimen/fab_margin_bottom"
+        android:layout_marginEnd="@dimen/fab_margin_end"
+        android:layout_gravity="bottom|end" />
 
 </com.brandonhogan.liftscout.utils.controls.BaseFrameLayout>

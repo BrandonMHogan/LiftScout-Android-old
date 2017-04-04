@@ -13,6 +13,7 @@ public interface ExerciseListContract {
         void removeItem(int position);
         void itemSelected(int id, boolean isSearch);
         void swipeItem(int position);
+        void showFab();
 
     }
 

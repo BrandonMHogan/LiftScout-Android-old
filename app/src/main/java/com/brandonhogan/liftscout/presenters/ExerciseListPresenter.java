@@ -53,8 +53,18 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
     @Override
     public void onResume(ExerciseListContract.View view) {
         this.view = view;
-        updateAdapter();
         setupExerciseListener();
+
+        CategoryRepo categoryRepo = new CategoryRepoImpl();
+
+        if (favOnly || showAll)
+            view.applyTitle(null, favOnly, showAll);
+        else {
+            view.applyTitle(categoryRepo.getCategory(categoryId).getName(), favOnly, showAll);
+            view.showFab();
+        }
+
+        updateAdapter();
     }
 
     @Override
@@ -110,15 +120,6 @@ public class ExerciseListPresenter implements ExerciseListContract.Presenter {
         this.isAddSet = isAddSet;
         this.favOnly = favOnly;
         this.showAll = showAll;
-
-        CategoryRepo categoryRepo = new CategoryRepoImpl();
-
-        if (favOnly || showAll)
-            view.applyTitle(null, favOnly, showAll);
-        else
-            view.applyTitle(categoryRepo.getCategory(categoryId).getName(), favOnly, showAll);
-
-        updateAdapter();
     }
 
     @Override
