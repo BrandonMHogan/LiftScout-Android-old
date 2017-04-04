@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/BrandonMHogan/LiftScout-Android.svg?branch=develop)](https://travis-ci.org/BrandonMHogan/LiftScout-Android) [![API](https://img.shields.io/badge/API-18%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=18) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+![LiftScout](https://github.com/BrandonMHogan/LiftScout-Android/blob/develop/store/app_icon_512_arrow.png | width=48)
 
-
-# LiftScout-Android   
+#  LiftScout-Android   
  <a href='https://play.google.com/store/apps/details?id=com.brandonhogan.liftscout&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width='200' alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 
 
