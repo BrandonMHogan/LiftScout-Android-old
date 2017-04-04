@@ -2,7 +2,7 @@
 
 <img src="https://github.com/BrandonMHogan/LiftScout-Android/blob/develop/store/app_icon_512_arrow.png" align="left" height="48" width="48" >
 
-#  LiftScout-Android   
+#  LiftScout  
  <a href='https://play.google.com/store/apps/details?id=com.brandonhogan.liftscout&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width='200' alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 
  ![screen_one](https://github.com/BrandonMHogan/LiftScout-Android/blob/develop/store/github/today.png)
