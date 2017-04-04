@@ -20,10 +20,9 @@ import com.brandonhogan.liftscout.events.IncrementEvent;
 import com.brandonhogan.liftscout.events.TrackerEvent;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.RecyclerViewClickListener;
-import com.brandonhogan.liftscout.interfaces.contracts.TrackerContract;
+import com.brandonhogan.liftscout.interfaces.contracts.WorkoutTrackerContract;
 import com.brandonhogan.liftscout.models.TrackerListModel;
 import com.brandonhogan.liftscout.presenters.WorkoutTrackerPresenter;
-import com.brandonhogan.liftscout.utils.BhDate;
 import com.brandonhogan.liftscout.utils.constants.Bundles;
 import com.brandonhogan.liftscout.utils.controls.NumberPicker;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
@@ -32,14 +31,13 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class TrackerFragment extends BaseFragment implements
-        TrackerContract.View, RecyclerViewClickListener {
+public class WorkoutTrackerFragment extends BaseFragment implements
+        WorkoutTrackerContract.View, RecyclerViewClickListener {
 
 
     // Static Properties
@@ -51,9 +49,9 @@ public class TrackerFragment extends BaseFragment implements
 
     // Instance
     //
-    public static TrackerFragment newInstance(int exerciseId)
+    public static WorkoutTrackerFragment newInstance(int exerciseId)
     {
-        TrackerFragment frag = new TrackerFragment();
+        WorkoutTrackerFragment frag = new WorkoutTrackerFragment();
         Bundle bundle = new Bundle();
 
         bundle.putInt(BUNDLE_EXERCISE_ID, exerciseId);
@@ -66,7 +64,7 @@ public class TrackerFragment extends BaseFragment implements
     // Private Properties
     //
     private View rootView;
-    private TrackerContract.Presenter presenter;
+    private WorkoutTrackerContract.Presenter presenter;
 
     private TrackerAdapter mAdapter;
     private LinearLayoutManager layoutManager;
@@ -99,7 +97,7 @@ public class TrackerFragment extends BaseFragment implements
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_tracker, container, false);
+        rootView = inflater.inflate(R.layout.frag_workout_tracker, container, false);
 
         return rootView;
     }
@@ -195,8 +193,12 @@ public class TrackerFragment extends BaseFragment implements
     }
 
     @Override
-    public void setDate(Date date) {
-        dateTextView.setText(BhDate.toSimpleStringDate(date));
+    public void setDate(int titleRes, String title) {
+
+        if(title == null)
+            dateTextView.setText(getString(titleRes));
+        else
+            dateTextView.setText(title);
     }
 
     // Contract

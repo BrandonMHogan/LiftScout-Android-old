@@ -2,14 +2,13 @@ package com.brandonhogan.liftscout.interfaces.contracts;
 
 import com.brandonhogan.liftscout.models.TrackerListModel;
 
-import java.util.Date;
 import java.util.List;
 
-public interface TrackerContract {
+public interface WorkoutTrackerContract {
 
     interface View {
         void updateAdapter(List<TrackerListModel> data);
-        void setDate(Date date);
+        void setDate(int titleRes, String title);
         void updateValues(float weight, int reps);
         String getRepsLabel(boolean isMultiple);
         void saveSuccess(int position, boolean isNew);

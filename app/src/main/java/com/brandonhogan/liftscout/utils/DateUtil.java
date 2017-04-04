@@ -3,6 +3,8 @@ package com.brandonhogan.liftscout.utils;
 
 import android.util.Log;
 
+import com.brandonhogan.liftscout.R;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,6 +17,28 @@ public class BhDate {
 
     private static final String detailedDateFormat = "MMMM d, yyyy";
     private static final String dayOfWeekDateFormat = "EEEE";
+
+    public static int toRelativeDateRes(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(BhDate.trimTimeFromDate(new Date()));
+
+        if (date.equals(cal.getTime())) {
+            return R.string.today;
+        }
+
+        cal.add(Calendar.DATE, -1);
+        if (date.equals(cal.getTime())) {
+            return R.string.yesterday;
+        }
+
+        cal.add(Calendar.DATE, 2);
+        if (date.equals(cal.getTime())) {
+            return R.string.tomorrow;
+        }
+
+        else return 0;
+    }
 
     public static String toStringDate (Date date) {
         SimpleDateFormat format = new SimpleDateFormat(detailedDateFormat, Locale.getDefault());

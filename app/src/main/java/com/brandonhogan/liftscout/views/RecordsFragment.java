@@ -49,7 +49,7 @@ public class RecordsFragment extends BaseFragment implements RecordsContract.Vie
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_tracker, container, false);
+        rootView = inflater.inflate(R.layout.frag_workout_tracker, container, false);
 
         return rootView;
     }

@@ -1,7 +1,7 @@
 package com.brandonhogan.liftscout.presenters;
 
 import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.interfaces.contracts.TrackerContract;
+import com.brandonhogan.liftscout.interfaces.contracts.WorkoutTrackerContract;
 import com.brandonhogan.liftscout.managers.ProgressManager;
 import com.brandonhogan.liftscout.managers.RecordsManager;
 import com.brandonhogan.liftscout.managers.UserManager;
@@ -10,14 +10,18 @@ import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.repository.model.Rep;
 import com.brandonhogan.liftscout.repository.model.Set;
+import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.Constants;
 import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 import com.brandonhogan.liftscout.utils.constants.Measurements;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
-public class WorkoutTrackerPresenter implements TrackerContract.Presenter {
+public class WorkoutTrackerPresenter implements WorkoutTrackerContract.Presenter {
 
     // Injections
     //
@@ -33,7 +37,7 @@ public class WorkoutTrackerPresenter implements TrackerContract.Presenter {
 
     // Private Properties
     //
-    private TrackerContract.View view;
+    private WorkoutTrackerContract.View view;
     private int exerciseId;
     private Set set;
     private ArrayList<TrackerListModel> adapterData;
@@ -46,7 +50,7 @@ public class WorkoutTrackerPresenter implements TrackerContract.Presenter {
 
     // Constructor
     //
-    public WorkoutTrackerPresenter(TrackerContract.View view, int exerciseId) {
+    public WorkoutTrackerPresenter(WorkoutTrackerContract.View view, int exerciseId) {
         Injector.getAppComponent().inject(this);
 
         this.view = view;
@@ -77,7 +81,16 @@ public class WorkoutTrackerPresenter implements TrackerContract.Presenter {
     @Override
     public void viewCreated() {
         updateAdapter();
-        view.setDate(progressManager.getTodayProgress().getDate());
+
+        int dateRes = BhDate.toRelativeDateRes(progressManager.getTodayProgress().getDate());
+
+        if (dateRes != 0) {
+            view.setDate(dateRes, null);
+        }
+        else {
+            view.setDate(0, new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT, Locale.getDefault()).format(progressManager.getTodayProgress().getDate()));
+        }
+
         updateIncrement();
     }
 

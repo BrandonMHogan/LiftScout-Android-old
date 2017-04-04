@@ -1,6 +1,5 @@
 package com.brandonhogan.liftscout.presenters;
 
-import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.TodayContract;
 import com.brandonhogan.liftscout.managers.ProgressManager;
@@ -16,7 +15,6 @@ import com.mikepenz.fastadapter.IItem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -124,28 +122,14 @@ public class TodayPresenter implements TodayContract.Presenter {
         double weight = progressManager.getTodayProgress().getWeight();
         view.setupWeight(weight == 0 ? null : Double.toString(weight));
 
+        int dateRes = BhDate.toRelativeDateRes(date);
 
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(BhDate.trimTimeFromDate(new Date()));
-
-        if (date.equals(cal.getTime())) {
-            view.setupTitle(R.string.today, null);
-            return;
+        if (dateRes != 0) {
+            view.setupTitle(dateRes, null);
         }
-
-        cal.add(Calendar.DATE, -1);
-        if (date.equals(cal.getTime())) {
-            view.setupTitle(R.string.yesterday, null);
-            return;
+        else {
+            view.setupTitle(0, new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT, Locale.getDefault()).format(date));
         }
-
-        cal.add(Calendar.DATE, 2);
-        if (date.equals(cal.getTime())) {
-            view.setupTitle(R.string.tomorrow, null);
-            return;
-        }
-
-        view.setupTitle(0, new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT, Locale.getDefault()).format(date));
     }
 
     @Override

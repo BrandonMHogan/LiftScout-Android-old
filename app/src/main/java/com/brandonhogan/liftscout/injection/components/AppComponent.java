@@ -38,7 +38,7 @@ import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
 import com.brandonhogan.liftscout.utils.controls.graphs.line.MyLineGraph;
 import com.brandonhogan.liftscout.views.GraphExercisesFragment;
 import com.brandonhogan.liftscout.views.SettingsDisplayFragment;
-import com.brandonhogan.liftscout.views.TrackerFragment;
+import com.brandonhogan.liftscout.views.WorkoutTrackerFragment;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import javax.inject.Singleton;
@@ -85,7 +85,7 @@ public interface AppComponent {
 
     // Workout
     void inject(WorkoutContainerPresenter presenter);
-    void inject(TrackerFragment fragment);
+    void inject(WorkoutTrackerFragment fragment);
     void inject(WorkoutTrackerPresenter presenter);
     void inject(WorkoutHistoryPresenter presenter);
     void inject(WorkoutGraphPresenter presenter);
