@@ -9,7 +9,7 @@ import com.brandonhogan.liftscout.models.TodayListItemModel;
 import com.brandonhogan.liftscout.models.TodayListSectionModel;
 import com.brandonhogan.liftscout.repository.model.Rep;
 import com.brandonhogan.liftscout.repository.model.Set;
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 import com.brandonhogan.liftscout.utils.Constants;
 import com.mikepenz.fastadapter.IItem;
 
@@ -122,7 +122,7 @@ public class TodayPresenter implements TodayContract.Presenter {
         double weight = progressManager.getTodayProgress().getWeight();
         view.setupWeight(weight == 0 ? null : Double.toString(weight));
 
-        int dateRes = BhDate.toRelativeDateRes(date);
+        int dateRes = DateUtil.toRelativeDateRes(date);
 
         if (dateRes != 0) {
             view.setupTitle(dateRes, null);

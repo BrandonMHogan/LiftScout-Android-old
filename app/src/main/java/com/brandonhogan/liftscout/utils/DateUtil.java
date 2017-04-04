@@ -13,7 +13,7 @@ import java.util.Locale;
 import static com.brandonhogan.liftscout.utils.Constants.MONTH_YEAR_DATE_FORMAT;
 import static com.brandonhogan.liftscout.utils.Constants.SIMPLE_DATE_FORMAT;
 
-public class BhDate {
+public class DateUtil {
 
     private static final String detailedDateFormat = "MMMM d, yyyy";
     private static final String dayOfWeekDateFormat = "EEEE";
@@ -21,7 +21,7 @@ public class BhDate {
     public static int toRelativeDateRes(Date date) {
 
         Calendar cal = Calendar.getInstance();
-        cal.setTime(BhDate.trimTimeFromDate(new Date()));
+        cal.setTime(DateUtil.trimTimeFromDate(new Date()));
 
         if (date.equals(cal.getTime())) {
             return R.string.today;
@@ -53,7 +53,7 @@ public class BhDate {
             return format.parse(dateString);
         }
         catch (java.text.ParseException ex) {
-            Log.e("BhDate", ex.getMessage());
+            Log.e("DateUtil", ex.getMessage());
         }
 
         return null;

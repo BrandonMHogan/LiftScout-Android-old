@@ -18,7 +18,7 @@ import com.brandonhogan.liftscout.interfaces.contracts.GraphsCategoriesContract;
 import com.brandonhogan.liftscout.presenters.GraphsCategoriesPresenter;
 import com.brandonhogan.liftscout.repository.model.CategoryGraph;
 import com.brandonhogan.liftscout.utils.AttrUtil;
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -247,7 +247,7 @@ public class GraphsCategoriesFragment extends BaseFragment
         totalTextView.setText(formattedValue);
 
         if (startDate > 0 && endDate > 0)
-            totalDateRangeTextView.setText(BhDate.toSimpleDateRange(startDate, endDate));
+            totalDateRangeTextView.setText(DateUtil.toSimpleDateRange(startDate, endDate));
     }
 
     private void updateVisibilities(boolean isData) {

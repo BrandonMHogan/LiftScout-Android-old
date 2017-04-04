@@ -18,7 +18,7 @@ import com.brandonhogan.liftscout.interfaces.contracts.HistoryContract;
 import com.brandonhogan.liftscout.models.HistoryListItemModel;
 import com.brandonhogan.liftscout.models.HistoryListSectionModel;
 import com.brandonhogan.liftscout.presenters.WorkoutHistoryPresenter;
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 import com.brandonhogan.liftscout.utils.constants.Bundles;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.mikepenz.fastadapter.FastAdapter;
@@ -130,9 +130,9 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
     public void setupTitle(long start, long end) {
         if (start > 0 && end > 0) {
             if (start == end)
-                title.setText(BhDate.toSimpleStringDate(start));
+                title.setText(DateUtil.toSimpleStringDate(start));
             else
-                title.setText(BhDate.toSimpleDateRange(start, end));
+                title.setText(DateUtil.toSimpleDateRange(start, end));
         }
     }
 

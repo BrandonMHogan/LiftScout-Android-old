@@ -9,7 +9,7 @@ import com.brandonhogan.liftscout.models.HistoryListItemModel;
 import com.brandonhogan.liftscout.models.HistoryListSectionModel;
 import com.brandonhogan.liftscout.repository.model.Rep;
 import com.brandonhogan.liftscout.repository.model.Set;
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 import com.mikepenz.fastadapter.IItem;
 
 import java.util.ArrayList;
@@ -81,7 +81,7 @@ public class WorkoutHistoryPresenter implements HistoryContract.Presenter {
                 else
                     setCount = set.getReps().size();
 
-                HistoryListSectionModel expandableItem = new HistoryListSectionModel(set.getId(), set.getDate(), BhDate.toSimpleStringDate(set.getDate()), set.getExercise().getId(), volume, setCount, userManager.getMeasurementValue(), isEmpty, setCounter == 0);
+                HistoryListSectionModel expandableItem = new HistoryListSectionModel(set.getId(), set.getDate(), DateUtil.toSimpleStringDate(set.getDate()), set.getExercise().getId(), volume, setCount, userManager.getMeasurementValue(), isEmpty, setCounter == 0);
                 expandableItem.withIsExpanded(true);
                 expandableItem.withSubItems(items);
                 adapterData.add(expandableItem);

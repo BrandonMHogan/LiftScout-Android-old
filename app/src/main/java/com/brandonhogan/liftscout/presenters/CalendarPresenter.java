@@ -16,7 +16,7 @@ import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.repository.model.CalendarEvent;
 import com.brandonhogan.liftscout.repository.model.Rep;
 import com.brandonhogan.liftscout.repository.model.Set;
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.mikepenz.fastadapter.IItem;
 
@@ -79,7 +79,7 @@ public class CalendarPresenter implements CalendarContract.Presenter {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
 
-        String monthTitle = BhDate.toMonthYearStringDate(cal.getTime());
+        String monthTitle = DateUtil.toMonthYearStringDate(cal.getTime());
         view.setEvents(monthTitle, date, getEvents(cal));
 
         updateAdapter();
@@ -92,7 +92,7 @@ public class CalendarPresenter implements CalendarContract.Presenter {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
 
-        String monthTitle = BhDate.toMonthYearStringDate(cal.getTime());
+        String monthTitle = DateUtil.toMonthYearStringDate(cal.getTime());
         view.setEvents(monthTitle, date, getEvents(cal));
     }
 

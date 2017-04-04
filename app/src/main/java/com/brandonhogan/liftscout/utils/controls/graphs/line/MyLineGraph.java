@@ -21,7 +21,7 @@ import com.brandonhogan.liftscout.models.LineGraphModel;
 import com.brandonhogan.liftscout.repository.model.Rep;
 import com.brandonhogan.liftscout.repository.model.Set;
 import com.brandonhogan.liftscout.utils.AttrUtil;
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 import com.brandonhogan.liftscout.utils.constants.Charts;
 import com.etiennelawlor.discreteslider.library.ui.DiscreteSlider;
 import com.github.mikephil.charting.charts.LineChart;
@@ -271,7 +271,7 @@ public class MyLineGraph extends FrameLayout {
         else
             value = Float.toString(((long)entry.getY())) + " " + userManager.getMeasurementValue();
 
-        setSelected(BhDate.toSimpleStringDate(getDateByFloat(entry.getX())), value);
+        setSelected(DateUtil.toSimpleStringDate(getDateByFloat(entry.getX())), value);
     }
 
     private Date getDateByFloat(float value) {

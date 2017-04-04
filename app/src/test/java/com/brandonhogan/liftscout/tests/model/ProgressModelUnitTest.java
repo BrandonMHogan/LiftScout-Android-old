@@ -2,7 +2,7 @@ package com.brandonhogan.liftscout.tests.model;
 
 import com.brandonhogan.liftscout.repository.model.Progress;
 import com.brandonhogan.liftscout.repository.model.Set;
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +35,7 @@ public class ProgressModelUnitTest {
         progress.setSets(sets);
 
         assertThat(progress.getId(), is(date.getTime()));
-        assertThat(progress.getDate(), is(BhDate.trimTimeFromDate(date)));
+        assertThat(progress.getDate(), is(DateUtil.trimTimeFromDate(date)));
         assertThat(progress.getWeight(), is(FAKE_DOUBLE));
         assertThat(progress.getSets(), is(sets));
     }

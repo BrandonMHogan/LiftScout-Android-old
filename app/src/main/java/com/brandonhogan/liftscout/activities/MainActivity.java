@@ -20,7 +20,7 @@ import com.brandonhogan.liftscout.managers.NavigationManager;
 import com.brandonhogan.liftscout.managers.NotificationServiceManager;
 import com.brandonhogan.liftscout.managers.ProgressManager;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 import com.brandonhogan.liftscout.utils.LogUtil;
 import com.brandonhogan.liftscout.utils.constants.DefaultScreens;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -341,7 +341,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_today:
-                        if (!progressManager.getCurrentDate().equals(BhDate.trimTimeFromDate(new Date())))
+                        if (!progressManager.getCurrentDate().equals(DateUtil.trimTimeFromDate(new Date())))
                             navigationManager.startToday(true);
                         else
                             navigationManager.startToday(false);

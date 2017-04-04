@@ -10,7 +10,7 @@ import com.brandonhogan.liftscout.repository.ExerciseRepo;
 import com.brandonhogan.liftscout.repository.impl.ExerciseRepoImpl;
 import com.brandonhogan.liftscout.repository.model.Rep;
 import com.brandonhogan.liftscout.repository.model.Set;
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 import com.brandonhogan.liftscout.utils.Constants;
 import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 import com.brandonhogan.liftscout.utils.constants.Measurements;
@@ -82,7 +82,7 @@ public class WorkoutTrackerPresenter implements WorkoutTrackerContract.Presenter
     public void viewCreated() {
         updateAdapter();
 
-        int dateRes = BhDate.toRelativeDateRes(progressManager.getTodayProgress().getDate());
+        int dateRes = DateUtil.toRelativeDateRes(progressManager.getTodayProgress().getDate());
 
         if (dateRes != 0) {
             view.setDate(dateRes, null);

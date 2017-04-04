@@ -13,7 +13,7 @@ import com.brandonhogan.liftscout.repository.impl.SetRepoImpl;
 import com.brandonhogan.liftscout.repository.model.Progress;
 import com.brandonhogan.liftscout.repository.model.Rep;
 import com.brandonhogan.liftscout.repository.model.Set;
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 
 import java.util.Date;
 
@@ -63,7 +63,7 @@ public class ProgressManager {
         exerciseRepo = new ExerciseRepoImpl();
 
         // Will default to today
-        setTodayProgress(BhDate.trimTimeFromDate(new Date()));
+        setTodayProgress(DateUtil.trimTimeFromDate(new Date()));
     }
 
 
@@ -83,7 +83,7 @@ public class ProgressManager {
 
     public void setTodayProgress(Date date) {
 
-        date = BhDate.trimTimeFromDate(date);
+        date = DateUtil.trimTimeFromDate(date);
 
         todayProgress = databaseRealm.getRealmInstance()
                 .where(Progress.class)

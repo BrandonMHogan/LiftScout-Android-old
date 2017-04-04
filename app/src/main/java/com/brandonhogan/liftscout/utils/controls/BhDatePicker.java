@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 
 import com.brandonhogan.liftscout.AppController;
 import com.brandonhogan.liftscout.R;
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -49,7 +49,7 @@ public class BhDatePicker extends FrameLayout {
     public void setDate (Date date) {
         this.date = date;
         if (date != null) {
-            editTextView.setText(BhDate.toStringDate(date));
+            editTextView.setText(DateUtil.toStringDate(date));
         }
     }
     public Date getMinDate() { return minDate; }

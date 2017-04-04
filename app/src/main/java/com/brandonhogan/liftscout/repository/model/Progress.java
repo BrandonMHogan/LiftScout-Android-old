@@ -1,6 +1,6 @@
 package com.brandonhogan.liftscout.repository.model;
 
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 
 import java.util.Date;
 
@@ -40,7 +40,7 @@ public class Progress extends RealmObject {
     }
 
     public void setDate(Date date) {
-        this.date = BhDate.trimTimeFromDate(date);
+        this.date = DateUtil.trimTimeFromDate(date);
         this.id = date.getTime();
     }
 

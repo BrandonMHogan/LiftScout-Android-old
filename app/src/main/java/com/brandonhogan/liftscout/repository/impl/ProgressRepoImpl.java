@@ -6,7 +6,7 @@ import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.ProgressRepo;
 import com.brandonhogan.liftscout.repository.model.Progress;
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -39,7 +39,7 @@ public class ProgressRepoImpl implements ProgressRepo {
     public Progress getProgress(Date date) {
         return databaseRealm.getRealmInstance()
                 .where(Progress.class)
-                .equalTo(Progress.DATE, BhDate.trimTimeFromDate(date))
+                .equalTo(Progress.DATE, DateUtil.trimTimeFromDate(date))
                 .findFirst();
     }
 
@@ -56,7 +56,7 @@ public class ProgressRepoImpl implements ProgressRepo {
         cal.set(Calendar.SECOND, cal.getActualMinimum(Calendar.SECOND));
         cal.set(Calendar.MILLISECOND, cal.getActualMinimum(Calendar.MILLISECOND));
 
-        Date first = BhDate.trimTimeFromDate(cal.getTime());
+        Date first = DateUtil.trimTimeFromDate(cal.getTime());
 
         cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
         cal.set(Calendar.HOUR_OF_DAY, cal.getActualMaximum(Calendar.HOUR_OF_DAY));
@@ -64,7 +64,7 @@ public class ProgressRepoImpl implements ProgressRepo {
         cal.set(Calendar.SECOND, cal.getActualMaximum(Calendar.SECOND));
         cal.set(Calendar.MILLISECOND, cal.getActualMaximum(Calendar.MILLISECOND));
 
-        Date last = BhDate.trimTimeFromDate(cal.getTime());
+        Date last = DateUtil.trimTimeFromDate(cal.getTime());
 
         return databaseRealm.getRealmInstance()
                 .where(Progress.class)

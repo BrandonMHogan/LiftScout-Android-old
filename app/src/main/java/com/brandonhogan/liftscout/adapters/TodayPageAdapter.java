@@ -5,7 +5,7 @@ import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-import com.brandonhogan.liftscout.utils.BhDate;
+import com.brandonhogan.liftscout.utils.DateUtil;
 import com.brandonhogan.liftscout.views.TodayFragment;
 
 import java.util.Calendar;
@@ -129,7 +129,7 @@ public class TodayPageAdapter extends FragmentPagerAdapter
         Calendar calendar=Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, getRealPosition(position) - TOTAL_DAYS);
 
-        currentDate = BhDate.trimTimeFromDate(calendar.getTime());
+        currentDate = DateUtil.trimTimeFromDate(calendar.getTime());
 
         return currentDate;
     }
