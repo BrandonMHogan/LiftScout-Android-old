@@ -5,6 +5,10 @@
 #  LiftScout-Android   
  <a href='https://play.google.com/store/apps/details?id=com.brandonhogan.liftscout&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width='200' alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 
+ ![screen_one](https://github.com/BrandonMHogan/LiftScout-Android/blob/develop/store/github/today.png)
+ ![screen_two](https://github.com/BrandonMHogan/LiftScout-Android/blob/develop/store/github/tracker.png)
+ ![screen_three](https://github.com/BrandonMHogan/LiftScout-Android/blob/develop/store/github/calendar.png)
+ ![screen_four](https://github.com/BrandonMHogan/LiftScout-Android/blob/develop/store/github/themes.png)
 
 ## Description
 Weightlifting and routine tracking application to improve your gym experience. You can create routines and workout plans, track your progress visually and keep yourself motivated and on time.
