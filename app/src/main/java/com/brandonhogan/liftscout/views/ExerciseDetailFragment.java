@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.views;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,7 +15,10 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.interfaces.OnBackPressListener;
 import com.brandonhogan.liftscout.interfaces.contracts.ExerciseDetailContract;
 import com.brandonhogan.liftscout.presenters.ExerciseDetailPresenter;
 import com.brandonhogan.liftscout.repository.model.Category;
@@ -31,7 +35,7 @@ import butterknife.ButterKnife;
  * Description :
  */
 
-public class ExerciseDetailFragment extends BaseFragment implements ExerciseDetailContract.View {
+public class ExerciseDetailFragment extends BaseFragment implements ExerciseDetailContract.View, OnBackPressListener {
 
 
     // Private Static Properties
@@ -75,6 +79,7 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
     //
     private ExerciseDetailContract.Presenter presenter;
     private Toast toast;
+    private boolean canLeave = false;
 
     @Bind(R.id.name_text)
     EditText nameText;
@@ -162,6 +167,27 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onBackPress() {
+
+        if (canLeave)
+            return true;
+
+        new MaterialDialog.Builder(getActivity())
+                .title(R.string.exercise_leave_without_saving_title)
+                .content(R.string.exercise_leave_without_saving)
+                .neutralText(R.string.leave)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        canLeave = true;
+                        getNavigationManager().navigateBack(getActivity());
+                    }
+                })
+                .positiveText(R.string.cancel).show();
+        return false;
+    }
+
     private void setupControls() {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item_view, ConstantValues.increments_string);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -198,6 +224,7 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
 
     @Override
     public void onSaveSuccess() {
+        canLeave = true;
         toast.setText(R.string.exercise_setting_saved);
         toast.show();
         getNavigationManager().navigateBack(getActivity());
@@ -205,6 +232,7 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
 
     @Override
     public void onSaveFailure(int errorMsg) {
+        canLeave = false;
         toast.setText(errorMsg);
         toast.show();
     }

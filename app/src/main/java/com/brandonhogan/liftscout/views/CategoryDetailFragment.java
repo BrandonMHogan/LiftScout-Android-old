@@ -2,6 +2,7 @@ package com.brandonhogan.liftscout.views;
 
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,7 +13,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.interfaces.OnBackPressListener;
 import com.brandonhogan.liftscout.interfaces.contracts.CategoryDetailContract;
 import com.brandonhogan.liftscout.presenters.CategoryDetailPresenter;
 import com.brandonhogan.liftscout.repository.model.Category;
@@ -28,7 +32,7 @@ import butterknife.ButterKnife;
  */
 
 public class CategoryDetailFragment extends BaseFragment implements CategoryDetailContract.View,
-        SpectrumPalette.OnColorSelectedListener{
+        SpectrumPalette.OnColorSelectedListener, OnBackPressListener {
 
 
     // Private Static Properties
@@ -69,6 +73,7 @@ public class CategoryDetailFragment extends BaseFragment implements CategoryDeta
     private View rootView;
     private CategoryDetailContract.Presenter presenter;
     private Toast toast;
+    private boolean canLeave = false;
 
     @Bind(R.id.name_text)
     EditText nameText;
@@ -128,6 +133,27 @@ public class CategoryDetailFragment extends BaseFragment implements CategoryDeta
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onBackPress() {
+
+        if (canLeave)
+            return true;
+
+        new MaterialDialog.Builder(getActivity())
+                .title(R.string.category_leave_without_saving_title)
+                .content(R.string.category_leave_without_saving)
+                .neutralText(R.string.leave)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        canLeave = true;
+                        getNavigationManager().navigateBack(getActivity());
+                    }
+                })
+                .positiveText(R.string.cancel).show();
+        return false;
+    }
+
     private void setupControls() {
         int[] colors = getActivity().getResources().getIntArray(R.array.category_colors);
         palette.setColors(colors);
@@ -143,6 +169,7 @@ public class CategoryDetailFragment extends BaseFragment implements CategoryDeta
 
     @Override
     public void onSaveSuccess() {
+        canLeave = true;
         toast.setText(R.string.category_setting_saved);
         toast.show();
         getNavigationManager().navigateBack(getActivity());
@@ -150,6 +177,7 @@ public class CategoryDetailFragment extends BaseFragment implements CategoryDeta
 
     @Override
     public void onSaveFailure(int errorMsg) {
+        canLeave = false;
         toast.setText(errorMsg);
         toast.show();
     }

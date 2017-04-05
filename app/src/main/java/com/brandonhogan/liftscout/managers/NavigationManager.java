@@ -7,6 +7,7 @@ import android.app.FragmentManager;
 import android.util.Log;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.interfaces.OnBackPressListener;
 import com.brandonhogan.liftscout.views.AboutFragment;
 import com.brandonhogan.liftscout.views.AnalyticsContainerFragment;
 import com.brandonhogan.liftscout.views.CalendarFragment;
@@ -103,6 +104,17 @@ public class NavigationManager {
     /**
      * pops every fragment and starts the given fragment as a new one.
      */
+    private boolean openAsEdit(BaseFragment fragment) {
+
+        if (!verifyTransition(fragment, false)) {
+            Log.d(TAG, "Transition has failed");
+            return false;
+        }
+
+        hideBottomNav();
+        return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
+    }
+
     private boolean openAsRoot(BaseFragment fragment) {
         return openAsRoot(fragment, false);
     }
@@ -111,6 +123,7 @@ public class NavigationManager {
         if (!verifyTransition(fragment, force))
             return false;
 
+        showBottomNav();
         popToHomeFragment();
         return replaceWithTransitions(fragment, R.animator.root_in, R.animator.fade_out);
     }
@@ -119,6 +132,7 @@ public class NavigationManager {
         if (!verifyTransition(fragment, false))
             return false;
 
+        showBottomNav();
         popEveryFragment();
         return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
     }
@@ -127,6 +141,7 @@ public class NavigationManager {
         if (!verifyTransition(fragment, force))
             return false;
 
+        showBottomNav();
         popEveryFragment();
         return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
     }
@@ -137,6 +152,7 @@ public class NavigationManager {
             return false;
         }
 
+        showBottomNav();
         return replaceWithTransitions(fragment, R.animator.fade_in, R.animator.fade_out);
     }
 
@@ -204,7 +220,18 @@ public class NavigationManager {
             // we can finish the base activity since we have no other fragments
             baseActivity.finish();
         } else {
-            mFragmentManager.popBackStack();
+
+            Fragment currentFragment = mFragmentManager.findFragmentById(R.id.fragment_manager);
+
+            boolean allowPop = true;
+            if(currentFragment instanceof OnBackPressListener){
+                allowPop = ((OnBackPressListener)currentFragment).onBackPress();
+            }
+
+            if(allowPop) {
+                showBottomNav();
+                mFragmentManager.popBackStack();
+            }
         }
     }
 
@@ -299,22 +326,22 @@ public class NavigationManager {
 
     public boolean startExerciseDetail(int exerciseId, int categoryId) {
         BaseFragment fragment = ExerciseDetailFragment.newInstance(exerciseId, categoryId);
-        return open(fragment);
+        return openAsEdit(fragment);
     }
 
     public boolean startExerciseDetail(boolean validCategoryId, int categoryId) {
         BaseFragment fragment = ExerciseDetailFragment.newInstance(validCategoryId, categoryId);
-        return open(fragment);
+        return openAsEdit(fragment);
     }
 
     public boolean startCategoryDetail() {
         BaseFragment fragment = CategoryDetailFragment.newInstance();
-        return open(fragment);
+        return openAsEdit(fragment);
     }
 
     public boolean startCategoryDetail(int categoryId) {
         BaseFragment fragment = CategoryDetailFragment.newInstance(categoryId);
-        return open(fragment);
+        return openAsEdit(fragment);
     }
 
     // Set Edit
