@@ -2,7 +2,6 @@ package com.brandonhogan.liftscout.injection.module;
 
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsProfileContract;
 import com.brandonhogan.liftscout.presenters.SettingsProfilePresenter;
-import com.brandonhogan.liftscout.repository.DatabaseRealm;
 
 import javax.inject.Singleton;
 

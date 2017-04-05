@@ -37,7 +37,6 @@ import com.brandonhogan.liftscout.repository.impl.UserRepoImpl;
 import com.brandonhogan.liftscout.repository.impl.UserSettingsRepoImpl;
 import com.brandonhogan.liftscout.utils.controls.graphs.line.MyLineGraph;
 import com.brandonhogan.liftscout.views.GraphExercisesFragment;
-import com.brandonhogan.liftscout.views.SettingsDisplayFragment;
 import com.brandonhogan.liftscout.views.WorkoutTrackerFragment;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 

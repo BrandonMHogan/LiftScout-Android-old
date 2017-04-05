@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.injection.components.Injector;
-import com.brandonhogan.liftscout.injection.scopes.PerActivity;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsProfileContract;
 import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.utils.constants.Measurements;
