@@ -9,8 +9,8 @@ import com.brandonhogan.liftscout.models.TodayListItemModel;
 import com.brandonhogan.liftscout.models.TodayListSectionModel;
 import com.brandonhogan.liftscout.repository.model.Rep;
 import com.brandonhogan.liftscout.repository.model.Set;
-import com.brandonhogan.liftscout.utils.DateUtil;
 import com.brandonhogan.liftscout.utils.Constants;
+import com.brandonhogan.liftscout.utils.DateUtil;
 import com.mikepenz.fastadapter.IItem;
 
 import java.text.SimpleDateFormat;
