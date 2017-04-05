@@ -25,7 +25,6 @@ public class Injector {
                 .build();
 
         fragmentComponent = DaggerFragmentComponent.builder()
-                .userModule(new UserModule())
                 .presenterModule(new PresenterModule())
                 .build();
 

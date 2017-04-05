@@ -40,9 +40,6 @@ public class SettingsProfilePresenter implements SettingsProfileContract.Present
     @Inject
     public SettingsProfilePresenter() {
         Injector.getAppComponent().inject(this);
-        //this.view = view;
-
-        originalMeasurementValue = userManager.getMeasurementValue();
     }
 
     @Override
@@ -73,14 +70,18 @@ public class SettingsProfilePresenter implements SettingsProfileContract.Present
         view.saveSuccess(R.string.setting_profile_measurement_saved);
     }
 
-    // Private Functions
-    //
     private void init() {
         measurements = new ArrayList<>();
         measurements.add(Measurements.POUNDS);
         measurements.add(Measurements.KILOGRAMS);
 
+        originalMeasurementValue = userManager.getMeasurementValue();
         currentSelectedMeasurement = originalMeasurementValue;
         view.populateMeasurements(measurements, measurements.indexOf(originalMeasurementValue));
+    }
+
+    // Exists mostly for the unit tests
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
     }
 }

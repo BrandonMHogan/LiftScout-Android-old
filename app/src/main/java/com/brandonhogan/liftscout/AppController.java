@@ -45,8 +45,5 @@ public class AppController extends Application {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
-
-
-
     }
 }
