@@ -4,11 +4,6 @@ import com.brandonhogan.liftscout.presenters.base.PresenterBase;
 
 import java.util.ArrayList;
 
-/**
- * Created by Brandon on 2/17/2017.
- * Description :
- */
-
 public interface SettingsProfileContract {
     interface View {
         void populateMeasurements(ArrayList<String> measurements, int position);

@@ -30,16 +30,16 @@ public class SettingsProfileFragment extends BaseFragment implements SettingsPro
     //
     @Inject SettingsProfileContract.Presenter presenter;
 
+    // Bindings
+    //
+    @Bind(R.id.measurementSpinner)
+    MaterialSpinner measurementSpinner;
+
     // Instance
     //
     public static SettingsProfileFragment newInstance() {
         return new SettingsProfileFragment();
     }
-
-    // Bindings
-    //
-    @Bind(R.id.measurementSpinner)
-    MaterialSpinner measurementSpinner;
 
     //Overrides
     //

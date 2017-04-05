@@ -13,14 +13,8 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-/**
- * Created by Brandon on 2/17/2017.
- * Description :
- */
-
 @Singleton
 public class SettingsProfilePresenter implements SettingsProfileContract.Presenter {
-
 
     // Injections
     //
@@ -33,7 +27,6 @@ public class SettingsProfilePresenter implements SettingsProfileContract.Present
     private String originalMeasurementValue;
     private String currentSelectedMeasurement;
     private ArrayList<String> measurements;
-
 
     // Constructor
     //

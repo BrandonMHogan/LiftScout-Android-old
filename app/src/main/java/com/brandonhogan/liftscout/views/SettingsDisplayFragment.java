@@ -21,10 +21,21 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 
 public class SettingsDisplayFragment extends BaseFragment implements SettingsDisplayContract.View {
 
+    // Injections
+    //
+    @Inject
+    SettingsDisplayContract.Presenter presenter;
+
+    // Bindings
+    //
+    @Bind(R.id.themeSpinner)
+    MaterialSpinner themeSpinner;
 
     // Instance
     //
@@ -32,26 +43,17 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
         return new SettingsDisplayFragment();
     }
 
-
     // Private Properties
     //
-    private SettingsDisplayContract.Presenter presenter;
-    private View rootView;
     private MaterialDialog dialog;
-
-
-    // Bindings
-    //
-    @Bind(R.id.themeSpinner)
-    MaterialSpinner themeSpinner;
-
 
     //Overrides
     //
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_settings_display, container, false);
+        View rootView = inflater.inflate(R.layout.frag_settings_display, container, false);
+        Injector.getFragmentComponent().inject(this);
 
         return rootView;
     }
@@ -59,13 +61,26 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Injector.getAppComponent().inject(this);
-
-        presenter = new SettingsDisplayPresenter(this);
-
+        presenter.setView(this);
         setTitle(getResources().getString(R.string.title_frag_settings_display));
+    }
 
-        presenter.viewCreated();
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.onDestroy();
     }
 
     @Override
