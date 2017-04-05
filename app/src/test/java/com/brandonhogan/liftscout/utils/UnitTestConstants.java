@@ -5,7 +5,7 @@ package com.brandonhogan.liftscout.utils;
  * Description :
  */
 
-public class constants {
+public class UnitTestConstants {
     public static final long FAKE_LONG = 5454545;
     public static final long FAKE_LONG_OTHER = 679967;
 

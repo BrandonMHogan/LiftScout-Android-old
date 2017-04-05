@@ -14,8 +14,8 @@ import org.mockito.stubbing.Answer;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.brandonhogan.liftscout.utils.constants.FAKE_STRING;
-import static com.brandonhogan.liftscout.utils.constants.FAKE_STRING_OTHER;
+import static com.brandonhogan.liftscout.utils.UnitTestConstants.FAKE_STRING;
+import static com.brandonhogan.liftscout.utils.UnitTestConstants.FAKE_STRING_OTHER;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Matchers.anyString;

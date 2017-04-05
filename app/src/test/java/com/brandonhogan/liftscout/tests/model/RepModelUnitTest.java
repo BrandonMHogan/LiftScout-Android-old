@@ -6,9 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static com.brandonhogan.liftscout.utils.constants.FAKE_DOUBLE;
-import static com.brandonhogan.liftscout.utils.constants.FAKE_INT;
-import static com.brandonhogan.liftscout.utils.constants.FAKE_STRING;
+import static com.brandonhogan.liftscout.utils.UnitTestConstants.FAKE_DOUBLE;
+import static com.brandonhogan.liftscout.utils.UnitTestConstants.FAKE_INT;
+import static com.brandonhogan.liftscout.utils.UnitTestConstants.FAKE_STRING;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 

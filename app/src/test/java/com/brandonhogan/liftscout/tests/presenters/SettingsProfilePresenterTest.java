@@ -7,6 +7,7 @@ import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsProfileContract;
 import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.presenters.SettingsProfilePresenter;
+import com.brandonhogan.liftscout.utils.constants.Measurements;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,10 +26,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by Brandon on 4/5/2017.
- * Description :
- */
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Injector.class, UserManager.class})
@@ -56,7 +53,7 @@ public class SettingsProfilePresenterTest {
 
         // Mocks out the userManager
         userManager = mock(UserManager.class);
-        when(userManager.getMeasurementValue()).thenReturn("Pounds");
+        when(userManager.getMeasurementValue()).thenReturn(Measurements.POUNDS);
 
         // Creates,
         settingsProfilePresenter = new SettingsProfilePresenter();
@@ -66,11 +63,11 @@ public class SettingsProfilePresenterTest {
     @Test
     public void test_setView() {
         ArrayList<String> measurements = new ArrayList<>();
-        measurements.add("Pounds");
-        measurements.add("Kilograms");
+        measurements.add(Measurements.POUNDS);
+        measurements.add(Measurements.KILOGRAMS);
 
         settingsProfilePresenter.setView(mockView);
-        verify(mockView, times(1)).populateMeasurements(measurements, measurements.indexOf(measurements.get(0)));
+        verify(mockView, times(1)).populateMeasurements(measurements, measurements.indexOf(Measurements.POUNDS));
     }
 
     @Test

@@ -10,7 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import io.realm.RealmList;
 
-import static com.brandonhogan.liftscout.utils.constants.FAKE_DOUBLE;
+import static com.brandonhogan.liftscout.utils.UnitTestConstants.FAKE_DOUBLE;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
