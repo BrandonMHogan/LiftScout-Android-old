@@ -178,8 +178,6 @@ public class WorkoutTrackerFragment extends BaseFragment implements
 
     @Override
     public void onLongClick(View v, int position) {
-        presenter.onSelect(position);
-        mAdapter.selected(position);
         showDeleteRepAlert(position);
     }
 
