@@ -85,4 +85,16 @@ public class SettingsProfilePresenterTest {
         settingsProfilePresenter.setView(mockView);
         settingsProfilePresenter.onDestroy();
     }
+
+    @Test
+    public void test_onResume() {
+        settingsProfilePresenter.setView(mockView);
+        settingsProfilePresenter.onResume();
+    }
+
+    @Test
+    public void test_onPause() {
+        settingsProfilePresenter.setView(mockView);
+        settingsProfilePresenter.onPause();
+    }
 }

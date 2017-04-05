@@ -177,10 +177,10 @@
     <string name="setting_about">About Lift Scout</string>
     <string name="setting_about_description">Check out some information about the app and its developer</string>
     <string name="setting_profile">Profile</string>
-    <string name="setting_profile_description">Change your profile name, age and unit of measurement</string>
+    <string name="setting_profile_description">Change your unit of measurement</string>
     <string name="setting_profile_measurement_saved">Unit of Measurement has been updated</string>
     <string name="setting_display">Display</string>
-    <string name="setting_display_description">Adjust display settings including themes and colours</string>
+    <string name="setting_display_description">Find a theme that suits you</string>
     <string name="setting_notifications">Notifications</string>
     <string name="setting_notifications_description">Create, delete and modify existing local push notifications</string>
     <string name="setting_home">Home</string>
