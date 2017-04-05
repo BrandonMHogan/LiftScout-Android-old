@@ -201,7 +201,7 @@ public class ExerciseListFragment extends BaseFragment implements
 
         dialog = new MaterialDialog.Builder(getActivity())
                 .title(exercise.getName())
-                .content(getString(R.string.dialog_category_long_selected, exercise.getName()))
+                .content(getString(R.string.dialog_exercise_long_selected, exercise.getName()))
                 .positiveText(R.string.edit)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override

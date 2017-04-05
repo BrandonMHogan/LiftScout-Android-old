@@ -151,6 +151,7 @@
     <string name="dialog_edit_exercise_title">Edit Exercise</string>
     <string name="dialog_category_remove_title">Deleting %s</string>
     <string name="dialog_category_long_selected">Do you want to edit, or delete %s.  \n\nNote that deleting will not remove existing set data, but will delete all exercises associated to this category.</string>
+    <string name="dialog_exercise_long_selected">Do you want to edit, or delete %s.  \n\nNote that deleting will not remove existing set data</string>
     <string name="dialog_exercise_remove_title">Deleting %s</string>
     <string name="dialog_exercise_remove_message">Are you sure you wish to delete %s? \n\nNote that this will not remove existing set data.</string>
     <string name="dialog_rep_remove_title">Deleting Rep</string>
