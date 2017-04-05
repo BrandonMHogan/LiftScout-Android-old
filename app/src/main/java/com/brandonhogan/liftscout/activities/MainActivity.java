@@ -308,8 +308,8 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         }
         else {
             if (getFragmentManager().getBackStackEntryCount() == 1) {
-                // we have only one fragment left so we would close the application with this back
-                endActivity();
+                // we have only one fragment left so we will background the app
+                this.moveTaskToBack(true);
 
             } else {
                 navigationManager.navigateBack(this);

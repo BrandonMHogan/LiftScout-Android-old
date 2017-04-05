@@ -166,7 +166,7 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item_view, ConstantValues.increments_string);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         incrementSpinner.setAdapter(dataAdapter);
-
+        incrementSpinner.setSelection(ConstantValues.increments.indexOf(presenter.getDefaultIncrement()), true);
 
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item_view, presenter.getCategories());
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
