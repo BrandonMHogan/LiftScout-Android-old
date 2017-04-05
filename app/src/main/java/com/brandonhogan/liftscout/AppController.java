@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout;
 import android.app.Application;
 
 import com.brandonhogan.liftscout.injection.components.Injector;
+import com.brandonhogan.liftscout.repository.migration.Migration;
 import com.squareup.leakcanary.LeakCanary;
 
 import io.realm.Realm;
@@ -40,9 +41,9 @@ public class AppController extends Application {
         Realm.init(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
                 .name("myRealm.realm")
-                .schemaVersion(0)
-                //.migration(new Migration())
-                .deleteRealmIfMigrationNeeded()
+                .schemaVersion(1)
+                .migration(new Migration())
+                //.deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
     }

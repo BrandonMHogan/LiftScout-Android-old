@@ -1,5 +1,7 @@
 package com.brandonhogan.liftscout.repository.model;
 
+import android.support.annotation.NonNull;
+
 import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 
 import java.util.Date;
@@ -20,6 +22,7 @@ public class Exercise extends RealmObject {
     public static final String REST_SOUND = "restSound";
     public static final String REST_AUTO_START = "restAutoStart";
     public static final String INCREMENT = "increment";
+    public static final String ALLOW_NEGATIVE_VALUE = "allowNegativeValue";
     public static final String FAVOURITE = "favourite";
 
 
@@ -48,6 +51,9 @@ public class Exercise extends RealmObject {
     private double increment;
 
     private boolean favourite = false;
+
+    @NonNull
+    private boolean allowNegativeValue = false;
 
     public int getId() {
         return id;
@@ -143,5 +149,13 @@ public class Exercise extends RealmObject {
 
     public void setFavourite(boolean favourite) {
         this.favourite = favourite;
+    }
+
+    public boolean isAllowNegativeValue() {
+        return allowNegativeValue;
+    }
+
+    public void setAllowNegativeValue(boolean allowNegativeValue) {
+        this.allowNegativeValue = allowNegativeValue;
     }
 }

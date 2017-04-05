@@ -1,6 +1,7 @@
 package com.brandonhogan.liftscout.repository.migration;
 
 import io.realm.DynamicRealm;
+import io.realm.FieldAttribute;
 import io.realm.RealmMigration;
 import io.realm.RealmObjectSchema;
 import io.realm.RealmSchema;
@@ -38,9 +39,9 @@ public class Migration implements RealmMigration {
          ************************************************/
         // Migrate from version 0 to version 1
         if (oldVersion == 0) {
-            RealmObjectSchema categorySchema = schema.get("Category");
-
-
+            RealmObjectSchema exerciseSchema = schema.get("Exercise");
+            exerciseSchema
+                    .addField("allowNegativeValue", boolean.class, FieldAttribute.REQUIRED);
             oldVersion++;
 
 
