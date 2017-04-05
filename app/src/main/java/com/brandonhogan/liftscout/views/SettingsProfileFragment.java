@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsProfileContract;
 import com.brandonhogan.liftscout.presenters.SettingsProfilePresenter;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 
@@ -24,6 +27,9 @@ import butterknife.Bind;
 
 public class SettingsProfileFragment extends BaseFragment implements SettingsProfileContract.View {
 
+    // Injections
+    //
+    @Inject SettingsProfileContract.Presenter presenter;
 
     // Instance
     //
@@ -31,25 +37,18 @@ public class SettingsProfileFragment extends BaseFragment implements SettingsPro
         return new SettingsProfileFragment();
     }
 
-
-    // Private Properties
-    //
-    private SettingsProfileContract.Presenter presenter;
-    private View rootView;
-
-
     // Bindings
     //
     @Bind(R.id.measurementSpinner)
     MaterialSpinner measurementSpinner;
-
 
     //Overrides
     //
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_settings_profile, container, false);
+        View rootView = inflater.inflate(R.layout.frag_settings_profile, container, false);
+        Injector.getFragmentComponent().inject(this);
 
         return rootView;
     }
@@ -57,12 +56,26 @@ public class SettingsProfileFragment extends BaseFragment implements SettingsPro
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        presenter = new SettingsProfilePresenter(this);
-
+        presenter.setView(this);
         setTitle(getResources().getString(R.string.title_frag_settings_profile));
+    }
 
-        presenter.viewCreated();
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.onDestroy();
     }
 
     @Override

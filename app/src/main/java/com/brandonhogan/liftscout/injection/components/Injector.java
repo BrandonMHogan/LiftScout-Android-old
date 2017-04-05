@@ -4,11 +4,13 @@ import android.app.Application;
 
 import com.brandonhogan.liftscout.injection.module.AppModule;
 import com.brandonhogan.liftscout.injection.module.DatabaseModule;
+import com.brandonhogan.liftscout.injection.module.PresenterModule;
 import com.brandonhogan.liftscout.injection.module.UserModule;
 
 public class Injector {
 
     private static AppComponent appComponent;
+    private static FragmentComponent fragmentComponent;
     private static RepoComponent repoComponent;
 
     private Injector() {}
@@ -20,6 +22,11 @@ public class Injector {
                 .appModule(new AppModule(application))
                 .userModule(new UserModule())
                 .databaseModule(new DatabaseModule())
+                .build();
+
+        fragmentComponent = DaggerFragmentComponent.builder()
+                .userModule(new UserModule())
+                .presenterModule(new PresenterModule())
                 .build();
 
         repoComponent = DaggerRepoComponent.builder()
@@ -35,5 +42,10 @@ public class Injector {
     public static RepoComponent getRepoComponent() {
        // Objects.requireNonNull(repoComponent, "repoComponent is null");
         return repoComponent;
+    }
+
+    public static FragmentComponent getFragmentComponent() {
+        // Objects.requireNonNull(repoComponent, "repoComponent is null");
+        return fragmentComponent;
     }
 }

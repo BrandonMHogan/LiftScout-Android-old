@@ -92,7 +92,6 @@ public interface AppComponent {
     void inject(RecordsPresenter presenter);
 
     // Settings
-    void inject(SettingsDisplayFragment fragment);
     void inject(SettingsDisplayPresenter presenter);
     void inject(SettingsHomePresenter presenter);
     void inject(SettingsProfilePresenter presenter);
