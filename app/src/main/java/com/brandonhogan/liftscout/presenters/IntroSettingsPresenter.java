@@ -72,4 +72,8 @@ public class IntroSettingsPresenter implements IntroSettingsContract.Presenter {
     private void setupMeasurementDefaults() {
         view.populateMeasurementDefaults(Measurements.MEASUREMENTS, Measurements.MEASUREMENTS.indexOf(userManager.getMeasurementValue()));
     }
+
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
+    }
 }
