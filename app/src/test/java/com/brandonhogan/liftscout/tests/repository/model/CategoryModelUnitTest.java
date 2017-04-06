@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.tests.model;
+package com.brandonhogan.liftscout.tests.repository.model;
 
 import android.content.Context;
 
@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.Date;
 
 import static com.brandonhogan.liftscout.utils.UnitTestConstants.FAKE_INT;
 import static com.brandonhogan.liftscout.utils.UnitTestConstants.FAKE_STRING;
@@ -66,5 +68,26 @@ public class CategoryModelUnitTest {
 
         // ...then the result should be the expected one.
         assertThat(result, is(FAKE_INT));
+    }
+
+    @Test
+    public void CategoryModel_isDeleted() {
+        Category myCategory = new Category();
+
+        myCategory.setDeleted(true);
+        assertThat(myCategory.isDeleted(), is(true));
+
+        myCategory.setDeleted(false);
+        assertThat(myCategory.isDeleted(), is(false));
+
+        Date date = new Date();
+        myCategory.setDeleteDate(date);
+        assertThat(myCategory.getDeleteDate(), is(date));
+
+        myCategory.setDeletable(false);
+        assertThat(myCategory.isDeletable(), is(false));
+
+        myCategory.setDeletable(true);
+        assertThat(myCategory.isDeletable(), is(true));
     }
 }

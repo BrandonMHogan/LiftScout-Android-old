@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.tests.model;
+package com.brandonhogan.liftscout.tests.repository.model;
 
 import android.content.Context;
 
@@ -44,6 +44,8 @@ public class ExerciseModelUnitTest {
         exercise.setType(FAKE_INT);
         exercise.setDeleteDate(date);
         exercise.setDeleted(FAKE_BOOLEAN_TRUE);
+        exercise.setFavourite(true);
+        exercise.setAllowNegativeValue(true);
 
 
         // All asserts should be true
@@ -57,7 +59,8 @@ public class ExerciseModelUnitTest {
         assertThat(exercise.isRestVibrate(), is(FAKE_BOOLEAN_TRUE));
         assertThat(exercise.getType(), is(FAKE_INT));
         assertThat(exercise.getDeleteDate(), is(date));
-
+        assertThat(exercise.isFavourite(), is(true));
+        assertThat(exercise.isAllowNegativeValue(), is(true));
 
         //Check if deleted, then remove delete date, then check again
         assertThat(exercise.isDeleted(), is(FAKE_BOOLEAN_TRUE));

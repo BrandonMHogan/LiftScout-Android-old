@@ -1,7 +1,7 @@
-package com.brandonhogan.liftscout.tests.repo;
+package com.brandonhogan.liftscout.tests.repository;
 
 import com.brandonhogan.liftscout.BuildConfig;
-import com.brandonhogan.liftscout.repository.model.Exercise;
+import com.brandonhogan.liftscout.repository.DatabaseRealm;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -21,52 +21,39 @@ import io.realm.log.RealmLog;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, manifest = Config.NONE, sdk = 19)
 @PowerMockIgnore({"org.mockito.*", "org.robolectric.*", "android.*"})
 @SuppressStaticInitializationFor("io.realm.internal.Util")
 @PrepareForTest({Realm.class, RealmLog.class})
-public class RealmPOIManagerTest {
+public class DatabaseRealmTest {
 
+    private DatabaseRealm databaseRealm;
 
     @Rule
     public PowerMockRule rule = new PowerMockRule();
-    Realm mockRealm;
+    private Realm mockRealm;
 
     @Before
-    public void setup() {
+    public void setUp() {
         mockStatic(RealmLog.class);
         mockStatic(Realm.class);
 
         Realm mockRealm = PowerMockito.mock(Realm.class);
-        when(Realm.getDefaultInstance()).thenReturn(mockRealm);
+        PowerMockito.when(Realm.getDefaultInstance()).thenReturn(mockRealm);
 
         this.mockRealm = mockRealm;
+        databaseRealm = new DatabaseRealm();
     }
 
     @Test
-    public void shouldBeAbleToGetDefaultInstance() {
-        assertThat(Realm.getDefaultInstance(), is(mockRealm));
+    public void test_getRealmInstance() {
+        assertThat(databaseRealm.getRealmInstance(), is(mockRealm));
     }
 
     @Test
-    public void shouldBeAbleToMockRealmMethods() {
-        when(mockRealm.isAutoRefresh()).thenReturn(true);
-        assertThat(mockRealm.isAutoRefresh(), is(true));
-
-        when(mockRealm.isAutoRefresh()).thenReturn(false);
-        assertThat(mockRealm.isAutoRefresh(), is(false));
-    }
-
-    @Test
-    public void shouldBeAbleToCreateARealmObject() {
-        Exercise exercise = new Exercise();
-        when(mockRealm.createObject(Exercise.class)).thenReturn(exercise);
-
-        Exercise output = mockRealm.createObject(Exercise.class);
-
-        assertThat(output, is(exercise));
+    public void test_close() {
+        databaseRealm.close();
     }
 }

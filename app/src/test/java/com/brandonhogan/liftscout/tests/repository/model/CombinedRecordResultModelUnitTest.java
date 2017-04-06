@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.tests.model;
+package com.brandonhogan.liftscout.tests.repository.model;
 
 import com.brandonhogan.liftscout.repository.model.CombinedRecordResult;
 import com.brandonhogan.liftscout.repository.model.Record;
@@ -25,7 +25,6 @@ public class CombinedRecordResultModelUnitTest {
     @Test
     public void CombinedRecordModel_CorrectProperties_assertTrue() {
 
-        java.util.Date date = new java.util.Date();
         CombinedRecordResult combinedRecordResult = new CombinedRecordResult();
 
         Rep rep = new Rep();

@@ -77,8 +77,6 @@ public class SettingsDisplayPresenterTest {
     public void test_onThemeSelected() {
         settingsDisplayPresenter.setView(mockView);
 
-        ArrayList<String> themes = Themes.THEMES;
-
         settingsDisplayPresenter.onThemeSelected(Themes.THEMES.indexOf(Themes.ORIGINAL_LIGHT));
         verify(mockView, times(0)).showAlert();
 

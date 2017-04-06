@@ -1,4 +1,4 @@
-package com.brandonhogan.liftscout.tests.model;
+package com.brandonhogan.liftscout.tests.repository.model;
 
 import com.brandonhogan.liftscout.repository.model.UserSetting;
 
@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static com.brandonhogan.liftscout.utils.UnitTestConstants.FAKE_BOOLEAN_TRUE;
 import static com.brandonhogan.liftscout.utils.UnitTestConstants.FAKE_STRING;
 import static com.brandonhogan.liftscout.utils.UnitTestConstants.FAKE_STRING_OTHER;
 import static org.hamcrest.CoreMatchers.is;
@@ -30,7 +29,10 @@ public class UserSettingModelUnitTest {
         assertThat(userSetting.getName(), is(FAKE_STRING));
         assertThat(userSetting.getValue(), is(FAKE_STRING_OTHER));
 
-        userSetting.setValue(FAKE_BOOLEAN_TRUE);
-        assertThat(userSetting.getValueBoolean(), is(FAKE_BOOLEAN_TRUE));
+        userSetting.setValue(true);
+        assertThat(userSetting.getValueBoolean(), is(true));
+
+        userSetting.setValue(false);
+        assertThat(userSetting.getValueBoolean(), is(false));
     }
 }
