@@ -263,10 +263,10 @@
     <string name="exercise_setting_auto_start">Rest timer auto start</string>
     <string name="exercise_no_categories_found_title">No Categories Found</string>
     <string name="exercise_no_categories_found_message">Every exercise needs a category, and you currently have none. \n\n Do you want to create a category now?</string>
-    <string name="exercise_leave_without_saving_title">Exercise Not Saved</string>
-    <string name="exercise_leave_without_saving">Are you sure you want to leave without saving your changes?</string>
-    <string name="category_leave_without_saving_title">Category Not Saved</string>
-    <string name="category_leave_without_saving">Are you sure you want to leave without saving your changes?</string>
+    <string name="exercise_leave_without_saving_title">Leaving Exercise Edit</string>
+    <string name="exercise_leave_without_saving">Are you sure you want to leave? Any changes will not be saved</string>
+    <string name="category_leave_without_saving_title">Leaving Category Edit</string>
+    <string name="category_leave_without_saving">Are you sure you want to leave? Any changes will not be saved</string>
 
 
     <string name="exercise_new">New Exercise</string>
