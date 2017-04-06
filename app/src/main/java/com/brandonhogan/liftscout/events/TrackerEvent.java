@@ -1,10 +1,5 @@
 package com.brandonhogan.liftscout.events;
 
-/**
- * Created by Brandon on 2/15/2017.
- * Description :
- */
-
 public class TrackerEvent {
 
     public final boolean isUpdated;
@@ -20,4 +15,11 @@ public class TrackerEvent {
         this.isNew = isNew;
     }
 
+    public boolean isUpdated() {
+        return isUpdated;
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
 }

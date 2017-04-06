@@ -21,4 +21,16 @@ public class HistoryTrackerEvent {
         this.date = date;
         this.exerciseId = exerciseId;
     }
+
+    public int getEventID() {
+        return eventID;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public int getExerciseId() {
+        return exerciseId;
+    }
 }
