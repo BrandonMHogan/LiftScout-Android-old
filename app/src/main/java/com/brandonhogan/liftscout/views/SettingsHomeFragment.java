@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsHomeContract;
-import com.brandonhogan.liftscout.presenters.SettingsHomePresenter;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 

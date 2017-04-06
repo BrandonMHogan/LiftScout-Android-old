@@ -7,8 +7,6 @@ import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.utils.constants.DefaultScreens;
 import com.brandonhogan.liftscout.utils.constants.TodayTransforms;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -23,8 +21,6 @@ public class SettingsHomePresenter implements SettingsHomeContract.Presenter {
     // Private Properties
     //
     private SettingsHomeContract.View view;
-    private ArrayList<String> transforms;
-    private ArrayList<String> homeDefaults;
 
     @Inject
     public SettingsHomePresenter() {
@@ -54,13 +50,13 @@ public class SettingsHomePresenter implements SettingsHomeContract.Presenter {
 
     @Override
     public void onTransformSelected(int position) {
-        userManager.setTransform(transforms.get(position));
+        userManager.setTransform(TodayTransforms.TRANSFORMS.get(position));
         view.saveSuccess(R.string.setting_home_transform_saved);
     }
 
     @Override
     public void onHomeDefaultSelected(int position) {
-        userManager.setHomeDefault(homeDefaults.get(position));
+        userManager.setHomeDefault(DefaultScreens.SCREENS.get(position));
         view.saveSuccess(R.string.setting_home_screen_saved);
     }
 
@@ -70,23 +66,14 @@ public class SettingsHomePresenter implements SettingsHomeContract.Presenter {
     }
 
     private void setupHomeDefaults() {
-        homeDefaults = new ArrayList<>();
-
-        homeDefaults.add(DefaultScreens.TODAY);
-        homeDefaults.add(DefaultScreens.CALENDAR);
-
-        view.populateHomeDefaults(homeDefaults, homeDefaults.indexOf(userManager.getHomeDefaultValue()));
+        view.populateHomeDefaults(DefaultScreens.SCREENS, DefaultScreens.SCREENS.indexOf(userManager.getHomeDefaultValue()));
     }
 
     private void setupTransforms() {
-        transforms = new ArrayList<>();
+        view.populateTransforms(TodayTransforms.TRANSFORMS, TodayTransforms.TRANSFORMS.indexOf(userManager.getTransformValue()));
+    }
 
-        transforms.add(TodayTransforms.DEFAULT);
-        transforms.add(TodayTransforms.OVERSHOOT);
-        transforms.add(TodayTransforms.FAST_OUT_LINEAR_IN);
-        transforms.add(TodayTransforms.BOUNCE);
-        transforms.add(TodayTransforms.ACCELERATE_DECELERATE);
-
-        view.populateTransforms(transforms, transforms.indexOf(userManager.getTransformValue()));
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
     }
 }
