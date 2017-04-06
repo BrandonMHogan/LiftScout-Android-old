@@ -1,5 +1,7 @@
 package com.brandonhogan.liftscout.utils.constants;
 
+import java.util.ArrayList;
+
 /**
  * Created by Brandon on 2/17/2017.
  * Description :
@@ -22,4 +24,19 @@ public class Measurements {
         else
             return plural ? Measurements.LBS : Measurements.LB;
     }
+
+    public static final ArrayList<String> MEASUREMENTS = new ArrayList<String>() {{
+        add(POUNDS);
+        add(KILOGRAMS);
+    }};
+
+    public static final ArrayList<String> MEASUREMENTS_COMPRESSED = new ArrayList<String>() {{
+        add(LBS);
+        add(KGS);
+    }};
+
+    public static final ArrayList<String> MEASUREMENTS_COMPRESSED_SINGLE = new ArrayList<String>() {{
+        add(LB);
+        add(KG);
+    }};
 }

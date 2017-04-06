@@ -1,5 +1,7 @@
 package com.brandonhogan.liftscout.interfaces.contracts;
 
+import com.brandonhogan.liftscout.presenters.base.PresenterBase;
+
 import java.util.ArrayList;
 
 /**
@@ -14,8 +16,8 @@ public interface IntroSettingsContract {
         void populateMeasurementDefaults(ArrayList<String> screens, int position);
     }
 
-    interface Presenter {
-        void viewCreated();
+    interface Presenter extends PresenterBase {
+        void setView(IntroSettingsContract.View view);
         void onHomeDefaultSelected(int position);
         void onMeasurementDefaultSelected(int position);
     }

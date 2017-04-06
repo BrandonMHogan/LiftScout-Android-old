@@ -19,11 +19,9 @@ public class SettingsListFragment extends BaseFragment {
         return new SettingsListFragment();
     }
 
-
     // Private Properties
     //
     private View rootView;
-
 
     //Overrides
     //
@@ -37,11 +35,8 @@ public class SettingsListFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setTitle(getResources().getString(R.string.title_frag_settings));
-
     }
-
 
     // Events
     //

@@ -1,8 +1,10 @@
 package com.brandonhogan.liftscout.injection.module;
 
+import com.brandonhogan.liftscout.interfaces.contracts.IntroSettingsContract;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsDisplayContract;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsHomeContract;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsProfileContract;
+import com.brandonhogan.liftscout.presenters.IntroSettingsPresenter;
 import com.brandonhogan.liftscout.presenters.SettingsDisplayPresenter;
 import com.brandonhogan.liftscout.presenters.SettingsHomePresenter;
 import com.brandonhogan.liftscout.presenters.SettingsProfilePresenter;
@@ -19,22 +21,31 @@ import dagger.Provides;
 @Module
 public class PresenterModule {
 
+    // Settings
+    //
     @Provides
     @Singleton
     SettingsProfileContract.Presenter getSettingsProfilePresenter() {
         return new SettingsProfilePresenter();
     }
-
     @Provides
     @Singleton
     SettingsDisplayContract.Presenter getSettingsDisplayPresenter() {
         return new SettingsDisplayPresenter();
     }
-
     @Provides
     @Singleton
     SettingsHomeContract.Presenter getSettingsHomeContract() {
         return new SettingsHomePresenter();
+    }
+
+
+    // Intro
+    //
+    @Provides
+    @Singleton
+    IntroSettingsContract.Presenter getIntroSettingsPresenter() {
+        return new IntroSettingsPresenter();
     }
 
 }

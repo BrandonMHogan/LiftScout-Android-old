@@ -7,24 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.IntroSettingsContract;
-import com.brandonhogan.liftscout.presenters.IntroSettingsPresenter;
 import com.brandonhogan.liftscout.utils.AttrUtil;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import agency.tango.materialintroscreen.SlideFragment;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * Created by Brandon on 2/26/2017.
- * Description :
- */
-
 public class IntroSettingsFragment extends SlideFragment implements IntroSettingsContract.View {
 
+    // Injections
+    //
+    @Inject
+    IntroSettingsContract.Presenter presenter;
 
     // Bindings
     //
@@ -34,17 +35,11 @@ public class IntroSettingsFragment extends SlideFragment implements IntroSetting
     @Bind(R.id.measurementSpinner)
     MaterialSpinner measurementSpinner;
 
-
-    // Private Properties
-    //
-    private IntroSettingsContract.Presenter presenter;
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.frag_intro_settings, container, false);
-
+        Injector.getFragmentComponent().inject(this);
         return view;
     }
 
@@ -52,12 +47,28 @@ public class IntroSettingsFragment extends SlideFragment implements IntroSetting
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        presenter.setView(this);
 
         homeDefaultSpinner.setBackgroundResource(AttrUtil.getAttributeRes(getActivity().getTheme(), R.attr.colorFill));
         measurementSpinner.setBackgroundResource(AttrUtil.getAttributeRes(getActivity().getTheme(), R.attr.colorFill));
+    }
 
-        presenter = new IntroSettingsPresenter(this);
-        presenter.viewCreated();
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.onDestroy();
     }
 
     @Override
@@ -74,7 +85,6 @@ public class IntroSettingsFragment extends SlideFragment implements IntroSetting
     public boolean canMoveFurther() {
         return true;
     }
-
 
     @Override
     public void populateHomeDefaults(ArrayList<String> screens, int position) {
