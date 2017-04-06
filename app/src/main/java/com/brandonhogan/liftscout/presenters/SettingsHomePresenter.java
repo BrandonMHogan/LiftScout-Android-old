@@ -10,15 +10,15 @@ import com.brandonhogan.liftscout.utils.constants.TodayTransforms;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class SettingsHomePresenter implements SettingsHomeContract.Presenter {
-
 
     // Injections
     //
     @Inject
     UserManager userManager;
-
 
     // Private Properties
     //
@@ -26,18 +26,30 @@ public class SettingsHomePresenter implements SettingsHomeContract.Presenter {
     private ArrayList<String> transforms;
     private ArrayList<String> homeDefaults;
 
-    public SettingsHomePresenter(SettingsHomeContract.View view) {
+    @Inject
+    public SettingsHomePresenter() {
         Injector.getAppComponent().inject(this);
-        this.view = view;
     }
 
-
-    // Contract
-    //
     @Override
-    public void viewCreated() {
-        setupHomeDefaults();
-        setupTransforms();
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+        view = null;
+    }
+
+    @Override
+    public void setView(SettingsHomeContract.View view) {
+        this.view = view;
+        init();
     }
 
     @Override
@@ -52,9 +64,10 @@ public class SettingsHomePresenter implements SettingsHomeContract.Presenter {
         view.saveSuccess(R.string.setting_home_screen_saved);
     }
 
-
-    // Private Functions
-    //
+    private void init() {
+        setupHomeDefaults();
+        setupTransforms();
+    }
 
     private void setupHomeDefaults() {
         homeDefaults = new ArrayList<>();

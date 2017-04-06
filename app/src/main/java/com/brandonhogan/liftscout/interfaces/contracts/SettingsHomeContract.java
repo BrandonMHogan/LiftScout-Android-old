@@ -1,5 +1,7 @@
 package com.brandonhogan.liftscout.interfaces.contracts;
 
+import com.brandonhogan.liftscout.presenters.base.PresenterBase;
+
 import java.util.ArrayList;
 
 public interface SettingsHomeContract {
@@ -10,8 +12,8 @@ public interface SettingsHomeContract {
         void saveSuccess(int message);
     }
 
-    interface Presenter {
-        void viewCreated();
+    interface Presenter extends PresenterBase {
+        void setView(SettingsHomeContract.View view);
         void onTransformSelected(int position);
         void onHomeDefaultSelected(int position);
     }

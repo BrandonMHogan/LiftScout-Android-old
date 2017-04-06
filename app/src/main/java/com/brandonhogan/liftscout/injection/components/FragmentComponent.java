@@ -3,6 +3,7 @@ package com.brandonhogan.liftscout.injection.components;
 import com.brandonhogan.liftscout.injection.module.PresenterModule;
 import com.brandonhogan.liftscout.injection.module.UserModule;
 import com.brandonhogan.liftscout.views.SettingsDisplayFragment;
+import com.brandonhogan.liftscout.views.SettingsHomeFragment;
 import com.brandonhogan.liftscout.views.SettingsProfileFragment;
 
 import javax.inject.Singleton;
@@ -21,4 +22,5 @@ public interface FragmentComponent {
     // Settings
     void inject(SettingsProfileFragment fragment);
     void inject(SettingsDisplayFragment fragment);
+    void inject(SettingsHomeFragment fragment);
 }

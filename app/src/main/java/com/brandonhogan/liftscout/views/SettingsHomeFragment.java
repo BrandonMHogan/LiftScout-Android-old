@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsHomeContract;
 import com.brandonhogan.liftscout.presenters.SettingsHomePresenter;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
@@ -15,23 +16,19 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 
 public class SettingsHomeFragment extends BaseFragment implements SettingsHomeContract.View {
 
+    @Inject SettingsHomeContract.Presenter presenter;
 
     // Instance
     //
     public static SettingsHomeFragment newInstance() {
         return new SettingsHomeFragment();
     }
-
-
-    // Private Properties
-    //
-    private View rootView;
-    private SettingsHomeContract.Presenter presenter;
-
 
     // Bindings
     //
@@ -46,20 +43,36 @@ public class SettingsHomeFragment extends BaseFragment implements SettingsHomeCo
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.frag_settings_home, container, false);
+        View rootView = inflater.inflate(R.layout.frag_settings_home, container, false);
+        Injector.getFragmentComponent().inject(this);
+
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        presenter.setView(this);
         setTitle(getResources().getString(R.string.title_frag_settings_home));
-
-        presenter = new SettingsHomePresenter(this);
-        presenter.viewCreated();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.onDestroy();
+    }
 
     // Contract
     //

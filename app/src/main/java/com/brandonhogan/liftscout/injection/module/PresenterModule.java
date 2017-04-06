@@ -1,8 +1,10 @@
 package com.brandonhogan.liftscout.injection.module;
 
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsDisplayContract;
+import com.brandonhogan.liftscout.interfaces.contracts.SettingsHomeContract;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsProfileContract;
 import com.brandonhogan.liftscout.presenters.SettingsDisplayPresenter;
+import com.brandonhogan.liftscout.presenters.SettingsHomePresenter;
 import com.brandonhogan.liftscout.presenters.SettingsProfilePresenter;
 
 import javax.inject.Singleton;
@@ -27,6 +29,12 @@ public class PresenterModule {
     @Singleton
     SettingsDisplayContract.Presenter getSettingsDisplayPresenter() {
         return new SettingsDisplayPresenter();
+    }
+
+    @Provides
+    @Singleton
+    SettingsHomeContract.Presenter getSettingsHomeContract() {
+        return new SettingsHomePresenter();
     }
 
 }
