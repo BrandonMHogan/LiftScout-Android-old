@@ -104,7 +104,7 @@ public class NavigationManager {
     /**
      * pops every fragment and starts the given fragment as a new one.
      */
-    private boolean openAsEdit(BaseFragment fragment) {
+    private boolean openWithoutNavBar(BaseFragment fragment) {
 
         if (!verifyTransition(fragment, false)) {
             Log.d(TAG, "Transition has failed");
@@ -255,17 +255,17 @@ public class NavigationManager {
 
     public boolean startSettingsProfile() {
         BaseFragment fragment = SettingsProfileFragment.newInstance();
-        return open(fragment);
+        return openWithoutNavBar(fragment);
     }
 
     public boolean startSettingsDisplay() {
         BaseFragment fragment = SettingsDisplayFragment.newInstance();
-        return open(fragment);
+        return openWithoutNavBar(fragment);
     }
 
     public boolean startSettingsHome() {
         BaseFragment fragment = SettingsHomeFragment.newInstance();
-        return open(fragment);
+        return openWithoutNavBar(fragment);
     }
 
 
@@ -273,7 +273,7 @@ public class NavigationManager {
     //
     public boolean startAbout() {
         BaseFragment fragment = AboutFragment.newInstance();
-        return open(fragment);
+        return openWithoutNavBar(fragment);
     }
 
     // Graphs
@@ -299,16 +299,6 @@ public class NavigationManager {
         return openAsRoot(fragment);
     }
 
-    public boolean startCategoryList() {
-        BaseFragment fragment = CategoryListFragment.newInstance(false);
-        return openAsRoot(fragment);
-    }
-
-    public boolean startCategoryListAddSet() {
-        BaseFragment fragment = CategoryListFragment.newInstance(true);
-        return openAsRoot(fragment);
-    }
-
     public boolean startCategoryListGraphSearch() {
         BaseFragment fragment = CategoryListFragment.newInstance(false);
         return open(fragment);
@@ -326,22 +316,22 @@ public class NavigationManager {
 
     public boolean startExerciseDetail(int exerciseId, int categoryId) {
         BaseFragment fragment = ExerciseDetailFragment.newInstance(exerciseId, categoryId);
-        return openAsEdit(fragment);
+        return openWithoutNavBar(fragment);
     }
 
     public boolean startExerciseDetail(boolean validCategoryId, int categoryId) {
         BaseFragment fragment = ExerciseDetailFragment.newInstance(validCategoryId, categoryId);
-        return openAsEdit(fragment);
+        return openWithoutNavBar(fragment);
     }
 
     public boolean startCategoryDetail() {
         BaseFragment fragment = CategoryDetailFragment.newInstance();
-        return openAsEdit(fragment);
+        return openWithoutNavBar(fragment);
     }
 
     public boolean startCategoryDetail(int categoryId) {
         BaseFragment fragment = CategoryDetailFragment.newInstance(categoryId);
-        return openAsEdit(fragment);
+        return openWithoutNavBar(fragment);
     }
 
     // Set Edit
