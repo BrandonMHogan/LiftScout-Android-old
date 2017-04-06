@@ -6,46 +6,48 @@ import com.brandonhogan.liftscout.interfaces.contracts.IntroThemesContract;
 import com.brandonhogan.liftscout.managers.UserManager;
 import com.brandonhogan.liftscout.utils.constants.Themes;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
-/**
- * Created by Brandon on 2/27/2017.
- * Description :
- */
-
-public class IntroThemePresenter implements IntroThemesContract.Presenter {
-
+@Singleton
+public class IntroThemesPresenter implements IntroThemesContract.Presenter {
 
     // Injections
     //
     @Inject
     UserManager userManager;
 
-
     // Private Properties
     //
     private IntroThemesContract.View view;
-    private ArrayList<String> themes;
-    private String currentTheme;
 
-    public IntroThemePresenter(IntroThemesContract.View view) {
+    @Inject
+    public IntroThemesPresenter() {
         Injector.getAppComponent().inject(this);
-        this.view = view;
     }
 
-
-    // Contract
-    //
     @Override
-    public void viewCreated() {
-        setupThemes();
+    public void onResume() {
+    }
+
+    @Override
+    public void onPause() {
+    }
+
+    @Override
+    public void onDestroy() {
+        view = null;
+    }
+
+    @Override
+    public void setView(IntroThemesContract.View view) {
+        this.view = view;
+        init();
     }
 
     @Override
     public void onThemeSelected(int position) {
-        currentTheme = themes.get(position);
+        String currentTheme = Themes.THEMES.get(position);
         userManager.setTheme(currentTheme);
 
         switch (currentTheme) {
@@ -79,12 +81,15 @@ public class IntroThemePresenter implements IntroThemesContract.Presenter {
         }
     }
 
-
-    // Private Functions
-    //
+    private void init() {
+        setupThemes();
+    }
 
     private void setupThemes() {
-        themes = Themes.THEMES;
-        view.populateThemes(themes, themes.indexOf(userManager.getThemeValue()));
+        view.populateThemes(Themes.THEMES, Themes.THEMES.indexOf(userManager.getThemeValue()));
+    }
+
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
     }
 }

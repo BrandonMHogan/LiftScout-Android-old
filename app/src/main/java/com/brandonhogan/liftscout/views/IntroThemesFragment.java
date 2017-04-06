@@ -8,12 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.IntroThemesContract;
-import com.brandonhogan.liftscout.presenters.IntroThemePresenter;
 import com.brandonhogan.liftscout.utils.AttrUtil;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import agency.tango.materialintroscreen.SlideFragment;
 import butterknife.Bind;
@@ -24,8 +26,12 @@ import butterknife.ButterKnife;
  * Description :
  */
 
-public class IntroThemeFragment extends SlideFragment implements IntroThemesContract.View {
+public class IntroThemesFragment extends SlideFragment implements IntroThemesContract.View {
 
+    // Injections
+    //
+    @Inject
+    IntroThemesContract.Presenter presenter;
 
     // Bindings
     //
@@ -41,17 +47,11 @@ public class IntroThemeFragment extends SlideFragment implements IntroThemesCont
     @Bind(R.id.accent_color)
     View accentColor;
 
-
-    // Private Properties
-    //
-    private IntroThemesContract.Presenter presenter;
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.frag_intro_themes, container, false);
-
+        Injector.getFragmentComponent().inject(this);
         return view;
     }
 
@@ -59,11 +59,27 @@ public class IntroThemeFragment extends SlideFragment implements IntroThemesCont
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        presenter.setView(this);
 
         themeSpinner.setBackgroundResource(AttrUtil.getAttributeRes(getActivity().getTheme(), R.attr.colorFill));
+    }
 
-        presenter = new IntroThemePresenter(this);
-        presenter.viewCreated();
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.onDestroy();
     }
 
     @Override
@@ -97,13 +113,8 @@ public class IntroThemeFragment extends SlideFragment implements IntroThemesCont
         presenter.onThemeSelected(position);
     }
 
-//    @Override
-//    public void themeSelected(int primary, int dark, int accent, int background) {
-//        primaryColor.setBackgroundColor(primary);
-//    }
-
-
     @Override
+    @SuppressWarnings("deprecation")
     public void themeSelected(int theme) {
         primaryColor.setBackgroundColor(getResources().getColor(setColor(theme, R.attr.colorPrimary)));
         primaryDarkColor.setBackgroundColor(getResources().getColor(setColor(theme, R.attr.colorPrimaryDark)));

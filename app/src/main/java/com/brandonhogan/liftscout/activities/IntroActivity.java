@@ -12,7 +12,7 @@ import com.brandonhogan.liftscout.views.IntroExerciseFragment;
 import com.brandonhogan.liftscout.views.IntroFirstFragment;
 import com.brandonhogan.liftscout.views.IntroLastFragment;
 import com.brandonhogan.liftscout.views.IntroSettingsFragment;
-import com.brandonhogan.liftscout.views.IntroThemeFragment;
+import com.brandonhogan.liftscout.views.IntroThemesFragment;
 
 import javax.inject.Inject;
 
@@ -44,7 +44,7 @@ public class IntroActivity extends MaterialIntroActivity {
         addSlide(new IntroFirstFragment());
         addSlide(new IntroSettingsFragment());
         addSlide(new IntroExerciseFragment());
-        addSlide(new IntroThemeFragment());
+        addSlide(new IntroThemesFragment());
         addSlide(new IntroLastFragment());
     }
 

@@ -1,11 +1,8 @@
 package com.brandonhogan.liftscout.interfaces.contracts;
 
-import java.util.ArrayList;
+import com.brandonhogan.liftscout.presenters.base.PresenterBase;
 
-/**
- * Created by Brandon on 2/27/2017.
- * Description :
- */
+import java.util.ArrayList;
 
 public interface IntroThemesContract {
     interface View {
@@ -13,8 +10,8 @@ public interface IntroThemesContract {
         void themeSelected(int theme);
     }
 
-    interface Presenter {
-        void viewCreated();
+    interface Presenter extends PresenterBase {
+        void setView(IntroThemesContract.View view);
         void onThemeSelected(int position);
     }
 }

@@ -17,7 +17,7 @@ import com.brandonhogan.liftscout.presenters.GraphExercisesPresenter;
 import com.brandonhogan.liftscout.presenters.GraphsCategoriesPresenter;
 import com.brandonhogan.liftscout.presenters.IntroExercisePresenter;
 import com.brandonhogan.liftscout.presenters.IntroSettingsPresenter;
-import com.brandonhogan.liftscout.presenters.IntroThemePresenter;
+import com.brandonhogan.liftscout.presenters.IntroThemesPresenter;
 import com.brandonhogan.liftscout.presenters.RecordsPresenter;
 import com.brandonhogan.liftscout.presenters.SettingsDisplayPresenter;
 import com.brandonhogan.liftscout.presenters.SettingsHomePresenter;
@@ -64,7 +64,7 @@ public interface AppComponent {
     // Intro
     void inject(IntroSettingsPresenter presenter);
     void inject(IntroExercisePresenter presenter);
-    void inject(IntroThemePresenter presenter);
+    void inject(IntroThemesPresenter presenter);
 
     // Calendar
     void inject(CalendarPresenter presenter);
