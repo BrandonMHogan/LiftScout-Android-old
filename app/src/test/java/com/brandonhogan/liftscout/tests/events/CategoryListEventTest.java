@@ -1,6 +1,5 @@
 package com.brandonhogan.liftscout.tests.events;
 
-import com.brandonhogan.liftscout.events.AllExercisesListEvent;
 import com.brandonhogan.liftscout.events.CategoryListEvent;
 
 import org.junit.Before;

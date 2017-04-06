@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
 @PrepareForTest({Injector.class, UserManager.class})
 public class SettingsHomePresenterTest {
 
-    private SettingsHomePresenter settingsHomePresenter;
+    private SettingsHomePresenter presenter;
 
     @Mock
     private SettingsHomeContract.View mockView;
@@ -59,36 +59,54 @@ public class SettingsHomePresenterTest {
         when(userManager.getTransformValue()).thenReturn(TodayTransforms.DEFAULT);
 
         // Creates,
-        settingsHomePresenter = new SettingsHomePresenter();
-        settingsHomePresenter.setUserManager(userManager);
+        presenter = new SettingsHomePresenter();
+        presenter.setUserManager(userManager);
     }
 
     @Test
     public void test_setView() {
-        settingsHomePresenter.setView(mockView);
+        presenter.setView(mockView);
         verify(mockView, times(1)).populateHomeDefaults(DefaultScreens.SCREENS, DefaultScreens.SCREENS.indexOf(DefaultScreens.TODAY));
         verify(mockView, times(1)).populateTransforms(TodayTransforms.TRANSFORMS, TodayTransforms.TRANSFORMS.indexOf(TodayTransforms.DEFAULT));
     }
 
     @Test
     public void test_onTransformSelected() {
-        settingsHomePresenter.setView(mockView);
+        presenter.setView(mockView);
 
-        settingsHomePresenter.onTransformSelected(TodayTransforms.TRANSFORMS.indexOf(TodayTransforms.BOUNCE));
+        presenter.onTransformSelected(TodayTransforms.TRANSFORMS.indexOf(TodayTransforms.BOUNCE));
         verify(mockView, times(1)).saveSuccess(R.string.setting_home_transform_saved);
 
-        settingsHomePresenter.onTransformSelected(TodayTransforms.TRANSFORMS.indexOf(TodayTransforms.DEFAULT));
+        presenter.onTransformSelected(TodayTransforms.TRANSFORMS.indexOf(TodayTransforms.DEFAULT));
         verify(mockView, times(2)).saveSuccess(R.string.setting_home_transform_saved);
     }
 
     @Test
     public void test_onHomeDefaultSelected() {
-        settingsHomePresenter.setView(mockView);
+        presenter.setView(mockView);
 
-        settingsHomePresenter.onHomeDefaultSelected(DefaultScreens.SCREENS.indexOf(DefaultScreens.TODAY));
+        presenter.onHomeDefaultSelected(DefaultScreens.SCREENS.indexOf(DefaultScreens.TODAY));
         verify(mockView, times(1)).saveSuccess(R.string.setting_home_screen_saved);
 
-        settingsHomePresenter.onHomeDefaultSelected(DefaultScreens.SCREENS.indexOf(DefaultScreens.CALENDAR));
+        presenter.onHomeDefaultSelected(DefaultScreens.SCREENS.indexOf(DefaultScreens.CALENDAR));
         verify(mockView, times(2)).saveSuccess(R.string.setting_home_screen_saved);
+    }
+
+    @Test
+    public void test_onDestroy() {
+        presenter.setView(mockView);
+        presenter.onDestroy();
+    }
+
+    @Test
+    public void test_onResume() {
+        presenter.setView(mockView);
+        presenter.onResume();
+    }
+
+    @Test
+    public void test_onPause() {
+        presenter.setView(mockView);
+        presenter.onPause();
     }
 }

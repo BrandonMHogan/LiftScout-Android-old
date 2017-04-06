@@ -1,5 +1,7 @@
 package com.brandonhogan.liftscout.presenters;
 
+import android.util.Log;
+
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.IntroThemesContract;
@@ -47,7 +49,15 @@ public class IntroThemesPresenter implements IntroThemesContract.Presenter {
 
     @Override
     public void onThemeSelected(int position) {
-        String currentTheme = Themes.THEMES.get(position);
+        String currentTheme = Themes.ORIGINAL_LIGHT;
+
+        try {
+            currentTheme = Themes.THEMES.get(position);
+        }
+        catch (Exception ex) {
+            Log.e("IntroThemes", "onThemeSelected: ", ex);
+        }
+
         userManager.setTheme(currentTheme);
 
         switch (currentTheme) {
@@ -69,15 +79,14 @@ public class IntroThemesPresenter implements IntroThemesContract.Presenter {
             case Themes.BLACK_DARK:
                 view.themeSelected(R.style.AppTheme_Black_Dark);
                 return;
-
-            case Themes.ORIGINAL_LIGHT:
-                view.themeSelected(R.style.AppTheme_Original_Light);
-                return;
             case Themes.GREEN_LIGHT:
                 view.themeSelected(R.style.AppTheme_Green_Light);
                 return;
             case Themes.PURPLE_LIGHT:
                 view.themeSelected(R.style.AppTheme_Purple_Light);
+                return;
+            default:
+                view.themeSelected(R.style.AppTheme_Original_Light);
         }
     }
 

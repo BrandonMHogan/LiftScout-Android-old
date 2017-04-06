@@ -77,6 +77,12 @@ public class IntroSettingsPresenterTest {
     }
 
     @Test
+    public void test_onMeasurementDefaultSelected() {
+        presenter.setView(mockView);
+        presenter.onMeasurementDefaultSelected(Measurements.MEASUREMENTS.indexOf(Measurements.POUNDS));
+    }
+
+    @Test
     public void test_onDestroy() {
         presenter.setView(mockView);
         presenter.onDestroy();

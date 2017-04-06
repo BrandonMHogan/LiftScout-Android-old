@@ -1,5 +1,7 @@
 package com.brandonhogan.liftscout.tests.presenters;
 
+import android.util.Log;
+
 import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.injection.components.AppComponent;
 import com.brandonhogan.liftscout.injection.components.Injector;
@@ -23,13 +25,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by Brandon on 4/6/2017.
- * Description :
- */
-
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({Injector.class, UserManager.class})
+@PrepareForTest({Injector.class, UserManager.class, Log.class})
 public class IntroThemesPresenterTest {
 
     private IntroThemesPresenter presenter;
@@ -48,7 +45,8 @@ public class IntroThemesPresenterTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        // Mocks the injector
+        // Mocks the log and injector
+        PowerMockito.mockStatic(Log.class);
         PowerMockito.mockStatic(Injector.class);
         BDDMockito.given(Injector.getAppComponent()).willReturn(appComponent);
 
@@ -98,6 +96,11 @@ public class IntroThemesPresenterTest {
 
         presenter.onThemeSelected(Themes.THEMES.indexOf((Themes.PURPLE_LIGHT)));
         verify(mockView, times(1)).themeSelected(R.style.AppTheme_Purple_Light);
+
+
+        // Tries to run a value not in the themes list
+        presenter.onThemeSelected(100);
+        verify(mockView, times(2)).themeSelected(R.style.AppTheme_Original_Light);
     }
 
     @Test
