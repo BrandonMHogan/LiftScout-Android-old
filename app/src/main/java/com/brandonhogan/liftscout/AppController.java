@@ -4,10 +4,10 @@ import android.app.Application;
 
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.repository.migration.Migration;
-import com.squareup.leakcanary.LeakCanary;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+
 
 public class AppController extends Application {
 
@@ -25,12 +25,6 @@ public class AppController extends Application {
         initDagger();
         initRealmConfiguration();
 
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
     }
 
     private void initDagger() {
@@ -38,6 +32,7 @@ public class AppController extends Application {
     }
 
     private void initRealmConfiguration() {
+
         Realm.init(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
                 .name("myRealm.realm")

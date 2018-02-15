@@ -15,6 +15,7 @@ import java.util.Date;
 
 public class UserManager {
 
+
     // Private Static Properties
     //
     private static final String TAG = "UserManager";

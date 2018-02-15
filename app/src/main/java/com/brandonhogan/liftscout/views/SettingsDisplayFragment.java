@@ -149,7 +149,7 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
         getActivity().finish();
         final Intent intent = getActivity().getIntent();
         intent.replaceExtras(new Bundle());
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         getActivity().startActivity(intent);
     }
 }

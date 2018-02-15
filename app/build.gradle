@@ -1,72 +1,28 @@
 apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
 apply plugin: 'realm-android'
-apply plugin: 'com.vanniktech.android.junit.jacoco'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
 
-    lintOptions {
-        abortOnError false
-        disable 'ShowToast'
-    }
+    compileSdkVersion 27
+    buildToolsVersion '27.0.1'
 
     defaultConfig {
         applicationId "com.brandonhogan.liftscout"
-        minSdkVersion 18
-        targetSdkVersion 25
-
-        // Needed for jUnit4 support.
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        // Fetch the version according to git latest tag
-        def longVersionName = "git -C ${rootDir} describe --tags --long".execute().text.trim()
-        // No tag found
-        if (longVersionName.isEmpty())
-            throw new FileNotFoundException("\n--------" + "GRADLE ERROR--------"
-                    + "\n"
-                    + " - Could not find a valid tag associated to this build. Tag versioning " +
-                    "must be in the Major.Minor.Patch format."
-                    + "\n"
-                    + "Example : 1.2.3")
-        def branchName = "git -C ${rootDir} rev-parse --abbrev-ref HEAD".execute().text.trim()
-        def (fullVersionTag, versionBuild, gitSha) = longVersionName.tokenize('-')
-        def (versionMajor, versionMinor, versionPatch) = fullVersionTag.tokenize('.')
-        if (versionMajor == null || versionMinor == null || versionPatch == null) {
-            throw new FileNotFoundException("\n--------" + "GRADLE ERROR--------"
-                    + "\n"
-                    + " - Could not find a valid tag associated to this build. Tag versioning " +
-                    "must be in the Major.Minor.Patch format."
-                    + "\n"
-                    + "Example : 1.2.3")
-        }
-        if (!versionMajor.isNumber())
-            throw new FileNotFoundException("Tag version major is not numeric. " + versionMajor)
-        if (!versionMinor.isNumber())
-            throw new FileNotFoundException("Tag version minor is not numeric. " + versionMinor)
-        if (!versionPatch.isNumber())
-            throw new FileNotFoundException("Tag version patch is not numeric. " + versionPatch)
-        // Set the version name
-        versionName "$branchName $versionMajor.$versionMinor.$versionPatch($versionBuild)"
-
-        // Turn the version name into a version code
-        versionCode versionMajor.toInteger() * 100000 +
-                versionMinor.toInteger() * 10000 +
-                versionPatch.toInteger() * 100 +
-                versionBuild.toInteger()
-
-        // Friendly print the version output to the Gradle console
-        printf("\n--------" + "VERSION DATA--------"
-                + "\n"
-                + "- Branch Name: " + branchName
-                + "\n"
-                + "- Version Code: " + versionCode
-                + "\n"
-                + "- Version Name: " + versionName
-                + "\n"
-                + "- Long Version Name: " + longVersionName
-                + "\n----------------------------\n")
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode getVersionCode()
+        versionName "1.0"
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -79,82 +35,52 @@ android {
             testCoverageEnabled true
         }
     }
-    productFlavors {
-    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // Testing
-    testCompile 'junit:junit:4.12'
-    testCompile "org.robolectric:robolectric:3.0"
-    testCompile 'org.mockito:mockito-core:1.10.19'
-    testCompile 'org.robolectric:shadows-support-v4:3.0'
-
-    testCompile "org.powermock:powermock-module-junit4:1.6.5"
-    testCompile "org.powermock:powermock-module-junit4-rule:1.6.5"
-    testCompile "org.powermock:powermock-api-mockito:1.6.5"
-    testCompile "org.powermock:powermock-classloading-xstream:1.6.5"
-
-    // Espresso support
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestCompile('com.android.support.test:runner:0.5', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-
-    // Leak Canary
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-
-
-    // Debug
-    debugCompile 'com.facebook.stetho:stetho:1.4.1'
-    debugCompile 'com.uphyca:stetho_realm:2.0.0'
+    // Kotlin standard library
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     // Support
-    compile 'com.android.support:appcompat-v7:25.3.0'
-    compile 'com.android.support:preference-v7:25.3.0'
-    compile 'com.android.support:design:25.3.0'
-    compile 'com.android.support:support-v13:25.3.0'
-    compile 'com.android.support:cardview-v7:25.3.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.1'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:preference-v7:27.0.2'
+    implementation 'com.android.support:design:27.0.2'
+    implementation 'com.android.support:support-v13:27.0.2'
+    implementation 'com.android.support:cardview-v7:27.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // Important
-    compile "io.reactivex.rxjava2:rxjava:2.0.8"
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'javax.annotation:jsr250-api:1.0'
-    compile 'com.google.dagger:dagger:2.0.1'
+    implementation "io.reactivex.rxjava2:rxjava:2.0.8"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'javax.annotation:jsr250-api:1.0'
+    implementation 'com.google.dagger:dagger:2.0.1'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.0.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'org.greenrobot:eventbus:3.0.0'
+    annotationProcessor 'com.jakewharton:butterknife:7.0.1'
+    implementation 'com.jakewharton:butterknife:7.0.1'
+    implementation 'org.greenrobot:eventbus:3.0.0'
 
     // Random
-    compile 'com.github.sundeepk:compact-calendar-view:2.0.0'
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
-    compile 'com.github.lawloretienne:discreteslider:0.0.9'
-    compile 'com.jaredrummler:material-spinner:1.1.0'
-    compile 'com.afollestad.material-dialogs:core:0.9.4.2'
-    compile 'com.thebluealliance:spectrum:0.7.1'
-    compile 'com.github.devlight:infinitecycleviewpager:1.0.2'
-    compile 'agency.tango.android:material-intro-screen:0.0.5'
-    compile('com.mikepenz:fastadapter:1.6.0@aar') {
+    implementation 'com.github.sundeepk:compact-calendar-view:2.0.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+    implementation 'com.github.lawloretienne:discreteslider:0.0.9'
+    implementation 'com.jaredrummler:material-spinner:1.1.0'
+    implementation 'com.afollestad.material-dialogs:core:0.9.4.2'
+    implementation 'com.thebluealliance:spectrum:0.7.1'
+    implementation 'com.github.devlight:infinitecycleviewpager:1.0.2'
+    implementation 'agency.tango.android:material-intro-screen:0.0.5'
+    implementation('com.mikepenz:fastadapter:1.6.0@aar') {
         transitive = true
     }
-    compile 'com.mikepenz:fastadapter-extensions:1.7.0@aar'
-    compile 'com.github.ittianyu:BottomNavigationViewEx:1.1.3'
+    implementation 'com.mikepenz:fastadapter-extensions:1.7.0@aar'
+    implementation 'com.github.ittianyu:BottomNavigationViewEx:1.1.3'
 
     // Firebase
-    compile 'com.google.firebase:firebase-core:10.0.1'
-    compile 'com.google.firebase:firebase-crash:10.0.1'
-    compile 'com.google.android.gms:play-services-tagmanager:10.0.1'
-    compile 'com.google.firebase:firebase-messaging:10.0.1'
+    implementation 'com.google.firebase:firebase-core:10.2.1'
+    implementation 'com.google.firebase:firebase-crash:10.2.1'
+    implementation 'com.google.android.gms:play-services-tagmanager:10.2.1'
+    implementation 'com.google.firebase:firebase-messaging:10.2.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
