@@ -18,7 +18,8 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import agency.tango.materialintroscreen.SlideFragment;
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -35,16 +36,16 @@ public class IntroThemesFragment extends SlideFragment implements IntroThemesCon
 
     // Bindings
     //
-    @Bind(R.id.theme_spinner)
+    @BindView(R.id.theme_spinner)
     MaterialSpinner themeSpinner;
 
-    @Bind(R.id.primary_color)
+    @BindView(R.id.primary_color)
     View primaryColor;
 
-    @Bind(R.id.primary_dark_color)
+    @BindView(R.id.primary_dark_color)
     View primaryDarkColor;
 
-    @Bind(R.id.accent_color)
+    @BindView(R.id.accent_color)
     View accentColor;
 
     @Nullable

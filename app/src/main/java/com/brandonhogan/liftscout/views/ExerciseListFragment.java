@@ -26,7 +26,7 @@ import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class ExerciseListFragment extends BaseFragment implements
@@ -97,13 +97,13 @@ public class ExerciseListFragment extends BaseFragment implements
 
     // Binds
     //
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
-    @Bind(R.id.no_data_label)
+    @BindView(R.id.no_data_label)
     TextView noDataLabel;
 
-    @Bind(R.id.fab_exercise_list)
+    @BindView(R.id.fab_exercise_list)
     FloatingActionButton fab;
 
     //Overrides

@@ -15,7 +15,8 @@ import com.brandonhogan.liftscout.presenters.IntroExercisePresenter;
 
 import agency.tango.materialintroscreen.SlideFragment;
 import agency.tango.materialintroscreen.parallax.ParallaxLinearLayout;
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -29,13 +30,13 @@ public class IntroExerciseFragment extends SlideFragment implements IntroExercis
 
     // Bindings
     //
-    @Bind(R.id.create_button)
+    @BindView(R.id.create_button)
     AppCompatButton createButton;
 
-    @Bind(R.id.image_button_desc)
+    @BindView(R.id.image_button_desc)
     TextView imageButtonDescription;
 
-    @Bind(R.id.layout)
+    @BindView(R.id.layout)
     ParallaxLinearLayout layout;
 
     // Private Properties

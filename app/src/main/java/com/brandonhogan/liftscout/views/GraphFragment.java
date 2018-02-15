@@ -16,7 +16,7 @@ import com.brandonhogan.liftscout.views.base.BaseFragment;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class GraphFragment extends BaseFragment implements GraphContract.View {
 
@@ -31,7 +31,7 @@ public class GraphFragment extends BaseFragment implements GraphContract.View {
 
     // Bindings
     //
-    @Bind(R.id.my_line_graph)
+    @BindView(R.id.my_line_graph)
     MyLineGraph graph;
 
 

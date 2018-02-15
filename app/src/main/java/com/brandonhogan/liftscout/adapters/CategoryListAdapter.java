@@ -18,7 +18,7 @@ import com.brandonhogan.liftscout.utils.DiffUtil.CategoryDiffCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @SuppressWarnings("WeakerAccess")
@@ -89,10 +89,10 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
     protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        @Bind(R.id.color)
+        @BindView(R.id.color)
         ImageView color;
 
-        @Bind(R.id.name)
+        @BindView(R.id.name)
         TextView name;
 
         protected ViewHolder(View itemView) {

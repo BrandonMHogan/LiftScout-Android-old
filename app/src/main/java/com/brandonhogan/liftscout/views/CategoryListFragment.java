@@ -22,7 +22,7 @@ import com.brandonhogan.liftscout.views.base.BaseFragment;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class CategoryListFragment extends BaseFragment implements
         CategoryListContract.View, RecyclerViewClickListener {
@@ -56,10 +56,10 @@ public class CategoryListFragment extends BaseFragment implements
 
     // Binds
     //
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    @Bind(R.id.no_data_label)
+    @BindView(R.id.no_data_label)
     TextView noDataLabel;
 
     //Overrides

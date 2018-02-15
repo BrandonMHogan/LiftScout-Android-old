@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import agency.tango.materialintroscreen.SlideFragment;
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class IntroSettingsFragment extends SlideFragment implements IntroSettingsContract.View {
@@ -29,10 +30,10 @@ public class IntroSettingsFragment extends SlideFragment implements IntroSetting
 
     // Bindings
     //
-    @Bind(R.id.homeDefaultSpinner)
+    @BindView(R.id.homeDefaultSpinner)
     MaterialSpinner homeDefaultSpinner;
 
-    @Bind(R.id.measurementSpinner)
+    @BindView(R.id.measurementSpinner)
     MaterialSpinner measurementSpinner;
 
     @Nullable

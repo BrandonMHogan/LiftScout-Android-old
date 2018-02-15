@@ -13,7 +13,7 @@ import com.brandonhogan.liftscout.presenters.GraphExercisesPresenter;
 import com.brandonhogan.liftscout.utils.controls.graphs.line.MyLineGraph;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * Created by Brandon on 2/16/2017.
@@ -33,7 +33,7 @@ public class GraphExercisesFragment extends BaseFragment implements GraphExercis
 
     // Bindings
     //
-    @Bind(R.id.my_line_graph)
+    @BindView(R.id.my_line_graph)
     MyLineGraph lineGraph;
 
     // Instance

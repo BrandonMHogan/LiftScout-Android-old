@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class SettingsHomeFragment extends BaseFragment implements SettingsHomeContract.View {
 
@@ -31,10 +31,10 @@ public class SettingsHomeFragment extends BaseFragment implements SettingsHomeCo
 
     // Bindings
     //
-    @Bind(R.id.homeDefaultSpinner)
+    @BindView(R.id.homeDefaultSpinner)
     MaterialSpinner homeDefaultSpinner;
 
-    @Bind(R.id.todayTransformSpinner)
+    @BindView(R.id.todayTransformSpinner)
     MaterialSpinner transformSpinner;
 
     //Overrides

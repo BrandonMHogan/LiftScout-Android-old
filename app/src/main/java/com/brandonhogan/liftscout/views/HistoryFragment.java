@@ -31,7 +31,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class HistoryFragment extends BaseFragment implements HistoryContract.View {
 
@@ -62,10 +62,10 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
 
     //Bindings
     //
-    @Bind(R.id.recycler_view)
+    @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    @Bind(R.id.title)
+    @BindView(R.id.title)
     TextView title;
 
 

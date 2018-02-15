@@ -23,7 +23,7 @@ import com.brandonhogan.liftscout.repository.model.Category;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 import com.thebluealliance.spectrum.SpectrumPalette;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -75,10 +75,10 @@ public class CategoryDetailFragment extends BaseFragment implements CategoryDeta
     private Toast toast;
     private boolean canLeave = false;
 
-    @Bind(R.id.name_text)
+    @BindView(R.id.name_text)
     EditText nameText;
 
-    @Bind(R.id.palette)
+    @BindView(R.id.palette)
     SpectrumPalette palette;
 
     //Overrides

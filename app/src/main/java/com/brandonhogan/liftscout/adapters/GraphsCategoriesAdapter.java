@@ -17,7 +17,7 @@ import com.brandonhogan.liftscout.repository.model.CategoryGraph;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -66,16 +66,16 @@ public class GraphsCategoriesAdapter extends RecyclerView.Adapter<GraphsCategori
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        @Bind(R.id.display_layout)
+        @BindView(R.id.display_layout)
         LinearLayout displayLayout;
 
-        @Bind(R.id.color)
+        @BindView(R.id.color)
         ImageView color;
 
-        @Bind(R.id.name)
+        @BindView(R.id.name)
         TextView name;
 
-        @Bind(R.id.value)
+        @BindView(R.id.value)
         TextView value;
 
 

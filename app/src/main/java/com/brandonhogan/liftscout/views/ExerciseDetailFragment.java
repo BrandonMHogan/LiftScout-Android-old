@@ -27,7 +27,7 @@ import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 import com.brandonhogan.liftscout.utils.controls.NumberPicker;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -81,25 +81,25 @@ public class ExerciseDetailFragment extends BaseFragment implements ExerciseDeta
     private Toast toast;
     private boolean canLeave = false;
 
-    @Bind(R.id.name_text)
+    @BindView(R.id.name_text)
     EditText nameText;
 
-    @Bind(R.id.category_spinner)
+    @BindView(R.id.category_spinner)
     Spinner categorySpinner;
 
-    @Bind(R.id.increment_spinner)
+    @BindView(R.id.increment_spinner)
     Spinner incrementSpinner;
 
-    @Bind(R.id.rest_timer)
+    @BindView(R.id.rest_timer)
     NumberPicker restTimerPicker;
 
-    @Bind(R.id.auto_switch)
+    @BindView(R.id.auto_switch)
     Switch autoSwitch;
 
-    @Bind(R.id.sound_switch)
+    @BindView(R.id.sound_switch)
     Switch soundSwitch;
 
-    @Bind(R.id.vibrate_switch)
+    @BindView(R.id.vibrate_switch)
     Switch vibrateSwitch;
 
     //Overrides

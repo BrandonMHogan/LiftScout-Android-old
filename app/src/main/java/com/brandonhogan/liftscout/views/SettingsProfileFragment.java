@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * Created by Brandon on 2/17/2017.
@@ -32,7 +32,7 @@ public class SettingsProfileFragment extends BaseFragment implements SettingsPro
 
     // Bindings
     //
-    @Bind(R.id.measurementSpinner)
+    @BindView(R.id.measurementSpinner)
     MaterialSpinner measurementSpinner;
 
     // Instance

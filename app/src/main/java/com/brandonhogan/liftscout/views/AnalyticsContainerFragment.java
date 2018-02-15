@@ -12,7 +12,7 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.adapters.AnalyticsContainerAdapter;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * Created by Brandon on 2/16/2017.
@@ -38,10 +38,10 @@ public class AnalyticsContainerFragment extends BaseFragment {
 
     // Binds
     //
-    @Bind(R.id.analytics_viewpager)
+    @BindView(R.id.analytics_viewpager)
     ViewPager viewPager;
 
-    @Bind(R.id.analytics_tab_layout)
+    @BindView(R.id.analytics_tab_layout)
     TabLayout tabLayout;
 
 

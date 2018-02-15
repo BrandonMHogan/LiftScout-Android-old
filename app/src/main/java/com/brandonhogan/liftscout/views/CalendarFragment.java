@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class CalendarFragment extends BaseFragment implements CalendarContract.View {
@@ -55,16 +55,16 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
 
     // Binds
     //
-    @Bind(R.id.date)
+    @BindView(R.id.date)
     TextView titleTextView;
 
-    @Bind(R.id.calendar_view)
+    @BindView(R.id.calendar_view)
     CompactCalendarView calendar;
 
-    @Bind(R.id.recycler_view)
+    @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    @Bind(R.id.workout_no_data)
+    @BindView(R.id.workout_no_data)
     LinearLayout noDataLayout;
 
 

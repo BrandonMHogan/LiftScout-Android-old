@@ -30,7 +30,7 @@ import com.brandonhogan.liftscout.views.base.BaseFragment;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -74,13 +74,13 @@ public class WorkoutContainerFragment extends BaseFragment implements WorkoutCon
 
     // Binds
     //
-    @Bind(R.id.workout_viewpager)
+    @BindView(R.id.workout_viewpager)
     ViewPager viewPager;
 
-    @Bind(R.id.workout_tab_layout)
+    @BindView(R.id.workout_tab_layout)
     TabLayout tabLayout;
 
-    @Bind(R.id.force_focus_layout)
+    @BindView(R.id.force_focus_layout)
     LinearLayout forceFocusLayout;
 
 

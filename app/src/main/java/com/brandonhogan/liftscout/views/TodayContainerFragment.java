@@ -22,7 +22,7 @@ import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 
 import java.util.Date;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class TodayContainerFragment extends BaseFragment implements TodayContainerContract.View {
@@ -44,7 +44,7 @@ public class TodayContainerFragment extends BaseFragment implements TodayContain
 
     // Binds
     //
-    @Bind(R.id.viewpager)
+    @BindView(R.id.viewpager)
     HorizontalInfiniteCycleViewPager viewPager;
 
 

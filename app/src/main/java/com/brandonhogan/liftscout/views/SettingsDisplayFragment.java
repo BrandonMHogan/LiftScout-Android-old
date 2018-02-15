@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class SettingsDisplayFragment extends BaseFragment implements SettingsDisplayContract.View {
 
@@ -33,7 +33,7 @@ public class SettingsDisplayFragment extends BaseFragment implements SettingsDis
 
     // Bindings
     //
-    @Bind(R.id.themeSpinner)
+    @BindView(R.id.themeSpinner)
     MaterialSpinner themeSpinner;
 
     // Instance

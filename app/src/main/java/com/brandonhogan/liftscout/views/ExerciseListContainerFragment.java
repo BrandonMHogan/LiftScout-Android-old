@@ -21,7 +21,7 @@ import com.brandonhogan.liftscout.interfaces.contracts.ExerciseListContainerCont
 import com.brandonhogan.liftscout.presenters.ExerciseListContainerPresenter;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 
@@ -59,13 +59,13 @@ public class ExerciseListContainerFragment extends BaseFragment implements Exerc
 
     // Binds
     //
-    @Bind(R.id.workout_viewpager)
+    @BindView(R.id.workout_viewpager)
     ViewPager viewPager;
 
-    @Bind(R.id.workout_tab_layout)
+    @BindView(R.id.workout_tab_layout)
     TabLayout tabLayout;
 
-    @Bind(R.id.fab)
+    @BindView(R.id.fab)
     FloatingActionButton fab;
 
 

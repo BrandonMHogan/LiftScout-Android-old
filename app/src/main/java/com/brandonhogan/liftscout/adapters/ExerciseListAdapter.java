@@ -16,7 +16,7 @@ import com.brandonhogan.liftscout.utils.DiffUtil.ExerciseDiffCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ViewHolder> {
@@ -90,7 +90,7 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
 
     protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        @Bind(R.id.name)
+        @BindView(R.id.name)
         TextView name;
 
         protected ViewHolder(View itemView) {

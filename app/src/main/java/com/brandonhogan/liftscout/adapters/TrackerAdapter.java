@@ -18,7 +18,7 @@ import com.brandonhogan.liftscout.utils.constants.Measurements;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TrackerAdapter extends RecyclerView.Adapter<TrackerAdapter.ViewHolder> {
@@ -60,30 +60,30 @@ public class TrackerAdapter extends RecyclerView.Adapter<TrackerAdapter.ViewHold
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        @Bind(R.id.display_layout)
+        @BindView(R.id.display_layout)
         RelativeLayout displayLayout;
 
-        @Bind(R.id.rep_layout)
+        @BindView(R.id.rep_layout)
         LinearLayout repLayout;
 
-        @Bind(R.id.item_reps)
+        @BindView(R.id.item_reps)
         TextView reps;
 
-        @Bind(R.id.item_weight)
+        @BindView(R.id.item_weight)
         TextView weight;
 
 
-        @Bind(R.id.no_rep)
+        @BindView(R.id.no_rep)
         TextView noRep;
 
-        @Bind(R.id.item_measurement)
+        @BindView(R.id.item_measurement)
         TextView measurement;
 
 
-        @Bind(R.id.record_image)
+        @BindView(R.id.record_image)
         ImageView recordImage;
 
-        @Bind(R.id.divider)
+        @BindView(R.id.divider)
         View divider;
 
 

@@ -15,7 +15,7 @@ import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TodayListSectionModel extends AbstractItem<TodayListSectionModel, TodayListSectionModel.ViewHolder> implements IExpandable<TodayListSectionModel, IItem> {
@@ -181,13 +181,13 @@ public class TodayListSectionModel extends AbstractItem<TodayListSectionModel, T
     protected static class ViewHolder extends RecyclerView.ViewHolder {
         protected final View view;
 
-        @Bind(R.id.padding_view)
+        @BindView(R.id.padding_view)
         View paddingView;
 
-        @Bind(R.id.workout_name)
+        @BindView(R.id.workout_name)
         TextView name;
 
-        @Bind(R.id.workout_set_count)
+        @BindView(R.id.workout_set_count)
         TextView setCount;
 
         public ViewHolder(View view) {

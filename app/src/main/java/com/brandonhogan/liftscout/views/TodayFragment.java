@@ -27,7 +27,7 @@ import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class TodayFragment extends BaseFragment implements TodayContract.View {
 
@@ -61,13 +61,13 @@ public class TodayFragment extends BaseFragment implements TodayContract.View {
 
     // Binds
     //
-    @Bind(R.id.title)
+    @BindView(R.id.title)
     TextView titleView;
 
-    @Bind(R.id.recycler_view)
+    @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    @Bind(R.id.workout_no_data)
+    @BindView(R.id.workout_no_data)
     LinearLayout noDataLayout;
     
 

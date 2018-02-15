@@ -33,7 +33,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class WorkoutTrackerFragment extends BaseFragment implements
@@ -73,22 +73,22 @@ public class WorkoutTrackerFragment extends BaseFragment implements
 
     // Binds
     //
-    @Bind(R.id.date)
+    @BindView(R.id.date)
     TextView dateTextView;
 
-    @Bind(R.id.recycler_view)
+    @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    @Bind(R.id.first_button)
+    @BindView(R.id.first_button)
     AppCompatButton firstButton;
 
-    @Bind(R.id.second_button)
+    @BindView(R.id.second_button)
     AppCompatButton secondButton;
 
-    @Bind(R.id.rep_number_picker)
+    @BindView(R.id.rep_number_picker)
     NumberPicker repNumberPicker;
 
-    @Bind(R.id.weight_number_picker)
+    @BindView(R.id.weight_number_picker)
     NumberPicker weightNumberPicker;
 
 

@@ -34,7 +34,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * Created by Brandon on 2/16/2017.
@@ -51,25 +51,25 @@ public class GraphsCategoriesFragment extends BaseFragment
 
     // Bindings
     //
-    @Bind(R.id.display_layout)
+    @BindView(R.id.display_layout)
     LinearLayout displayLayout;
 
-    @Bind(R.id.no_data)
+    @BindView(R.id.no_data)
     TextView noDataTextView;
 
-    @Bind(R.id.pie_chart)
+    @BindView(R.id.pie_chart)
     PieChart pieChart;
 
-    @Bind(R.id.graph_type)
+    @BindView(R.id.graph_type)
     MaterialSpinner graphType;
 
-    @Bind(R.id.recycler_view)
+    @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    @Bind(R.id.total)
+    @BindView(R.id.total)
     TextView totalTextView;
 
-    @Bind(R.id.total_date_range)
+    @BindView(R.id.total_date_range)
     TextView totalDateRangeTextView;
 
 

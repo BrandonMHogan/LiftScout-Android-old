@@ -12,7 +12,7 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.utils.IntentUtil;
 import com.brandonhogan.liftscout.views.base.BaseFragment;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class AboutFragment extends BaseFragment {
@@ -26,7 +26,7 @@ public class AboutFragment extends BaseFragment {
 
     // Bindings
     //
-    @Bind(R.id.version_number)
+    @BindView(R.id.version_number)
     TextView versionNumber;
 
 

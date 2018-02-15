@@ -48,7 +48,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.RealmResults;
@@ -79,25 +79,25 @@ public class MyLineGraph extends FrameLayout {
 
     // Bindings
     //
-    @Bind(R.id.chart)
+    @BindView(R.id.chart)
     LineChart lineChart;
 
-    @Bind(R.id.slider)
+    @BindView(R.id.slider)
     DiscreteSlider slider;
 
-    @Bind(R.id.range_text)
+    @BindView(R.id.range_text)
     TextView rangeText;
 
-    @Bind(R.id.selected_item_date)
+    @BindView(R.id.selected_item_date)
     TextView selectedItemDate;
 
-    @Bind(R.id.selected_item_value)
+    @BindView(R.id.selected_item_value)
     TextView selectedItemVale;
 
-    @Bind(R.id.graph_type)
+    @BindView(R.id.graph_type)
     MaterialSpinner graphType;
 
-    @Bind(R.id.exercise_selector)
+    @BindView(R.id.exercise_selector)
     Button exerciseSelector;
 
     private static final int GRAPH_MAX_VALUE_DEFAULT = 30;

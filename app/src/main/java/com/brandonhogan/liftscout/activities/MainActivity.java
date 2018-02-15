@@ -31,7 +31,7 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements NavigationManager.NavigationListener {
@@ -44,10 +44,10 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
 
     // Bindings
     //
-    @Bind(R.id.bottom_navigation)
+    @BindView(R.id.bottom_navigation)
     BottomNavigationViewEx bottomNav;
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
 
