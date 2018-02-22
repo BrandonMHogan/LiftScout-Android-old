@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import agency.tango.materialintroscreen.SlideFragment;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

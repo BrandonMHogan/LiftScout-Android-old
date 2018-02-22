@@ -15,7 +15,6 @@ import com.brandonhogan.liftscout.presenters.IntroExercisePresenter;
 
 import agency.tango.materialintroscreen.SlideFragment;
 import agency.tango.materialintroscreen.parallax.ParallaxLinearLayout;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

@@ -5,6 +5,20 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'realm-android'
 
+def getVersionCode = { ->
+    try {
+        def code = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-list', '--all'
+            standardOutput = code
+        }
+        return code.toString().split("\n").size()
+    }
+    catch (ignored) {
+        return -1
+    }
+}
+
 android {
 
     compileSdkVersion 27
@@ -12,7 +26,7 @@ android {
 
     defaultConfig {
         applicationId "com.brandonhogan.liftscout"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode getVersionCode()
         versionName "1.0"
