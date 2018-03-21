@@ -183,8 +183,8 @@ public class WorkoutTrackerPresenter implements WorkoutTrackerContract.Presenter
 
     @Override
     public void onDeleteRep(int position) {
-        if (editingRep != null) {
-
+        if (adapterData != null) {
+            editingRep = adapterData.get(position);
             progressManager.deleteRep(editingRep.getId(), exerciseId);
             editingRep = null;
             resetAdapter();
