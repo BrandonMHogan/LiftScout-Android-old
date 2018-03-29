@@ -1,8 +1,12 @@
 package com.brandonhogan.liftscout.managers;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
 import com.brandonhogan.liftscout.R;
@@ -31,6 +35,9 @@ public class NotificationServiceManager {
     private int exerciseId;
     private long date;
     private int time;
+    private String CHANNEL_ID = "ls_channel_01";
+    private CharSequence name = "notificationChannel";
+    int importance = NotificationManager.IMPORTANCE_HIGH;
     private android.app.NotificationManager notificationManager;
 
 
@@ -49,6 +56,18 @@ public class NotificationServiceManager {
         this.exerciseId = exerciseId;
         this.date = date;
         this.time = time;
+
+
+
+//        if(builder == null) {
+//            builder = new NotificationCompat.Builder(context);
+//            builder.setAutoCancel(false);
+//            builder.setOnlyAlertOnce(true);
+//            builder.setVisibility(Notification.VISIBILITY_PRIVATE);
+//            builder.setSmallIcon(R.drawable.ic_timer_white_24dp);
+//            builder.setOngoing(running);
+//            builder.setContentTitle(context.getString(R.string.app_name));
+//        }
 
 //        Intent stopIntent = new Intent("com.brandonhogan.liftscout.STOP");
 //        PendingIntent stopPendingIntent = PendingIntent.getBroadcast(context,
@@ -73,6 +92,7 @@ public class NotificationServiceManager {
                 .setSmallIcon(R.drawable.ic_timer_white_24dp)
                 .setAutoCancel(false)
                 .setOngoing(running)
+                .setChannelId(CHANNEL_ID)
                 .setOnlyAlertOnce(true);
 //                .setContentIntent(
 //                        PendingIntent.getActivity(context, 0,
@@ -100,6 +120,10 @@ public class NotificationServiceManager {
 
 
         //builder.mNotification.flags |= Notification.FLAG_NO_CLEAR;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            notificationManager.createNotificationChannel(mChannel);
+        }
         notificationManager.notify(id, builder.build());
     }
 
