@@ -26,7 +26,7 @@
                 app:ms_text_color="?attr/android:textColorSecondary"
                 app:ms_background_color="?attr/colorFill" />
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/exercise_selector"
                 android:layout_width="0dp"
                 android:layout_weight="1"

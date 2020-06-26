@@ -85,7 +85,7 @@ public class GraphsCategoriesPresenter implements GraphsCategoriesContract.Prese
 
             switch (graphTypes.get(currentGraphTypePosition)) {
                 case Charts.CATEOGRY_BREAKDOWN_TOTAL_WORKOUT:
-                    count = sets.where().equalTo("exercise.categoryId", category.getId()).distinct(Set.DATE).size();
+                    count = (int)sets.where().equalTo("exercise.categoryId", category.getId()).distinct(Set.DATE).count();
                     break;
                 case Charts.CATEOGRY_BREAKDOWN_TOTAL_SETS:
                     count = sets.where().equalTo("exercise.categoryId", category.getId()).findAll().size();

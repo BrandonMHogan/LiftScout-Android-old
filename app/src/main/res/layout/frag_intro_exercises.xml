@@ -45,7 +45,7 @@
         android:textColor="@color/light_theme_text_secondary"
         android:textSize="@dimen/material_text_size_small" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/create_button"
         android:layout_width="@dimen/intro_button_width"
         android:layout_height="@dimen/intro_button_height"

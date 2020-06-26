@@ -33,6 +33,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
@@ -177,8 +178,7 @@ public class MyLineGraph extends FrameLayout {
         xAxis.setGranularity(1f);
         xAxis.setDrawGridLines(false);
 
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
-
+        xAxis.setValueFormatter(new ValueFormatter() {
             private SimpleDateFormat mFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
             @Override
             public String getFormattedValue(float value, AxisBase axis) {

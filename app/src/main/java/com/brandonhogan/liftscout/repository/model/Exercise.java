@@ -1,6 +1,6 @@
 package com.brandonhogan.liftscout.repository.model;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.brandonhogan.liftscout.utils.constants.ConstantValues;
 

@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LiftScout-Android.iml" filepath="$PROJECT_DIR$/LiftScout-Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LiftScout-Android-old.iml" filepath="$PROJECT_DIR$/.idea/modules/LiftScout-Android-old.iml" group="LiftScout-Android-old" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="LiftScout-Android-old/app" />
     </modules>
   </component>
 </project>

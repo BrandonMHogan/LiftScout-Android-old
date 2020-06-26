@@ -52,8 +52,8 @@ public class SetRepoImpl implements SetRepo {
     public RealmResults<Set> getSets(int exerciseId) {
         return databaseRealm.getRealmInstance()
                 .where(Set.class)
-                .equalTo("exercise.id", exerciseId)
-                .findAllSorted(Set.DATE, Sort.DESCENDING);
+                .equalTo("exercise.id", exerciseId).sort(Set.DATE, Sort.DESCENDING)
+                .findAll();
     }
 
     @Override
@@ -64,7 +64,8 @@ public class SetRepoImpl implements SetRepo {
                 .beginGroup()
                     .equalTo("sets.exercise.id", exerciseId)
                 .endGroup()
-                .findAllSorted(Progress.DATE, Sort.DESCENDING);
+                .sort(Set.DATE, Sort.DESCENDING)
+                .findAll();
 
         if (!progress.isEmpty())
             return progress.first().getSets().where().equalTo("exercise.id", exerciseId).findFirst();

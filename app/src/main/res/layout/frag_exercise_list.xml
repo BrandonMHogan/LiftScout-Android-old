@@ -15,7 +15,7 @@
         android:visibility="gone"
         android:text="@string/exercise_list_no_data"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,7 +24,7 @@
         android:scrollbarSize="1dp"
         android:scrollbarStyle="insideOverlay"/>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_exercise_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

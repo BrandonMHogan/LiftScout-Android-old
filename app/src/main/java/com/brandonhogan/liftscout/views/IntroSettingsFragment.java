@@ -1,7 +1,7 @@
 package com.brandonhogan.liftscout.views;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +16,9 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import agency.tango.materialintroscreen.SlideFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.github.dreierf.materialintroscreen.SlideFragment;
 
 public class IntroSettingsFragment extends SlideFragment implements IntroSettingsContract.View {
 

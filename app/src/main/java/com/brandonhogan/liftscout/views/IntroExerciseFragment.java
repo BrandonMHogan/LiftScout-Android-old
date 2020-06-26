@@ -1,9 +1,9 @@
 package com.brandonhogan.liftscout.views;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.AppCompatButton;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +13,12 @@ import com.brandonhogan.liftscout.R;
 import com.brandonhogan.liftscout.interfaces.contracts.IntroExerciseContract;
 import com.brandonhogan.liftscout.presenters.IntroExercisePresenter;
 
-import agency.tango.materialintroscreen.SlideFragment;
-import agency.tango.materialintroscreen.parallax.ParallaxLinearLayout;
+import io.github.dreierf.materialintroscreen.SlideFragment;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.github.dreierf.materialintroscreen.parallax.ParallaxLinearLayout;
 
 /**
  * Created by Brandon on 2/27/2017.

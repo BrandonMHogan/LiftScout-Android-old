@@ -7,6 +7,7 @@ import com.brandonhogan.liftscout.repository.DatabaseRealm;
 import com.brandonhogan.liftscout.repository.RecordsRepo;
 import com.brandonhogan.liftscout.repository.model.Record;
 import com.brandonhogan.liftscout.repository.model.Rep;
+import com.brandonhogan.liftscout.repository.model.Set;
 
 import java.util.Date;
 import java.util.List;
@@ -131,7 +132,8 @@ public class RecordsRepoImpl implements RecordsRepo {
                             .where(Record.class)
                             .equalTo(Record.EXERCISE_ID, exerciseId)
                             .equalTo(Record.REP_RANGE, repRange)
-                            .findAllSorted(Record.REP_WEIGHT);
+                            .sort(Record.REP_WEIGHT)
+                            .findAll();
 
                     e.onNext(models);
                     e.onComplete();

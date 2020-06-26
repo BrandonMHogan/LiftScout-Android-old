@@ -2,7 +2,7 @@ package com.brandonhogan.liftscout.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.FloatRange;
+import androidx.annotation.FloatRange;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,8 +16,8 @@ import com.brandonhogan.liftscout.views.IntroThemesFragment;
 
 import javax.inject.Inject;
 
-import agency.tango.materialintroscreen.MaterialIntroActivity;
-import agency.tango.materialintroscreen.animations.IViewTranslation;
+import io.github.dreierf.materialintroscreen.MaterialIntroActivity;
+import io.github.dreierf.materialintroscreen.animations.IViewTranslation;
 
 public class IntroActivity extends MaterialIntroActivity {
 

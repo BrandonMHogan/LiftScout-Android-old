@@ -1,6 +1,6 @@
 package com.brandonhogan.liftscout.presenters;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.brandonhogan.liftscout.injection.components.Injector;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsDisplayContract;

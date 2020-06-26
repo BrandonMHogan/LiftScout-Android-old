@@ -91,7 +91,7 @@
             android:layout_marginTop="@dimen/tracker_button_margin_top"
             android:orientation="horizontal">
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/first_button"
                 android:layout_width="@dimen/tracker_button_width"
                 android:layout_height="@dimen/tracker_button_height"
@@ -101,7 +101,7 @@
                 android:textColor="@color/white"
                 android:layout_marginEnd="@dimen/tracker_inner_margin" />
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/second_button"
                 android:layout_width="@dimen/tracker_button_width"
                 android:layout_height="@dimen/tracker_button_height"
@@ -121,7 +121,7 @@
             android:background="@color/divider"
             android:elevation="@dimen/tracker_divider_elevation"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

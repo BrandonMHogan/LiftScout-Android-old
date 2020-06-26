@@ -3,7 +3,7 @@ package com.brandonhogan.liftscout.utils.controls;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.design.widget.TextInputLayout;
+import com.google.android.material.textfield.TextInputLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
