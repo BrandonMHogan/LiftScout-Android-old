@@ -1,7 +1,7 @@
 <resources>
 
     <!-- This is the base of all dark themes. All dark base themes need to be a child of this -->
-    <style name="AppTheme.Dark.Base" parent="Theme.AppCompat">
+    <style name="AppTheme.Dark.Base" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="android:windowBackground">@color/dark_theme_background</item>
         <item name="android:itemBackground">@color/dark_theme_background</item>
 
@@ -32,7 +32,7 @@
     </style>
 
     <!-- This is the base of all light themes. All light base themes need to be a child of this -->
-    <style name="AppTheme.Light.Base" parent="Theme.AppCompat.Light">
+    <style name="AppTheme.Light.Base" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="android:windowBackground">@color/light_theme_background</item>
         <item name="android:itemBackground">@color/light_theme_background</item>
 
@@ -71,7 +71,7 @@
 
     <!-- Light Themes -->
 
-    <style name="AppTheme.ActionBarTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.ActionBarTheme" parent="@style/Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/theme_original_primary</item>
         <item name="colorPrimaryDark">@color/theme_original_primary_dark</item>
         <item name="colorAccent">@color/theme_original_accent</item>

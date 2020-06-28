@@ -2,13 +2,14 @@ package com.brandonhogan.liftscout.managers;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.util.Log;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.brandonhogan.liftscout.R;
+import com.brandonhogan.liftscout.features.about.AboutFragment;
 import com.brandonhogan.liftscout.interfaces.OnBackPressListener;
-import com.brandonhogan.liftscout.views.AboutFragment;
 import com.brandonhogan.liftscout.views.AnalyticsContainerFragment;
 import com.brandonhogan.liftscout.views.CalendarFragment;
 import com.brandonhogan.liftscout.views.CategoryDetailFragment;

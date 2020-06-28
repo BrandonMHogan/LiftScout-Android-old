@@ -3,10 +3,11 @@ package com.brandonhogan.liftscout.views.base;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;

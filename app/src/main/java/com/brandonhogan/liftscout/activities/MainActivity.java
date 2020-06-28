@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
 
         if (findViewById(R.id.fragment_manager) != null) {
 
-            navigationManager.init(getFragmentManager());
+            navigationManager.init(getSupportFragmentManager());
             navigationManager.setNavigationListener(this);
 
             setupBottomNavigation();
@@ -255,7 +255,7 @@ public class MainActivity extends BaseActivity implements NavigationManager.Navi
         super.onResume();
         updateUserData();
         navigationManager.setNavigationListener(this);
-        navigationManager.setmFragmentManager(getFragmentManager());
+        navigationManager.setmFragmentManager(getSupportFragmentManager());
         navigationManager.setBottomNav(bottomNav);
     }
 

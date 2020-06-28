@@ -1,8 +1,9 @@
 package com.brandonhogan.liftscout.adapters;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import androidx.legacy.app.FragmentStatePagerAdapter;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.brandonhogan.liftscout.views.CategoryListFragment;
 import com.brandonhogan.liftscout.views.ExerciseListFragment;
