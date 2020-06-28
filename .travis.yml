@@ -13,19 +13,6 @@ jdk:
   - oraclejdk8
 before_install:
   - chmod +x gradlew
-
-  notifications:
-    slack: 
-      - liftscout:Y8AEaVOpBBcCJWwR2HY9FcnF
-
-# safelist
-branches:
-    only:
-    - master
-    - develop
-    - release
-
 after_success:
-    - bash <(curl -s https://codecov.io/bash)
-
+  - bash <(curl -s https://codecov.io/bash)
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
