@@ -1,7 +1,6 @@
 package com.brandonhogan.liftscout.injection.components;
 
 import com.brandonhogan.liftscout.activities.BaseActivity;
-import com.brandonhogan.liftscout.activities.IntroActivity;
 import com.brandonhogan.liftscout.activities.MainActivity;
 import com.brandonhogan.liftscout.injection.module.AppModule;
 import com.brandonhogan.liftscout.injection.module.DatabaseModule;
@@ -15,9 +14,6 @@ import com.brandonhogan.liftscout.presenters.ExerciseListContainerPresenter;
 import com.brandonhogan.liftscout.presenters.ExerciseListPresenter;
 import com.brandonhogan.liftscout.presenters.GraphExercisesPresenter;
 import com.brandonhogan.liftscout.presenters.GraphsCategoriesPresenter;
-import com.brandonhogan.liftscout.presenters.IntroExercisePresenter;
-import com.brandonhogan.liftscout.presenters.IntroSettingsPresenter;
-import com.brandonhogan.liftscout.presenters.IntroThemesPresenter;
 import com.brandonhogan.liftscout.presenters.RecordsPresenter;
 import com.brandonhogan.liftscout.presenters.SettingsDisplayPresenter;
 import com.brandonhogan.liftscout.presenters.SettingsHomePresenter;
@@ -53,18 +49,12 @@ public interface AppComponent {
 
     // Activities
     void inject(BaseActivity activity);
-    void inject(IntroActivity activity);
     void inject(MainActivity activity);
 
     // Fragments
     void inject(BaseFragment fragment);
     void inject(TodayContainerPresenter presenter);
     void inject(TodayPresenter presenter);
-
-    // Intro
-    void inject(IntroSettingsPresenter presenter);
-    void inject(IntroExercisePresenter presenter);
-    void inject(IntroThemesPresenter presenter);
 
     // Calendar
     void inject(CalendarPresenter presenter);

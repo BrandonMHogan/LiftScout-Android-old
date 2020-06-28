@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="transparent">#80000000</color>
+
     <!-- Light Theme Colors -->
     <color name="light_theme_text_primary">#DE000000</color>
     <color name="light_theme_text_secondary">#8A000000</color>
@@ -66,15 +68,6 @@
     <color name="divider">#67676767</color>
     <color name="delete_red">#80ff1744</color>
     <color name="edit_green">#8036CF8E</color>
-
-
-
-    <color name="intro_slide_one">#ff343434</color>
-    <color name="intro_slide_two">#ff3b3c3d</color>
-    <color name="intro_slide_three">#ff434547</color>
-    <color name="intro_slide_four">#ff4a4d51</color>
-    <color name="intro_slide_five">#ff535960</color>
-
 
     <!-- Category Colors -->
     <color name="category_light_red">#E6F44336</color>

@@ -115,23 +115,6 @@
     <string name="title_frag_exercise_list">Exercises</string>
     <string name="title_frag_home">Home</string>
 
-    <!-- Intro Activity -->
-    <string name="intro_slide_one_title">Welcome to Lift Scout!</string>
-    <string name="intro_slide_one_description">Thank you for using Lift Scout, an imperative tool both in and outside of the gym!</string>
-    <string name="intro_slide_one_description_two">Before you begin, we need to setup a few things to make sure the application is best tailored for your needs.</string>
-    <string name="intro_slide_two_title">Settings</string>
-    <string name="intro_slide_two_description">You can change these settings anytime later from the settings menu</string>
-    <string name="intro_slide_three_title">Default Exercises</string>
-    <string name="intro_slide_three_added_description">Exercises have been added</string>
-    <string name="intro_slide_three_description">To make things easier for you, we have added many of the most common exercises. You can also add your own later</string>
-    <string name="intro_slide_three_button">Remove Exercises</string>
-    <string name="intro_slide_three_button_undo">Undo</string>
-    <string name="intro_slide_four_title">Themes</string>
-    <string name="intro_slide_four_description">Choose from a number of themes to find what best suits your preference</string>
-    <string name="intro_slide_five_title">Welcome!</string>
-    <string name="intro_slide_five_description">Lift Scout is configured and you\'re ready to begin! Remember, you can change these settings anytime within the settings view.</string>
-    <string name="intro_slide_five_description_two">Let the grind begin!</string>
-
     <!-- Init user activity -->
     <string name="frag_init_welcome_title">"Welcome to Lift Scout!"</string>
     <string name="frag_init_welcome_message">"Before we get started, we need to set up a few details."</string>

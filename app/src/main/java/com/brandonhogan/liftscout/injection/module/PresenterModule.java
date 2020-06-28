@@ -1,12 +1,8 @@
 package com.brandonhogan.liftscout.injection.module;
 
-import com.brandonhogan.liftscout.interfaces.contracts.IntroSettingsContract;
-import com.brandonhogan.liftscout.interfaces.contracts.IntroThemesContract;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsDisplayContract;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsHomeContract;
 import com.brandonhogan.liftscout.interfaces.contracts.SettingsProfileContract;
-import com.brandonhogan.liftscout.presenters.IntroSettingsPresenter;
-import com.brandonhogan.liftscout.presenters.IntroThemesPresenter;
 import com.brandonhogan.liftscout.presenters.SettingsDisplayPresenter;
 import com.brandonhogan.liftscout.presenters.SettingsHomePresenter;
 import com.brandonhogan.liftscout.presenters.SettingsProfilePresenter;
@@ -39,21 +35,6 @@ public class PresenterModule {
     @Singleton
     SettingsHomeContract.Presenter getSettingsHomeContract() {
         return new SettingsHomePresenter();
-    }
-
-
-    // Intro
-    //
-    @Provides
-    @Singleton
-    IntroSettingsContract.Presenter getIntroSettingsPresenter() {
-        return new IntroSettingsPresenter();
-    }
-
-    @Provides
-    @Singleton
-    IntroThemesContract.Presenter getIntroThemePresenter() {
-        return new IntroThemesPresenter();
     }
 
 }

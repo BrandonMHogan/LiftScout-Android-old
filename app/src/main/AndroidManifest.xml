@@ -31,10 +31,6 @@
                 android:resource="@xml/searchable" />
         </activity>
 
-        <activity
-            android:name=".activities.IntroActivity"
-            android:theme="@style/Theme.Intro.Mine" />
-
     </application>
 
 </manifest>

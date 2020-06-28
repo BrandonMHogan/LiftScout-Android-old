@@ -41,7 +41,7 @@ public class SplashActivity extends BaseActivity {
                 }
                 else {
                     userManager.setUser(new User());
-                    toIntro();
+                    toMain();
                 }
             }
 
@@ -52,21 +52,10 @@ public class SplashActivity extends BaseActivity {
         logo.startAnimation(animation);
     }
 
-
-
-
     private void toMain() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         this.startActivity(intent);
-        //finish();
-    }
-
-    private void toIntro() {
-        Intent intent = new Intent(this, IntroActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(intent);
-        finish();
     }
 
     @Override
