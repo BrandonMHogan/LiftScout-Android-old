@@ -14,11 +14,11 @@ class AboutRepo private constructor(private val aboutDao: AboutDao){
 
     // This may seem redundant.
     // Imagine a code which also updates and checks the backend.
-    fun set(about: About) {
+    suspend fun set(about: About) {
         aboutDao.setAbout(about)
     }
 
-    fun getAbout() = aboutDao.getAbout()
+    suspend fun getAbout() = aboutDao.getAbout()
 
     companion object {
         // Singleton instantiation you already know and love
